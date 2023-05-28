@@ -28,6 +28,7 @@
         ]
     },
     "github-actions": {
+        "commitMessageTopic": "chore(deps): update github actions {{ depName }}",
         "fileMatch": [
             "^(workflow-templates|\\.github/workflows)/[^/]+\\.ya?ml$",
             "(^|/)action\\.ya?ml$"
