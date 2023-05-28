@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Helm Lint
     strategy:
-      max-parallel: 4
+      max-parallel: 12
       matrix:
         directory:
           - applications
@@ -59,7 +59,7 @@ jobs:
     needs:
       - lint
     strategy:
-      max-parallel: 4
+      max-parallel: 12
       matrix:
         directory: 
           - applications
