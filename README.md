@@ -1,6 +1,6 @@
 # Homelab: Kubernetes Home Cluster - Applications
 
-[![Build status](https://img.shields.io/github/actions/workflow/status/muhlba91/homelab-kubernetes-home-applications/pipeline?style=for-the-badge)](https://github.com/muhlba91/homelab-kubernetes-home-applications/actions/workflows/pipeline.yml)
+[![Build status](https://img.shields.io/github/actions/workflow/status/muhlba91/homelab-kubernetes-home-applications/pipeline.yml?style=for-the-badge)](https://github.com/muhlba91/homelab-kubernetes-home-applications/actions/workflows/pipeline.yml)
 [![License](https://img.shields.io/github/license/muhlba91/homelab-kubernetes-home-applications?style=for-the-badge)](LICENSE.md)
 
 This repository contains applications deployed on the `home-cluster` via [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) using [GitOps](https://opengitops.dev).
