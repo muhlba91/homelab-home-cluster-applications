@@ -1,0 +1,28 @@
+---
+addressPools:
+  range-global:
+    addresses:
+      - 10.0.0.10-10.0.0.20
+      - fe80::2:1-fe80::2:ffff
+
+metallb:
+  rbac:
+    create: true
+  psp:
+    create: true
+  controller:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 72Mi
+      limits:
+        cpu: 50m
+        memory: 96Mi
+  speaker:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 128Mi
+      limits:
+        cpu: 50m
+        memory: 192Mi

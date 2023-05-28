@@ -1,0 +1,112 @@
+---
+influxdb:
+  hostname: home-assistant-telegraf
+  url: http://influxdb.domain.org
+  organization: home
+  bucket: home-assistant
+
+environment: dev
+
+app-template:
+  global:
+    fullnameOverride: telegraf
+
+  image:
+    repository: telegraf
+    pullPolicy: IfNotPresent
+    tag: 1.24.3
+
+  serviceAccount:
+    create: true
+
+  env:
+    - name: TELEGRAF_REMOTE_TOKEN
+      valueFrom:
+        secretKeyRef:
+          name: telegraf-remote-token
+          key: remote-token
+
+  initContainers:
+    plugins:
+      image: alpine:3.17
+      imagePullPolicy: IfNotPresent
+      command:
+        - /scripts/plugins.sh
+      volumeMounts:
+        - name: plugins
+          mountPath: /plugins
+        - name: init-scripts
+          mountPath: /scripts
+      resources:
+        requests:
+          cpu: 10m
+          memory: 64Mi
+        limits:
+          cpu: 100m
+          memory: 128Mi
+    grafana:
+      image: bitnami/kubectl:1.27
+      imagePullPolicy: IfNotPresent
+      command:
+        - /scripts/grafana.sh
+      env:
+        - name: TELEGRAF_REMOTE_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: telegraf-remote-token
+              key: remote-token
+      volumeMounts:
+        - name: init-scripts
+          mountPath: /scripts
+      resources:
+        requests:
+          cpu: 10m
+          memory: 64Mi
+        limits:
+          cpu: 100m
+          memory: 128Mi
+
+  service:
+    main:
+      ipFamilyPolicy: PreferDualStack
+      ports:
+        http:
+          port: 8086
+
+  persistence:
+    config:
+      enabled: true
+      type: custom
+      mountPath: /etc/telegraf/telegraf.conf
+      subPath: telegraf.conf
+      volumeSpec:
+        secret:
+          secretName: telegraf-config
+          defaultMode: 420
+    plugins:
+      enabled: true
+      type: emptyDir
+      mountPath: /plugins/bin
+    plugin-configuration:
+      enabled: true
+      type: custom
+      mountPath: /plugins/config
+      volumeSpec:
+        configMap:
+          name: telegraf-plugins
+          defaultMode: 420
+    init-scripts:
+      enabled: true
+      type: custom
+      volumeSpec:
+        configMap:
+          name: telegraf-init-scripts
+          defaultMode: 511
+
+  resources:
+    requests:
+      cpu: 5m
+      memory: 96Mi
+    limits:
+      cpu: 50m
+      memory: 128Mi

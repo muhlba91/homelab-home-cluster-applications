@@ -1,0 +1,34 @@
+---
+ingress:
+  host: traefik.domain.org
+
+traefik:
+  fullnameOverride: traefik
+
+  providers:
+    kubernetesIngress:
+      publishedService:
+        enabled: true
+
+  additionalArguments:
+    - "--serversTransport.insecureSkipVerify=true"
+    - "--providers.kubernetesingress.allowexternalnameservices=true"
+    - "--providers.kubernetesingress.allowEmptyServices=true"
+
+  ports:
+    traefik:
+      expose: true
+    web:
+      redirectTo: websecure
+
+  service:
+    spec:
+      externalTrafficPolicy: Local
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi

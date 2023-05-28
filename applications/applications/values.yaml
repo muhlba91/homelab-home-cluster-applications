@@ -1,0 +1,72 @@
+---
+global:
+  spec:
+    namespace: argocd
+    source:
+      repoURL: https://github.com/muhlba91/homelab-kubernetes-home-applications.git
+      targetRevision: HEAD
+    values:
+      repoURL: git@github.com:muhlba91/homelab-kubernetes-home-values.git
+      targetRevision: HEAD
+    syncWave: 0
+    helm:
+      enabled: false
+      valueFiles:
+        - values.yaml
+    enableAutomated: false
+    syncOptions: []
+
+applications:
+  dnsmasq:
+    project: "applications-{{ $.Values.global.projectEnvironment }}"
+    path: applications/charts/dnsmasq
+    releaseName: dnsmasq
+    disabled: false
+    namespace: dnsmasq
+    helm: true
+    syncWave: -200
+  coredns:
+    project: "applications-{{ $.Values.global.projectEnvironment }}"
+    path: applications/charts/coredns
+    releaseName: coredns
+    disabled: false
+    namespace: coredns
+    helm: true
+    syncWave: -200
+  adguard:
+    project: "applications-{{ $.Values.global.projectEnvironment }}"
+    path: applications/charts/adguard
+    releaseName: adguard
+    disabled: false
+    namespace: adguard
+    helm: true
+    syncWave: -200
+  external-dns-coredns:
+    project: "applications-{{ $.Values.global.projectEnvironment }}"
+    path: applications/charts/external-dns-coredns
+    releaseName: external-dns-coredns
+    disabled: false
+    namespace: external-dns-coredns
+    helm: true
+    syncWave: -100
+  grafana:
+    project: "applications-{{ $.Values.global.projectEnvironment }}"
+    path: applications/charts/grafana
+    releaseName: grafana
+    disabled: false
+    namespace: grafana
+    helm: true
+  minio:
+    project: "applications-{{ $.Values.global.projectEnvironment }}"
+    path: applications/charts/minio
+    releaseName: minio
+    disabled: false
+    namespace: minio
+    helm: true
+  external-services:
+    project: "applications-{{ $.Values.global.projectEnvironment }}"
+    path: applications/charts/external-services
+    releaseName: external-services
+    disabled: false
+    namespace: external-services
+    helm: true

@@ -1,0 +1,33 @@
+---
+service:
+  annotations: {}
+
+emqx:
+  fullnameOverride: emqx
+
+  envFromSecret: home-assistant-emqx
+
+  replicaCount: 1
+
+  ingress:
+    dashboard:
+      enabled: true
+
+  persistence:
+    enabled: true
+    storageClassName: proxmox-rbd
+    accessMode: ReadWriteOnce
+    size: 128Mi
+
+  ssl:
+    enabled: true
+    dnsnames:
+      - emqx.domain.org
+
+  resources:
+    requests:
+      cpu: 30m
+      memory: 296Mi
+    limits:
+      cpu: 300m
+      memory: 512Mi

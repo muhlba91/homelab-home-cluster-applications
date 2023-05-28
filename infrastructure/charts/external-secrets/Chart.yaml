@@ -1,0 +1,19 @@
+---
+apiVersion: v2
+name: external-secrets
+description: Customized External Secrets Operator
+
+version: 1.0.0
+
+type: application
+
+maintainers:
+  - name: Daniel Muehlbachler-Pietrzykowski
+    email: daniel@muehlbachler.io
+
+appVersion: "0.0.0"
+
+dependencies:
+  - name: external-secrets
+    version: 0.8.3
+    repository: https://charts.external-secrets.io

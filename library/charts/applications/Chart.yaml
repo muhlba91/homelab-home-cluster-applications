@@ -1,0 +1,17 @@
+---
+apiVersion: v2
+name: applications
+description: ArgoCD Applications
+
+version: 1.0.0
+
+type: application
+home: https://github.com/muhlba91/homelab-kubernetes-home-applications.git
+sources:
+  - https://github.com/muhlba91/homelab-kubernetes-home-applications.git
+
+maintainers:
+  - name: Daniel Muehlbachler-Pietrzykowski
+    email: daniel@muehlbachler.io
+
+appVersion: "0.0.0"

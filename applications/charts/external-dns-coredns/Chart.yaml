@@ -1,0 +1,19 @@
+---
+apiVersion: v2
+name: external-dns-coredns
+description: Customized External DNS for CoreDNS
+
+version: 1.0.0
+
+type: application
+
+maintainers:
+  - name: Daniel Muehlbachler-Pietrzykowski
+    email: daniel@muehlbachler.io
+
+appVersion: "0.0.0"
+
+dependencies:
+  - name: external-dns
+    version: 6.20.3
+    repository: oci://registry-1.docker.io/bitnamicharts

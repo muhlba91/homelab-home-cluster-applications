@@ -1,0 +1,155 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: adguard-home-config
+data:
+  AdGuardHome.yaml: |
+    ---
+    bind_host: 0.0.0.0
+    bind_port: 3000
+    users:
+      - name: admin
+        password: {{ .Values.adminPassword }}
+    auth_attempts: 5
+    block_auth_min: 15
+    http_proxy: ""
+    language: ""
+    theme: auto
+    debug_pprof: false
+    web_session_ttl: 720
+    querylog:
+      enabled: true
+      file_enabled: true
+      interval: 720h
+      size_memory: 1000
+    statistics:
+      enabled: true
+      interval: 720h
+    dns:
+      bind_hosts:
+        - 0.0.0.0
+      port: 53
+      anonymize_client_ip: false
+      protection_enabled: true
+      protection_disabled_until: null
+      blocking_mode: nxdomain
+      blocking_ipv4: ""
+      blocking_ipv6: ""
+      blocked_response_ttl: 10
+      parental_block_host: family-block.dns.adguard.com
+      safebrowsing_block_host: standard-block.dns.adguard.com
+      ratelimit: 1000
+      ratelimit_whitelist: []
+      refuse_any: true
+      upstream_dns:
+        - {{ .Values.upstreamDns.ipv4 }}
+        - {{ .Values.upstreamDns.ipv6 }}
+      upstream_dns_file: ""
+      bootstrap_dns:
+        - 9.9.9.10
+        - 149.112.112.10
+        - 2620:fe::10
+        - 2620:fe::fe:10
+      all_servers: false
+      fastest_addr: false
+      serve_http3: false
+      use_http3_upstreams: false
+      use_dns64: false
+      dns64_prefixes: []
+      fastest_timeout: 1s
+      allowed_clients: []
+      disallowed_clients: []
+      blocked_hosts:
+        - version.bind
+        - id.server
+        - hostname.bind
+      trusted_proxies:
+        - 127.0.0.0/8
+        - ::1/128
+      cache_size: 4194304
+      cache_ttl_min: 0
+      cache_ttl_max: 0
+      cache_optimistic: true
+      bogus_nxdomain: []
+      aaaa_disabled: false
+      enable_dnssec: false
+      edns_client_subnet:
+        enabled: false
+        enable_dnssec: false
+        use_custom: false
+      max_goroutines: 300
+      handle_ddr: true
+      ipset: []
+      ipset_file: ""
+      filtering_enabled: true
+      filters_update_interval: 24
+      parental_enabled: false
+      safe_search:
+        enabled: false
+      safebrowsing_enabled: false
+      safebrowsing_cache_size: 1048576
+      safesearch_cache_size: 1048576
+      parental_cache_size: 1048576
+      cache_time: 30
+      rewrites: []
+      blocked_services: []
+      upstream_timeout: 10s
+      private_networks: []
+      local_domain_name: lan
+      resolve_clients: false
+      use_private_ptr_resolvers: true
+      local_ptr_upstreams:
+        - {{ .Values.upstreamDns.ipv4 }}
+        - {{ .Values.upstreamDns.ipv6 }}
+    tls:
+      enabled: false
+      server_name: ""
+      force_https: false
+      port_https: 443
+      port_dns_over_tls: 853
+      port_dns_over_quic: 784
+      port_dnscrypt: 0
+      dnscrypt_config_file: ""
+      allow_unencrypted_doh: false
+      strict_sni_check: false
+      certificate_chain: ""
+      private_key: ""
+      certificate_path: ""	
+      private_key_path: ""
+    filters:
+      - enabled: true
+        url: https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
+        name: AdGuard DNS filter
+        id: 1
+      - enabled: true
+        url: https://raw.githubusercontent.com/notracking/hosts-blocklists/master/adblock/adblock.txt
+        name: NoTracking
+        id: 1636385999
+      - enabled: true
+        url: https://abp.oisd.nl
+        name: OISD
+        id: 1636386000
+      - enabled: true
+        url: https://block.energized.pro/basic/formats/filter
+        name: Energized.Pro Basic
+        id: 1640689725
+    whitelist_filters: []
+    user_rules:
+      {{- range .Values.exclusions }}
+      - '@@||{{ . }}^$important'
+      {{- end }}
+    dhcp:
+      enabled: false
+    log_compress: false
+    log_localtime: false
+    log_max_backups: 0
+    log_max_size: 100
+    log_max_age: 3
+    log_file: ""
+    verbose: false
+    os:
+      group: ""
+      user: ""
+      rlimit_nofile: 0
+    schema_version: 20

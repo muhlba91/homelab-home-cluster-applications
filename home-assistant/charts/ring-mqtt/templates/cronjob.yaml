@@ -1,0 +1,79 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ring-mqtt-backup
+spec:
+  schedule: 0 0 * * *
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  suspend: false
+  concurrencyPolicy: Replace
+  jobTemplate:
+    metadata:
+      namespace: {{ .Release.Namespace }}
+    spec:
+      template:
+        metadata:
+          namespace: {{ .Release.Namespace }}
+        spec:
+          restartPolicy: Never
+          affinity:
+            podAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - labelSelector:
+                    matchExpressions:
+                      - key: app.kubernetes.io/name
+                        operator: In
+                        values:
+                          - home-assistant-ring-mqtt
+                  topologyKey: kubernetes.io/hostname
+          containers:
+            - name: backup
+              image: alpine:3.17
+              imagePullPolicy: IfNotPresent
+              command:
+                - /scripts/backup.sh
+              env:
+                - name: DATA_PATH
+                  value: /data
+                - name: GIT_REPO
+                  valueFrom:
+                    configMapKeyRef:
+                      name: ring-mqtt-git
+                      key: git-repo
+                - name: GIT_USERNAME
+                  valueFrom:
+                    configMapKeyRef:
+                      name: ring-mqtt-git
+                      key: git-username
+                - name: GIT_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      key: gitlab-token
+                      name: ring-mqtt-git
+                - name: GIT_CRYPT_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      key: git-crypt-key
+                      name: ring-mqtt-git
+              volumeMounts:
+                - name: data
+                  mountPath: /data
+                - name: scripts
+                  mountPath: /scripts
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 128Mi
+                limits:
+                  cpu: 1
+                  memory: 256Mi
+          volumes:
+            - name: data
+              persistentVolumeClaim:
+                claimName: ring-mqtt-data
+            - name: scripts
+              configMap:
+                name: ring-mqtt-scripts
+                defaultMode: 511

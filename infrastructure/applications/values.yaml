@@ -1,0 +1,91 @@
+---
+global:
+  spec:
+    namespace: argocd
+    source:
+      repoURL: https://github.com/muhlba91/homelab-kubernetes-home-applications.git
+      targetRevision: HEAD
+    values:
+      repoURL: git@github.com:muhlba91/homelab-kubernetes-home-values.git
+      targetRevision: HEAD
+    syncWave: 0
+    helm:
+      enabled: false
+      valueFiles:
+        - values.yaml
+    enableAutomated: false
+    syncOptions: []
+
+applications:
+  argocd:
+    project: "infrastructure-{{ $.Values.global.projectEnvironment }}"
+    path: infrastructure/charts/argocd
+    disabled: false
+    enableAutomated: true
+    namespace: argocd
+    releaseName: argocd-{{ $.Values.global.environment }}
+    helm: true
+    syncWave: -2000
+  cilium:
+    project: "infrastructure-{{ $.Values.global.projectEnvironment }}"
+    path: infrastructure/charts/cilium
+    releaseName: cilium
+    disabled: false
+    enableAutomated: true
+    namespace: cilium
+    helm: true
+    syncWave: -1000
+  external-secrets:
+    project: "infrastructure-{{ $.Values.global.projectEnvironment }}"
+    path: infrastructure/charts/external-secrets
+    releaseName: external-secrets
+    disabled: false
+    enableAutomated: true
+    namespace: external-secrets
+    helm: true
+    syncWave: -750
+  external-secrets-stores:
+    project: "infrastructure-{{ $.Values.global.projectEnvironment }}"
+    path: infrastructure/kustomizations/external-secrets-stores
+    releaseName: external-secrets-stores
+    disabled: false
+    enableAutomated: true
+    namespace: external-secrets
+    helm: false
+    syncWave: -500
+  metallb:
+    project: "infrastructure-{{ $.Values.global.projectEnvironment }}"
+    path: infrastructure/charts/metallb
+    releaseName: metallb
+    disabled: false
+    namespace: metallb-system
+    helm: true
+    syncWave: -500
+    ignoreDifferences:
+      - group: apiextensions.k8s.io
+        kind: CustomResourceDefinition
+        jsonPointers:
+          - /spec/conversion/webhook/clientConfig/caBundle
+  rook-ceph:
+    project: "infrastructure-{{ $.Values.global.projectEnvironment }}"
+    path: infrastructure/charts/rook-ceph
+    releaseName: rook-ceph
+    disabled: false
+    namespace: rook-ceph
+    helm: true
+    syncWave: -250
+  csi-nfs-driver:
+    project: "infrastructure-{{ $.Values.global.projectEnvironment }}"
+    path: infrastructure/charts/csi-nfs-driver
+    releaseName: csi-nfs-driver
+    disabled: false
+    namespace: csi-nfs-driver
+    helm: true
+    syncWave: -150
+  descheduler:
+    project: "infrastructure-{{ $.Values.global.projectEnvironment }}"
+    path: infrastructure/charts/descheduler
+    releaseName: descheduler
+    disabled: false
+    namespace: descheduler
+    helm: true

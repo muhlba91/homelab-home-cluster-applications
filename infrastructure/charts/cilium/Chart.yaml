@@ -1,0 +1,19 @@
+---
+apiVersion: v2
+name: cilium
+description: Customized Cilium
+
+version: 1.0.0
+
+type: application
+
+maintainers:
+  - name: Daniel Muehlbachler-Pietrzykowski
+    email: daniel@muehlbachler.io
+
+appVersion: "0.0.0"
+
+dependencies:
+  - name: cilium
+    version: 1.13.2
+    repository: https://helm.cilium.io/ 

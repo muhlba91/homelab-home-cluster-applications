@@ -1,0 +1,17 @@
+{{- range $k, $v := .Values.services }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $k }}
+  annotations:
+    traefik.ingress.kubernetes.io/service.serversscheme: {{ $v.scheme }}
+spec:
+  type: ClusterIP
+  ipFamilyPolicy: PreferDualStack
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http
+{{- end }}

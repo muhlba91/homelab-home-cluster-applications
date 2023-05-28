@@ -1,0 +1,12 @@
+{{- range $k, $v := .Values.addressPools }}
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: {{ $k }}
+spec:
+  addresses:
+    {{- $v.addresses | toYaml | nindent 4 }}
+  autoAssign: true
+  avoidBuggyIPs: false
+{{- end }}

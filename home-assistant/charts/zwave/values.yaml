@@ -1,0 +1,122 @@
+---
+gitUsername: username
+gitRepo: repo.com/config.git
+
+app-template:
+  global:
+    fullnameOverride: zwave-js
+
+  image:
+    repository: zwavejs/zwave-js-ui
+    pullPolicy: IfNotPresent
+    tag: 8.17.1
+
+  serviceAccount:
+    create: true
+  automountServiceAccountToken: false
+
+  env:
+    - name: TZ
+      value: UTC
+    - name: NETWORK_KEY
+      valueFrom:
+        secretKeyRef:
+          name: zwave-js-network
+          key: key
+    - name: SESSION_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: zwave-js-session
+          key: secret
+
+  securityContext:
+    privileged: true
+
+  initContainers:
+    git-sync:
+      image: alpine:3.17
+      imagePullPolicy: IfNotPresent
+      command:
+        - /scripts/sync.sh
+      env:
+        - name: DATA_PATH
+          value: /data
+        - name: GIT_REPO
+          valueFrom:
+            configMapKeyRef:
+              name: zwave-js-git
+              key: git-repo
+        - name: GIT_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: zwave-js-git
+              key: git-username
+        - name: GIT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: zwave-js-git
+              key: gitlab-token
+        - name: GIT_CRYPT_KEY
+          valueFrom:
+            secretKeyRef:
+              name: zwave-js-git
+              key: git-crypt-key
+      volumeMounts:
+        - name: config
+          mountPath: /data
+        - name: init-scripts
+          mountPath: /scripts
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 1
+          memory: 256Mi
+
+  service:
+    main:
+      ipFamilyPolicy: PreferDualStack
+      ports:
+        http:
+          port: 8091
+        ws:
+          enabled: true
+          port: 3000
+
+  ingress:
+    main:
+      enabled: true
+
+  persistence:
+    config:
+      enabled: true
+      type: pvc
+      storageClass: proxmox-cephfs
+      accessMode: ReadWriteMany
+      size: 1Gi
+      retain: false
+      mountPath: /usr/src/app/store
+    usb:
+      enabled: true
+      type: hostPath
+      hostPath: /dev
+      hostPathType: Directory
+    init-scripts:
+      enabled: true
+      type: custom
+      volumeSpec:
+        configMap:
+          name: zwave-js-scripts
+          defaultMode: 0o0777
+
+  resources:
+    requests:
+      cpu: 10m
+      memory: 192Mi
+    limits:
+      cpu: 300m
+      memory: 256Mi
+
+  nodeSelector:
+    usb: zwave-controller

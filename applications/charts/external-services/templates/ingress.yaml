@@ -1,0 +1,25 @@
+{{- range $k, $v := .Values.services }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $k }}
+  annotations:
+    {{- $v.ingress.annotations | toYaml | nindent 4 }}
+spec:
+  rules:
+    - host: {{ $v.domain }}
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ $k }}
+                port:
+                  number: 80
+  tls:
+    - secretName: {{ $k }}-tls-cert
+      hosts:
+        - {{ $v.domain }}
+{{- end }}

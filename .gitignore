@@ -1,0 +1,35 @@
+# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,helm
+# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,helm
+
+### Helm ###
+# Chart dependencies
+**/charts/*.tgz
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
+# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,helm
+
+TODO.md
+**/secret-*.yaml
+**/secret-*.yml
+!**/secret-*.enc.yaml
+!**/secret-*.enc.yml
+!**/secret-generator.yaml
+!**/secret-generator.yml

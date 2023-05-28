@@ -1,0 +1,87 @@
+---
+gitUsername: username
+gitRepo: repo.com/config.git
+
+app-template:
+  global:
+    fullnameOverride: ring-mqtt
+
+  image:
+    repository: tsightler/ring-mqtt
+    pullPolicy: IfNotPresent
+    tag: 5.2.2
+
+  serviceAccount:
+    create: true
+  automountServiceAccountToken: false
+
+  initContainers:
+    git-sync:
+      image: alpine:3.17
+      imagePullPolicy: IfNotPresent
+      command:
+        - /scripts/sync.sh
+      env:
+        - name: DATA_PATH
+          value: /data
+        - name: GIT_REPO
+          valueFrom:
+            configMapKeyRef:
+              name: ring-mqtt-git
+              key: git-repo
+        - name: GIT_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: ring-mqtt-git
+              key: git-username
+        - name: GIT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ring-mqtt-git
+              key: gitlab-token
+        - name: GIT_CRYPT_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ring-mqtt-git
+              key: git-crypt-key
+      volumeMounts:
+        - name: data
+          mountPath: /data
+        - name: init-scripts
+          mountPath: /scripts
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 1
+          memory: 256Mi
+
+  service:
+    main:
+      enabled: false
+
+  persistence:
+    data:
+      enabled: true
+      type: pvc
+      storageClass: proxmox-cephfs
+      accessMode: ReadWriteMany
+      size: 32Mi
+      retain: false
+      mountPath: /data
+    init-scripts:
+      enabled: true
+      type: custom
+      volumeSpec:
+        configMap:
+          name: ring-mqtt-scripts
+          defaultMode: 0o0777
+
+  resources:
+    requests:
+      cpu: 5m
+      memory: 128Mi
+    limits:
+      cpu: 100m
+      memory: 256Mi

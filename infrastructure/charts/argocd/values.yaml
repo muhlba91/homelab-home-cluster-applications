@@ -1,0 +1,141 @@
+---
+argo-cd:
+  fullnameOverride: argocd-dev
+
+  configs:
+    params:
+      server.insecure: true
+    cm:
+      resource.customizations.health.argoproj.io_Application: |
+        hs = {}
+        hs.status = "Progressing"
+        hs.message = ""
+        if obj.status ~= nil then
+          if obj.status.health ~= nil then
+            hs.status = obj.status.health.status
+            if obj.status.health.message ~= nil then
+        hs.message = obj.status.health.message
+            end
+          end
+        end
+        return hs
+      resource.compareoptions: |
+        # disables status field diffing in specified resource types
+        ignoreAggregatedRoles: true
+
+  server:
+    secret:
+      createSecret: false
+    service:
+      type: NodePort
+    config:
+      kustomize.buildOptions: "--enable-alpha-plugins --enable-exec"
+
+    ingress:
+      enabled: false
+
+    resources:
+      requests:
+        cpu: 10m
+        memory: 128Mi
+      limits:
+        cpu: 50m
+        memory: 256Mi
+    
+  controller:
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+      limits:
+        cpu: 1
+        memory: 1024Mi
+    
+  dex:
+    resources:
+      requests:
+        cpu: 5m
+        memory: 64Mi
+      limits:
+        cpu: 50m
+        memory: 96Mi
+
+  redis:
+    serviceAccount:
+      create: true
+    resources:
+      requests:
+        cpu: 5m
+        memory: 196Mi
+      limits:
+        cpu: 100m
+        memory: 256Mi
+
+  repoServer:
+    env:
+      - name: XDG_CONFIG_HOME
+        value: /.config
+      - name: GOOGLE_APPLICATION_CREDENTIALS
+        value: /ksops-credentials/credentials.json
+      - name: GOOGLE_CREDENTIALS
+        valueFrom:
+          secretKeyRef:
+            name: ksops-credentials
+            key: credentials.json
+    volumes:
+      - name: custom-tools
+        emptyDir: {}
+      - name: ksops-credentials
+        secret:
+          secretName: ksops-credentials
+    initContainers:
+      - name: install-ksops
+        image: viaductoss/ksops:v4
+        imagePullPolicy: Always
+        command:
+          - "/bin/sh"
+          - "-c"
+        args:
+          - echo "Installing KSOPS...";
+            mv /usr/local/bin/ksops /custom-tools/;
+            mv /usr/local/bin/kustomize /custom-tools/;
+            echo "Done.";
+        volumeMounts:
+          - mountPath: /custom-tools
+            name: custom-tools
+    volumeMounts:
+      - mountPath: /usr/local/bin/kustomize
+        name: custom-tools
+        subPath: kustomize
+      - mountPath: /usr/local/bin/ksops
+        name: custom-tools
+        subPath: ksops
+      - mountPath: /ksops-credentials
+        readOnly: true
+        name: ksops-credentials
+
+    resources:
+      requests:
+        cpu: 10m
+        memory: 416Mi
+      limits:
+        cpu: 1
+        memory: 768Mi
+
+  applicationSet:
+    resources:
+      requests:
+        cpu: 5m
+        memory: 64Mi
+      limits:
+        cpu: 50m
+        memory: 96Mi
+
+  notifications:
+    resources:
+      requests:
+        cpu: 5m
+        memory: 56Mi
+      limits:
+        cpu: 50m
+        memory: 64Mi

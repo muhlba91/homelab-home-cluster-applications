@@ -1,0 +1,17 @@
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-storage
+provisioner: nfs.csi.k8s.io
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+mountOptions:
+  - nfsvers=4.1
+parameters:
+  server: {{ .Values.nfs.server }}
+  share: {{ .Values.nfs.share }}
+  subDir: "${pvc.metadata.namespace}-${pvc.metadata.name}-${pv.metadata.name}"
+  csi.storage.k8s.io/provisioner-secret-name: "mount-options"
+  csi.storage.k8s.io/provisioner-secret-namespace: "csi-nfs-driver"

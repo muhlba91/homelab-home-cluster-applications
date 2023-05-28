@@ -1,0 +1,123 @@
+---
+adminPassword: hashed-password
+upstreamDns:
+  ipv4: "10.1.1"
+  ipv6: "2606:4700:4700::1111"
+exclusions:
+  - backblazeb2.com
+  - apps.apple.com
+  - itunes.apple.com
+  - analytics.console.aws.a2z.com
+  - fonts.gstatic.com
+  - firebaseinstallations.googleapis.com
+  - firebaselogging-pa.googleapis.com
+  - flutter.dev
+  - sentry.io
+  - sentry-cdn.com
+  - newrelic.com
+  - segment.io
+  - revenuecat.com
+  - optimizely.com
+  - onesignal.com
+  - privacy-mgmt.com
+  - smartclip.net
+  - prod.http1.netflix.com
+
+app-template:
+  global:
+    fullnameOverride: adguard-home
+
+  image:
+    repository: adguard/adguardhome
+    pullPolicy: IfNotPresent
+    tag: v0.107.29
+
+  serviceAccount:
+    create: true
+  automountServiceAccountToken: false
+
+  args:
+    - /opt/adguardhome/AdGuardHome
+    - --config
+    - /opt/adguardhome/conf/AdGuardHome.yaml
+    - --work-dir
+    - /opt/adguardhome/work
+    - --no-check-update
+
+  initContainers:
+    copy-configmap:
+      image: busybox:1.36
+      imagePullPolicy: IfNotPresent
+      command:
+        - sh
+        - -c
+        - "mkdir -p /opt/adguardhome/conf; cp /tmp/AdGuardHome.yaml /opt/adguardhome/conf/AdGuardHome.yaml"
+      volumeMounts:
+        - name: adguard-home-config
+          mountPath: /tmp/AdGuardHome.yaml
+          subPath: AdGuardHome.yaml
+        - name: config
+          mountPath: /opt/adguardhome/conf
+      securityContext:
+        runAsUser: 0
+      resources:
+        requests:
+          cpu: 10m
+          memory: 16Mi
+        limits:
+          cpu: 100m
+          memory: 32Mi
+
+  service:
+    main:
+      ports:
+        http:
+          port: 3000
+    dns:
+      enabled: true
+      ipFamilyPolicy: PreferDualStack
+      type: LoadBalancer
+      externalTrafficPolicy: Local
+      ports:
+        dns-tcp:
+          enabled: true
+          port: 53
+          protocol: TCP
+          targetPort: 53
+        dns-udp:
+          enabled: true
+          port: 53
+          protocol: UDP
+          targetPort: 53
+
+  ingress:
+    main:
+      enabled: true
+
+  persistence:
+    config:
+      enabled: true
+      type: emptyDir
+      mountPath: /opt/adguardhome/conf
+    data:
+      enabled: true
+      type: pvc
+      storageClass: proxmox-rbd
+      accessMode: ReadWriteOnce
+      size: 5Gi
+      retain: false
+      mountPath: /opt/adguardhome/work
+    adguard-home-config:
+      enabled: true
+      type: custom
+      volumeSpec:
+        configMap:
+          name: adguard-home-config
+
+  resources:
+    requests:
+      cpu: 150m
+      memory: 384Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi

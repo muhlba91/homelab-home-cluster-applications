@@ -1,0 +1,43 @@
+---
+global:
+  spec:
+    namespace: argocd
+    source:
+      repoURL: https://github.com/muhlba91/homelab-kubernetes-home-applications.git
+      targetRevision: HEAD
+    values:
+      repoURL: git@github.com:muhlba91/homelab-kubernetes-home-values.git
+      targetRevision: HEAD
+    syncWave: 0
+    helm:
+      enabled: false
+      valueFiles:
+        - values.yaml
+    enableAutomated: false
+    syncOptions: []
+
+applications:
+  cert-manager:
+    project: "core-{{ $.Values.global.projectEnvironment }}"
+    path: core/charts/cert-manager
+    releaseName: cert-manager
+    disabled: false
+    namespace: cert-manager
+    helm: true
+    syncWave: -200
+  external-dns-google:
+    project: "core-{{ $.Values.global.projectEnvironment }}"
+    path: core/charts/external-dns-google
+    releaseName: external-dns-google
+    disabled: false
+    namespace: external-dns-google
+    helm: true
+    syncWave: -200
+  traefik:
+    project: "core-{{ $.Values.global.projectEnvironment }}"
+    path: core/charts/traefik
+    releaseName: traefik
+    disabled: false
+    namespace: traefik
+    helm: true
+    syncWave: -100

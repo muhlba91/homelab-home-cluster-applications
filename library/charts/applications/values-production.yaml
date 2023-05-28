@@ -1,0 +1,8 @@
+---
+global:
+  environment: production
+  spec:
+    helm:
+      valueFiles:
+        - values.yaml
+        - values-production.yaml

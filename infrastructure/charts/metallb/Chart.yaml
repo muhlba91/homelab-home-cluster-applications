@@ -1,0 +1,19 @@
+---
+apiVersion: v2
+name: traefik
+description: Customized MetalLB
+
+version: 1.0.0
+
+type: application
+
+maintainers:
+  - name: Daniel Muehlbachler-Pietrzykowski
+    email: daniel@muehlbachler.io
+
+appVersion: "0.0.0"
+
+dependencies:
+  - name: metallb
+    version: 0.13.9
+    repository: https://metallb.github.io/metallb

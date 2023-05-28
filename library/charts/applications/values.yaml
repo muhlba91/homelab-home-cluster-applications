@@ -1,0 +1,27 @@
+---
+global:
+  prefix: ""
+  environment: development
+  spec:
+    namespace: argocd
+    source:
+      repoURL: https://repo.com/source.git
+      targetRevision: HEAD
+    values:
+      repoURL: https://repo.com/values.git
+      targetRevision: HEAD
+    syncWave: 0
+    helm:
+      enabled: true
+      valueFiles:
+        - values.yaml
+    enableAutomated: false
+    syncOptions: []
+
+projects: []
+#  - name: project
+
+applications: {}
+#  infrastructure:
+#    project: "project-{{ $.Values.global.environment }}"
+#    path: project

@@ -1,0 +1,79 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: home-assistant-backup
+spec:
+  schedule: 0 0 * * *
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  suspend: false
+  concurrencyPolicy: Replace
+  jobTemplate:
+    metadata:
+      namespace: {{ .Release.Namespace }}
+    spec:
+      template:
+        metadata:
+          namespace: {{ .Release.Namespace }}
+        spec:
+          restartPolicy: Never
+          affinity:
+            podAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - labelSelector:
+                    matchExpressions:
+                      - key: app.kubernetes.io/name
+                        operator: In
+                        values:
+                          - home-assistant-home-assistant
+                  topologyKey: kubernetes.io/hostname
+          containers:
+            - name: backup
+              image: alpine:3.17
+              imagePullPolicy: IfNotPresent
+              command:
+                - /scripts/backup.sh
+              env:
+                - name: DATA_PATH
+                  value: /data
+                - name: GIT_REPO
+                  valueFrom:
+                    configMapKeyRef:
+                      name: home-assistant-git
+                      key: git-repo
+                - name: GIT_USERNAME
+                  valueFrom:
+                    configMapKeyRef:
+                      name: home-assistant-git
+                      key: git-username
+                - name: GIT_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      key: gitlab-token
+                      name: home-assistant-git
+                - name: GIT_CRYPT_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      key: git-crypt-key
+                      name: home-assistant-git
+              volumeMounts:
+                - name: data
+                  mountPath: /data
+                - name: scripts
+                  mountPath: /scripts
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 512Mi
+                limits:
+                  cpu: 1
+                  memory: 1024Mi
+          volumes:
+            - name: data
+              persistentVolumeClaim:
+                claimName: home-assistant-config
+            - name: scripts
+              configMap:
+                name: home-assistant-scripts
+                defaultMode: 511

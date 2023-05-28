@@ -1,0 +1,87 @@
+---
+name: Pipeline
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+env:
+  HELM_EXPERIMENTAL_OCI: true
+
+
+chartDirectories: &chart_directories
+  - applications
+  - core
+  - home-assistant
+  - infrastructure
+  - library
+
+jobs:
+  conform:
+    runs-on: ubuntu-latest
+    name: Conform
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: siderolabs/conform@v0.1.0-alpha.27
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  lint:
+    runs-on: ubuntu-latest
+    name: Helm Lint
+    strategy:
+      max-parallel: 4
+      matrix:
+        directory: *chart_directories
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: yokawasa/action-setup-kube-tools@v0.9.3
+        with:
+          setup-tools: helm
+
+      - name: Lint ${{ matrix.directory }}
+        working-directory: ${{ matrix.directory }}/charts/
+        run: |
+          for chart in */; do
+            echo Processing ${chart}...
+            helm lint ${chart}
+          done
+
+  template:
+    runs-on: ubuntu-latest
+    name: Helm Template
+    needs:
+      - lint
+    strategy:
+      max-parallel: 4
+      matrix:
+        directory: *chart_directories
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: yokawasa/action-setup-kube-tools@v0.9.3
+        with:
+          setup-tools: helm
+
+      - name: Template ${{ matrix.directory }}
+        working-directory: ${{ matrix.directory }}/charts/
+        run: |
+          for chart in */; do
+            echo Processing ${chart}...
+            cd ${chart}
+            helm dependency update
+            helm template .
+            cd ../
+          done

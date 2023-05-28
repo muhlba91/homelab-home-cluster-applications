@@ -1,0 +1,58 @@
+---
+service:
+  annotations: {}
+
+etcd:
+  fullnameOverride: etcd
+
+  serviceAccount:
+    create: true
+    automountServiceAccountToken: false
+
+  auth:
+    rbac:
+      create: false
+    token:
+      enabled: false
+
+  persistence:
+    enabled: true
+    storageClass: proxmox-rbd
+    size: 1Gi
+
+  livenessProbe:
+    initialDelaySeconds: 5
+
+  readinessProbe:
+    initialDelaySeconds: 5
+
+  resources:
+    requests:
+      cpu: 20m
+      memory: 104Mi
+    limits:
+      cpu: 100m
+      memory: 124Mi
+
+coredns:
+  global:
+    fullnameOverride: coredns
+
+  serviceAccount:
+    create: true
+
+  isClusterService: false
+
+  livenessProbe:
+    initialDelaySeconds: 5
+
+  readinessProbe:
+    initialDelaySeconds: 5
+
+  resources:
+    requests:
+      cpu: 10m
+      memory: 104Mi
+    limits:
+      cpu: 50m
+      memory: 124Mi

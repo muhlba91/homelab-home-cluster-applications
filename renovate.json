@@ -1,0 +1,36 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:base",
+        ":dependencyDashboard"
+    ],
+    "prHourlyLimit": 0,
+    "prConcurrentLimit": 0,
+    "baseBranches": [
+        "main"
+    ],
+    "enabledManagers": [
+        "helm-values",
+        "helmv3",
+        "github-actions"
+    ],
+    "helm-values": {
+        "commitMessageTopic": "chore(deps): update helm values {{ depName }}",
+        "fileMatch": [
+            "(^|/)values\\.yaml$"
+        ],
+        "pinDigests": false
+    },
+    "helmv3": {
+        "commitMessageTopic": "chore(deps): update helm chart {{ depName }}",
+        "fileMatch": [
+            "(^|/)Chart\\.yaml$"
+        ]
+    },
+    "github-actions": {
+        "fileMatch": [
+            "^(workflow-templates|\\.github/workflows)/[^/]+\\.ya?ml$",
+            "(^|/)action\\.ya?ml$"
+        ]
+    }
+}

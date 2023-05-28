@@ -1,0 +1,28 @@
+---
+external-dns:
+  image:
+    registry: registry.k8s.io
+    repository: external-dns/external-dns
+    tag: v0.13.4
+
+  sources:
+    - service
+    - ingress
+
+  interval: 5m
+
+  logLevel: debug
+
+  txtOwnerId: external-dns-dev-google
+  provider: google
+  google:
+    project: tuxnet-385112
+    serviceAccountSecret: external-dns-google
+
+  resources:
+    requests:
+      cpu: 5m
+      memory: 64Mi
+    limits:
+      cpu: 10m
+      memory: 80Mi

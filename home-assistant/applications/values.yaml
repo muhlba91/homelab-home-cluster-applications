@@ -1,0 +1,63 @@
+---
+global:
+  prefix: home-assistant
+  spec:
+    namespace: argocd
+    source:
+      repoURL: https://github.com/muhlba91/homelab-kubernetes-home-applications.git
+      targetRevision: HEAD
+    values:
+      repoURL: git@github.com:muhlba91/homelab-kubernetes-home-values.git
+      targetRevision: HEAD
+    syncWave: 0
+    helm:
+      enabled: false
+      valueFiles:
+        - values.yaml
+    enableAutomated: false
+    syncOptions: []
+
+applications:
+  node-red:
+    project: "home-assistant-{{ $.Values.global.projectEnvironment }}"
+    path: home-assistant/charts/node-red
+    releaseName: "{{ $.Values.global.prefix }}-node-red"
+    disabled: false
+    namespace: "{{ $.Values.global.prefix }}-node-red"
+    helm: true
+  zwave:
+    project: "home-assistant-{{ $.Values.global.projectEnvironment }}"
+    path: home-assistant/charts/zwave
+    releaseName: "{{ $.Values.global.prefix }}-zwave"
+    disabled: false
+    namespace: "{{ $.Values.global.prefix }}-zwave"
+    helm: true
+  emqx:
+    project: "home-assistant-{{ $.Values.global.projectEnvironment }}"
+    path: home-assistant/charts/emqx
+    releaseName: "{{ $.Values.global.prefix }}-emqx"
+    disabled: false
+    namespace: "{{ $.Values.global.prefix }}-mqtt"
+    helm: true
+  ring-mqtt:
+    project: "home-assistant-{{ $.Values.global.projectEnvironment }}"
+    path: home-assistant/charts/ring-mqtt
+    releaseName: "{{ $.Values.global.prefix }}-ring-mqtt"
+    disabled: false
+    namespace: "{{ $.Values.global.prefix }}-ring-mqtt"
+    helm: true
+  telegraf:
+    project: "home-assistant-{{ $.Values.global.projectEnvironment }}"
+    path: home-assistant/charts/telegraf
+    releaseName: "{{ $.Values.global.prefix }}-telegraf"
+    disabled: false
+    namespace: "{{ $.Values.global.prefix }}-telegraf"
+    helm: true
+  home-assistant:
+    project: "home-assistant-{{ $.Values.global.projectEnvironment }}"
+    path: home-assistant/charts/home-assistant
+    releaseName: "{{ $.Values.global.prefix }}-home-assistant"
+    disabled: false
+    namespace: "{{ $.Values.global.prefix }}-home-assistant"
+    helm: true
+  

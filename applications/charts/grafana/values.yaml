@@ -1,0 +1,95 @@
+---
+ldap:
+  host: ldap.domain.org
+  bindDn: uid=binduser,ou=Users,o=ldap,dc=domain,dc=org
+  baseDn: o=ldap,dc=domain,dc=org
+  groups:
+    admin:
+      dn: cn=System Administrators,ou=Users,o=ldap,dc=domain,dc=org
+
+grafana:
+  useStatefulSet: true
+
+  rbac:
+    create: true
+
+  serviceAccount:
+    create: true
+
+  testFramework:
+    enabled: false
+
+  deploymentStrategy:
+    type: Recreate
+
+  envValueFrom:
+    LDAP_BIND_PASSWORD:
+      secretKeyRef:
+        name: grafana-ldap
+        key: password
+
+  ingress:
+    enabled: true
+
+  persistence:
+    enabled: true
+    type: statefulset
+    storageClass: proxmox-rbd
+    size: 1Gi
+
+  initChownData:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        cpu: 100m
+        memory: 32Mi
+
+  admin:
+    existingSecret: grafana-admin
+    userKey: user
+    passwordKey: password
+
+  grafana.ini:
+    auth.ldap:
+      enabled: true
+      allow_sign_up: true
+      config_file: /etc/grafana/ldap.toml
+
+  ldap:
+    enabled: true
+    existingSecret: grafana-ldap-configuration
+
+  sidecar:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 128Mi
+      limits:
+        cpu: 50m
+        memory: 156Mi
+    dashboards:
+      enabled: true
+      labelValue: "1"
+      searchNamespace: ALL
+    datasources:
+      enabled: true
+      labelValue: "1"
+      searchNamespace: ALL
+    plugins:
+      enabled: true
+      labelValue: "1"
+      searchNamespace: ALL
+    notifiers:
+      enabled: false
+      labelValue: "1"
+      searchNamespace: ALL
+
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: 1
+      memory: 1Gi

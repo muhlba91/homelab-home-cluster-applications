@@ -1,0 +1,97 @@
+---
+gitUsername: username
+gitRepo: repo.com/config.git
+
+app-template:
+  global:
+    fullnameOverride: home-assistant
+
+  image:
+    repository: ghcr.io/home-assistant/home-assistant
+    pullPolicy: IfNotPresent
+    tag: 2023.5.4
+
+  serviceAccount:
+    create: true
+  automountServiceAccountToken: false
+
+  env:
+    - name: TZ
+      value: UTC
+
+  initContainers:
+    git-sync:
+      image: alpine:3.17
+      imagePullPolicy: IfNotPresent
+      command:
+        - /scripts/sync.sh
+      env:
+        - name: DATA_PATH
+          value: /data
+        - name: GIT_REPO
+          valueFrom:
+            configMapKeyRef:
+              name: home-assistant-git
+              key: git-repo
+        - name: GIT_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: home-assistant-git
+              key: git-username
+        - name: GIT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: home-assistant-git
+              key: gitlab-token
+        - name: GIT_CRYPT_KEY
+          valueFrom:
+            secretKeyRef:
+              name: home-assistant-git
+              key: git-crypt-key
+      volumeMounts:
+        - name: config
+          mountPath: /data
+        - name: init-scripts
+          mountPath: /scripts
+      resources:
+        requests:
+          cpu: 100m
+          memory: 512Mi
+        limits:
+          cpu: 1
+          memory: 1024Mi
+
+  service:
+    main:
+      ipFamilyPolicy: PreferDualStack
+      ports:
+        http:
+          port: 8123
+
+  ingress:
+    main:
+      enabled: true
+
+  persistence:
+    config:
+      enabled: true
+      type: pvc
+      storageClass: proxmox-cephfs
+      accessMode: ReadWriteMany
+      size: 5Gi
+      retain: false
+    init-scripts:
+      enabled: true
+      type: custom
+      volumeSpec:
+        configMap:
+          name: home-assistant-scripts
+          defaultMode: 0o0777
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 1024Mi
+    limits:
+      cpu: 1
+      memory: 1280Mi

@@ -1,0 +1,28 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: emqx-mqtt
+  annotations:
+    external-dns.alpha.kubernetes.io/provider: internal
+    external-dns.alpha.kubernetes.io/hostname: {{ .Values.emqx.ssl.dnsnames | first }}
+    {{- with .Values.service.annotations }}
+    {{- . | toYaml | nindent 4 }}
+    {{- end }}
+spec:
+  type: LoadBalancer
+    # FIXME: external-dns needs to support IPv6 first - https://github.com/kubernetes-sigs/external-dns/pull/2461
+    # ipFamilyPolicy: PreferDualStack
+  externalTrafficPolicy: Local
+  ports:
+    - name: mqtt
+      port: 1883
+      protocol: TCP
+      targetPort: mqtt
+    - name: mqttssl
+      port: 8883
+      protocol: TCP
+      targetPort: mqttssl
+  selector:
+    app.kubernetes.io/instance: home-assistant-emqx
+    app.kubernetes.io/name: emqx

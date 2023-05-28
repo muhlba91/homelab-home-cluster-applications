@@ -1,0 +1,14 @@
+---
+apiVersion: v2
+name: external-services
+description: External Services
+
+version: 0.1.0
+
+type: application
+
+maintainers:
+  - name: Daniel Muehlbachler-Pietrzykowski
+    email: daniel@muehlbachler.io
+
+appVersion: "0.0.0"

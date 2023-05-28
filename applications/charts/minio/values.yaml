@@ -1,0 +1,53 @@
+---
+minio:
+  image:
+    tag: RELEASE.2023-01-20T02-05-44Z
+
+  mode: standalone
+  replicas: 1
+
+  existingSecret: minio-root-user
+
+  securityContext:
+    enabled: false
+
+  persistence:
+    storageClass: nfs-storage
+    size: 1Gi
+
+  ingress:
+    enabled: true
+
+  consoleIngress:
+    enabled: true
+
+  policies:
+    - name: buildkite-agent
+      statements:
+        - resources:
+            - "arn:aws:s3:::buildkite-agent-cache-*"
+            - "arn:aws:s3:::buildkite-agent-cache-*/*"
+          actions:
+            - "s3:*"
+  users:
+    - accessKey: buildkite-agent
+      existingSecret: buildkite-agent-user
+      existingSecretKey: secret-access-key
+      policy: buildkite-agent
+  buckets:
+    - name: buildkite-agent-cache-dev
+      policy: none
+      purge: false
+      versioning: false
+      objectlocking: false
+  postJob:
+    annotations:
+      argocd.argoproj.io/hook: PostSync
+
+  resources:
+    requests:
+      cpu: 20m
+      memory: 296Mi
+    limits:
+      cpu: 100m
+      memory: 512Mi

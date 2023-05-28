@@ -1,0 +1,107 @@
+---
+internalDomain: internal.domain.org
+dns:
+  ipv4: 1.1.1.1
+  ipv6: 2606:4700:4700::1111
+
+network:
+  leaseTime: 48h
+  renewTime: 24h
+  rebindTime: 42h
+  ipv4:
+    cidr: 10.0.0.0/24
+    router: 10.0.0.1
+    defaultPool:
+      startAddress: 10.0.0.10
+      endAddress: 10.0.0.250
+      netmask: 255.255.255.0
+  ipv6:
+    cidr: fe80::/64
+    router: fe80::1
+    informationRefreshTime: 6h
+    defaultPool:
+      startAddress: fe80::1:1
+      endAddress: fe80::1:ffff
+      prefixLength: 64
+
+reservations: []
+
+app-template:
+  global:
+    fullnameOverride: dnsmasq
+
+  image:
+    repository: quay.io/ricardbejarano/dnsmasq
+    pullPolicy: IfNotPresent
+    tag: "2.89"
+
+  serviceAccount:
+    create: true
+  automountServiceAccountToken: false
+
+  controller:
+    type: statefulset
+
+  args:
+    - --keep-in-foreground
+    - --log-facility=-
+
+  hostNetwork: true
+
+  securityContext:
+    runAsUser: 0
+    capabilities:
+      add:
+        - NET_ADMIN
+
+  service:
+    main:
+      ipFamilyPolicy: PreferDualStack
+      ports:
+        http:
+          enabled: false
+        dhcp4:
+          enabled: true
+          port: 67
+          protocol: UDP
+          targetPort: 67
+        dhcp6:
+          enabled: true
+          port: 547
+          protocol: UDP
+          targetPort: 547
+
+  persistence:
+    dhcp4:
+      enabled: true
+      type: custom
+      mountPath: /etc/dnsmasq.conf
+      subPath: dnsmasq.conf
+      volumeSpec:
+        configMap:
+          name: dnsmasq-config
+    tmp:
+      enabled: true
+      type: emptyDir
+      mountPath: /tmp
+    run:
+      enabled: true
+      type: emptyDir
+      mountPath: /var/run
+
+  # TODO: enable probes correctly
+  probes:
+    liveness:
+      enabled: false
+    readiness:
+      enabled: false
+    startup:
+      enabled: false
+
+  resources:
+    requests:
+      cpu: 5m
+      memory: 8Mi
+    limits:
+      cpu: 10m
+      memory: 12Mi

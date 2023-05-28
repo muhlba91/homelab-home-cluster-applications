@@ -1,0 +1,32 @@
+---
+cilium:
+  rollOutCiliumPods: true
+
+  ipam:
+    mode: kubernetes
+  ipv6:
+    enabled: true
+
+  bpf:
+    hostLegacyRouting: false
+
+  kubeProxyReplacement: strict
+  kubeProxyReplacementHealthzBindAddr: "0.0.0.0:10256"
+
+  k8sServiceHost: 127.0.0.1
+  k8sServicePort: 6443
+
+  prometheus:
+    enabled: true
+
+  operator:
+    rollOutPods: true
+    prometheus:
+      enabled: true
+
+  # TODO: needed for updates?
+  preflight:
+    enabled: false
+
+  hubble:
+    enabled: false
