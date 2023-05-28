@@ -28,7 +28,7 @@ app-template:
 
   initContainers:
     plugins:
-      image: alpine:3.17
+      image: alpine:3.18
       imagePullPolicy: IfNotPresent
       command:
         - /scripts/plugins.sh

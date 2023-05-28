@@ -111,7 +111,7 @@ app-template:
 
   initContainers:
     git-sync:
-      image: alpine:3.17
+      image: alpine:3.18
       imagePullPolicy: IfNotPresent
       command:
         - /scripts/sync.sh
@@ -151,7 +151,7 @@ app-template:
           cpu: '1'
           memory: 256Mi
     init-chown-data:
-      image: alpine:3.17
+      image: alpine:3.18
       imagePullPolicy: IfNotPresent
       command:
         - chown
@@ -175,7 +175,7 @@ app-template:
           add:
             - CHOWN
     init-chown-node-modules:
-      image: alpine:3.17
+      image: alpine:3.18
       imagePullPolicy: IfNotPresent
       command:
         - chown
