@@ -16,7 +16,6 @@ external-dns:
   txtOwnerId: external-dns-dev-google
   provider: google
   google:
-    project: tuxnet-385112
     serviceAccountSecret: external-dns-google
 
   resources:
