@@ -2,3 +2,11 @@
 global:
   projectEnvironment: development
   environment: dev
+
+applications:
+  metallb:
+    enableAutomated: false
+  rook-ceph:
+    enableAutomated: false
+  csi-nfs-driver:
+    enableAutomated: false

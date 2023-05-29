@@ -13,7 +13,7 @@ global:
       enabled: false
       valueFiles:
         - values.yaml
-    enableAutomated: false
+    enableAutomated: true
     syncOptions: []
 
 applications:
@@ -21,7 +21,6 @@ applications:
     project: "infrastructure-{{ $.Values.global.projectEnvironment }}"
     path: infrastructure/charts/argocd
     disabled: false
-    enableAutomated: true
     namespace: argocd
     releaseName: argocd-{{ $.Values.global.environment }}
     helm: true
@@ -31,7 +30,6 @@ applications:
     path: infrastructure/charts/cilium
     releaseName: cilium
     disabled: false
-    enableAutomated: true
     namespace: cilium
     helm: true
     syncWave: -1000
@@ -40,7 +38,6 @@ applications:
     path: infrastructure/charts/external-secrets
     releaseName: external-secrets
     disabled: false
-    enableAutomated: true
     namespace: external-secrets
     helm: true
     syncWave: -750
@@ -49,7 +46,6 @@ applications:
     path: infrastructure/kustomizations/external-secrets-stores
     releaseName: external-secrets-stores
     disabled: false
-    enableAutomated: true
     namespace: external-secrets
     helm: false
     syncWave: -500

@@ -13,7 +13,7 @@ global:
       enabled: false
       valueFiles:
         - values.yaml
-    enableAutomated: false
+    enableAutomated: true
     syncOptions: []
 
 applications:
