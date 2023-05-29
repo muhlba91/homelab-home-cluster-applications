@@ -84,9 +84,9 @@ app-template:
     fullnameOverride: node-red
 
   image:
-    repository: quay.io/muhlba91/node-red
+    repository: ghcr.io/muhlba91/node-red
     pullPolicy: IfNotPresent
-    tag: 3.0.2-1.0.4
+    tag: 3.0.2-1.0.8
 
   serviceAccount:
     create: true
