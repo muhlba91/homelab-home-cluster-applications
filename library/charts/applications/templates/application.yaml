@@ -27,7 +27,7 @@ spec:
         releaseName: {{ tpl (default $appName $app.releaseName) $ }}
         valueFiles:
         {{- range (default $.Values.global.spec.helm.valueFiles .valueFiles) }}
-          - {{ if ne $sourceRepoUrl $valuesRepoUrl -}}$values/{{- end -}}{{ $valuesFiles }}/{{ . }}
+          - {{ if ne $sourceRepoUrl $valuesRepoUrl -}}$values{{- end -}}/{{ $valuesFiles }}/{{ . }}
         {{- end }}
       {{- end }}
     {{- if ne $sourceRepoUrl $valuesRepoUrl }}
