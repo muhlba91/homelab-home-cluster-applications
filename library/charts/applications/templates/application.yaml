@@ -1,6 +1,8 @@
 {{- range $name, $app := .Values.applications -}}
 {{- $valuesFiles := printf "%s" (default $app.path $app.valuesPath) -}}
 {{- $appName := printf "%s%s-%s" (ternary (printf "%s-" $.Values.global.prefix) "" (ne $.Values.global.prefix "")) $name $.Values.global.environment -}}
+{{- $sourceRepoUrl :=  (default $.Values.global.spec.source.repoURL $app.sourceRepoURL) -}}
+{{- $valuesRepoUrl := (default $.Values.global.spec.values.repoURL $app.valuesRepoURL) -}}
 {{- if not $app.disabled }}
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -15,7 +17,7 @@ metadata:
 spec:
   project: {{ tpl $app.project $ }}
   sources:
-    - repoURL: {{ default $.Values.global.spec.source.repoURL $app.sourceRepoURL }}
+    - repoURL: {{ $sourceRepoUrl }}
       targetRevision: {{ default $.Values.global.spec.source.targetRevision $app.sourceTargetRevision }}
       {{- if not (and $app.sourceRepoURL $app.sourceTargetRevision) }}
       path: {{ $app.path }}
@@ -25,12 +27,14 @@ spec:
         releaseName: {{ tpl (default $appName $app.releaseName) $ }}
         valueFiles:
         {{- range (default $.Values.global.spec.helm.valueFiles .valueFiles) }}
-          - $values/{{ $valuesFiles }}/{{ . }}
+          - {{ if ne $sourceRepoUrl $valuesRepoUrl -}}$values/{{- end -}}{{ $valuesFiles }}/{{ . }}
         {{- end }}
       {{- end }}
-    - repoURL: {{ default $.Values.global.spec.values.repoURL $app.valuesRepoURL }}
+    {{- if ne $sourceRepoUrl $valuesRepoUrl }}
+    - repoURL: {{ $valuesRepoUrl }}
       targetRevision: {{ default $.Values.global.spec.values.targetRevision $app.valuesTargetRevision }}
       ref: values
+    {{- end }}
   destination:
     namespace: {{ tpl (default $.Values.global.spec.namespace $app.namespace) $ }}
     server: https://kubernetes.default.svc
