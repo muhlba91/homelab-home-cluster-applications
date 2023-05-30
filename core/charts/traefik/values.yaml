@@ -23,6 +23,7 @@ traefik:
 
   service:
     spec:
+      ipFamilyPolicy: PreferDualStack
       externalTrafficPolicy: Local
 
   resources:

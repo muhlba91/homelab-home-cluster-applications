@@ -11,8 +11,7 @@ metadata:
     {{- end }}
 spec:
   type: LoadBalancer
-    # FIXME: external-dns needs to support IPv6 first - https://github.com/kubernetes-sigs/external-dns/pull/2461
-    # ipFamilyPolicy: PreferDualStack
+  ipFamilyPolicy: PreferDualStack
   externalTrafficPolicy: Local
   ports:
     - name: mqtt
