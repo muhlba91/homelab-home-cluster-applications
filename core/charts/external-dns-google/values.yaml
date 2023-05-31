@@ -11,7 +11,7 @@ external-dns:
 
   interval: 5m
 
-  logLevel: debug
+  logLevel: error
 
   txtOwnerId: external-dns-dev-google
   provider: google
