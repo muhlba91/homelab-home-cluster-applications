@@ -23,5 +23,5 @@ external-dns:
       cpu: 5m
       memory: 64Mi
     limits:
-      cpu: 10m
-      memory: 80Mi
+      cpu: 100m
+      memory: 160Mi
