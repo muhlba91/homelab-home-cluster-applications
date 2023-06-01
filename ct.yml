@@ -1,0 +1,25 @@
+---
+target-branch: main
+chart-dirs:
+  - applications/charts
+  - core/charts
+  - home-assistant/charts
+  - infrastructure/charts
+  - library/charts
+validate-maintainers: false
+check-version-increment: false
+chart-repos: # we need to add all repos which are not OCI ones
+  - bjw-s=https://bjw-s.github.io/helm-charts/
+  - coredns=https://coredns.github.io/helm
+  - grafana=https://grafana.github.io/helm-charts
+  - minio=https://charts.min.io/
+  - cert-manager=https://charts.jetstack.io
+  - traefik=https://helm.traefik.io/traefik
+  - emqx=https://repos.emqx.io/charts
+  - argo=https://argoproj.github.io/argo-helm
+  - cilium=https://helm.cilium.io/
+  - csi-driver-nfs=https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
+  - descheduler=https://kubernetes-sigs.github.io/descheduler
+  - external-secrets=https://charts.external-secrets.io
+  - metallb=https://metallb.github.io/metallb
+  - rook=https://charts.rook.io/release

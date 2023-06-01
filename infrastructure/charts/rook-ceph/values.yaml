@@ -102,7 +102,7 @@ rook-ceph:
           limits:
             memory: 32Mi
             cpu: 100m
-  
+
     csiCephFSProvisionerResource: |
       - name : csi-provisioner
         resource:
@@ -152,7 +152,7 @@ rook-ceph:
           limits:
             memory: 32Mi
             cpu: 100m
-  
+
     csiCephFSPluginResource: |
       - name : driver-registrar
         resource:
@@ -178,7 +178,7 @@ rook-ceph:
           limits:
             memory: 32Mi
             cpu: 100m
-  
+
     csiNFSProvisionerResource: |
       - name : csi-provisioner
         resource:
@@ -204,7 +204,7 @@ rook-ceph:
           limits:
             memory: 96Mi
             cpu: 100m
-    
+
     csiNFSPluginResource: |
       - name : driver-registrar
         resource:
