@@ -1,6 +1,6 @@
 dependencies:
 - name: csi-driver-nfs
   repository: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
-  version: v4.2.0
-digest: sha256:09a48407916f665ce9783cba5bfcb6b249464c85224a04ef45ed154ddea68660
-generated: "2023-03-27T15:09:30.871224+02:00"
+  version: v4.3.0
+digest: sha256:6d55527268a0ac675ec48b3397c65d38142eebad172f38391b81a714f2b06b7c
+generated: "2023-06-01T08:50:55.16811256Z"
