@@ -16,9 +16,7 @@ etcd:
       enabled: false
 
   persistence:
-    enabled: true
-    storageClass: proxmox-rbd
-    size: 1Gi
+    enabled: false
 
   livenessProbe:
     initialDelaySeconds: 5
