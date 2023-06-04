@@ -41,7 +41,8 @@ grafana:
     passwordKey: password
 
   grafana.ini:
-    root_url: "{{ if (and .Values.ingress.enabled .Values.ingress.hosts) }}https://{{ .Values.ingress.hosts | first }}{{ else }}''{{ end }}"
+    server:
+      root_url: "{{ if (and .Values.ingress.enabled .Values.ingress.hosts) }}https://{{ .Values.ingress.hosts | first }}{{ else }}''{{ end }}"
     auth.generic_oauth:
       enabled: true
       allow_sign_up: true
