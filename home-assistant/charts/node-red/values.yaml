@@ -1,5 +1,4 @@
 ---
-githubUsername: username
 packages:
   - name: bcryptjs
     version: 2.4.3
@@ -65,10 +64,8 @@ packages:
     version: 1.4.2
   - name: node-red-contrib-mytimeout
     version: 3.2.2
-  - name: passport-openidconnect
-    version: 0.1.1
-  - name: node-red-auth-github
-    version: 0.1.1
+  - name: "@govtechsg/passport-openidconnect"
+    version: 1.0.1
   - name: node-red-contrib-telegrambot
     version: 15.0.1
   - name: node-red-contrib-uspatata-influxdb-v2
@@ -78,6 +75,7 @@ gitUsername: username
 gitRepo: repo.com/config.git
 
 domain: node-red.domain.org
+adminUser: daniel
 
 app-template:
   global:
