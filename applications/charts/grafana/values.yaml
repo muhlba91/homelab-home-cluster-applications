@@ -1,8 +1,4 @@
 ---
-oidc:
-  groups:
-    admin: sysadmin
-
 grafana:
   useStatefulSet: true
 
@@ -48,14 +44,17 @@ grafana:
     auth.generic_oauth:
       enabled: true
       allow_sign_up: true
-      config_file: /etc/grafana/oidc.toml
-
-  extraConfigmapMounts:
-    - name: oidc-configuration
-      configMap: grafana-oidc-configuration
-      mountPath: /etc/grafana/oidc.toml
-      subPath: oidc-toml
-      readOnly: true
+      verbose_logging: false
+      name: Tuxnet
+      icon: cloud
+      scopes: openid email profile
+      auth_url: "${OIDC_AUTHZ_URL}"
+      token_url: "${OIDC_TOKEN_URL}"
+      api_url: "${OIDC_USER_INFO_URL}"
+      client_id: "${OIDC_CLIENT_ID}"
+      client_secret: "${OIDC_CLIENT_SECRET}"
+      # allowed_groups: ["sysadmin"]
+      role_attribute_path: "contains(groups[*], 'sysadmin') && 'Admin' || 'Viewer'"
 
   sidecar:
     resources:
