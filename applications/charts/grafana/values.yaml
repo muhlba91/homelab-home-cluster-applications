@@ -1,11 +1,7 @@
 ---
-ldap:
-  host: ldap.domain.org
-  bindDn: uid=binduser,ou=Users,o=ldap,dc=domain,dc=org
-  baseDn: o=ldap,dc=domain,dc=org
+oidc:
   groups:
-    admin:
-      dn: cn=System Administrators,ou=Users,o=ldap,dc=domain,dc=org
+    admin: sysadmin
 
 grafana:
   useStatefulSet: true
@@ -22,11 +18,8 @@ grafana:
   deploymentStrategy:
     type: Recreate
 
-  envValueFrom:
-    LDAP_BIND_PASSWORD:
-      secretKeyRef:
-        name: grafana-ldap
-        key: password
+  envFromSecrets:
+    - name: grafana-oidc
 
   ingress:
     enabled: true
@@ -52,14 +45,20 @@ grafana:
     passwordKey: password
 
   grafana.ini:
-    auth.ldap:
+    auth.generic_oauth:
       enabled: true
       allow_sign_up: true
-      config_file: /etc/grafana/ldap.toml
+      config_file: /etc/grafana/oidc.toml
 
-  ldap:
-    enabled: true
-    existingSecret: grafana-ldap-configuration
+  extraContainerVolumes:
+    - name: oidc-configuration
+      configMap:
+        name: grafana-oidc-configuration
+  extraVolumeMounts:
+    - name: oidc-configuration
+      mountPath: /etc/grafana/oidc.toml
+      subPath: oidc-toml
+      readOnly: true
 
   sidecar:
     resources:
