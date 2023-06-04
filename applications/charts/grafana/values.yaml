@@ -50,12 +50,9 @@ grafana:
       allow_sign_up: true
       config_file: /etc/grafana/oidc.toml
 
-  extraContainerVolumes:
+  extraConfigmapMounts:
     - name: oidc-configuration
-      configMap:
-        name: grafana-oidc-configuration
-  extraVolumeMounts:
-    - name: oidc-configuration
+      configMap: grafana-oidc-configuration
       mountPath: /etc/grafana/oidc.toml
       subPath: oidc-toml
       readOnly: true
