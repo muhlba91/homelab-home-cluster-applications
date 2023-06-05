@@ -63,7 +63,7 @@ grafana:
       client_id: "${OIDC_CLIENT_ID}"
       client_secret: "${OIDC_CLIENT_SECRET}"
       # allowed_groups: ["sysadmin"]
-      role_attribute_path: "contains(groups[*], 'sysadmin') && 'Admin' || 'Viewer'"
+      role_attribute_path: "contains(groups[*], 'sysadmin') && 'GrafanaAdmin' || 'Viewer'"
 
   sidecar:
     resources:
