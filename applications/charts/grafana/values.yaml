@@ -1,4 +1,8 @@
 ---
+global:
+  oidc:
+    autoLogin: false
+
 grafana:
   useStatefulSet: true
 
@@ -41,6 +45,9 @@ grafana:
     passwordKey: password
 
   grafana.ini:
+    auth:
+      signout_redirect_url: "${OIDC_SIGNOUT_URL}"
+      oauth_auto_login: "{{ .Values.global.oidc.autoLogin }}"
     server:
       root_url: "{{ if (and .Values.ingress.enabled .Values.ingress.hosts) }}https://{{ .Values.ingress.hosts | first }}{{ else }}''{{ end }}"
     auth.generic_oauth:
