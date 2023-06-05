@@ -53,6 +53,7 @@ grafana:
     auth.generic_oauth:
       enabled: true
       allow_sign_up: true
+      allow_assign_grafana_admin: true
       verbose_logging: false
       name: Tuxnet
       icon: cloud
