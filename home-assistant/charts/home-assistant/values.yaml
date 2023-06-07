@@ -9,7 +9,7 @@ app-template:
   image:
     repository: ghcr.io/home-assistant/home-assistant
     pullPolicy: IfNotPresent
-    tag: 2023.5.4
+    tag: 2023.6.0
 
   serviceAccount:
     create: true
