@@ -9,7 +9,7 @@ app-template:
   image:
     repository: zwavejs/zwave-js-ui
     pullPolicy: IfNotPresent
-    tag: 8.18.0
+    tag: 8.18.1
 
   serviceAccount:
     create: true
