@@ -3,6 +3,7 @@ generators:
   - ./secret-generator.yml
 
 resources:
+  - ./stores/argocd.yml
   - ./stores/ceph.yml
   - ./stores/cert-manager.yml
   - ./stores/external-dns.yml

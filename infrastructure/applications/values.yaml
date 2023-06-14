@@ -25,6 +25,11 @@ applications:
     releaseName: argocd-{{ $.Values.global.environment }}
     helm: true
     syncWave: -2000
+    ignoreDifferences:
+      - group: "*"
+        kind: "*"
+        managedFieldsManagers:
+          - externalsecrets.external-secrets.io/argocd-notifications-secret
   cilium:
     project: "infrastructure-{{ $.Values.global.projectEnvironment }}"
     path: infrastructure/charts/cilium
