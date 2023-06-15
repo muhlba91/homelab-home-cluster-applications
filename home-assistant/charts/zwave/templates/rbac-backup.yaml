@@ -1,0 +1,25 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: backup-restore-pod
+rules:
+  - apiGroups:
+      - ''
+    resources:
+      - pods
+    verbs:
+      - '*'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: backup-restore-pod
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: backup-restore-pod
+subjects:
+  - kind: ServiceAccount
+    name: {{ index .Values "app-template" "global" "fullnameOverride" }}
+    namespace: home-assistant-zwave

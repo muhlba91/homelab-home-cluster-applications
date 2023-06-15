@@ -1,7 +1,4 @@
 ---
-gitUsername: username
-gitRepo: repo.com/config.git
-
 app-template:
   global:
     fullnameOverride: zwave-js
@@ -32,48 +29,6 @@ app-template:
   securityContext:
     privileged: true
 
-  initContainers:
-    git-sync:
-      image: alpine:3.18
-      imagePullPolicy: IfNotPresent
-      command:
-        - /scripts/sync.sh
-      env:
-        - name: DATA_PATH
-          value: /data
-        - name: GIT_REPO
-          valueFrom:
-            configMapKeyRef:
-              name: zwave-js-git
-              key: git-repo
-        - name: GIT_USERNAME
-          valueFrom:
-            configMapKeyRef:
-              name: zwave-js-git
-              key: git-username
-        - name: GIT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: zwave-js-git
-              key: gitlab-token
-        - name: GIT_CRYPT_KEY
-          valueFrom:
-            secretKeyRef:
-              name: zwave-js-git
-              key: git-crypt-key
-      volumeMounts:
-        - name: config
-          mountPath: /data
-        - name: init-scripts
-          mountPath: /scripts
-      resources:
-        requests:
-          cpu: 100m
-          memory: 128Mi
-        limits:
-          cpu: 1
-          memory: 256Mi
-
   service:
     main:
       ipFamilyPolicy: PreferDualStack
@@ -92,8 +47,8 @@ app-template:
     config:
       enabled: true
       type: pvc
-      storageClass: proxmox-cephfs
-      accessMode: ReadWriteMany
+      storageClass: proxmox-rbd
+      accessMode: ReadWriteOnce
       size: 1Gi
       retain: false
       mountPath: /usr/src/app/store
@@ -102,13 +57,6 @@ app-template:
       type: hostPath
       hostPath: /dev
       hostPathType: Directory
-    init-scripts:
-      enabled: true
-      type: custom
-      volumeSpec:
-        configMap:
-          name: zwave-js-scripts
-          defaultMode: 0o0777
 
   resources:
     requests:

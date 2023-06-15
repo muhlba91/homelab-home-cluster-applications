@@ -4,52 +4,85 @@ kind: ConfigMap
 metadata:
   name: zwave-js-scripts
 data:
-  backup.sh: |
+  backup_restore.sh: |
     #!/bin/sh
+    set -euo pipefail
 
-    /scripts/clone.sh
+    #region global configuration
+    URL="http://{{ index .Values "app-template" "global" "fullnameOverride" }}:8091/api"
+    S3_ASSETS_BUCKET_PATH="${S3_ASSETS_BUCKET}/zwave"
+    #endregion
 
-    cp -rf ${DATA_PATH}/* /tmp/repo/
+    #region functions
+    function restart() {
+      echo "application will be restarted..."
 
-    cd /tmp/repo
-    git add --all
-    git config --global http.postBuffer 2097152000
-    git config --global https.postBuffer 2097152000
-    git status
-    
-    git commit -am "chore: create new backup [skip ci]"
-    git push -o ci.skip
-  clone.sh: |
-    #!/bin/sh
+      kubectl -n {{ .Release.Namespace }} delete pod -l app.kubernetes.io/name={{ index .Values "app-template" "global" "fullnameOverride" }}
 
-    apk add git gettext
+      echo "application restarted."
+    }
 
-    git config --global user.email 'daemon+backup@muehlbachler.io'
-    git config --global user.name 'daemon+backup'
+    function backup() {
+      echo "backing up..."
 
-    rm -rf /tmp/repo
-    git clone `echo ${GIT_REPO} | envsubst` /tmp/repo
-    cd /tmp/repo
-    /scripts/unlock.sh
-  sync.sh: |
-    #!/bin/sh
+      # download backup
+      token=$(curl -s -X POST ${URL}/authenticate -d "{ \"username\": \"${ZWAVE_USERNAME}\", \"password\": \"${ZWAVE_PASSWORD}\" }" -H "Content-Type: application/json" | jq -c '.user.token' -r)
+      curl -s ${URL}/store/backup -H "Authorization: Bearer ${token}" -H "Accept: application/json" -J -o backup.zip &> /dev/null
 
-    /scripts/clone.sh
-    first_file=`ls /tmp/repo | head -n 1`
+      # upload backup to S3
+      s3cmd --access_key=${GCS_ACCESS_KEY_ID} --secret_key="${GCS_SECRET_ACCESS_KEY}" --host="https://storage.googleapis.com" --host-bucket="https://storage.googleapis.com" sync backup.zip s3://${S3_ASSETS_BUCKET_PATH}/
 
-    if ! test -f ${DATA_PATH}/$first_file; then
-      echo copying data...
-      cp -rf /tmp/repo/* ${DATA_PATH}/
+      echo "backed up and uploaded to s3://${S3_ASSETS_BUCKET_PATH}/backup.zip."
+    }
+
+    function restore() {
+      echo "restoring from s3://${S3_ASSETS_BUCKET_PATH}/backup.zip..."
+
+      # download backup from S3
+      s3cmd --access_key=${GCS_ACCESS_KEY_ID} --secret_key="${GCS_SECRET_ACCESS_KEY}" --host="https://storage.googleapis.com" --host-bucket="https://storage.googleapis.com" --recursive --force get s3://${S3_ASSETS_BUCKET_PATH}/backup.zip ./
+
+      # restore backup
+      restore=$(curl -s -X POST ${URL}/store/upload -F "restore=true" -F "upload=@backup.zip" -H "Accept: application/json" -H "Content-Type: multipart/form-data")
+      if [[ `echo ${restore} | jq -c '.success' -r` == "true" ]]; then
+        echo "restore successful."
+        # ATTENTION: the application MUST be restarted afterwards to load the new configuration!
+        restart
+      else
+        echo "restore error: `echo ${restore} | jq -c '.message' -r`"
+      fi
+    }
+    #endregion
+
+    #region install packages
+    apk --no-cache add jq curl
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+    #endregion
+
+    #region log configuration
+    echo "using endpoint: ${URL}"
+    echo "using S3 bucket and path: ${S3_ASSETS_BUCKET_PATH}"
+    #endregion
+
+    #region wait for API readiness
+    echo "waiting for API readiness..."
+    while [[ ! `curl -s ${URL}/auth-enabled -H "Accept: application/json"` ]]; do
+      sleep 1
+    done
+    echo "API is ready."
+    #endregion
+
+    #region authentication check
+    auth_enabled=$(curl -s ${URL}/auth-enabled -H "Accept: application/json" | jq -c '.data' -r)
+    echo "detected authentication: ${auth_enabled}"
+    #endregion
+
+    #region backup or restore
+    # if authentication is enabled, we need to perform a backup
+    # otherwise, we have a new (empty) setup and can restore
+    if [[ "${auth_enabled}" == "true" ]]; then
+      backup
+    else
+      restore
     fi
-
-    /scripts/backup.sh
-  unlock.sh: |
-    #!/bin/sh
-
-    apk add git-crypt gnupg
-
-    echo ${GIT_CRYPT_KEY} > /tmp/crypt.key.b64
-    base64 -d /tmp/crypt.key.b64 > /tmp/crypt.key
-
-    cd /tmp/repo
-    git-crypt unlock /tmp/crypt.key
+    #endregion
