@@ -177,6 +177,11 @@ argo-cd:
                 "title": "Sync Status",
                 "value": "{{.app.status.sync.status}}",
                 "short": true
+              },
+              {
+                "title": "Revisions",
+                "value": "{{.app.status.sync.revisions}}",
+                "short": true
               }
               {{range $index, $c := .app.status.conditions}}
               {{if not $index}},{{end}}
@@ -205,6 +210,11 @@ argo-cd:
               {
                 "title": "Sync Status",
                 "value": "{{.app.status.sync.status}}",
+                "short": true
+              },
+              {
+                "title": "Revisions",
+                "value": "{{.app.status.sync.revisions}}",
                 "short": true
               }
               {{range $index, $c := .app.status.conditions}}
@@ -235,6 +245,11 @@ argo-cd:
                 "title": "Sync Status",
                 "value": "{{.app.status.sync.status}}",
                 "short": true
+              },
+              {
+                "title": "Revisions",
+                "value": "{{.app.status.sync.revisions}}",
+                "short": true
               }
               {{range $index, $c := .app.status.conditions}}
               {{if not $index}},{{end}}
@@ -263,6 +278,11 @@ argo-cd:
               {
                 "title": "Sync Status",
                 "value": "{{.app.status.sync.status}}",
+                "short": true
+              },
+              {
+                "title": "Revisions",
+                "value": "{{.app.status.sync.revisions}}",
                 "short": true
               }
               {{range $index, $c := .app.status.conditions}}
@@ -298,6 +318,11 @@ argo-cd:
                 "title": "Sync Status",
                 "value": "{{.app.status.sync.status}}",
                 "short": true
+              },
+              {
+                "title": "Revisions",
+                "value": "{{.app.status.sync.revisions}}",
+                "short": true
               }
               {{range $index, $c := .app.status.conditions}}
               {{if not $index}},{{end}}
@@ -327,6 +352,11 @@ argo-cd:
                 "title": "Sync Status",
                 "value": "{{.app.status.sync.status}}",
                 "short": true
+              },
+              {
+                "title": "Revisions",
+                "value": "{{.app.status.sync.revisions}}",
+                "short": true
               }
               {{range $index, $c := .app.status.conditions}}
               {{if not $index}},{{end}}
@@ -342,7 +372,7 @@ argo-cd:
     triggers:
       trigger.on-deployed: |
         - description: Application is synced and healthy. Triggered once per commit.
-          oncePer: app.status.sync.revision
+          oncePer: app.status.sync.revisions
           send:
           - app-deployed
           when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'
