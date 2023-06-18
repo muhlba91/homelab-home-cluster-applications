@@ -108,7 +108,16 @@ data:
           }
         },
         users: function(user) {
-          return Promise.resolve({ username: user, permissions: user == "{{ .Values.adminUser }}" ? "*" : "read" });
+          var permissions = "read";
+          {{- range .Values.adminUsers }}
+          if(user == "{{ . }}") {
+            permissions = "*"
+          }
+          {{- end }}
+          return Promise.resolve({
+            username: user,
+            permissions: permissions
+          });
         },
         tokens: function(token) {
           return new Promise(function(resolve, reject) {
@@ -145,7 +154,16 @@ data:
                 console.log("Error authenticating: " + err);
                 resolve(null);
               } else {
-                var user = { username: decoded.{{ .Values.oidcUserProperty }}, permissions: user == "{{ .Values.adminUser }}" ? "*" : "read" };
+                var permissions = "read";
+                {{- range .Values.adminUsers }}
+                if(user == "{{ . }}") {
+                  permissions = "*"
+                }
+                {{- end }}
+                var user = {
+                  username: decoded.{{ .Values.oidcUserProperty }},
+                  permissions: permissions
+                };
                 resolve(user);
               }
             });

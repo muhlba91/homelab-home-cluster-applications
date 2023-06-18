@@ -78,7 +78,9 @@ packages:
 domain: node-red.domain.org
 
 oidcUserProperty: preferred_username
-adminUser: daniel
+adminUsers:
+  - daniel
+  - home-cluster-home-assistant-automation
 
 projectsEnabled: &projectsEnabled "false"
 
