@@ -124,8 +124,6 @@ app-template:
       volumeMounts:
         - name: data
           mountPath: /data
-        - name: init-scripts
-          mountPath: /scripts
       resources:
         requests:
           cpu: 10m
