@@ -154,15 +154,15 @@ data:
                 console.log("Error authenticating: " + err);
                 resolve(null);
               } else {
-                var user = decoded.{{ .Values.oidcUserProperty }};
+                var uid = decoded.uid;
                 var permissions = "read";
-                {{- range .Values.adminUsers }}
-                if(user == "{{ . }}") {
+                {{- range .Values.automationUserIds }}
+                if(uid == "{{ . }}") {
                   permissions = "*"
                 }
                 {{- end }}
                 var user = {
-                  username: user,
+                  username: uid,
                   permissions: permissions
                 };
                 resolve(user);
