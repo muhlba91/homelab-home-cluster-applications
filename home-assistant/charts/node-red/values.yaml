@@ -79,9 +79,9 @@ domain: node-red.domain.org
 
 oidcUserProperty: preferred_username
 adminUsers:
-  - daniel
+  - user
 automationUserIds:
-  - aqlcLKtDt5566ndEqd6P2xkVI8afbHgtzNgffkqP
+  - id
 
 projectsEnabled: &projectsEnabled "false"
 
