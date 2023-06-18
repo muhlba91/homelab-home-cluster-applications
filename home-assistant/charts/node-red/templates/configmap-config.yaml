@@ -154,6 +154,7 @@ data:
                 console.log("Error authenticating: " + err);
                 resolve(null);
               } else {
+                var user = decoded.{{ .Values.oidcUserProperty }};
                 var permissions = "read";
                 {{- range .Values.adminUsers }}
                 if(user == "{{ . }}") {
@@ -161,7 +162,7 @@ data:
                 }
                 {{- end }}
                 var user = {
-                  username: decoded.{{ .Values.oidcUserProperty }},
+                  username: user,
                   permissions: permissions
                 };
                 resolve(user);
