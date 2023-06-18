@@ -18,7 +18,7 @@ data:
       echo "retrieving JWT token..."
 
       # get JWT token
-      JWT_TOKEN=$(curl -s -X POST ${OIDC_TOKEN_URL} -F "username=${OIDC_USERNAME}" -F "password=${OIDC_AUTH_TOKEN}" -F "grant_type=client_credentials" -F "client_id=${NODE_RED_OIDC_CLIENT_ID}" -H "Content-Type: application/json" -H "Referer: ${OIDC_REFERER}" | jq -c '.access_token' -r)
+      JWT_TOKEN=$(curl -s -X POST ${OIDC_TOKEN_URL} -d "username=${OIDC_USERNAME}&password=${OIDC_AUTH_TOKEN}&grant_type=client_credentials&client_id=${NODE_RED_OIDC_CLIENT_ID}" -H "Referer: ${OIDC_REFERER}" | jq -c '.access_token' -r)
     }
 
     function check() {
