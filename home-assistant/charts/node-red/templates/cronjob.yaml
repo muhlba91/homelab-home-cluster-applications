@@ -10,4 +10,6 @@ spec:
   suspend: false
   concurrencyPolicy: Replace
   jobTemplate:
-    {{- include "node-red.backup_restore.job" . | nindent 4 }}
+    spec:
+      template:
+        {{- include "node-red.backup_restore.job" . | nindent 8 }}
