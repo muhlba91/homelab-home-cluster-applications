@@ -62,7 +62,7 @@ data:
     #endregion
 
     #region install packages
-    apk --no-cache add jq curl
+    apk --no-cache add jq curl s3cmd
     pip install homelab-node-red-backup
     #endregion
 
@@ -73,7 +73,7 @@ data:
 
     #region wait for API readiness
     echo "waiting for API readiness..."
-    while [[ ! `curl -s ${URL}/auth-enabled -H "Accept: application/json"` ]]; do
+    while [[ ! `curl -s ${URL} -H "Accept: application/json"` ]]; do
       sleep 1
     done
     echo "API is ready."
