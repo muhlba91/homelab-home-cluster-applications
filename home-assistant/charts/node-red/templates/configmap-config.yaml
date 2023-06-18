@@ -109,6 +109,47 @@ data:
         },
         users: function(user) {
           return Promise.resolve({ username: user, permissions: user == "{{ .Values.adminUser }}" ? "*" : "read" });
+        },
+        tokens: function(token) {
+          return new Promise(function(resolve, reject) {
+            var jwt = require('jsonwebtoken');
+            var jwksClient = require('jwks-rsa');
+
+            var client = jwksClient({
+              jwksUri: process.env.NODE_RED_OIDC_ISSUER + "jwks/"
+            });
+
+            var options = {
+              algorithms: [ 'RS256' ],
+              audience: process.env.NODE_RED_OIDC_CLIENT_ID,
+              issuer: process.env.NODE_RED_OIDC_ISSUER
+            };
+
+            function getKey(header, callback){
+              client.getSigningKey(header.kid, function(err, key) {
+                if(err) {
+                  callback(err, null);
+                } else {
+                  try {
+                    var signingKey = key.publicKey || key.rsaPublicKey;
+                    callback(null, signingKey);
+                  } catch(e) {
+                    callback(e, null);
+                  }
+                }
+              });
+            }
+
+            jwt.verify(token, getKey, options, function(err, decoded) {
+              if(err) {
+                console.log("Error authenticating: " + err);
+                resolve(null);
+              } else {
+                var user = { username: decoded.{{ .Values.oidcUserProperty }}, permissions: user == "{{ .Values.adminUser }}" ? "*" : "read" };
+                resolve(user);
+              }
+            });
+          });
         }
       },
 
