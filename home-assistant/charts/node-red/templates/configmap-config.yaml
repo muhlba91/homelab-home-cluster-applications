@@ -94,9 +94,9 @@ data:
           strategy: require("@govtechsg/passport-openidconnect").Strategy,
           options: {
             issuer: process.env.NODE_RED_OIDC_ISSUER,
-            authorizationURL: process.env.NODE_RED_OIDC_AUTHZ_URL,
-            tokenURL: process.env.NODE_RED_OIDC_TOKEN_URL,
-            userInfoURL: process.env.NODE_RED_OIDC_USER_INFO_URL,
+            authorizationURL: process.env.OIDC_AUTHZ_URL,
+            tokenURL: process.env.OIDC_TOKEN_URL,
+            userInfoURL: process.env.OIDC_USER_INFO_URL,
             clientID: process.env.NODE_RED_OIDC_CLIENT_ID,
             clientSecret: process.env.NODE_RED_OIDC_CLIENT_SECRET,
             callbackURL: 'https://{{ .Values.domain }}/auth/strategy/callback/',
@@ -461,7 +461,7 @@ data:
 
         projects: {
           /** To enable the Projects feature, set this value to true */
-          enabled: true,
+          enabled: {{ .Values.projectsEnabled }},
           workflow: {
             /** Set the default projects workflow mode.
              *  - manual - you must manually commit changes

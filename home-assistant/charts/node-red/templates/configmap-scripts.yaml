@@ -4,52 +4,91 @@ kind: ConfigMap
 metadata:
   name: node-red-scripts
 data:
-  backup.sh: |
+  backup_restore.sh: |
     #!/bin/sh
+    set -euo pipefail
 
-    /scripts/clone.sh
+    #region global configuration
+    URL="http://{{ index .Values "app-template" "global" "fullnameOverride" }}:1880"
+    S3_ASSETS_BUCKET_PATH="${S3_ASSETS_BUCKET}/node-red"
+    #endregion
 
-    cp -rf ${DATA_PATH}/* /tmp/repo/
+    #region functions
+    function token() {
+      echo "retrieving JWT token..."
 
-    cd /tmp/repo
-    git add --all
-    git config --global http.postBuffer 2097152000
-    git config --global https.postBuffer 2097152000
-    git status
-    
-    git commit -am "chore: create new backup [skip ci]"
-    git push -o ci.skip
-  clone.sh: |
-    #!/bin/sh
+      # get JWT token
+      JWT_TOKEN=$(curl -s -X POST ${OIDC_TOKEN_URL} -F "username=${OIDC_USERNAME}" -F "password=${OIDC_AUTH_TOKEN}" -F "grant_type=client_credentials" -F "client_id=${NODE_RED_OIDC_CLIENT_ID}" -H "Content-Type: application/json" -H "Referer: ${OIDC_REFERER}" | jq -c '.access_token' -r)
+    }
 
-    apk add git gettext
+    function check() {
+      echo "checking for data..."
 
-    git config --global user.email 'daemon+backup@muehlbachler.io'
-    git config --global user.name 'daemon+backup'
+      # check for data
+      token
+      homelab-node-red-backup check -e ${URL} -jwt "${JWT_TOKEN}" 2> /dev/null
+      if [[ $? -eq 0 ]]; then
+        DATA_EXISTS="true"
+      else
+        DATA_EXISTS="false"
+      fi
 
-    rm -rf /tmp/repo
-    git clone `echo ${GIT_REPO} | envsubst` /tmp/repo
-    cd /tmp/repo
-    /scripts/unlock.sh
-  sync.sh: |
-    #!/bin/sh
+      echo "evaluated data exists: ${DATA_EXISTS}"
+    }
 
-    /scripts/clone.sh
-    first_file=`ls /tmp/repo | head -n 1`
+    function backup() {
+      echo "backing up..."
 
-    if ! test -f ${DATA_PATH}/$first_file; then
-      echo copying data...
-      cp -rf /tmp/repo/* ${DATA_PATH}/
+      # create backup
+      token
+      homelab-node-red-backup backup -e ${URL} -jwt "${JWT_TOKEN}" -f backup.json
+
+      # upload backup to S3
+      s3cmd --access_key=${GCS_ACCESS_KEY_ID} --secret_key="${GCS_SECRET_ACCESS_KEY}" --host="https://storage.googleapis.com" --host-bucket="https://storage.googleapis.com" sync backup.json s3://${S3_ASSETS_BUCKET_PATH}/
+
+      echo "backed up and uploaded to s3://${S3_ASSETS_BUCKET_PATH}/backup.json."
+    }
+
+    function restore() {
+      echo "restoring from s3://${S3_ASSETS_BUCKET_PATH}/backup.json..."
+
+      # download backup from S3
+      s3cmd --access_key=${GCS_ACCESS_KEY_ID} --secret_key="${GCS_SECRET_ACCESS_KEY}" --host="https://storage.googleapis.com" --host-bucket="https://storage.googleapis.com" --recursive --force get s3://${S3_ASSETS_BUCKET_PATH}/backup.json ./
+
+      # restore backup
+      token
+      homelab-node-red-backup restore -e ${URL} -jwt "${JWT_TOKEN}" -f backup.json
+    }
+    #endregion
+
+    #region install packages
+    apk --no-cache add jq curl
+    pip install homelab-node-red-backup
+    #endregion
+
+    #region log configuration
+    echo "using endpoint: ${URL}"
+    echo "using S3 bucket and path: ${S3_ASSETS_BUCKET_PATH}"
+    #endregion
+
+    #region wait for API readiness
+    echo "waiting for API readiness..."
+    while [[ ! `curl -s ${URL}/auth-enabled -H "Accept: application/json"` ]]; do
+      sleep 1
+    done
+    echo "API is ready."
+    #endregion
+
+    #region data check
+    check
+    #endregion
+
+    #region backup or restore
+    # if check returns true, we need to perform a backup
+    # otherwise, we have a new (empty) setup and can restore
+    if [[ "${DATA_EXISTS}" == "true" ]]; then
+      backup
+    else
+      restore
     fi
-
-    /scripts/backup.sh
-  unlock.sh: |
-    #!/bin/sh
-
-    apk add git-crypt gnupg
-
-    echo ${GIT_CRYPT_KEY} > /tmp/crypt.key.b64
-    base64 -d /tmp/crypt.key.b64 > /tmp/crypt.key
-
-    cd /tmp/repo
-    git-crypt unlock /tmp/crypt.key
+    #endregion

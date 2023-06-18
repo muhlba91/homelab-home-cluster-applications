@@ -75,12 +75,12 @@ packages:
   - name: node-red-contrib-uspatata-influxdb-v2
     version: 1.0.6
 
-gitUsername: username
-gitRepo: repo.com/config.git
-
 domain: node-red.domain.org
+
 oidcUserProperty: preferred_username
 adminUser: daniel
+
+projectsEnabled: &projectsEnabled "false"
 
 app-template:
   global:
@@ -99,7 +99,7 @@ app-template:
     - name: TZ
       value: UTC
     - name: NODE_RED_ENABLE_PROJECTS
-      value: "true"
+      value: *projectsEnabled
     - name: FLOWS
       value: flows.json
     - name: NODE_RED_URL
@@ -113,46 +113,6 @@ app-template:
         name: node-red-credentials
 
   initContainers:
-    git-sync:
-      image: alpine:3.18
-      imagePullPolicy: IfNotPresent
-      command:
-        - /scripts/sync.sh
-      env:
-        - name: DATA_PATH
-          value: /data
-        - name: GIT_REPO
-          valueFrom:
-            configMapKeyRef:
-              name: node-red-git
-              key: git-repo
-        - name: GIT_USERNAME
-          valueFrom:
-            configMapKeyRef:
-              name: node-red-git
-              key: git-username
-        - name: GIT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: node-red-git
-              key: gitlab-token
-        - name: GIT_CRYPT_KEY
-          valueFrom:
-            secretKeyRef:
-              name: node-red-git
-              key: git-crypt-key
-      volumeMounts:
-        - name: data
-          mountPath: /data
-        - name: init-scripts
-          mountPath: /scripts
-      resources:
-        requests:
-          cpu: 100m
-          memory: 128Mi
-        limits:
-          cpu: '1'
-          memory: 256Mi
     init-chown-data:
       image: alpine:3.18
       imagePullPolicy: IfNotPresent
@@ -215,8 +175,8 @@ app-template:
     data:
       enabled: true
       type: pvc
-      storageClass: proxmox-cephfs
-      accessMode: ReadWriteMany
+      storageClass: proxmox-rbd
+      accessMode: ReadWriteOnce
       size: 1Gi
       retain: false
       mountPath: /data
@@ -235,13 +195,6 @@ app-template:
       volumeSpec:
         configMap:
           name: node-red-config
-    init-scripts:
-      enabled: true
-      type: custom
-      volumeSpec:
-        configMap:
-          name: node-red-scripts
-          defaultMode: 0o0777
 
   probes:
     startup:
