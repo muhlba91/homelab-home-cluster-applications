@@ -26,12 +26,14 @@ data:
 
       # check for data
       token
+      set +e
       homelab-node-red-backup check -e ${URL} -jwt "${JWT_TOKEN}" 2> /dev/null
       if [[ $? -eq 0 ]]; then
         DATA_EXISTS="true"
       else
         DATA_EXISTS="false"
       fi
+      set -e
 
       echo "evaluated data exists: ${DATA_EXISTS}"
     }
