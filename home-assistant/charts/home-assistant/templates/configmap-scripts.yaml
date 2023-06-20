@@ -4,65 +4,17 @@ kind: ConfigMap
 metadata:
   name: home-assistant-scripts
 data:
-  backup.sh: |
+  backup_restore.sh: |
     #!/bin/sh
 
-    /scripts/clone.sh
-
-    cp -rf ${DATA_PATH}/* /tmp/repo/config/
-    cp -rf ${DATA_PATH}/.storage /tmp/repo/config/
-
-    cd /tmp/repo
-    git add --all
-    git config --global http.postBuffer 2097152000
-    git config --global https.postBuffer 2097152000
-    git status
-    
-    git commit -am "chore: create new backup [skip ci]"
-    git push -o ci.skip
-  clone.sh: |
-    #!/bin/sh
-
-    apk add git gettext
-
-    git config --global user.email 'daemon+backup@muehlbachler.io'
-    git config --global user.name 'daemon+backup'
+    apk --no-cache add git s3cmd
+    wget -O /usr/bin/sops https://github.com/mozilla/sops/releases/download/v3.7.3/sops-v3.7.3.linux.amd64 &> /dev/null
+    chmod +x /usr/bin/sops
 
     rm -rf /tmp/repo
-    git clone `echo ${GIT_REPO} | envsubst` /tmp/repo
+    git clone ${GIT_REPO} /tmp/repo
     cd /tmp/repo
-    /scripts/unlock.sh
-  sync.sh: |
-    #!/bin/sh
 
-    /scripts/clone.sh
-
-    apk add bash
-
-    cd /tmp/repo
-    ./scripts/custom_components.sh
-    ./scripts/www_components.sh
-    cd /tmp
-
-    first_file='secrets.yaml'
-
-    if ! test -f ${DATA_PATH}/$first_file; then
-      echo copying data...
-      cp -rf /tmp/repo/config/* ${DATA_PATH}/
-      cp -rf /tmp/repo/config/.storage ${DATA_PATH}/
-    else
-      echo copying configuration...
-      cp -rf /tmp/repo/config/* ${DATA_PATH}/
-    fi
-
-    /scripts/backup.sh
-  unlock.sh: |
-    #!/bin/sh
-
-    apk add git-crypt gnupg
-
-    echo ${GIT_CRYPT_KEY} > /tmp/crypt.key.b64
-    base64 -d /tmp/crypt.key.b64 > /tmp/crypt.key
-
-    cd /tmp/repo
-    git-crypt unlock /tmp/crypt.key
+    ./lifecycle/sops.sh d
+    ./lifecycle/backup_restore.sh ${DATA_PATH}
+    ./lifecycle/prepare.sh ${DATA_PATH}

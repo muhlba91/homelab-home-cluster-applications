@@ -1,5 +1,4 @@
 ---
-gitUsername: username
 gitRepo: repo.com/config.git
 
 app-template:
@@ -24,42 +23,32 @@ app-template:
       image: alpine:3.18
       imagePullPolicy: IfNotPresent
       command:
-        - /scripts/sync.sh
+        - /scripts/backup_restore.sh
+      envFrom:
+        - secretRef:
+            name: home-assistant-backup
+        - configMap:
+            name: home-assistant-git
       env:
         - name: DATA_PATH
           value: /data
-        - name: GIT_REPO
-          valueFrom:
-            configMapKeyRef:
-              name: home-assistant-git
-              key: git-repo
-        - name: GIT_USERNAME
-          valueFrom:
-            configMapKeyRef:
-              name: home-assistant-git
-              key: git-username
-        - name: GIT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: home-assistant-git
-              key: gitlab-token
-        - name: GIT_CRYPT_KEY
-          valueFrom:
-            secretKeyRef:
-              name: home-assistant-git
-              key: git-crypt-key
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /gcp-credentials/credentials.json
       volumeMounts:
         - name: config
           mountPath: /data
-        - name: init-scripts
+        - name: scripts
           mountPath: /scripts
+        - name: gcp-credentials
+          mountPath: /gcp-credentials
+          readOnly: true
       resources:
         requests:
           cpu: 100m
-          memory: 512Mi
+          memory: 128Mi
         limits:
           cpu: 1
-          memory: 1024Mi
+          memory: 256Mi
 
   service:
     main:
@@ -80,13 +69,19 @@ app-template:
       accessMode: ReadWriteMany
       size: 5Gi
       retain: false
-    init-scripts:
+    scripts:
       enabled: true
       type: custom
       volumeSpec:
         configMap:
           name: home-assistant-scripts
           defaultMode: 0o0777
+    gcp-credentials:
+      enabled: true
+      type: custom
+      volumeSpec:
+        secret:
+          name: home-assistant-gcp-credentials
 
   resources:
     requests:
