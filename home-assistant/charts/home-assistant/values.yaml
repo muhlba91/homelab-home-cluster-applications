@@ -27,7 +27,7 @@ app-template:
       envFrom:
         - secretRef:
             name: home-assistant-backup
-        - configMap:
+        - configMapRef:
             name: home-assistant-git
       env:
         - name: DATA_PATH
