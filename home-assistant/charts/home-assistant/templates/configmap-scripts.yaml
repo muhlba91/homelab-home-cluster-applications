@@ -15,6 +15,6 @@ data:
     git clone ${GIT_REPO} /tmp/repo
     cd /tmp/repo
 
-    ./lifecycle/sops.sh d
-    ./lifecycle/backup_restore.sh ${DATA_PATH}
-    ./lifecycle/prepare.sh ${DATA_PATH}
+    /tmp/repo/lifecycle/sops.sh d /tmp/repo
+    /tmp/repo/lifecycle/backup_restore.sh ${DATA_PATH} /tmp/repo
+    /tmp/repo/lifecycle/prepare.sh ${DATA_PATH} /tmp/repo

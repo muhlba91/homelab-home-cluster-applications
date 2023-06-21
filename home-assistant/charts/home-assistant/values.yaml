@@ -17,10 +17,15 @@ app-template:
   env:
     - name: TZ
       value: UTC
-    - name: GOOGLE_APPLICATION_CREDENTIALS
-      value: /gcp-credentials/credentials.json
     - name: DATA_PATH
       value: /config
+    - name: GOOGLE_APPLICATION_CREDENTIALS
+      value: /gcp-credentials/credentials.json
+    - name: GOOGLE_CREDENTIALS
+      valueFrom:
+        secretKeyRef:
+          name: home-assistant-gcp-credentials
+          key: credentials.json
 
   envFrom:
     - secretRef:
@@ -44,6 +49,11 @@ app-template:
           value: /data
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /gcp-credentials/credentials.json
+        - name: GOOGLE_CREDENTIALS
+          valueFrom:
+            secretKeyRef:
+              name: home-assistant-gcp-credentials
+              key: credentials.json
       volumeMounts:
         - name: config
           mountPath: /data
