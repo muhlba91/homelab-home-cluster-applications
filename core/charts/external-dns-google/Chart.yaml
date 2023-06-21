@@ -15,5 +15,5 @@ appVersion: "0.0.0"
 
 dependencies:
   - name: external-dns
-    version: 6.20.3
+    version: 6.20.4
     repository: oci://registry-1.docker.io/bitnamicharts
