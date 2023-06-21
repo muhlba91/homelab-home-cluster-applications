@@ -99,10 +99,16 @@ The following applications are defined in [`home-assistant/charts`](home-assista
 
 #### Notes: Backup and Restore
 
-Home Assistant related backup and restore is currently handled via Git, and RWX volumes.
+Home Assistant related backup and restore is currently handled via S3 backups.
 
-Upon pod start an `initContainer` as well as nightly `CronJob`s are backing up data to a Git repository.
-If no data is found in the Persistent Volume yet, the data from Git will be copied over which results in a full restore.
+For most services, upon pod start an `initContainer` as well as a nightly `CronJob` are backing up data to an S3 bucket.
+If no data is found in the Persistent Volume yet, the data from will be retrieved and copied over which results in a full restore.
+
+The following services also have Git repositories to store their configuration which gets pulled in upon start:
+
+- [Home Assistant](https://github.com/muhlba91/homelab-home-assistant-configuration)
+  - Home Assistant also defines it's own backup method via a `trigger` and a `shell_command`, and doesn't rely on a `CronJob`.
+- [Ring MQTT](https://github.com/muhlba91/homelab-ring-mqtt-configuration)
 
 ---
 
