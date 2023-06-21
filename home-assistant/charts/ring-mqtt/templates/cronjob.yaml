@@ -25,7 +25,8 @@ spec:
                           - {{ .Release.Namespace }}
                   topologyKey: kubernetes.io/hostname
           containers:
-            - image: alpine:3.18
+            - name: backup
+              image: alpine:3.18
               imagePullPolicy: IfNotPresent
               command:
                 - /scripts/backup_restore.sh
