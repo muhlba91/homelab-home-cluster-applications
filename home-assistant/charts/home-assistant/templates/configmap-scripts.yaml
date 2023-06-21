@@ -7,7 +7,7 @@ data:
   backup_restore.sh: |
     #!/bin/sh
 
-    apk --no-cache add git s3cmd
+    apk --no-cache add git s3cmd bash
     wget -O /usr/bin/sops https://github.com/mozilla/sops/releases/download/v3.7.3/sops-v3.7.3.linux.amd64 &> /dev/null
     chmod +x /usr/bin/sops
 
