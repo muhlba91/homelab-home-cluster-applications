@@ -45,7 +45,7 @@ spec:
                       name: ring-mqtt-gcp-credentials
                       key: credentials.json
               volumeMounts:
-                - name: config
+                - name: data
                   mountPath: /data
                 - name: scripts
                   mountPath: /scripts
