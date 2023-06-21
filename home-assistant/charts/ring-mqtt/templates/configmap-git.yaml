@@ -4,5 +4,4 @@ kind: ConfigMap
 metadata:
   name: ring-mqtt-git
 data:
-  git-username: {{ .Values.gitUsername }}
-  git-repo: "https://${GIT_USERNAME}:${GIT_PASSWORD}@{{ .Values.gitRepo }}"
+  GIT_REPO: "{{ .Values.gitRepo }}"

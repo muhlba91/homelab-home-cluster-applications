@@ -4,52 +4,16 @@ kind: ConfigMap
 metadata:
   name: ring-mqtt-scripts
 data:
-  backup.sh: |
+  backup_restore.sh: |
     #!/bin/sh
 
-    /scripts/clone.sh
-
-    cp -rf ${DATA_PATH}/* /tmp/repo/
-
-    cd /tmp/repo
-    git add --all
-    git config --global http.postBuffer 2097152000
-    git config --global https.postBuffer 2097152000
-    git status
-    
-    git commit -am "chore: create new backup [skip ci]"
-    git push -o ci.skip
-  clone.sh: |
-    #!/bin/sh
-
-    apk add git gettext
-
-    git config --global user.email 'daemon+backup@muehlbachler.io'
-    git config --global user.name 'daemon+backup'
+    apk --no-cache add git s3cmd bash
+    wget -O /usr/bin/sops https://github.com/mozilla/sops/releases/download/v3.7.3/sops-v3.7.3.linux.amd64 &> /dev/null
+    chmod +x /usr/bin/sops
 
     rm -rf /tmp/repo
-    git clone `echo ${GIT_REPO} | envsubst` /tmp/repo
+    git clone ${GIT_REPO} /tmp/repo
     cd /tmp/repo
-    /scripts/unlock.sh
-  sync.sh: |
-    #!/bin/sh
 
-    /scripts/clone.sh
-    first_file=`ls /tmp/repo | head -n 1`
-
-    if ! test -f ${DATA_PATH}/$first_file; then
-      echo copying data...
-      cp -rf /tmp/repo/* ${DATA_PATH}/
-    fi
-
-    /scripts/backup.sh
-  unlock.sh: |
-    #!/bin/sh
-
-    apk add git-crypt gnupg
-
-    echo ${GIT_CRYPT_KEY} > /tmp/crypt.key.b64
-    base64 -d /tmp/crypt.key.b64 > /tmp/crypt.key
-
-    cd /tmp/repo
-    git-crypt unlock /tmp/crypt.key
+    /tmp/repo/lifecycle/sops.sh d /tmp/repo
+    /tmp/repo/lifecycle/backup_restore.sh ${DATA_PATH} /tmp/repo

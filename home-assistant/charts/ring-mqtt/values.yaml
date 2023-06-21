@@ -1,5 +1,4 @@
 ---
-gitUsername: username
 gitRepo: repo.com/config.git
 
 app-template:
@@ -15,40 +14,52 @@ app-template:
     create: true
   automountServiceAccountToken: false
 
+  env:
+    - name: DATA_PATH
+      value: /config
+    - name: GOOGLE_APPLICATION_CREDENTIALS
+      value: /gcp-credentials/credentials.json
+    - name: GOOGLE_CREDENTIALS
+      valueFrom:
+        secretKeyRef:
+          name: ring-mqtt-gcp-credentials
+          key: credentials.json
+
+  envFrom:
+    - secretRef:
+        name: ring-mqtt-backup
+    - configMapRef:
+        name: ring-mqtt-git
+
   initContainers:
-    git-sync:
+    backup-restore:
       image: alpine:3.18
       imagePullPolicy: IfNotPresent
       command:
-        - /scripts/sync.sh
+        - /scripts/backup_restore.sh
+      envFrom:
+        - secretRef:
+            name: ring-mqtt-backup
+        - configMapRef:
+            name: ring-mqtt-git
       env:
         - name: DATA_PATH
           value: /data
-        - name: GIT_REPO
-          valueFrom:
-            configMapKeyRef:
-              name: ring-mqtt-git
-              key: git-repo
-        - name: GIT_USERNAME
-          valueFrom:
-            configMapKeyRef:
-              name: ring-mqtt-git
-              key: git-username
-        - name: GIT_PASSWORD
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /gcp-credentials/credentials.json
+        - name: GOOGLE_CREDENTIALS
           valueFrom:
             secretKeyRef:
-              name: ring-mqtt-git
-              key: gitlab-token
-        - name: GIT_CRYPT_KEY
-          valueFrom:
-            secretKeyRef:
-              name: ring-mqtt-git
-              key: git-crypt-key
+              name: ring-mqtt-gcp-credentials
+              key: credentials.json
       volumeMounts:
-        - name: data
+        - name: config
           mountPath: /data
-        - name: init-scripts
+        - name: scripts
           mountPath: /scripts
+        - name: gcp-credentials
+          mountPath: /gcp-credentials
+          readOnly: true
       resources:
         requests:
           cpu: 100m
@@ -70,13 +81,20 @@ app-template:
       size: 32Mi
       retain: false
       mountPath: /data
-    init-scripts:
+    scripts:
       enabled: true
       type: custom
       volumeSpec:
         configMap:
           name: ring-mqtt-scripts
           defaultMode: 0o0777
+    gcp-credentials:
+      enabled: true
+      type: custom
+      readOnly: true
+      volumeSpec:
+        secret:
+          secretName: ring-mqtt-gcp-credentials
 
   resources:
     requests:

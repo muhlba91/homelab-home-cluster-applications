@@ -10,14 +10,10 @@ spec:
   suspend: false
   concurrencyPolicy: Replace
   jobTemplate:
-    metadata:
-      namespace: {{ .Release.Namespace }}
     spec:
       template:
-        metadata:
-          namespace: {{ .Release.Namespace }}
         spec:
-          restartPolicy: Never
+          restartPolicy: OnFailure
           affinity:
             podAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
@@ -26,42 +22,36 @@ spec:
                       - key: app.kubernetes.io/name
                         operator: In
                         values:
-                          - home-assistant-ring-mqtt
+                          - {{ .Release.Namespace }}
                   topologyKey: kubernetes.io/hostname
           containers:
-            - name: backup
-              image: alpine:3.17
+            - image: alpine:3.18
               imagePullPolicy: IfNotPresent
               command:
-                - /scripts/backup.sh
+                - /scripts/backup_restore.sh
+              envFrom:
+                - secretRef:
+                    name: ring-mqtt-backup
+                - configMapRef:
+                    name: ring-mqtt-git
               env:
                 - name: DATA_PATH
                   value: /data
-                - name: GIT_REPO
-                  valueFrom:
-                    configMapKeyRef:
-                      name: ring-mqtt-git
-                      key: git-repo
-                - name: GIT_USERNAME
-                  valueFrom:
-                    configMapKeyRef:
-                      name: ring-mqtt-git
-                      key: git-username
-                - name: GIT_PASSWORD
+                - name: GOOGLE_APPLICATION_CREDENTIALS
+                  value: /gcp-credentials/credentials.json
+                - name: GOOGLE_CREDENTIALS
                   valueFrom:
                     secretKeyRef:
-                      key: gitlab-token
-                      name: ring-mqtt-git
-                - name: GIT_CRYPT_KEY
-                  valueFrom:
-                    secretKeyRef:
-                      key: git-crypt-key
-                      name: ring-mqtt-git
+                      name: ring-mqtt-gcp-credentials
+                      key: credentials.json
               volumeMounts:
-                - name: data
+                - name: config
                   mountPath: /data
                 - name: scripts
                   mountPath: /scripts
+                - name: gcp-credentials
+                  mountPath: /gcp-credentials
+                  readOnly: true
               resources:
                 requests:
                   cpu: 100m
@@ -77,3 +67,6 @@ spec:
               configMap:
                 name: ring-mqtt-scripts
                 defaultMode: 511
+            - name: gcp-credentials
+              secret:
+                secretName: ring-mqtt-gcp-credentials
