@@ -10,4 +10,6 @@ spec:
   suspend: false
   concurrencyPolicy: Replace
   jobTemplate:
-    {{- include "zwave.backup_restore.job" . | nindent 4 }}
+    spec:
+      template:
+        {{- include "zwave.backup_restore.job" . | nindent 8 }}
