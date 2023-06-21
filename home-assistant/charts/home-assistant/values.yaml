@@ -17,6 +17,16 @@ app-template:
   env:
     - name: TZ
       value: UTC
+    - name: GOOGLE_APPLICATION_CREDENTIALS
+      value: /gcp-credentials/credentials.json
+    - name: DATA_PATH
+      value: /config
+
+  envFrom:
+    - secretRef:
+        name: home-assistant-backup
+    - configMapRef:
+        name: home-assistant-git
 
   initContainers:
     git-sync:
@@ -65,8 +75,8 @@ app-template:
     config:
       enabled: true
       type: pvc
-      storageClass: proxmox-cephfs
-      accessMode: ReadWriteMany
+      storageClass: proxmox-rbd
+      accessMode: ReadWriteOnce
       size: 5Gi
       retain: false
     scripts:
@@ -79,6 +89,7 @@ app-template:
     gcp-credentials:
       enabled: true
       type: custom
+      readOnly: true
       volumeSpec:
         secret:
           name: home-assistant-gcp-credentials
