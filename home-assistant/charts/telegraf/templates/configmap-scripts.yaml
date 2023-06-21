@@ -6,18 +6,24 @@ metadata:
 data:
   plugins.sh: |
     #!/bin/sh
+    set -eou pipefail
+
+    apk add --no-cache curl
 
     # telegraf-output-kinesis-data-firehose
     echo "[telegraf-output-kinesis-data-firehose] retrieving latest version..."
     TELEGRAF_FIREHOSE_VERSION=$(curl -s https://raw.githubusercontent.com/muhlba91/telegraf-output-kinesis-data-firehose/main/latest.sh | sh)
-    
-    echo "[telegraf-output-kinesis-data-firehose] downloading ${TELEGRAF_FIREHOSE_VERSION}..."
 
+    echo "[telegraf-output-kinesis-data-firehose] wiping old binaries..."
+    rm -rf /plugins/firehose
     mkdir /plugins/firehose
+
+    echo "[telegraf-output-kinesis-data-firehose] downloading ${TELEGRAF_FIREHOSE_VERSION}..."
     wget https://github.com/muhlba91/telegraf-output-kinesis-data-firehose/releases/download/${TELEGRAF_FIREHOSE_VERSION}/telegraf-output-kinesis-data-firehose-${TELEGRAF_FIREHOSE_VERSION}-linux-amd64.tar.gz -O /tmp/firehose.tar.gz &> /dev/null
     tar -xzvf /tmp/firehose.tar.gz -C /plugins/firehose/
   grafana.sh: |
     #!/bin/sh
+    set -eou pipefail
 
     sed "s/#TELEGRAF_REMOTE_TOKEN#/${TELEGRAF_REMOTE_TOKEN}/g" -r /scripts/grafana-datasource.yml > /tmp/grafana-datasource.yml
     kubectl apply -f /tmp/grafana-datasource.yml
