@@ -29,7 +29,7 @@ app-template:
         name: home-assistant-git
 
   initContainers:
-    git-sync:
+    backup-restore:
       image: alpine:3.18
       imagePullPolicy: IfNotPresent
       command:
@@ -92,7 +92,7 @@ app-template:
       readOnly: true
       volumeSpec:
         secret:
-          name: home-assistant-gcp-credentials
+          secretName: home-assistant-gcp-credentials
 
   resources:
     requests:
