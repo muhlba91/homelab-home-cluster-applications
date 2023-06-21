@@ -19,12 +19,9 @@ app-template:
   serviceAccount:
     create: true
 
-  env:
-    - name: TELEGRAF_REMOTE_TOKEN
-      valueFrom:
-        secretKeyRef:
-          name: telegraf-remote-token
-          key: remote-token
+  envFrom:
+    - secretRef:
+        name: telegraf-remote-token
 
   initContainers:
     plugins:
@@ -35,7 +32,7 @@ app-template:
       volumeMounts:
         - name: plugins
           mountPath: /plugins
-        - name: init-scripts
+        - name: scripts
           mountPath: /scripts
       resources:
         requests:
@@ -49,14 +46,11 @@ app-template:
       imagePullPolicy: IfNotPresent
       command:
         - /scripts/grafana.sh
-      env:
-        - name: TELEGRAF_REMOTE_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name: telegraf-remote-token
-              key: remote-token
+      envFrom:
+        - secretRef:
+            name: telegraf-remote-token
       volumeMounts:
-        - name: init-scripts
+        - name: scripts
           mountPath: /scripts
       resources:
         requests:
@@ -80,8 +74,8 @@ app-template:
       mountPath: /etc/telegraf/telegraf.conf
       subPath: telegraf.conf
       volumeSpec:
-        secret:
-          secretName: telegraf-config
+        configMap:
+          name: telegraf-config
           defaultMode: 420
     plugins:
       enabled: true
@@ -93,14 +87,14 @@ app-template:
       mountPath: /plugins/config
       volumeSpec:
         configMap:
-          name: telegraf-plugins
+          name: telegraf-plugin-config
           defaultMode: 420
-    init-scripts:
+    scripts:
       enabled: true
       type: custom
       volumeSpec:
         configMap:
-          name: telegraf-init-scripts
+          name: telegraf-scripts
           defaultMode: 511
 
   resources:

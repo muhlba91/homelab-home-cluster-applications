@@ -1,10 +1,9 @@
 ---
 apiVersion: v1
-kind: Secret
-type: Opaque
+kind: ConfigMap
 metadata:
   name: telegraf-config
-stringData:
+data:
   telegraf.conf: |
     [agent]
       hostname = "{{ .Values.influxdb.hostname }}"
