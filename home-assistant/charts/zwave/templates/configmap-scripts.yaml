@@ -17,7 +17,7 @@ data:
     function restart() {
       echo "application will be restarted..."
 
-      kubectl -n {{ .Release.Namespace }} delete pod -l app.kubernetes.io/name={{ index .Values "app-template" "global" "fullnameOverride" }}
+      kubectl -n {{ .Release.Namespace }} delete pod -l app.kubernetes.io/name={{ .Release.Namespace }}
 
       echo "application restarted."
     }
