@@ -38,7 +38,7 @@ app-template:
       image: alpine:3.18
       imagePullPolicy: IfNotPresent
       command:
-        - /scripts/backup_restore.sh
+        - /scripts/backup_restore.sh true
       envFrom:
         - secretRef:
             name: home-assistant-backup
