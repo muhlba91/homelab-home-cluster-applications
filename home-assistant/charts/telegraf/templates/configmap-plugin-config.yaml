@@ -4,3 +4,13 @@ kind: ConfigMap
 metadata:
   name: telegraf-plugin-config
 data:
+  firehose.conf: |
+    streamname = "${FIREHOSE_DELIVERY_STREAM}"
+
+    batchsize = 500
+
+    [format]
+      flatten = true
+      normalize_keys = true
+      timestamp_as_rfc3339 = false
+      timestamp_units = "1ms"

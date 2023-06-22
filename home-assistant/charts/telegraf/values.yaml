@@ -22,6 +22,8 @@ app-template:
   envFrom:
     - secretRef:
         name: telegraf-remote-token
+    - secretRef:
+        name: telegraf-plugin-kinesis-firehose
 
   initContainers:
     plugins:

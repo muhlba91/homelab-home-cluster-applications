@@ -46,3 +46,7 @@ data:
       rotation_max_archives = 2
       data_format = "json"
       json_timestamp_units = "1ms"
+
+    [[outputs.exec]]
+      command = [ "/plugins/bin/firehose/telegraf-output-kinesis-data-firehose", "-config", "/plugins/config/firehose.conf" ]
+      data_format = "influx"
