@@ -6,7 +6,7 @@ metadata:
 data:
   plugins.sh: |
     #!/bin/sh
-    set -eou pipefail
+    set -euo pipefail
 
     apk add --no-cache curl
 
@@ -23,7 +23,7 @@ data:
     tar -xzvf /tmp/firehose.tar.gz -C /plugins/firehose/
   grafana.sh: |
     #!/bin/sh
-    set -eou pipefail
+    set -euo pipefail
 
     sed "s/#TELEGRAF_REMOTE_TOKEN#/${TELEGRAF_REMOTE_TOKEN}/g" -r /scripts/grafana-datasource.yml > /tmp/grafana-datasource.yml
     kubectl apply -f /tmp/grafana-datasource.yml
