@@ -37,6 +37,7 @@ app-template:
       imagePullPolicy: IfNotPresent
       command:
         - /scripts/backup_restore.sh
+        - "true"
       envFrom:
         - secretRef:
             name: ring-mqtt-backup
