@@ -50,3 +50,4 @@ data:
     [[outputs.exec]]
       command = [ "/plugins/bin/firehose/telegraf-output-kinesis-data-firehose", "-config", "/plugins/config/firehose.conf" ]
       data_format = "influx"
+      timeout = "120s"
