@@ -5,6 +5,7 @@ metadata:
   name: telegraf-plugin-config
 data:
   firehose.conf: |
+    regions = "${AWS_REGION}"
     streamname = "${FIREHOSE_DELIVERY_STREAM}"
 
     batchsize = 500
