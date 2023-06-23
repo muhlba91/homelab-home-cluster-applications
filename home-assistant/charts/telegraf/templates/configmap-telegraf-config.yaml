@@ -48,7 +48,7 @@ data:
       json_timestamp_units = "1ms"
 
     [[outputs.execd]]
-      command = [ "/plugins/bin/firehose/telegraf-output-kinesis-data-firehose", "-config", "/plugins/config/firehose.conf"
+      command = [ "/plugins/bin/firehose/telegraf-output-kinesis-data-firehose", "-config", "/plugins/config/firehose.conf" ]
       restart_delay = "10s"
       ignore_serialization_error = true
       data_format = "influx"
