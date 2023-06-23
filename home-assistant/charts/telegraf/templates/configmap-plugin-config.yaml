@@ -10,13 +10,12 @@ data:
       access_key = "${AWS_ACCESS_KEY_ID}"
       secret_key = "${AWS_SECRET_ACCESS_KEY}"
 
-      streamname = "${FIREHOSE_DELIVERY_STREAM}"
+      stream_name = "${FIREHOSE_DELIVERY_STREAM}"
 
-      batchsize = 500
+      batch_size = 500
 
-      [format]
-        flatten = true
-        normalize_keys = true
-        name_key_rename = "unit"
-        timestamp_as_rfc3339 = false
-        timestamp_units = "1ms"
+      flatten = true
+      normalize_keys = true
+      name_key_rename = "unit"
+      timestamp_as_rfc3339 = false
+      timestamp_units = "1ms"
