@@ -66,6 +66,9 @@ grafana:
       # allowed_groups: ["sysadmin"]
       role_attribute_path: "contains(groups[*], 'sysadmin') && 'GrafanaAdmin' || 'Viewer'"
 
+  plugins:
+    - athena-datasource
+
   sidecar:
     resources:
       requests:
