@@ -25,30 +25,18 @@ data:
     #!/bin/sh
     set -eu
 
-    sed "s/#TELEGRAF_REMOTE_TOKEN#/${TELEGRAF_REMOTE_TOKEN}/g" -r /scripts/grafana-datasource.yml > /tmp/grafana-datasource.yml
-    kubectl apply -f /tmp/grafana-datasource.yml
-  grafana-datasource.yml: |
-    ---
-    apiVersion: v1
-    kind: Secret
-    type: Opaque
-    metadata:
-      name: home-assistant-influxdb-grafana
-      labels:
-        grafana_datasource: "1"
-    stringData:
-      datasource.yaml: |
-        ---
-        apiVersion: 1
-        datasources:
-          - name: influxdb
-            type: influxdb
-            access: proxy
-            url: {{ .Values.influxdb.url }}
-            jsonData:
-              version: Flux
-              organization: {{ .Values.influxdb.organization }}
-              defaultBucket: {{ .Values.influxdb.bucket }}
-              tlsSkipVerify: true
-            secureJsonData:
-              token: "#TELEGRAF_REMOTE_TOKEN#"
+    for datasource in /grafana-datasources/*; do
+      name=$(basename ${datasource})
+      cp ${datasource} /tmp/datasource-${name}
+
+      sed "s/#TELEGRAF_REMOTE_TOKEN#/${TELEGRAF_REMOTE_TOKEN}/g" -r -i /tmp/datasource-${name}
+
+      sed "s/#AWS_REGION#/${AWS_REGION}/g" -r -i /tmp/datasource-${name}
+
+      sed "s/#GRAFANA_ATHENA_WORKGROUP#/${GRAFANA_ATHENA_WORKGROUP}/g" -r -i /tmp/datasource-${name}
+      sed "s/#GRAFANA_GLUE_DATABASE#/${GRAFANA_GLUE_DATABASE}/g" -r -i /tmp/datasource-${name}
+      sed "s/#GRAFANA_AWS_ACCESS_KEY_ID#/${GRAFANA_AWS_ACCESS_KEY_ID}/g" -r -i /tmp/datasource-${name}
+      sed "s/#GRAFANA_AWS_SECRET_ACCESS_KEY#/${GRAFANA_AWS_SECRET_ACCESS_KEY}/g" -r -i /tmp/datasource-${name}
+
+      kubectl apply -f /tmp/datasource-${name}
+    done

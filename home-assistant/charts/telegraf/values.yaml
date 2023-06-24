@@ -50,10 +50,12 @@ app-template:
         - /scripts/grafana.sh
       envFrom:
         - secretRef:
-            name: telegraf-remote-token
+            name: grafana-datasource-secrets
       volumeMounts:
         - name: scripts
           mountPath: /scripts
+        - name: grafana-datasources
+          mountPath: /grafana-datasources
       resources:
         requests:
           cpu: 10m
@@ -97,6 +99,13 @@ app-template:
       volumeSpec:
         configMap:
           name: telegraf-scripts
+          defaultMode: 511
+    grafana-datasources:
+      enabled: true
+      type: custom
+      volumeSpec:
+        configMap:
+          name: grafana-datasources
           defaultMode: 511
 
   resources:
