@@ -47,10 +47,10 @@ data:
             type: grafana-athena-datasource
             jsonData:
               authType: keys
-              defaultRegion: #AWS_REGION
+              defaultRegion: #AWS_REGION#
               catalog: AwsDataCatalog
-              database: #GRAFANA_GLUE_DATABASE
-              workgroup: #GRAFANA_ATHENA_WORKGROUP
+              database: #GRAFANA_GLUE_DATABASE#
+              workgroup: #GRAFANA_ATHENA_WORKGROUP#
             secureJsonData:
               accessKey: "#GRAFANA_AWS_ACCESS_KEY_ID#"
               secretKey: "#GRAFANA_AWS_SECRET_ACCESS_KEY#"
