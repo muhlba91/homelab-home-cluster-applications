@@ -1,9 +1,9 @@
 dependencies:
 - name: etcd
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 9.0.3
+  version: 9.0.4
 - name: coredns
   repository: https://coredns.github.io/helm
   version: 1.24.1
-digest: sha256:ff907a562afae9212e36d9f6bc7caae5a72142b9907fb67bff678cdc5d766bed
-generated: "2023-06-30T16:32:44.848112429Z"
+digest: sha256:e549407cdb672ac7f8e17ce02f868fdf54105b4a7628a0a4b258926666883869
+generated: "2023-06-30T21:54:25.731938129Z"
