@@ -6,8 +6,9 @@ metadata:
 data:
   AdGuardHome.yaml: |
     ---
-    bind_host: 0.0.0.0
-    bind_port: 3000
+    http:
+      address: 0.0.0.0:3000
+      session_ttl: 720h
     users:
       - name: admin
         password: {{ .Values.adminPassword }}
@@ -17,7 +18,6 @@ data:
     language: ""
     theme: auto
     debug_pprof: false
-    web_session_ttl: 720
     querylog:
       enabled: true
       file_enabled: true
@@ -93,7 +93,7 @@ data:
       parental_cache_size: 1048576
       cache_time: 30
       rewrites: []
-      blocked_services: []
+      blocked_services: {}
       upstream_timeout: 10s
       private_networks: []
       local_domain_name: lan
@@ -152,4 +152,4 @@ data:
       group: ""
       user: ""
       rlimit_nofile: 0
-    schema_version: 20
+    schema_version: 23
