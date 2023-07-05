@@ -15,5 +15,5 @@ appVersion: "0.0.0"
 
 dependencies:
   - name: emqx
-    version: 5.1.0
+    version: 5.1.1
     repository: https://repos.emqx.io/charts
