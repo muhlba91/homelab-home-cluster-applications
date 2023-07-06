@@ -15,8 +15,6 @@ For [ksops](https://github.com/viaduct-ai/kustomize-sops) and ArgoCD to decrypt 
 
 ArgoCD will then manage Cilium, itself, and all applications as defined in this repository.
 
-***Attention:*** some applications will be automatically deployed, others not (yet).
-
 ---
 
 ## ArgoCD App-of-Apps
