@@ -37,7 +37,6 @@ app-template:
   automountServiceAccountToken: false
 
   args:
-    - /opt/adguardhome/AdGuardHome
     - --config
     - /opt/adguardhome/conf/AdGuardHome.yaml
     - --work-dir
