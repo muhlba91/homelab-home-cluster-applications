@@ -1,6 +1,6 @@
 dependencies:
 - name: emqx
   repository: https://repos.emqx.io/charts
-  version: 5.1.4
-digest: sha256:f18e51c2bbc7e884feaa034d2f660bfada27fc71e92755e9492448d244480c7c
-generated: "2023-08-01T10:20:40.907460351Z"
+  version: 5.1.6
+digest: sha256:139283ccece80fa51a6af7d256ea38f179bb5e47fe191c7e0e334bf4a6f96da4
+generated: "2023-08-25T07:32:06.877781862Z"
