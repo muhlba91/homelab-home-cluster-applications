@@ -19,7 +19,7 @@ app-template:
     - name: ECOWITT2MQTT_PRECISION
       value: "2"
     - name: ECOWITT2MQTT_DEFAULT_BATTERY_STRATEGY
-      value: binary
+      value: boolean
     - name: ECOWITT2MQTT_MQTT_BROKER
       value: emqx.home-assistant-mqtt
     - name: ECOWITT2MQTT_MQTT_TLS
