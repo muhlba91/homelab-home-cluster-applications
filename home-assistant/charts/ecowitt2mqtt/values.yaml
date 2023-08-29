@@ -1,0 +1,41 @@
+---
+app-template:
+  image:
+    repository: ghcr.io/bachya/ecowitt2mqtt
+    pullPolicy: IfNotPresent
+    tag: 2023.08.0
+
+  serviceAccount:
+    create: true
+  automountServiceAccountToken: false
+
+  env:
+    - name: ECOWITT2MQTT_HASS_DISCOVERY
+      value: "true"
+    - name: ECOWITT2MQTT_INPUT_UNIT_SYSTEM
+      value: imperial
+    - name: ECOWITT2MQTT_OUTPUT_UNIT_SYSTEM
+      value: metric
+    - name: ECOWITT2MQTT_DEFAULT_BATTERY_STRATEGY
+      value: percentage
+    - name: ECOWITT2MQTT_MQTT_BROKER
+      value: emqx.home-assistant-mqtt
+    - name: ECOWITT2MQTT_MQTT_TLS
+      value: "false"
+
+  service:
+    main:
+      enabled: true
+      type: LoadBalancer
+      ipFamilyPolicy: PreferDualStack
+      ports:
+        http:
+          port: 8080
+
+  resources:
+    requests:
+      cpu: 5m
+      memory: 32Mi
+    limits:
+      cpu: 100m
+      memory: 64Mi

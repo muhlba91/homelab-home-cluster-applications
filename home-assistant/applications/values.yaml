@@ -46,6 +46,13 @@ applications:
     disabled: false
     namespace: "{{ $.Values.global.prefix }}-ring-mqtt"
     helm: true
+  ecowitt2mqtt:
+    project: "home-assistant-{{ $.Values.global.projectEnvironment }}"
+    path: home-assistant/charts/ecowitt2mqtt
+    releaseName: "{{ $.Values.global.prefix }}-ecowitt2mqtt"
+    disabled: false
+    namespace: "{{ $.Values.global.prefix }}-ecowitt2mqtt"
+    helm: true
   telegraf:
     project: "home-assistant-{{ $.Values.global.projectEnvironment }}"
     path: home-assistant/charts/telegraf
