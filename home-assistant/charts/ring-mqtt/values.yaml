@@ -8,7 +8,7 @@ app-template:
   image:
     repository: tsightler/ring-mqtt
     pullPolicy: IfNotPresent
-    tag: 5.6.0
+    tag: 5.6.2@sha256:74143c2e97ac6fdd7bbbd686a983bc36c7f58ac3bd50e6170cd9798612b8b8f1
 
   serviceAccount:
     create: true
