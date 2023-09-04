@@ -6,7 +6,7 @@ app-template:
   image:
     repository: zwavejs/zwave-js-ui
     pullPolicy: IfNotPresent
-    tag: 8.24.1@sha256:916c3303ef1fd96253714030f936ea2d49339e5566dbf4c0c51c0f6e8a8be37a
+    tag: 8.24.2@sha256:86d1e9b8121f45f038b9215121bb4405114579559dedf9a937c302bd263b6825
 
   serviceAccount:
     create: true
