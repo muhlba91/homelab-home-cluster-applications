@@ -30,7 +30,7 @@ app-template:
   image:
     repository: adguard/adguardhome
     pullPolicy: IfNotPresent
-    tag: v0.107.36
+    tag: v0.107.37
 
   serviceAccount:
     create: true
