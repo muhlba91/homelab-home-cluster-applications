@@ -14,7 +14,7 @@ app-template:
   image:
     repository: telegraf
     pullPolicy: IfNotPresent
-    tag: 1.28.0
+    tag: 1.28.1
 
   serviceAccount:
     create: true
