@@ -78,6 +78,7 @@ applications:
     ignoreDifferences:
       - group: "*"
         kind: ConfigMap
+        name: rook-ceph-mon-endpoints
         jsonPointers:
           - /metadata/labels
           - /data/mapping
