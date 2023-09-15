@@ -80,8 +80,6 @@ domain: node-red.domain.org
 oidcUserProperty: preferred_username
 adminUsers:
   - user
-automationUserIds:
-  - id
 
 projectsEnabled: &projectsEnabled "false"
 

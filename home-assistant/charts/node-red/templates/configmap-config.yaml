@@ -155,12 +155,7 @@ data:
                 resolve(null);
               } else {
                 var uid = decoded.uid;
-                var permissions = "read";
-                {{- range .Values.automationUserIds }}
-                if(uid == "{{ . }}") {
-                  permissions = "*"
-                }
-                {{- end }}
+                var permissions = "*";
                 var user = {
                   username: uid,
                   permissions: permissions
