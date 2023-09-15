@@ -6,7 +6,7 @@ global:
 applications:
   metallb:
     enableAutomated: false
-  rook-ceph:
+  longhorn:
     enableAutomated: false
   csi-nfs-driver:
     enableAutomated: false

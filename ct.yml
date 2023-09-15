@@ -22,4 +22,4 @@ chart-repos: # we need to add all repos which are not OCI ones
   - descheduler=https://kubernetes-sigs.github.io/descheduler
   - external-secrets=https://charts.external-secrets.io
   - metallb=https://metallb.github.io/metallb
-  - rook=https://charts.rook.io/release
+  - longhorn=https://charts.longhorn.io

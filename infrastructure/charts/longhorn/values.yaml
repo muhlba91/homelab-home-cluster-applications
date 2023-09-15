@@ -1,0 +1,27 @@
+---
+longhorn:
+  csi:
+    kubeletRootDir: /var/lib/k0s/kubelet
+
+  persistence:
+    defaultClass: false
+    defaultClassReplicaCount: 1
+
+  defaultSettings:
+    nodeDrainPolicy: allow-if-replica-is-stopped
+    defaultLonghornStaticStorageClass: longhorn-default
+    defaultReplicaCount: 1
+    replicaSoftAntiAffinity: true
+    disableSchedulingOnCordonedNode: true
+    autoDeletePodWhenVolumeDetachedUnexpectedly: true
+    allowVolumeCreationWithDegradedAvailability: true
+    upgradeChecker: true
+    concurrentAutomaticEngineUpgradePerNodeLimit: 1
+    storageMinimalAvailablePercentage: 20
+    storageOverProvisioningPercentage: 200
+
+  longhornUI:
+    replicas: 2
+
+  ingress:
+    enabled: false

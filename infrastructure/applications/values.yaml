@@ -67,21 +67,14 @@ applications:
         kind: CustomResourceDefinition
         jsonPointers:
           - /spec/conversion/webhook/clientConfig/caBundle
-  rook-ceph:
+  longhorn:
     project: "infrastructure-{{ $.Values.global.projectEnvironment }}"
-    path: infrastructure/charts/rook-ceph
-    releaseName: rook-ceph
+    path: infrastructure/charts/longhorn
+    releaseName: longhorn
     disabled: false
-    namespace: rook-ceph
+    namespace: longhorn-system
     helm: true
     syncWave: -250
-    ignoreDifferences:
-      - group: "*"
-        kind: ConfigMap
-        name: rook-ceph-mon-endpoints
-        jsonPointers:
-          - /metadata/labels
-          - /data/mapping
   csi-nfs-driver:
     project: "infrastructure-{{ $.Values.global.projectEnvironment }}"
     path: infrastructure/charts/csi-nfs-driver
