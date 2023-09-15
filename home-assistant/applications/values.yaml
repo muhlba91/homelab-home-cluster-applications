@@ -14,7 +14,7 @@ global:
       enabled: false
       valueFiles:
         - values.yaml
-    enableAutomated: false # TODO: post-migration
+    enableAutomated: true
     syncOptions: []
 
 applications:
