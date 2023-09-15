@@ -58,7 +58,7 @@ The following applications are defined in [`infrastructure/charts`](infrastructu
 - [x] [Descheduler](https://github.com/kubernetes-sigs/descheduler) - Finds pods to be evicted for optimizing node usage.
 - [x] [External Secrets Operator](http://external-secrets.io) - Synchronizes secrets from external stores to Kubernetes `Secret` objects.
 - [x] [MetalLB](https://metallb.universe.tf) - Provides a Kubernetes network load balancer to expose Kubernetes `Service`s.
-- [x] [Rook Ceph](https://rook.io) - Exposes the Ceph storage cluster on Proxmox as Kubernetes `StorageClass`es.
+- [x] [Longhorn](https://longhorn.io) - Exposes local storage to Kubernetes `StorageClass`es.
 
 #### Kustomizations
 
