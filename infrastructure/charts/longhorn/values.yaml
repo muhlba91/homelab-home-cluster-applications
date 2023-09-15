@@ -2,6 +2,10 @@
 longhorn:
   csi:
     kubeletRootDir: /var/lib/k0s/kubelet
+    attacherReplicaCount: 1
+    provisionerReplicaCount: 1
+    resizerReplicaCount: 1
+    snapshotterReplicaCount: 1
 
   persistence:
     defaultClass: false
@@ -21,7 +25,7 @@ longhorn:
     storageOverProvisioningPercentage: 200
 
   longhornUI:
-    replicas: 2
+    replicas: 1
 
   ingress:
     enabled: false
