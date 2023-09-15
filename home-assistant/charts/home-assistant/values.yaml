@@ -86,7 +86,7 @@ app-template:
     config:
       enabled: true
       type: pvc
-      storageClass: proxmox-rbd
+      storageClass: longhorn
       accessMode: ReadWriteOnce
       size: 5Gi
       retain: false

@@ -77,7 +77,7 @@ app-template:
     data:
       enabled: true
       type: pvc
-      storageClass: proxmox-cephfs
+      storageClass: longhorn
       accessMode: ReadWriteMany
       size: 32Mi
       retain: false

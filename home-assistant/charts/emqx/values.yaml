@@ -15,7 +15,7 @@ emqx:
 
   persistence:
     enabled: true
-    storageClassName: proxmox-rbd
+    storageClassName: longhorn
     accessMode: ReadWriteOnce
     size: 128Mi
 

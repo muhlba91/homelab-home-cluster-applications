@@ -176,7 +176,7 @@ app-template:
     data:
       enabled: true
       type: pvc
-      storageClass: proxmox-rbd
+      storageClass: longhorn
       accessMode: ReadWriteOnce
       size: 1Gi
       retain: false
@@ -184,7 +184,7 @@ app-template:
     node-modules:
       enabled: true
       type: pvc
-      storageClass: proxmox-rbd
+      storageClass: longhorn
       accessMode: ReadWriteOnce
       size: 1Gi
       retain: false

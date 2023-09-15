@@ -27,7 +27,7 @@ grafana:
   persistence:
     enabled: true
     type: statefulset
-    storageClass: proxmox-rbd
+    storageClass: longhorn
     size: 1Gi
 
   initChownData:
