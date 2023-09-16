@@ -1,27 +1,27 @@
 ---
 adminPassword: hashed-password
 upstreamDns:
-  ipv4: "10.1.1"
+  ipv4: "1.1.1.1"
   ipv6: "2606:4700:4700::1111"
 exclusions:
-  - backblazeb2.com
   - apps.apple.com
   - itunes.apple.com
-  - analytics.console.aws.a2z.com
   - fonts.gstatic.com
+  - smartclip.net
+  - prod.http1.netflix.com
+  - collector.github.com
+  - backblazeb2.com
+  - flutter.dev
   - firebaseinstallations.googleapis.com
   - firebaselogging-pa.googleapis.com
-  - flutter.dev
+  - analytics.console.aws.a2z.com
   - sentry.io
   - sentry-cdn.com
   - newrelic.com
   - segment.io
   - revenuecat.com
-  - optimizely.com
   - onesignal.com
   - privacy-mgmt.com
-  - smartclip.net
-  - prod.http1.netflix.com
 
 app-template:
   global:
