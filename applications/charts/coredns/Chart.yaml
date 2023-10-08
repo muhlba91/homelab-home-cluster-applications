@@ -15,8 +15,8 @@ appVersion: "0.0.0"
 
 dependencies:
   - name: etcd
-    version: 9.5.0
-    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 9.5.1
+    repository: https://charts.bitnami.com/bitnami
   - name: coredns
     version: 1.26.0
     repository: https://coredns.github.io/helm
