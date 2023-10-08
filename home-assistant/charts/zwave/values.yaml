@@ -3,31 +3,79 @@ app-template:
   global:
     fullnameOverride: zwave-js
 
-  image:
-    repository: zwavejs/zwave-js-ui
-    pullPolicy: IfNotPresent
-    tag: 9.1.0@sha256:31d29d08c4774f98cf9514b36c0b484ca1de0d1d84b785b6f5d671bc2e2d45b8
+  controllers:
+    main:
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: zwavejs/zwave-js-ui
+            pullPolicy: IfNotPresent
+            tag: 9.1.0@sha256:31d29d08c4774f98cf9514b36c0b484ca1de0d1d84b785b6f5d671bc2e2d45b8
+
+          env:
+            - name: TZ
+              value: UTC
+            - name: NETWORK_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: zwave-js-network
+                  key: key
+            - name: SESSION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: zwave-js-session
+                  key: secret
+
+          securityContext:
+            privileged: true
+
+          resources:
+            requests:
+              cpu: 10m
+              memory: 192Mi
+            limits:
+              cpu: 300m
+              memory: 256Mi
+
+    backup:
+      type: cronjob
+      cronjob:
+        concurrencyPolicy: Replace
+        schedule: 0 0 * * *
+        successfulJobsHistory: 3
+        failedJobsHistory: 3
+        startingDeadlineSeconds: 30
+        backoffLimit: 2
+      pod:
+        restartPolicy: OnFailure
+        automountServiceAccountToken: true
+      containers:
+        backup:
+          image:
+            repository: alpine
+            tag: 3.18
+            pullPolicy: IfNotPresent
+          command:
+            - /scripts/backup_restore.sh
+          envFrom:
+            - secretRef:
+                name: zwave-js-backup
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 1
+              memory: 256Mi
 
   serviceAccount:
     create: true
-  automountServiceAccountToken: false
 
-  env:
-    - name: TZ
-      value: UTC
-    - name: NETWORK_KEY
-      valueFrom:
-        secretKeyRef:
-          name: zwave-js-network
-          key: key
-    - name: SESSION_SECRET
-      valueFrom:
-        secretKeyRef:
-          name: zwave-js-session
-          key: secret
-
-  securityContext:
-    privileged: true
+  defaultPodOptions:
+    automountServiceAccountToken: false
+    nodeSelector:
+      usb: zwave-controller
 
   service:
     main:
@@ -46,25 +94,30 @@ app-template:
   persistence:
     config:
       enabled: true
-      type: pvc
+      type: persistentVolumeClaim
       storageClass: longhorn
       accessMode: ReadWriteOnce
       size: 1Gi
       retain: false
-      mountPath: /usr/src/app/store
+      advancedMounts:
+        main:
+          main:
+            - path: /usr/src/app/store
     usb:
       enabled: true
       type: hostPath
       hostPath: /dev
       hostPathType: Directory
-
-  resources:
-    requests:
-      cpu: 10m
-      memory: 192Mi
-    limits:
-      cpu: 300m
-      memory: 256Mi
-
-  nodeSelector:
-    usb: zwave-controller
+      advancedMounts:
+        main:
+          main:
+            - path: /dev
+    scripts:
+      enabled: true
+      type: configMap
+      name: zwave-js-scripts
+      defaultMode: 511
+      advancedMounts:
+        backup:
+          backup:
+            - path: /scripts
