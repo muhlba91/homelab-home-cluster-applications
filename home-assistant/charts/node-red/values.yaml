@@ -87,77 +87,138 @@ app-template:
   global:
     fullnameOverride: node-red
 
-  image:
-    repository: ghcr.io/muhlba91/node-red
-    pullPolicy: IfNotPresent
-    tag: 3.0.2-1.0.8
+  controllers:
+    main:
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: ghcr.io/muhlba91/node-red
+            pullPolicy: IfNotPresent
+            tag: 3.0.2-1.0.8
+
+          env:
+            - name: TZ
+              value: UTC
+            - name: NODE_RED_ENABLE_PROJECTS
+              value: *projectsEnabled
+            - name: FLOWS
+              value: flows.json
+            - name: NODE_RED_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: node-red-config
+                  key: url
+
+          envFrom:
+            - secretRef:
+                name: node-red-credentials
+
+          probes:
+            startup:
+              spec:
+                initialDelaySeconds: 30
+                periodSeconds: 15
+                failureThreshold: 90
+            readiness:
+              spec:
+                initialDelaySeconds: 10
+            liveness:
+              spec:
+                initialDelaySeconds: 10
+
+          resources:
+            requests:
+              cpu: 10m
+              memory: 256Mi
+            # necessary for yarn!
+            limits:
+              cpu: '1'
+              memory: 1Gi
+
+      initContainers:
+        init-chown-data:
+          image:
+            repository: alpine
+            tag: 3.18
+            pullPolicy: IfNotPresent
+          command:
+            - chown
+            - '-R'
+            - '1000:0'
+            - /data
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 100m
+              memory: 32Mi
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+        init-chown-node-modules:
+          image:
+            repository: alpine
+            tag: 3.18
+            pullPolicy: IfNotPresent
+          imagePullPolicy: IfNotPresent
+          command:
+            - chown
+            - '-R'
+            - '1000:0'
+            - /node_modules
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 100m
+              memory: 32Mi
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+
+    backup:
+      type: cronjob
+      cronjob:
+        concurrencyPolicy: Replace
+        schedule: 0 0 * * *
+        successfulJobsHistory: 3
+        failedJobsHistory: 3
+        startingDeadlineSeconds: 30
+        backoffLimit: 2
+      pod:
+        restartPolicy: OnFailure
+        automountServiceAccountToken: true
+      containers:
+        backup:
+          image:
+            repository: python
+            tag: 3.11-alpine
+            pullPolicy: IfNotPresent
+          command:
+            - /scripts/backup_restore.sh
+          envFrom:
+            - secretRef:
+                name: node-red-backup
+            - secretRef:
+                name: node-red-credentials
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 1
+              memory: 256Mi
 
   serviceAccount:
     create: true
-  automountServiceAccountToken: false
 
-  env:
-    - name: TZ
-      value: UTC
-    - name: NODE_RED_ENABLE_PROJECTS
-      value: *projectsEnabled
-    - name: FLOWS
-      value: flows.json
-    - name: NODE_RED_URL
-      valueFrom:
-        configMapKeyRef:
-          name: node-red-config
-          key: url
-
-  envFrom:
-    - secretRef:
-        name: node-red-credentials
-
-  initContainers:
-    init-chown-data:
-      image: alpine:3.18
-      imagePullPolicy: IfNotPresent
-      command:
-        - chown
-        - '-R'
-        - '1000:0'
-        - /data
-      volumeMounts:
-        - name: data
-          mountPath: /data
-      resources:
-        requests:
-          cpu: 10m
-          memory: 16Mi
-        limits:
-          cpu: 100m
-          memory: 32Mi
-      securityContext:
-        capabilities:
-          add:
-            - CHOWN
-    init-chown-node-modules:
-      image: alpine:3.18
-      imagePullPolicy: IfNotPresent
-      command:
-        - chown
-        - '-R'
-        - '1000:0'
-        - /data
-      volumeMounts:
-        - name: node-modules
-          mountPath: /data
-      resources:
-        requests:
-          cpu: 10m
-          memory: 16Mi
-        limits:
-          cpu: 100m
-          memory: 32Mi
-      securityContext:
-        capabilities:
-          add:
-            - CHOWN
+  defaultPodOptions:
+    automountServiceAccountToken: false
 
   service:
     main:
@@ -173,46 +234,36 @@ app-template:
   persistence:
     data:
       enabled: true
-      type: pvc
+      type: persistentVolumeClaim
       storageClass: longhorn
       accessMode: ReadWriteOnce
       size: 1Gi
       retain: false
-      mountPath: /data
     node-modules:
       enabled: true
-      type: pvc
+      type: persistentVolumeClaim
       storageClass: longhorn
       accessMode: ReadWriteOnce
       size: 1Gi
       retain: false
-      mountPath: /usr/src/node-red/node_modules
+      advancedMounts:
+        main:
+          main:
+            - path: /usr/src/node-red/node_modules
+          init-chown-node-modules:
+            - path: /node_modules
     packages:
       enabled: true
-      type: custom
-      mountPath: /init
-      volumeSpec:
-        configMap:
-          name: node-red-config
-
-  probes:
-    startup:
-      spec:
-        initialDelaySeconds: 30
-        periodSeconds: 15
-        failureThreshold: 90
-    readiness:
-      spec:
-        initialDelaySeconds: 10
-    liveness:
-      spec:
-        initialDelaySeconds: 10
-
-  resources:
-    requests:
-      cpu: 10m
-      memory: 256Mi
-    # necessary for yarn!
-    limits:
-      cpu: '1'
-      memory: 1Gi
+      type: configMap
+      name: node-red-config
+      globalMounts:
+        - path: /init
+    scripts:
+      enabled: true
+      type: configMap
+      name: node-red-scripts
+      defaultMode: 511
+      advancedMounts:
+        backup:
+          backup:
+            - path: /scripts
