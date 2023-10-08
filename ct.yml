@@ -23,3 +23,4 @@ chart-repos: # we need to add all repos which are not OCI ones
   - external-secrets=https://charts.external-secrets.io
   - metallb=https://metallb.github.io/metallb
   - longhorn=https://charts.longhorn.io
+  - bitnami=https://charts.bitnami.com/bitnami
