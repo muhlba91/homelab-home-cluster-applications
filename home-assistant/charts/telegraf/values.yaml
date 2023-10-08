@@ -44,7 +44,7 @@ app-template:
           cpu: 100m
           memory: 128Mi
     grafana:
-      image: bitnami/kubectl:1.27
+      image: bitnami/kubectl:1.28
       imagePullPolicy: IfNotPresent
       command:
         - /scripts/grafana.sh
