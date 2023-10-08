@@ -30,6 +30,9 @@ jobs:
     strategy:
       max-parallel: 12
       matrix:
+        python-version: ["3.11"]
+        helm-version: ["3.13.0"]
+        yamale-version: ["4.0.4"]
         directory:
           - applications
           - core
@@ -45,12 +48,15 @@ jobs:
       - uses: yokawasa/action-setup-kube-tools@v0.9.3
         with:
           setup-tools: helm
+          helm: ${{ matrix.helm-version }}
 
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: ${{ matrix.python-version }}
 
       - uses: helm/chart-testing-action@v2.4.0
+        with:
+          yamale_version: ${{ matrix.yamale-version }}
 
       - name: Lint all charts
         run: ct lint --all --chart-dirs ${{ matrix.directory }}/charts --config ${{ github.workspace }}/ct.yml

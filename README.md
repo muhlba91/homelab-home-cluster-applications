@@ -88,6 +88,7 @@ The following applications are defined in [`applications/charts`](applications/c
 
 The following applications are defined in [`home-assistant/charts`](home-assistant/charts).
 
+- [x] [ecowitt2mqtt](https://github.com/bachya/ecowitt2mqtt) - Forwards data received from ecowitt devices to the MQTT broker.
 - [x] [EMQX](https://www.emqx.io) - A MQTT broker.
 - [x] [Home Assistant](https://home-assistant.io) - The Home Assistant instance.
 - [x] [Node-RED](https://nodered.org) - Automation based on flows and Home Assistant data.
@@ -99,10 +100,17 @@ The following applications are defined in [`home-assistant/charts`](home-assista
 
 Home Assistant related backup and restore is currently handled via S3 backups.
 
-For most services, upon pod start an `initContainer` as well as a nightly `CronJob` are backing up data to an S3 bucket.
-If no data is found in the Persistent Volume yet, the data from will be retrieved and copied over which results in a full restore.
+The following services implement an `initContainer` as well as a nightly `CronJob` to backup data to an S3 bucket. If no data is found in the Persistent Volume yet, the data from will be retrieved and copied over which results in a full restore.
 
-The following services also have Git repositories to store their configuration which gets pulled in upon start:
+- Ring MQTT
+
+The following services use API calls to determine whether a backup or restore is necessary.
+
+- Node-RED
+- Home Assistant
+- Z-Wave JS UI
+
+The following services also have Git repositories to store their configuration which gets pulled in upon start.
 
 - [Home Assistant](https://github.com/muhlba91/homelab-home-assistant-configuration)
   - Home Assistant also defines it's own backup method via a `trigger` and a `shell_command`, and doesn't rely on a `CronJob`.

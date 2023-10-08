@@ -126,7 +126,7 @@ app-template:
 
   serviceAccount:
     create: true
-  
+
   defaultPodOptions:
     automountServiceAccountToken: false
 
