@@ -95,7 +95,7 @@ app-template:
           image:
             repository: ghcr.io/muhlba91/node-red
             pullPolicy: IfNotPresent
-            tag: v2.0.1
+            tag: v4.0.0
 
           env:
             - name: TZ
