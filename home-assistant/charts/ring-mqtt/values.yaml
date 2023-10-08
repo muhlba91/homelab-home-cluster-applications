@@ -153,9 +153,9 @@ app-template:
       advancedMounts:
         main:
           backup-restore:
-            - path: /
+            - path: /gcp-credentials
               readOnly: true
         backup:
           backup:
-            - path: /
+            - path: /gcp-credentials
               readOnly: true
