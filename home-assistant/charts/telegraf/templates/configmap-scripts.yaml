@@ -15,12 +15,12 @@ data:
     TELEGRAF_FIREHOSE_VERSION=$(curl -s https://raw.githubusercontent.com/muhlba91/telegraf-output-kinesis-data-firehose/main/latest.sh | sh)
 
     echo "[telegraf-output-kinesis-data-firehose] wiping old binaries..."
-    rm -rf /plugins/firehose
-    mkdir /plugins/firehose
+    rm -rf /plugins/bin/firehose
+    mkdir /plugins/bin/firehose
 
     echo "[telegraf-output-kinesis-data-firehose] downloading ${TELEGRAF_FIREHOSE_VERSION}..."
     wget https://github.com/muhlba91/telegraf-output-kinesis-data-firehose/releases/download/${TELEGRAF_FIREHOSE_VERSION}/telegraf-output-kinesis-data-firehose-${TELEGRAF_FIREHOSE_VERSION}-linux-amd64.tar.gz -O /tmp/firehose.tar.gz &> /dev/null
-    tar -xzvf /tmp/firehose.tar.gz -C /plugins/firehose/
+    tar -xzvf /tmp/firehose.tar.gz -C /plugins/bin/firehose/
   grafana.sh: |
     #!/bin/sh
     set -eu
