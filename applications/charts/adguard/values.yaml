@@ -27,45 +27,55 @@ app-template:
   global:
     fullnameOverride: adguard-home
 
-  image:
-    repository: adguard/adguardhome
-    pullPolicy: IfNotPresent
-    tag: v0.107.38
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: adguard/adguardhome
+            pullPolicy: IfNotPresent
+            tag: v0.107.38
+
+          args:
+            - --config
+            - /opt/adguardhome/conf/AdGuardHome.yaml
+            - --work-dir
+            - /opt/adguardhome/work
+            - --no-check-update
+
+          resources:
+            requests:
+              cpu: 150m
+              memory: 384Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+
+      initContainers:
+        copy-configmap:
+          image:
+            repository: busybox
+            tag: 1.36
+            pullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - "mkdir -p /opt/adguardhome/conf; cp /tmp/AdGuardHome.yaml /opt/adguardhome/conf/AdGuardHome.yaml"
+          securityContext:
+            runAsUser: 0
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 100m
+              memory: 32Mi
 
   serviceAccount:
     create: true
-  automountServiceAccountToken: false
 
-  args:
-    - --config
-    - /opt/adguardhome/conf/AdGuardHome.yaml
-    - --work-dir
-    - /opt/adguardhome/work
-    - --no-check-update
-
-  initContainers:
-    copy-configmap:
-      image: busybox:1.36
-      imagePullPolicy: IfNotPresent
-      command:
-        - sh
-        - -c
-        - "mkdir -p /opt/adguardhome/conf; cp /tmp/AdGuardHome.yaml /opt/adguardhome/conf/AdGuardHome.yaml"
-      volumeMounts:
-        - name: adguard-home-config
-          mountPath: /tmp/AdGuardHome.yaml
-          subPath: AdGuardHome.yaml
-        - name: config
-          mountPath: /opt/adguardhome/conf
-      securityContext:
-        runAsUser: 0
-      resources:
-        requests:
-          cpu: 10m
-          memory: 16Mi
-        limits:
-          cpu: 100m
-          memory: 32Mi
+  defaultPodOptions:
+    automountServiceAccountToken: false
 
   service:
     main:
@@ -74,6 +84,7 @@ app-template:
           port: 3000
     dns:
       enabled: true
+      controller: main
       ipFamilyPolicy: PreferDualStack
       type: LoadBalancer
       externalTrafficPolicy: Local
@@ -97,26 +108,23 @@ app-template:
     config:
       enabled: true
       type: emptyDir
-      mountPath: /opt/adguardhome/conf
+      globalMounts:
+        - path: /opt/adguardhome/conf
     data:
       enabled: true
-      type: pvc
+      type: persistentVolumeClaim
       storageClass: longhorn
       accessMode: ReadWriteOnce
       size: 5Gi
       retain: false
-      mountPath: /opt/adguardhome/work
+      globalMounts:
+        - path: /opt/adguardhome/work
     adguard-home-config:
       enabled: true
-      type: custom
-      volumeSpec:
-        configMap:
-          name: adguard-home-config
-
-  resources:
-    requests:
-      cpu: 150m
-      memory: 384Mi
-    limits:
-      cpu: 500m
-      memory: 512Mi
+      type: configMap
+      name: adguard-home-config
+      advancedMounts:
+        main:
+          copy-configmap:
+            - path: /tmp/AdGuardHome.yaml
+              subPath: AdGuardHome.yaml
