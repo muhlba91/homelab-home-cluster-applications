@@ -18,5 +18,5 @@ dependencies:
     version: 9.5.1
     repository: https://charts.bitnami.com/bitnami
   - name: coredns
-    version: 1.26.0
+    version: 1.27.1
     repository: https://coredns.github.io/helm
