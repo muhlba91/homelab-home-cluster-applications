@@ -5,69 +5,129 @@ app-template:
   global:
     fullnameOverride: ring-mqtt
 
-  image:
-    repository: tsightler/ring-mqtt
-    pullPolicy: IfNotPresent
-    tag: 5.6.3@sha256:e3a3781921b2fad0ced8c3db05f82f5a70fe3ef3037213f5b201a49507c17dbd
+  controllers:
+    main:
+      type: statefulset
+      containers:
+        main:
+          image:
+            repository: tsightler/ring-mqtt
+            pullPolicy: IfNotPresent
+            tag: 5.6.3@sha256:e3a3781921b2fad0ced8c3db05f82f5a70fe3ef3037213f5b201a49507c17dbd
+
+          env:
+            - name: DATA_PATH
+              value: /config
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /gcp-credentials/credentials.json
+            - name: GOOGLE_CREDENTIALS
+              valueFrom:
+                secretKeyRef:
+                  name: ring-mqtt-gcp-credentials
+                  key: credentials.json
+
+          envFrom:
+            - secretRef:
+                name: ring-mqtt-backup
+            - configMapRef:
+                name: ring-mqtt-git
+
+          resources:
+            requests:
+              cpu: 5m
+              memory: 128Mi
+            limits:
+              cpu: 100m
+              memory: 256Mi
+
+      initContainers:
+        backup-restore:
+          image:
+            repository: alpine
+            tag: 3.18
+            pullPolicy: IfNotPresent
+          command:
+            - /scripts/backup_restore.sh
+            - "true"
+          envFrom:
+            - secretRef:
+                name: ring-mqtt-backup
+            - configMapRef:
+                name: ring-mqtt-git
+          env:
+            - name: DATA_PATH
+              value: /data
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /gcp-credentials/credentials.json
+            - name: GOOGLE_CREDENTIALS
+              valueFrom:
+                secretKeyRef:
+                  name: ring-mqtt-gcp-credentials
+                  key: credentials.json
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 1
+              memory: 256Mi
+    ring-mqtt-backup:
+      type: cronjob
+      cronjob:
+        concurrencyPolicy: Replace
+        schedule: 0 0 * * *
+        successfulJobsHistory: 3
+        failedJobsHistory: 3
+        startingDeadlineSeconds: 30
+        backoffLimit: 2
+      pod:
+        restartPolicy: OnFailure
+        affinity:
+          podAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - home-assistant-ring-mqtt
+                topologyKey: kubernetes.io/hostname
+      containers:
+        backup:
+          image:
+            repository: alpine
+            tag: 3.18
+            pullPolicy: IfNotPresent
+          command:
+            - /scripts/backup_restore.sh
+          envFrom:
+            - secretRef:
+                name: ring-mqtt-backup
+            - configMapRef:
+                name: ring-mqtt-git
+          env:
+            - name: DATA_PATH
+              value: /data
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /gcp-credentials/credentials.json
+            - name: GOOGLE_CREDENTIALS
+              valueFrom:
+                secretKeyRef:
+                  name: ring-mqtt-gcp-credentials
+                  key: credentials.json
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 1
+              memory: 256Mi
 
   serviceAccount:
     create: true
-  automountServiceAccountToken: false
-
-  env:
-    - name: DATA_PATH
-      value: /config
-    - name: GOOGLE_APPLICATION_CREDENTIALS
-      value: /gcp-credentials/credentials.json
-    - name: GOOGLE_CREDENTIALS
-      valueFrom:
-        secretKeyRef:
-          name: ring-mqtt-gcp-credentials
-          key: credentials.json
-
-  envFrom:
-    - secretRef:
-        name: ring-mqtt-backup
-    - configMapRef:
-        name: ring-mqtt-git
-
-  initContainers:
-    backup-restore:
-      image: alpine:3.18
-      imagePullPolicy: IfNotPresent
-      command:
-        - /scripts/backup_restore.sh
-        - "true"
-      envFrom:
-        - secretRef:
-            name: ring-mqtt-backup
-        - configMapRef:
-            name: ring-mqtt-git
-      env:
-        - name: DATA_PATH
-          value: /data
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: /gcp-credentials/credentials.json
-        - name: GOOGLE_CREDENTIALS
-          valueFrom:
-            secretKeyRef:
-              name: ring-mqtt-gcp-credentials
-              key: credentials.json
-      volumeMounts:
-        - name: data
-          mountPath: /data
-        - name: scripts
-          mountPath: /scripts
-        - name: gcp-credentials
-          mountPath: /gcp-credentials
-          readOnly: true
-      resources:
-        requests:
-          cpu: 100m
-          memory: 128Mi
-        limits:
-          cpu: 1
-          memory: 256Mi
+  
+  defaultPodOptions:
+    automountServiceAccountToken: false
 
   service:
     main:
@@ -76,31 +136,26 @@ app-template:
   persistence:
     data:
       enabled: true
-      type: pvc
+      type: persistentVolumeClaim
       storageClass: longhorn
       accessMode: ReadWriteMany
       size: 32Mi
       retain: false
-      mountPath: /data
     scripts:
       enabled: true
-      type: custom
-      volumeSpec:
-        configMap:
-          name: ring-mqtt-scripts
-          defaultMode: 0o0777
+      type: configMap
+      name: ring-mqtt-scripts
+      defaultMode: 0o0777
     gcp-credentials:
       enabled: true
-      type: custom
-      readOnly: true
-      volumeSpec:
-        secret:
-          secretName: ring-mqtt-gcp-credentials
-
-  resources:
-    requests:
-      cpu: 5m
-      memory: 128Mi
-    limits:
-      cpu: 100m
-      memory: 256Mi
+      type: secret
+      name: ring-mqtt-gcp-credentials
+      advancedMounts:
+        main:
+          backup-restore:
+            - path: /
+              readOnly: true
+        ring-mqtt-backup:
+          backup:
+            - path: /
+              readOnly: true
