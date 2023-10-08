@@ -71,7 +71,7 @@ app-template:
             limits:
               cpu: 1
               memory: 256Mi
-    ring-mqtt-backup:
+    backup:
       type: cronjob
       cronjob:
         concurrencyPolicy: Replace
@@ -155,7 +155,7 @@ app-template:
           backup-restore:
             - path: /
               readOnly: true
-        ring-mqtt-backup:
+        backup:
           backup:
             - path: /
               readOnly: true
