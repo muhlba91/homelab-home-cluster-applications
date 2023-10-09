@@ -11,7 +11,7 @@ app-template:
           image:
             repository: zwavejs/zwave-js-ui
             pullPolicy: IfNotPresent
-            tag: 9.1.0@sha256:31d29d08c4774f98cf9514b36c0b484ca1de0d1d84b785b6f5d671bc2e2d45b8
+            tag: 9.1.1@sha256:1623535dbfe4c8704bdceee9884f423439396a3ea60c5bfbcf6d42c23d8ac8ed
 
           env:
             - name: TZ
