@@ -15,7 +15,7 @@ appVersion: "0.0.0"
 
 dependencies:
   - name: etcd
-    version: 9.5.5
+    version: 9.5.6
     repository: https://charts.bitnami.com/bitnami
   - name: coredns
     version: 1.27.1
