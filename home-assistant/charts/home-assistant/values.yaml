@@ -15,7 +15,7 @@ app-template:
           image:
             repository: ghcr.io/home-assistant/home-assistant
             pullPolicy: IfNotPresent
-            tag: 2023.10.4
+            tag: 2023.10.5
 
           env:
             - name: TZ
