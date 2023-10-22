@@ -4,10 +4,8 @@ generators:
 
 resources:
   - ./stores/argocd.yml
-  - ./stores/ceph.yml
   - ./stores/cert-manager.yml
   - ./stores/external-dns.yml
   - ./stores/grafana.yml
   - ./stores/home-assistant.yml
-  - ./stores/influxdb.yml
   - ./stores/minio.yml
