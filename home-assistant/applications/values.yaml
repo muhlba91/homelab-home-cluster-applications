@@ -7,7 +7,7 @@ global:
       repoURL: https://github.com/muhlba91/homelab-kubernetes-home-applications.git
       targetRevision: HEAD
     values:
-      repoURL: git@github.com:muhlba91/homelab-kubernetes-home-values.git
+      repoURL: https://github.com/muhlba91/homelab-kubernetes-home-applications.git
       targetRevision: HEAD
     syncWave: 0
     helm:
