@@ -107,6 +107,7 @@ app-template:
 
   ingress:
     main:
+      enabled: true
       annotations:
         cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
         external-dns.alpha.kubernetes.io/provider: internal
