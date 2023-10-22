@@ -1,4 +1,6 @@
 ---
+domain: &domain longhorn.dev.internal.muehlbachler.io
+
 longhorn:
   csi:
     kubeletRootDir: /var/lib/k0s/kubelet
@@ -28,4 +30,11 @@ longhorn:
     replicas: 1
 
   ingress:
-    enabled: false
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+      external-dns.alpha.kubernetes.io/provider: internal
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    host: *domain
+    tls: true
+    tlsSecret: longhorn-tls-cert

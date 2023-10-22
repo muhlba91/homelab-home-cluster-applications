@@ -1,6 +1,15 @@
 ---
+domain: &domain minio.dev.internal.muehlbachler.io
+consoleDomain: &console_domain console.minio.dev.internal.muehlbachler.io
+
+ingressAnnotations: &ingress_annotations
+  cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+  external-dns.alpha.kubernetes.io/provider: internal
+  traefik.ingress.kubernetes.io/router.tls: "true"
+
 minio:
   image:
+    repository: quay.io/minio/minio
     tag: RELEASE.2023-01-20T02-05-44Z
 
   mode: standalone
@@ -17,9 +26,23 @@ minio:
 
   ingress:
     enabled: true
+    annotations: *ingress_annotations
+    hosts:
+      - *domain
+    tls:
+      - secretName: minio-tls-cert
+        hosts:
+          - *domain
 
   consoleIngress:
     enabled: true
+    annotations: *ingress_annotations
+    hosts:
+      - *console_domain
+    tls:
+      - secretName: minio-console-tls-cert
+        hosts:
+          - *console_domain
 
   policies:
     - name: buildkite-agent

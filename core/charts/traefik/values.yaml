@@ -1,6 +1,10 @@
 ---
 ingress:
-  host: traefik.domain.org
+  host: traefik.dev.internal.muehlbachler.io
+  annotations:
+    cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+    external-dns.alpha.kubernetes.io/provider: internal
+    traefik.ingress.kubernetes.io/router.tls: "true"
 
 traefik:
   fullnameOverride: traefik
@@ -22,9 +26,11 @@ traefik:
       redirectTo: websecure
 
   service:
+    ipFamilyPolicy: PreferDualStack
     spec:
-      ipFamilyPolicy: PreferDualStack
       externalTrafficPolicy: Local
+    annotations:
+      metallb.universe.tf/loadBalancerIPs: "10.0.220.30,2a01:aea0:dd3:25a:f000:21:30"
 
   resources:
     requests:

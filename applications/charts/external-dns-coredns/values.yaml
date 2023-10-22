@@ -13,6 +13,10 @@ external-dns:
 
   logLevel: error
 
+  domainFilters:
+    - internal.muehlbachler.io
+  annotationFilter: external-dns.alpha.kubernetes.io/provider=internal
+
   txtOwnerId: external-dns-dev-coredns
   provider: coredns
   coredns:

@@ -1,0 +1,44 @@
+---
+domain: &domain argocd.internal.muehlbachler.io
+url: &url https://argocd.internal.muehlbachler.io
+
+argo-cd:
+  fullnameOverride: argocd-prod
+
+  server:
+    service:
+      type: ClusterIP
+
+    ingress:
+      enabled: true
+      hosts:
+        - *domain
+      tls:
+        - secretName: argocd-tls-cert
+          hosts:
+            - *domain
+
+  notifications:
+    argocdUrl: *url
+
+    notifiers:
+      service.email.homelab: |
+        username: $email-username
+        password: $email-password
+        host: $email-host
+        port: 587
+        from: $email-from
+        html: true
+    subscriptions:
+      - recipients:
+          - slack:announcements-home-cluster
+        triggers:
+          - on-health-degraded
+          - on-sync-failed
+      - recipients:
+          - slack:announcements-home-cluster
+        triggers:
+          - on-deployed
+          - on-sync-running
+          - on-sync-succeeded
+          - on-sync-status-unknown

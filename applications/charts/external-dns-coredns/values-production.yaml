@@ -1,0 +1,5 @@
+---
+external-dns:
+  txtOwnerId: external-dns-prod-coredns
+
+  interval: 1m

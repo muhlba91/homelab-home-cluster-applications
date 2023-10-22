@@ -1,0 +1,21 @@
+---
+services:
+  # network
+  router-001:
+    domain: router-001.network.internal.muehlbachler.io
+  switch-001:
+    domain: switch-001.network.internal.muehlbachler.io
+  switch-002:
+    domain: switch-002.network.internal.muehlbachler.io
+  omada-controller:
+    domain: omada.network.home.muehlbachler.io
+  # PVE
+  pve:
+    domain: pve.internal.muehlbachler.io
+  pbs:
+    domain: backup.pve.internal.muehlbachler.io
+  # applications
+  fileshare:
+    domain: fileshare.internal.muehlbachler.io
+  influxdb:
+    domain: influxdb.internal.muehlbachler.io

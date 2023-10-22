@@ -1,6 +1,10 @@
 ---
+domain: &domain emqx.dev.iot.internal.muehlbachler.io
+mqttDomain: &mqtt_domain mqtt.dev.iot.internal.muehlbachler.io
+
 service:
-  annotations: {}
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: "10.0.220.20,2a01:aea0:dd3:25a:f000:21:20"
 
 emqx:
   fullnameOverride: emqx
@@ -12,6 +16,16 @@ emqx:
   ingress:
     dashboard:
       enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+        external-dns.alpha.kubernetes.io/provider: internal
+        traefik.ingress.kubernetes.io/router.tls: "true"
+      hosts:
+        - *domain
+      tls:
+        - secretName: home-assistant-emqx-tls-cert
+          hosts:
+            - *domain
 
   persistence:
     enabled: true
@@ -22,7 +36,10 @@ emqx:
   ssl:
     enabled: true
     dnsnames:
-      - emqx.domain.org
+      - *mqtt_domain
+    issuer:
+      name: cluster-issuer-internal-muehlbachler-io
+      kind: ClusterIssuer
 
   resources:
     requests:

@@ -45,6 +45,10 @@ app-template:
       enabled: true
       type: LoadBalancer
       ipFamilyPolicy: PreferDualStack
+      annotations:
+        metallb.universe.tf/loadBalancerIPs: "10.0.220.11,2a01:aea0:dd3:25a:f000:21:11"
+        external-dns.alpha.kubernetes.io/provider: internal
+        external-dns.alpha.kubernetes.io/hostname: ecowitt.dev.iot.internal.muehlbachler.io
       ports:
         http:
           port: 80

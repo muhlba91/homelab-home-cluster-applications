@@ -1,0 +1,11 @@
+---
+domain: &domain grafana.home.muehlbachler.io
+
+grafana:
+  ingress:
+    hosts:
+      - *domain
+    tls:
+      - secretName: grafana-tls-cert
+        hosts:
+          - *domain

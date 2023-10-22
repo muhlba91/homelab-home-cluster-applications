@@ -1,7 +1,7 @@
 ---
 influxdb:
   hostname: home-assistant-telegraf
-  url: http://influxdb.domain.org
+  url: http://influxdb.external-services
   organization: home
   bucket: home-assistant
 

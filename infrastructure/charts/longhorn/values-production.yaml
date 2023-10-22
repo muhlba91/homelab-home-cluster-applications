@@ -1,0 +1,6 @@
+---
+domain: &domain longhorn.internal.muehlbachler.io
+
+longhorn:
+  ingress:
+    host: *domain

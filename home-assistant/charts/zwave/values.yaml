@@ -1,4 +1,6 @@
 ---
+domain: &domain zwave.dev.iot.internal.muehlbachler.io
+
 app-template:
   global:
     fullnameOverride: zwave-js
@@ -90,6 +92,22 @@ app-template:
   ingress:
     main:
       enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+        external-dns.alpha.kubernetes.io/provider: internal
+        traefik.ingress.kubernetes.io/router.tls: "true"
+      hosts:
+        - host: *domain
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+              service:
+                name: zwave-js
+                port: 8091
+      tls:
+        - secretName: home-assistant-zwave-tls-cert
+          hosts:
+            - *domain
 
   persistence:
     config:

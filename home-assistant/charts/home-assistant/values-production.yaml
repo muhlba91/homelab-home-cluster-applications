@@ -1,0 +1,18 @@
+---
+domain: &domain manage.iot.home.muehlbachler.io
+
+app-template:
+  ingress:
+    main:
+      hosts:
+        - host: *domain
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+              service:
+                name: home-assistant
+                port: 8123
+      tls:
+        - secretName: home-assistant-home-assistant-tls-cert
+          hosts:
+            - *domain

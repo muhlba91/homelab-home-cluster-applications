@@ -1,5 +1,5 @@
 ---
-gitRepo: repo.com/config.git
+gitRepo: https://github.com/muhlba91/homelab-ring-mqtt-configuration.git
 
 app-template:
   global:

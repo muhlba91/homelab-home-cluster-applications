@@ -13,10 +13,15 @@ external-dns:
 
   logLevel: error
 
+  domainFilters:
+    - home.muehlbachler.io
+  annotationFilter: external-dns.alpha.kubernetes.io/provider=public
+
   txtOwnerId: external-dns-dev-google
   provider: google
   google:
     serviceAccountSecret: external-dns-google
+    project: tuxnet-385112
 
   resources:
     requests:

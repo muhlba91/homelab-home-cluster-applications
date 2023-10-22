@@ -1,6 +1,7 @@
 ---
 service:
-  annotations: {}
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: "10.0.220.1,2a01:aea0:dd3:25a:f000:21:1"
 
 etcd:
   fullnameOverride: etcd
@@ -40,6 +41,35 @@ coredns:
     create: true
 
   isClusterService: false
+
+  servers:
+    - zones:
+        - zone: .
+      port: 53
+      plugins:
+        - name: errors
+        - name: health
+          configBlock: |-
+            lameduck 5s
+        - name: ready
+        - name: prometheus
+          parameters: 0.0.0.0:9153
+        - name: forward
+          parameters: . tls://1.1.1.1 tls://1.0.0.1 tls://2606:4700:4700::1111 tls://2606:4700:4700::1001
+          configBlock: |
+            tls_servername cloudflare-dns.com
+            except internal.muehlbachler.io
+        - name: cache
+          parameters: 3600
+        - name: loop
+        - name: reload
+        - name: loadbalance
+        - name: etcd
+          parameters: internal.muehlbachler.io
+          configBlock: |
+            stubzones
+            path /skydns
+            endpoint http://etcd:2379
 
   livenessProbe:
     initialDelaySeconds: 5

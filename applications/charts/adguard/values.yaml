@@ -1,8 +1,11 @@
 ---
-adminPassword: hashed-password
+domain: &domain adguard.dev.internal.muehlbachler.io
+
+# TODO: can we push this in differently?
+adminPassword: "$2a$10$9mrdK.OJpEL.89.OTbi9C.5wSGOEKOdVLakFEdSsV.iUkNSFGvtWC"
 upstreamDns:
-  ipv4: "1.1.1.1"
-  ipv6: "2606:4700:4700::1111"
+  ipv4: "10.0.220.1"
+  ipv6: "2a01:aea0:dd3:25a:f000:21:1"
 exclusions:
   - apps.apple.com
   - itunes.apple.com
@@ -88,6 +91,8 @@ app-template:
       ipFamilyPolicy: PreferDualStack
       type: LoadBalancer
       externalTrafficPolicy: Local
+      annotations:
+        metallb.universe.tf/loadBalancerIPs: "10.0.220.10,2a01:aea0:dd3:25a:f000:21:10"
       ports:
         dns-tcp:
           enabled: true
@@ -102,7 +107,22 @@ app-template:
 
   ingress:
     main:
-      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+        external-dns.alpha.kubernetes.io/provider: internal
+        traefik.ingress.kubernetes.io/router.tls: "true"
+      hosts:
+        - host: *domain
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+              service:
+                name: adguard-home
+                port: 3000
+      tls:
+        - secretName: adguard-tls-cert
+          hosts:
+            - *domain
 
   persistence:
     config:

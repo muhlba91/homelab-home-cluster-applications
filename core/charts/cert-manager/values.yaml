@@ -1,8 +1,14 @@
 ---
-zones: {}
+tuxnetProject: &tuxnet_project tuxnet-385112
+
+zones:
+  home.muehlbachler.io:
+    project: *tuxnet_project
+  internal.muehlbachler.io:
+    project: *tuxnet_project
 
 acme:
-  email: "email@domain.org"
+  email: "noreply@muehlbachler.xyz"
 
 cert-manager:
   installCRDs: true

@@ -1,0 +1,18 @@
+---
+domain: &domain zwave.iot.internal.muehlbachler.io
+
+app-template:
+  ingress:
+    main:
+      hosts:
+        - host: *domain
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+              service:
+                name: zwave-js
+                port: 8091
+      tls:
+        - secretName: home-assistant-zwave-tls-cert
+          hosts:
+            - *domain

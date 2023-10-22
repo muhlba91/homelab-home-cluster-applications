@@ -1,0 +1,5 @@
+---
+external-dns:
+  txtOwnerId: external-dns-prod-google
+
+  interval: 2m

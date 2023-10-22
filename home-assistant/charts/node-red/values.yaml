@@ -75,11 +75,11 @@ packages:
   - name: node-red-contrib-uspatata-influxdb-v2
     version: 1.0.6
 
-domain: node-red.domain.org
+domain: &domain node-red.dev.iot.internal.muehlbachler.io
 
 oidcUserProperty: preferred_username
 adminUsers:
-  - user
+  - daniel
 
 projectsEnabled: &projectsEnabled "false"
 
@@ -230,6 +230,22 @@ app-template:
   ingress:
     main:
       enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+        external-dns.alpha.kubernetes.io/provider: internal
+        traefik.ingress.kubernetes.io/router.tls: "true"
+      hosts:
+        - host: *domain
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+              service:
+                name: node-red
+                port: 1880
+      tls:
+        - secretName: home-assistant-node-red-tls-cert
+          hosts:
+            - *domain
 
   persistence:
     data:

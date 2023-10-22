@@ -1,4 +1,7 @@
 ---
+domain: &domain argocd.dev.internal.muehlbachler.io
+url: &url https://argocd.dev.internal.muehlbachler.io
+
 argo-cd:
   fullnameOverride: argocd-dev
 
@@ -33,6 +36,16 @@ argo-cd:
 
     ingress:
       enabled: false
+      annotations:
+        cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+        external-dns.alpha.kubernetes.io/provider: internal
+        traefik.ingress.kubernetes.io/router.tls: "true"
+      hosts:
+        - *domain
+      tls:
+        - secretName: argocd-tls-cert
+          hosts:
+            - *domain
 
     resources:
       requests:
@@ -132,6 +145,8 @@ argo-cd:
         memory: 96Mi
 
   notifications:
+    argocdUrl: *url
+
     secret:
       create: true
     cm:

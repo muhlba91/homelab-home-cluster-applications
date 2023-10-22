@@ -1,0 +1,25 @@
+---
+domain: &domain emqx.iot.internal.muehlbachler.io
+mqttDomain: &mqtt_domain mqtt.iot.internal.muehlbachler.io
+
+service:
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: "10.0.73.1,2a01:aea0:dd3:25a:1000:3:4:1"
+
+emqx:
+  ingress:
+    dashboard:
+      hosts:
+        - *domain
+      tls:
+        - secretName: home-assistant-mqtt-tls-cert
+          hosts:
+            - *domain
+
+  ssl:
+    enabled: true
+    dnsnames:
+      - *mqtt_domain
+    issuer:
+      name: cluster-issuer-internal-muehlbachler-io
+      kind: ClusterIssuer
