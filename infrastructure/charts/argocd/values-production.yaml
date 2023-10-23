@@ -39,6 +39,4 @@ argo-cd:
           - slack:announcements-home-cluster
         triggers:
           - on-deployed
-          - on-sync-running
-          - on-sync-succeeded
           - on-sync-status-unknown

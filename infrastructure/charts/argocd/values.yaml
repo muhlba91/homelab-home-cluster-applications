@@ -416,17 +416,6 @@ argo-cd:
           send:
           - app-sync-succeeded
           when: app.status.operationState.phase in ['Succeeded']
-      defaultTriggers: |
-        - on-health-degraded
-        - on-sync-failed
-        - on-sync-status-unknown
-      defaultTriggers.slack: |
-        - on-deployed
-        - on-health-degraded
-        - on-sync-failed
-        - on-sync-running
-        - on-sync-status-unknown
-        - on-sync-succeeded
     resources:
       requests:
         cpu: 5m
