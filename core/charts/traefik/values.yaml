@@ -23,7 +23,8 @@ traefik:
     traefik:
       expose: true
     web:
-      redirectTo: websecure
+      redirectTo:
+        port: websecure
 
   service:
     ipFamilyPolicy: PreferDualStack
