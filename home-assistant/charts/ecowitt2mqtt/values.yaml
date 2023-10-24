@@ -31,8 +31,8 @@ app-template:
               cpu: 5m
               memory: 48Mi
             limits:
-              cpu: 200m
-              memory: 96Mi
+              cpu: 100m
+              memory: 64Mi
 
   serviceAccount:
     create: true

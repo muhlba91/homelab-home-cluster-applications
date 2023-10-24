@@ -34,11 +34,11 @@ app-template:
 
           resources:
             requests:
-              cpu: 5m
-              memory: 128Mi
+              cpu: 3m
+              memory: 80Mi
             limits:
               cpu: 100m
-              memory: 256Mi
+              memory: 128Mi
 
       initContainers:
         backup-restore:

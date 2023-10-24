@@ -27,11 +27,11 @@ etcd:
 
   resources:
     requests:
-      cpu: 20m
+      cpu: 15m
       memory: 112Mi
     limits:
-      cpu: 100m
-      memory: 160Mi
+      cpu: 150m
+      memory: 176Mi
 
 coredns:
   global:
@@ -79,8 +79,8 @@ coredns:
 
   resources:
     requests:
-      cpu: 10m
+      cpu: 5m
       memory: 80Mi
     limits:
       cpu: 50m
-      memory: 160Mi
+      memory: 144Mi
