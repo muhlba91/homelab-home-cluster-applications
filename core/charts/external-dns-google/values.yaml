@@ -11,7 +11,7 @@ external-dns:
 
   interval: 5m
 
-  logLevel: error
+  logLevel: info
 
   domainFilters:
     - home.muehlbachler.io
