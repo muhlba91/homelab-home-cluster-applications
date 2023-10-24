@@ -11,6 +11,8 @@ external-dns:
 
   interval: 5m
 
+  logLevel: error
+
   domainFilters:
     - muehlbachler.io
   annotationFilter: external-dns.alpha.kubernetes.io/provider=public
