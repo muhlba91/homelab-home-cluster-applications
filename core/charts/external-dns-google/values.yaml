@@ -11,11 +11,7 @@ external-dns:
 
   interval: 5m
 
-  logLevel: info
-
   domainFilters:
-    - home.muehlbachler.io
-  zoneNameFilters:
     - muehlbachler.io
   annotationFilter: external-dns.alpha.kubernetes.io/provider=public
 
