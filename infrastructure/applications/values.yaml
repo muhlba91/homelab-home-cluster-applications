@@ -75,11 +75,11 @@ applications:
     namespace: longhorn-system
     helm: true
     syncWave: -250
-  csi-nfs-driver:
-    project: "infrastructure-{{ $.Values.global.projectEnvironment }}"
-    path: infrastructure/charts/csi-nfs-driver
-    releaseName: csi-nfs-driver
-    disabled: false
-    namespace: csi-nfs-driver
-    helm: true
-    syncWave: -150
+  # csi-nfs-driver:
+  #   project: "infrastructure-{{ $.Values.global.projectEnvironment }}"
+  #   path: infrastructure/charts/csi-nfs-driver
+  #   releaseName: csi-nfs-driver
+  #   disabled: false
+  #   namespace: csi-nfs-driver
+  #   helm: true
+  #   syncWave: -150

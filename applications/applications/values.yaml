@@ -56,13 +56,13 @@ applications:
     disabled: false
     namespace: grafana
     helm: true
-  minio:
-    project: "applications-{{ $.Values.global.projectEnvironment }}"
-    path: applications/charts/minio
-    releaseName: minio
-    disabled: false
-    namespace: minio
-    helm: true
+  # minio:
+  #   project: "applications-{{ $.Values.global.projectEnvironment }}"
+  #   path: applications/charts/minio
+  #   releaseName: minio
+  #   disabled: false
+  #   namespace: minio
+  #   helm: true
   external-services:
     project: "applications-{{ $.Values.global.projectEnvironment }}"
     path: applications/charts/external-services
