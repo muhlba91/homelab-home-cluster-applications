@@ -19,7 +19,7 @@ app-template:
           image:
             repository: telegraf
             pullPolicy: IfNotPresent
-            tag: 1.28.2
+            tag: 1.28.3
 
           envFrom:
             - secretRef:
