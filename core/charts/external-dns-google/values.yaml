@@ -15,7 +15,7 @@ external-dns:
 
   domainFilters:
     - home.muehlbachler.io
-  zoneIdFilters:
+  zoneNameFilters:
     - muehlbachler.io
   annotationFilter: external-dns.alpha.kubernetes.io/provider=public
 
