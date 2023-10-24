@@ -1,11 +1,14 @@
 ---
-tuxnetProject: &tuxnet_project tuxnet-385112
+dnsProject: &dns_project muehlbachler-dns
+dnsHostedZoneName: &hosted_zone_name muehlbachler-io
 
 zones:
   home.muehlbachler.io:
-    project: *tuxnet_project
+    project: *dns_project
+    hostedZoneName: *hosted_zone_name
   internal.muehlbachler.io:
-    project: *tuxnet_project
+    project: *dns_project
+    hostedZoneName: *hosted_zone_name
 
 acme:
   email: "noreply@muehlbachler.xyz"

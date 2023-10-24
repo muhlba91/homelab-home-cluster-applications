@@ -17,6 +17,7 @@ spec:
         dns01:
           cloudDNS:
             project: {{ $v.project }}
+            hostedZoneName: ${{ $v.hostedZoneName }}
             serviceAccountSecretRef:
               key: credentials.json
               name: cert-manager-google

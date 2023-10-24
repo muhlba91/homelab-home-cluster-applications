@@ -21,7 +21,7 @@ external-dns:
   provider: google
   google:
     serviceAccountSecret: external-dns-google
-    project: tuxnet-385112
+    project: muehlbachler-dns
 
   resources:
     requests:
