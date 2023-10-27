@@ -1,0 +1,31 @@
+---
+image:
+  registry: registry.k8s.io
+  repository: external-dns/external-dns
+  tag: v0.13.6
+
+sources:
+  - service
+  - ingress
+
+interval: 2m
+
+logLevel: error
+
+domainFilters:
+  - muehlbachler.io
+annotationFilter: external-dns.alpha.kubernetes.io/provider=public
+
+txtOwnerId: external-dns-prod-google
+provider: google
+google:
+  serviceAccountSecret: external-dns-google
+  project: muehlbachler-dns
+
+resources:
+  requests:
+    cpu: 3m
+    memory: 32Mi
+  limits:
+    cpu: 30m
+    memory: 64Mi

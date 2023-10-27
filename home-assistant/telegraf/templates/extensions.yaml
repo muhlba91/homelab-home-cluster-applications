@@ -1,0 +1,12 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: home-assistant-telegraf-extensions
+spec:
+  targetNamespace: home-assistant-telegraf
+  sourceRef:
+    kind: GitRepository
+    name: cluster-applications
+  path: ./applications/home-assistant/telegraf/extensions/
+  wait: true

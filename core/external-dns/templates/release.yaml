@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: external-dns
+spec:
+  releaseName: external-dns
+  targetNamespace: external-dns
+  chart:
+    spec:
+      chart: external-dns
+      version: 6.27.0
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: external-dns
+        namespace: flux-system
+  valuesFrom:
+    - kind: ConfigMap
+      name: external-dns-values
+      valuesKey: values.yaml

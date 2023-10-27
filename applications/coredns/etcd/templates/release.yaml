@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: coredns-etcd
+spec:
+  releaseName: coredns-etcd
+  targetNamespace: coredns
+  chart:
+    spec:
+      chart: etcd
+      version: 9.5.6
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: coredns-etcd
+        namespace: flux-system
+  valuesFrom:
+    - kind: ConfigMap
+      name: coredns-etcd-values
+      valuesKey: values.yaml

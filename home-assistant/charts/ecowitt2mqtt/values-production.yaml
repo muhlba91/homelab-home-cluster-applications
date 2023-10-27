@@ -1,8 +1,0 @@
----
-app-template:
-  service:
-    main:
-      annotations:
-        metallb.universe.tf/loadBalancerIPs: "10.0.73.10,2a01:aea0:dd3:25a:1000:3:4:10"
-        external-dns.alpha.kubernetes.io/provider: internal
-        external-dns.alpha.kubernetes.io/hostname: ecowitt.iot.internal.muehlbachler.io

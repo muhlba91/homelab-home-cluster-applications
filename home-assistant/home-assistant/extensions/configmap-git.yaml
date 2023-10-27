@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: home-assistant-git
+data:
+  GIT_REPO: "https://github.com/muhlba91/homelab-home-assistant-configuration.git"

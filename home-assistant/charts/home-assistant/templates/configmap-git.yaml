@@ -1,7 +1,0 @@
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: home-assistant-git
-data:
-  GIT_REPO: "{{ .Values.gitRepo }}"

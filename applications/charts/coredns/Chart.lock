@@ -1,9 +1,0 @@
-dependencies:
-- name: etcd
-  repository: https://charts.bitnami.com/bitnami
-  version: 9.5.6
-- name: coredns
-  repository: https://coredns.github.io/helm
-  version: 1.27.1
-digest: sha256:40ab5c84f91b5753475830e81eedade901443c275305599a6bb0db1d5dc9a564
-generated: "2023-10-12T17:05:26.896488316Z"

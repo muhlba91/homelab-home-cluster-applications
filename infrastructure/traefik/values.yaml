@@ -1,0 +1,36 @@
+---
+fullnameOverride: traefik
+
+providers:
+  kubernetesCRD:
+    allowExternalNameServices: true
+    allowEmptyServices: true
+  kubernetesIngress:
+    allowExternalNameServices: true
+    allowEmptyServices: true
+    publishedService:
+      enabled: true
+
+additionalArguments:
+  - "--serversTransport.insecureSkipVerify=true"
+
+ports:
+  traefik:
+    expose: true
+  web:
+    redirectTo:
+      port: websecure
+
+service:
+  ipFamilyPolicy: PreferDualStack
+  externalTrafficPolicy: Local
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: "10.0.72.1,2a01:aea0:dd3:25a:1000:3:3:1"
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 96Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi

@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: adguard
+spec:
+  releaseName: adguard
+  targetNamespace: adguard
+  chart:
+    spec:
+      chart: app-template
+      version: 2.0.3
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: adguard
+        namespace: flux-system
+  valuesFrom:
+    - kind: ConfigMap
+      name: adguard-values
+      valuesKey: values.yaml

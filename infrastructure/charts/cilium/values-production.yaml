@@ -1,3 +1,0 @@
----
-cilium:
-  k8sServiceHost: 10.0.79.1

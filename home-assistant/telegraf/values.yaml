@@ -1,0 +1,106 @@
+---
+global:
+  fullnameOverride: telegraf
+
+controllers:
+  main:
+    type: deployment
+    containers:
+      main:
+        image:
+          repository: telegraf
+          pullPolicy: IfNotPresent
+          tag: 1.28.3
+
+        envFrom:
+          - secretRef:
+              name: telegraf-remote-token
+          - secretRef:
+              name: telegraf-plugin-kinesis-firehose
+
+        resources:
+          requests:
+            cpu: 5m
+            memory: 96Mi
+          limits:
+            cpu: 50m
+            memory: 128Mi
+
+    initContainers:
+      plugins:
+        image:
+          repository: alpine
+          tag: 3.18
+          pullPolicy: IfNotPresent
+        command:
+          - /scripts/plugins.sh
+        resources:
+          requests:
+            cpu: 10m
+            memory: 64Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
+      grafana:
+        image:
+          repository: bitnami/kubectl
+          tag: 1.28
+          pullPolicy: IfNotPresent
+        command:
+          - /scripts/grafana.sh
+        envFrom:
+          - secretRef:
+              name: grafana-datasource-secrets
+        resources:
+          requests:
+            cpu: 10m
+            memory: 64Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
+
+serviceAccount:
+  create: true
+
+service:
+  main:
+    ipFamilyPolicy: PreferDualStack
+    ports:
+      http:
+        port: 8086
+
+persistence:
+  config:
+    enabled: true
+    type: configMap
+    name: telegraf-config
+    defaultMode: 420
+    globalMounts:
+      - path: /etc/telegraf/telegraf.conf
+        subPath: telegraf.conf
+  plugins:
+    enabled: true
+    type: emptyDir
+    globalMounts:
+      - path: /plugins/bin
+  plugin-configuration:
+    enabled: true
+    type: configMap
+    name: telegraf-plugin-config
+    defaultMode: 420
+    globalMounts:
+      - path: /plugins/config
+  scripts:
+    enabled: true
+    type: configMap
+    name: telegraf-scripts
+    defaultMode: 511
+  grafana-datasources:
+    enabled: true
+    type: configMap
+    name: grafana-datasources
+    defaultMode: 511
+    advancedMounts:
+      main:
+        grafana:
+          - path: /grafana-datasources

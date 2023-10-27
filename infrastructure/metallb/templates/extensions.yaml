@@ -1,0 +1,12 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: metallb-extensions
+spec:
+  targetNamespace: metallb-system
+  sourceRef:
+    kind: GitRepository
+    name: cluster-applications
+  path: ./infrastructure/metallb/extensions/
+  wait: false

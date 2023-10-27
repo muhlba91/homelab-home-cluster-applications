@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ring-mqtt-git
+data:
+  GIT_REPO: "https://github.com/muhlba91/homelab-ring-mqtt-configuration.git"

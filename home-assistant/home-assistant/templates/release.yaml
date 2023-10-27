@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: home-assistant-home-assistant
+spec:
+  releaseName: home-assistant-home-assistant
+  targetNamespace: home-assistant-home-assistant
+  chart:
+    spec:
+      chart: app-template
+      version: 2.0.3
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: home-assistant-home-assistant
+        namespace: flux-system
+  valuesFrom:
+    - kind: ConfigMap
+      name: home-assistant-home-assistant-values
+      valuesKey: values.yaml

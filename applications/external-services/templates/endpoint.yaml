@@ -1,0 +1,101 @@
+# network
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: router-001
+subsets:
+  - addresses:
+      - ip: 10.0.0.1
+    ports:
+      - name: http
+        port: 443
+        protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: switch-001
+subsets:
+  - addresses:
+      - ip: 10.0.10.1
+    ports:
+      - name: http
+        port: 80
+        protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: switch-002
+subsets:
+  - addresses:
+      - ip: 10.0.10.11
+    ports:
+      - name: http
+        port: 443
+        protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: omada-controller
+subsets:
+  - addresses:
+      - ip: 10.0.21.1
+    ports:
+      - name: http
+        port: 443
+        protocol: TCP
+
+# PVE
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: pve
+subsets:
+  - addresses:
+      - ip: 10.0.50.10
+    ports:
+      - name: http
+        port: 8006
+        protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: pbs
+subsets:
+  - addresses:
+      - ip: 10.0.51.1
+    ports:
+      - name: http
+        port: 8007
+        protocol: TCP
+
+# applications
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: fileshare
+subsets:
+  - addresses:
+      - ip: 10.0.55.1
+    ports:
+      - name: http
+        port: 443
+        protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: influxdb
+subsets:
+  - addresses:
+      - ip: 10.0.55.1
+    ports:
+      - name: http
+        port: 8086
+        protocol: TCP

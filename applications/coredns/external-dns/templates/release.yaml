@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: coredns-external-dns
+spec:
+  releaseName: coredns-external-dns
+  targetNamespace: coredns
+  chart:
+    spec:
+      chart: external-dns
+      version: 6.27.0
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: coredns-external-dns
+        namespace: flux-system
+  valuesFrom:
+    - kind: ConfigMap
+      name: coredns-external-dns-values
+      valuesKey: values.yaml

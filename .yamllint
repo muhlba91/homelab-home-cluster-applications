@@ -1,0 +1,14 @@
+---
+extends: default
+
+ignore:
+  - secret-*.enc.yml
+
+rules:
+  line-length:
+    max: 300
+  comments:
+    min-spaces-from-content: 1
+  truthy:
+    ignore:
+      - .github/

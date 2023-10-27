@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: home-assistant-node-red
+spec:
+  releaseName: home-assistant-node-red
+  targetNamespace: home-assistant-node-red
+  chart:
+    spec:
+      chart: app-template
+      version: 2.0.3
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: home-assistant-node-red
+        namespace: flux-system
+  valuesFrom:
+    - kind: ConfigMap
+      name: home-assistant-node-red-values
+      valuesKey: values.yaml

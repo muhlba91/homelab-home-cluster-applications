@@ -1,0 +1,9 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: home-assistant-ring-mqtt
+resources:
+  - ./configmap-git.yaml
+  - ./configmap-scripts.yaml
+  - ./external-secret-backup.yaml
+  - ./external-secret-gcp.yaml

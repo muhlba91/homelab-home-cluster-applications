@@ -33,3 +33,4 @@ TODO.md
 !**/secret-*.enc.yml
 !**/secret-generator.yaml
 !**/secret-generator.yml
+local.env

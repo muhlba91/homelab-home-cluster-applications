@@ -1,0 +1,12 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: grafana-extensions
+spec:
+  targetNamespace: grafana
+  sourceRef:
+    kind: GitRepository
+    name: cluster-applications
+  path: ./applications/grafana/extensions/
+  wait: true

@@ -1,7 +1,0 @@
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: ring-mqtt-git
-data:
-  GIT_REPO: "{{ .Values.gitRepo }}"

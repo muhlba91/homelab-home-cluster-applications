@@ -1,7 +1,0 @@
----
-dns:
-  ipv4: 10.0.71.10
-  ipv6: 2a01:aea0:dd3:25a:1000:3:2:10
-
-app-template:
-  hostNetwork: true

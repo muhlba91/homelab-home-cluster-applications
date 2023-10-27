@@ -3,7 +3,7 @@
     "extends": [
         "config:base",
         ":dependencyDashboard",
-	":semanticCommitTypeAll(chore)"
+        ":semanticCommitTypeAll(chore)"
     ],
     "prHourlyLimit": 0,
     "prConcurrentLimit": 0,
@@ -13,6 +13,7 @@
     "enabledManagers": [
         "helm-values",
         "helmv3",
+        "flux",
         "github-actions"
     ],
     "helm-values": {
@@ -24,6 +25,14 @@
     "helmv3": {
         "fileMatch": [
             "(^|/)Chart\\.yaml$"
+        ]
+    },
+    "flux": {
+        "fileMatch": [
+            "(^|/)cluster/.+\\.ya?ml$",
+            "(^|/)applications/.+\\.ya?ml$",
+            "(^|/)core/.+\\.ya?ml$",
+            "(^|/)infrastructure/.+\\.ya?ml$"
         ]
     },
     "github-actions": {

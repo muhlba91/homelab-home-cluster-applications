@@ -1,8 +1,0 @@
----
-ingress:
-  host: traefik.internal.muehlbachler.io
-
-traefik:
-  service:
-    annotations:
-      metallb.universe.tf/loadBalancerIPs: "10.0.72.1,2a01:aea0:dd3:25a:1000:3:3:1"

@@ -1,0 +1,54 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: telegraf-config
+data:
+  telegraf.conf: |
+    [agent]
+      hostname = "home-assistant-telegraf"
+      omit_hostname = true
+      metric_batch_size = 500
+      metric_buffer_limit = 5000
+      flush_interval = "30s"
+      flush_jitter = "15s"
+
+    [global_tags]
+      environment = "prod"
+
+    [[inputs.influxdb_v2_listener]]
+      service_address = ":8086"
+
+    [[processors.date]]
+      tag_key = "year"
+      date_format = "2006"
+      timezone = "UTC"
+
+    [[processors.date]]
+      tag_key = "month"
+      date_format = "01"
+      timezone = "UTC"
+
+    [[processors.date]]
+      tag_key = "day"
+      date_format = "02"
+      timezone = "UTC"
+
+    [[outputs.influxdb_v2]]
+      urls = [ "http://influxdb.external-services" ]
+      organization = "home"
+      bucket = "home-assistant"
+      token = "${TELEGRAF_REMOTE_TOKEN}"
+
+    [[outputs.file]]
+      files = [ "/tmp/metrics.txt" ]
+      rotation_max_size = "5MB"
+      rotation_max_archives = 2
+      data_format = "json"
+      json_timestamp_units = "1ms"
+
+    [[outputs.execd]]
+      command = [ "/plugins/bin/firehose/telegraf-output-kinesis-data-firehose", "-config", "/plugins/config/firehose.conf" ]
+      restart_delay = "10s"
+      ignore_serialization_error = true
+      data_format = "influx"

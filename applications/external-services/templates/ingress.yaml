@@ -1,0 +1,206 @@
+# network
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: &name router-001
+  annotations:
+    cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+    external-dns.alpha.kubernetes.io/provider: internal
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  rules:
+    - host: &domain router-001.network.internal.muehlbachler.io
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: *name
+                port:
+                  number: 80
+  tls:
+    - secretName: router-001-tls-cert
+      hosts:
+        - *domain
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: &name switch-001
+  annotations:
+    cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+    external-dns.alpha.kubernetes.io/provider: internal
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  rules:
+    - host: &domain switch-001.network.internal.muehlbachler.io
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: *name
+                port:
+                  number: 80
+  tls:
+    - secretName: switch-001-tls-cert
+      hosts:
+        - *domain
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: &name switch-002
+  annotations:
+    cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+    external-dns.alpha.kubernetes.io/provider: internal
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  rules:
+    - host: &domain switch-002.network.internal.muehlbachler.io
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: *name
+                port:
+                  number: 80
+  tls:
+    - secretName: switch-002-tls-cert
+      hosts:
+        - *domain
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: &name omada-controller
+  annotations:
+    cert-manager.io/cluster-issuer: cluster-issuer-home-muehlbachler-io
+    external-dns.alpha.kubernetes.io/provider: public
+    external-dns.alpha.kubernetes.io/target: 144.208.195.224,2a01:aea0:dd3:25a:1000:3:3:1
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  rules:
+    - host: &domain omada.network.home.muehlbachler.io
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: *name
+                port:
+                  number: 80
+  tls:
+    - secretName: omada-controller-tls-cert
+      hosts:
+        - *domain
+
+# PVE
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: &name pve
+  annotations:
+    cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+    external-dns.alpha.kubernetes.io/provider: internal
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  rules:
+    - host: &domain pve.internal.muehlbachler.io
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: *name
+                port:
+                  number: 80
+  tls:
+    - secretName: pve-tls-cert
+      hosts:
+        - *domain
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: &name pbs
+  annotations:
+    cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+    external-dns.alpha.kubernetes.io/provider: internal
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  rules:
+    - host: &domain backup.pve.internal.muehlbachler.io
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: *name
+                port:
+                  number: 80
+  tls:
+    - secretName: pbs-tls-cert
+      hosts:
+        - *domain
+
+# applications
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: &name fileshare
+  annotations:
+    cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+    external-dns.alpha.kubernetes.io/provider: internal
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  rules:
+    - host: &domain fileshare.internal.muehlbachler.io
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: *name
+                port:
+                  number: 80
+  tls:
+    - secretName: fileshare-tls-cert
+      hosts:
+        - *domain
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: &name influxdb
+  annotations:
+    cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+    external-dns.alpha.kubernetes.io/provider: internal
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  rules:
+    - host: &domain influxdb.internal.muehlbachler.io
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: *name
+                port:
+                  number: 80
+  tls:
+    - secretName: influxdb-tls-cert
+      hosts:
+        - *domain

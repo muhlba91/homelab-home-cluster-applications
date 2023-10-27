@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: coredns
+spec:
+  releaseName: coredns
+  targetNamespace: coredns
+  chart:
+    spec:
+      chart: coredns
+      version: 1.27.1
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: coredns
+        namespace: flux-system
+  valuesFrom:
+    - kind: ConfigMap
+      name: coredns-values
+      valuesKey: values.yaml
