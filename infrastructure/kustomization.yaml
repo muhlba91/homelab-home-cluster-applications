@@ -6,5 +6,5 @@ resources:
   - ./cilium/
   - ./longhorn/
   - ./metallb/
+  - ./traefik/
   # - ./external-secrets/
-  # - ./traefik/
