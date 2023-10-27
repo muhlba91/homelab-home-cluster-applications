@@ -5,7 +5,7 @@ metadata:
   name: longhorn
 spec:
   releaseName: longhorn
-  targetNamespace: longhorn
+  targetNamespace: longhorn-system
   chart:
     spec:
       chart: longhorn
