@@ -7,4 +7,4 @@ resources:
   - ./longhorn/
   - ./metallb/
   - ./traefik/
-  # - ./external-secrets/
+  - ./external-secrets/
