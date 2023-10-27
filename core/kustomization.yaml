@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - ./external-dns/
-  # - ./cert-manager/
+  - ./cert-manager/
