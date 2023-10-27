@@ -13,7 +13,7 @@ spec:
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: dnsmasq
+        name: bjw-s
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap

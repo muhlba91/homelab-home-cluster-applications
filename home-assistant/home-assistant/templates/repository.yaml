@@ -1,8 +1,0 @@
----
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: home-assistant-home-assistant
-  namespace: flux-system
-spec:
-  url: https://bjw-s.github.io/helm-charts

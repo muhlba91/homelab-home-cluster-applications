@@ -13,7 +13,7 @@ spec:
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: home-assistant-zwave
+        name: bjw-s
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap

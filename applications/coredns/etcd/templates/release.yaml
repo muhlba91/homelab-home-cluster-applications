@@ -13,7 +13,7 @@ spec:
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: coredns-etcd
+        name: bitnami
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap

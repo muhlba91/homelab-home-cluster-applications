@@ -34,3 +34,4 @@ TODO.md
 !**/secret-generator.yaml
 !**/secret-generator.yml
 local.env
+.vscode/
