@@ -5,6 +5,6 @@ namespace: flux-system
 resources:
   - ./cilium/
   - ./longhorn/
+  - ./metallb/
   # - ./external-secrets/
-  # - ./metallb/
   # - ./traefik/

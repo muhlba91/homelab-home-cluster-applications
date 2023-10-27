@@ -5,4 +5,4 @@ metadata:
   name: metallb
   namespace: flux-system
 spec:
-  url: https://helm.traefik.io/traefik
+  url: https://metallb.github.io/metallb
