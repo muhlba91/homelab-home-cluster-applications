@@ -3,112 +3,111 @@ global:
   oidc:
     autoLogin: false
 
-grafana:
-  useStatefulSet: true
+useStatefulSet: true
 
-  rbac:
-    create: true
+rbac:
+  create: true
 
-  serviceAccount:
-    create: true
+serviceAccount:
+  create: true
 
-  testFramework:
-    enabled: false
+testFramework:
+  enabled: false
 
-  deploymentStrategy:
-    type: Recreate
+deploymentStrategy:
+  type: Recreate
 
-  envFromSecrets:
-    - name: grafana-oidc
+envFromSecrets:
+  - name: grafana-oidc
 
-  ingress:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: cluster-issuer-home-muehlbachler-io
-      external-dns.alpha.kubernetes.io/provider: public
-      external-dns.alpha.kubernetes.io/target: 144.208.195.224,2a01:aea0:dd3:25a:1000:3:3:1
-      traefik.ingress.kubernetes.io/router.tls: "true"
-    hosts:
-      - &domain grafana.home.muehlbachler.io
-    tls:
-      - secretName: grafana-tls-cert
-        hosts:
-          - *domain
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/cluster-issuer: cluster-issuer-home-muehlbachler-io
+    external-dns.alpha.kubernetes.io/provider: public
+    external-dns.alpha.kubernetes.io/target: 144.208.195.224,2a01:aea0:dd3:25a:1000:3:3:1
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  hosts:
+    - &domain grafana.home.muehlbachler.io
+  tls:
+    - secretName: grafana-tls-cert
+      hosts:
+        - *domain
 
-  persistence:
-    enabled: true
-    type: statefulset
-    storageClassName: longhorn
-    size: 1Gi
+persistence:
+  enabled: true
+  type: statefulset
+  storageClassName: longhorn
+  size: 1Gi
 
-  initChownData:
-    resources:
-      requests:
-        cpu: 10m
-        memory: 16Mi
-      limits:
-        cpu: 100m
-        memory: 32Mi
-
-  admin:
-    existingSecret: grafana-admin
-    userKey: user
-    passwordKey: password
-
-  grafana.ini:
-    auth:
-      signout_redirect_url: "${OIDC_SIGNOUT_URL}"
-      oauth_auto_login: "false"
-    server:
-      root_url: "https://grafana.home.muehlbachler.io"
-    auth.generic_oauth:
-      enabled: true
-      allow_sign_up: true
-      allow_assign_grafana_admin: true
-      verbose_logging: false
-      name: Tuxnet
-      icon: cloud
-      scopes: openid email profile
-      auth_url: "${OIDC_AUTHZ_URL}"
-      token_url: "${OIDC_TOKEN_URL}"
-      api_url: "${OIDC_USER_INFO_URL}"
-      client_id: "${OIDC_CLIENT_ID}"
-      client_secret: "${OIDC_CLIENT_SECRET}"
-      # allowed_groups: ["sysadmin"]
-      role_attribute_path: "contains(groups[*], 'sysadmin') && 'GrafanaAdmin' || 'Viewer'"
-
-  plugins:
-    - grafana-athena-datasource
-
-  sidecar:
-    resources:
-      requests:
-        cpu: 5m
-        memory: 96Mi
-      limits:
-        cpu: 50m
-        memory: 156Mi
-    dashboards:
-      enabled: true
-      labelValue: "1"
-      searchNamespace: ALL
-    datasources:
-      enabled: true
-      labelValue: "1"
-      searchNamespace: ALL
-    plugins:
-      enabled: true
-      labelValue: "1"
-      searchNamespace: ALL
-    notifiers:
-      enabled: false
-      labelValue: "1"
-      searchNamespace: ALL
-
+initChownData:
   resources:
     requests:
-      cpu: 100m
-      memory: 512Mi
+      cpu: 10m
+      memory: 16Mi
     limits:
-      cpu: 1
-      memory: 1Gi
+      cpu: 100m
+      memory: 32Mi
+
+admin:
+  existingSecret: grafana-admin
+  userKey: user
+  passwordKey: password
+
+grafana.ini:
+  auth:
+    signout_redirect_url: "${OIDC_SIGNOUT_URL}"
+    oauth_auto_login: "false"
+  server:
+    root_url: "https://grafana.home.muehlbachler.io"
+  auth.generic_oauth:
+    enabled: true
+    allow_sign_up: true
+    allow_assign_grafana_admin: true
+    verbose_logging: false
+    name: Tuxnet
+    icon: cloud
+    scopes: openid email profile
+    auth_url: "${OIDC_AUTHZ_URL}"
+    token_url: "${OIDC_TOKEN_URL}"
+    api_url: "${OIDC_USER_INFO_URL}"
+    client_id: "${OIDC_CLIENT_ID}"
+    client_secret: "${OIDC_CLIENT_SECRET}"
+    # allowed_groups: ["sysadmin"]
+    role_attribute_path: "contains(groups[*], 'sysadmin') && 'GrafanaAdmin' || 'Viewer'"
+
+plugins:
+  - grafana-athena-datasource
+
+sidecar:
+  resources:
+    requests:
+      cpu: 5m
+      memory: 96Mi
+    limits:
+      cpu: 50m
+      memory: 156Mi
+  dashboards:
+    enabled: true
+    labelValue: "1"
+    searchNamespace: ALL
+  datasources:
+    enabled: true
+    labelValue: "1"
+    searchNamespace: ALL
+  plugins:
+    enabled: true
+    labelValue: "1"
+    searchNamespace: ALL
+  notifiers:
+    enabled: false
+    labelValue: "1"
+    searchNamespace: ALL
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 512Mi
+  limits:
+    cpu: 1
+    memory: 1Gi
