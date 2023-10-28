@@ -1,0 +1,50 @@
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta2
+kind: Alert
+metadata:
+  name: infrastructure-error
+  namespace: flux-system
+spec:
+  summary: Infrastructure Impacted
+  providerRef:
+    name: slack
+  eventSeverity: error
+  eventSources:
+    - kind: Kustomization
+      name: '*'
+      matchLabels:
+        kustomize.toolkit.fluxcd.io/name: infrastructure
+    - kind: HelmRelease
+      name: '*'
+      matchLabels:
+        kustomize.toolkit.fluxcd.io/name: infrastructure
+  eventMetadata:
+    app.kubernetes.io/env: production
+    app.kubernetes.io/component: infrastructure
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta2
+kind: Alert
+metadata:
+  name: infrastructure-succeeded
+  namespace: flux-system
+spec:
+  summary: Infrastructure Sync Succeeded
+  providerRef:
+    name: slack
+  inclusionList:
+    - ".*succeeded.*"
+  exclusionList:
+    - ".*uninstall.*"
+    - ".*test.*"
+  eventSources:
+    - kind: Kustomization
+      name: '*'
+      matchLabels:
+        kustomize.toolkit.fluxcd.io/name: infrastructure
+    - kind: HelmRelease
+      name: '*'
+      matchLabels:
+        kustomize.toolkit.fluxcd.io/name: infrastructure
+  eventMetadata:
+    app.kubernetes.io/env: production
+    app.kubernetes.io/component: infrastructure
