@@ -5,6 +5,6 @@ namespace: flux-system
 resources:
   - ./dnsmasq/
   # - ./coredns/
-  # - ./adguard/
+  - ./adguard/
   # - ./grafana/
   # - ./external-services/
