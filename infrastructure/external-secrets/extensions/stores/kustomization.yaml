@@ -4,5 +4,6 @@ kind: Kustomization
 resources:
   - ./cert-manager.yaml
   - ./external-dns.yaml
+  - ./flux.yaml
   - ./grafana.yaml
   - ./home-assistant.yaml
