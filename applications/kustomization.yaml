@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - ./dnsmasq/
-  # - ./coredns/
+  - ./coredns/
   - ./adguard/
   - ./grafana/
   - ./external-services/
