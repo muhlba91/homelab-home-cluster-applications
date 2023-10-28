@@ -2,7 +2,7 @@
 apiVersion: notification.toolkit.fluxcd.io/v1beta2
 kind: Alert
 metadata:
-  name: infrastructure-error
+  name: global-error
   namespace: flux-system
 spec:
   summary: Infrastructure Impacted
@@ -12,8 +12,10 @@ spec:
   eventSources:
     - kind: GitRepository
       name: '*'
+      namespace: flux-system
     - kind: HelmRepository
       name: '*'
+      namespace: flux-system
   eventMetadata:
     app.kubernetes.io/env: production
     app.kubernetes.io/component: global

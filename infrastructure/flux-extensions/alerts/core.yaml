@@ -12,10 +12,12 @@ spec:
   eventSources:
     - kind: Kustomization
       name: '*'
+      namespace: flux-system
       matchLabels:
         kustomize.toolkit.fluxcd.io/name: core
     - kind: HelmRelease
       name: '*'
+      namespace: flux-system
       matchLabels:
         kustomize.toolkit.fluxcd.io/name: core
   eventMetadata:
@@ -39,10 +41,12 @@ spec:
   eventSources:
     - kind: Kustomization
       name: '*'
+      namespace: flux-system
       matchLabels:
         kustomize.toolkit.fluxcd.io/name: core
     - kind: HelmRelease
       name: '*'
+      namespace: flux-system
       matchLabels:
         kustomize.toolkit.fluxcd.io/name: core
   eventMetadata:

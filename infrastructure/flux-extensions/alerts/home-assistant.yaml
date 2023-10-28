@@ -12,10 +12,12 @@ spec:
   eventSources:
     - kind: Kustomization
       name: '*'
+      namespace: flux-system
       matchLabels:
         kustomize.toolkit.fluxcd.io/name: home-assistant
     - kind: HelmRelease
       name: '*'
+      namespace: flux-system
       matchLabels:
         kustomize.toolkit.fluxcd.io/name: home-assistant
   eventMetadata:
@@ -39,10 +41,12 @@ spec:
   eventSources:
     - kind: Kustomization
       name: '*'
+      namespace: flux-system
       matchLabels:
         kustomize.toolkit.fluxcd.io/name: home-assistant
     - kind: HelmRelease
       name: '*'
+      namespace: flux-system
       matchLabels:
         kustomize.toolkit.fluxcd.io/name: home-assistant
   eventMetadata:
