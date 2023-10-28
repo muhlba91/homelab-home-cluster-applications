@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./etcd/
   - ./coredns/
-  # - ./external-dns/
+  - ./external-dns/
