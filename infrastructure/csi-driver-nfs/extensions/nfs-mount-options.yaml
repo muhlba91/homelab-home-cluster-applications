@@ -1,0 +1,8 @@
+---
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: mount-options
+stringData:
+  mountOptions: nfsvers=4.1,hard

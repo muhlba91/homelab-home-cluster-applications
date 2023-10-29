@@ -1,0 +1,12 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: csi-driver-nfs-extensions
+spec:
+  targetNamespace: csi-driver-nfs
+  sourceRef:
+    kind: GitRepository
+    name: cluster-applications
+  path: ./infrastructure/csi-driver-nfs/extensions/
+  wait: true

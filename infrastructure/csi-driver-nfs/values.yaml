@@ -1,0 +1,50 @@
+---
+kubeletDir: /var/lib/k0s/kubelet
+
+controller:
+  resources:
+    livenessProbe:
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 10m
+        memory: 40Mi
+    csiProvisioner:
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 10m
+        memory: 40Mi
+    nfs:
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 10m
+        memory: 40Mi
+
+node:
+  resources:
+    livenessProbe:
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 10m
+        memory: 40Mi
+    nodeDriverRegistrar:
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 10m
+        memory: 40Mi
+    nfs:
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 10m
+        memory: 40Mi
