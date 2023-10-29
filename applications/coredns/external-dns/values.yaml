@@ -24,7 +24,7 @@ coredns:
 resources:
   requests:
     cpu: 3m
-    memory: 32Mi
+    memory: 64Mi
   limits:
     cpu: 30m
-    memory: 64Mi
+    memory: 96Mi
