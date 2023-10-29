@@ -6,13 +6,13 @@ crds:
 
 victoria-metrics-operator:
   enabled: true
-  resources: # FIXME: resources
+  resources:
     requests:
-      cpu: 5m
-      memory: 64Mi
+      cpu: 3m
+      memory: 40Mi
     limits:
-      cpu: 100m
-      memory: 128Mi
+      cpu: 64m
+      memory: 80Mi
 
 defaultRules:
   create: true
@@ -51,20 +51,20 @@ vmsingle:
     retentionPeriod: "14"
     replicaCount: 1
     logLevel: WARN
-    resources: # FIXME: resources
+    resources:
       requests:
-        cpu: 100m
-        memory: 1Gi
+        cpu: 50m
+        memory: 256Mi
       limits:
         cpu: 1
-        memory: 3Gi
+        memory: 1Gi
     storage:
       storageClassName: nfs
       accessModes:
         - ReadWriteOnce
       resources:
         requests:
-          storage: 100Gi # FIXME: storage
+          storage: 100Gi
   ingress:
     enabled: false
 
@@ -84,13 +84,13 @@ vmagent:
     minScrapeInterval: 60s # FIXME: interval
     maxScrapeInterval: 900s
     logLevel: WARN
-    resources: # FIXME: resources
+    resources:
       requests:
         cpu: 10m
-        memory: 64Mi
-      limits:
-        cpu: 100m
         memory: 128Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
     externalLabels:
       cluster: home
       environment: prod
@@ -104,23 +104,23 @@ grafana:
 
 prometheus-node-exporter:
   enabled: true
-  resources: # FIXME: resources
+  resources:
     requests:
-      cpu: 5m
-      memory: 32Mi
+      cpu: 3m
+      memory: 12Mi
     limits:
-      cpu: 50m
-      memory: 64Mi
+      cpu: 30m
+      memory: 24Mi
 
 kube-state-metrics:
   enabled: true
-  resources: # FIXME: resources
+  resources:
     requests:
-      cpu: 10m
-      memory: 64Mi
+      cpu: 3m
+      memory: 32Mi
     limits:
-      cpu: 100m
-      memory: 128Mi
+      cpu: 30m
+      memory: 56Mi
 
 kubelet:
   enabled: false
