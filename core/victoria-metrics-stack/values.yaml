@@ -54,7 +54,7 @@ vmsingle:
     resources:
       requests:
         cpu: 50m
-        memory: 256Mi
+        memory: 384Mi
       limits:
         cpu: 1
         memory: 1Gi
