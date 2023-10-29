@@ -6,3 +6,4 @@ resources:
   - ./external-dns/
   - ./cert-manager/
   - ./victoria-metrics-stack/
+  - ./loki-stack/

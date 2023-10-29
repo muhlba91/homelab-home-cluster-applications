@@ -1,0 +1,64 @@
+---
+test_pod:
+  enabled: false
+
+loki:
+  enabled: true
+  auth_enabled: false
+  commonConfig:
+    replication_factor: 1
+  limits_config:
+    retention_period: &retention 2d
+  compactor:
+    retention_enabled: true
+    retention_delete_delay: 1h
+    retention_delete_worker_count: 150
+    compaction_interval: 30m
+  table_manager:
+    retention_deletes_enabled: true
+    retention_period: *retention
+  storage:
+    type: filesystem
+  singleBinary:
+    replicas: 1
+    persistence:
+      storageClass: nfs
+      size: 100Gi
+    resources:
+      requests:
+        cpu: 50m
+        memory: 386Mi
+      limits:
+        cpu: 1
+        memory: 1Gi
+
+promtail:
+  enabled: true
+  config:
+    logLevel: warn
+  resources:
+    requests:
+      cpu: 5m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+
+fluent-bit:
+  enabled: false
+
+grafana:
+  enabled: false
+  sidecar:
+    datasources:
+      enabled: true
+      label: grafana_datasource
+
+prometheus:
+  enabled: false
+
+filebeat:
+  enabled: false
+
+logstash:
+  enabled: false
