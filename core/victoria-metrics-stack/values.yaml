@@ -1,4 +1,6 @@
 ---
+fullnameOverride: victoria-metrics
+
 crds:
   enabled: true
 
