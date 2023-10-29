@@ -30,7 +30,6 @@ controllers:
             cpu: 10m
             memory: 12Mi
 
-        # TODO: enable probes correctly
         probes:
           liveness:
             enabled: false
