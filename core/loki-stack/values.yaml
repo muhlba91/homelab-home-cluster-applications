@@ -4,6 +4,8 @@ test_pod:
 
 loki:
   enabled: true
+  isDefault: false
+  replicas: 1
   auth_enabled: false
   commonConfig:
     replication_factor: 1
@@ -19,18 +21,17 @@ loki:
     retention_period: *retention
   storage:
     type: filesystem
-  singleBinary:
-    replicas: 1
-    persistence:
-      storageClass: nfs
-      size: 100Gi
-    resources:
-      requests:
-        cpu: 50m
-        memory: 386Mi
-      limits:
-        cpu: 1
-        memory: 1Gi
+  persistence:
+    enabled: true
+    storageClassName: nfs
+    size: 100Gi
+  resources:
+    requests:
+      cpu: 50m
+      memory: 192Mi
+    limits:
+      cpu: 1
+      memory: 512Gi
 
 promtail:
   enabled: true
@@ -38,11 +39,11 @@ promtail:
     logLevel: warn
   resources:
     requests:
-      cpu: 5m
-      memory: 64Mi
+      cpu: 15m
+      memory: 96Mi
     limits:
       cpu: 200m
-      memory: 128Mi
+      memory: 192Mi
 
 fluent-bit:
   enabled: false
@@ -53,6 +54,7 @@ grafana:
     datasources:
       enabled: true
       label: grafana_datasource
+      labelValue: "1"
 
 prometheus:
   enabled: false
