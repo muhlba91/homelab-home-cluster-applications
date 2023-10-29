@@ -5,6 +5,8 @@ metadata:
   name: external-secrets-extensions
 spec:
   targetNamespace: external-secrets
+  dependsOn:
+    - external-secrets
   sourceRef:
     kind: GitRepository
     name: cluster-applications

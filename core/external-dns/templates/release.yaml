@@ -6,6 +6,8 @@ metadata:
 spec:
   releaseName: external-dns
   targetNamespace: external-dns
+  dependsOn:
+    - external-dns-extensions
   chart:
     spec:
       chart: external-dns

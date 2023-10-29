@@ -6,6 +6,8 @@ metadata:
 spec:
   releaseName: cert-manager
   targetNamespace: cert-manager
+  dependsOn:
+    - cert-manager-extensions
   chart:
     spec:
       chart: cert-manager

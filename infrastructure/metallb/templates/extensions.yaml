@@ -5,6 +5,8 @@ metadata:
   name: metallb-extensions
 spec:
   targetNamespace: metallb-system
+  dependsOn:
+    - metallb
   sourceRef:
     kind: GitRepository
     name: cluster-applications

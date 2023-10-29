@@ -6,6 +6,8 @@ metadata:
 spec:
   releaseName: grafana
   targetNamespace: grafana
+  dependsOn:
+    - grafana-extensions
   chart:
     spec:
       chart: grafana

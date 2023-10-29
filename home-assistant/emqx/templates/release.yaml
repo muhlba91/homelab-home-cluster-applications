@@ -5,7 +5,9 @@ metadata:
   name: home-assistant-emqx
 spec:
   releaseName: home-assistant-emqx
-  targetNamespace: home-assistant-emqx
+  targetNamespace: home-assistant-mqtt
+  dependsOn:
+    - home-assistant-emqx-extensions
   chart:
     spec:
       chart: emqx
