@@ -8,5 +8,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./applications/home-assistant/home-assistant/extensions/
+  path: ./home-assistant/home-assistant/extensions/
   wait: true

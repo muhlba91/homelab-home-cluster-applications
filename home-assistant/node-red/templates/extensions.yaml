@@ -8,5 +8,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./applications/home-assistant/node-red/extensions/
+  path: ./home-assistant/node-red/extensions/
   wait: true
