@@ -5,6 +5,7 @@ test_pod:
 loki:
   enabled: true
   isDefault: false
+  url: http://{{ (include "loki.serviceName" .) }}.{{ .Release.Namespace }}:{{ .Values.loki.service.port }}
   replicas: 1
   auth_enabled: false
   commonConfig:
