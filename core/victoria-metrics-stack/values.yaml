@@ -80,8 +80,8 @@ vmalert:
 vmagent:
   enabled: true
   spec:
-    scrapeInterval: 120s # FIXME: interval
-    minScrapeInterval: 60s # FIXME: interval
+    scrapeInterval: 120s
+    minScrapeInterval: 60s
     maxScrapeInterval: 900s
     logLevel: WARN
     resources:
