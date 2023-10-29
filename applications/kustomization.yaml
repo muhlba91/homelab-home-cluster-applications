@@ -6,5 +6,4 @@ resources:
   - ./dnsmasq/
   - ./coredns/
   - ./adguard/
-  - ./grafana/
   - ./external-services/

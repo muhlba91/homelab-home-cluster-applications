@@ -5,5 +5,4 @@ namespace: flux-system
 resources:
   - ./external-dns/
   - ./cert-manager/
-  - ./victoria-metrics-stack/
-  - ./loki-stack/
+  - ./monitoring/
