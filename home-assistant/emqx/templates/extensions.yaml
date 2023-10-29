@@ -8,5 +8,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./applications/home-assistant/emqx/extensions/
+  path: ./home-assistant/emqx/extensions/
   wait: true
