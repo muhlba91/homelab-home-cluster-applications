@@ -18,7 +18,7 @@ data:
         ---
         apiVersion: 1
         datasources:
-          - name: home-assistant-influxdb
+          - name: Home Assistant - InfluxDB
             type: influxdb
             access: proxy
             url: http://influxdb.external-services
@@ -35,7 +35,7 @@ data:
     kind: Secret
     type: Opaque
     metadata:
-      name: home-assistant-athena-grafana
+      name: Home Assistant - Athena
       labels:
         grafana_datasource: "1"
     stringData:
