@@ -44,6 +44,7 @@ The following applications are defined in [`infrastructure/`](infrastructure/).
 - [ ] [CSI NFS Driver](https://github.com/kubernetes-csi/csi-driver-nfs/tree/master) - Exposes the NAS' NFS storage as a Kubernetes `StorageClass`.
 - [x] [MetalLB](https://metallb.universe.tf) - Provides a Kubernetes network load balancer to expose Kubernetes `Service`s.
 - [x] [Longhorn](https://longhorn.io) - Exposes local storage to Kubernetes `StorageClass`es.
+- [x] [NFS CSI Driver](https://github.com/kubernetes-csi/csi-driver-nfs/tree/master) - Exposes NAS NFS storage to Kubernetes `StorageClass`es.
 - [x] [External Secrets Operator](http://external-secrets.io) - Synchronizes secrets from external stores to Kubernetes `Secret` objects.
   - [x] [External Secrets Stores](infrastructure/external-secrets/) - Deploys the required `ClusterSecretStore`s and Doppler [Service Tokens](https://docs.doppler.com/docs/service-tokens) as Kubernetes `Secret`s.
 - [x] [Traefik](https://traefik.io) - Exposes Kubernetes `Ingress` resources to the "outside world".
@@ -54,6 +55,7 @@ The following applications are defined in [`core/`](core/).
 
 - [x] [cert-manager](https://cert-manager.io) - Certificate management using ACME Let's Encrypt.
 - [x] [External DNS with Google Cloud DNS integration](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Google Cloud DNS domains for publicly reachable services.
+- [x] [victoria-metrics-stack](https://github.com/VictoriaMetrics/helm-charts/tree/master/charts/victoria-metrics-k8s-stack) - Monitoring stack using [Victoria Metrics](https://victoriametrics.com).
 
 ### (User) Applications
 

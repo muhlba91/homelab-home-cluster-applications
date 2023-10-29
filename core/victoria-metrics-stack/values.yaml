@@ -1,0 +1,145 @@
+---
+crds:
+  enabled: true
+
+victoria-metrics-operator:
+  enabled: true
+  resources: # FIXME: resources
+    requests:
+      cpu: 5m
+      memory: 64Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi
+
+defaultRules:
+  create: true
+  rules:
+    etcd: false
+    general: true
+    k8s: true
+    kubeApiserver: false
+    kubeApiserverAvailability: false
+    kubeApiserverBurnrate: false
+    kubeApiserverHistogram: false
+    kubeApiserverSlos: false
+    kubelet: false
+    kubePrometheusGeneral: true
+    kubePrometheusNodeRecording: true
+    kubernetesApps: true
+    kubernetesResources: true
+    kubernetesStorage: true
+    kubernetesSystem: false
+    kubeScheduler: false
+    kubeStateMetrics: true
+    network: true
+    node: true
+    vmagent: true
+    vmsingle: true
+    vmcluster: false
+    vmhealth: true
+    alertmanager: false
+
+defaultDashboardsEnabled: false
+experimentalDashboardsEnabled: false
+
+vmsingle:
+  enabled: true
+  spec:
+    retentionPeriod: "14"
+    replicaCount: 1
+    logLevel: WARN
+    resources: # FIXME: resources
+      requests:
+        cpu: 100m
+        memory: 1Gi
+      limits:
+        cpu: 1
+        memory: 3Gi
+    storage:
+      storageClassName: nfs
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 100Gi # FIXME: storage
+  ingress:
+    enabled: false
+
+vmcluster:
+  enabled: false
+
+alertmanager:
+  enabled: false
+
+vmalert:
+  enabled: false
+
+vmagent:
+  enabled: true
+  spec:
+    scrapeInterval: 120s # FIXME: interval
+    minScrapeInterval: 60s # FIXME: interval
+    maxScrapeInterval: 900s
+    logLevel: WARN
+    resources: # FIXME: resources
+      requests:
+        cpu: 10m
+        memory: 64Mi
+      limits:
+        cpu: 100m
+        memory: 128Mi
+    externalLabels:
+      cluster: home
+      environment: prod
+
+grafana:
+  enabled: false
+  forceDeployDatasource: true
+  sidecar:
+    datasources:
+      label: grafana_datasource
+
+prometheus-node-exporter:
+  enabled: true
+  resources: # FIXME: resources
+    requests:
+      cpu: 5m
+      memory: 32Mi
+    limits:
+      cpu: 50m
+      memory: 64Mi
+
+kube-state-metrics:
+  enabled: true
+  resources: # FIXME: resources
+    requests:
+      cpu: 10m
+      memory: 64Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi
+
+kubelet:
+  enabled: false
+
+kubeApiserver:
+  enabled: false
+
+kubeControllerManager:
+  enabled: false
+
+kubeDns:
+  enabled: false
+
+coreDns:
+  enabled: false
+
+kubeEtcd:
+  enabled: false
+
+kubeScheduler:
+  enabled: false
+
+kubeProxy:
+  enabled: false
