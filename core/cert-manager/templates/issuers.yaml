@@ -5,8 +5,6 @@ metadata:
   name: cert-manager-issuers
 spec:
   targetNamespace: cert-manager
-  dependsOn:
-    - cert-manager
   sourceRef:
     kind: GitRepository
     name: cluster-applications

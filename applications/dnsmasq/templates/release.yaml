@@ -6,8 +6,6 @@ metadata:
 spec:
   releaseName: dnsmasq
   targetNamespace: dnsmasq
-  dependsOn:
-    - dnsmasq-extensions
   chart:
     spec:
       chart: app-template

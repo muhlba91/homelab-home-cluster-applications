@@ -6,8 +6,6 @@ metadata:
 spec:
   releaseName: adguard
   targetNamespace: adguard
-  dependsOn:
-    - adguard-extensions
   chart:
     spec:
       chart: app-template

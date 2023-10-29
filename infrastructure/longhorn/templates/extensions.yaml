@@ -5,8 +5,6 @@ metadata:
   name: longhorn-extensions
 spec:
   targetNamespace: longhorn-system
-  dependsOn:
-    - longhorn
   sourceRef:
     kind: GitRepository
     name: cluster-applications

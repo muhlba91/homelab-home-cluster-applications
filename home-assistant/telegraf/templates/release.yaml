@@ -6,8 +6,6 @@ metadata:
 spec:
   releaseName: home-assistant-telegraf
   targetNamespace: home-assistant-telegraf
-  dependsOn:
-    - home-assistant-telegraf-extensions
   chart:
     spec:
       chart: app-template
