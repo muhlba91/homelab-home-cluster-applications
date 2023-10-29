@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: loki-stack
-      version: 0.18.5
+      version: 2.9.11
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
