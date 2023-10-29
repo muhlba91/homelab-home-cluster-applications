@@ -9,10 +9,10 @@ victoria-metrics-operator:
   resources:
     requests:
       cpu: 3m
-      memory: 40Mi
+      memory: 56Mi
     limits:
-      cpu: 64m
-      memory: 80Mi
+      cpu: 50m
+      memory: 96Mi
 
 defaultRules:
   create: true
@@ -107,20 +107,20 @@ prometheus-node-exporter:
   resources:
     requests:
       cpu: 3m
-      memory: 12Mi
+      memory: 24Mi
     limits:
       cpu: 30m
-      memory: 24Mi
+      memory: 48Mi
 
 kube-state-metrics:
   enabled: true
   resources:
     requests:
       cpu: 3m
-      memory: 32Mi
+      memory: 56Mi
     limits:
       cpu: 30m
-      memory: 56Mi
+      memory: 96Mi
 
 kubelet:
   enabled: false
