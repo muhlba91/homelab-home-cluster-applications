@@ -35,7 +35,7 @@ data:
     kind: Secret
     type: Opaque
     metadata:
-      name: Home Assistant - Athena
+      name: home-assistant-athena-grafana
       labels:
         grafana_datasource: "1"
     stringData:
@@ -43,7 +43,7 @@ data:
         ---
         apiVersion: 1
         datasources:
-          - name: home-assistant-athena
+          - name: Home Assistant - Athena
             type: grafana-athena-datasource
             jsonData:
               authType: keys
