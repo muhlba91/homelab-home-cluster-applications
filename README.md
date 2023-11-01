@@ -56,6 +56,7 @@ The following applications are defined in [`core/`](core/).
 - [x] [cert-manager](https://cert-manager.io) - Certificate management using ACME Let's Encrypt.
 - [x] [External DNS with Google Cloud DNS integration](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Google Cloud DNS domains for publicly reachable services.
 - [x] [victoria-metrics-stack](https://github.com/VictoriaMetrics/helm-charts/tree/master/charts/victoria-metrics-k8s-stack) - Monitoring stack using [Victoria Metrics](https://victoriametrics.com).
+- [x] [loki-stack](https://github.com/grafana/helm-charts/tree/main/charts/loki-stack) - Logging stack using [Grafana Loki](https://grafana.com/oss/loki/).
 
 ### (User) Applications
 
@@ -67,7 +68,6 @@ The following applications are defined in [`applications/`](applications/).
 - [x] [External DNS with CoreDNS/etcd integration](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in CoreDNS/etcs for internal, local only, reachable services.
 - [x] External Services - Deploys Kubernetes `Service`s and `Ingress`es to local endpoints, and existing services outside of the cluster.
 - [x] [Grafana](http://grafana.com) - Visualization of metrics, and other data.
-- [ ] [MinIO](https://min.io) - Local object storage.
 
 ### Home Assistant
 
