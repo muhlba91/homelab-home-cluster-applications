@@ -29,10 +29,10 @@ loki:
   resources:
     requests:
       cpu: 50m
-      memory: 192Mi
+      memory: 128Mi
     limits:
       cpu: 1
-      memory: 512Mi
+      memory: 384Mi
 
 promtail:
   enabled: true
@@ -41,10 +41,10 @@ promtail:
   resources:
     requests:
       cpu: 15m
-      memory: 80Mi
+      memory: 112Mi
     limits:
       cpu: 200m
-      memory: 128Mi
+      memory: 176Mi
 
 fluent-bit:
   enabled: false
