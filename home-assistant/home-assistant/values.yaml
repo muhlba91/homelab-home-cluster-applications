@@ -36,7 +36,7 @@ controllers:
             cpu: 50m
             memory: 768Mi
           limits:
-            cpu: 1
+            cpu: "1"
             memory: 1280Mi
 
     initContainers:
@@ -68,7 +68,7 @@ controllers:
             cpu: 100m
             memory: 128Mi
           limits:
-            cpu: 1
+            cpu: "1"
             memory: 256Mi
 
 serviceAccount:

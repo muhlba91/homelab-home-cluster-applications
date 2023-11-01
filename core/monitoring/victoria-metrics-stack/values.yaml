@@ -56,7 +56,7 @@ vmsingle:
         cpu: 50m
         memory: 384Mi
       limits:
-        cpu: 1
+        cpu: "1"
         memory: 1Gi
     storage:
       storageClassName: nfs
