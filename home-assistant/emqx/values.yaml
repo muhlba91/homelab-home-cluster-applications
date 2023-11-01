@@ -27,11 +27,8 @@ persistence:
 
 ssl:
   enabled: true
-  dnsnames:
-    - mqtt.iot.internal.muehlbachler.io
-  issuer:
-    name: cluster-issuer-internal-muehlbachler-io
-    kind: ClusterIssuer
+  useExisting: true
+  existingName: emqx-tls
 
 resources:
   requests:
