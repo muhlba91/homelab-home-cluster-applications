@@ -19,13 +19,3 @@ spec:
     - kind: ConfigMap
       name: victoria-metrics-stack-values
       valuesKey: values.yaml
-  postRenderers:
-    - kustomize:
-        patches:
-          - target:
-              apiVersion: operator.victoriametrics.com/v1beta1
-              kind: VMSingle
-            patch: |
-              - op: add
-                path: /metadata/annotations/helm.toolkit.fluxcd.io~1driftDetection
-                value: disabled

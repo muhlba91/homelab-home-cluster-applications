@@ -47,6 +47,8 @@ experimentalDashboardsEnabled: false
 
 vmsingle:
   enabled: true
+  annotations:
+    helm.toolkit.fluxcd.io/driftDetection: disabled
   spec:
     retentionPeriod: "14"
     replicaCount: 1
