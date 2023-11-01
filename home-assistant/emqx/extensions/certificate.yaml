@@ -5,7 +5,7 @@ metadata:
   name: emqx-tls
 spec:
   dnsNames:
-  - mqtt.iot.internal.muehlbachler.io
+    - mqtt.iot.internal.muehlbachler.io
   issuerRef:
     kind: ClusterIssuer
     name: cluster-issuer-internal-muehlbachler-io
