@@ -11,7 +11,7 @@ sources:
 
 interval: 2m
 
-logLevel: error
+logLevel: warning
 
 domainFilters:
   - internal.muehlbachler.io
