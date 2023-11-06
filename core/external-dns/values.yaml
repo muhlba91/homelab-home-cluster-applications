@@ -21,6 +21,7 @@ domainFilters:
 annotationFilter: external-dns.alpha.kubernetes.io/provider=public
 
 txtOwnerId: external-dns-prod-google
+txtPrefix: extdns-
 provider: google
 google:
   serviceAccountSecret: external-dns-google
