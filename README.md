@@ -62,10 +62,9 @@ The following applications are defined in [`core/`](core/).
 
 The following applications are defined in [`applications/`](applications/).
 
-- [x] [AdGuard](https://adguard.com/en/adguard-home/overview.html) - DNS server with ad filtering/blocking capabilities.
-- [x] [CoreDNS](https://coredns.io) - DNS resolver for internal, local only, domains.
+- [x] [Adguard](https://adguard.com/en/adguard-home/overview.html) - DNS server with ad filtering/blocking capabilities.
 - [x] [dnsmasq](https://thekelleys.org.uk/dnsmasq/doc.html) - IPv4 and IPv6 DHCP server.
-- [x] [External DNS with CoreDNS/etcd integration](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in CoreDNS/etcs for internal, local only, reachable services.
+- [x] [External DNS with Adguard integration](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Adguard for internal, local only, reachable services. Uses the [External DNS Adguard Webhook provider](https://github.com/muhlba91/external-dns-provider-adguard).
 - [x] External Services - Deploys Kubernetes `Service`s and `Ingress`es to local endpoints, and existing services outside of the cluster.
 - [x] [Grafana](http://grafana.com) - Visualization of metrics, and other data.
 
