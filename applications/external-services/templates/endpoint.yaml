@@ -4,7 +4,7 @@ apiVersion: v1
 kind: Endpoints
 metadata:
   name: router-001
-  namespace: &namespace external-services
+  namespace: external-services
 subsets:
   - addresses:
       - ip: 10.0.0.1
@@ -17,7 +17,7 @@ apiVersion: v1
 kind: Endpoints
 metadata:
   name: switch-001
-  namespace: *namespace
+  namespace: external-services
 subsets:
   - addresses:
       - ip: 10.0.10.1
@@ -30,7 +30,7 @@ apiVersion: v1
 kind: Endpoints
 metadata:
   name: switch-002
-  namespace: *namespace
+  namespace: external-services
 subsets:
   - addresses:
       - ip: 10.0.10.11
@@ -43,7 +43,7 @@ apiVersion: v1
 kind: Endpoints
 metadata:
   name: omada-controller
-  namespace: *namespace
+  namespace: external-services
 subsets:
   - addresses:
       - ip: 10.0.21.1
@@ -58,7 +58,7 @@ apiVersion: v1
 kind: Endpoints
 metadata:
   name: pve
-  namespace: *namespace
+  namespace: external-services
 subsets:
   - addresses:
       - ip: 10.0.50.10
@@ -71,7 +71,7 @@ apiVersion: v1
 kind: Endpoints
 metadata:
   name: pbs
-  namespace: *namespace
+  namespace: external-services
 subsets:
   - addresses:
       - ip: 10.0.51.1
@@ -86,7 +86,7 @@ apiVersion: v1
 kind: Endpoints
 metadata:
   name: fileshare
-  namespace: *namespace
+  namespace: external-services
 subsets:
   - addresses:
       - ip: 10.0.55.1
@@ -99,7 +99,7 @@ apiVersion: v1
 kind: Endpoints
 metadata:
   name: influxdb
-  namespace: *namespace
+  namespace: external-services
 subsets:
   - addresses:
       - ip: 10.0.55.1
