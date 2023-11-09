@@ -115,9 +115,9 @@ data:
         name: OISD
         id: 1636386000
       - enabled: true
-        url: https://block.energized.pro/basic/formats/filter
-        name: Energized.Pro Basic
-        id: 1640689725
+        url: https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt
+        name: HaGeZi Multi PRO - Extended Protection
+        id: 1699520531
     whitelist_filters: []
     user_rules:
       - '@@||apps.apple.com^$important'
