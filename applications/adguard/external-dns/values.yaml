@@ -1,0 +1,68 @@
+---
+image:
+  registry: registry.k8s.io
+  repository: external-dns/external-dns
+  tag: v0.14.0
+
+sources:
+  - crd
+  - service
+  - ingress
+
+interval: 2m
+
+logLevel: warning
+
+domainFilters:
+  - internal.muehlbachler.io
+annotationFilter: external-dns.alpha.kubernetes.io/provider=internal
+
+txtOwnerId: external-dns-prod-adguard
+provider: webhook
+extraArgs:
+  webhook-provider-url: http://localhost:8888
+sidecars:
+  - name: adguard-webhook
+    image:
+      repository: ghcr.io/muhlba91/external-dns-provider-adguard
+      tag: v2.0.0
+      pullPolicy: IfNotPresent
+    ports:
+      - containerPort: 8888
+        name: http
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: http
+      initialDelaySeconds: 10
+      timeoutSeconds: 5
+    readinessProbe:
+      httpGet:
+        path: /health
+        port: http
+      initialDelaySeconds: 10
+      timeoutSeconds: 5
+    env:
+      - name: LOG_LEVEL
+        value: debug
+      - name: ADGUARD_HOME
+        value: "http://adguard-home:3000"
+      - name: ADGUARD_USER
+        value: "admin"
+      - name: ADGUARD_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: adguard-home-admin-password
+            key: ADGUARD_ADMIN_PASSWORD
+      - name: SERVER_HOST
+        value: "0.0.0.0"
+      - name: DRY_RUN
+        value: "false"
+
+resources:
+  requests:
+    cpu: 3m
+    memory: 64Mi
+  limits:
+    cpu: 30m
+    memory: 96Mi
