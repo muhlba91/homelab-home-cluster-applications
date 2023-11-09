@@ -8,5 +8,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./applications/adguard/adgaurd/extensions/
+  path: ./applications/adguard/adguard/extensions/
   wait: true
