@@ -22,20 +22,20 @@ extraArgs:
   webhook-provider-url: http://localhost:8888
 sidecars:
   - name: adguard-webhook
-    image: ghcr.io/muhlba91/external-dns-provider-adguard:v3.0.0
+    image: ghcr.io/muhlba91/external-dns-provider-adguard:v3.1.0
     imagePullPolicy: IfNotPresent
     ports:
       - containerPort: 8888
         name: http
     livenessProbe:
       httpGet:
-        path: /health
+        path: /healthz
         port: http
       initialDelaySeconds: 10
       timeoutSeconds: 5
     readinessProbe:
       httpGet:
-        path: /health
+        path: /healthz
         port: http
       initialDelaySeconds: 10
       timeoutSeconds: 5
