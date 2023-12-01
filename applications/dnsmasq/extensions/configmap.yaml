@@ -34,7 +34,7 @@ data:
     dhcp-host=10:27:f5:a2:07:58,omada-controller,10.0.21.1
     dhcp-host=90:9a:4a:93:70:26,omada-living-room,10.0.21.11
     dhcp-host=5c:62:8b:ce:b3:d4,omada-office,10.0.21.12
-    dhcp-host=fc:f5:c4:13:00:50,nuki-bridge,10.0.100.1
+    dhcp-host=94:c9:60:32:99:a6,tedee-bridge,10.0.100.1
     dhcp-host=34:3e:a4:00:19:e1,ring-chime,10.0.101.1
     dhcp-host=54:e0:19:f3:02:97,ring-doorbell,10.0.101.2
     dhcp-host=b0:09:da:32:14:67,ring-alarm-base,10.0.101.3
