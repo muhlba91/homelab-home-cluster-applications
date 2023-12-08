@@ -30,7 +30,7 @@ controllers:
       plugins:
         image:
           repository: alpine
-          tag: 3.18
+          tag: 3.19
           pullPolicy: IfNotPresent
         command:
           - /scripts/plugins.sh
