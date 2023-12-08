@@ -53,7 +53,7 @@ controllers:
       backup:
         image:
           repository: alpine
-          tag: 3.18
+          tag: 3.19
           pullPolicy: IfNotPresent
         command:
           - /scripts/backup_restore.sh
