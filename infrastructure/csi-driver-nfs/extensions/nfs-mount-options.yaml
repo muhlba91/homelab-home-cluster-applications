@@ -5,4 +5,4 @@ type: Opaque
 metadata:
   name: mount-options
 stringData:
-  mountOptions: nfsvers=4.1,hard
+  mountOptions: nfsvers=4.2,hard
