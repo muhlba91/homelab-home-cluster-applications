@@ -4,3 +4,4 @@ kind: Kustomization
 namespace: csi-driver-nfs
 resources:
   - ./storageclass.yaml
+  - ./nfs-mount-options.yaml

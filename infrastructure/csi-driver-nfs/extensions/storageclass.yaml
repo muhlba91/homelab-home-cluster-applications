@@ -14,3 +14,5 @@ parameters:
   server: 10.0.55.1
   share: /mnt/user/home-cluster
   subDir: "${pvc.metadata.namespace}-${pvc.metadata.name}-${pv.metadata.name}"
+  csi.storage.k8s.io/provisioner-secret-name: mount-options
+  csi.storage.k8s.io/provisioner-secret-namespace: csi-driver-nfs
