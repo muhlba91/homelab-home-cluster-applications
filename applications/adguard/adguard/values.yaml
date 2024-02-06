@@ -9,7 +9,7 @@ controllers:
         image:
           repository: adguard/adguardhome
           pullPolicy: IfNotPresent
-          tag: v0.107.43
+          tag: v0.107.44
 
         args:
           - --config
