@@ -10,7 +10,7 @@ controllers:
         image:
           repository: quay.io/ricardbejarano/dnsmasq
           pullPolicy: IfNotPresent
-          tag: "2.89"
+          tag: "2.90"
 
         args:
           - --keep-in-foreground
