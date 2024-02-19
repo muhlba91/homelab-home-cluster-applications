@@ -65,7 +65,7 @@ grafana.ini:
     allow_sign_up: true
     allow_assign_grafana_admin: true
     verbose_logging: false
-    name: Tuxnet
+    name: SSO
     icon: cloud
     scopes: openid email profile urn:zitadel:iam:org:project:id:254760536233776133:aud
     auth_url: "${OIDC_AUTHZ_URL}"
