@@ -67,14 +67,14 @@ grafana.ini:
     verbose_logging: false
     name: Tuxnet
     icon: cloud
-    scopes: openid email profile
+    scopes: openid email profile urn:zitadel:iam:org:project:id:254760536233776133:aud
     auth_url: "${OIDC_AUTHZ_URL}"
     token_url: "${OIDC_TOKEN_URL}"
     api_url: "${OIDC_USER_INFO_URL}"
     client_id: "${OIDC_CLIENT_ID}"
     client_secret: "${OIDC_CLIENT_SECRET}"
     # allowed_groups: ["sysadmin"]
-    role_attribute_path: "contains(groups[*], 'sysadmin') && 'GrafanaAdmin' || 'Viewer'"
+    role_attribute_path: contains("urn:zitadel:iam:org:project:254760536233776133:roles"."admin"."253178200153208318", 'muehlbachler.zitadel.cloud') && 'GrafanaAdmin' || 'Viewer'
 
 plugins:
   - grafana-athena-datasource
