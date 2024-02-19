@@ -123,11 +123,11 @@ data:
         type: "strategy",
         strategy: {
           name: "openidconnect",
-          label: "Sign in with Tuxnet",
+          label: "Sign in with SSO",
           icon:"fa-cloud",
           strategy: require("@govtechsg/passport-openidconnect").Strategy,
           options: {
-            issuer: process.env.NODE_RED_OIDC_ISSUER,
+            issuer: process.env.OIDC_ISSUER,
             authorizationURL: process.env.OIDC_AUTHZ_URL,
             tokenURL: process.env.OIDC_TOKEN_URL,
             userInfoURL: process.env.OIDC_USER_INFO_URL,
@@ -143,7 +143,7 @@ data:
         },
         users: function(user) {
           var permissions = "read";
-          if(user == "daniel") {
+          if(user == "daniel@muehlbachler.io") {
             permissions = "*"
           }
           return Promise.resolve({
@@ -157,13 +157,13 @@ data:
             var jwksClient = require('jwks-rsa');
 
             var client = jwksClient({
-              jwksUri: process.env.NODE_RED_OIDC_ISSUER + "jwks/"
+              jwksUri: process.env.OIDC_JWKS_URL
             });
 
             var options = {
               algorithms: [ 'RS256' ],
-              audience: process.env.NODE_RED_OIDC_CLIENT_ID,
-              issuer: process.env.NODE_RED_OIDC_ISSUER
+              audience: process.env.NODE_RED_OIDC_AUDIENCE,
+              issuer: process.env.OIDC_ISSUER
             };
 
             function getKey(header, callback){
