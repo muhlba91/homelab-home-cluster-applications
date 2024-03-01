@@ -10,7 +10,7 @@ controllers:
         image:
           repository: ghcr.io/muhlba91/node-red
           pullPolicy: IfNotPresent
-          tag: v4.0.1
+          tag: v4.0.2
 
         env:
           - name: TZ
