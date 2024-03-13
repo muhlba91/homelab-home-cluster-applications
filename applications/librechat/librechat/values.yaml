@@ -19,6 +19,13 @@ controllers:
           - secretRef:
               name: librechat-meilisearch-master-key
 
+        env:
+          - name: MONGO_URI
+            valueFrom:
+              secretKeyRef:
+                name: librechat-mongodb-svcbind-root
+                key: uri
+
         resources: # FIXME: librechat - resources
           requests:
             cpu: 100m
