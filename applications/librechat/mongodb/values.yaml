@@ -11,8 +11,8 @@ replicaCount: 1
 arbiter:
   enabled: false
 
-serviceBindings:
-  enabled: true
+auth:
+  enabled: false
 
 persistence:
   enabled: true
