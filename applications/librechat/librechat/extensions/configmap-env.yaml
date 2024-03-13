@@ -14,7 +14,7 @@ data:
   ASSISTANTS_MODELS: gpt-3.5-turbo,gpt-4-turbo-preview,gpt-4
   SEARCH: "true"
   MEILI_NO_ANALYTICS: "true"
-  MEILI_HOST: "http://meilisearch:7700"
+  MEILI_HOST: "http://librechat-meilisearch:7700"
   LOGIN_MAX: "10"
   LOGIN_WINDOW: "5"
   LIMIT_CONCURRENT_MESSAGES: "true"
