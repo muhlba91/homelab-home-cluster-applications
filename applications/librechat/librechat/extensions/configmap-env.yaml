@@ -7,6 +7,8 @@ data:
   # https://github.com/danny-avila/LibreChat/blob/main/.env.example
   DOMAIN_CLIENT: ""
   DOMAIN_SERVER: ""
+  DEBUG_LOGGING: "true"
+  DEBUG_CONSOLE: "true"
   ENDPOINTS: openAI,anthropic,gptPlugins
   BAN_VIOLATIONS: "false"
   ANTHROPIC_MODELS: claude-3-sonnet-20240229,claude-3-opus-20240229
