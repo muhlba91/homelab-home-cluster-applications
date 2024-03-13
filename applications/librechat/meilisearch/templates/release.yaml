@@ -17,5 +17,5 @@ spec:
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
-      name: meilisearch-values
+      name: librechat-meilisearch-values
       valuesKey: values.yaml

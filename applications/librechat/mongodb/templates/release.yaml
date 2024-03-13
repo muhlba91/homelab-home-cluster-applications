@@ -17,5 +17,5 @@ spec:
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
-      name: mongodb-values
+      name: librechat-mongodb-values
       valuesKey: values.yaml

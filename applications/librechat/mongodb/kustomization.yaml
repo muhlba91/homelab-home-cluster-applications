@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./templates/release.yaml
 configMapGenerator:
-  - name: mongodb-values
+  - name: librechat-mongodb-values
     files:
       - values.yaml=values.yaml
 configurations:

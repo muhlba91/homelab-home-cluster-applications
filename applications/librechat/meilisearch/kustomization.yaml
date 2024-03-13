@@ -6,7 +6,7 @@ resources:
   - ./templates/extensions.yaml
   - ./templates/release.yaml
 configMapGenerator:
-  - name: meilisearch-values
+  - name: librechat-meilisearch-values
     files:
       - values.yaml=values.yaml
 configurations:
