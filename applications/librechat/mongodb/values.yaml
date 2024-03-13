@@ -22,10 +22,10 @@ persistence:
 volumePermissions:
   enabled: false
 
-resources: # FIXME: mongodb - resources
+resources:
   requests:
-    cpu: 50m
-    memory: 96Mi
+    cpu: 150m
+    memory: 128Mi
   limits:
-    cpu: 250m
-    memory: 192Mi
+    cpu: 300m
+    memory: 256Mi

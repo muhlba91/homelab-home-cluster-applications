@@ -3,5 +3,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: librechat
 resources:
+  - ./configmap-env.yaml
   - ./configmap.yaml
   - ./external-secret-librechat-meilisearch-master-key.yaml
+  - ./external-secret-librechat-secrets.yaml

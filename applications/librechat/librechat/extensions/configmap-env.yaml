@@ -7,7 +7,7 @@ data:
   # https://github.com/danny-avila/LibreChat/blob/main/.env.example
   DOMAIN_CLIENT: ""
   DOMAIN_SERVER: ""
-  ENDPOINTS: openAI,anthropic,gptPlugins # FIXME: librechat - order
+  ENDPOINTS: openAI,anthropic,gptPlugins
   BAN_VIOLATIONS: "false"
   ANTHROPIC_MODELS: claude-3-sonnet-20240229,claude-3-opus-20240229
   OPENAI_MODELS: gpt-3.5-turbo,gpt-4-turbo-preview,gpt-4,gpt-4-vision-preview
@@ -21,14 +21,14 @@ data:
   CONCURRENT_MESSAGE_MAX: "15"
   LIMIT_MESSAGE_IP: "false"
   ALLOW_EMAIL_LOGIN: "true"
-  ALLOW_REGISTRATION: "true" # FIXME: librechat
+  ALLOW_REGISTRATION: "true" # FIXME: librechat - registration
   ALLOW_SOCIAL_LOGIN: "true"
   ALLOW_SOCIAL_REGISTRATION: "true"
   OPENID_BUTTON_LABEL: "Login with SSO"
   #OPENID_IMAGE_URL: ""
-  EMAIL_FROM: "noreply@tuxchat.home.muehlbachler.io" # FIXME: librechat - domain
+  EMAIL_FROM: "noreply@tuxchat.home.muehlbachler.io"
   SESSION_EXPIRY: "1000 * 60 * 30" # 30 min
   REFRESH_TOKEN_EXPIRY: "(1000 * 60 * 60 * 24) * 7" # 7 days
-  APP_TITLE: TuxChat # FIXME: librechat - name
+  APP_TITLE: TuxChat
   HELP_AND_FAQ_URL: "/"
   CUSTOM_FOOTER: ""
