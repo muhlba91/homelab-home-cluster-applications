@@ -28,10 +28,31 @@ data:
         userWindowInMinutes: 60
 
     registration:
-      socialLogins: ["openid"]
+      socialLogins:
+        - openid
       allowedDomains:
         - "muehlbachler.io"
 
-    # endpoints:
+    endpoints:
       # assistants:
-      #   supportedIds: ["asst_supportedAssistantId1"]
+      #   supportedIds:
+      #     - asst_supportedAssistantId1
+      custom:
+        - name: "Mistral"
+          modelDisplayLabel: "Mistral AI"
+          iconURL: https://raw.githubusercontent.com/mistralai/platform-docs-public/main/static/img/favicon.ico
+          apiKey: "${MISTRAL_API_KEY}"
+          baseURL: https://api.mistral.ai/v1
+          models:
+            default:
+              - mistral-medium-latest
+              - mistral-small-latest
+              - mistral-large-latest
+            fetch: false
+            userIdQuery: false
+          # NOTE: For Mistral, it is necessary to drop the following parameters or you will encounter a 422 Error:
+          dropParams:
+            - stop
+            - user
+            - presence_penalty
+            - frequency_penalty
