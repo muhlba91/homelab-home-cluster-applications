@@ -50,7 +50,8 @@ data:
               - mistral-large-latest
             fetch: false
             userIdQuery: false
-          titleConvo: false
+          titleConvo: true
+          titleModel: mistral-small-latest
           # NOTE: For Mistral, it is necessary to drop the following parameters or you will encounter a 422 Error:
           dropParams:
             - stop
