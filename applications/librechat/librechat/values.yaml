@@ -26,12 +26,12 @@ controllers:
                 name: librechat-mongodb-svcbind-root
                 key: uri
 
-        resources: # FIXME: librechat - resources
+        resources:
           requests:
-            cpu: 100m
-            memory: 288Mi
+            cpu: 20m
+            memory: 256Mi
           limits:
-            cpu: 500m
+            cpu: 300m
             memory: 384Mi
 
 serviceAccount:
@@ -53,7 +53,7 @@ ingress:
       cert-manager.io/cluster-issuer: cluster-issuer-home-muehlbachler-io
       external-dns.alpha.kubernetes.io/provider: public
     hosts:
-      - host: &domain tuxchat.home.muehlbachler.io
+      - host: &domain gpt.home.muehlbachler.io
         paths:
           - path: /
             pathType: ImplementationSpecific
