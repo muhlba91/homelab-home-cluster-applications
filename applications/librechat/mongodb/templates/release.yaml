@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: librechat-mongodb
+spec:
+  releaseName: librechat-mongodb
+  targetNamespace: librechat
+  chart:
+    spec:
+      chart: mongodb
+      version: 14.13.0
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+  valuesFrom:
+    - kind: ConfigMap
+      name: mongodb-values
+      valuesKey: values.yaml

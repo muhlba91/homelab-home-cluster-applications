@@ -1,0 +1,84 @@
+---
+global:
+  fullnameOverride: librechat
+
+controllers:
+  main:
+    containers:
+      main:
+        image:
+          repository: ghcr.io/danny-avila/librechat
+          pullPolicy: IfNotPresent
+          tag: v0.6.10
+
+        envFrom:
+          - configMapRef:
+              name: librechat-env
+          - secretRef:
+              name: librechat-secrets
+          - secretRef:
+              name: librechat-meilisearch-master-key
+        
+        env:
+          - name: MONGO_URI
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-svcbind-root
+                key: uri
+
+        resources: # FIXME: librechat - resources
+          requests:
+            cpu: 100m
+            memory: 288Mi
+          limits:
+            cpu: 500m
+            memory: 384Mi
+
+serviceAccount:
+  create: true
+
+defaultPodOptions:
+  automountServiceAccountToken: false
+
+service:
+  main:
+    ports:
+      http:
+        port: 3080
+
+ingress:
+  main:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: cluster-issuer-muehlbachler-io
+      external-dns.alpha.kubernetes.io/provider: public
+    hosts:
+      - host: &domain tuxchat.home.muehlbachler.io # FIXME: librechat - url
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            service:
+              name: librechat
+              port: 3080
+    tls:
+      - secretName: simplelogin-tls-cert
+        hosts:
+          - *domain
+
+persistence:
+  data:
+    enabled: true
+    type: persistentVolumeClaim
+    storageClass: longhorn # FIXME: librechat - storage
+    accessMode: ReadWriteOnce
+    size: 10Gi
+    globalMounts:
+      - path: /app/client/public/images
+  config:
+    enabled: true
+    type: configMap
+    name: librechat-config
+    defaultMode: 511
+    globalMounts:
+      - path: /app/librechat.yaml
+        subPath: librechat.yaml

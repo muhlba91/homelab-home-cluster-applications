@@ -1,0 +1,21 @@
+---
+global:
+  fullnameOverride: meilisearch
+
+environment:
+  MEILI_ENV: production
+auth:
+  existingMasterKeySecret: librechat-meilisearch-master-key
+
+persistence: # FIXME: meilisearch - persistence
+  enabled: true
+  storageClass: longhorn
+  size: 10Gi
+
+resources: # FIXME: meilisearch - resources
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 250m
+    memory: 128Mi

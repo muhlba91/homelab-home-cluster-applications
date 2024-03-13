@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: librechat
+spec:
+  releaseName: librechat
+  targetNamespace: librechat
+  chart:
+    spec:
+      chart: app-template
+      version: 2.0.3
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  valuesFrom:
+    - kind: ConfigMap
+      name: values
+      valuesKey: values.yaml

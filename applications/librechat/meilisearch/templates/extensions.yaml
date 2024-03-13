@@ -1,0 +1,12 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: librechat-meilisearch-extensions
+spec:
+  targetNamespace: librechat
+  sourceRef:
+    kind: GitRepository
+    name: cluster-applications
+  path: ./applications/librechat/meilisearch/extensions/
+  wait: true

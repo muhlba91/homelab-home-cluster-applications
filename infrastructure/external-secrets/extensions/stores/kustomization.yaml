@@ -7,3 +7,4 @@ resources:
   - ./flux.yaml
   - ./grafana.yaml
   - ./home-assistant.yaml
+  - ./librechat.yaml

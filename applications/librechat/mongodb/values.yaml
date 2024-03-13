@@ -1,0 +1,31 @@
+---
+global:
+  fullnameOverride: mongodb
+
+rbac:
+  create: true
+
+architecture: standalone
+useStatefulSet: true
+replicaCount: 1
+arbiter:
+  enabled: false
+
+serviceBindings:
+  enabled: true
+
+persistence:
+  enabled: true
+  storageClass: "longhorn"
+  size: 5Gi
+
+volumePermissions:
+  enabled: false
+
+resources: # FIXME: mongodb - resources
+  requests:
+    cpu: 50m
+    memory: 32Mi
+  limits:
+    cpu: 250m
+    memory: 96Mi
