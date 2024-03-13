@@ -41,7 +41,6 @@ Each of these applications follows the app-of-apps pattern again using sub-kusto
 The following applications are defined in [`infrastructure/`](infrastructure/).
 
 - [x] [Cilium](https://cilium.io) - Provides the cluster CNI.
-- [ ] [CSI NFS Driver](https://github.com/kubernetes-csi/csi-driver-nfs/tree/master) - Exposes the NAS' NFS storage as a Kubernetes `StorageClass`.
 - [x] [MetalLB](https://metallb.universe.tf) - Provides a Kubernetes network load balancer to expose Kubernetes `Service`s.
 - [x] [Longhorn](https://longhorn.io) - Exposes local storage to Kubernetes `StorageClass`es.
 - [x] [NFS CSI Driver](https://github.com/kubernetes-csi/csi-driver-nfs/tree/master) - Exposes NAS NFS storage to Kubernetes `StorageClass`es.
@@ -57,6 +56,7 @@ The following applications are defined in [`core/`](core/).
 - [x] [External DNS with Google Cloud DNS integration](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Google Cloud DNS domains for publicly reachable services.
 - [x] [victoria-metrics-stack](https://github.com/VictoriaMetrics/helm-charts/tree/master/charts/victoria-metrics-k8s-stack) - Monitoring stack using [Victoria Metrics](https://victoriametrics.com).
 - [x] [loki-stack](https://github.com/grafana/helm-charts/tree/main/charts/loki-stack) - Logging stack using [Grafana Loki](https://grafana.com/oss/loki/).
+- [x] [Grafana](http://grafana.com) - Visualization of metrics, and other data.
 
 ### (User) Applications
 
@@ -66,7 +66,7 @@ The following applications are defined in [`applications/`](applications/).
 - [x] [dnsmasq](https://thekelleys.org.uk/dnsmasq/doc.html) - IPv4 and IPv6 DHCP server.
 - [x] [External DNS with Adguard integration](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Adguard for internal, local only, reachable services. Uses the [External DNS Adguard Webhook provider](https://github.com/muhlba91/external-dns-provider-adguard).
 - [x] External Services - Deploys Kubernetes `Service`s and `Ingress`es to local endpoints, and existing services outside of the cluster.
-- [x] [Grafana](http://grafana.com) - Visualization of metrics, and other data.
+- [x] [LibreChat](https://librechat.ai) - Open Source AI platform integrating with multiple models.
 
 ### Home Assistant
 
