@@ -5,8 +5,8 @@ metadata:
   name: librechat-env
 data:
   # https://github.com/danny-avila/LibreChat/blob/main/.env.example
-  DOMAIN_CLIENT: "gpt.home.muehlbachler.io"
-  DOMAIN_SERVER: "gpt.home.muehlbachler.io"
+  DOMAIN_CLIENT: "https://gpt.home.muehlbachler.io"
+  DOMAIN_SERVER: "https://gpt.home.muehlbachler.io"
   EMAIL_FROM: "noreply@gpt.home.muehlbachler.io"
   APP_TITLE: GPT Chat
   ENDPOINTS: openAI,anthropic,gptPlugins
