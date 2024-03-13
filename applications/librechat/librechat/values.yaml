@@ -51,7 +51,9 @@ ingress:
     enabled: true
     annotations:
       cert-manager.io/cluster-issuer: cluster-issuer-home-muehlbachler-io
-      external-dns.alpha.kubernetes.io/provider: public
+    external-dns.alpha.kubernetes.io/provider: public
+    external-dns.alpha.kubernetes.io/target: 144.208.195.224,2a01:aea0:dd3:25a:1000:3:3:1
+    traefik.ingress.kubernetes.io/router.tls: "true"
     hosts:
       - host: &domain gpt.home.muehlbachler.io
         paths:
