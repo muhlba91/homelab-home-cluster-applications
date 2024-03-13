@@ -13,8 +13,6 @@ arbiter:
 
 auth:
   enabled: true
-  databases:
-    - librechat
 
 networkPolicy:
   enabled: false
