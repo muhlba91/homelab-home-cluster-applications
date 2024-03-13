@@ -25,7 +25,7 @@ data:
   ALLOW_SOCIAL_LOGIN: "true"
   ALLOW_SOCIAL_REGISTRATION: "true"
   OPENID_BUTTON_LABEL: "Login with SSO"
-  #OPENID_IMAGE_URL: ""
+  # OPENID_IMAGE_URL: ""
   EMAIL_FROM: "noreply@tuxchat.home.muehlbachler.io"
   SESSION_EXPIRY: "1000 * 60 * 30" # 30 min
   REFRESH_TOKEN_EXPIRY: "(1000 * 60 * 60 * 24) * 7" # 7 days

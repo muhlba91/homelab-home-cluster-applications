@@ -18,7 +18,7 @@ controllers:
               name: librechat-secrets
           - secretRef:
               name: librechat-meilisearch-master-key
-        
+
         env:
           - name: MONGO_URI
             valueFrom:
@@ -53,7 +53,7 @@ ingress:
       cert-manager.io/cluster-issuer: cluster-issuer-muehlbachler-io
       external-dns.alpha.kubernetes.io/provider: public
     hosts:
-      - host: &domain tuxchat.home.muehlbachler.io # FIXME: librechat - url
+      - host: &domain tuxchat.home.muehlbachler.io
         paths:
           - path: /
             pathType: ImplementationSpecific
@@ -69,9 +69,9 @@ persistence:
   data:
     enabled: true
     type: persistentVolumeClaim
-    storageClass: longhorn # FIXME: librechat - storage
+    storageClass: nfs
     accessMode: ReadWriteOnce
-    size: 10Gi
+    size: 25Gi
     globalMounts:
       - path: /app/client/public/images
   config:
