@@ -54,7 +54,7 @@ ingress:
               name: librechat
               port: 3080
     tls:
-      - secretName: simplelogin-tls-cert
+      - secretName: librechat-tls-cert
         hosts:
           - *domain
 
