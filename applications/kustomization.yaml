@@ -6,4 +6,4 @@ resources:
   - ./dnsmasq/
   - ./adguard/
   - ./external-services/
-  - ./librechat/
+  # - ./librechat/
