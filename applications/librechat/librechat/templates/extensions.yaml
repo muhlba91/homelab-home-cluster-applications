@@ -8,5 +8,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./applications/librechat/extensions/
+  path: ./applications/librechat/librechat/extensions/
   wait: true
