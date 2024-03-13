@@ -12,6 +12,11 @@ arbiter:
   enabled: false
 
 auth:
+  enabled: true
+  databases:
+    - librechat
+
+networkPolicy:
   enabled: false
 
 persistence:
