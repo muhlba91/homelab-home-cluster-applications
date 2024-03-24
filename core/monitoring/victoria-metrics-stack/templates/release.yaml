@@ -19,3 +19,20 @@ spec:
     - kind: ConfigMap
       name: victoria-metrics-stack-values
       valuesKey: values.yaml
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: prometheus-operator-crds
+spec:
+  releaseName: prometheus-operator-crds
+  targetNamespace: victoria-metrics
+  chart:
+    spec:
+      chart: prometheus-operator-crds
+      version: 10.0.0
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: flux-system

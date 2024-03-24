@@ -6,6 +6,9 @@ crds:
 
 victoria-metrics-operator:
   enabled: true
+  operator:
+    disable_prometheus_converter: false
+    enable_converter_ownership: true
   resources:
     requests:
       cpu: 3m
