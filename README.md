@@ -57,6 +57,7 @@ The following applications are defined in [`core/`](core/).
 - [x] [victoria-metrics-stack](https://github.com/VictoriaMetrics/helm-charts/tree/master/charts/victoria-metrics-k8s-stack) - Monitoring stack using [Victoria Metrics](https://victoriametrics.com).
 - [x] [loki-stack](https://github.com/grafana/helm-charts/tree/main/charts/loki-stack) - Logging stack using [Grafana Loki](https://grafana.com/oss/loki/).
 - [x] [Grafana](http://grafana.com) - Visualization of metrics, and other data.
+- [x] [CloudNativePG](https://cloudnative-pg.io/documentation/current/) - Postgres database operator.
 
 ### (User) Applications
 

@@ -5,4 +5,5 @@ namespace: flux-system
 resources:
   - ./external-dns/
   - ./cert-manager/
+  - ./cloudnative-pg/
   - ./monitoring/
