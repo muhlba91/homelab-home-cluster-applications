@@ -24,6 +24,11 @@ controllers:
               secretKeyRef:
                 name: home-assistant-gcp-credentials
                 key: credentials.json
+          - name: POSTGRESQL_URI
+            valueFrom:
+              secretKeyRef:
+                name: home-assistant-postgresql-app
+                key: uri
 
         envFrom:
           - secretRef:
@@ -34,10 +39,10 @@ controllers:
         resources:
           requests:
             cpu: 50m
-            memory: 768Mi
+            memory: 1024Mi
           limits:
             cpu: "1"
-            memory: 1280Mi
+            memory: 1536Mi
 
     initContainers:
       backup-restore:
