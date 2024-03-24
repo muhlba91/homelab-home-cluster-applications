@@ -25,7 +25,7 @@ defaultRules:
     kubeApiserverBurnrate: false
     kubeApiserverHistogram: false
     kubeApiserverSlos: false
-    kubelet: false
+    kubelet: true
     kubePrometheusGeneral: true
     kubePrometheusNodeRecording: true
     kubernetesApps: true
@@ -125,7 +125,7 @@ kube-state-metrics:
       memory: 96Mi
 
 kubelet:
-  enabled: false
+  enabled: true
 
 kubeApiserver:
   enabled: false
