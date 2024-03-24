@@ -7,3 +7,4 @@ resources:
   - ./configmap-scripts.yaml
   - ./external-secret-backup.yaml
   - ./external-secret-gcp.yaml
+  - ./postgresql.yaml
