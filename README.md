@@ -57,7 +57,7 @@ The following applications are defined in [`core/`](core/).
 - [x] [victoria-metrics-stack](https://github.com/VictoriaMetrics/helm-charts/tree/master/charts/victoria-metrics-k8s-stack) - Monitoring stack using [Victoria Metrics](https://victoriametrics.com).
 - [x] [loki-stack](https://github.com/grafana/helm-charts/tree/main/charts/loki-stack) - Logging stack using [Grafana Loki](https://grafana.com/oss/loki/).
 - [x] [Grafana](http://grafana.com) - Visualization of metrics, and other data.
-- [x] [CloudNativePG](https://cloudnative-pg.io/documentation/current/) - Postgres database operator.
+- [x] [CloudNativePG](https://cloudnative-pg.io/documentation/current/) - PostgreSQL database operator.
 
 ### (User) Applications
 
@@ -76,6 +76,7 @@ The following applications are defined in [`home-assistant/`](home-assistant/).
 - [x] [ecowitt2mqtt](https://github.com/bachya/ecowitt2mqtt) - Forwards data received from ecowitt devices to the MQTT broker.
 - [x] [EMQX](https://www.emqx.io) - A MQTT broker.
 - [x] [Home Assistant](https://home-assistant.io) - The Home Assistant instance.
+  - [x] PostgreSQL instance as the Home Assistant recorder target and configured via the CloudNativePG operator.
 - [x] [Node-RED](https://nodered.org) - Automation based on flows and Home Assistant data.
 - [x] [Ring MQTT](https://github.com/tsightler/ring-mqtt) - Amazon Ring devices to MQTT bridge.
 - [x] [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) - Forwards Home Assistant state changes to a local [InfluxDB](https://www.influxdata.com) instance.
