@@ -20,22 +20,22 @@ victoria-metrics-operator:
 defaultRules:
   create: true
   rules:
-    etcd: false
+    etcd: false # k0s restriction
     general: true
     k8s: true
-    kubeApiserver: false
-    kubeApiserverAvailability: false
-    kubeApiserverBurnrate: false
-    kubeApiserverHistogram: false
-    kubeApiserverSlos: false
+    kubeApiserver: true
+    kubeApiserverAvailability: true
+    kubeApiserverBurnrate: true
+    kubeApiserverHistogram: true
+    kubeApiserverSlos: true
     kubelet: true
     kubePrometheusGeneral: true
     kubePrometheusNodeRecording: true
     kubernetesApps: true
     kubernetesResources: true
     kubernetesStorage: true
-    kubernetesSystem: false
-    kubeScheduler: false
+    kubernetesSystem: true
+    kubeScheduler: false # k0s restriction
     kubeStateMetrics: true
     network: true
     node: true
@@ -45,8 +45,8 @@ defaultRules:
     vmhealth: true
     alertmanager: false
 
-defaultDashboardsEnabled: false
-experimentalDashboardsEnabled: false
+defaultDashboardsEnabled: true
+experimentalDashboardsEnabled: true
 
 vmsingle:
   enabled: true
@@ -106,6 +106,8 @@ grafana:
   sidecar:
     datasources:
       label: grafana_datasource
+    dashboards:
+      label: grafana_dashboard
 
 prometheus-node-exporter:
   enabled: true
@@ -131,22 +133,22 @@ kubelet:
   enabled: true
 
 kubeApiserver:
-  enabled: false
+  enabled: true
 
 kubeControllerManager:
-  enabled: false
+  enabled: false # k0s restriction
 
 kubeDns:
   enabled: false
 
 coreDns:
-  enabled: false
+  enabled: true
 
 kubeEtcd:
-  enabled: false
+  enabled: false # k0s restriction
 
 kubeScheduler:
-  enabled: false
+  enabled: false # k0s restriction
 
 kubeProxy:
   enabled: false
