@@ -9,7 +9,7 @@ controllers:
         image:
           repository: ghcr.io/danny-avila/librechat-dev
           pullPolicy: IfNotPresent
-          tag: 0f417aaec04572276755b6ab502dacec166a0ec3
+          tag: b5d25f5e4f8bafe8e0e58228006218af11182375
 
         envFrom:
           - configMapRef:
