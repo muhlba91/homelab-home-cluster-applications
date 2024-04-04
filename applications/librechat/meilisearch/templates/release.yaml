@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: meilisearch
-      version: 0.5.0
+      version: 0.6.1
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
