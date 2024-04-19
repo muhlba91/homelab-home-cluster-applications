@@ -8,3 +8,4 @@ resources:
   - ./grafana.yaml
   - ./home-assistant.yaml
   - ./librechat.yaml
+  - ./vault.yaml
