@@ -1,4 +1,7 @@
 ---
+node:
+  kubeletHostPath: /var/lib/k0s/kubelet
+
 csiDriver:
   name: "org.democratic-csi.iscsi"
 
