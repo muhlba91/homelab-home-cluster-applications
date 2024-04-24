@@ -34,11 +34,11 @@ data:
       date_format = "02"
       timezone = "UTC"
 
-    [[outputs.influxdb_v2]]
-      urls = [ "http://influxdb.external-services" ]
-      organization = "home"
-      bucket = "home-assistant"
-      token = "${TELEGRAF_REMOTE_TOKEN}"
+    # [[outputs.influxdb_v2]]
+    #   urls = [ "http://influxdb.external-services" ]
+    #   organization = "home"
+    #   bucket = "home-assistant"
+    #   token = "${TELEGRAF_REMOTE_TOKEN}"
 
     [[outputs.file]]
       files = [ "/tmp/metrics.txt" ]
