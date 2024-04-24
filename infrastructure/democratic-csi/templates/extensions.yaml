@@ -2,11 +2,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: csi-driver-nfs-extensions
+  name: democratic-csi-extensions
 spec:
-  targetNamespace: csi-driver-nfs
+  targetNamespace: democratic-csi
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./infrastructure/csi-driver-nfs/extensions/
+  path: ./infrastructure/democratic-csi/extensions/
   wait: true

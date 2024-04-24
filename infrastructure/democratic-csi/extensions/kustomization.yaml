@@ -1,7 +1,7 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: csi-driver-nfs
+namespace: democratic-csi
 resources:
+  - ./external-secret-driver-config.yaml
   - ./storageclass.yaml
-  - ./nfs-mount-options.yaml

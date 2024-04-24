@@ -6,7 +6,7 @@ resources:
   - ./templates/release.yaml
   - ./templates/extensions.yaml
 configMapGenerator:
-  - name: csi-driver-nfs-values
+  - name: democratic-csi-values
     files:
       - values.yaml=values.yaml
 configurations:

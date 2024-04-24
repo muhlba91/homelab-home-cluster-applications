@@ -1,0 +1,11 @@
+---
+csiDriver:
+  name: "org.democratic-csi.iscsi"
+
+storageClasses: []
+volumeSnapshotClasses: []
+
+driver:
+  existingConfigSecret: democratic-csi-driver-config
+  config:
+    driver: zfs-generic-iscsi

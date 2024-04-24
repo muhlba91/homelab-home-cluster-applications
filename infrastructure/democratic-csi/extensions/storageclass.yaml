@@ -1,0 +1,36 @@
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: zfs
+provisioner: org.democratic-csi.iscsi
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+mountOptions: []
+parameters:
+  fsType: "ext4"
+secrets:
+  provisioner-secret:
+  controller-publish-secret:
+  node-stage-secret:
+  node-publish-secret:
+  controller-expand-secret:
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: zfs-retain
+provisioner: org.democratic-csi.iscsi
+allowVolumeExpansion: true
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
+mountOptions: []
+parameters:
+  fsType: "ext4"
+secrets:
+  provisioner-secret:
+  controller-publish-secret:
+  node-stage-secret:
+  node-publish-secret:
+  controller-expand-secret:

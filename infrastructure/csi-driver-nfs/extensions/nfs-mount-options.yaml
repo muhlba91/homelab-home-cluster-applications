@@ -1,9 +1,0 @@
----
-apiVersion: v1
-kind: Secret
-type: Opaque
-metadata:
-  name: mount-options
-  namespace: csi-driver-nfs
-stringData:
-  mountOptions: nfsvers=4.2,hard

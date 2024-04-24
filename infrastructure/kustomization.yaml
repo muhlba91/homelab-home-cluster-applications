@@ -5,7 +5,7 @@ namespace: flux-system
 resources:
   - ./cilium/
   - ./longhorn/
-  - ./csi-driver-nfs/
+  - ./democratic-csi/
   - ./metallb/
   - ./traefik/
   - ./external-secrets/
