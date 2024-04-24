@@ -93,33 +93,3 @@ spec:
       targetPort: http
 
 # applications
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: fileshare
-  annotations:
-    traefik.ingress.kubernetes.io/service.serversscheme: https
-spec:
-  type: ClusterIP
-  ipFamilyPolicy: PreferDualStack
-  ports:
-    - name: http
-      port: 80
-      protocol: TCP
-      targetPort: http
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: influxdb
-  annotations:
-    traefik.ingress.kubernetes.io/service.serversscheme: http
-spec:
-  type: ClusterIP
-  ipFamilyPolicy: PreferDualStack
-  ports:
-    - name: http
-      port: 80
-      protocol: TCP
-      targetPort: http
