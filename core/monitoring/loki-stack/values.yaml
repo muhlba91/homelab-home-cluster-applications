@@ -24,7 +24,7 @@ loki:
     type: filesystem
   persistence:
     enabled: true
-    storageClassName: longhorn
+    storageClassName: zfs
     size: 50Gi
   resources:
     requests:

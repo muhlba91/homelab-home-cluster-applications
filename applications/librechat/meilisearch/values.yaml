@@ -9,7 +9,7 @@ auth:
 
 persistence:
   enabled: true
-  storageClass: longhorn
+  storageClass: zfs
   size: 5Gi
 
 resources:

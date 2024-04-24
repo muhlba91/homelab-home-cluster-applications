@@ -64,7 +64,7 @@ vmsingle:
         cpu: "1"
         memory: 1Gi
     storage:
-      storageClassName: longhorn
+      storageClassName: zfs
       accessModes:
         - ReadWriteOnce
       resources:
