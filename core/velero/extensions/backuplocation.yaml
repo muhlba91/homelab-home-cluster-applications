@@ -5,11 +5,11 @@ metadata:
   name: google-cloud
 spec:
   provider: velero.io/gcp
-  
+
   objectStorage:
     bucket: infrastructure-assets-5274ba70-fde0-47de-8e9a-f1bc64c11157
     prefix: cluster/home/backup
-  
+
   credential:
     name: velero-google
     key: credentials
