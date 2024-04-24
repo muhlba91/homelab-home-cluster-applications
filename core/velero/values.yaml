@@ -17,3 +17,7 @@ initContainers:
 
 credentials:
   extraSecretRef: velero-google
+
+configuration:
+  backupStorageLocation: []
+  volumeSnapshotLocation: []
