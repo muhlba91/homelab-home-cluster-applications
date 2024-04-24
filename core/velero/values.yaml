@@ -21,3 +21,4 @@ credentials:
 configuration:
   backupStorageLocation: []
   volumeSnapshotLocation: []
+  defaultBackupStorageLocation: google-cloud
