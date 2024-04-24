@@ -166,14 +166,14 @@ persistence:
   data:
     enabled: true
     type: persistentVolumeClaim
-    storageClass: longhorn
+    storageClass: zfs
     accessMode: ReadWriteOnce
     size: 1Gi
     retain: false
   node-modules:
     enabled: true
     type: persistentVolumeClaim
-    storageClass: longhorn
+    storageClass: zfs
     accessMode: ReadWriteOnce
     size: 1Gi
     retain: false

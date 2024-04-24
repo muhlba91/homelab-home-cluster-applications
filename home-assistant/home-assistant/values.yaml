@@ -114,7 +114,7 @@ persistence:
   config:
     enabled: true
     type: persistentVolumeClaim
-    storageClass: longhorn
+    storageClass: zfs-retain
     accessMode: ReadWriteOnce
     size: 5Gi
     retain: false

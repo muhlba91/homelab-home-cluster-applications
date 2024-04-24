@@ -135,8 +135,8 @@ persistence:
   data:
     enabled: true
     type: persistentVolumeClaim
-    storageClass: longhorn
-    accessMode: ReadWriteMany
+    storageClass: zfs
+    accessMode: ReadWriteOnce
     size: 32Mi
     retain: false
   scripts:

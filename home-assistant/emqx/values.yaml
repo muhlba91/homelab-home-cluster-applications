@@ -21,7 +21,7 @@ ingress:
 
 persistence:
   enabled: true
-  storageClassName: longhorn
+  storageClassName: zfs
   accessMode: ReadWriteOnce
   size: 512Mi
 
