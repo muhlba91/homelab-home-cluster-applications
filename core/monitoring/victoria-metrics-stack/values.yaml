@@ -64,12 +64,12 @@ vmsingle:
         cpu: "1"
         memory: 1Gi
     storage:
-      storageClassName: nfs
+      storageClassName: longhorn
       accessModes:
         - ReadWriteOnce
       resources:
         requests:
-          storage: 100Gi
+          storage: 50Gi
   ingress:
     enabled: false
 

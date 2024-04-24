@@ -24,8 +24,8 @@ loki:
     type: filesystem
   persistence:
     enabled: true
-    storageClassName: nfs
-    size: 100Gi
+    storageClassName: longhorn
+    size: 50Gi
   resources:
     requests:
       cpu: 50m
