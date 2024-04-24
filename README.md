@@ -42,7 +42,6 @@ The following applications are defined in [`infrastructure/`](infrastructure/).
 
 - [x] [Cilium](https://cilium.io) - Provides the cluster CNI.
 - [x] [MetalLB](https://metallb.universe.tf) - Provides a Kubernetes network load balancer to expose Kubernetes `Service`s.
-- [x] [Longhorn](https://longhorn.io) - Exposes local storage to Kubernetes `StorageClass`es.
 - [x] [Democratic CSI Driver](https://github.com/democratic-csi/democratic-csi) - Exposes Proxmox ZFS storage to Kubernetes `StorageClass`es.
 - [x] [External Secrets Operator](http://external-secrets.io) - Synchronizes secrets from external stores to Kubernetes `Secret` objects.
   - [x] [External Secrets Stores](infrastructure/external-secrets/) - Deploys the required `ClusterSecretStore`s and Doppler [Service Tokens](https://docs.doppler.com/docs/service-tokens) as Kubernetes `Secret`s.
