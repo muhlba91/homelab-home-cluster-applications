@@ -71,7 +71,7 @@ persistence:
   data:
     enabled: true
     type: persistentVolumeClaim
-    storageClass: nfs
+    storageClass: longhorn
     accessMode: ReadWriteOnce
     size: 25Gi
     globalMounts:
