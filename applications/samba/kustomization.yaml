@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - ./jane-doe-backup/
-  # - ./jessica-doe-backup/
+  - ./jessica-doe-backup/

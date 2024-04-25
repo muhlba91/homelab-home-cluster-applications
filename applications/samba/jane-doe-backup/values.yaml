@@ -80,6 +80,8 @@ service:
     externalTrafficPolicy: Local
     annotations:
       metallb.universe.tf/loadBalancerIPs: "10.0.74.11,2a01:aea0:dd3:25a:1000:3:5:11"
+      external-dns.alpha.kubernetes.io/provider: internal
+      external-dns.alpha.kubernetes.io/hostname: jane-doe-backup.smb.internal.muehlbachler.io
     ports:
       http:
         enabled: false
