@@ -13,7 +13,13 @@ controllers:
           - name: TZ
             value: UTC
           - name: SAMBA_SERVER_STRING
-            value: jane-doe-backup
+            value: jessica-doe-backup
+          - name: WSDD2_ENABLE
+            value: "1"
+          - name: WSDD2_HOSTNAME
+            value: jessica-doe-backup
+          - name: WSDD2_NETBIOS_NAME
+            value: jessica-doe-backup
           - name: SAMBA_LOG_LEVEL
             value: "0"
 
@@ -87,6 +93,21 @@ service:
         port: 139
         protocol: TCP
         targetPort: 139
+      discovery:
+        enabled: true
+        port: 3702
+        protocol: TCP
+        targetPort: 3702
+      llmnr-tcp:
+        enabled: true
+        port: 5355
+        protocol: TCP
+        targetPort: 5355
+      llmnr-udp:
+        enabled: true
+        port: 5355
+        protocol: UDP
+        targetPort: 5355
 
 persistence:
   data:
