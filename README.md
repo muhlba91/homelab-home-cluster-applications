@@ -67,6 +67,7 @@ The following applications are defined in [`applications/`](applications/).
 - [x] [External DNS with Adguard integration](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Adguard for internal, local only, reachable services. Uses the [External DNS Adguard Webhook provider](https://github.com/muhlba91/external-dns-provider-adguard).
 - [x] External Services - Deploys Kubernetes `Service`s and `Ingress`es to local endpoints, and existing services outside of the cluster.
 - [x] [LibreChat](https://librechat.ai) - Open Source AI platform integrating with multiple models.
+- [x] [Samba](https://github.com/crazy-max/docker-samba) - Exposes Samba shares for various applications.
 
 ### Home Assistant
 

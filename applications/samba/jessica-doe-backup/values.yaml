@@ -117,7 +117,7 @@ persistence:
     type: persistentVolumeClaim
     storageClass: zfs-retain
     accessMode: ReadWriteOnce
-    size: 384Gi
+    size: 300Gi
     globalMounts:
       - path: /share
   samba-config:
