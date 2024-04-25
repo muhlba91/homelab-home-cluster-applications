@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: samba-jessica-doe-backup
+spec:
+  releaseName: samba-jessica-doe-backup
+  targetNamespace: samba-jessica-doe-backup
+  chart:
+    spec:
+      chart: app-template
+      version: 2.0.3
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  valuesFrom:
+    - kind: ConfigMap
+      name: samba-jessica-doe-backup-values
+      valuesKey: values.yaml

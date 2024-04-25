@@ -112,12 +112,12 @@ persistence:
     retain: false
     globalMounts:
       - path: /opt/adguardhome/work
-    adguard-home-config:
-      enabled: true
-      type: configMap
-      name: adguard-home-config
-      advancedMounts:
-        main:
-          copy-configmap:
-            - path: /tmp/AdGuardHome.yaml
-              subPath: AdGuardHome.yaml
+  adguard-home-config:
+    enabled: true
+    type: configMap
+    name: adguard-home-config
+    advancedMounts:
+      main:
+        copy-configmap:
+          - path: /tmp/AdGuardHome.yaml
+            subPath: AdGuardHome.yaml

@@ -1,0 +1,97 @@
+---
+controllers:
+  main:
+    type: statefulset
+    containers:
+      main:
+        image:
+          repository: ghcr.io/crazy-max/samba
+          pullPolicy: IfNotPresent
+          tag: "4.18.9"
+
+        env:
+          - TZ: UTC
+          - SAMBA_SERVER_STRING: jessica-doe-backup
+          - WSDD2_ENABLE: "1"
+          - WSDD2_HOSTNAME: jessica-doe-backup
+          - WSDD2_NETBIOS_NAME: jessica-doe-backup
+
+        securityContext:
+          runAsUser: 0
+          capabilities:
+            add:
+              - NET_ADMIN
+              - NET_RAW
+
+        resources:
+          requests:
+            cpu: 5m
+            memory: 128Mi
+          limits:
+            cpu: 1
+            memory: 256Mi
+
+        probes:
+          liveness:
+            enabled: false
+          readiness:
+            enabled: false
+          startup:
+            enabled: false
+
+serviceAccount:
+  create: true
+
+defaultPodOptions:
+  automountServiceAccountToken: false
+
+service:
+  main:
+    controller: main
+    ipFamilyPolicy: PreferDualStack
+    type: LoadBalancer
+    externalTrafficPolicy: Local
+    annotations:
+      metallb.universe.tf/loadBalancerIPs: "10.0.74.12,2a01:aea0:dd3:25a:1000:3:5:12"
+    ports:
+      http:
+        enabled: false
+      smb:
+        enabled: true
+        port: 445
+        protocol: TCP
+        targetPort: 445
+      discovery:
+        enabled: true
+        port: 3702
+        protocol: TCP
+        targetPort: 3702
+      llmnr-tcp:
+        enabled: true
+        port: 5355
+        protocol: TCP
+        targetPort: 5355
+      llmnr-udp:
+        enabled: true
+        port: 5355
+        protocol: UDP
+        targetPort: 5355
+
+persistence:
+  data:
+    enabled: true
+    type: persistentVolumeClaim
+    storageClass: zfs-retain
+    accessMode: ReadWriteOnce
+    size: 384Gi
+    globalMounts:
+      - path: /share
+  samba-config:
+    enabled: true
+    type: secret
+    name: samba-config
+    globalMounts:
+      - path: /data/config.yaml
+        subPath: config.yaml
+      - path: /data/smb-shares.yaml
+        subPath: shares.yaml
