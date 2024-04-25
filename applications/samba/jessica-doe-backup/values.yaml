@@ -13,13 +13,13 @@ controllers:
           - name: TZ
             value: UTC
           - name: SAMBA_SERVER_STRING
-            value: jessica-doe-backup
+            value: jessica-doe-bkp
           - name: WSDD2_ENABLE
             value: "1"
           - name: WSDD2_HOSTNAME
-            value: jessica-doe-backup
+            value: jessica-doe-bkp
           - name: WSDD2_NETBIOS_NAME
-            value: jessica-doe-backup
+            value: jessica-doe-bkp
           - name: SAMBA_LOG_LEVEL
             value: "0"
 
@@ -125,8 +125,8 @@ persistence:
     type: secret
     name: samba-config
     globalMounts:
-      - path: /data/config.yaml
-        subPath: config.yml
+      - path: /data/config.yml
+        subPath: config.yaml
   scripts:
     enabled: true
     type: configMap
