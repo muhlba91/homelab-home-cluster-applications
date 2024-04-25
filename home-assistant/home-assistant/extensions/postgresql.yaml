@@ -10,7 +10,7 @@ spec:
 
   storage:
     size: 25Gi
-    storageClass: zfs-retain
+    storageClass: zfs
 
   resources:
     requests:
