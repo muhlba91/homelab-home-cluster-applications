@@ -97,6 +97,4 @@ persistence:
     name: samba-config
     globalMounts:
       - path: /data/config.yaml
-        subPath: config.yaml
-      - path: /data/smb-shares.yaml
-        subPath: shares.yaml
+        subPath: config.yml
