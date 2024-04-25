@@ -10,11 +10,12 @@ controllers:
           tag: "4.18.9"
 
         env:
-          - TZ: UTC
-          - SAMBA_SERVER_STRING: jessica-doe-backup
-          - WSDD2_ENABLE: "1"
-          - WSDD2_HOSTNAME: jessica-doe-backup
-          - WSDD2_NETBIOS_NAME: jessica-doe-backup
+          - name: TZ
+            value: UTC
+          - name: SAMBA_SERVER_STRING
+            value: jane-doe-backup
+          - name: SAMBA_LOG_LEVEL
+            value: "0"
 
         securityContext:
           runAsUser: 0
@@ -61,21 +62,6 @@ service:
         port: 445
         protocol: TCP
         targetPort: 445
-      discovery:
-        enabled: true
-        port: 3702
-        protocol: TCP
-        targetPort: 3702
-      llmnr-tcp:
-        enabled: true
-        port: 5355
-        protocol: TCP
-        targetPort: 5355
-      llmnr-udp:
-        enabled: true
-        port: 5355
-        protocol: UDP
-        targetPort: 5355
 
 persistence:
   data:
@@ -92,6 +78,4 @@ persistence:
     name: samba-config
     globalMounts:
       - path: /data/config.yaml
-        subPath: config.yaml
-      - path: /data/smb-shares.yaml
-        subPath: shares.yaml
+        subPath: config.yml
