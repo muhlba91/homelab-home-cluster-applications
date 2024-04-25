@@ -10,11 +10,16 @@ controllers:
           tag: "4.18.9"
 
         env:
-          - TZ: UTC
-          - SAMBA_SERVER_STRING: jane-doe-backup
-          - WSDD2_ENABLE: "1"
-          - WSDD2_HOSTNAME: jane-doe-backup
-          - WSDD2_NETBIOS_NAME: jane-doe-backup
+          - name: TZ
+            value: UTC
+          - name: SAMBA_SERVER_STRING
+            value: jane-doe-backup
+          - name: WSDD2_ENABLE
+            value: "1"
+          - name: WSDD2_HOSTNAME
+            value: jane-doe-backup
+          - name: WSDD2_NETBIOS_NAME
+            value: jane-doe-backup
 
         securityContext:
           runAsUser: 0
