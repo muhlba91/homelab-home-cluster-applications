@@ -62,6 +62,11 @@ service:
         port: 445
         protocol: TCP
         targetPort: 445
+      netbios:
+        enabled: true
+        port: 139
+        protocol: TCP
+        targetPort: 139
 
 persistence:
   data:

@@ -40,6 +40,26 @@ controllers:
           startup:
             enabled: false
 
+    initContainers:
+      init-chown-data:
+        image:
+          repository: alpine
+          tag: 3.19
+          pullPolicy: IfNotPresent
+        command:
+          - /scripts/init.sh
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 32Mi
+        securityContext:
+          capabilities:
+            add:
+              - CHOWN
+
 serviceAccount:
   create: true
 
@@ -84,3 +104,12 @@ persistence:
     globalMounts:
       - path: /data/config.yaml
         subPath: config.yml
+  scripts:
+    enabled: true
+    type: configMap
+    name: samba-scripts
+    defaultMode: 511
+    advancedMounts:
+      main:
+        init-chown-data:
+          - path: /scripts
