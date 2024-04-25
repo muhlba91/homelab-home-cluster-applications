@@ -14,6 +14,8 @@ controllers:
             value: UTC
           - name: SAMBA_SERVER_STRING
             value: jane-doe-backup
+          - name: SAMBA_LOG_LEVEL
+            value: "2"
 
         securityContext:
           runAsUser: 0
