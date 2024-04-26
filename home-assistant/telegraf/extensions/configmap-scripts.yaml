@@ -56,7 +56,7 @@ data:
 
     # create bucket
     influx bucket create --name home-assistant --description "Home Assistant" --retention 0 || true
-    HOME_ASSISTANT_BUCKET=$(influx bucket list --name default --hide-headers --json | jq -r ".[0].id")
+    HOME_ASSISTANT_BUCKET=$(influx bucket list --name home-assistant --hide-headers --json | jq -r ".[0].id")
 
     # create user
     influx user create --name home-assistant --password ${INFLUXDB_HOME_ASSISTANT_PASSWORD} || true
