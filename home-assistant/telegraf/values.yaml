@@ -14,7 +14,7 @@ controllers:
 
         envFrom:
           - secretRef:
-              name: telegraf-remote-token
+              name: influxdb-token
           - secretRef:
               name: telegraf-plugin-kinesis-firehose
 
@@ -51,24 +51,6 @@ controllers:
         envFrom:
           - secretRef:
               name: grafana-datasource-secrets
-        resources:
-          requests:
-            cpu: 10m
-            memory: 64Mi
-          limits:
-            cpu: 100m
-            memory: 128Mi
-      # FIXME: influxdb
-      influxdb:
-        image:
-          repository: influxdb
-          tag: 2.7.4-alpine
-          pullPolicy: IfNotPresent
-        command:
-          - /scripts/influxdb.sh
-        envFrom:
-          - secretRef:
-              name: influxdb-auth
         resources:
           requests:
             cpu: 10m
@@ -118,8 +100,6 @@ persistence:
         plugins:
           - path: /scripts
         grafana:
-          - path: /scripts
-        influxdb:
           - path: /scripts
   grafana-datasources:
     enabled: true

@@ -13,3 +13,4 @@ resources:
   - ./rbac-grafana.yaml
   - ./rbac-influxdb.yaml
   - ./external-secret-influxdb-auth.yaml
+  - ./influxdb-job.yaml
