@@ -78,4 +78,5 @@ data:
     data:
       token: ${HOME_ASSISTANT_TOKEN}
     EOF
+    cat /tmp/token.yaml
     ./kubectl apply -f /tmp/token.yaml
