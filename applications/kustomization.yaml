@@ -6,6 +6,6 @@ resources:
   - ./dnsmasq/
   - ./adguard/
   - ./external-services/
-  - ./influxdb/
+  # - ./influxdb/
   - ./samba/
   - ./librechat/
