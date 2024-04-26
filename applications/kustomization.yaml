@@ -6,7 +6,6 @@ resources:
   - ./dnsmasq/
   - ./adguard/
   - ./external-services/
-  # FIXME: influxdb
   - ./influxdb/
   - ./samba/
   - ./librechat/

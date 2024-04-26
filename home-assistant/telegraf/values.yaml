@@ -59,23 +59,23 @@ controllers:
             cpu: 100m
             memory: 128Mi
       # FIXME: influxdb
-      # influxdb:
-      #   image:
-      #     repository: influxdb
-      #     tag: 2.7.4-alpine
-      #     pullPolicy: IfNotPresent
-      #   command:
-      #     - /scripts/influxdb.sh
-      #   envFrom:
-      #     - secretRef:
-      #         name: influxdb-auth
-      #   resources:
-      #     requests:
-      #       cpu: 10m
-      #       memory: 64Mi
-      #     limits:
-      #       cpu: 100m
-      #       memory: 128Mi
+      influxdb:
+        image:
+          repository: influxdb
+          tag: 2.7.4-alpine
+          pullPolicy: IfNotPresent
+        command:
+          - /scripts/influxdb.sh
+        envFrom:
+          - secretRef:
+              name: influxdb-auth
+        resources:
+          requests:
+            cpu: 10m
+            memory: 64Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
 
 serviceAccount:
   create: true
