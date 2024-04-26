@@ -13,8 +13,8 @@ controllers:
           tag: 1.30.2
 
         envFrom:
-          - secretRef:
-              name: influxdb-token
+          # - secretRef:
+          #     name: influxdb-token
           - secretRef:
               name: telegraf-plugin-kinesis-firehose
 
