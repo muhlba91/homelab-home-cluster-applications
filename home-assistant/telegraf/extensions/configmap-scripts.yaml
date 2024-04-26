@@ -66,17 +66,15 @@ data:
     if [[ -z "$HOME_ASSISTANT_TOKEN" ]]; then
       HOME_ASSISTANT_TOKEN=$(influx auth create --read-bucket ${HOME_ASSISTANT_BUCKET} --write-bucket ${HOME_ASSISTANT_BUCKET} --description "Home Assistant Telegraf Token" --user home-assistant --json | jq -r ".token")
     fi
-    HOME_ASSISTANT_TOKEN=$(echo -n ${HOME_ASSISTANT_TOKEN} | base64)
 
     # store token in secret
-    cat > /tmp/token.yaml <<EOF
+    ubectl apply -f - <<EOF
+    ---
     apiVersion: v1
     kind: Secret
     type: Opaque
     metadata:
       name: influxdb-token
-    data:
+    stringData:
       token: ${HOME_ASSISTANT_TOKEN}
     EOF
-    cat /tmp/token.yaml
-    ./kubectl apply -f /tmp/token.yaml
