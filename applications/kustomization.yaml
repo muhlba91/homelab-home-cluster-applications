@@ -7,6 +7,6 @@ resources:
   - ./adguard/
   - ./external-services/
   # FIXME: influxdb
-  # - ./influxdb/
+  - ./influxdb/
   - ./samba/
   - ./librechat/

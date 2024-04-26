@@ -10,7 +10,7 @@ adminUser:
 
 persistence:
   enabled: true
-  storageClass: zfs-retain
+  storageClass: zfs
   size: 15Gi
 
 initScripts:
