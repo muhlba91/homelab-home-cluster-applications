@@ -69,7 +69,7 @@ data:
     HOME_ASSISTANT_TOKEN=$(echo -n ${HOME_ASSISTANT_TOKEN} | base64)
 
     # store token in secret
-    ./kubectl apply -f - <<EOF
+    cat > /tmp/token.yaml <<EOF
     apiVersion: v1
     kind: Secret
     type: Opaque
@@ -78,3 +78,4 @@ data:
     data:
       token: ${HOME_ASSISTANT_TOKEN}
     EOF
+    ./kubectl apply -f /tmp/token.yaml
