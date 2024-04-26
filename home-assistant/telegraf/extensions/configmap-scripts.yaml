@@ -76,5 +76,5 @@ data:
     metadata:
       name: influxdb-token
     stringData:
-      token: ${HOME_ASSISTANT_TOKEN}
+      TELEGRAF_INFLUXDB_TOKEN: ${HOME_ASSISTANT_TOKEN}
     EOF
