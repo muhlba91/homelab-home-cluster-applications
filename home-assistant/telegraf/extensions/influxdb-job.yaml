@@ -15,7 +15,7 @@ spec:
       serviceAccountName: telegraf
       restartPolicy: OnFailure
       containers:
-        - name: init
+        - name: influxdb
           image: influxdb:2.7.4-alpine
           imagePullPolicy: IfNotPresent
           command:

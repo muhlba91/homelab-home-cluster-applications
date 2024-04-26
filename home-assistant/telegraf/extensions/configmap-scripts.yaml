@@ -68,7 +68,7 @@ data:
     fi
 
     # store token in secret
-    kubectl apply -f - <<EOF
+    ./kubectl apply -f - <<EOF
     apiVersion: v1
     kind: Secret
     type: Opaque
