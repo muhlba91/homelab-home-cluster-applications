@@ -62,7 +62,7 @@ controllers:
       influxdb:
         image:
           repository: influxdb
-          tag: 2.7.4-alpine
+          tag: 2.7.6-alpine
           pullPolicy: IfNotPresent
         command:
           - /scripts/influxdb.sh
