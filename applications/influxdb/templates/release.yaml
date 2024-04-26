@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: influxdb
+spec:
+  releaseName: influxdb
+  targetNamespace: influxdb
+  chart:
+    spec:
+      chart: influxdb2
+      version: 2.1.2
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: influxdata
+        namespace: flux-system
+  valuesFrom:
+    - kind: ConfigMap
+      name: influxdb-values
+      valuesKey: values.yaml

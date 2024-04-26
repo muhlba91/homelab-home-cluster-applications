@@ -11,3 +11,5 @@ resources:
   - ./external-secret-plugin-kinesis-firehose.yaml
   - ./external-secret-remote-token.yaml
   - ./rbac-grafana.yaml
+  - ./rbac-influxdb.yaml
+  - ./external-secret-influxdb-auth.yaml

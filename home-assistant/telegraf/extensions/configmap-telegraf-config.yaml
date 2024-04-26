@@ -35,8 +35,8 @@ data:
       timezone = "UTC"
 
     # [[outputs.influxdb_v2]]
-    #   urls = [ "http://influxdb.external-services" ]
-    #   organization = "home"
+    #   urls = [ "http://influxdb.influxdb" ]
+    #   organization = "tuxnet"
     #   bucket = "home-assistant"
     #   token = "${TELEGRAF_REMOTE_TOKEN}"
 

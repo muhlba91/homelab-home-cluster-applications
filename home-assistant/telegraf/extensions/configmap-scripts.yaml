@@ -8,6 +8,7 @@ data:
     #!/bin/sh
     set -eu
 
+    # install required tools
     apk add --no-cache curl
 
     # telegraf-output-kinesis-data-firehose
@@ -40,3 +41,39 @@ data:
 
       kubectl apply -f /tmp/datasource-${name}
     done
+  influxdb.sh: |
+    #!/bin/bash
+    set -eu
+
+    # install required tools
+    apk add jq curl
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    chmod +x kubectl
+
+    while [[ ! `curl -s ${INFLUX_HOST}` ]]; do
+      sleep 1
+    done
+
+    # create bucket
+    influx bucket create --name home-assistant --description "Home Assistant" --retention 0 || true
+    HOME_ASSISTANT_BUCKET=$(influx bucket list --name default --hide-headers --json | jq -r ".[0].id")
+
+    # create user
+    influx user create --name home-assistant --password ${INFLUXDB_HOME_ASSISTANT_PASSWORD} || true
+
+    # create token
+    HOME_ASSISTANT_TOKEN=$(influx auth list --json | jq -r '.[] | select(.description | match("Home Assistant Telegraf Token")).token')
+    if [[ -z "$HOME_ASSISTANT_TOKEN" ]]; then
+      HOME_ASSISTANT_TOKEN=$(influx auth create --read-bucket ${HOME_ASSISTANT_BUCKET} --write-bucket ${HOME_ASSISTANT_BUCKET} --description "Home Assistant Telegraf Token" --user home-assistant --json | jq -r ".token")
+    fi
+
+    # store token in secret
+    kubectl apply -f - <<EOF
+    apiVersion: v1
+    kind: Secret
+    type: Opaque
+    metadata:
+      name: influxdb-token
+    data:
+      token: $(echo -n ${HOME_ASSISTANT_TOKEN} | base64)
+    EOF

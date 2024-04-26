@@ -1,0 +1,27 @@
+---
+fullnameOverride: influxdb
+
+adminUser:
+  organization: tuxnet
+  bucket: default
+  user: admin
+  retention_policy: 0s
+  existingSecret: influxdb-admin
+
+persistence:
+  enabled: true
+  storageClass: zfs-retain
+  size: 15Gi
+
+initScripts:
+  enabled: false
+
+ingress:
+  enabled: true
+  tls: true
+  secretName: influxdb-tls-cert
+  hostname: influxdb.iot.internal.muehlbachler.io
+  annotations:
+    cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+    external-dns.alpha.kubernetes.io/provider: internal
+    traefik.ingress.kubernetes.io/router.tls: "true"
