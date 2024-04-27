@@ -12,3 +12,7 @@ driver:
   existingConfigSecret: democratic-csi-driver-config
   config:
     driver: zfs-generic-iscsi
+
+controller:
+  driver:
+    image: ghcr.io/democratic-csi/democratic-csi:v1.9.0
