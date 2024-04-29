@@ -1,0 +1,11 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: immich
+resources:
+  - ./configmap-env.yaml
+  - ./configmap-init.yaml
+  - ./external-secret-immich-config.yaml
+  - ./external-secret-immich-database.yaml
+  - ./postgresql.yaml
+  # - ./postgresql-backup.yaml # FIXME: immich

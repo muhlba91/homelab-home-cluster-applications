@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: immich-init
+data:
+  create-data-directories.sh: |
+    #!/bin/bash
+    set -euo pipefail
+
+    mkdir -p /data/upload || true

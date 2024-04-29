@@ -1,0 +1,68 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: immich-postgresql
+spec:
+  instances: 1
+
+  imageName: ghcr.io/muhlba91/postgresql-pgvecto:15.6-16-v0.2.1
+
+  storage:
+    size: 25Gi
+    storageClass: zfs
+
+  resources:
+    requests:
+      cpu: 10m
+      memory: 128Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
+
+  enableSuperuserAccess: true
+  managed:
+    roles:
+      - name: immich
+        ensure: present
+        comment: Immich
+        login: true
+        superuser: true
+        passwordSecret:
+          name: immich-database
+
+  bootstrap:
+    recovery:
+      source: immich-postgresql-backup
+      database: immich
+      owner: immich
+      secret:
+        name: immich-database
+
+  backup:
+    barmanObjectStore:
+      destinationPath: gs://infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157/cluster/home/backup/immich/postgresql
+      googleCredentials:
+        applicationCredentials:
+          name: cloudnativepg-google-cloud
+          key: credentials
+      wal:
+        compression: gzip
+        maxParallel: 4
+      data:
+        compression: gzip
+    retentionPolicy: 7d
+
+  externalClusters:
+    - name: immich-postgresql-backup
+      barmanObjectStore:
+        destinationPath: gs://infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157/cluster/home/backup/immich/postgresql
+        googleCredentials:
+          applicationCredentials:
+            name: cloudnativepg-google-cloud
+            key: credentials
+        wal:
+          compression: gzip
+          maxParallel: 4
+        data:
+          compression: gzip
