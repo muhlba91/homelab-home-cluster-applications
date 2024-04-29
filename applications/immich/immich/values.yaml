@@ -156,7 +156,7 @@ controllers:
         image:
           repository: ghcr.io/immich-app/immich-machine-learning
           pullPolicy: IfNotPresent
-          tag: v1.102.3
+          tag: v1.103.0
 
         envFrom:
           - configMapRef:
