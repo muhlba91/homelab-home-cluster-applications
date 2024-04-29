@@ -34,23 +34,23 @@ spec:
           name: immich-database
 
   bootstrap:
-    recovery:
-      source: immich-postgresql
-      database: immich
-      owner: immich
-      secret:
-        name: immich-database
-    # initdb:
+    # recovery:
+    #   source: immich-postgresql-backup
     #   database: immich
     #   owner: immich
-    #   encoding: UTF8
     #   secret:
     #     name: immich-database
+    initdb:
+      database: immich
+      owner: immich
+      encoding: UTF8
+      secret:
+        name: immich-database
 
   backup:
     barmanObjectStore:
-      destinationPath: gs://infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157/cluster/home/backup/immich/postgresql
-      serverName: immich-postgresql
+      destinationPath: gs://infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157/cluster/home/backup/immich
+      serverName: postgresql
       googleCredentials:
         applicationCredentials:
           name: cloudnativepg-google-cloud
@@ -63,10 +63,10 @@ spec:
     retentionPolicy: 7d
 
   externalClusters:
-    - name: immich-postgresql
+    - name: immich-postgresql-backup
       barmanObjectStore:
-        destinationPath: gs://infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157/cluster/home/backup/immich/postgresql
-        serverName: immich-postgresql
+        destinationPath: gs://infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157/cluster/home/backup/immich
+        serverName: postgresql
         googleCredentials:
           applicationCredentials:
             name: cloudnativepg-google-cloud
