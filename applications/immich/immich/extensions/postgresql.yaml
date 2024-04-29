@@ -33,7 +33,7 @@ spec:
 
   bootstrap:
     recovery:
-      source: immich-postgresql-backup
+      source: immich-postgresql
       database: immich
       owner: immich
       secret:
@@ -61,7 +61,7 @@ spec:
     retentionPolicy: 7d
 
   externalClusters:
-    - name: immich-postgresql-backup
+    - name: immich-postgresql
       barmanObjectStore:
         destinationPath: gs://infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157/cluster/home/backup/immich/postgresql
         serverName: immich-postgresql
