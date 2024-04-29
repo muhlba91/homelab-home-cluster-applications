@@ -32,18 +32,18 @@ spec:
           name: immich-database
 
   bootstrap:
-    # recovery:
-    #   source: immich-postgresql-backup
-    #   database: immich
-    #   owner: immich
-    #   secret:
-    #     name: immich-database
-    initdb:
+    recovery:
+      source: immich-postgresql-backup
       database: immich
       owner: immich
-      encoding: UTF8
       secret:
         name: immich-database
+    # initdb:
+    #   database: immich
+    #   owner: immich
+    #   encoding: UTF8
+    #   secret:
+    #     name: immich-database
 
   backup:
     barmanObjectStore:
