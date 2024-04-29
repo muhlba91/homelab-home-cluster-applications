@@ -4,9 +4,9 @@ kind: Kustomization
 resources:
   - ./templates/extensions.yaml
   # - ./templates/release.yaml # FIXME: immich
-configMapGenerator:
-  - name: values
-    files:
-      - values.yaml=values.yaml
-configurations:
-  - kustomizeconfig.yml
+# configMapGenerator:
+#   - name: values
+#     files:
+#       - values.yaml=values.yaml
+# configurations:
+#   - kustomizeconfig.yml
