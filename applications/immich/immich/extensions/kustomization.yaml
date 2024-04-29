@@ -8,5 +8,5 @@ resources:
   - ./external-secret-immich-config.yaml
   - ./external-secret-immich-database.yaml
   - ./external-secret-cloudnativepg-google-cloud.yaml
-  - ./postgresql.yaml
+  # - ./postgresql.yaml
   # - ./postgresql-backup.yaml
