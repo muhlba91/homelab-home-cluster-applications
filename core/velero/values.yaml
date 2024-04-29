@@ -22,3 +22,14 @@ configuration:
   backupStorageLocation: []
   volumeSnapshotLocation: []
   defaultBackupStorageLocation: google-cloud
+
+deployNodeAgent: true
+nodeAgent:
+  podVolumePath: /var/lib/k0s/kubelet/pods
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 1
+      memory: 384Mi
