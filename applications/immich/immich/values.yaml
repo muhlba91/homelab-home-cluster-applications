@@ -9,7 +9,7 @@ controllers:
         image:
           repository: ghcr.io/immich-app/immich-server
           pullPolicy: IfNotPresent
-          tag: v1.102.3
+          tag: v1.103.0
 
         command:
           - sh
@@ -101,7 +101,7 @@ controllers:
         image:
           repository: ghcr.io/immich-app/immich-server
           pullPolicy: IfNotPresent
-          tag: v1.102.3
+          tag: v1.103.0
 
         command:
           - sh
