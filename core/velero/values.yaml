@@ -1,11 +1,11 @@
 ---
 resources:
   requests:
-    cpu: 10m
-    memory: 96Mi
+    cpu: 50m
+    memory: 192Mi
   limits:
-    cpu: 500m
-    memory: 256Mi
+    cpu: 1
+    memory: 384Mi
 
 initContainers:
   - name: velero-plugin-for-gcp
@@ -28,8 +28,8 @@ nodeAgent:
   podVolumePath: /var/lib/k0s/kubelet/pods
   resources:
     requests:
-      cpu: 100m
-      memory: 128Mi
+      cpu: 50m
+      memory: 192Mi
     limits:
       cpu: 1
       memory: 384Mi
