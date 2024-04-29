@@ -9,4 +9,4 @@ resources:
   - ./external-secret-immich-database.yaml
   - ./external-secret-cloudnativepg-google-cloud.yaml
   - ./postgresql.yaml
-  # - ./postgresql-backup.yaml # FIXME: immich
+  - ./postgresql-backup.yaml
