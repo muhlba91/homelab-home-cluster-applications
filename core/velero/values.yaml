@@ -2,10 +2,10 @@
 resources:
   requests:
     cpu: 50m
-    memory: 192Mi
+    memory: 256Mi
   limits:
     cpu: 1
-    memory: 384Mi
+    memory: 512Mi
 
 initContainers:
   - name: velero-plugin-for-gcp
@@ -29,7 +29,7 @@ nodeAgent:
   resources:
     requests:
       cpu: 50m
-      memory: 192Mi
+      memory: 256Mi
     limits:
       cpu: 1
-      memory: 384Mi
+      memory: 512Mi
