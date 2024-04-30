@@ -5,7 +5,7 @@ metadata:
   name: immich-init
 data:
   create-data-directories.sh: |
-    #!/bin/bash
+    #!/bin/sh
     set -euo pipefail
 
     mkdir -p /data/upload || true
