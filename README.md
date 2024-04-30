@@ -41,10 +41,10 @@ Each of these applications follows the app-of-apps pattern again using sub-kusto
 The following applications are defined in [`infrastructure/`](infrastructure/).
 
 - [x] [Cilium](https://cilium.io) - Provides the cluster CNI.
-- [x] [MetalLB](https://metallb.universe.tf) - Provides a Kubernetes network load balancer to expose Kubernetes `Service`s.
 - [x] [Democratic CSI Driver](https://github.com/democratic-csi/democratic-csi) - Exposes Proxmox ZFS storage to Kubernetes `StorageClass`es.
 - [x] [External Secrets Operator](http://external-secrets.io) - Synchronizes secrets from external stores to Kubernetes `Secret` objects.
-  - [x] [External Secrets Stores](infrastructure/external-secrets/) - Deploys the required `ClusterSecretStore`s and Doppler [Service Tokens](https://docs.doppler.com/docs/service-tokens) as Kubernetes `Secret`s.
+  - [x] [External Secrets Stores](infrastructure/external-secrets/) - Deploys the required `ClusterSecretStore`s and Vault credentials as Kubernetes `Secret`s.
+- [x] [MetalLB](https://metallb.universe.tf) - Provides a Kubernetes network load balancer to expose Kubernetes `Service`s.
 - [x] [Traefik](https://traefik.io) - Exposes Kubernetes `Ingress` resources to the "outside world".
 
 ### Core Applications
@@ -52,11 +52,13 @@ The following applications are defined in [`infrastructure/`](infrastructure/).
 The following applications are defined in [`core/`](core/).
 
 - [x] [cert-manager](https://cert-manager.io) - Certificate management using ACME Let's Encrypt.
+- [x] [CloudNativePG](https://cloudnative-pg.io/documentation/current/) - PostgreSQL database operator.
 - [x] [External DNS with Google Cloud DNS integration](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Google Cloud DNS domains for publicly reachable services.
 - [x] [victoria-metrics-stack](https://github.com/VictoriaMetrics/helm-charts/tree/master/charts/victoria-metrics-k8s-stack) - Monitoring stack using [Victoria Metrics](https://victoriametrics.com).
 - [x] [loki-stack](https://github.com/grafana/helm-charts/tree/main/charts/loki-stack) - Logging stack using [Grafana Loki](https://grafana.com/oss/loki/).
 - [x] [Grafana](http://grafana.com) - Visualization of metrics, and other data.
-- [x] [CloudNativePG](https://cloudnative-pg.io/documentation/current/) - PostgreSQL database operator.
+- [x] [Velero](https://velero.io) - Performs cluster backups.
+  - [x] Includes deployment of backup schedules.
 
 ### (User) Applications
 
@@ -66,6 +68,8 @@ The following applications are defined in [`applications/`](applications/).
 - [x] [dnsmasq](https://thekelleys.org.uk/dnsmasq/doc.html) - IPv4 and IPv6 DHCP server.
 - [x] [External DNS with Adguard integration](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Adguard for internal, local only, reachable services. Uses the [External DNS Adguard Webhook provider](https://github.com/muhlba91/external-dns-provider-adguard).
 - [x] External Services - Deploys Kubernetes `Service`s and `Ingress`es to local endpoints, and existing services outside of the cluster.
+- [x] [Immich](https://immich.app) - Photo management solution.
+- [x] [InfluxDB](https://www.influxdata.com) - Time-Series database.
 - [x] [LibreChat](https://librechat.ai) - Open Source AI platform integrating with multiple models.
 - [x] [Samba](https://github.com/crazy-max/docker-samba) - Exposes Samba shares for various applications.
 
@@ -84,7 +88,7 @@ The following applications are defined in [`home-assistant/`](home-assistant/).
 
 #### Notes: Backup and Restore
 
-Home Assistant related backup and restore is currently handled via S3 backups.
+Home Assistant related backup and restore is handled via S3 backups.
 
 The following services implement an `initContainer` as well as a nightly `CronJob` to backup data to an S3 bucket. If no data is found in the Persistent Volume yet, the data from will be retrieved and copied over which results in a full restore.
 
@@ -106,9 +110,17 @@ The following services also have Git repositories to store their configuration w
 
 ## Backup and Restore
 
-No (cluster-wide) backup and restore has been implemented as of yet.
+The current backup and restore strategy consists of:
 
-***Note:*** for Home Asisstant backup and restore, see the [corresponding section](#notes-backup-and-restore).
+- CloudNativePG backups for persistent PostgreSQL data
+- Home Assistant: see (#notes-backup-and-restore)
+- Proxmox `zfs-retain` storage class with consistent ZFS volume identifiers
+- Velero as a second layer disaster recovery for critical workloads
+
+Timewise, the layers of backups follow the strategy:
+
+1. `12:00am`: in-application backups
+2. `02:00am`: Velero backups
 
 ---
 
