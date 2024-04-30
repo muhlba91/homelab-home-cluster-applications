@@ -6,7 +6,7 @@ resources:
   - ./templates/extensions.yaml
   - ./templates/release.yaml
 configMapGenerator:
-  - name: values
+  - name: librechat-values
     files:
       - values.yaml=values.yaml
 configurations:

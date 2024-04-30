@@ -17,5 +17,5 @@ spec:
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
-      name: values
+      name: librechat-values
       valuesKey: values.yaml

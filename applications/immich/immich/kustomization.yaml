@@ -5,7 +5,7 @@ resources:
   - ./templates/extensions.yaml
   - ./templates/release.yaml
 configMapGenerator:
-  - name: values
+  - name: immich-values
     files:
       - values.yaml=values.yaml
 configurations:
