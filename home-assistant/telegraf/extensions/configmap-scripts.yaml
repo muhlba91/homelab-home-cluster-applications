@@ -30,7 +30,7 @@ data:
       name=$(basename ${datasource})
       cp ${datasource} /tmp/datasource-${name}
 
-      sed "s/#TELEGRAF_REMOTE_TOKEN#/${TELEGRAF_REMOTE_TOKEN}/g" -r -i /tmp/datasource-${name}
+      sed "s/#TELEGRAF_INFLUXDB_TOKEN#/${TELEGRAF_INFLUXDB_TOKEN}/g" -r -i /tmp/datasource-${name}
 
       sed "s/#AWS_REGION#/${AWS_REGION}/g" -r -i /tmp/datasource-${name}
 

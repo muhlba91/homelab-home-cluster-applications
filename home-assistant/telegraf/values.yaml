@@ -50,6 +50,8 @@ controllers:
           - /scripts/grafana.sh
         envFrom:
           - secretRef:
+              name: influxdb-token
+          - secretRef:
               name: grafana-datasource-secrets
         resources:
           requests:

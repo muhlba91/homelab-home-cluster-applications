@@ -28,7 +28,7 @@ data:
               defaultBucket: home-assistant
               tlsSkipVerify: true
             secureJsonData:
-              token: "#TELEGRAF_REMOTE_TOKEN#"
+              token: "#TELEGRAF_INFLUXDB_TOKEN#"
   athena.yml: |
     ---
     apiVersion: v1
