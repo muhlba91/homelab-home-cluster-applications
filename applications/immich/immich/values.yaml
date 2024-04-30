@@ -137,9 +137,9 @@ controllers:
                 path: /api/server-info/ping
                 port: 3002
               initialDelaySeconds: 0
-              periodSeconds: 10
+              periodSeconds: 30
               timeoutSeconds: 1
-              failureThreshold: 3
+              failureThreshold: 10
           readiness: *microservices_probes
           startup:
             enabled: false
