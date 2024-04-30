@@ -104,6 +104,10 @@ controllers:
           - -c
           - "./start-microservices.sh"
 
+        envFrom:
+          - configMapRef:
+              name: immich-env
+
         env:
           - name: DB_USERNAME
             valueFrom:
