@@ -129,18 +129,10 @@ controllers:
             memory: 512Mi
 
         probes:
-          liveness: &microservices_probes
-            enabled: true
-            custom: true
-            spec:
-              httpGet:
-                path: /api/server-info/ping
-                port: 3002
-              initialDelaySeconds: 0
-              periodSeconds: 30
-              timeoutSeconds: 1
-              failureThreshold: 10
-          readiness: *microservices_probes
+          liveness:
+            enabled: false
+          readiness:
+            enabled: false
           startup:
             enabled: false
   machine-learning:
