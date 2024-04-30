@@ -34,11 +34,11 @@ controllers:
 
         resources:
           requests:
-            cpu: 50m
-            memory: 256Mi
+            cpu: 25m
+            memory: 192Mi
           limits:
             cpu: 1
-            memory: 512Mi
+            memory: 384Mi
 
         probes:
           liveness: &server_probes
@@ -122,11 +122,11 @@ controllers:
 
         resources:
           requests:
-            cpu: 50m
-            memory: 256Mi
+            cpu: 25m
+            memory: 192Mi
           limits:
             cpu: 1
-            memory: 512Mi
+            memory: 384Mi
 
         probes:
           liveness:
@@ -164,8 +164,8 @@ controllers:
 
         resources:
           requests:
-            cpu: 50m
-            memory: 512Mi
+            cpu: 25m
+            memory: 384Mi
           limits:
             cpu: 1
             memory: 1024Mi
