@@ -264,7 +264,7 @@ persistence:
           - path: /cache
   config:
     enabled: true
-    type: configMap
+    type: secret
     name: immich-config
     defaultMode: 511
     advancedMounts:
