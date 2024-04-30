@@ -9,4 +9,4 @@ spec:
     kind: GitRepository
     name: cluster-applications
   path: ./applications/librechat/meilisearch/extensions/
-  wait: true
+  wait: false

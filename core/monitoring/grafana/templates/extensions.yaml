@@ -9,4 +9,4 @@ spec:
     kind: GitRepository
     name: cluster-applications
   path: ./core/monitoring/grafana/extensions/
-  wait: true
+  wait: false

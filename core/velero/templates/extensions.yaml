@@ -9,4 +9,4 @@ spec:
     kind: GitRepository
     name: cluster-applications
   path: ./core/velero/extensions/
-  wait: true
+  wait: false

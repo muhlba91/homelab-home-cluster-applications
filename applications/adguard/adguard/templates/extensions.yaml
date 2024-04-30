@@ -9,4 +9,4 @@ spec:
     kind: GitRepository
     name: cluster-applications
   path: ./applications/adguard/adguard/extensions/
-  wait: true
+  wait: false

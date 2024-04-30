@@ -9,4 +9,4 @@ spec:
     kind: GitRepository
     name: cluster-applications
   path: ./home-assistant/zwave/extensions/
-  wait: true
+  wait: false
