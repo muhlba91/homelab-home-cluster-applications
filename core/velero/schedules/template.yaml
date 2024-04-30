@@ -13,6 +13,8 @@ spec:
     ttl: 7d
     includedNamespaces:
       - change-me
+    includedResources:
+      - "*"
     # optionally, you can specify a label selector to filter the resources to backup
     # labelSelector:
     #   matchLabels:
