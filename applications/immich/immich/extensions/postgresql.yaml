@@ -47,6 +47,10 @@ spec:
     #   secret:
     #     name: immich-database
 
+  postgresql:
+    shared_preload_libraries:
+      - vectors.so
+
   backup:
     barmanObjectStore:
       destinationPath: gs://infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157/cluster/home/backup/immich
