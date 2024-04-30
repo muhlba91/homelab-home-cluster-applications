@@ -19,12 +19,8 @@ controllers:
         envFrom:
           - configMapRef:
               name: immich-env
-          - secretRef:
-              name: immich-database
 
         env:
-          - name: IMMICH_CONFIG_FILE
-            value: /config/immich.yaml
           - name: DB_USERNAME
             valueFrom:
               secretKeyRef:
@@ -108,9 +104,7 @@ controllers:
           - -c
           - "./start-microservices.sh"
 
-        envFrom:
-          - name: IMMICH_CONFIG_FILE
-            value: /config/immich.yaml
+        env:
           - name: DB_USERNAME
             valueFrom:
               secretKeyRef:
@@ -121,10 +115,6 @@ controllers:
               secretKeyRef:
                 name: immich-database
                 key: password
-
-        env:
-          - name: IMMICH_CONFIG_FILE
-            value: /config/immich.yaml
 
         resources:
           requests:
@@ -161,12 +151,20 @@ controllers:
         envFrom:
           - configMapRef:
               name: immich-env
-          - secretRef:
-              name: immich-database
 
         env:
           - name: TRANSFORMERS_CACHE
             value: /cache
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: immich-database
+                key: username
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: immich-database
+                key: password
 
         resources:
           requests:
@@ -200,16 +198,19 @@ defaultPodOptions:
 
 service:
   main:
+    controller: main
     ports:
       http:
         port: 3001
   microservices:
     enabled: true
+    controller: microservices
     ports:
       http:
         port: 3002
   machine-learning:
     enabled: true
+    controller: machine-learning
     ports:
       http:
         port: 3003
@@ -223,13 +224,13 @@ ingress:
       external-dns.alpha.kubernetes.io/target: 144.208.195.224,2a01:aea0:dd3:25a:1000:3:3:1
       traefik.ingress.kubernetes.io/router.tls: "true"
     hosts:
-      - host: &domain pictures.home.muehlbachler.io
+      - host: &domain photos.home.muehlbachler.io
         paths:
           - path: /
             pathType: ImplementationSpecific
             service:
-              name: immich
-              port: 3080
+              name: immich-main
+              port: 3001
     tls:
       - secretName: immich-tls-cert
         hosts:
