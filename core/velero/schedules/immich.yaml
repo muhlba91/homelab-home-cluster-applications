@@ -1,10 +1,8 @@
-# DO NOT USE THIS FILE DIRECTLY.
-# It's a template file for creating a new schedule.
 ---
 apiVersion: velero.io/v1
 kind: Schedule
 metadata:
-  name: change-me
+  name: immich
 spec:
   paused: false
   schedule: "0 0 2 * * *"
@@ -12,14 +10,10 @@ spec:
   template:
     ttl: 7d
     includedNamespaces:
-      - change-me
+      - immich
     includedResources:
       - pvc
       - pv
-    # optionally, you can specify a label selector to filter the resources to backup
-    # labelSelector:
-    #   matchLabels:
-    #     velero.io/backup: "true"
     storageLocation: google-cloud
     defaultVolumesToFsBackup: true
     uploaderConfig:

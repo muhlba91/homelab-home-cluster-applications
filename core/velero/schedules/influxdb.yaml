@@ -1,25 +1,19 @@
-# DO NOT USE THIS FILE DIRECTLY.
-# It's a template file for creating a new schedule.
 ---
 apiVersion: velero.io/v1
 kind: Schedule
 metadata:
-  name: change-me
+  name: influxdb
 spec:
   paused: false
   schedule: "0 0 2 * * *"
   useOwnerReferencesInBackup: false
   template:
-    ttl: 7d
+    ttl: 3d
     includedNamespaces:
-      - change-me
+      - influxdb
     includedResources:
       - pvc
       - pv
-    # optionally, you can specify a label selector to filter the resources to backup
-    # labelSelector:
-    #   matchLabels:
-    #     velero.io/backup: "true"
     storageLocation: google-cloud
     defaultVolumesToFsBackup: true
     uploaderConfig:
