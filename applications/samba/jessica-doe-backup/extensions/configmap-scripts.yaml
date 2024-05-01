@@ -8,5 +8,5 @@ data:
     #!/bin/sh
     set -eu
 
-    mkdir -p /share/jessica-doe
+    mkdir -p /share/jessica-doe || true
     chown -R 1000:1000 /share/jessica-doe

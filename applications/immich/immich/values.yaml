@@ -185,6 +185,126 @@ controllers:
           readiness: *ml_probes
           startup:
             enabled: false
+  samba-daniel:
+    type: statefulset
+    pod:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - immich
+                  - key: app.kubernetes.io/component
+                    operator: In
+                    values:
+                      - main
+              topologyKey: kubernetes.io/hostname
+    containers:
+      main:
+        image:
+          repository: ghcr.io/crazy-max/samba
+          pullPolicy: IfNotPresent
+          tag: "4.18.9"
+
+        env:
+          - name: TZ
+            value: UTC
+          - name: SAMBA_SERVER_STRING
+            value: photos-daniel
+          - name: WSDD2_ENABLE
+            value: "1"
+          - name: WSDD2_HOSTNAME
+            value: photos-daniel
+          - name: WSDD2_NETBIOS_NAME
+            value: photos-daniel
+          - name: SAMBA_LOG_LEVEL
+            value: "0"
+
+        securityContext:
+          runAsUser: 0
+          capabilities:
+            add:
+              - NET_ADMIN
+              - NET_RAW
+
+        resources:
+          requests:
+            cpu: 5m
+            memory: 128Mi
+          limits:
+            cpu: 1
+            memory: 256Mi
+
+        probes:
+          liveness:
+            enabled: false
+          readiness:
+            enabled: false
+          startup:
+            enabled: false
+  samba-kasia:
+    type: statefulset
+    pod:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - immich
+                  - key: app.kubernetes.io/component
+                    operator: In
+                    values:
+                      - main
+              topologyKey: kubernetes.io/hostname
+    containers:
+      main:
+        image:
+          repository: ghcr.io/crazy-max/samba
+          pullPolicy: IfNotPresent
+          tag: "4.18.9"
+
+        env:
+          - name: TZ
+            value: UTC
+          - name: SAMBA_SERVER_STRING
+            value: photos-kasia
+          - name: WSDD2_ENABLE
+            value: "1"
+          - name: WSDD2_HOSTNAME
+            value: photos-kasia
+          - name: WSDD2_NETBIOS_NAME
+            value: photos-kasia
+          - name: SAMBA_LOG_LEVEL
+            value: "0"
+
+        securityContext:
+          runAsUser: 0
+          capabilities:
+            add:
+              - NET_ADMIN
+              - NET_RAW
+
+        resources:
+          requests:
+            cpu: 5m
+            memory: 128Mi
+          limits:
+            cpu: 1
+            memory: 256Mi
+
+        probes:
+          liveness:
+            enabled: false
+          readiness:
+            enabled: false
+          startup:
+            enabled: false
 
 serviceAccount:
   create: true
@@ -210,6 +330,80 @@ service:
     ports:
       http:
         port: 3003
+  samba-daniel:
+    controller: samba-daniel
+    ipFamilyPolicy: PreferDualStack
+    type: LoadBalancer
+    externalTrafficPolicy: Local
+    annotations:
+      metallb.universe.tf/loadBalancerIPs: "10.0.74.21,2a01:aea0:dd3:25a:1000:3:5:21"
+      external-dns.alpha.kubernetes.io/provider: internal
+      external-dns.alpha.kubernetes.io/hostname: photos-daniel.smb.internal.muehlbachler.io
+    ports:
+      http:
+        enabled: false
+      smb:
+        enabled: true
+        port: 445
+        protocol: TCP
+        targetPort: 445
+      netbios:
+        enabled: true
+        port: 139
+        protocol: TCP
+        targetPort: 139
+      discovery:
+        enabled: true
+        port: 3702
+        protocol: TCP
+        targetPort: 3702
+      llmnr-tcp:
+        enabled: true
+        port: 5355
+        protocol: TCP
+        targetPort: 5355
+      llmnr-udp:
+        enabled: true
+        port: 5355
+        protocol: UDP
+        targetPort: 5355
+  samba-kasia:
+    controller: samba-kasia
+    ipFamilyPolicy: PreferDualStack
+    type: LoadBalancer
+    externalTrafficPolicy: Local
+    annotations:
+      metallb.universe.tf/loadBalancerIPs: "10.0.74.22,2a01:aea0:dd3:25a:1000:3:5:22"
+      external-dns.alpha.kubernetes.io/provider: internal
+      external-dns.alpha.kubernetes.io/hostname: photos-kasia.smb.internal.muehlbachler.io
+    ports:
+      http:
+        enabled: false
+      smb:
+        enabled: true
+        port: 445
+        protocol: TCP
+        targetPort: 445
+      netbios:
+        enabled: true
+        port: 139
+        protocol: TCP
+        targetPort: 139
+      discovery:
+        enabled: true
+        port: 3702
+        protocol: TCP
+        targetPort: 3702
+      llmnr-tcp:
+        enabled: true
+        port: 5355
+        protocol: TCP
+        targetPort: 5355
+      llmnr-udp:
+        enabled: true
+        port: 5355
+        protocol: UDP
+        targetPort: 5355
 
 ingress:
   main:
@@ -248,6 +442,12 @@ persistence:
       microservices:
         main:
           - path: /data
+      samba-daniel:
+        main:
+          - path: /data
+      samba-kasia:
+        main:
+          - path: /data
   machine-learning-cache:
     enabled: true
     type: persistentVolumeClaim
@@ -272,6 +472,19 @@ persistence:
         main:
           - path: /config/immich.yaml
             subPath: immich.yaml
+  samba-config:
+    enabled: true
+    type: secret
+    name: samba-config
+    advancedMounts:
+      samba-daniel:
+        main:
+          - path: /data/config.yml
+            subPath: daniel.yaml
+      samba-kasia:
+        main:
+          - path: /data/config.yml
+            subPath: kasia.yaml
   init:
     enabled: true
     type: configMap

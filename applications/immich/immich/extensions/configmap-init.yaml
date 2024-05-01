@@ -9,3 +9,9 @@ data:
     set -euo pipefail
 
     mkdir -p /data/upload || true
+
+    mkdir -p /data/external/daniel || true
+    chown -R 1000:1000 /data/external/daniel
+
+    mkdir -p /data/external/kasia || true
+    chown -R 1000:1000 /data/external/kasia
