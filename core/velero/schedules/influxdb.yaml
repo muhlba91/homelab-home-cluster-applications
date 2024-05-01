@@ -16,7 +16,6 @@ spec:
       - pv
     storageLocation: google-cloud
     defaultVolumesToFsBackup: true
-    snapshotVolumes: false
     snapshotMoveData: true
     datamover: velero
     uploaderConfig:
