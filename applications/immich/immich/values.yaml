@@ -126,10 +126,10 @@ controllers:
         resources:
           requests:
             cpu: 25m
-            memory: 192Mi
+            memory: 256Mi
           limits:
             cpu: 1
-            memory: 384Mi
+            memory: 1024Mi
 
         probes:
           liveness:
