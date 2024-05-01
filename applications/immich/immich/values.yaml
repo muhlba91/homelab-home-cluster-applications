@@ -187,7 +187,6 @@ controllers:
             enabled: false
   samba-daniel:
     enabled: true
-    type: statefulset
     pod:
       affinity:
         podAffinity:
@@ -248,7 +247,6 @@ controllers:
             enabled: false
   samba-kasia:
     enabled: true
-    type: statefulset
     pod:
       affinity:
         podAffinity:
