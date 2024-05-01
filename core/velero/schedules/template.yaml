@@ -22,5 +22,8 @@ spec:
     #     velero.io/backup: "true"
     storageLocation: google-cloud
     defaultVolumesToFsBackup: true
+    snapshotVolumes: false
+    snapshotMoveData: true
+    datamover: velero
     uploaderConfig:
       parallelFilesUpload: 8
