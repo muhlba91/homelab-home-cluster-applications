@@ -12,7 +12,9 @@ spec:
     includedNamespaces:
       - influxdb
     includedResources:
-      - "*"
+      - pod
+      - pvc
+      - pv
     storageLocation: google-cloud
     defaultVolumesToFsBackup: false
     snapshotMoveData: false

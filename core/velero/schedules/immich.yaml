@@ -12,7 +12,9 @@ spec:
     includedNamespaces:
       - immich
     includedResources:
-      - "*"
+      - pod
+      - pvc
+      - pv
     storageLocation: google-cloud
     defaultVolumesToFsBackup: false
     snapshotMoveData: false
