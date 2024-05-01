@@ -14,7 +14,9 @@ spec:
     includedNamespaces:
       - change-me
     includedResources:
-      - "*"
+      - pod
+      - pvc
+      - pv
     # optionally, you can specify a label selector to filter the resources to backup
     # labelSelector:
     #   matchLabels:
