@@ -5,7 +5,7 @@ global:
 controllers:
   main:
     annotations:
-    backup.velero.io/backup-volumes: data
+      backup.velero.io/backup-volumes: data
     containers:
       main:
         image:
