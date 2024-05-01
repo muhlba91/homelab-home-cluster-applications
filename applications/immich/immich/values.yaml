@@ -440,10 +440,10 @@ persistence:
           - path: /data
       samba-daniel:
         main:
-          - path: /data
+          - path: /shares
       samba-kasia:
         main:
-          - path: /data
+          - path: /shares
   machine-learning-cache:
     enabled: true
     type: persistentVolumeClaim
