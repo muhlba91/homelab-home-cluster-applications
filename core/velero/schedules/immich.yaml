@@ -12,11 +12,9 @@ spec:
     includedNamespaces:
       - immich
     includedResources:
-      - pvc
-      - pv
+      - "*"
     storageLocation: google-cloud
-    defaultVolumesToFsBackup: true
-    snapshotMoveData: true
-    datamover: velero
+    defaultVolumesToFsBackup: false
+    snapshotMoveData: false
     uploaderConfig:
       parallelFilesUpload: 8

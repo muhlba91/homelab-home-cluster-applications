@@ -5,6 +5,7 @@ metadata:
   name: immich-postgresql
   annotations:
     cnpg.io/skipEmptyWalArchiveCheck: enabled
+    backup.velero.io/backup-volumes: pgdata
 spec:
   instances: 1
 
