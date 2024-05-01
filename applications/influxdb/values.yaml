@@ -1,6 +1,9 @@
 ---
 fullnameOverride: influxdb
 
+podAnnotations:
+  backup.velero.io/backup-volumes: data
+
 adminUser:
   organization: tuxnet
   bucket: default
