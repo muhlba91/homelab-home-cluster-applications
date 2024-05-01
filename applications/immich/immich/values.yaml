@@ -186,6 +186,7 @@ controllers:
           startup:
             enabled: false
   samba-daniel:
+    enabled: true
     type: statefulset
     pod:
       affinity:
@@ -246,6 +247,7 @@ controllers:
           startup:
             enabled: false
   samba-kasia:
+    enabled: true
     type: statefulset
     pod:
       affinity:
@@ -340,8 +342,6 @@ service:
       external-dns.alpha.kubernetes.io/provider: internal
       external-dns.alpha.kubernetes.io/hostname: photos-daniel.smb.internal.muehlbachler.io
     ports:
-      http:
-        enabled: false
       smb:
         enabled: true
         port: 445
@@ -377,8 +377,6 @@ service:
       external-dns.alpha.kubernetes.io/provider: internal
       external-dns.alpha.kubernetes.io/hostname: photos-kasia.smb.internal.muehlbachler.io
     ports:
-      http:
-        enabled: false
       smb:
         enabled: true
         port: 445
