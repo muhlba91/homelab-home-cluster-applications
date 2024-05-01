@@ -4,8 +4,9 @@ global:
 
 controllers:
   main:
-    annotations:
-      backup.velero.io/backup-volumes: data
+    pod:
+      annotations:
+        backup.velero.io/backup-volumes: data
     containers:
       main:
         image:
