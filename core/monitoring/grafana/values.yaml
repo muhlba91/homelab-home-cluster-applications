@@ -3,6 +3,9 @@ global:
   oidc:
     autoLogin: false
 
+podAnnotations:
+  backup.velero.io/backup-volumes: storage
+
 useStatefulSet: true
 
 rbac:
