@@ -12,14 +12,13 @@ controllers:
           pullPolicy: IfNotPresent
           tag: 9.12.0@sha256:b3e81d29666116cdc8a5e80e9b57af73f04af627f84bf23cb2d6a6b050de61dc
 
+        envFrom:
+          - secretRef:
+              name: zwave-js-network
+
         env:
           - name: TZ
             value: UTC
-          - name: NETWORK_KEY
-            valueFrom:
-              secretKeyRef:
-                name: zwave-js-network
-                key: key
           - name: SESSION_SECRET
             valueFrom:
               secretKeyRef:
