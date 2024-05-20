@@ -34,6 +34,29 @@ controllers:
             cpu: 300m
             memory: 384Mi
 
+    initContainers:
+      init-chown-data:
+        image:
+          repository: alpine
+          tag: 3.19
+          pullPolicy: IfNotPresent
+        command:
+          - chown
+          - '-R'
+          - '1000:1000'
+          - /app/client/public/images
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 32Mi
+        securityContext:
+          capabilities:
+            add:
+              - CHOWN
+
 serviceAccount:
   create: true
 
