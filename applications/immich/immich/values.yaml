@@ -12,12 +12,7 @@ controllers:
         image:
           repository: ghcr.io/immich-app/immich-server
           pullPolicy: IfNotPresent
-          tag: v1.105.1
-
-        command:
-          - sh
-          - -c
-          - "./start-server.sh"
+          tag: v1.106.2
 
         envFrom:
           - configMapRef:
@@ -37,11 +32,11 @@ controllers:
 
         resources:
           requests:
-            cpu: 20m
-            memory: 192Mi
+            cpu: 50m
+            memory: 384Mi
           limits:
-            cpu: 250m
-            memory: 256Mi
+            cpu: 1
+            memory: 2048Mi
 
         probes:
           liveness: &server_probes
@@ -78,66 +73,6 @@ controllers:
           limits:
             cpu: 100m
             memory: 32Mi
-  microservices:
-    enabled: true
-    pod:
-      affinity:
-        podAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: app.kubernetes.io/name
-                    operator: In
-                    values:
-                      - immich
-                  - key: app.kubernetes.io/component
-                    operator: In
-                    values:
-                      - main
-              topologyKey: kubernetes.io/hostname
-    containers:
-      main:
-        image:
-          repository: ghcr.io/immich-app/immich-server
-          pullPolicy: IfNotPresent
-          tag: v1.105.1
-
-        command:
-          - sh
-          - -c
-          - "./start-microservices.sh"
-
-        envFrom:
-          - configMapRef:
-              name: immich-env
-
-        env:
-          - name: DB_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: immich-database
-                key: username
-          - name: DB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: immich-database
-                key: password
-
-        resources:
-          requests:
-            cpu: 50m
-            memory: 384Mi
-          limits:
-            cpu: 1
-            memory: 2048Mi
-
-        probes:
-          liveness:
-            enabled: false
-          readiness:
-            enabled: false
-          startup:
-            enabled: false
   machine-learning:
     enabled: true
     containers:
@@ -145,7 +80,7 @@ controllers:
         image:
           repository: ghcr.io/immich-app/immich-machine-learning
           pullPolicy: IfNotPresent
-          tag: v1.105.1
+          tag: v1.106.2
 
         envFrom:
           - configMapRef:
@@ -321,12 +256,6 @@ service:
     ports:
       http:
         port: 3001
-  microservices:
-    enabled: true
-    controller: microservices
-    ports:
-      http:
-        port: 3002
   machine-learning:
     enabled: true
     controller: machine-learning
@@ -438,9 +367,6 @@ persistence:
           - path: /data
         create-data-directories:
           - path: /data
-      microservices:
-        main:
-          - path: /data
       samba-daniel:
         main:
           - path: /shares
@@ -464,10 +390,6 @@ persistence:
     defaultMode: 511
     advancedMounts:
       main:
-        main:
-          - path: /config/immich.yaml
-            subPath: immich.yaml
-      microservices:
         main:
           - path: /config/immich.yaml
             subPath: immich.yaml
