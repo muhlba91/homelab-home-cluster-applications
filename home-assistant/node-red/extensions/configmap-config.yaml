@@ -11,14 +11,14 @@ data:
     full-icu@1.5.0
     node-red-contrib-actionflows@2.1.2
     node-red-contrib-alexa-home-skill@0.1.19
-    node-red-contrib-bigtimer@2.8.5
+    node-red-contrib-bigtimer@2.8.6
     node-red-contrib-castv2@4.3.0
     node-red-contrib-counter@0.1.6
-    node-red-contrib-home-assistant-websocket@0.57.2
-    node-red-contrib-influxdb@0.6.1
+    node-red-contrib-home-assistant-websocket@0.65.1
+    node-red-contrib-influxdb@0.7.0
     node-red-contrib-interval-length@0.0.6
     node-red-contrib-looptimer-advanced@0.0.8
-    node-red-contrib-modbus@5.27.2
+    node-red-contrib-modbus@5.40.0
     node-red-contrib-moment@5.0.0
     node-red-contrib-persistent-fsm@1.2.1
     node-red-contrib-statistics@2.2.2
@@ -27,21 +27,21 @@ data:
     node-red-contrib-time-range-switch@1.2.0
     node-red-contrib-timecheck@1.1.0
     node-red-contrib-traffic@0.2.1
-    node-red-dashboard@3.6.0
+    node-red-dashboard@3.6.5
     node-red-node-base64@0.3.0
-    node-red-node-email@2.0.1
+    node-red-node-email@3.0.0
     node-red-node-geofence@0.3.4
     node-red-node-msgpack@1.2.1
     node-red-node-ping@0.3.3
     node-red-node-smooth@0.1.2
-    node-red-node-suncalc@1.1.0
-    @node-red-contrib-themes/theme-collection@3.1.2
+    node-red-node-suncalc@1.1.2
+    @node-red-contrib-themes/theme-collection@4.0.1
     node-red-contrib-countdown-2@1.4.2
     node-red-contrib-mytimeout@3.2.2
     @govtechsg/passport-openidconnect@1.0.2
     jsonwebtoken@9.0.2
     jwks-rsa@3.1.0
-    node-red-contrib-telegrambot@15.1.7
+    node-red-contrib-telegrambot@16.0.1
     node-red-contrib-uspatata-influxdb-v2@1.0.6
   settings.js: |
     /**
@@ -250,11 +250,13 @@ data:
        *  - httpServerOptions
        *  - httpAdminRoot
        *  - httpAdminMiddleware
+       *  - httpAdminCookieOptions
        *  - httpNodeRoot
        *  - httpNodeCors
        *  - httpNodeMiddleware
        *  - httpStatic
        *  - httpStaticRoot
+       *  - httpStaticCors
        ******************************************************************************/
 
       /** the tcp port that the Node-RED web server is listening on */
@@ -295,10 +297,15 @@ data:
       //    next();
       // },
 
+      /** The following property can be used to set addition options on the session
+       * cookie used as part of adminAuth authentication system
+       * Available options are documented here: https://www.npmjs.com/package/express-session#cookie
+       */
+      // httpAdminCookieOptions: { },
 
       /** Some nodes, such as HTTP In, can be used to listen for incoming http requests.
        * By default, these are served relative to '/'. The following property
-       * can be used to specifiy a different root path. If set to false, this is
+       * can be used to specify a different root path. If set to false, this is
        * disabled.
        */
       //httpNodeRoot: '/red-nodes',
@@ -340,10 +347,18 @@ data:
        * to move httpAdminRoot
        */
       //httpStatic: '/home/nol/node-red-static/', //single static source
-      /* OR multiple static sources can be created using an array of objects... */
+      /**
+       *  OR multiple static sources can be created using an array of objects...
+       *  Each object can also contain an options object for further configuration.
+       *  See https://expressjs.com/en/api.html#express.static for available options.
+       *  They can also contain an option `cors` object to set specific Cross-Origin
+       *  Resource Sharing rules for the source. `httpStaticCors` can be used to
+       *  set a default cors policy across all static routes.
+       */
       //httpStatic: [
       //    {path: '/home/nol/pics/',    root: "/img/"},
       //    {path: '/home/nol/reports/', root: "/doc/"},
+      //    {path: '/home/nol/videos/',  root: "/vid/", options: {maxAge: '1d'}}
       //],
 
       /**
@@ -355,6 +370,21 @@ data:
        *      then "/home/nol/pics/" will be served at "/static/img/"
        */
       //httpStaticRoot: '/static/',
+
+      /** The following property can be used to configure cross-origin resource sharing
+       * in the http static routes.
+       * See https://github.com/troygoode/node-cors#configuration-options for
+       * details on its contents. The following is a basic permissive set of options:
+       */
+      //httpStaticCors: {
+      //    origin: "*",
+      //    methods: "GET,PUT,POST,DELETE"
+      //},
+
+      /** The following property can be used to modify proxy options */
+      // proxyOptions: {
+      //     mode: "legacy", // legacy mode is for non-strict previous proxy determination logic (node-red < v4 compatible)
+      // },
 
       /*******************************************************************************
        * Runtime Settings
@@ -386,7 +416,7 @@ data:
           ui: true,
       },
       /** Configure runtimeState options
-       * - enabled:  When `enabled` is `true` flows runtime can be Started/Stoped
+       * - enabled:  When `enabled` is `true` flows runtime can be Started/Stopped
        *   by POSTing to available at http://localhost:1880/flows/state
        * - ui: When `ui` is `true`, the action `core:start-flows` and
        *   `core:stop-flows` will be available to logged in users of node-red editor
@@ -411,7 +441,7 @@ data:
            * trace - record very detailed logging + debug + info + warn + error + fatal errors
            * off - turn off all logging (doesn't affect metrics or audit)
            */
-          level: 'info',
+          level: "info",
           /** Whether or not to include metric events in the log output */
           metrics: false,
           /** Whether or not to include audit events in the log output */
@@ -502,7 +532,7 @@ data:
            * added to the end of the palette.
            * If not set, the following default order is used:
            */
-          categories: ['subflows', 'common', 'function', 'network', 'sequence', 'parser', 'storage']
+          //categories: ['subflows', 'common', 'function', 'network', 'sequence', 'parser', 'storage'],
         },
 
         projects: {
@@ -515,7 +545,7 @@ data:
              * This can be overridden per-user from the 'Git config'
              * section of 'User Settings' within the editor
              */
-            mode: 'manual'
+            mode: "manual"
           }
         },
 
@@ -531,15 +561,28 @@ data:
                  * packages/node_modules/@node-red/editor-client/src/vendor/monaco/dist/theme
                  * e.g. "tomorrow-night", "upstream-sunburst", "github", "my-theme"
                  */
-                theme: "vs",
+                // theme: "vs",
                 /** other overrides can be set e.g. fontSize, fontFamily, fontLigatures etc.
-                 * for the full list, see https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.IStandaloneEditorConstructionOptions.html
+                 * for the full list, see https://microsoft.github.io/monaco-editor/docs.html#interfaces/editor.IStandaloneEditorConstructionOptions.html
                  */
                 //fontSize: 14,
                 //fontFamily: "Cascadia Code, Fira Code, Consolas, 'Courier New', monospace",
                 //fontLigatures: true,
             }
-        }
+        },
+
+        markdownEditor: {
+            mermaid: {
+                /** enable or disable mermaid diagram in markdown document
+                 */
+                enabled: true
+            }
+        },
+
+        multiplayer: {
+            /** To enable the Multiplayer feature, set this value to true */
+            enabled: false
+        },
       },
 
       /*******************************************************************************
@@ -547,10 +590,12 @@ data:
        *  - fileWorkingDirectory
        *  - functionGlobalContext
        *  - functionExternalModules
+       *  - functionTimeout
        *  - nodeMessageBufferMaxLength
        *  - ui (for use with Node-RED Dashboard)
        *  - debugUseColors
        *  - debugMaxLength
+       *  - debugStatusLength
        *  - execMaxBufferSize
        *  - httpRequestTimeout
        *  - mqttReconnectTime
@@ -570,6 +615,9 @@ data:
 
       /** Allow the Function node to load additional npm modules directly */
       functionExternalModules: true,
+
+      /** Default timeout, in seconds, for the Function node. 0 means no timeout is applied */
+      functionTimeout: 0,
 
       /** The following property can be used to set predefined values in Global Context.
        * This allows extra node modules to be made available with in Function node.
@@ -603,6 +651,9 @@ data:
       /** The maximum length, in characters, of any message sent to the debug sidebar tab */
       debugMaxLength: 1000,
 
+      /** The maximum length, in characters, of status messages under the debug node */
+      //debugStatusLength: 32,
+
       /** Maximum buffer size for the exec node. Defaults to 10Mb */
       //execMaxBufferSize: 10000000,
 
@@ -613,7 +664,7 @@ data:
       mqttReconnectTime: 15000,
 
       /** Retry time in milliseconds for Serial port connections */
-      serialReconnectTime: 15000
+      serialReconnectTime: 15000,
 
       /** Retry time in milliseconds for TCP socket connections */
       //socketReconnectTime: 10000,
@@ -636,7 +687,7 @@ data:
        */
       //tlsConfigDisableLocalFiles: true,
 
-      /** The following property can be used to verify websocket connection attempts.
+      /** The following property can be used to verify WebSocket connection attempts.
        * This allows, for example, the HTTP request headers to be checked to ensure
        * they include valid authentication information.
        */
@@ -656,4 +707,4 @@ data:
       //    *   - reason: if result is false, the HTTP reason string to return
       //    */
       //},
-    };
+    }
