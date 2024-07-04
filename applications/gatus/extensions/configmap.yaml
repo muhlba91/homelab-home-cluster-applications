@@ -16,14 +16,29 @@ data:
 
     endpoints:
       # 001 - Mail
-      - name: Example
+      - name: IMAP
         group: 001 - Mail
-        enabled: false
-        url: https://example.com
-        method: GET
+        enabled: true
+        url: tls://imap.soverin.net:993
         interval: 5m
         conditions:
-          - "[STATUS] == 200"
+          - "[CONNECTED] == true"
+          - "[CERTIFICATE_EXPIRATION] > 48h"
+      - name: SMTP Outgoing
+        group: 001 - Mail
+        enabled: true
+        url: tls://smtp.soverin.net:465
+        interval: 5m
+        conditions:
+          - "[CONNECTED] == true"
+          - "[CERTIFICATE_EXPIRATION] > 48h"
+      - name: SMTP Incoming
+        group: 001 - Mail
+        enabled: true
+        url: tcp://smtp.soverin.net:25
+        interval: 5m
+        conditions:
+          - "[CONNECTED] == true"
       # 002 - Applications
       - name: Immich
         group: 002 - Applications
