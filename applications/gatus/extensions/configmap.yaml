@@ -4,7 +4,7 @@ kind: ConfigMap
 metadata:
   name: gatus-config
 data:
-  gatus.yml: |
+  config.yaml: |
     storage:
       type: sqlite
       path: /data/data.db

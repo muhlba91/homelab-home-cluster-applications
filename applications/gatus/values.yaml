@@ -70,5 +70,5 @@ persistence:
     type: configMap
     name: gatus-config
     globalMounts:
-      - path: /config/gatus.yml
-        subPath: gatus.yml
+      - path: /config/config.yaml
+        subPath: config.yaml
