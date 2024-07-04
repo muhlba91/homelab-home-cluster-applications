@@ -21,7 +21,7 @@ data:
         enabled: false
         url: https://example.com
         method: GET
-        interval: 60s
+        interval: 5m
         conditions:
           - "[STATUS] == 200"
       # 002 - Applications
@@ -30,7 +30,7 @@ data:
         enabled: true
         url: http://immich.immich.svc.cluster.local:3001
         method: GET
-        interval: 60s
+        interval: 5m
         conditions:
           - "[STATUS] == 200"
       - name: GPT Chat
@@ -38,7 +38,7 @@ data:
         enabled: true
         url: http://librechat.librechat.svc.cluster.local:3080
         method: GET
-        interval: 60s
+        interval: 5m
         conditions:
           - "[STATUS] == 200"
       # 003 - Home Automation
@@ -47,7 +47,7 @@ data:
         enabled: true
         url: http://home-assistant.home-assistant-home-assistant.svc.cluster.local:8123
         method: GET
-        interval: 60s
+        interval: 5m
         conditions:
           - "[STATUS] == 200"
       - name: Node-RED
@@ -55,22 +55,22 @@ data:
         enabled: true
         url: http://node-red.home-assistant-node-red.svc.cluster.local:1880
         method: GET
-        interval: 60s
+        interval: 5m
         conditions:
           - "[STATUS] == 200"
       - name: ZWaveJS
         group: 003 - Home Automation
         enabled: true
-        url: http://zwave-js.home-assistant-zwave.svc.cluster.local:3000
+        url: http://zwave-js.home-assistant-zwave.svc.cluster.local:8091
         method: GET
-        interval: 60s
+        interval: 5m
         conditions:
           - "[STATUS] == 200"
       - name: MQTT
         group: 003 - Home Automation
         enabled: true
         url: tcp://emqx-mqtt.home-assistant-mqtt.svc.cluster.local:1883
-        interval: 60s
+        interval: 5m
         conditions:
           - "[CONNECTED] == true"
       - name: Telegraf
@@ -78,7 +78,7 @@ data:
         enabled: true
         url: http://home-assistant-ecowitt2mqtt.home-assistant-ecowitt2mqtt.svc.cluster.local:80
         method: GET
-        interval: 60s
+        interval: 5m
         conditions:
           - "[STATUS] == 404"
       - name: InfluxDB
@@ -86,7 +86,7 @@ data:
         enabled: true
         url: http://influxdb.influxdb.svc.cluster.local:80
         method: GET
-        interval: 60s
+        interval: 5m
         conditions:
           - "[STATUS] == 200"
       # 004 - Samba
@@ -94,28 +94,28 @@ data:
         group: 004 - Samba
         enabled: true
         url: tcp://10.0.74.11:445
-        interval: 60s
+        interval: 5m
         conditions:
           - "[CONNECTED] == true"
       - name: Jessica Doe Backup
         group: 004 - Samba
         enabled: true
         url: tcp://10.0.74.12:445
-        interval: 60s
+        interval: 5m
         conditions:
           - "[CONNECTED] == true"
       - name: Immich Daniel
         group: 004 - Samba
         enabled: true
         url: tcp://10.0.74.21:445
-        interval: 60s
+        interval: 5m
         conditions:
           - "[CONNECTED] == true"
       - name: Immich Kasia
         group: 004 - Samba
         enabled: true
         url: tcp://10.0.74.22:445
-        interval: 60s
+        interval: 5m
         conditions:
           - "[CONNECTED] == true"
       # 005 - DNS
@@ -123,7 +123,7 @@ data:
         group: 005 - DNS
         enabled: true
         url: udp://10.0.71.10:53
-        interval: 60s
+        interval: 5m
         conditions:
           - "[CONNECTED] == true"
       - name: External DNS AdGuard
@@ -131,7 +131,7 @@ data:
         enabled: true
         url: http://adguard-external-dns.adguard.svc.cluster.local:7979
         method: GET
-        interval: 60s
+        interval: 5m
         conditions:
           - "[STATUS] == 404"
       - name: External DNS Home
@@ -139,7 +139,7 @@ data:
         enabled: true
         url: http://external-dns.external-dns.svc.cluster.local:7979
         method: GET
-        interval: 60s
+        interval: 5m
         conditions:
           - "[STATUS] == 404"
       # 006 - Monitoring
@@ -148,7 +148,7 @@ data:
         enabled: true
         url: http://grafana.grafana.svc.cluster.local:80
         method: GET
-        interval: 60s
+        interval: 5m
         conditions:
           - "[STATUS] == 200"
       - name: Victoria Metrics VMAgent
@@ -156,7 +156,7 @@ data:
         enabled: true
         url: http://vmagent-victoria-metrics.victoria-metrics.svc.cluster.local:8429
         method: GET
-        interval: 60s
+        interval: 5m
         conditions:
           - "[STATUS] == 200"
       - name: Victoria Metrics VMSingle
@@ -164,7 +164,7 @@ data:
         enabled: true
         url: http://vmsingle-victoria-metrics.victoria-metrics.svc.cluster.local:8429
         method: GET
-        interval: 60s
+        interval: 5m
         conditions:
           - "[STATUS] == 200"
       - name: Loki
@@ -172,7 +172,7 @@ data:
         enabled: true
         url: http://loki-stack.loki.svc.cluster.local:3100
         method: GET
-        interval: 60s
+        interval: 5m
         conditions:
           - "[STATUS] == 404"
       # 007 - Infrastructure
@@ -181,7 +181,7 @@ data:
         enabled: true
         url: https://vault.platform.muehlbachler.io:8200/ui/
         method: GET
-        interval: 60s
+        interval: 5m
         conditions:
           - "[STATUS] == 200"
       - name: Traefik Home
@@ -189,7 +189,7 @@ data:
         enabled: true
         url: https://traefik.traefik.svc.cluster.local:443
         method: GET
-        interval: 60s
+        interval: 5m
         client:
           insecure: true
         conditions:
@@ -199,6 +199,6 @@ data:
         enabled: true
         url: http://cert-manager.cert-manager.svc.cluster.local:9402
         method: GET
-        interval: 60s
+        interval: 5m
         conditions:
           - "[STATUS] == 404"
