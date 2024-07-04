@@ -64,13 +64,13 @@ data:
         conditions:
           - "[STATUS] == 200"
       - name: SimpleLogin Aliases
-        group: 001 - Mail
+        group: 002 - Applications
         enabled: true
-        url: https://aliases.email.muehlbachler.io
+        url: https://aliases.email.muehlbachler.io/auth/login
         method: GET
         interval: 5m
         conditions:
-          - "[STATUS] == 302"
+          - "[STATUS] == 200"
       # 003 - Home Automation
       - name: Home Assistant
         group: 003 - Home Automation
