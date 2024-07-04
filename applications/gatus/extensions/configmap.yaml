@@ -39,6 +39,13 @@ data:
         interval: 5m
         conditions:
           - "[CONNECTED] == true"
+      - name: SimpleLogin Relay
+        group: 001 - Mail
+        enabled: true
+        url: tcp://relay.email.muehlbachler.io:25
+        interval: 5m
+        conditions:
+          - "[CONNECTED] == true"
       # 002 - Applications
       - name: Immich
         group: 002 - Applications
@@ -56,6 +63,14 @@ data:
         interval: 5m
         conditions:
           - "[STATUS] == 200"
+      - name: SimpleLogin Aliases
+        group: 001 - Mail
+        enabled: true
+        url: https://aliases.email.muehlbachler.io
+        method: GET
+        interval: 5m
+        conditions:
+          - "[STATUS] == 302"
       # 003 - Home Automation
       - name: Home Assistant
         group: 003 - Home Automation
