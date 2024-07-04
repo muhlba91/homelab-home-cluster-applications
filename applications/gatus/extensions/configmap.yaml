@@ -73,13 +73,6 @@ data:
         interval: 60s
         conditions:
           - "[CONNECTED] == true"
-      - name: MQTT
-        group: 003 - Home Automation
-        enabled: true
-        url: tcp://emqx-mqtt.home-assistant-mqtt.svc.cluster.local:1883
-        interval: 60s
-        conditions:
-          - "[CONNECTED] == true"
       - name: Telegraf
         group: 003 - Home Automation
         enabled: true
