@@ -35,7 +35,7 @@ data:
       - name: SMTP Incoming
         group: 001 - Mail
         enabled: true
-        url: tcp://smtp.soverin.net:25
+        url: tcp://mx.soverin.net:25
         interval: 5m
         conditions:
           - "[CONNECTED] == true"
