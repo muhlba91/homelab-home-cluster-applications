@@ -1,0 +1,74 @@
+---
+global:
+  fullnameOverride: gatus
+
+controllers:
+  main:
+    containers:
+      main:
+        image:
+          repository: ghcr.io/twin/gatus
+          pullPolicy: IfNotPresent
+          tag: v5.11.0
+
+        env:
+          - name: GATUS_CONFIG_PATH
+            value: /config
+
+        resources:
+          requests:
+            cpu: 5m
+            memory: 8Mi
+          limits:
+            cpu: 20m
+            memory: 32Mi
+
+serviceAccount:
+  create: true
+
+defaultPodOptions:
+  automountServiceAccountToken: false
+
+service:
+  main:
+    ports:
+      http:
+        port: 8080
+
+ingress:
+  main:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: cluster-issuer-home-muehlbachler-io
+      external-dns.alpha.kubernetes.io/provider: public
+      external-dns.alpha.kubernetes.io/target: 144.208.195.224,2a01:aea0:dd3:25a:1000:3:3:1
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    hosts:
+      - host: &domain status.home.muehlbachler.io
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            service:
+              name: gatus
+              port: 8080
+    tls:
+      - secretName: gatus-tls-cert
+        hosts:
+          - *domain
+
+persistence:
+  data:
+    enabled: true
+    storageClass: zfs
+    accessMode: ReadWriteOnce
+    size: 200Mi
+    retain: false
+    globalMounts:
+      - path: /data
+  config:
+    enabled: true
+    type: configMap
+    name: gatus-config
+    globalMounts:
+      - path: /config/gatus.yml
+        subPath: gatus.yml
