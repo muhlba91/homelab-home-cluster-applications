@@ -58,7 +58,7 @@ data:
         interval: 5m
         conditions:
           - "[STATUS] == 200"
-      - name: ZWaveJS
+      - name: ZWave JS
         group: 003 - Home Automation
         enabled: true
         url: http://zwave-js.home-assistant-zwave.svc.cluster.local:8091
