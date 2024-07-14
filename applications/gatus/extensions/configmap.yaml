@@ -39,13 +39,6 @@ data:
         interval: 5m
         conditions:
           - "[CONNECTED] == true"
-      - name: SimpleLogin Relay
-        group: 001 - Mail
-        enabled: true
-        url: tcp://relay.email.muehlbachler.io:25
-        interval: 5m
-        conditions:
-          - "[CONNECTED] == true"
       # 002 - Applications
       - name: Immich
         group: 002 - Applications
