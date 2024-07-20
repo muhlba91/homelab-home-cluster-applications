@@ -6,6 +6,6 @@ resources:
   - repository.yaml
   - helmrepository.yaml
   - infrastructure.yaml
-  - core.yaml
-  - applications.yaml
-  - home-assistant.yaml
+  # - core.yaml
+  # - applications.yaml
+  # - home-assistant.yaml

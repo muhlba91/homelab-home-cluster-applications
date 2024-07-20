@@ -2,20 +2,20 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: democratic-csi
+  name: rook-ceph-cluster
 spec:
-  releaseName: democratic-csi
-  targetNamespace: democratic-csi
+  releaseName: rook-ceph-cluster
+  targetNamespace: rook-ceph
   chart:
     spec:
-      chart: democratic-csi
-      version: 0.14.6
+      chart: rook-ceph-cluster
+      version: v1.14.8
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: democratic-csi
+        name: rook
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
-      name: democratic-csi-values
+      name: rook-ceph-cluster-values
       valuesKey: values.yaml

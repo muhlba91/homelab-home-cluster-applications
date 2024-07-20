@@ -2,7 +2,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: democratic-csi
+  name: rook
   namespace: flux-system
 spec:
-  url: https://democratic-csi.github.io/charts/
+  url: https://charts.rook.io/release

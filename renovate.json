@@ -29,9 +29,9 @@
     },
     "flux": {
         "fileMatch": [
-            "(^|/)cluster/.+\\.ya?ml$",
             "(^|/)applications/.+\\.ya?ml$",
             "(^|/)core/.+\\.ya?ml$",
+            "(^|/)home-assistant/.+\\.ya?ml$",
             "(^|/)infrastructure/.+\\.ya?ml$"
         ]
     },
