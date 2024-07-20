@@ -41,6 +41,8 @@ Each of these applications follows the app-of-apps pattern again using sub-kusto
 The following applications are defined in [`infrastructure/`](infrastructure/).
 
 - [x] [Cilium](https://cilium.io) - Provides the cluster CNI.
+- [x] [Kubelet Serving Cert Approver](https://github.com/alex1989hu/kubelet-serving-cert-approver) - Enables automatic certificate approval by the kubelet.
+- [x] [Metrics Server](https://github.com/kubernetes-sigs/metrics-server) - Collects container resource metrics.
 - [x] [Democratic CSI Driver](https://github.com/democratic-csi/democratic-csi) - Exposes Proxmox ZFS storage to Kubernetes `StorageClass`es.
 - [x] [External Secrets Operator](http://external-secrets.io) - Synchronizes secrets from external stores to Kubernetes `Secret` objects.
   - [x] [External Secrets Stores](infrastructure/external-secrets/) - Deploys the required `ClusterSecretStore`s and Vault credentials as Kubernetes `Secret`s.

@@ -4,8 +4,10 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - ./cilium/
-  - ./democratic-csi/
-  - ./metallb/
-  - ./traefik/
-  - ./external-secrets/
-  - ./flux-extensions/
+  - ./kubelet-serving-cert-approver/
+  - ./metrics-server/
+  # - ./rook-ceph/ # FIXME: change to rook-ceph
+  # - ./metallb/
+  # - ./traefik/
+  # - ./external-secrets/
+  # - ./flux-extensions/

@@ -4,10 +4,13 @@ kind: Kustomization
 resources:
   - ./templates/repository.yaml
   - ./templates/release.yaml
-  - ./templates/extensions.yaml
+  - ./templates/release-cluster.yaml
 configMapGenerator:
-  - name: democratic-csi-values
+  - name: rook-ceph-values
     files:
       - values.yaml=values.yaml
+  - name: rook-ceph-cluster-values
+    files:
+      - values.yaml=values-cluster.yaml
 configurations:
   - kustomizeconfig.yaml

@@ -1,0 +1,76 @@
+---
+cephClusterSpec:
+  cephVersion:
+    image: quay.io/ceph/ceph:v18.2.2
+    allowUnsupported: false
+  dataDirHostPath: /var/lib/rook
+  skipUpgradeChecks: false
+  continueUpgradeAfterChecksEvenIfNotHealthy: false
+  cephConfig:
+    global:
+      osd_pool_default_size: "3"
+      osd_pool_default_min_size: "2"
+      mon_warn_on_pool_no_redundancy: "false"
+      bdev_flock_retry: "20"
+      bluefs_buffered_io: "false"
+      mon_data_avail_warn: "10"
+  mon:
+    count: 1
+    allowMultiplePerNode: true
+  mgr:
+    count: 1
+    allowMultiplePerNode: true
+    modules:
+      - name: pg_autoscaler
+        enabled: true
+      - name: rook
+        enabled: true
+  dashboard:
+    enabled: true
+    ssl: false
+  storage:
+    useAllNodes: true
+    useAllDevices: false
+    deviceFilter: "" # FIXME: add filter
+
+ingress:
+  dashboard:
+    annotations:
+      cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+      external-dns.alpha.kubernetes.io/provider: internal
+    host:
+      name: &domain rook.internal.muehlbachler.io
+    tls:
+      - secretName: rook-ceph-dashboard-tls-cert
+        hosts:
+          - *domain
+
+cephBlockPools: []
+cephECBlockPools:
+  - name: ceph-ec-pool
+    spec:
+      metadataPool:
+        failureDomain: osd
+        replicated:
+          size: 3
+          requireSafeReplicaSize: false
+      dataPool:
+        failureDomain: osd
+        erasureCoded:
+          dataChunks: 2
+          codingChunks: 1
+    parameters:
+      clusterID: rook-ceph
+      imageFormat: "2"
+      imageFeatures: layering # FIXME: imageFeatures: layering,fast-diff,object-map,deep-flatten,exclusive-lock?
+    storageClass:
+      enabled: true
+      provisioner: rook-ceph.rbd.csi.ceph.com
+      name: rook-ceph-block
+      isDefault: true
+      allowVolumeExpansion: true
+      reclaimPolicy: Delete
+
+cephFileSystems: []
+
+cephObjectStores: []

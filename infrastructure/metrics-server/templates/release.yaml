@@ -2,21 +2,20 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: cilium
-  namespace: cilium
+  name: metrics-server
 spec:
-  releaseName: cilium
-  targetNamespace: cilium
+  releaseName: metrics-server
+  targetNamespace: metrics-server
   chart:
     spec:
-      chart: cilium
-      version: 1.15.7
+      chart: metrics-server
+      version: 3.12.1
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: cilium
+        name: metrics-server
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
-      name: cilium-values
+      name: metrics-server-values
       valuesKey: values.yaml
