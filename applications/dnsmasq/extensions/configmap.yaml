@@ -55,6 +55,7 @@ data:
     dhcp-host=20:50:e7:03:b9:82,xiaomi-mi-projector,10.0.120.3
     dhcp-host=24:df:a7:f1:1b:35,broadlink-irrf-1,10.0.121.1
     dhcp-host=30:e1:71:b0:64:a3,hp-printer,10.0.130.1
+    dhcp-host=9c:dc:71:47:47:f0,home-cluster-001,10.0.50.1
 
     # DHCPv6 reservations
     dhcp-host=id:00:02:00:00:ab:11:21:d7:59:d6:f5:1f:73:9b,onyx,[2a01:aea0:dd3:25a:2000:2:2:1]
