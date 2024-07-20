@@ -13,7 +13,7 @@ data:
     dhcp-option=option:T1,24h
     dhcp-option=option:T2,42h
     dhcp-option=option:router,10.0.0.1
-    dhcp-option=option:dns-server,10.0.71.10
+    dhcp-option=option:dns-server,10.0.0.1
     dhcp-option=option:domain-name,internal.muehlbachler.io
     dhcp-option=option:domain-search,internal.muehlbachler.io
 
@@ -21,7 +21,7 @@ data:
     dhcp-range=2a01:aea0:dd3:25a:e000::1,2a01:aea0:dd3:25a:e000::ffff,64,48h
     dhcp-option=option6:information-refresh-time,6h
     #dhcp-option=option:router,2a01:aea0:dd3:25a::1
-    dhcp-option=option6:dns-server,[2a01:aea0:dd3:25a:1000:3:2:10]
+    dhcp-option=option6:dns-server,[2a01:aea0:dd3:25a::1]
     #dhcp-option=option:domain-name,internal.muehlbachler.io
     dhcp-option=option6:domain-search,internal.muehlbachler.io
 
