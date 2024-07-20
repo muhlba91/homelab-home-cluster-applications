@@ -85,6 +85,6 @@ subsets:
       - ip: 10.0.71.10
     ports:
       - name: http
-        port: 3000
+        port: 80
         protocol: TCP
 
