@@ -43,7 +43,7 @@ sidecars:
       - name: LOG_LEVEL
         value: debug
       - name: ADGUARD_URL
-        value: "http://10.0.71.10"
+        value: "http://10.0.0.1:3000"
       - name: ADGUARD_USER
         value: "admin"
       - name: ADGUARD_PASSWORD
