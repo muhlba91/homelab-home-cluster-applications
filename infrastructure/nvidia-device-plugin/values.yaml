@@ -2,8 +2,6 @@
 runtimeClassName: nvidia
 
 compatWithCPUManager: false
-migStrategy: none
-failOnInitError: true
 
 gfd:
   enabled: true
@@ -11,15 +9,25 @@ gfd:
 config:
   default: config
   map:
-    config: |-
+    default: |-
       version: v1
+      flags:
+        migStrategy: "none"
+        failOnInitError: true
+        nvidiaDriverRoot: "/"
+        plugin:
+          passDeviceSpecs: false
+          deviceListStrategy:
+            - envvar
+          deviceIDStrategy: uuid
       sharing:
         timeSlicing:
+          renameByDefault: false
           failRequestsGreaterThanOne: true
           resources:
             - name: nvidia.com/gpu
-              replicas: 5
+              replicas: 10
         # mps:
         #   resources:
         #     - name: nvidia.com/gpu
-        #       replicas: 5
+        #       replicas: 10
