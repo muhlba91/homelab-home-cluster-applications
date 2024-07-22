@@ -6,5 +6,5 @@ resources:
   # - ./external-dns/
   - ./cert-manager/
   # - ./velero/
-  # - ./cloudnative-pg/
+  - ./cloudnative-pg/
   # - ./monitoring/
