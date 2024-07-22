@@ -5,7 +5,7 @@ namespace: flux-system
 resources:
   - ./cilium/
   - ./kubelet-serving-cert-approver/
-  # - ./metrics-server/
+  - ./metrics-server/
   # - ./external-secrets/
   # - ./rook-ceph/ # FIXME: change to rook-ceph
   # - ./metallb/
