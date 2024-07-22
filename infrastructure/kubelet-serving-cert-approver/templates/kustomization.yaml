@@ -8,5 +8,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: kubelet-serving-cert-approver
-  path: ./deploy/standalone-install.yaml
+  path: ./deploy/standalone/
   wait: false
