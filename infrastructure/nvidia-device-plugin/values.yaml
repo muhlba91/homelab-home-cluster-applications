@@ -1,0 +1,24 @@
+---
+runtimeClassName: nvidia
+
+compatWithCPUManager: false
+migStrategy: none
+failOnInitError: true
+
+gfd:
+  enabled: true
+
+config:
+  map:
+    config: |-
+      version: v1
+      sharing:
+        timeSlicing:
+          failRequestsGreaterThanOne: true
+          resources:
+            - name: nvidia.com/gpu
+              replicas: 5
+        # mps:
+        #   resources:
+        #     - name: nvidia.com/gpu
+        #       replicas: 5

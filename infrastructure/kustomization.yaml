@@ -6,6 +6,7 @@ resources:
   - ./cilium/
   - ./kubelet-serving-cert-approver/
   - ./metrics-server/
+  - ./nvidia-device-plugin/
   # - ./external-secrets/
   # - ./rook-ceph/ # FIXME: change to rook-ceph
   # - ./metallb/
