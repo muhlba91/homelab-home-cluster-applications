@@ -7,7 +7,7 @@ gfd:
   enabled: true
 
 config:
-  default: config
+  default: default
   map:
     default: |-
       version: v1
