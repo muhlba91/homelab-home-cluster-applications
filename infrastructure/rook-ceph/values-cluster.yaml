@@ -1,4 +1,7 @@
 ---
+toolbox:
+  enabled: true
+
 cephClusterSpec:
   cephVersion:
     image: quay.io/ceph/ceph:v18.2.2
@@ -6,6 +9,8 @@ cephClusterSpec:
   dataDirHostPath: /var/lib/rook
   skipUpgradeChecks: false
   continueUpgradeAfterChecksEvenIfNotHealthy: false
+  cleanupPolicy:
+    confirmation: "" # "yes-really-destroy-data"
   cephConfig:
     global:
       osd_pool_default_size: "3"
@@ -47,6 +52,24 @@ ingress:
 
 cephBlockPools: []
 cephECBlockPools:
+  - name: .mgr
+    spec:
+      metadataPool:
+        failureDomain: osd
+        replicated:
+          size: 3
+          requireSafeReplicaSize: false
+      dataPool:
+        failureDomain: osd
+        erasureCoded:
+          dataChunks: 2
+          codingChunks: 1
+    parameters:
+      clusterID: rook-ceph
+      imageFormat: "2"
+      imageFeatures: layering,fast-diff,object-map,deep-flatten,exclusive-lock
+    storageClass:
+      enabled: false
   - name: ceph-ec-pool
     spec:
       metadataPool:
@@ -62,7 +85,7 @@ cephECBlockPools:
     parameters:
       clusterID: rook-ceph
       imageFormat: "2"
-      imageFeatures: layering # FIXME: imageFeatures: layering,fast-diff,object-map,deep-flatten,exclusive-lock?
+      imageFeatures: layering,fast-diff,object-map,deep-flatten,exclusive-lock
     storageClass:
       enabled: true
       provisioner: rook-ceph.rbd.csi.ceph.com
