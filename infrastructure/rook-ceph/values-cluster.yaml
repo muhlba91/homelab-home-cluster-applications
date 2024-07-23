@@ -31,7 +31,7 @@ cephClusterSpec:
   storage:
     useAllNodes: true
     useAllDevices: false
-    deviceFilter: "" # FIXME: add filter
+    deviceFilter: "^sd."
 
 ingress:
   dashboard:

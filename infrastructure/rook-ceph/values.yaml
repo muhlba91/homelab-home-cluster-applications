@@ -1,1 +1,3 @@
 ---
+csi:
+  provisionerReplicas: 1
