@@ -50,26 +50,21 @@ ingress:
         hosts:
           - *domain
 
-cephBlockPools: []
-cephECBlockPools:
-  - name: .mgr
+cephBlockPools:
+  - name: builtin-mgr
     spec:
-      metadataPool:
-        failureDomain: osd
-        replicated:
-          size: 3
-          requireSafeReplicaSize: false
-      dataPool:
-        failureDomain: osd
-        erasureCoded:
-          dataChunks: 2
-          codingChunks: 1
-    parameters:
-      clusterID: rook-ceph
-      imageFormat: "2"
-      imageFeatures: layering,fast-diff,object-map,deep-flatten,exclusive-lock
+      name: .mgr
+      failureDomain: osd
+      replicated:
+        size: 3
+        requireSafeReplicaSize: false
+      parameters:
+        compression_mode: none
+      mirroring:
+        enabled: false
     storageClass:
       enabled: false
+cephECBlockPools:
   - name: ceph-ec-pool
     spec:
       metadataPool:
