@@ -12,7 +12,7 @@ arbiter:
   enabled: false
 
 auth:
-  enabled: true
+  enabled: false
 
 serviceBindings:
   enabled: true
