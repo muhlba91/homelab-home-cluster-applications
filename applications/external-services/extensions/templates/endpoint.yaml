@@ -48,32 +48,6 @@ subsets:
         port: 443
         protocol: TCP
 
-# PVE
----
-apiVersion: v1
-kind: Endpoints
-metadata:
-  name: pve
-subsets:
-  - addresses:
-      - ip: 10.0.50.10
-    ports:
-      - name: http
-        port: 8006
-        protocol: TCP
----
-apiVersion: v1
-kind: Endpoints
-metadata:
-  name: pbs
-subsets:
-  - addresses:
-      - ip: 10.0.51.1
-    ports:
-      - name: http
-        port: 8007
-        protocol: TCP
-
 # applications
 ---
 apiVersion: v1

@@ -60,38 +60,6 @@ spec:
       protocol: TCP
       targetPort: http
 
-# PVE
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: pve
-  annotations:
-    traefik.ingress.kubernetes.io/service.serversscheme: https
-spec:
-  type: ClusterIP
-  ipFamilyPolicy: PreferDualStack
-  ports:
-    - name: http
-      port: 80
-      protocol: TCP
-      targetPort: http
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: pbs
-  annotations:
-    traefik.ingress.kubernetes.io/service.serversscheme: https
-spec:
-  type: ClusterIP
-  ipFamilyPolicy: PreferDualStack
-  ports:
-    - name: http
-      port: 80
-      protocol: TCP
-      targetPort: http
-
 # applications
 ---
 apiVersion: v1

@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: flux-system
 resources:
   # - ./adguard/
-  # - ./external-services/
+  - ./external-services/
   - ./influxdb/
   # - ./samba/
   - ./librechat/

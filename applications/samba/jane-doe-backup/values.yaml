@@ -114,7 +114,7 @@ persistence:
   data:
     enabled: true
     type: persistentVolumeClaim
-    storageClass: zfs-retain
+    storageClass: rook-ceph-block
     accessMode: ReadWriteOnce
     size: 300Gi
     globalMounts:
