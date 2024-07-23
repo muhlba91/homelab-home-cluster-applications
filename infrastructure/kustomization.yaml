@@ -11,4 +11,4 @@ resources:
   - ./rook-ceph/
   # - ./metallb/
   # - ./traefik/
-  # - ./flux-extensions/
+  - ./flux-extensions/
