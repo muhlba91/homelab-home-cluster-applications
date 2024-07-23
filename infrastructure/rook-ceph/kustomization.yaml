@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./templates/repository.yaml
   - ./templates/release.yaml
-  # - ./templates/release-cluster.yaml
+  - ./templates/release-cluster.yaml
 configMapGenerator:
   - name: rook-ceph-values
     files:
