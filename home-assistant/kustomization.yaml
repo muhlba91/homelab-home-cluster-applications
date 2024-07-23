@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - ./emqx/
-  # - ./telegraf/
+  - ./telegraf/
   # - ./ecowitt2mqtt/
   # - ./ring-mqtt/
   # - ./zwave/
