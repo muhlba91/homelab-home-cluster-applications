@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./victoria-metrics-stack/
   - ./loki-stack/
-  # - ./grafana/
+  - ./grafana/
