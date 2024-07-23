@@ -9,4 +9,4 @@ resources:
   # - ./samba/
   - ./librechat/
   # - ./immich/
-  # - ./gatus/
+  - ./gatus/

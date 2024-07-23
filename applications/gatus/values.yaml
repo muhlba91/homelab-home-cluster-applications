@@ -59,7 +59,7 @@ ingress:
 persistence:
   data:
     enabled: true
-    storageClass: zfs
+    storageClass: rook-ceph-block
     accessMode: ReadWriteOnce
     size: 200Mi
     retain: false
