@@ -5,7 +5,7 @@ namespace: flux-system
 resources:
   - ./emqx/
   - ./telegraf/
-  # - ./ecowitt2mqtt/
+  - ./ecowitt2mqtt/
   # - ./ring-mqtt/
   # - ./zwave/
   # - ./home-assistant/
