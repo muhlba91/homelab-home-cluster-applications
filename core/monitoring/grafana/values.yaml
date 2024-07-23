@@ -40,7 +40,7 @@ ingress:
 persistence:
   enabled: true
   type: statefulset
-  storageClassName: zfs-retain
+  storageClassName: rook-ceph-block
   size: 1Gi
 
 initChownData:

@@ -20,7 +20,7 @@ victoria-metrics-operator:
 defaultRules:
   create: true
   rules:
-    etcd: false # k0s restriction
+    etcd: false # restricted by certificates
     general: true
     k8s: true
     kubeApiserver: true
@@ -35,7 +35,7 @@ defaultRules:
     kubernetesResources: true
     kubernetesStorage: true
     kubernetesSystem: true
-    kubeScheduler: false # k0s restriction
+    kubeScheduler: true
     kubeStateMetrics: true
     network: true
     node: true
@@ -64,12 +64,12 @@ vmsingle:
         cpu: "1"
         memory: 1Gi
     storage:
-      storageClassName: zfs
+      storageClassName: rook-ceph-block
       accessModes:
         - ReadWriteOnce
       resources:
         requests:
-          storage: 50Gi
+          storage: 20Gi
   ingress:
     enabled: false
 
@@ -136,7 +136,10 @@ kubeApiserver:
   enabled: true
 
 kubeControllerManager:
-  enabled: false # k0s restriction
+  enabled: true
+  service:
+    selector:
+      k8s-app: kube-controller-manager
 
 kubeDns:
   enabled: false
@@ -145,10 +148,13 @@ coreDns:
   enabled: true
 
 kubeEtcd:
-  enabled: false # k0s restriction
+  enabled: false # restricted by certificates
 
 kubeScheduler:
-  enabled: false # k0s restriction
+  enabled: true
+  service:
+    selector:
+      k8s-app: kube-scheduler
 
 kubeProxy:
   enabled: false

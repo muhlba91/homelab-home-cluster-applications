@@ -24,8 +24,8 @@ loki:
     type: filesystem
   persistence:
     enabled: true
-    storageClassName: zfs
-    size: 50Gi
+    storageClassName: rook-ceph-block
+    size: 20Gi
   resources:
     requests:
       cpu: 50m
