@@ -13,8 +13,8 @@ adminUser:
 
 persistence:
   enabled: true
-  storageClass: zfs-retain
-  size: 15Gi
+  storageClass: rook-ceph-block
+  size: 5Gi
 
 initScripts:
   enabled: false
@@ -23,7 +23,7 @@ ingress:
   enabled: true
   tls: true
   secretName: influxdb-tls-cert
-  hostname: influxdb.iot.internal.muehlbachler.io
+  hostname: influxdb.internal.muehlbachler.io
   annotations:
     cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
     external-dns.alpha.kubernetes.io/provider: internal
