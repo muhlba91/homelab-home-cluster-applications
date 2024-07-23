@@ -21,7 +21,7 @@ ingress:
 
 persistence:
   enabled: true
-  storageClassName: zfs
+  storageClassName: rook-ceph-block
   accessMode: ReadWriteOnce
   size: 512Mi
 
