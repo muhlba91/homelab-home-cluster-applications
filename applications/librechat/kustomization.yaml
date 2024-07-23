@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./mongodb/
   - ./meilisearch/
-  - ./librechat/
+  # - ./librechat/
