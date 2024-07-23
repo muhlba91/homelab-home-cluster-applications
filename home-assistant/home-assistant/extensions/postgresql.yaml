@@ -9,8 +9,8 @@ spec:
   imageName: ghcr.io/cloudnative-pg/postgresql:15.6
 
   storage:
-    size: 25Gi
-    storageClass: zfs
+    size: 10Gi
+    storageClass: rook-ceph-block
 
   resources:
     requests:

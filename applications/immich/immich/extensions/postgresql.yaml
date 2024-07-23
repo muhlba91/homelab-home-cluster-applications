@@ -11,8 +11,8 @@ spec:
   imageName: ghcr.io/muhlba91/postgresql-pgvecto:15.6-16-v0.2.1-v1.1.2
 
   storage:
-    size: 25Gi
-    storageClass: zfs
+    size: 10Gi
+    storageClass: rook-ceph-block
 
   resources:
     requests:

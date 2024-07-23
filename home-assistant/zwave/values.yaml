@@ -109,9 +109,9 @@ persistence:
   config:
     enabled: true
     type: persistentVolumeClaim
-    storageClass: zfs
+    storageClass: rook-ceph-block
     accessMode: ReadWriteOnce
-    size: 1Gi
+    size: 512Mi
     retain: false
     advancedMounts:
       main:

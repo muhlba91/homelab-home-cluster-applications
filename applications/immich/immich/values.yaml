@@ -358,7 +358,7 @@ persistence:
   data:
     enabled: true
     type: persistentVolumeClaim
-    storageClass: zfs-retain
+    storageClass: rook-ceph-block
     accessMode: ReadWriteOnce
     size: 256Gi
     advancedMounts:
@@ -376,9 +376,9 @@ persistence:
   machine-learning-cache:
     enabled: true
     type: persistentVolumeClaim
-    storageClass: zfs
+    storageClass: rook-ceph-block
     accessMode: ReadWriteOnce
-    size: 10Gi
+    size: 15Gi
     advancedMounts:
       machine-learning:
         main:

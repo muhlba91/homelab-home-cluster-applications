@@ -135,7 +135,7 @@ persistence:
   data:
     enabled: true
     type: persistentVolumeClaim
-    storageClass: zfs
+    storageClass: rook-ceph-block
     accessMode: ReadWriteOnce
     size: 32Mi
     retain: false
