@@ -94,9 +94,9 @@ persistence:
   data:
     enabled: true
     type: persistentVolumeClaim
-    storageClass: zfs
+    storageClass: rook-ceph-block
     accessMode: ReadWriteOnce
-    size: 25Gi
+    size: 5Gi
     globalMounts:
       - path: /app/client/public/images
   config:

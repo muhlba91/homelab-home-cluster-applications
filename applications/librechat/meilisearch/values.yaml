@@ -9,7 +9,7 @@ auth:
 
 persistence:
   enabled: true
-  storageClass: zfs
+  storageClass: rook-ceph-block
   size: 5Gi
 
 resources:

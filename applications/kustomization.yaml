@@ -7,6 +7,6 @@ resources:
   # - ./external-services/
   - ./influxdb/
   # - ./samba/
-  # - ./librechat/
+  - ./librechat/
   # - ./immich/
   # - ./gatus/
