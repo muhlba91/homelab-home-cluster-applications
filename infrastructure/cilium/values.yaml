@@ -6,7 +6,7 @@ ipam:
 ipv6:
   enabled: true
 
-kubeProxyReplacement: strict
+kubeProxyReplacement: true
 kubeProxyReplacementHealthzBindAddr: "0.0.0.0:10256"
 
 k8sServiceHost: 127.0.0.1
@@ -15,6 +15,9 @@ k8sServicePort: 7445
 k8sClientRateLimit:
   qps: 30
   burst: 60
+
+envoy:
+  enabled: false
 
 l2announcements:
   enabled: false
@@ -27,8 +30,6 @@ cgroup:
   hostRoot: /sys/fs/cgroup
 
 bpf:
-  autoMount:
-    enabled: false
   hostLegacyRouting: false
 
 securityContext:
