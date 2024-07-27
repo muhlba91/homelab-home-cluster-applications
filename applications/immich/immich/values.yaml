@@ -126,21 +126,21 @@ controllers:
   #           enabled: false
   samba-daniel:
     enabled: true
-    pod:
-      affinity:
-        podAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: app.kubernetes.io/name
-                    operator: In
-                    values:
-                      - immich
-                  - key: app.kubernetes.io/component
-                    operator: In
-                    values:
-                      - main
-              topologyKey: kubernetes.io/hostname
+    # pod:
+    #   affinity:
+    #     podAffinity:
+    #       requiredDuringSchedulingIgnoredDuringExecution:
+    #         - labelSelector:
+    #             matchExpressions:
+    #               - key: app.kubernetes.io/name
+    #                 operator: In
+    #                 values:
+    #                   - immich
+    #               - key: app.kubernetes.io/component
+    #                 operator: In
+    #                 values:
+    #                   - main
+    #           topologyKey: kubernetes.io/hostname
     containers:
       main:
         image:
@@ -186,21 +186,21 @@ controllers:
             enabled: false
   samba-kasia:
     enabled: true
-    pod:
-      affinity:
-        podAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: app.kubernetes.io/name
-                    operator: In
-                    values:
-                      - immich
-                  - key: app.kubernetes.io/component
-                    operator: In
-                    values:
-                      - main
-              topologyKey: kubernetes.io/hostname
+    # pod:
+    #   affinity:
+    #     podAffinity:
+    #       requiredDuringSchedulingIgnoredDuringExecution:
+    #         - labelSelector:
+    #             matchExpressions:
+    #               - key: app.kubernetes.io/name
+    #                 operator: In
+    #                 values:
+    #                   - immich
+    #               - key: app.kubernetes.io/component
+    #                 operator: In
+    #                 values:
+    #                   - main
+    #           topologyKey: kubernetes.io/hostname
     containers:
       main:
         image:
