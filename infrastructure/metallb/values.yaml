@@ -9,13 +9,13 @@ controller:
       cpu: 10m
       memory: 72Mi
     limits:
-      cpu: 50m
-      memory: 96Mi
+      cpu: 100m
+      memory: 128Mi
 speaker:
   resources:
     requests:
       cpu: 10m
       memory: 128Mi
     limits:
-      cpu: 50m
+      cpu: 100m
       memory: 192Mi
