@@ -8,5 +8,5 @@ resources:
   - ./ecowitt2mqtt/
   - ./ring-mqtt/
   - ./zwave/
-  # - ./home-assistant/
+  - ./home-assistant/
   # - ./node-red/
