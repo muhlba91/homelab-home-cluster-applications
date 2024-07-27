@@ -5,7 +5,7 @@ resources:
   - ./templates/repository.yaml
   - ./templates/extensions.yaml
   - ./templates/release.yaml
-  - ./templates/schedules.yaml
+  # - ./templates/schedules.yaml
 configMapGenerator:
   - name: velero-values
     files:
