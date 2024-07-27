@@ -4,76 +4,75 @@ global:
 
 controllers:
   main:
-    enabled: false
-  #   pod:
-  #     annotations:
-  #       backup.velero.io/backup-volumes: data
-  #   containers:
-  #     main:
-  #       image:
-  #         repository: ghcr.io/immich-app/immich-server
-  #         pullPolicy: IfNotPresent
-  #         tag: v1.109.2
+    pod:
+      annotations:
+        backup.velero.io/backup-volumes: data
+    containers:
+      main:
+        image:
+          repository: ghcr.io/immich-app/immich-server
+          pullPolicy: IfNotPresent
+          tag: v1.109.2
 
-  #       envFrom:
-  #         - configMapRef:
-  #             name: immich-env
+        envFrom:
+          - configMapRef:
+              name: immich-env
 
-  #       env:
-  #         - name: DB_USERNAME
-  #           valueFrom:
-  #             secretKeyRef:
-  #               name: immich-database
-  #               key: username
-  #         - name: DB_PASSWORD
-  #           valueFrom:
-  #             secretKeyRef:
-  #               name: immich-database
-  #               key: password
+        env:
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: immich-database
+                key: username
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: immich-database
+                key: password
 
-  #       resources:
-  #         requests:
-  #           cpu: 50m
-  #           memory: 384Mi
-  #         limits:
-  #           cpu: 1
-  #           memory: 2048Mi
+        resources:
+          requests:
+            cpu: 50m
+            memory: 384Mi
+          limits:
+            cpu: 1
+            memory: 2048Mi
 
-  #       probes:
-  #         liveness: &server_probes
-  #           enabled: true
-  #           custom: true
-  #           spec:
-  #             httpGet:
-  #               path: /api/server-info/ping
-  #               port: 3001
-  #             initialDelaySeconds: 0
-  #             periodSeconds: 10
-  #             timeoutSeconds: 1
-  #             failureThreshold: 3
-  #         readiness: *server_probes
-  #         startup:
-  #           enabled: false
+        probes:
+          liveness: &server_probes
+            enabled: true
+            custom: true
+            spec:
+              httpGet:
+                path: /api/server-info/ping
+                port: 3001
+              initialDelaySeconds: 0
+              periodSeconds: 10
+              timeoutSeconds: 1
+              failureThreshold: 3
+          readiness: *server_probes
+          startup:
+            enabled: false
 
-  #   initContainers:
-  #     create-data-directories:
-  #       image:
-  #         repository: busybox
-  #         tag: 1.36
-  #         pullPolicy: IfNotPresent
-  #       command:
-  #         - sh
-  #         - -c
-  #         - "/init/create-data-directories.sh"
-  #       securityContext:
-  #         runAsUser: 0
-  #       resources:
-  #         requests:
-  #           cpu: 10m
-  #           memory: 16Mi
-  #         limits:
-  #           cpu: 100m
-  #           memory: 32Mi
+    initContainers:
+      create-data-directories:
+        image:
+          repository: busybox
+          tag: 1.36
+          pullPolicy: IfNotPresent
+        command:
+          - sh
+          - -c
+          - "/init/create-data-directories.sh"
+        securityContext:
+          runAsUser: 0
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 32Mi
   # machine-learning:
   #   enabled: true
   #   containers:
@@ -126,21 +125,21 @@ controllers:
   #           enabled: false
   samba-daniel:
     enabled: true
-    # pod:
-    #   affinity:
-    #     podAffinity:
-    #       requiredDuringSchedulingIgnoredDuringExecution:
-    #         - labelSelector:
-    #             matchExpressions:
-    #               - key: app.kubernetes.io/name
-    #                 operator: In
-    #                 values:
-    #                   - immich
-    #               - key: app.kubernetes.io/component
-    #                 operator: In
-    #                 values:
-    #                   - main
-    #           topologyKey: kubernetes.io/hostname
+    pod:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - immich
+                  - key: app.kubernetes.io/component
+                    operator: In
+                    values:
+                      - main
+              topologyKey: kubernetes.io/hostname
     containers:
       main:
         image:
@@ -186,21 +185,21 @@ controllers:
             enabled: false
   samba-kasia:
     enabled: true
-    # pod:
-    #   affinity:
-    #     podAffinity:
-    #       requiredDuringSchedulingIgnoredDuringExecution:
-    #         - labelSelector:
-    #             matchExpressions:
-    #               - key: app.kubernetes.io/name
-    #                 operator: In
-    #                 values:
-    #                   - immich
-    #               - key: app.kubernetes.io/component
-    #                 operator: In
-    #                 values:
-    #                   - main
-    #           topologyKey: kubernetes.io/hostname
+    pod:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - immich
+                  - key: app.kubernetes.io/component
+                    operator: In
+                    values:
+                      - main
+              topologyKey: kubernetes.io/hostname
     containers:
       main:
         image:
