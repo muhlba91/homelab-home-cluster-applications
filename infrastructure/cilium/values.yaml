@@ -16,9 +16,6 @@ k8sClientRateLimit:
   qps: 30
   burst: 60
 
-envoy:
-  enabled: false
-
 l2announcements:
   enabled: false
 externalIPs:
@@ -28,9 +25,6 @@ cgroup:
   autoMount:
     enabled: false
   hostRoot: /sys/fs/cgroup
-
-bpf:
-  hostLegacyRouting: false
 
 securityContext:
   capabilities:
