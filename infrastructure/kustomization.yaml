@@ -9,6 +9,6 @@ resources:
   - ./nvidia-device-plugin/
   - ./external-secrets/
   - ./rook-ceph/
-  # - ./metallb/
-  # - ./traefik/
+  - ./metallb/
+  - ./traefik/
   - ./flux-extensions/
