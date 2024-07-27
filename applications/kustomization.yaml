@@ -8,5 +8,5 @@ resources:
   - ./influxdb/
   # - ./samba/
   - ./librechat/
-  - ./immich/
+  # - ./immich/
   - ./gatus/
