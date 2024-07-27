@@ -8,7 +8,7 @@ resources:
   - ./metrics-server/
   - ./nvidia-device-plugin/
   - ./external-secrets/
-  # - ./rook-ceph/
-  # - ./metallb/
-  # - ./traefik/
-  # - ./flux-extensions/
+  - ./rook-ceph/
+  - ./metallb/
+  - ./traefik/
+  - ./flux-extensions/
