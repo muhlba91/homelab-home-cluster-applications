@@ -2,8 +2,9 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: librechat
+  name: adguard-external-dns
   namespace: flux-system
 spec:
   interval: 10m
-  url: https://bjw-s.github.io/helm-charts
+  url: oci://registry-1.docker.io/bitnamicharts
+  type: oci

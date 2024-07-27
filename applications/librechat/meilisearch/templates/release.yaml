@@ -13,7 +13,7 @@ spec:
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: meilisearch
+        name: librechat-meilisearch
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap

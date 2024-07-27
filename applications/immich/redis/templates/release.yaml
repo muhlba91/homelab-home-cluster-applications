@@ -13,7 +13,7 @@ spec:
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: bitnami
+        name: immich-redis
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap

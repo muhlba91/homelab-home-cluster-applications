@@ -2,7 +2,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: meilisearch
+  name: librechat-meilisearch
   namespace: flux-system
 spec:
   url: https://meilisearch.github.io/meilisearch-kubernetes

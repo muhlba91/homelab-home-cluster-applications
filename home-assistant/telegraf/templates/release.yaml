@@ -13,7 +13,7 @@ spec:
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: bjw-s
+        name: home-assistant-telegraf
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
