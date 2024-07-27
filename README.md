@@ -41,22 +41,24 @@ Each of these applications follows the app-of-apps pattern again using sub-kusto
 The following applications are defined in [`infrastructure/`](infrastructure/).
 
 - [x] [Cilium](https://cilium.io) - Provides the cluster CNI.
-- [x] [Kubelet Serving Cert Approver](https://github.com/alex1989hu/kubelet-serving-cert-approver) - Enables automatic certificate approval by the kubelet.
-- [x] [Metrics Server](https://github.com/kubernetes-sigs/metrics-server) - Collects container resource metrics.
 - [x] [External Secrets Operator](http://external-secrets.io) - Synchronizes secrets from external stores to Kubernetes `Secret` objects.
   - [x] [External Secrets Stores](infrastructure/external-secrets/) - Deploys the required `ClusterSecretStore`s and Vault credentials as Kubernetes `Secret`s.
+- [x] [Kubelet Serving Cert Approver](https://github.com/alex1989hu/kubelet-serving-cert-approver) - Enables automatic certificate approval by the kubelet.
 - [x] [MetalLB](https://metallb.universe.tf) - Provides a Kubernetes network load balancer to expose Kubernetes `Service`s.
+- [x] [Metrics Server](https://github.com/kubernetes-sigs/metrics-server) - Collects container resource metrics.
+- [x] [NVIDIA Device Plugin](https://github.com/NVIDIA/k8s-device-plugin) - Makes the NVIDIA GPU accessible in the cluster.
+- [x] [Rook Ceph](https://rook.io) - Manages persistent storage in the cluster.
 - [x] [Traefik](https://traefik.io) - Exposes Kubernetes `Ingress` resources to the "outside world".
 
 ### Core Applications
 
 The following applications are defined in [`core/`](core/).
 
-- [x] [cert-manager](https://cert-manager.io) - Certificate management using ACME Let's Encrypt.
+- [x] [Cert Manager](https://cert-manager.io) - Certificate management using ACME Let's Encrypt.
 - [x] [CloudNativePG](https://cloudnative-pg.io/documentation/current/) - PostgreSQL database operator.
 - [x] [External DNS with Google Cloud DNS integration](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Google Cloud DNS domains for publicly reachable services.
-- [x] [victoria-metrics-stack](https://github.com/VictoriaMetrics/helm-charts/tree/master/charts/victoria-metrics-k8s-stack) - Monitoring stack using [Victoria Metrics](https://victoriametrics.com).
-- [x] [loki-stack](https://github.com/grafana/helm-charts/tree/main/charts/loki-stack) - Logging stack using [Grafana Loki](https://grafana.com/oss/loki/).
+- [x] [Victoria Metrics Stack](https://github.com/VictoriaMetrics/helm-charts/tree/master/charts/victoria-metrics-k8s-stack) - Monitoring stack using [Victoria Metrics](https://victoriametrics.com).
+- [x] [Loki Stack](https://github.com/grafana/helm-charts/tree/main/charts/loki-stack) - Logging stack using [Grafana Loki](https://grafana.com/oss/loki/).
 - [x] [Grafana](http://grafana.com) - Visualization of metrics, and other data.
 - [x] [Velero](https://velero.io) - Performs cluster backups.
   - [x] Includes deployment of backup schedules.
@@ -65,14 +67,13 @@ The following applications are defined in [`core/`](core/).
 
 The following applications are defined in [`applications/`](applications/).
 
-- [x] [Adguard](https://adguard.com/en/adguard-home/overview.html) - DNS server with ad filtering/blocking capabilities.
-- [x] [dnsmasq](https://thekelleys.org.uk/dnsmasq/doc.html) - IPv4 and IPv6 DHCP server.
 - [x] [External DNS with Adguard integration](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Adguard for internal, local only, reachable services. Uses the [External DNS Adguard Webhook provider](https://github.com/muhlba91/external-dns-provider-adguard).
 - [x] External Services - Deploys Kubernetes `Service`s and `Ingress`es to local endpoints, and existing services outside of the cluster.
+- [x] [Gatus](https://gatus.io) - Service status page.
 - [x] [Immich](https://immich.app) - Photo management solution.
 - [x] [InfluxDB](https://www.influxdata.com) - Time-Series database.
 - [x] [LibreChat](https://librechat.ai) - Open Source AI platform integrating with multiple models.
-- [x] [Samba](https://github.com/crazy-max/docker-samba) - Exposes Samba shares for various applications.
+- [ ] [Samba](https://github.com/crazy-max/docker-samba) - Exposes Samba shares for various applications.
 
 ### Home Assistant
 
@@ -85,7 +86,7 @@ The following applications are defined in [`home-assistant/`](home-assistant/).
 - [x] [Node-RED](https://nodered.org) - Automation based on flows and Home Assistant data.
 - [x] [Ring MQTT](https://github.com/tsightler/ring-mqtt) - Amazon Ring devices to MQTT bridge.
 - [x] [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) - Forwards Home Assistant state changes to a local [InfluxDB](https://www.influxdata.com) instance.
-- [x] [Z-Wave JS UI](https://github.com/zwave-js/zwave-js-ui) - Full featured Z-Wave Control Panel and MQTT Gateway.
+- [x] [Z-Wave JS](https://github.com/zwave-js/zwave-js-ui) - Full featured Z-Wave Control Panel and MQTT Gateway.
 
 #### Notes: Backup and Restore
 
