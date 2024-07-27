@@ -5,6 +5,6 @@ namespace: flux-system
 resources:
   # - ./external-dns/
   - ./cert-manager/
-  # - ./velero/
+  - ./velero/
   - ./cloudnative-pg/
   - ./monitoring/
