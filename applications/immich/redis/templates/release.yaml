@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: redis
-      version: 19.1.2
+      version: 19.6.4
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
