@@ -5,7 +5,7 @@ namespace: flux-system
 resources:
   - repository.yaml
   - helmrepository.yaml
-  # - infrastructure.yaml
+  - infrastructure.yaml
   # - core.yaml
   # - applications.yaml
   # - home-assistant.yaml
