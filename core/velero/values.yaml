@@ -25,7 +25,6 @@ configuration:
 
 deployNodeAgent: true
 nodeAgent:
-  podVolumePath: /var/lib/k0s/kubelet/pods
   resources:
     requests:
       cpu: 50m
