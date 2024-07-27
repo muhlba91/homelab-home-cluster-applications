@@ -4,7 +4,8 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - repository.yaml
-  - helmrepository.yaml
+  - helmrepository/bitnami.yaml
+  - helmrepository/bjw-s.yaml
   - infrastructure.yaml
   - core.yaml
   - applications.yaml
