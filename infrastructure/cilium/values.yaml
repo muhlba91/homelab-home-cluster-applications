@@ -6,7 +6,7 @@ ipam:
 ipv6:
   enabled: true
 
-kubeProxyReplacement: true
+kubeProxyReplacement: strict
 kubeProxyReplacementHealthzBindAddr: "0.0.0.0:10256"
 
 k8sServiceHost: 127.0.0.1
