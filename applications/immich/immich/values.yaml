@@ -4,7 +4,7 @@ global:
 
 controllers:
   main:
-  enabled: false
+    enabled: false
   #   pod:
   #     annotations:
   #       backup.velero.io/backup-volumes: data
