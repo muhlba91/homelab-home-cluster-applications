@@ -7,6 +7,6 @@ resources:
   - ./telegraf/
   - ./ecowitt2mqtt/
   - ./ring-mqtt/
-  # - ./zwave/
+  - ./zwave/
   - ./home-assistant/
   # - ./node-red/
