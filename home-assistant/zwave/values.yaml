@@ -72,8 +72,6 @@ serviceAccount:
 
 defaultPodOptions:
   automountServiceAccountToken: false
-  nodeSelector:
-    usb: zwave-controller
 
 service:
   main:
