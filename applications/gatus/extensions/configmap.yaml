@@ -68,7 +68,7 @@ data:
       - name: Home Assistant
         group: 003 - Home Automation
         enabled: true
-        url: http://home-assistant.home-assistant-home-assistant.svc.cluster.local:8123
+        url: http://home-assistant-home-assistant.home-assistant-home-assistant.svc.cluster.local:8123
         method: GET
         interval: 5m
         conditions:
@@ -76,7 +76,7 @@ data:
       - name: Node-RED
         group: 003 - Home Automation
         enabled: true
-        url: http://node-red.home-assistant-node-red.svc.cluster.local:1880
+        url: http://home-assistant-node-red.home-assistant-node-red.svc.cluster.local:1880
         method: GET
         interval: 5m
         conditions:
@@ -84,7 +84,7 @@ data:
       - name: ZWave JS
         group: 003 - Home Automation
         enabled: true
-        url: http://zwave-js.home-assistant-zwave.svc.cluster.local:8091
+        url: http://home-assistant-zwave.home-assistant-zwave.svc.cluster.local:8091
         method: GET
         interval: 5m
         conditions:
@@ -97,6 +97,14 @@ data:
         conditions:
           - "[CONNECTED] == true"
       - name: Telegraf
+        group: 003 - Home Automation
+        enabled: true
+        url: http://home-assistant-telegrad.home-assistant-ecowitt2mqtt.svc.cluster.local:80
+        method: GET
+        interval: 5m
+        conditions:
+          - "[STATUS] == 404"
+      - name: Ecowitt 2 MQTT
         group: 003 - Home Automation
         enabled: true
         url: http://home-assistant-ecowitt2mqtt.home-assistant-ecowitt2mqtt.svc.cluster.local:80
