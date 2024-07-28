@@ -333,7 +333,7 @@ service:
         targetPort: 5355
 
 ingress:
-  main:
+  immich:
     enabled: true
     annotations:
       cert-manager.io/cluster-issuer: cluster-issuer-home-muehlbachler-io

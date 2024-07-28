@@ -77,7 +77,7 @@ service:
         port: 3080
 
 ingress:
-  main:
+  librechat:
     enabled: true
     annotations:
       cert-manager.io/cluster-issuer: cluster-issuer-home-muehlbachler-io

@@ -1,12 +1,10 @@
 ---
-global:
-  fullnameOverride: telegraf
-
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.2.0/charts/library/common/values.schema.json
 controllers:
   main:
     type: deployment
     containers:
-      main:
+      telegraf:
         image:
           repository: telegraf
           pullPolicy: IfNotPresent
@@ -25,6 +23,17 @@ controllers:
           limits:
             cpu: 50m
             memory: 128Mi
+
+        probes:
+          liveness:
+            enabled: true
+          readiness:
+            enabled: true
+          startup:
+            enabled: true
+            spec:
+              failureThreshold: 30
+              periodSeconds: 5
 
     initContainers:
       plugins:
@@ -65,7 +74,8 @@ serviceAccount:
   create: true
 
 service:
-  main:
+  telegraf:
+    controller: main
     ipFamilyPolicy: PreferDualStack
     ports:
       http:

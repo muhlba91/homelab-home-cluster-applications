@@ -100,7 +100,7 @@ service:
         port: 8123
 
 ingress:
-  main:
+  home-assistant:
     enabled: true
     annotations:
       cert-manager.io/cluster-issuer: cluster-issuer-home-muehlbachler-io
