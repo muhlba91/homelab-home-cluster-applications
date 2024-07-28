@@ -1,9 +1,10 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.2.0/charts/library/common/values.schema.json
 controllers:
   main:
     type: deployment
     containers:
-      main:
+      ecowitt2mqtt:
         image:
           repository: ghcr.io/bachya/ecowitt2mqtt
           pullPolicy: IfNotPresent
@@ -33,6 +34,17 @@ controllers:
             cpu: 100m
             memory: 64Mi
 
+        probes:
+          liveness:
+            enabled: true
+          readiness:
+            enabled: true
+          startup:
+            enabled: true
+            spec:
+              failureThreshold: 30
+              periodSeconds: 5
+
 serviceAccount:
   create: true
 
@@ -41,6 +53,7 @@ defaultPodOptions:
 
 service:
   main:
+    controller: main
     enabled: true
     type: LoadBalancer
     ipFamilyPolicy: PreferDualStack

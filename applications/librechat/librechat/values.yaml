@@ -1,11 +1,9 @@
 ---
-global:
-  fullnameOverride: librechat
-
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.2.0/charts/library/common/values.schema.json
 controllers:
   main:
     containers:
-      main:
+      librechat:
         image:
           repository: ghcr.io/danny-avila/librechat
           pullPolicy: IfNotPresent
@@ -30,6 +28,17 @@ controllers:
           limits:
             cpu: 300m
             memory: 384Mi
+
+        probes:
+          liveness:
+            enabled: true
+          readiness:
+            enabled: true
+          startup:
+            enabled: true
+            spec:
+              failureThreshold: 30
+              periodSeconds: 5
 
     initContainers:
       init-chown-data:
@@ -61,7 +70,8 @@ defaultPodOptions:
   automountServiceAccountToken: false
 
 service:
-  main:
+  librechat:
+    controller: main
     ports:
       http:
         port: 3080
@@ -80,7 +90,7 @@ ingress:
           - path: /
             pathType: ImplementationSpecific
             service:
-              name: librechat
+              identifier: librechat
               port: 3080
     tls:
       - secretName: librechat-tls-cert
