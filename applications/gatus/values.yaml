@@ -1,11 +1,9 @@
 ---
-global:
-  fullnameOverride: gatus
-
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.2.0/charts/library/common/values.schema.json
 controllers:
-  main:
+  gatus:
     containers:
-      main:
+      gatus:
         image:
           repository: ghcr.io/twin/gatus
           pullPolicy: IfNotPresent
@@ -23,6 +21,17 @@ controllers:
             cpu: 50m
             memory: 128Mi
 
+        probes:
+          liveness:
+            enabled: true
+          readiness:
+            enabled: true
+          startup:
+            enabled: true
+            spec:
+              failureThreshold: 30
+              periodSeconds: 5
+
 serviceAccount:
   create: true
 
@@ -30,13 +39,14 @@ defaultPodOptions:
   automountServiceAccountToken: false
 
 service:
-  main:
+  gatus:
+    controller: gatus
     ports:
       http:
         port: 8080
 
 ingress:
-  main:
+  gatus:
     enabled: true
     annotations:
       cert-manager.io/cluster-issuer: cluster-issuer-home-muehlbachler-io
@@ -49,7 +59,7 @@ ingress:
           - path: /
             pathType: ImplementationSpecific
             service:
-              name: gatus
+              identifier: gatus
               port: 8080
     tls:
       - secretName: gatus-tls-cert
