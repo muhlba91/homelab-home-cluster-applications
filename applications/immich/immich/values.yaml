@@ -362,15 +362,15 @@ persistence:
     size: 256Gi
     advancedMounts:
       main:
-        main:
+        immich:
           - path: /data
         create-data-directories:
           - path: /data
       samba-daniel:
-        main:
+        samba:
           - path: /shares
       samba-kasia:
-        main:
+        samba:
           - path: /shares
   machine-learning-cache:
     enabled: true
@@ -380,7 +380,7 @@ persistence:
     size: 15Gi
     advancedMounts:
       machine-learning:
-        main:
+        machine-learning:
           - path: /cache
   config:
     enabled: true
@@ -389,7 +389,7 @@ persistence:
     defaultMode: 511
     advancedMounts:
       main:
-        main:
+        immich:
           - path: /config/immich.yaml
             subPath: immich.yaml
   samba-config:
@@ -398,11 +398,11 @@ persistence:
     name: samba-config
     advancedMounts:
       samba-daniel:
-        main:
+        samba:
           - path: /data/config.yml
             subPath: daniel.yaml
       samba-kasia:
-        main:
+        samba:
           - path: /data/config.yml
             subPath: kasia.yaml
   init:
@@ -411,6 +411,6 @@ persistence:
     name: immich-init
     defaultMode: 511
     advancedMounts:
-      main:
+      samba:
         create-data-directories:
           - path: /init
