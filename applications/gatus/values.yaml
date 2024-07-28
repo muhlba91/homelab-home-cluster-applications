@@ -1,9 +1,9 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.2.0/charts/library/common/values.schema.json
 controllers:
-  main:
+  gatus:
     containers:
-      gatus:
+      main:
         image:
           repository: ghcr.io/twin/gatus
           pullPolicy: IfNotPresent
@@ -40,7 +40,7 @@ defaultPodOptions:
 
 service:
   gatus:
-    controller: main
+    controller: gatus
     ports:
       http:
         port: 8080
