@@ -411,6 +411,6 @@ persistence:
     name: immich-init
     defaultMode: 511
     advancedMounts:
-      samba:
+      main:
         create-data-directories:
           - path: /init
