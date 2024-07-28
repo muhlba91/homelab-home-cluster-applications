@@ -179,7 +179,7 @@ persistence:
     retain: false
     advancedMounts:
       main:
-        main:
+        node-red:
           - path: /usr/src/node-red/node_modules
         init-chown-node-modules:
           - path: /node_modules
