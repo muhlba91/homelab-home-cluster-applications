@@ -12,7 +12,7 @@ spec:
   template:
     spec:
       automountServiceAccountToken: true
-      serviceAccountName: zwave-js
+      serviceAccountName: home-assistant-zwave
       restartPolicy: OnFailure
       containers:
         - name: backup

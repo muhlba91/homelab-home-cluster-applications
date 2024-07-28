@@ -12,7 +12,7 @@ spec:
   template:
     spec:
       automountServiceAccountToken: true
-      serviceAccountName: node-red
+      serviceAccountName: home-assistant-node-red
       restartPolicy: OnFailure
       containers:
         - name: backup

@@ -12,7 +12,7 @@ spec:
   template:
     spec:
       automountServiceAccountToken: true
-      serviceAccountName: telegraf
+      serviceAccountName: home-assistant-telegraf
       restartPolicy: OnFailure
       containers:
         - name: influxdb
