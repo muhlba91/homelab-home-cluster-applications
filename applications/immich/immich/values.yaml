@@ -1,6 +1,5 @@
 ---
-global:
-  fullnameOverride: immich
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.2.0/charts/library/common/values.schema.json
 
 controllers:
   main:
@@ -8,7 +7,7 @@ controllers:
       annotations:
         backup.velero.io/backup-volumes: data
     containers:
-      main:
+      immich:
         image:
           repository: ghcr.io/immich-app/immich-server
           pullPolicy: IfNotPresent
@@ -76,7 +75,7 @@ controllers:
   machine-learning:
     enabled: true
     containers:
-      main:
+      machine-learning:
         image:
           repository: ghcr.io/immich-app/immich-machine-learning
           pullPolicy: IfNotPresent
@@ -141,7 +140,7 @@ controllers:
                       - main
               topologyKey: kubernetes.io/hostname
     containers:
-      main:
+      samba:
         image:
           repository: ghcr.io/crazy-max/samba
           pullPolicy: IfNotPresent
@@ -201,7 +200,7 @@ controllers:
                       - main
               topologyKey: kubernetes.io/hostname
     containers:
-      main:
+      samba:
         image:
           repository: ghcr.io/crazy-max/samba
           pullPolicy: IfNotPresent
@@ -251,7 +250,7 @@ defaultPodOptions:
   automountServiceAccountToken: false
 
 service:
-  main:
+  immich:
     controller: main
     ports:
       http:
@@ -347,7 +346,7 @@ ingress:
           - path: /
             pathType: ImplementationSpecific
             service:
-              name: immich
+              identifier: immich
               port: 3001
     tls:
       - secretName: immich-tls-cert
