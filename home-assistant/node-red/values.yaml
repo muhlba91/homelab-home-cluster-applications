@@ -1,12 +1,10 @@
 ---
-global:
-  fullnameOverride: node-red
-
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.2.0/charts/library/common/values.schema.json
 controllers:
   main:
     type: statefulset
     containers:
-      main:
+      node-red:
         image:
           repository: ghcr.io/muhlba91/node-red
           pullPolicy: IfNotPresent
@@ -36,9 +34,11 @@ controllers:
               periodSeconds: 15
               failureThreshold: 90
           readiness:
+            enabled: true
             spec:
               initialDelaySeconds: 10
           liveness:
+            enabled: true
             spec:
               initialDelaySeconds: 10
 
@@ -78,7 +78,6 @@ controllers:
           repository: alpine
           tag: 3.19
           pullPolicy: IfNotPresent
-        imagePullPolicy: IfNotPresent
         command:
           - chown
           - '-R'
@@ -136,7 +135,8 @@ defaultPodOptions:
   automountServiceAccountToken: false
 
 service:
-  main:
+  node-red:
+    controller: main
     ipFamilyPolicy: PreferDualStack
     ports:
       http:
@@ -155,7 +155,7 @@ ingress:
           - path: /
             pathType: ImplementationSpecific
             service:
-              name: node-red
+              identifier: node-red
               port: 1880
     tls:
       - secretName: home-assistant-node-red-tls-cert

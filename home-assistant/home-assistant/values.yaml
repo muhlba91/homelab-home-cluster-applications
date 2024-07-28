@@ -1,12 +1,10 @@
 ---
-global:
-  fullnameOverride: home-assistant
-
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.2.0/charts/library/common/values.schema.json
 controllers:
   main:
     type: statefulset
     containers:
-      main:
+      home-assistant:
         image:
           repository: ghcr.io/home-assistant/home-assistant
           pullPolicy: IfNotPresent
@@ -43,6 +41,17 @@ controllers:
           limits:
             cpu: "1"
             memory: 1536Mi
+
+        probes:
+          liveness:
+            enabled: true
+          readiness:
+            enabled: true
+          startup:
+            enabled: true
+            spec:
+              failureThreshold: 30
+              periodSeconds: 5
 
     initContainers:
       backup-restore:
@@ -83,7 +92,8 @@ defaultPodOptions:
   automountServiceAccountToken: false
 
 service:
-  main:
+  home-assistant:
+    controller: main
     ipFamilyPolicy: PreferDualStack
     ports:
       http:
@@ -103,7 +113,7 @@ ingress:
           - path: /
             pathType: ImplementationSpecific
             service:
-              name: home-assistant
+              identifier: home-assistant
               port: 8123
     tls:
       - secretName: home-assistant-home-assistant-tls-cert

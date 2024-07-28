@@ -52,7 +52,7 @@ defaultPodOptions:
   automountServiceAccountToken: false
 
 service:
-  main:
+  ecowitt2mqtt:
     controller: main
     enabled: true
     type: LoadBalancer
