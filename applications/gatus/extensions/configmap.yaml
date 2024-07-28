@@ -99,7 +99,7 @@ data:
       - name: Telegraf
         group: 003 - Home Automation
         enabled: true
-        url: http://home-assistant-telegraf.home-assistant-ecowitt2mqtt.svc.cluster.local:80
+        url: http://home-assistant-telegraf.home-assistant-telegraf.svc.cluster.local:80
         method: GET
         interval: 5m
         conditions:
