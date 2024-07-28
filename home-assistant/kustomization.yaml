@@ -9,4 +9,4 @@ resources:
   - ./ring-mqtt/
   - ./zwave/
   - ./home-assistant/
-  # - ./node-red/
+  - ./node-red/
