@@ -16,7 +16,7 @@ data:
 
     endpoints:
       # 001 - Mail
-      - name: IMAP
+      - name: IMAP (Soverin)
         group: 001 - Mail
         enabled: true
         url: tls://imap.soverin.net:993
@@ -24,7 +24,7 @@ data:
         conditions:
           - "[CONNECTED] == true"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-      - name: SMTP Outgoing
+      - name: SMTP Outgoing (Soverin)
         group: 001 - Mail
         enabled: true
         url: tls://smtp.soverin.net:465
@@ -32,10 +32,33 @@ data:
         conditions:
           - "[CONNECTED] == true"
           - "[CERTIFICATE_EXPIRATION] > 48h"
-      - name: SMTP Incoming
+      - name: SMTP Incoming (Soverin)
         group: 001 - Mail
         enabled: true
         url: tcp://mx.soverin.net:25
+        interval: 5m
+        conditions:
+          - "[CONNECTED] == true"
+      - name: IMAP
+        group: 001 - Mail
+        enabled: true
+        url: tls://mail.muehlbachler.io:993
+        interval: 5m
+        conditions:
+          - "[CONNECTED] == true"
+          - "[CERTIFICATE_EXPIRATION] > 48h"
+      - name: SMTP Outgoing
+        group: 001 - Mail
+        enabled: true
+        url: tls://mail.muehlbachler.io:465
+        interval: 5m
+        conditions:
+          - "[CONNECTED] == true"
+          - "[CERTIFICATE_EXPIRATION] > 48h"
+      - name: SMTP Incoming
+        group: 001 - Mail
+        enabled: true
+        url: tcp://mail.muehlbachler.io:25
         interval: 5m
         conditions:
           - "[CONNECTED] == true"
