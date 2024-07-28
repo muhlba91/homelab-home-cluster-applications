@@ -9,7 +9,7 @@ data:
     set -euo pipefail
 
     #region global configuration
-    URL="http://zwave-js:8091/api"
+    URL="http://home-assistant-zwave:8091/api"
     S3_ASSETS_BUCKET_PATH="${S3_ASSETS_BUCKET}/zwave"
     #endregion
 

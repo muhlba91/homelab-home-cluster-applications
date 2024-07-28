@@ -9,7 +9,7 @@ data:
     set -euo pipefail
 
     #region global configuration
-    URL="http://node-red:1880"
+    URL="http://home-assistant-node-red:1880"
     S3_ASSETS_BUCKET_PATH="${S3_ASSETS_BUCKET}/node-red"
     #endregion
 
