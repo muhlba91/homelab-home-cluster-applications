@@ -28,3 +28,11 @@ ingress:
     cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
     external-dns.alpha.kubernetes.io/provider: internal
     traefik.ingress.kubernetes.io/router.tls: "true"
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 128Mi
+  limits:
+    cpu: 1
+    memory: 256Mi

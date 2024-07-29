@@ -18,7 +18,7 @@ controllers:
             cpu: 5m
             memory: 64Mi
           limits:
-            cpu: 50m
+            cpu: 500m
             memory: 128Mi
 
         probes:

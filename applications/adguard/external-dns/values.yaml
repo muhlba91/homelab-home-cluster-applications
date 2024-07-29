@@ -59,7 +59,7 @@ sidecars:
 resources:
   requests:
     cpu: 3m
-    memory: 64Mi
+    memory: 48Mi
   limits:
-    cpu: 30m
+    cpu: 300m
     memory: 96Mi
