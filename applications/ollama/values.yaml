@@ -27,7 +27,7 @@ resources:
     cpu: 100m
     memory: 256Mi
   limits:
-    cpu: 1
+    cpu: 5
     memory: 4Gi
 
 persistentVolume:

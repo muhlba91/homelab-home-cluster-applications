@@ -8,7 +8,7 @@ data:
   DOMAIN_CLIENT: "https://gpt.home.muehlbachler.io"
   DOMAIN_SERVER: "https://gpt.home.muehlbachler.io"
   NO_INDEX: "true"
-  EMAIL_FROM: "noreply@gpt.home.muehlbachler.io"
+  EMAIL_FROM: "noreply@muehlbachler.io"
   APP_TITLE: GPT Chat
   ENDPOINTS: anthropic,openAI,google,gptPlugins
   BAN_VIOLATIONS: "false"
