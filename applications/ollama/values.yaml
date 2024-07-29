@@ -4,7 +4,8 @@ runtimeClassName: nvidia
 ollama:
   gpu:
     enabled: true
-  models: []
+  models:
+    - fixt/home-3b-v3:q4_k_m
 
 ingress:
   enabled: false
