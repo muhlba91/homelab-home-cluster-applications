@@ -34,5 +34,5 @@ resources:
     cpu: 10m
     memory: 128Mi
   limits:
-    cpu: 1
+    cpu: 2
     memory: 256Mi

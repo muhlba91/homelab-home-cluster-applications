@@ -31,7 +31,7 @@ loki:
       cpu: 50m
       memory: 128Mi
     limits:
-      cpu: "1"
+      cpu: 2
       memory: 384Mi
 
 promtail:
@@ -40,11 +40,11 @@ promtail:
     logLevel: warn
   resources:
     requests:
-      cpu: 15m
-      memory: 112Mi
+      cpu: 100m
+      memory: 128Mi
     limits:
-      cpu: 200m
-      memory: 176Mi
+      cpu: 500m
+      memory: 256Mi
 
 fluent-bit:
   enabled: false

@@ -12,9 +12,9 @@ victoria-metrics-operator:
   resources:
     requests:
       cpu: 3m
-      memory: 56Mi
+      memory: 48Mi
     limits:
-      cpu: 50m
+      cpu: 300m
       memory: 96Mi
 
 defaultRules:
@@ -61,8 +61,8 @@ vmsingle:
         cpu: 50m
         memory: 384Mi
       limits:
-        cpu: "1"
-        memory: 1Gi
+        cpu: "2"
+        memory: 2Gi
     storage:
       storageClassName: rook-ceph-block
       accessModes:
@@ -91,11 +91,11 @@ vmagent:
     logLevel: WARN
     resources:
       requests:
-        cpu: 10m
-        memory: 128Mi
+        cpu: 15m
+        memory: 96Mi
       limits:
-        cpu: 200m
-        memory: 256Mi
+        cpu: 300m
+        memory: 192Mi
     externalLabels:
       cluster: home
       environment: prod
@@ -116,17 +116,17 @@ prometheus-node-exporter:
       cpu: 3m
       memory: 24Mi
     limits:
-      cpu: 30m
+      cpu: 100m
       memory: 48Mi
 
 kube-state-metrics:
   enabled: true
   resources:
     requests:
-      cpu: 3m
-      memory: 56Mi
+      cpu: 5m
+      memory: 48Mi
     limits:
-      cpu: 30m
+      cpu: 100m
       memory: 96Mi
 
 kubelet:
