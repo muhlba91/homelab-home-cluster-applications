@@ -122,11 +122,11 @@ controllers:
               name: node-red-credentials
         resources:
           requests:
-            cpu: 50m
-            memory: 128Mi
+            cpu: 20m
+            memory: 160Mi
           limits:
             cpu: "1"
-            memory: 256Mi
+            memory: 320Mi
 
 serviceAccount:
   create: true

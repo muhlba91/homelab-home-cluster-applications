@@ -30,10 +30,10 @@ controllers:
         resources:
           requests:
             cpu: 3m
-            memory: 80Mi
+            memory: 96Mi
           limits:
-            cpu: 100m
-            memory: 128Mi
+            cpu: 300m
+            memory: 192Mi
 
     initContainers:
       backup-restore:
@@ -61,8 +61,8 @@ controllers:
                 key: credentials.json
         resources:
           requests:
-            cpu: 100m
-            memory: 128Mi
+            cpu: 3m
+            memory: 96Mi
           limits:
             cpu: "1"
             memory: 256Mi
