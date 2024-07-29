@@ -6,7 +6,7 @@ metadata:
 spec:
   releaseName: ollama
   targetNamespace: ollama
-  timeout: 30m # when downloading the models, the pod is not in running state; downloading takes a while
+  timeout: 45m # when downloading the models, the pod is not in running state; downloading takes a while
   chart:
     spec:
       chart: ollama
