@@ -73,6 +73,7 @@ The following applications are defined in [`applications/`](applications/).
 - [x] [Immich](https://immich.app) - Photo management solution.
 - [x] [InfluxDB](https://www.influxdata.com) - Time-Series database.
 - [x] [LibreChat](https://librechat.ai) - Open Source AI platform integrating with multiple models.
+- [x] [Ollama](https://ollama.com) - Run LLM models locally.
 - [ ] [Samba](https://github.com/crazy-max/docker-samba) - Exposes Samba shares for various applications.
 
 ### Home Assistant
