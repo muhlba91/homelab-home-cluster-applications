@@ -42,7 +42,6 @@ spec:
         spec:
           interval: 10m
           retryInterval: 2m
-          timeout: 10m
           prune: true
           force: false
       target:
@@ -54,7 +53,6 @@ spec:
           name: not-used
         spec:
           interval: 10m
-          timeout: 10m
           maxHistory: 3
           install:
             createNamespace: true
