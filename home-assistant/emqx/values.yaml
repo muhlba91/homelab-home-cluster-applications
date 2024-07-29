@@ -32,8 +32,8 @@ ssl:
 
 resources:
   requests:
-    cpu: 30m
-    memory: 296Mi
+    cpu: 20m
+    memory: 256Mi
   limits:
-    cpu: 300m
+    cpu: 500m
     memory: 512Mi

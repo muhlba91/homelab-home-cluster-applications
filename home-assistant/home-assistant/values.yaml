@@ -39,7 +39,7 @@ controllers:
             cpu: 50m
             memory: 1024Mi
           limits:
-            cpu: "1"
+            cpu: "2"
             memory: 1536Mi
 
         probes:
@@ -79,11 +79,11 @@ controllers:
                 key: credentials.json
         resources:
           requests:
-            cpu: 100m
-            memory: 128Mi
+            cpu: 50m
+            memory: 256Mi
           limits:
             cpu: "1"
-            memory: 256Mi
+            memory: 512Mi
 
 serviceAccount:
   create: true
