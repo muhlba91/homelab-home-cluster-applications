@@ -87,6 +87,14 @@ data:
         interval: 5m
         conditions:
           - "[STATUS] == 200"
+      - name: Ollama
+        group: 002 - Applications
+        enabled: true
+        url: http://ollama.ollama:11434
+        method: GET
+        interval: 5m
+        conditions:
+          - "[STATUS] == 200"
       # 003 - Home Automation
       - name: Home Assistant
         group: 003 - Home Automation
