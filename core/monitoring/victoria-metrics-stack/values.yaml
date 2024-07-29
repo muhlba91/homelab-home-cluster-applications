@@ -140,6 +140,18 @@ kubeControllerManager:
   service:
     selector:
       k8s-app: kube-controller-manager
+  spec:
+    jobLabel: jobLabel
+    endpoints:
+      - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+        # bearerTokenSecret:
+        #   key: ""
+        port: http-metrics
+        scheme: https
+        tlsConfig:
+          insecureSkipVerify: true
+          caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+          serverName: kubernetes
 
 kubeDns:
   enabled: false
@@ -155,6 +167,15 @@ kubeScheduler:
   service:
     selector:
       k8s-app: kube-scheduler
+  spec:
+    jobLabel: jobLabel
+    endpoints:
+      - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+        port: http-metrics
+        scheme: https
+        tlsConfig:
+          insecureSkipVerify: true
+          caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
 
-kubeProxy:
+kubeProxy: # disabled
   enabled: false

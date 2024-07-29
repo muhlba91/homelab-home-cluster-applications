@@ -1,0 +1,36 @@
+---
+runtimeClassName: nvidia
+
+ollama:
+  gpu:
+    enabled: true
+  models: []
+
+ingress:
+  enabled: false
+  annotations:
+    cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+    external-dns.alpha.kubernetes.io/provider: internal
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  hosts:
+    - host: &domain ollama.internal.muehlbachler.io
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: ollama-tls-cert
+      hosts:
+        - *domain
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 1
+    memory: 4Gi
+
+persistentVolume:
+  enabled: true
+  storageClass: rook-ceph-block
+  size: 50Gi
