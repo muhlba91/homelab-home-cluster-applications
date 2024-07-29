@@ -7,7 +7,7 @@ resources:
   - ./external-services/
   - ./influxdb/
   # - ./samba/
-  # - ./ollama/
+  - ./ollama/
   - ./librechat/
   - ./immich/
   - ./gatus/
