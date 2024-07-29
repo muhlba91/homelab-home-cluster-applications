@@ -5,7 +5,7 @@ ollama:
   gpu:
     enabled: true
   models:
-    - fixt/home-3b-v3:q4_k_m
+    - "fixt/home-3b-v3:q4_k_m"
 
 ingress:
   enabled: false
