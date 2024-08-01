@@ -272,7 +272,7 @@ service:
     controller: machine-learning
     ports:
       http:
-        port: 3003
+        port: 3001
   samba-daniel:
     controller: samba-daniel
     ipFamilyPolicy: PreferDualStack
