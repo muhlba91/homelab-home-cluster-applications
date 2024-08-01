@@ -8,7 +8,7 @@ data:
   REDIS_HOSTNAME: redis-master
   DB_HOSTNAME: immich-postgresql-rw
   DB_DATABASE_NAME: immich
-  IMMICH_MACHINE_LEARNING_URL: http://immich-machine-learning:3003
+  IMMICH_MACHINE_LEARNING_URL: http://immich-machine-learning:3001
   IMMICH_CONFIG_FILE: /config/immich.yaml
   UPLOAD_LOCATION: /data/upload
   IMMICH_MEDIA_LOCATION: /data/upload
