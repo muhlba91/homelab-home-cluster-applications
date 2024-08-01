@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: ollama
-      version: 0.48.0
+      version: 0.49.0
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
