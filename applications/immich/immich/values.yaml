@@ -75,7 +75,7 @@ controllers:
   machine-learning:
     enabled: true
     pod:
-      runtimeClassName: nvidia
+      # runtimeClassName: nvidia
       tolerations:
         - key: nvidia.com/gpu
           operator: Exists
@@ -85,21 +85,17 @@ controllers:
         image:
           repository: ghcr.io/immich-app/immich-machine-learning
           pullPolicy: IfNotPresent
-          tag: v1.111.0-cuda
+          tag: v1.111.0
 
         envFrom:
           - configMapRef:
               name: immich-env
 
         env:
-          - name: PATH
-            value: /usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/venv/bin
-          - name: LD_LIBRARY_PATH
-            value: /usr/local/nvidia/lib:/usr/local/nvidia/lib64
-          - name: NVIDIA_DRIVER_CAPABILITIES
-            value: compute,utility
-          - name: NVIDIA_VISIBLE_DEVICES
-            value: all
+          # - name: NVIDIA_DRIVER_CAPABILITIES
+          #   value: compute,utility
+          # - name: NVIDIA_VISIBLE_DEVICES
+          #   value: all
           - name: TRANSFORMERS_CACHE
             value: /cache
           - name: DB_USERNAME
@@ -117,11 +113,11 @@ controllers:
           requests:
             cpu: 100m
             memory: 384Mi
-            nvidia.com/gpu: "1"
+            # nvidia.com/gpu: "1"
           limits:
             cpu: 3
             memory: 1536Mi
-            nvidia.com/gpu: "1"
+            # nvidia.com/gpu: "1"
 
         probes:
           liveness: &ml_probes
