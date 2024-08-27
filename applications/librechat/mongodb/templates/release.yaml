@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: mongodb
-      version: 15.6.20
+      version: 15.6.21
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
