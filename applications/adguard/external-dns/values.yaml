@@ -2,7 +2,7 @@
 image:
   registry: registry.k8s.io
   repository: external-dns/external-dns
-  tag: v0.14.2
+  tag: v0.15.0
 
 sources:
   - service
@@ -22,7 +22,7 @@ extraArgs:
   webhook-provider-url: http://localhost:8888
 sidecars:
   - name: adguard-webhook
-    image: ghcr.io/muhlba91/external-dns-provider-adguard:v6.0.0
+    image: ghcr.io/muhlba91/external-dns-provider-adguard:v7.0.0
     imagePullPolicy: IfNotPresent
     ports:
       - containerPort: 8888
