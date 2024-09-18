@@ -14,11 +14,11 @@ data:
     node-red-contrib-bigtimer@2.8.6
     node-red-contrib-castv2@4.3.0
     node-red-contrib-counter@0.1.6
-    node-red-contrib-home-assistant-websocket@0.65.1
+    node-red-contrib-home-assistant-websocket@0.72.4
     node-red-contrib-influxdb@0.7.0
     node-red-contrib-interval-length@0.0.6
     node-red-contrib-looptimer-advanced@0.0.8
-    node-red-contrib-modbus@5.40.0
+    node-red-contrib-modbus@5.42.0
     node-red-contrib-moment@5.0.0
     node-red-contrib-persistent-fsm@1.2.1
     node-red-contrib-statistics@2.2.2
@@ -29,19 +29,19 @@ data:
     node-red-contrib-traffic@0.2.1
     node-red-dashboard@3.6.5
     node-red-node-base64@0.3.0
-    node-red-node-email@3.0.0
+    node-red-node-email@3.0.2
     node-red-node-geofence@0.3.4
     node-red-node-msgpack@1.2.1
     node-red-node-ping@0.3.3
     node-red-node-smooth@0.1.2
     node-red-node-suncalc@1.1.2
-    @node-red-contrib-themes/theme-collection@4.0.1
+    @node-red-contrib-themes/theme-collection@4.0.9
     node-red-contrib-countdown-2@1.4.2
     node-red-contrib-mytimeout@3.2.2
     @govtechsg/passport-openidconnect@1.0.2
     jsonwebtoken@9.0.2
     jwks-rsa@3.1.0
-    node-red-contrib-telegrambot@16.0.1
+    node-red-contrib-telegrambot@16.1.0
     node-red-contrib-uspatata-influxdb-v2@1.0.6
   settings.js: |
     /**
