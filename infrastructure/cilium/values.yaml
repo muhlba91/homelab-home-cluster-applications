@@ -26,6 +26,9 @@ cgroup:
     enabled: false
   hostRoot: /sys/fs/cgroup
 
+bpf:
+  masquerade: true
+
 securityContext:
   capabilities:
     ciliumAgent:
