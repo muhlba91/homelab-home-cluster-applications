@@ -19,7 +19,7 @@ spec:
       cpu: 20m
       memory: 384Mi
     limits:
-      cpu: 1
+      cpu: 2
       memory: 1024Mi
 
   enableSuperuserAccess: true

@@ -45,7 +45,7 @@ controllers:
               httpGet:
                 path: /
                 port: 3001
-              initialDelaySeconds: 60
+              initialDelaySeconds: 30
               periodSeconds: 30
               timeoutSeconds: 1
               failureThreshold: 3
