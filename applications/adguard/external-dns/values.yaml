@@ -45,7 +45,7 @@ sidecars:
       periodSeconds: 60
     env:
       - name: LOG_LEVEL
-        value: debug
+        value: info
       - name: ADGUARD_URL
         value: "http://10.0.0.1:3000"
       - name: ADGUARD_USER
