@@ -38,7 +38,7 @@ controllers:
             custom: true
             spec:
               tcpSocket:
-                port: 8088
+                port: 443
               initialDelaySeconds: 120
               periodSeconds: 60
               timeoutSeconds: 1
@@ -113,7 +113,7 @@ ingress:
             pathType: ImplementationSpecific
             service:
               identifier: omada-controller-http
-              port: 8043
+              port: 443
     tls:
       - secretName: omada-controller-tls-cert
         hosts:
