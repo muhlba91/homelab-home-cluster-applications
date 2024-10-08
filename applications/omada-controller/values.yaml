@@ -83,6 +83,8 @@ service:
     annotations:
       metallb.universe.tf/loadBalancerIPs: "10.0.71.1,2a01:aea0:dd3:25a:1000:3:2:1"
     ports:
+      manage:
+        port: 443
       app-discovery:
         port: 27001
         protocol: UDP
