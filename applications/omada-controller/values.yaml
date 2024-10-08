@@ -29,7 +29,8 @@ controllers:
               timeoutSeconds: 1
               failureThreshold: 5
           readiness: *server_probes
-          startup: *server_probes
+          startup:
+            enabled: false
 
 serviceAccount:
   create: true
