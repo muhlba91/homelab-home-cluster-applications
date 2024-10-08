@@ -8,5 +8,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./applications/omada-controller-extensions/extensions/
+  path: ./applications/omada-controller/extensions/
   wait: false
