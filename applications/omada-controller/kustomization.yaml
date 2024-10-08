@@ -5,6 +5,7 @@ namespace: flux-system
 resources:
   - ./templates/repository.yaml
   - ./templates/release.yaml
+  - ./templates/extensions.yaml
 configMapGenerator:
   - name: omada-controller-values
     files:

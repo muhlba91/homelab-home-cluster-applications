@@ -104,26 +104,28 @@ service:
       rtty:
         port: 29816
 
-ingress:
-  omada-controller:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: cluster-issuer-home-muehlbachler-io
-      external-dns.alpha.kubernetes.io/provider: public
-      external-dns.alpha.kubernetes.io/target: 144.208.195.224,2a01:aea0:dd3:25a:1000:3:3:1
-      traefik.ingress.kubernetes.io/router.tls: "true"
-    hosts:
-      - host: &domain omada.network.home.muehlbachler.io
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-            service:
-              identifier: omada-controller-http
-              port: 443
-    tls:
-      - secretName: omada-controller-tls-cert
-        hosts:
-          - *domain
+# TODO: we cannot use the ingress due to https://github.com/mbentley/docker-omada-controller/discussions/317
+# hence, we are setting the endpoint to the load balancer and create a new ingress resource using our extensions
+# ingress:
+#   omada-controller:
+#     enabled: true
+#     annotations:
+#       cert-manager.io/cluster-issuer: cluster-issuer-home-muehlbachler-io
+#       external-dns.alpha.kubernetes.io/provider: public
+#       external-dns.alpha.kubernetes.io/target: 144.208.195.224,2a01:aea0:dd3:25a:1000:3:3:1
+#       traefik.ingress.kubernetes.io/router.tls: "true"
+#     hosts:
+#       - host: &domain omada.network.home.muehlbachler.io
+#         paths:
+#           - path: /
+#             pathType: ImplementationSpecific
+#             service:
+#               identifier: omada-controller-http
+#               port: 443
+#     tls:
+#       - secretName: omada-controller-tls-cert
+#         hosts:
+#           - *domain
 
 persistence:
   data:
