@@ -18,21 +18,25 @@ controllers:
             memory: 256Mi
 
         probes:
-          liveness:
+          liveness: &server_probes
             enabled: true
-          readiness:
-            enabled: true
-          startup:
-            enabled: true
+            custom: true
             spec:
-              failureThreshold: 30
-              periodSeconds: 5
+              tcpSocket:
+                port: 8088
+              initialDelaySeconds: 30
+              periodSeconds: 60
+              timeoutSeconds: 1
+              failureThreshold: 5
+          readiness: *server_probes
+          startup: *server_probes
 
 serviceAccount:
   create: true
 
 defaultPodOptions:
   automountServiceAccountToken: false
+  terminationGracePeriodSeconds: 60
 
 service:
   omada-controller-http:
