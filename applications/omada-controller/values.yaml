@@ -9,13 +9,28 @@ controllers:
           pullPolicy: IfNotPresent
           tag: 5.14.26.1
 
+        env:
+          - name: MANAGE_HTTP_PORT
+            value: 80
+          - name: MANAGE_HTTPS_PORT
+            value: 443
+          - name: PORTAL_HTTP_PORT
+            value: 8088
+          - name: PORTAL_HTTPS_PORT
+            value: 8843
+        
+        securityContext:
+          capabilities:
+            add:
+              - CAP_NET_BIND_SERVICE
+
         resources:
           requests:
-            cpu: 5m
-            memory: 512Mi
+            cpu: 75m
+            memory: 1024Mi
           limits:
-            cpu: 1
-            memory: 1Gi
+            cpu: "1"
+            memory: 1536Mi
 
         probes:
           liveness: &server_probes
@@ -24,10 +39,10 @@ controllers:
             spec:
               tcpSocket:
                 port: 8088
-              initialDelaySeconds: 30
+              initialDelaySeconds: 120
               periodSeconds: 60
               timeoutSeconds: 1
-              failureThreshold: 5
+              failureThreshold: 7
           readiness: *server_probes
           startup:
             enabled: false
@@ -43,7 +58,9 @@ service:
   omada-controller-http:
     controller: main
     ports:
-      http:
+      manage:
+        port: 80
+      portal:
         port: 8088
   omada-controller-https:
     controller: main
@@ -51,7 +68,7 @@ service:
       traefik.ingress.kubernetes.io/service.serversscheme: https
     ports:
       manage:
-        port: 8043
+        port: 443
       portal:
         port: 8843
   omada-controller:
