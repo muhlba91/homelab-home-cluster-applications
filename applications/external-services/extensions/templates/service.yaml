@@ -44,21 +44,6 @@ spec:
       port: 80
       protocol: TCP
       targetPort: http
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: omada-controller
-  annotations:
-    traefik.ingress.kubernetes.io/service.serversscheme: https
-spec:
-  type: ClusterIP
-  ipFamilyPolicy: PreferDualStack
-  ports:
-    - name: http
-      port: 80
-      protocol: TCP
-      targetPort: http
 
 # applications
 ---

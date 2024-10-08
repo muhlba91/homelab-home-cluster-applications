@@ -35,18 +35,6 @@ subsets:
       - name: http
         port: 443
         protocol: TCP
----
-apiVersion: v1
-kind: Endpoints
-metadata:
-  name: omada-controller
-subsets:
-  - addresses:
-      - ip: 10.0.21.1
-    ports:
-      - name: http
-        port: 443
-        protocol: TCP
 
 # applications
 ---

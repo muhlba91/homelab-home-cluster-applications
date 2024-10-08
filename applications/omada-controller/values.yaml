@@ -1,0 +1,120 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.3.0/charts/library/common/values.schema.json
+controllers:
+  main:
+    containers:
+      omada-controller:
+        image:
+          repository: ghcr.io/twin/gatus
+          pullPolicy: IfNotPresent
+          tag: v5.12.1
+
+        env:
+          - name: GATUS_CONFIG_PATH
+            value: /config
+
+        resources:
+          requests:
+            cpu: 5m
+            memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 128Mi
+
+        probes:
+          liveness:
+            enabled: true
+          readiness:
+            enabled: true
+          startup:
+            enabled: true
+            spec:
+              failureThreshold: 30
+              periodSeconds: 5
+
+serviceAccount:
+  create: true
+
+defaultPodOptions:
+  automountServiceAccountToken: false
+
+service:
+  omada-controller-http:
+    controller: main
+    ports:
+      manage-http:
+        port: 8088
+  omada-controller-https:
+    controller: main
+    annotations:
+      traefik.ingress.kubernetes.io/service.serversscheme: https
+    ports:
+      manage-https:
+        port: 8043
+      portal-https:
+        port: 8843
+  omada-controller:
+    controller: main
+    ipFamilyPolicy: PreferDualStack
+    type: LoadBalancer
+    externalTrafficPolicy: Local
+    annotations:
+      metallb.universe.tf/loadBalancerIPs: "10.0.71.1,2a01:aea0:dd3:25a:1000:3:2:1"
+    ports:
+      app-discovery:
+        port: 27001
+        protocol: UDP
+      discovery:
+        port: 29810
+        protocol: UDP
+      manager-v1:
+        port: 29811
+      adopt-v1:
+        port: 29812
+      upgrade-v1:
+        port: 29813
+      manager-v2:
+        port: 29814
+      transfer-v2:
+        port: 29815
+      rtty:
+        port: 29816
+
+ingress:
+  omada-controller:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: cluster-issuer-home-muehlbachler-io
+      external-dns.alpha.kubernetes.io/provider: public
+      external-dns.alpha.kubernetes.io/target: 144.208.195.224,2a01:aea0:dd3:25a:1000:3:3:1
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    hosts:
+      - host: &domain omada.network.home.muehlbachler.io
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            service:
+              identifier: omada-controller-http
+              port: 8043
+    tls:
+      - secretName: omada-controller-tls-cert
+        hosts:
+          - *domain
+
+persistence:
+  data:
+    enabled: true
+    type: persistentVolumeClaim
+    storageClass: rook-ceph-block
+    accessMode: ReadWriteOnce
+    size: 5Gi
+    globalMounts:
+      - path: /opt/tplink/EAPController/data
+  logs:
+    enabled: true
+    type: persistentVolumeClaim
+    storageClass: rook-ceph-block
+    accessMode: ReadWriteOnce
+    size: 256Mi
+    globalMounts:
+      - path: /opt/tplink/EAPController/logs
