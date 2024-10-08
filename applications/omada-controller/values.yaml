@@ -5,13 +5,9 @@ controllers:
     containers:
       omada-controller:
         image:
-          repository: ghcr.io/twin/gatus
+          repository: mbentley/omada-controller
           pullPolicy: IfNotPresent
-          tag: v5.12.1
-
-        env:
-          - name: GATUS_CONFIG_PATH
-            value: /config
+          tag: 5.14.26.1
 
         resources:
           requests:
