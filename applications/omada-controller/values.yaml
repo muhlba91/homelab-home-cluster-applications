@@ -12,10 +12,10 @@ controllers:
         resources:
           requests:
             cpu: 5m
-            memory: 64Mi
+            memory: 128Mi
           limits:
             cpu: 500m
-            memory: 128Mi
+            memory: 256Mi
 
         probes:
           liveness:
@@ -38,16 +38,16 @@ service:
   omada-controller-http:
     controller: main
     ports:
-      manage-http:
+      http:
         port: 8088
   omada-controller-https:
     controller: main
     annotations:
       traefik.ingress.kubernetes.io/service.serversscheme: https
     ports:
-      manage-https:
+      manage:
         port: 8043
-      portal-https:
+      portal:
         port: 8843
   omada-controller:
     controller: main
