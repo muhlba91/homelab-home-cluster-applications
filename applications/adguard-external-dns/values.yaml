@@ -7,6 +7,12 @@ image:
 sources:
   - service
   - ingress
+  - traefik-proxy
+  - gateway-grpcroute
+  - gateway-httproute
+  - gateway-tlsroute
+  - gateway-udproute
+  - gateway-tcproute
 
 interval: 2m
 
