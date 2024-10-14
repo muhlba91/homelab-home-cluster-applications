@@ -8,7 +8,6 @@ crd:
   create: false
 
 sources:
-  - crd
   - service
   - ingress
   - traefik-proxy
