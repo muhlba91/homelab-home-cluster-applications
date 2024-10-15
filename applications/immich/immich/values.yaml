@@ -126,7 +126,7 @@ controllers:
             spec:
               httpGet:
                 path: /ping
-                port: 3001
+                port: 3003
               initialDelaySeconds: 0
               periodSeconds: 30
               timeoutSeconds: 1
@@ -272,7 +272,7 @@ service:
     controller: machine-learning
     ports:
       http:
-        port: 3001
+        port: 3003
   samba-daniel:
     controller: samba-daniel
     ipFamilyPolicy: PreferDualStack
