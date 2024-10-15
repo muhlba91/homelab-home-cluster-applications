@@ -66,7 +66,7 @@ data:
       - name: Immich
         group: 002 - Applications
         enabled: true
-        url: http://immich.immich.svc.cluster.local:3001
+        url: http://immich.immich.svc.cluster.local:2283
         method: GET
         interval: 5m
         conditions:
