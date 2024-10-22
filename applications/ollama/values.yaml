@@ -1,9 +1,9 @@
 ---
-runtimeClassName: nvidia
+# runtimeClassName: nvidia
 
 ollama:
   gpu:
-    enabled: true
+    enabled: false
   models:
     - llama3.1:8b-instruct-q4_K_M
 
