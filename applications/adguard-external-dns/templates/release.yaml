@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: external-dns
-      version: 8.3.12
+      version: 8.4.0
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
