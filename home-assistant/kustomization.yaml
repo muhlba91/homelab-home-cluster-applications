@@ -12,3 +12,4 @@ resources:
   - ./node-red/
   - ./faster-whisper/
   - ./piper/
+  - ./openwakeword/

@@ -1,0 +1,55 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.3.0/charts/library/common/values.schema.json
+controllers:
+  main:
+    type: deployment
+    containers:
+      openwakeword:
+        image:
+          repository: rhasspy/wyoming-openwakeword
+          pullPolicy: IfNotPresent
+          tag: 1.1.0
+
+        args:
+          - --preload-model
+          - ok_nabu
+
+        resources:
+          requests:
+            cpu: 10m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+
+        probes:
+          liveness:
+            enabled: true
+          readiness:
+            enabled: true
+          startup:
+            enabled: true
+            spec:
+              failureThreshold: 30
+              periodSeconds: 5
+
+serviceAccount:
+  create: true
+
+defaultPodOptions:
+  automountServiceAccountToken: false
+
+service:
+  openwakeword:
+    controller: main
+    enabled: true
+    type: LoadBalancer
+    ipFamilyPolicy: PreferDualStack
+    annotations:
+      metallb.universe.tf/loadBalancerIPs: "10.0.73.22,2a01:aea0:dd3:25a:1000:3:4:22"
+      external-dns.alpha.kubernetes.io/provider: internal
+      external-dns.alpha.kubernetes.io/hostname: openwakeword.iot.internal.muehlbachler.io
+    ports:
+      http:
+        port: 10400
+        targetPort: 10400
