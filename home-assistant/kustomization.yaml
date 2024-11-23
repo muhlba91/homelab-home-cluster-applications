@@ -10,3 +10,4 @@ resources:
   - ./zwave/
   - ./home-assistant/
   - ./node-red/
+  - ./faster-whisper/
