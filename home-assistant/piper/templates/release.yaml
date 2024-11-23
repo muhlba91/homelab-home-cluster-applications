@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: home-assistant-piper
+spec:
+  releaseName: home-assistant-piper
+  targetNamespace: home-assistant-piper
+  chart:
+    spec:
+      chart: app-template
+      version: 3.5.1
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: piper
+        namespace: flux-system
+  valuesFrom:
+    - kind: ConfigMap
+      name: home-assistant-piper-values
+      valuesKey: values.yaml

@@ -1,0 +1,65 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.3.0/charts/library/common/values.schema.json
+controllers:
+  main:
+    type: deployment
+    containers:
+      piper:
+        image:
+          repository: quay.io/linuxserver.io/piper
+          pullPolicy: IfNotPresent
+          tag: 1.4.0
+
+        env:
+          - name: PIPER_VOICE
+            value: en_US-lessac-medium
+          - name: PIPER_LENGTH
+            value: "1.5"
+          - name: PIPER_NOISE
+            value: "0.667"
+          - name: PIPER_NOISEW
+            value: "0.333"
+          - name: PIPER_SPEAKER
+            value: "0"
+          - name: PIPER_PROCS
+            value: "1"
+
+        resources:
+          requests:
+            cpu: 10m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+
+        probes:
+          liveness:
+            enabled: true
+          readiness:
+            enabled: true
+          startup:
+            enabled: true
+            spec:
+              failureThreshold: 30
+              periodSeconds: 5
+
+serviceAccount:
+  create: true
+
+defaultPodOptions:
+  automountServiceAccountToken: false
+
+service:
+  piper:
+    controller: main
+    enabled: true
+    type: LoadBalancer
+    ipFamilyPolicy: PreferDualStack
+    annotations:
+      metallb.universe.tf/loadBalancerIPs: "10.0.73.21,2a01:aea0:dd3:25a:1000:3:4:21"
+      external-dns.alpha.kubernetes.io/provider: internal
+      external-dns.alpha.kubernetes.io/hostname: piper.iot.internal.muehlbachler.io
+    ports:
+      http:
+        port: 10200
+        targetPort: 10200
