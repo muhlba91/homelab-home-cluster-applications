@@ -34,7 +34,7 @@ controllers:
             memory: 768Mi
             nvidia.com/gpu: "1"
           limits:
-            cpu: "1"
+            cpu: "2"
             memory: 2048Mi
             nvidia.com/gpu: "1"
 
