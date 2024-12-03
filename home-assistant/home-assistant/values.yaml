@@ -27,6 +27,9 @@ controllers:
               secretKeyRef:
                 name: home-assistant-postgresql-app
                 key: uri
+          # TODO: remove once https://github.com/home-assistant/core/issues/127966 is fixed
+          - name: PYTHONPATH
+            value: /usr/local/lib/python3.12:/config/deps
 
         envFrom:
           - secretRef:
