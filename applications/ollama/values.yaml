@@ -1,11 +1,16 @@
 ---
-# runtimeClassName: nvidia
+runtimeClassName: nvidia
 
 ollama:
   gpu:
-    enabled: false
+    enabled: true
+    type: nvidia
+    nvidiaResource: nvidia.com/gpu
+    number: 1
   models:
-    - llama3.1:8b-instruct-q4_K_M
+    pull:
+      # https://github.com/allenporter/home-assistant-datasets/tree/main/reports
+      - qwen2.5:7b-instruct-q4_K_M
 
 ingress:
   enabled: false
