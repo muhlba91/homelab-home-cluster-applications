@@ -44,7 +44,7 @@ controllers:
       init-chown-data:
         image:
           repository: alpine
-          tag: 3.19
+          tag: 3.21
           pullPolicy: IfNotPresent
         command:
           - chown

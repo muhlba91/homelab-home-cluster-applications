@@ -39,7 +39,7 @@ controllers:
       backup-restore:
         image:
           repository: alpine
-          tag: 3.19
+          tag: 3.21
           pullPolicy: IfNotPresent
         command:
           - /scripts/backup_restore.sh
@@ -92,7 +92,7 @@ controllers:
       backup:
         image:
           repository: alpine
-          tag: 3.19
+          tag: 3.21
           pullPolicy: IfNotPresent
         command:
           - /scripts/backup_restore.sh
