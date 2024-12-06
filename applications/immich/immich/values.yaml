@@ -112,11 +112,11 @@ controllers:
         resources:
           requests:
             cpu: 100m
-            memory: 512Mi
+            memory: 1024Mi
             nvidia.com/gpu: "1"
           limits:
             cpu: 3
-            memory: 2048Mi
+            memory: 3072Mi
             nvidia.com/gpu: "1"
 
         probes:
