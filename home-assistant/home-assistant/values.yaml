@@ -8,7 +8,7 @@ controllers:
         image:
           repository: ghcr.io/home-assistant/home-assistant
           pullPolicy: IfNotPresent
-          tag: 2024.12.1
+          tag: 2024.11.3
 
         env:
           - name: TZ
@@ -29,7 +29,7 @@ controllers:
                 key: uri
           # TODO: remove once https://github.com/home-assistant/core/issues/127966 is fixed
           - name: PYTHONPATH
-            value: /usr/local/lib/python3.13:/config/deps
+            value: /usr/local/lib/python3.12:/config/deps
 
         envFrom:
           - secretRef:
