@@ -10,15 +10,13 @@ data:
     js-yaml@4.1.0
     full-icu@1.5.0
     node-red-contrib-actionflows@2.1.2
-    node-red-contrib-alexa-home-skill@0.1.19
     node-red-contrib-bigtimer@2.8.6
-    node-red-contrib-castv2@4.3.0
     node-red-contrib-counter@0.1.6
-    node-red-contrib-home-assistant-websocket@0.72.4
+    node-red-contrib-home-assistant-websocket@0.74.2
     node-red-contrib-influxdb@0.7.0
     node-red-contrib-interval-length@0.0.6
     node-red-contrib-looptimer-advanced@0.0.8
-    node-red-contrib-modbus@5.42.0
+    node-red-contrib-modbus@5.43.0
     node-red-contrib-moment@5.0.0
     node-red-contrib-persistent-fsm@1.2.1
     node-red-contrib-statistics@2.2.2
@@ -34,15 +32,14 @@ data:
     node-red-node-msgpack@1.2.1
     node-red-node-ping@0.3.3
     node-red-node-smooth@0.1.2
-    node-red-node-suncalc@1.1.2
-    @node-red-contrib-themes/theme-collection@4.0.9
+    node-red-node-suncalc@1.2.0
+    @node-red-contrib-themes/theme-collection@4.0.11
     node-red-contrib-countdown-2@1.4.2
     node-red-contrib-mytimeout@3.2.2
-    @govtechsg/passport-openidconnect@1.0.2
+    @govtechsg/passport-openidconnect@1.0.3
     jsonwebtoken@9.0.2
     jwks-rsa@3.1.0
     node-red-contrib-telegrambot@16.1.0
-    node-red-contrib-uspatata-influxdb-v2@1.0.6
   settings.js: |
     /**
      * This is the default settings file provided by Node-RED.
