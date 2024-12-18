@@ -23,3 +23,5 @@ data:
     if [[ "${COPY_CONFIGURATION}" == true ]]; then
       /tmp/repo/lifecycle/prepare.sh ${DATA_PATH} /tmp/repo
     fi
+  dockerenv: |
+    # TODO: remove once https://github.com/home-assistant/core/issues/127966 (PR: https://github.com/home-assistant/core/pull/132404) is fixed

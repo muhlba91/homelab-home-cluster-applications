@@ -8,7 +8,7 @@ controllers:
         image:
           repository: ghcr.io/home-assistant/home-assistant
           pullPolicy: IfNotPresent
-          tag: 2024.11.3
+          tag: 2024.12.4
 
         env:
           - name: TZ
@@ -27,9 +27,6 @@ controllers:
               secretKeyRef:
                 name: home-assistant-postgresql-app
                 key: uri
-          # TODO: remove once https://github.com/home-assistant/core/issues/127966 is fixed
-          - name: PYTHONPATH
-            value: /usr/local/lib/python3.12:/config/deps
 
         envFrom:
           - secretRef:
@@ -143,3 +140,13 @@ persistence:
     globalMounts:
       - path: /gcp-credentials
         readOnly: true
+  # TODO: remove once https://github.com/home-assistant/core/issues/127966 (PR: https://github.com/home-assistant/core/pull/132404) is fixed
+  dockerenv:
+    enabled: true
+    type: configMap
+    name: home-assistant-scripts
+    advancedMounts:
+      main:
+        home-assistant:
+          - path: /.dockerenv
+            subPath: dockerenv
