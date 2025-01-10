@@ -53,7 +53,7 @@ controllers:
       grafana:
         image:
           repository: bitnami/kubectl
-          tag: 1.31
+          tag: 1.32
           pullPolicy: IfNotPresent
         command:
           - /scripts/grafana.sh
