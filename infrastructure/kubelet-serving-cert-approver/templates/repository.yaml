@@ -7,4 +7,4 @@ metadata:
 spec:
   url: https://github.com/alex1989hu/kubelet-serving-cert-approver
   ref:
-    tag: v0.8.7
+    tag: v0.9.0
