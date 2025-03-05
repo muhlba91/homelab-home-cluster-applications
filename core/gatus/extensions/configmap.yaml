@@ -127,14 +127,6 @@ data:
         interval: 5m
         conditions:
           - "[STATUS] == 404"
-      - name: InfluxDB
-        group: 003 - Home Automation
-        enabled: true
-        url: http://influxdb.influxdb.svc.cluster.local:80
-        method: GET
-        interval: 5m
-        conditions:
-          - "[STATUS] == 200"
       # 004 - Samba
       - name: Immich Daniel
         group: 004 - Samba
