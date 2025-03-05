@@ -8,5 +8,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./applications/gatus/extensions/
+  path: ./core/gatus/extensions/
   wait: false
