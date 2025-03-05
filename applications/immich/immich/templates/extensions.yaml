@@ -15,4 +15,4 @@ spec:
       APPLICATION: immich
       GATUS_NAME: Immich
       GATUS_GROUP: 002 - Applications
-      GATUS_PORT: 2283
+      GATUS_PORT: "2283"
