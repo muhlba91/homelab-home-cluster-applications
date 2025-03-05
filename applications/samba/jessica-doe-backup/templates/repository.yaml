@@ -1,9 +1,0 @@
----
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: samba-jessica-doe-backup
-  namespace: flux-system
-spec:
-  interval: 10m
-  url: https://bjw-s.github.io/helm-charts

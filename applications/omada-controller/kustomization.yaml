@@ -8,6 +8,7 @@ resources:
   - ./templates/extensions.yaml
 configMapGenerator:
   - name: omada-controller-values
+    namespace: flux-system
     files:
       - values.yaml=values.yaml
 configurations:
