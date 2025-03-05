@@ -13,3 +13,4 @@ resources:
   - ./traefik/
   - ./flux-extensions/
   - ./kube-cleanup-operator/
+  - ./reloader/
