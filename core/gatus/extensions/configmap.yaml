@@ -150,14 +150,6 @@ data:
         interval: 5m
         conditions:
           - "[CONNECTED] == true"
-      - name: External DNS Home
-        group: 005 - DNS
-        enabled: true
-        url: http://external-dns.external-dns.svc.cluster.local:7979
-        method: GET
-        interval: 5m
-        conditions:
-          - "[STATUS] == 404"
       # 006 - Monitoring
       - name: Grafana
         group: 006 - Monitoring
