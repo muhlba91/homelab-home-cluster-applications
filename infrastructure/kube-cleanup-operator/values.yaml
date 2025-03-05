@@ -1,0 +1,12 @@
+---
+rbac:
+  create: true
+  global: true
+
+args:
+  - --delete-successful-after=60m
+  - --delete-failed-after=120m
+  - --delete-pending-pods-after=30m
+  - --delete-evicted-pods-after=30m
+  - --delete-orphaned-pods-after=30m
+  - --legacy-mode=false
