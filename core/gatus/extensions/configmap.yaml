@@ -136,20 +136,6 @@ data:
         conditions:
           - "[STATUS] == 200"
       # 004 - Samba
-      - name: Jane Doe Backup
-        group: 004 - Samba
-        enabled: true
-        url: tcp://10.0.74.11:445
-        interval: 5m
-        conditions:
-          - "[CONNECTED] == true"
-      - name: Jessica Doe Backup
-        group: 004 - Samba
-        enabled: true
-        url: tcp://10.0.74.12:445
-        interval: 5m
-        conditions:
-          - "[CONNECTED] == true"
       - name: Immich Daniel
         group: 004 - Samba
         enabled: true
