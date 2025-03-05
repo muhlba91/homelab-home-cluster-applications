@@ -210,11 +210,3 @@ data:
           insecure: true
         conditions:
           - "[STATUS] == 404"
-      - name: Cert Manager Home
-        group: 007 - Infrastructure
-        enabled: true
-        url: http://cert-manager.cert-manager.svc.cluster.local:9402
-        method: GET
-        interval: 5m
-        conditions:
-          - "[STATUS] == 404"
