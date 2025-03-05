@@ -9,6 +9,7 @@ args:
   - --delete-pending-pods-after=30m
   - --delete-evicted-pods-after=30m
   - --delete-orphaned-pods-after=30m
+  - --ignore-owned-by-cronjobs
   - --legacy-mode=false
 
 resources:
