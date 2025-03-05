@@ -10,3 +10,11 @@ args:
   - --delete-evicted-pods-after=30m
   - --delete-orphaned-pods-after=30m
   - --legacy-mode=false
+
+resources:
+  limits:
+    cpu: 5m
+    memory: 32Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi
