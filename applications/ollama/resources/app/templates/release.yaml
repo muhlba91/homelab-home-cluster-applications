@@ -4,7 +4,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: ${APPLICATION}
-  namespace: flux-system
 spec:
   releaseName: ${APPLICATION}
   targetNamespace: ${APPLICATION_NAMESPACE}
@@ -30,7 +29,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: ${APPLICATION}
-        namespace: flux-system
+        namespace: ${APPLICATION_NAMESPACE}
   valuesFrom:
     - kind: ConfigMap
       name: ${APPLICATION}-values
