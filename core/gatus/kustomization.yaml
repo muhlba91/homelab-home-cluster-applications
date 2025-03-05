@@ -8,6 +8,7 @@ resources:
   - ./templates/release.yaml
 configMapGenerator:
   - name: gatus-values
+    namespace: flux-system
     files:
       - values.yaml=values.yaml
 configurations:

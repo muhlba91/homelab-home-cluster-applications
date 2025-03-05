@@ -8,6 +8,7 @@ resources:
   - ./templates/issuers.yaml
 configMapGenerator:
   - name: cert-manager-values
+    namespace: flux-system
     files:
       - values.yaml=values.yaml
 configurations:
