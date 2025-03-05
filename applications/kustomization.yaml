@@ -11,4 +11,3 @@ resources:
   - ./ollama/
   - ./librechat/
   - ./immich/
-  - ./gatus/
