@@ -4,5 +4,6 @@ apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
   name: ${APPLICATION}
+  namespace: flux-system
 spec:
   url: https://otwld.github.io/ollama-helm/
