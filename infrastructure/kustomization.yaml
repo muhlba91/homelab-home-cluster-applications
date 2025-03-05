@@ -12,5 +12,4 @@ resources:
   - ./metallb/
   - ./traefik/
   - ./flux-extensions/
-  # - ./kube-cleanup-operator/
   - ./reloader/

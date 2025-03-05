@@ -1,8 +1,0 @@
----
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: kube-cleanup-operator
-  namespace: flux-system
-spec:
-  url: http://charts.lwolf.org
