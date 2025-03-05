@@ -1,7 +1,7 @@
 ---
 runtimeClassName: nvidia
 
-ollama:
+${APPLICATION}:
   gpu:
     enabled: true
     type: nvidia

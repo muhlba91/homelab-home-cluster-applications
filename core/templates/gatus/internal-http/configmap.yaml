@@ -11,7 +11,7 @@ data:
       - name: "${GATUS_NAME:-${APPLICATION}}"
         group: "${GATUS_GROUP:-000 - Undefined}"
         enabled: true
-        url: "http://${GATUS_SERVICE:-${APPLICATION}}.${GATUS_NAMESPACE:-${APPLICATION}}.svc.cluster.local:${GATUS_PORT:-80}"
+        url: "http://${GATUS_SERVICE:-${APPLICATION}}.${APPLICATION_NAMESPACE:-${APPLICATION}}.svc.cluster.local:${GATUS_PORT:-80}"
         method: GET
         interval: 5m
         conditions:
