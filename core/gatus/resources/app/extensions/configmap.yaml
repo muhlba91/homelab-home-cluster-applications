@@ -63,14 +63,6 @@ data:
         conditions:
           - "[CONNECTED] == true"
       # 002 - Applications
-      - name: GPT Chat
-        group: 002 - Applications
-        enabled: true
-        url: http://librechat.librechat.svc.cluster.local:3080
-        method: GET
-        interval: 5m
-        conditions:
-          - "[STATUS] == 200"
       - name: SimpleLogin Aliases
         group: 002 - Applications
         enabled: true
