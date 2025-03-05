@@ -59,7 +59,6 @@ The following applications are defined in [`core/`](core/).
 - [x] [CloudNativePG](https://cloudnative-pg.io/documentation/current/) - PostgreSQL database operator.
 - [x] [External DNS with Google Cloud DNS integration](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Google Cloud DNS domains for publicly reachable services.
 - [x] [Victoria Metrics Stack](https://github.com/VictoriaMetrics/helm-charts/tree/master/charts/victoria-metrics-k8s-stack) - Monitoring stack using [Victoria Metrics](https://victoriametrics.com).
-- [x] [Loki Stack](https://github.com/grafana/helm-charts/tree/main/charts/loki-stack) - Logging stack using [Grafana Loki](https://grafana.com/oss/loki/).
 - [x] [Grafana](http://grafana.com) - Visualization of metrics, and other data.
 - [x] [Velero](https://velero.io) - Performs cluster backups.
   - [x] Includes deployment of backup schedules.
