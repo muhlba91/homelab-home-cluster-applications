@@ -8,6 +8,19 @@ spec:
   releaseName: ${APPLICATION}
   targetNamespace: ${APPLICATION_NAMESPACE}
   timeout: 45m # when downloading the models, the pod is not in running state; downloading takes a while
+  interval: 10m
+  maxHistory: 3
+  install:
+    createNamespace: true
+    crds: Create
+    remediation:
+      retries: -1
+  upgrade:
+    crds: CreateReplace
+    remediation:
+      retries: -1
+  rollback:
+    recreate: true
   chart:
     spec:
       chart: ollama
