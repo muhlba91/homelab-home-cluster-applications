@@ -24,7 +24,6 @@ spec:
         kind: HelmRepository
         metadata:
           name: not-used
-          namespace: flux-system
         spec:
           interval: 10m
       target:

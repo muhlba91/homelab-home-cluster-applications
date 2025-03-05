@@ -3,6 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: "${APPLICATION}-gatus-ep"
+  namespace: "${APPLICATION_NAMESPACE:-${APPLICATION}}"
   labels:
     gatus.io/enabled: "true"
 data:

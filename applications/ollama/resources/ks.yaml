@@ -6,7 +6,6 @@ metadata:
   name: &application ollama
   namespace: flux-system
 spec:
-  targetNamespace: *application
   sourceRef:
     kind: GitRepository
     name: cluster-applications
