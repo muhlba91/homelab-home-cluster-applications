@@ -1,7 +1,8 @@
 ---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: immich
+namespace: ${APPLICATION_NAMESPACE}
 resources:
   - ./configmap-env.yaml
   - ./configmap-init.yaml
@@ -11,4 +12,3 @@ resources:
   - ./external-secret-cloudnativepg-google-cloud.yaml
   - ./postgresql.yaml
   - ./postgresql-backup.yaml
-  - ../../../../core/templates/gatus/internal-http/
