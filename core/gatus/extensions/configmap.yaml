@@ -172,14 +172,6 @@ data:
         interval: 5m
         conditions:
           - "[CONNECTED] == true"
-      - name: External DNS AdGuard
-        group: 005 - DNS
-        enabled: true
-        url: http://adguard-external-dns.adguard.svc.cluster.local:7979
-        method: GET
-        interval: 5m
-        conditions:
-          - "[STATUS] == 404"
       - name: External DNS Home
         group: 005 - DNS
         enabled: true

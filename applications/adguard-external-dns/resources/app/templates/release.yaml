@@ -2,10 +2,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: adguard-external-dns
+  name: ${APPLICATION}
 spec:
-  releaseName: adguard-external-dns
-  targetNamespace: adguard
+  releaseName: ${APPLICATION}
+  targetNamespace: ${APPLICATION_NAMESPACE}
   chart:
     spec:
       chart: external-dns
@@ -13,9 +13,9 @@ spec:
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: adguard-external-dns
+        name: ${APPLICATION}
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
-      name: adguard-external-dns-values
+      name: ${APPLICATION}-values
       valuesKey: values.yaml
