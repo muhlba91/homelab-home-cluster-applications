@@ -70,7 +70,7 @@ serviceAccount:
   create: true
 
 defaultPodOptions:
-  automountServiceAccountToken: false
+  automountServiceAccountToken: true
 
 service:
   gatus:
@@ -110,6 +110,9 @@ persistence:
     globalMounts:
       - path: /data
   config:
+    enabled: true
+    type: emptyDir
+  config-file:
     enabled: true
     type: configMap
     name: gatus-config
