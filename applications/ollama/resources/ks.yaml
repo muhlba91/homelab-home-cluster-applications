@@ -11,6 +11,10 @@ spec:
     kind: GitRepository
     name: cluster-applications
   path: ./applications/ollama/resources/app/
+  interval: 10m
+  retryInterval: 2m
+  prune: true
+  force: false
   wait: false
   postBuild:
     substitute:
