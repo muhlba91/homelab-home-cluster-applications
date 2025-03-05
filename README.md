@@ -50,6 +50,7 @@ The following applications are defined in [`infrastructure/`](infrastructure/).
 - [x] [NVIDIA Device Plugin](https://github.com/NVIDIA/k8s-device-plugin) - Makes the NVIDIA GPU accessible in the cluster.
 - [x] [Rook Ceph](https://rook.io) - Manages persistent storage in the cluster.
 - [x] [Traefik](https://traefik.io) - Exposes Kubernetes `Ingress` resources to the "outside world".
+- [x] [Reloader](https://github.com/stakater/Reloader) - Automatically reloads Kubernetes resources when secrets or configmaps change.
 
 ### Core Applications
 
@@ -72,7 +73,6 @@ The following applications are defined in [`applications/`](applications/).
 - [x] [Gatus](https://gatus.io) - Service status page.
 - [x] [Immich](https://immich.app) - Photo management solution.
 - [x] [InfluxDB](https://www.influxdata.com) - Time-Series database.
-- [x] [LibreChat](https://librechat.ai) - Open Source AI platform integrating with multiple models.
 - [x] [Ollama](https://ollama.com) - Run LLM models locally.
 - [ ] [Samba](https://github.com/crazy-max/docker-samba) - Exposes Samba shares for various applications.
 

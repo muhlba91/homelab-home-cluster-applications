@@ -7,5 +7,4 @@ resources:
   - ./omada-controller/
   - ./influxdb/
   - ./ollama/
-  - ./librechat/
   - ./immich/
