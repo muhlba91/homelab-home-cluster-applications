@@ -1,0 +1,69 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ${APPLICATION}
+  namespace: flux-system
+spec:
+  releaseName: ${APPLICATION}
+  targetNamespace: ${APPLICATION_NAMESPACE}
+  interval: 10m
+  maxHistory: 3
+  install:
+    createNamespace: true
+    crds: Create
+    remediation:
+      retries: -1
+  upgrade:
+    crds: CreateReplace
+    remediation:
+      retries: -1
+  rollback:
+    recreate: true
+  chart:
+    spec:
+      chart: victoria-metrics-k8s-stack
+      version: 0.38.3
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: ${APPLICATION}
+        namespace: flux-system
+  valuesFrom:
+    - kind: ConfigMap
+      name: ${APPLICATION}-values
+      valuesKey: values.yaml
+
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: prometheus-operator-crds
+  namespace: flux-system
+spec:
+  releaseName: prometheus-operator-crds
+  targetNamespace: ${APPLICATION_NAMESPACE}
+  interval: 10m
+  maxHistory: 3
+  install:
+    createNamespace: true
+    crds: Create
+    remediation:
+      retries: -1
+  upgrade:
+    crds: CreateReplace
+    remediation:
+      retries: -1
+  rollback:
+    recreate: true
+  chart:
+    spec:
+      chart: prometheus-operator-crds
+      version: 18.0.1
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: ${APPLICATION}-prometheus
+        namespace: flux-system

@@ -6,11 +6,11 @@ resources:
   - ./templates/repository.yaml
   - ./extensions/
   - ./templates/release.yaml
-  - ../../../../core/templates/gatus/internal-http
+  - ../../../../../core/templates/gatus/internal-http
 configMapGenerator:
   - name: ${APPLICATION}-values
     namespace: flux-system
     files:
       - values.yaml=values.yaml
 configurations:
-  - kustomizeconfig.yaml
+  - kustomizeconfig.yml

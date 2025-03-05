@@ -151,14 +151,6 @@ data:
         conditions:
           - "[CONNECTED] == true"
       # 006 - Monitoring
-      - name: Grafana
-        group: 006 - Monitoring
-        enabled: true
-        url: http://grafana.grafana.svc.cluster.local:80
-        method: GET
-        interval: 5m
-        conditions:
-          - "[STATUS] == 200"
       - name: Victoria Metrics VMAgent
         group: 006 - Monitoring
         enabled: true
@@ -175,14 +167,6 @@ data:
         interval: 5m
         conditions:
           - "[STATUS] == 200"
-      - name: Loki
-        group: 006 - Monitoring
-        enabled: true
-        url: http://loki-stack.loki.svc.cluster.local:3100
-        method: GET
-        interval: 5m
-        conditions:
-          - "[STATUS] == 404"
       # 007 - Infrastructure
       - name: Vault
         group: 007 - Infrastructure
