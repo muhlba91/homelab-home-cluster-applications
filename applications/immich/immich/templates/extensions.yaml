@@ -10,3 +10,9 @@ spec:
     name: cluster-applications
   path: ./applications/immich/immich/extensions/
   wait: false
+  postBuild:
+    substitute:
+      APPLICATION: immich
+      GATUS_NAME: Immich
+      GATUS_GROUP: 002 - Applications
+      GATUS_PORT: 2283

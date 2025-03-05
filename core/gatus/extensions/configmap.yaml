@@ -63,14 +63,6 @@ data:
         conditions:
           - "[CONNECTED] == true"
       # 002 - Applications
-      - name: Immich
-        group: 002 - Applications
-        enabled: true
-        url: http://immich.immich.svc.cluster.local:2283
-        method: GET
-        interval: 5m
-        conditions:
-          - "[STATUS] == 200"
       - name: GPT Chat
         group: 002 - Applications
         enabled: true

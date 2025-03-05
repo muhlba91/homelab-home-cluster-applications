@@ -11,3 +11,4 @@ resources:
   - ./external-secret-cloudnativepg-google-cloud.yaml
   - ./postgresql.yaml
   - ./postgresql-backup.yaml
+  - ../../../../core/templates/gatus/internal-http/
