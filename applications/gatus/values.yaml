@@ -2,6 +2,29 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.3.0/charts/library/common/values.schema.json
 controllers:
   main:
+    annotations:
+      reloader.stakater.com/auto: "true"
+    initContainers:
+      init-config:
+        image: &configSyncImage
+          repository: ghcr.io/kiwigrid/k8s-sidecar
+          tag: 1.30.1
+
+        env:
+          FOLDER: /config
+          LABEL: gatus.io/enabled
+          NAMESPACE: ALL
+          RESOURCE: both
+          UNIQUE_FILENAMES: true
+          METHOD: LIST
+
+        resources: &configSyncResources
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 32Mi
     containers:
       gatus:
         image:
@@ -31,6 +54,17 @@ controllers:
             spec:
               failureThreshold: 30
               periodSeconds: 5
+
+      config-sync:
+        image: *configSyncImage
+        env:
+          FOLDER: /config
+          LABEL: gatus.io/enabled
+          NAMESPACE: ALL
+          RESOURCE: both
+          UNIQUE_FILENAMES: true
+          METHOD: WATCH
+        resources: *configSyncResources
 
 serviceAccount:
   create: true
