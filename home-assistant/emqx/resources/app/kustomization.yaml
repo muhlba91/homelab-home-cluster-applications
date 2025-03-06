@@ -6,7 +6,7 @@ resources:
   - ./templates/repository.yaml
   - ./extensions/
   - ./templates/release.yaml
-  # - ../../../../core/templates/gatus/internal-http # TODO: tcp
+  - ../../../../core/templates/gatus/internal-tcp
 configMapGenerator:
   - name: ${APPLICATION}-values
     namespace: flux-system

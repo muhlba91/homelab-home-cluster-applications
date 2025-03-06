@@ -71,14 +71,6 @@ data:
         interval: 5m
         conditions:
           - "[STATUS] == 200"
-      # 003 - Home Automation
-      - name: MQTT
-        group: 003 - Home Automation
-        enabled: true
-        url: tcp://emqx-mqtt.home-assistant-mqtt.svc.cluster.local:1883
-        interval: 5m
-        conditions:
-          - "[CONNECTED] == true"
       # 004 - Samba
       - name: Immich Daniel
         group: 004 - Samba
@@ -128,13 +120,3 @@ data:
         interval: 5m
         conditions:
           - "[STATUS] == 200"
-      - name: Traefik Home
-        group: 007 - Infrastructure
-        enabled: true
-        url: https://traefik.traefik.svc.cluster.local:443
-        method: GET
-        interval: 5m
-        client:
-          insecure: true
-        conditions:
-          - "[STATUS] == 404"
