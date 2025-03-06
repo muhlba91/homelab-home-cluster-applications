@@ -9,6 +9,10 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
+  decryption:
+    provider: sops
+    secretRef:
+      name: gcp-credentials
   path: ./infrastructure/external-secrets/resources/app/
   interval: 10m
   retryInterval: 2m
