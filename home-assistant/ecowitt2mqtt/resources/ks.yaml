@@ -19,3 +19,6 @@ spec:
     substitute:
       APPLICATION: *application
       APPLICATION_NAMESPACE: *application
+      GATUS_NAME: Ecowitt 2 MQTT
+      GATUS_GROUP: 003 - Home Automation
+      GATUS_STATUS: "404"

@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
   - ./templates/repository.yaml
   - ./templates/release.yaml
+  - ../../../../core/templates/gatus/internal-http
 configMapGenerator:
   - name: ${APPLICATION}-values
     namespace: flux-system
