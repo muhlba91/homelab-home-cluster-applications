@@ -10,6 +10,7 @@ spec:
   eventSources:
     - kind: Kustomization
       name: home-assistant
+
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta2
 kind: Alert
@@ -35,6 +36,7 @@ spec:
   eventMetadata:
     app.kubernetes.io/env: production
     app.kubernetes.io/component: home-assistant
+
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta2
 kind: Alert

@@ -2,22 +2,23 @@
 apiVersion: notification.toolkit.fluxcd.io/v1beta2
 kind: Alert
 metadata:
-  name: infrastructure-github
+  name: applications-github
   namespace: flux-system
 spec:
   providerRef:
     name: github-status
   eventSources:
     - kind: Kustomization
-      name: infrastructure
+      name: applications
+
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta2
 kind: Alert
 metadata:
-  name: infrastructure-error
+  name: applications-error
   namespace: flux-system
 spec:
-  summary: Infrastructure Impacted
+  summary: Applications Impacted
   providerRef:
     name: slack
   eventSeverity: error
@@ -26,23 +27,24 @@ spec:
       name: '*'
       namespace: flux-system
       matchLabels:
-        kustomize.toolkit.fluxcd.io/name: infrastructure
+        kustomize.toolkit.fluxcd.io/name: applications
     - kind: HelmRelease
       name: '*'
       namespace: flux-system
       matchLabels:
-        kustomize.toolkit.fluxcd.io/name: infrastructure
+        kustomize.toolkit.fluxcd.io/name: applications
   eventMetadata:
     app.kubernetes.io/env: production
-    app.kubernetes.io/component: infrastructure
+    app.kubernetes.io/component: applications
+
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta2
 kind: Alert
 metadata:
-  name: infrastructure-succeeded
+  name: applications-succeeded
   namespace: flux-system
 spec:
-  summary: Infrastructure Sync Succeeded
+  summary: Applications Sync Succeeded
   providerRef:
     name: slack
   inclusionList:
@@ -55,12 +57,12 @@ spec:
       name: '*'
       namespace: flux-system
       matchLabels:
-        kustomize.toolkit.fluxcd.io/name: infrastructure
+        kustomize.toolkit.fluxcd.io/name: applications
     - kind: HelmRelease
       name: '*'
       namespace: flux-system
       matchLabels:
-        kustomize.toolkit.fluxcd.io/name: infrastructure
+        kustomize.toolkit.fluxcd.io/name: applications
   eventMetadata:
     app.kubernetes.io/env: production
-    app.kubernetes.io/component: infrastructure
+    app.kubernetes.io/component: applications

@@ -2,22 +2,23 @@
 apiVersion: notification.toolkit.fluxcd.io/v1beta2
 kind: Alert
 metadata:
-  name: applications-github
+  name: infrastructure-github
   namespace: flux-system
 spec:
   providerRef:
     name: github-status
   eventSources:
     - kind: Kustomization
-      name: applications
+      name: infrastructure
+
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta2
 kind: Alert
 metadata:
-  name: applications-error
+  name: infrastructure-error
   namespace: flux-system
 spec:
-  summary: Applications Impacted
+  summary: Infrastructure Impacted
   providerRef:
     name: slack
   eventSeverity: error
@@ -26,23 +27,24 @@ spec:
       name: '*'
       namespace: flux-system
       matchLabels:
-        kustomize.toolkit.fluxcd.io/name: applications
+        kustomize.toolkit.fluxcd.io/name: infrastructure
     - kind: HelmRelease
       name: '*'
       namespace: flux-system
       matchLabels:
-        kustomize.toolkit.fluxcd.io/name: applications
+        kustomize.toolkit.fluxcd.io/name: infrastructure
   eventMetadata:
     app.kubernetes.io/env: production
-    app.kubernetes.io/component: applications
+    app.kubernetes.io/component: infrastructure
+
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta2
 kind: Alert
 metadata:
-  name: applications-succeeded
+  name: infrastructure-succeeded
   namespace: flux-system
 spec:
-  summary: Applications Sync Succeeded
+  summary: Infrastructure Sync Succeeded
   providerRef:
     name: slack
   inclusionList:
@@ -55,12 +57,12 @@ spec:
       name: '*'
       namespace: flux-system
       matchLabels:
-        kustomize.toolkit.fluxcd.io/name: applications
+        kustomize.toolkit.fluxcd.io/name: infrastructure
     - kind: HelmRelease
       name: '*'
       namespace: flux-system
       matchLabels:
-        kustomize.toolkit.fluxcd.io/name: applications
+        kustomize.toolkit.fluxcd.io/name: infrastructure
   eventMetadata:
     app.kubernetes.io/env: production
-    app.kubernetes.io/component: applications
+    app.kubernetes.io/component: infrastructure

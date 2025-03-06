@@ -10,6 +10,7 @@ spec:
   eventSources:
     - kind: Kustomization
       name: flux-system
+
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta2
 kind: Alert
@@ -22,6 +23,7 @@ spec:
   eventSources:
     - kind: Kustomization
       name: app-of-apps
+
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta2
 kind: Alert
