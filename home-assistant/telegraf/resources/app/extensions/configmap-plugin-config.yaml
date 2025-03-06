@@ -6,11 +6,11 @@ metadata:
 data:
   firehose.conf: |
     [[outputs.firehose]]
-      region = "${AWS_REGION}"
-      access_key = "${AWS_ACCESS_KEY_ID}"
-      secret_key = "${AWS_SECRET_ACCESS_KEY}"
+      region = "$${AWS_REGION}"
+      access_key = "$${AWS_ACCESS_KEY_ID}"
+      secret_key = "$${AWS_SECRET_ACCESS_KEY}"
 
-      stream_name = "${FIREHOSE_DELIVERY_STREAM}"
+      stream_name = "$${FIREHOSE_DELIVERY_STREAM}"
 
       batch_size = 500
 

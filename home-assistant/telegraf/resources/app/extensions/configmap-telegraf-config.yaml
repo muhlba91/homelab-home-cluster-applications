@@ -38,7 +38,7 @@ data:
       urls = [ "http://influxdb.influxdb" ]
       organization = "tuxnet"
       bucket = "home-assistant"
-      token = "${TELEGRAF_INFLUXDB_TOKEN}"
+      token = "$${TELEGRAF_INFLUXDB_TOKEN}"
 
     [[outputs.file]]
       files = [ "/tmp/metrics.txt" ]
