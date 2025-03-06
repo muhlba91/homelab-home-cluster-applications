@@ -8,6 +8,7 @@ spec:
   interval: 10m
   url: oci://registry-1.docker.io/bitnamicharts
   type: oci
+
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
