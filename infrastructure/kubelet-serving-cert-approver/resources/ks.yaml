@@ -6,7 +6,7 @@ metadata:
   name: kubelet-serving-cert-approver
   namespace: flux-system
 spec:
-  targetNamespace: ${APPLICATION_NAMESPACE}
+  targetNamespace: kubelet-serving-cert-approver
   sourceRef:
     kind: GitRepository
     name: kubelet-serving-cert-approver
