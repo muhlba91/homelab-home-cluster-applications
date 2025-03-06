@@ -28,7 +28,7 @@ spec:
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: ${APPLICATION}
+        name: cloudnative-pg
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap

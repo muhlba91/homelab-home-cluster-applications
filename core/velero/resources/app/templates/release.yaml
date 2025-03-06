@@ -28,7 +28,7 @@ spec:
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: ${APPLICATION}
+        name: velero
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap

@@ -28,7 +28,7 @@ spec:
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: ${APPLICATION}
+        name: victoria-metrics-stack
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
@@ -65,5 +65,5 @@ spec:
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: ${APPLICATION}-prometheus
+        name: prometheus-operator-crds
         namespace: flux-system
