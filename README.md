@@ -48,9 +48,9 @@ The following applications are defined in [`infrastructure/`](infrastructure/).
 - [x] [MetalLB](https://metallb.universe.tf) - Provides a Kubernetes network load balancer to expose Kubernetes `Service`s.
 - [x] [Metrics Server](https://github.com/kubernetes-sigs/metrics-server) - Collects container resource metrics.
 - [x] [NVIDIA Device Plugin](https://github.com/NVIDIA/k8s-device-plugin) - Makes the NVIDIA GPU accessible in the cluster.
+- [x] [Reloader](https://github.com/stakater/Reloader) - Automatically reloads Kubernetes resources when secrets or configmaps change.
 - [x] [Rook Ceph](https://rook.io) - Manages persistent storage in the cluster.
 - [x] [Traefik](https://traefik.io) - Exposes Kubernetes `Ingress` resources to the "outside world".
-- [x] [Reloader](https://github.com/stakater/Reloader) - Automatically reloads Kubernetes resources when secrets or configmaps change.
 
 ### Core Applications
 
@@ -59,6 +59,7 @@ The following applications are defined in [`core/`](core/).
 - [x] [Cert Manager](https://cert-manager.io) - Certificate management using ACME Let's Encrypt.
 - [x] [CloudNativePG](https://cloudnative-pg.io/documentation/current/) - PostgreSQL database operator.
 - [x] [External DNS with Google Cloud DNS integration](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Google Cloud DNS domains for publicly reachable services.
+- [x] [Gatus](https://gatus.io) - Service status page.
 - [x] [Victoria Metrics Stack](https://github.com/VictoriaMetrics/helm-charts/tree/master/charts/victoria-metrics-k8s-stack) - Monitoring stack using [Victoria Metrics](https://victoriametrics.com).
 - [x] [Grafana](http://grafana.com) - Visualization of metrics, and other data.
 - [x] [Velero](https://velero.io) - Performs cluster backups.
@@ -70,11 +71,10 @@ The following applications are defined in [`applications/`](applications/).
 
 - [x] [External DNS with Adguard integration](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Adguard for internal, local only, reachable services. Uses the [External DNS Adguard Webhook provider](https://github.com/muhlba91/external-dns-provider-adguard).
 - [x] External Services - Deploys Kubernetes `Service`s and `Ingress`es to local endpoints, and existing services outside of the cluster.
-- [x] [Gatus](https://gatus.io) - Service status page.
 - [x] [Immich](https://immich.app) - Photo management solution.
 - [x] [InfluxDB](https://www.influxdata.com) - Time-Series database.
-- [x] [Ollama](https://ollama.com) - Run LLM models locally.
-- [ ] [Samba](https://github.com/crazy-max/docker-samba) - Exposes Samba shares for various applications.
+- [x] [Ollama](https://ollama.com) - Run LLM models locally. *(testing)*
+- [x] [Omada Controller](https://www.tp-link.com/us/business-networking/omada-sdn-controller/) - TP-Link Omada Controller.
 
 ### Home Assistant
 
@@ -88,6 +88,9 @@ The following applications are defined in [`home-assistant/`](home-assistant/).
 - [x] [Ring MQTT](https://github.com/tsightler/ring-mqtt) - Amazon Ring devices to MQTT bridge.
 - [x] [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) - Forwards Home Assistant state changes to a local [InfluxDB](https://www.influxdata.com) instance.
 - [x] [Z-Wave JS](https://github.com/zwave-js/zwave-js-ui) - Full featured Z-Wave Control Panel and MQTT Gateway.
+- [x] [Faster Whisper](https://github.com/SYSTRAN/faster-whisper) - Faster Whisper transcription with CTranslate2. *(testing)*
+- [x] [OpenWakeWord](https://github.com/dscripka/openWakeWord) - An open-source audio wake word (or phrase) detection framework. *(testing)*
+- [x] [Piper](https://github.com/rhasspy/piper) - A local TTS server. *(testing)*
 
 #### Notes: Backup and Restore
 
