@@ -1,8 +1,0 @@
----
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: home-assistant-emqx
-  namespace: flux-system
-spec:
-  url: https://repos.emqx.io/charts
