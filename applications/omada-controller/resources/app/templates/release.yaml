@@ -28,7 +28,7 @@ spec:
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: ${APPLICATION}
+        name: omada-controller
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap

@@ -29,7 +29,7 @@ spec:
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: ${APPLICATION}
+        name: ollama
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
