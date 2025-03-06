@@ -72,14 +72,6 @@ data:
         conditions:
           - "[STATUS] == 200"
       # 003 - Home Automation
-      - name: Home Assistant
-        group: 003 - Home Automation
-        enabled: true
-        url: http://home-assistant-home-assistant.home-assistant-home-assistant.svc.cluster.local:8123
-        method: GET
-        interval: 5m
-        conditions:
-          - "[STATUS] == 200"
       - name: MQTT
         group: 003 - Home Automation
         enabled: true

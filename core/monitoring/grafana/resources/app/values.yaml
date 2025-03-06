@@ -59,7 +59,7 @@ admin:
 
 grafana.ini:
   auth:
-    signout_redirect_url: "${OIDC_SIGNOUT_URL}"
+    signout_redirect_url: "$${OIDC_SIGNOUT_URL}"
     oauth_auto_login: "false"
   server:
     root_url: "https://grafana.home.muehlbachler.io"
@@ -71,11 +71,11 @@ grafana.ini:
     name: SSO
     icon: cloud
     scopes: openid email profile urn:zitadel:iam:org:project:id:254760536233776133:aud
-    auth_url: "${OIDC_AUTHZ_URL}"
-    token_url: "${OIDC_TOKEN_URL}"
-    api_url: "${OIDC_USER_INFO_URL}"
-    client_id: "${OIDC_CLIENT_ID}"
-    client_secret: "${OIDC_CLIENT_SECRET}"
+    auth_url: "$${OIDC_AUTHZ_URL}"
+    token_url: "$${OIDC_TOKEN_URL}"
+    api_url: "$${OIDC_USER_INFO_URL}"
+    client_id: "$${OIDC_CLIENT_ID}"
+    client_secret: "$${OIDC_CLIENT_SECRET}"
     # allowed_groups: ["sysadmin"]
     role_attribute_path: contains("urn:zitadel:iam:org:project:254760536233776133:roles"."admin"."253178200153208318", 'muehlbachler.zitadel.cloud') && 'GrafanaAdmin' || 'Viewer'
 assertNoLeakedSecrets: false # TODO: can we get rid of this?
