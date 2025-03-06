@@ -3,19 +3,16 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &application kubelet-serving-cert-approver
+  name: kubelet-serving-cert-approver
   namespace: flux-system
 spec:
+  targetNamespace: ${APPLICATION_NAMESPACE}
   sourceRef:
     kind: GitRepository
-    name: cluster-applications
-  path: ./infrastructure/kubelet-serving-cert-approver/resources/app/
+    name: kubelet-serving-cert-approver
+  path: ./deploy/standalone/
   interval: 10m
   retryInterval: 2m
   prune: true
   force: false
   wait: false
-  postBuild:
-    substitute:
-      APPLICATION: *application
-      APPLICATION_NAMESPACE: *application
