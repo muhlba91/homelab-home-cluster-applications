@@ -1,12 +1,26 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: metallb
+  name: ${APPLICATION}
   namespace: flux-system
 spec:
-  releaseName: metallb
-  targetNamespace: metallb-system
+  releaseName: ${APPLICATION}
+  targetNamespace: ${APPLICATION_NAMESPACE}
+  interval: 10m
+  maxHistory: 3
+  install:
+    createNamespace: true
+    crds: Create
+    remediation:
+      retries: -1
+  upgrade:
+    crds: CreateReplace
+    remediation:
+      retries: -1
+  rollback:
+    recreate: true
   chart:
     spec:
       chart: metallb
@@ -14,11 +28,11 @@ spec:
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: metallb
+        name: ${APPLICATION}
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
-      name: metallb-values
+      name: ${APPLICATION}-values
       valuesKey: values.yaml
   postRenderers:
     - kustomize:
