@@ -7,9 +7,11 @@ resources:
   - ./templates/release-cluster.yaml
 configMapGenerator:
   - name: rook-ceph-values
+    namespace: flux-system
     files:
       - values.yaml=values.yaml
   - name: rook-ceph-cluster-values
+    namespace: flux-system
     files:
       - values.yaml=values-cluster.yaml
 configurations:

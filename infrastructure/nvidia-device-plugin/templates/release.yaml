@@ -3,6 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: nvidia-device-plugin
+  namespace: flux-system
 spec:
   releaseName: nvidia-device-plugin
   targetNamespace: nvidia-device-plugin

@@ -6,6 +6,7 @@ resources:
   - ./templates/release.yaml
 configMapGenerator:
   - name: metrics-server-values
+    namespace: flux-system
     files:
       - values.yaml=values.yaml
 configurations:

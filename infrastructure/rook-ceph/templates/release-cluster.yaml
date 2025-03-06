@@ -3,6 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: rook-ceph-cluster
+  namespace: flux-system
 spec:
   releaseName: rook-ceph-cluster
   targetNamespace: rook-ceph

@@ -4,7 +4,6 @@ kind: Kustomization
 metadata:
   name: infrastructure
 spec:
-  targetNamespace: flux-system
   sourceRef:
     kind: GitRepository
     name: cluster-applications
