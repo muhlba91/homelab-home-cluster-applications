@@ -3,6 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: home-assistant-zwave
+  namespace: flux-system
 spec:
   releaseName: home-assistant-zwave
   targetNamespace: home-assistant-zwave

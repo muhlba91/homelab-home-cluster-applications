@@ -3,6 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: home-assistant-faster-whisper
+  namespace: flux-system
 spec:
   releaseName: home-assistant-faster-whisper
   targetNamespace: home-assistant-faster-whisper

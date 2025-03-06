@@ -3,6 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: home-assistant-home-assistant
+  namespace: flux-system
 spec:
   releaseName: home-assistant-home-assistant
   targetNamespace: home-assistant-home-assistant

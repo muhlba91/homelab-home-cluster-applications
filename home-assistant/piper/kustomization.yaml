@@ -6,6 +6,7 @@ resources:
   - ./templates/release.yaml
 configMapGenerator:
   - name: home-assistant-piper-values
+    namespace: flux-system
     files:
       - values.yaml=values.yaml
 configurations:

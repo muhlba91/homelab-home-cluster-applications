@@ -7,6 +7,7 @@ resources:
   - ./templates/release.yaml
 configMapGenerator:
   - name: home-assistant-node-red-values
+    namespace: flux-system
     files:
       - values.yaml=values.yaml
 configurations:

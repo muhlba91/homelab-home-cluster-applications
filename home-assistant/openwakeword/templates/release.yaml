@@ -3,6 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: home-assistant-openwakeword
+  namespace: flux-system
 spec:
   releaseName: home-assistant-openwakeword
   targetNamespace: home-assistant-openwakeword
