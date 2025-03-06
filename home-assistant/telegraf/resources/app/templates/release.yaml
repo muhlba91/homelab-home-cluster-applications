@@ -28,7 +28,7 @@ spec:
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: ${APPLICATION}
+        name: home-assistant-telegraf
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
