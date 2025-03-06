@@ -15,4 +15,4 @@ spec:
   retryInterval: 2m
   prune: true
   force: false
-  wait: false
+  wait: true
