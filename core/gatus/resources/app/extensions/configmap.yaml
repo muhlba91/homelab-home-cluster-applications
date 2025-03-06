@@ -80,14 +80,6 @@ data:
         interval: 5m
         conditions:
           - "[STATUS] == 200"
-      - name: Node-RED
-        group: 003 - Home Automation
-        enabled: true
-        url: http://home-assistant-node-red.home-assistant-node-red.svc.cluster.local:1880
-        method: GET
-        interval: 5m
-        conditions:
-          - "[STATUS] == 200"
       - name: ZWave JS
         group: 003 - Home Automation
         enabled: true
