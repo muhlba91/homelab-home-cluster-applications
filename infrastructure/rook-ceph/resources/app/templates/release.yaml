@@ -28,7 +28,7 @@ spec:
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: ${APPLICATION}
+        name: rook-ceph
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
