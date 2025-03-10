@@ -7,7 +7,6 @@ environment:
   MEILI_MAX_INDEXING_MEMORY: 150Mb
   MEILI_EXPERIMENTAL_REDUCE_INDEXING_MEMORY_USAGE: "true"
   MEILI_MAX_INDEXING_THREADS: "1"
-  MEILI_LOG_LEVEL: DEBUG
 auth:
   existingMasterKeySecret: librechat-meilisearch-master-key
 
@@ -19,7 +18,7 @@ persistence:
 resources:
   requests:
     cpu: 10m
-    memory: 256Mi
+    memory: 128Mi
   limits:
     cpu: 500m
-    memory: 512Mi
+    memory: 256Mi
