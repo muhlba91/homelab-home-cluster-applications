@@ -8,7 +8,7 @@ controllers:
       init-config:
         image: &configSyncImage
           repository: ghcr.io/kiwigrid/k8s-sidecar
-          tag: 1.30.1
+          tag: 1.30.2
 
         env:
           FOLDER: /config
