@@ -15,6 +15,7 @@ data:
   TZ: UTC
   ALLOW_SIGNUP: "false"
   LOG_LEVEL: warning
+  SMTP_AUTH_STRATEGY: SSL
   SMTP_FROM_EMAIL: "noreply@muehlbachler.io"
   SMTP_FROM_NAME: Recipes
   DAILY_SCHEDULE_TIME: "01:00"
