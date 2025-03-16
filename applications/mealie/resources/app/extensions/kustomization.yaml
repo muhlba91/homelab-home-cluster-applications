@@ -8,6 +8,7 @@ resources:
   - ./external-secret-mealie-config.yaml
   - ./external-secret-mealie-database.yaml
   - ./external-secret-mealie-openai.yaml
+  - ./external-secret-mealie-smtp.yaml
   - ./external-secret-cloudnativepg-google-cloud.yaml
   - ./postgresql.yaml
   # - ./postgresql-backup.yaml

@@ -15,6 +15,7 @@ data:
   TZ: UTC
   ALLOW_SIGNUP: "false"
   LOG_LEVEL: warning
+  SMTP_FROM_NAME: "noreply@muehlbachler.io"
   DAILY_SCHEDULE_TIME: "01:00"
   OIDC_AUTH_ENABLED: "true"
   OIDC_SIGNUP_ENABLED: "false"

@@ -19,6 +19,8 @@ controllers:
               name: mealie-oidc
           - secretRef:
               name: mealie-openai
+          - secretRef:
+              name: mealie-smtp
 
         env:
           - name: POSTGRES_USER
