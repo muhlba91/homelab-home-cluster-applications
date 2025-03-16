@@ -1,0 +1,13 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: ${APPLICATION_NAMESPACE}
+resources:
+  - ./configmap-env.yaml
+  - ./external-secret-mealie-config.yaml
+  - ./external-secret-mealie-database.yaml
+  - ./external-secret-mealie-openai.yaml
+  - ./external-secret-cloudnativepg-google-cloud.yaml
+  - ./postgresql.yaml
+  - ./postgresql-backup.yaml
