@@ -9,3 +9,4 @@ resources:
   - ./ollama/
   - ./immich/
   - ./librechat/
+  - ./mealie/
