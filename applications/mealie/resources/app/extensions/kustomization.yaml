@@ -9,5 +9,5 @@ resources:
   - ./external-secret-mealie-database.yaml
   - ./external-secret-mealie-openai.yaml
   - ./external-secret-cloudnativepg-google-cloud.yaml
-  # - ./postgresql.yaml
+  - ./postgresql.yaml
   # - ./postgresql-backup.yaml
