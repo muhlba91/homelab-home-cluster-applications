@@ -34,18 +34,18 @@ spec:
           name: mealie-database
 
   bootstrap:
-    # initdb:
-    #   database: mealie
-    #   owner: mealie
-    #   encoding: UTF8
-    #   secret:
-    #     name: mealie-database
-    recovery:
-      source: mealie-postgresql-backup
+    initdb:
       database: mealie
       owner: mealie
+      encoding: UTF8
       secret:
         name: mealie-database
+    # recovery:
+    #   source: mealie-postgresql-backup
+    #   database: mealie
+    #   owner: mealie
+    #   secret:
+    #     name: mealie-database
 
   backup:
     barmanObjectStore:
