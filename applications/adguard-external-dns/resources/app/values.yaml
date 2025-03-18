@@ -36,7 +36,7 @@ extraArgs:
   traefik-disable-legacy: ""
 sidecars:
   - name: adguard-webhook
-    image: ghcr.io/muhlba91/external-dns-provider-adguard:v8.0.0
+    image: ghcr.io/muhlba91/external-dns-provider-adguard:v8.0.1
     imagePullPolicy: IfNotPresent
     ports:
       - containerPort: 8888
