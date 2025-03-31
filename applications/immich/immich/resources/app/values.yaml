@@ -85,7 +85,7 @@ controllers:
         image:
           repository: ghcr.io/immich-app/immich-machine-learning
           pullPolicy: IfNotPresent
-          tag: v1.130.3-cuda
+          tag: v1.131.1-cuda
 
         envFrom:
           - configMapRef:
