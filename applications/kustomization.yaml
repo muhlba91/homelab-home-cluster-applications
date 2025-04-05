@@ -10,4 +10,3 @@ resources:
   - ./immich/
   - ./librechat/
   - ./mealie/
-  - ./obsidian-couchdb/
