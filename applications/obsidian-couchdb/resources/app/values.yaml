@@ -1,0 +1,61 @@
+---
+fullnameOverride: obsidian-couchdb
+
+clusterSize: 1
+
+autoSetup:
+  enabled: true
+
+networkPolicy:
+  enabled: false
+
+createAdminSecret: false
+
+enableSearch: false
+
+couchdbConfig:
+  chttpd:
+    bind_address: any
+    require_valid_user: "true"
+    enable_cors: "true"
+    max_http_request_size: "4294967296"
+  chttpd_auth:
+    require_valid_user: "true"
+  httpd:
+    WWW-Authenticate: Basic realm="obsidian-couchdb"
+    enable_cors: "true"
+  couchdb:
+    max_document_size: "50000000"
+  cors:
+    credentials: "true"
+    origins: app://obsidian.md,capacitor://localhost,http://localhost
+
+persistentVolume:
+  enabled: true
+  storageClass: rook-ceph-block
+  size: 10Gi
+
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/cluster-issuer: cluster-issuer-home-muehlbachler-io
+    external-dns.alpha.kubernetes.io/provider: public
+    external-dns.alpha.kubernetes.io/target: 144.208.195.224,2a01:aea0:dd3:25a:1000:3:3:1
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  hosts:
+    - &domain gpt.home.muehlbachler.io
+  tls:
+    - secretName: obsidian-couchdb-tls-cert
+      hosts:
+        - *domain
+
+prometheusPort:
+  enabled: true
+
+# resources:
+#   limits:
+#     cpu: 1000m
+#     memory: 2Gi
+#   requests:
+#     cpu: 500m
+#     memory: 1Gi
