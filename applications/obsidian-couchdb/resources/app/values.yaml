@@ -25,6 +25,7 @@ couchdbConfig:
     WWW-Authenticate: Basic realm="obsidian-couchdb"
     enable_cors: "true"
   couchdb:
+    uuid: 6474acefc4a740b1a8f3adf4d3b01769
     max_document_size: "50000000"
   cors:
     credentials: "true"
@@ -43,7 +44,7 @@ ingress:
     external-dns.alpha.kubernetes.io/target: 144.208.195.224,2a01:aea0:dd3:25a:1000:3:3:1
     traefik.ingress.kubernetes.io/router.tls: "true"
   hosts:
-    - &domain gpt.home.muehlbachler.io
+    - &domain obsidian.home.muehlbachler.io
   tls:
     - secretName: obsidian-couchdb-tls-cert
       hosts:
