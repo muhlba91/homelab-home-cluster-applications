@@ -57,7 +57,7 @@ vmsingle:
     replicaCount: 1
     logLevel: WARN
     extraArgs:
-      - -maxLabelsPerTimeseries=50
+      maxLabelsPerTimeseries: "50"
     resources:
       requests:
         cpu: 50m
