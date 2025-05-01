@@ -141,12 +141,12 @@ kubelet:
         - action: labeldrop
           regex: (id|name)
         - action: labeldrop
-          regex: "extensions_talos_.*"
+          regex: "extensions_talos_dev_.*"
+        - action: labeldrop
+          regex: "feature_node_kubernetes_io_.*"
         - action: drop
           source_labels: [__name__]
           regex: (rest_client_request_duration_seconds_bucket|rest_client_request_duration_seconds_sum|rest_client_request_duration_seconds_count)
-        # - action: labeldrop
-        #   regex: "feature_node_.*"
         # - action: labeldrop
         #   regex: "nvidia_com_.*"
         # - action: labeldrop
