@@ -144,13 +144,11 @@ kubelet:
           regex: "extensions_talos_dev_.*"
         - action: labeldrop
           regex: "feature_node_kubernetes_io_.*"
+        - action: labeldrop
+          regex: "nvidia_com_.*"
         - action: drop
           source_labels: [__name__]
           regex: (rest_client_request_duration_seconds_bucket|rest_client_request_duration_seconds_sum|rest_client_request_duration_seconds_count)
-        # - action: labeldrop
-        #   regex: "nvidia_com_.*"
-        # - action: labeldrop
-        #   regex: "beta_kubernetes_.*"
 
 kubeApiserver:
   enabled: true
