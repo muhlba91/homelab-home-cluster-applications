@@ -12,7 +12,7 @@ This repository contains applications deployed on the `home-cluster` via [Flux](
 
 A Kubernetes cluster needs to be bootstrapped with the [Cilium CNI](https://cilium.io) and Flux pointing to this repository.
 
-For [ksops](https://github.com/viaduct-ai/kustomize-sops) and ArgoCD to decrypt the initial secrets for configuring the [External Secrets Operator](http://external-secrets.io) using [Doppler](http://doppler.com), a [Google Cloud Service Account](https://cloud.google.com/docs/authentication#service-accounts) with access to the correct KMS key needs to be set in the `flux` namespace.
+For [ksops](https://github.com/viaduct-ai/kustomize-sops) and Flux to decrypt the initial secrets for configuring the [External Secrets Operator](http://external-secrets.io) using [HashiCorp Vault](https://developer.hashicorp.com/vault), a [Google Cloud Service Account](https://cloud.google.com/docs/authentication#service-accounts) with access to the correct KMS key needs to be set in the `flux` namespace.
 
 ***Attention:*** some applications will be automatically deployed, others not (yet).
 
@@ -73,6 +73,8 @@ The following applications are defined in [`applications/`](applications/).
 - [x] External Services - Deploys Kubernetes `Service`s and `Ingress`es to local endpoints, and existing services outside of the cluster.
 - [x] [Immich](https://immich.app) - Photo management solution.
 - [x] [InfluxDB](https://www.influxdata.com) - Time-Series database.
+- [x] [LibreChat](https://librechat.ai) - Open-source chat application for AI conversations.
+- [x] [Mealie](https://mealie.io) - Recipe management application.
 - [x] [Ollama](https://ollama.com) - Run LLM models locally. *(testing)*
 - [x] [Omada Controller](https://www.tp-link.com/us/business-networking/omada-sdn-controller/) - TP-Link Omada Controller.
 
@@ -126,6 +128,36 @@ Timewise, the layers of backups follow the strategy:
 
 1. `12:00am`: in-application backups
 2. `02:00am`: Velero backups
+
+---
+
+## Resource Optimization
+
+[Kubernetes Resource Recommendations](https://github.com/robusta-dev/krr) can be used to analyze the resource usage of the cluster and provide recommendations for optimizing the resource requests and limits.
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/robusta-dev/krr/refs/heads/main/docs/krr-in-cluster/krr-in-cluster-job.yaml
+kubectl logs -l batch.kubernetes.io/job-name=krr > krr.txt
+kubectl delete -f https://raw.githubusercontent.com/robusta-dev/krr/refs/heads/main/docs/krr-in-cluster/krr-in-cluster-job.yaml
+```
+
+By default, this generates a text file with the recommendations. To output any other format, you can use the `-f` flag followed by the desired format.
+
+If using JSON, you can use the `jq` command to get a list of all changes:
+
+```bash
+# get all current CPU requests
+cat krr.json | jq '.scans[].object.allocations.requests.cpu | select(. != "?") | select(. != null)' | awk '{ sum += $0 } END { print sum }'
+# get all recommended CPU requests
+cat krr.json | jq '.scans[].recommended.requests.cpu | select(.value != "?") | .value' | awk '{ sum += $0 } END { print sum }'
+
+# get all current memory requests
+cat krr.json | jq '.scans[].object.allocations.requests.memory | select(. != "?") | select(. != null)' | awk '{ sum += $0 } END { print sum/1.074e9 }'
+# get all current memory limits
+cat krr.json | jq '.scans[].object.allocations.limits.memory | select(. != "?") | select(. != null)' | awk '{ sum += $0 } END { print sum/1.074e9 }'
+# get all recommended memory requests (= limits)
+cat krr.json | jq '.scans[].recommended.requests.memory | select(.value != "?") | .value' | awk '{ sum += $0 } END { print sum/1.074e9 }'
+```
 
 ---
 
