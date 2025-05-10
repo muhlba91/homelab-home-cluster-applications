@@ -56,6 +56,12 @@ operator:
   rollOutPods: true
   prometheus:
     enabled: true
+  resources:
+    requests:
+      cpu: 10m
+      memory: 222Mi
+    limits:
+      memory: 222Mi
 
 preflight:
   enabled: false

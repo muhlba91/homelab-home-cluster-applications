@@ -41,8 +41,7 @@ extraArgs:
 
 resources:
   requests:
-    cpu: 3m
-    memory: 48Mi
+    cpu: 10m
+    memory: 100Mi
   limits:
-    cpu: 300m
-    memory: 96Mi
+    memory: 100Mi

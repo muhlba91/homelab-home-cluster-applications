@@ -29,11 +29,10 @@ controllers:
 
         resources:
           requests:
-            cpu: 3m
-            memory: 96Mi
+            cpu: 10m
+            memory: 165Mi
           limits:
-            cpu: 300m
-            memory: 192Mi
+            memory: 165Mi
 
     initContainers:
       backup-restore:

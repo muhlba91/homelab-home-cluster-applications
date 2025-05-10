@@ -75,11 +75,16 @@ sidecars:
         value: "0.0.0.0"
       - name: DRY_RUN
         value: "false"
+    resources:
+      requests:
+        cpu: 3m
+        memory: 100Mi
+      limits:
+        memory: 100Mi
 
 resources:
   requests:
-    cpu: 3m
-    memory: 48Mi
+    cpu: 10m
+    memory: 110Mi
   limits:
-    cpu: 300m
-    memory: 96Mi
+    memory: 110Mi

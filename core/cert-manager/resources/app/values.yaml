@@ -8,25 +8,22 @@ extraArgs:
 webhook:
   resources:
     requests:
-      cpu: 3m
-      memory: 32Mi
+      cpu: 10m
+      memory: 100Mi
     limits:
-      cpu: 300m
-      memory: 64Mi
+      memory: 100Mi
 
 cainjector:
   resources:
     requests:
-      cpu: 3m
-      memory: 96Mi
+      cpu: 10m
+      memory: 147Mi
     limits:
-      cpu: 300m
-      memory: 192Mi
+      memory: 147Mi
 
 resources:
   requests:
-    cpu: 3m
-    memory: 64Mi
+    cpu: 10m
+    memory: 108Mi
   limits:
-    cpu: 300m
-    memory: 128Mi
+    memory: 108Mi

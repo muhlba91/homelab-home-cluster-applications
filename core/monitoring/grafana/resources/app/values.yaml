@@ -86,11 +86,10 @@ plugins:
 sidecar:
   resources:
     requests:
-      cpu: 5m
-      memory: 96Mi
+      cpu: 10m
+      memory: 133Mi
     limits:
-      cpu: 50m
-      memory: 156Mi
+      memory: 133Mi
   dashboards:
     enabled: true
     labelValue: "1"
@@ -110,8 +109,7 @@ sidecar:
 
 resources:
   requests:
-    cpu: 100m
-    memory: 512Mi
+    cpu: 10m
+    memory: 398Mi
   limits:
-    cpu: 2
     memory: 1Gi

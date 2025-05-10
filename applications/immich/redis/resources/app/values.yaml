@@ -11,11 +11,10 @@ master:
     enabled: false
   resources:
     requests:
-      cpu: 50m
-      memory: 48Mi
+      cpu: 30m
+      memory: 100Mi
     limits:
-      cpu: 1
-      memory: 96Mi
+      memory: 100Mi
 
 networkPolicy:
   enabled: false

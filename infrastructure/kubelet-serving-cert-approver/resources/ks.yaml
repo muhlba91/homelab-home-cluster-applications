@@ -16,3 +16,23 @@ spec:
   prune: true
   force: false
   wait: true
+  patches:
+    - patch: |-
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: not-used
+        spec:
+          template:
+            spec:
+              containers:
+                - name: cert-approver
+                  resources:
+                    requests:
+                      cpu: 10m
+                      memory: 100Mi
+                    limits:
+                      memory: 100Mi
+      target:
+        kind: Deployment
+        labelSelector: "app.kubernetes.io/name=kubelet-serving-cert-approver"

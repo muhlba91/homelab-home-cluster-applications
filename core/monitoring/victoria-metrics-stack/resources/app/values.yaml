@@ -11,11 +11,10 @@ victoria-metrics-operator:
     enable_converter_ownership: true
   resources:
     requests:
-      cpu: 3m
-      memory: 48Mi
+      cpu: 10m
+      memory: 100Mi
     limits:
-      cpu: 300m
-      memory: 96Mi
+      memory: 100Mi
 
 defaultRules:
   create: true
@@ -60,11 +59,10 @@ vmsingle:
       maxLabelsPerTimeseries: "150"
     resources:
       requests:
-        cpu: 50m
-        memory: 384Mi
+        cpu: 105m
+        memory: 1867Mi
       limits:
-        cpu: "2"
-        memory: 2Gi
+        memory: 1867Mi
     storage:
       storageClassName: rook-ceph-block
       accessModes:
@@ -93,11 +91,10 @@ vmagent:
     logLevel: WARN
     resources:
       requests:
-        cpu: 15m
-        memory: 96Mi
+        cpu: 25m
+        memory: 138Mi
       limits:
-        cpu: 300m
-        memory: 192Mi
+        memory: 138Mi
     externalLabels:
       cluster: home
       environment: prod
@@ -115,21 +112,19 @@ prometheus-node-exporter:
   enabled: true
   resources:
     requests:
-      cpu: 3m
-      memory: 24Mi
+      cpu: 10m
+      memory: 100Mi
     limits:
-      cpu: 100m
-      memory: 48Mi
+      memory: 100Mi
 
 kube-state-metrics:
   enabled: true
   resources:
     requests:
-      cpu: 5m
-      memory: 128Mi
+      cpu: 10m
+      memory: 156Mi
     limits:
-      cpu: 100m
-      memory: 192Mi
+      memory: 156Mi
 
 kubelet:
   enabled: true

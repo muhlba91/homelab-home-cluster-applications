@@ -28,10 +28,9 @@ controllers:
 
         resources:
           requests:
-            cpu: 30m
+            cpu: 10m
             memory: 192Mi
           limits:
-            cpu: 1
             memory: 284Mi
 
         probes:

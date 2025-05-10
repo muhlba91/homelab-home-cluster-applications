@@ -31,10 +31,9 @@ controllers:
 
         resources:
           requests:
-            cpu: 100m
-            memory: 512Mi
+            cpu: 50m
+            memory: 533Mi
           limits:
-            cpu: 2
             memory: 2048Mi
 
         probes:
@@ -111,11 +110,10 @@ controllers:
 
         resources:
           requests:
-            cpu: 100m
-            memory: 1024Mi
+            cpu: 50m
+            memory: 512Mi
             nvidia.com/gpu: "1"
           limits:
-            cpu: 3
             memory: 3072Mi
             nvidia.com/gpu: "1"
 
@@ -179,13 +177,12 @@ controllers:
               - NET_ADMIN
               - NET_RAW
 
-        resources:
+        resources: &samba_resources
           requests:
-            cpu: 5m
-            memory: 128Mi
+            cpu: 10m
+            memory: 100Mi
           limits:
-            cpu: 1
-            memory: 256Mi
+            memory: 200Mi
 
         probes:
           liveness:
@@ -239,13 +236,7 @@ controllers:
               - NET_ADMIN
               - NET_RAW
 
-        resources:
-          requests:
-            cpu: 5m
-            memory: 128Mi
-          limits:
-            cpu: 1
-            memory: 256Mi
+        resources: *samba_resources
 
         probes:
           liveness:

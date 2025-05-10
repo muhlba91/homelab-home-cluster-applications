@@ -6,16 +6,35 @@ psp:
 controller:
   resources:
     requests:
-      cpu: 5m
-      memory: 64Mi
+      cpu: 15m
+      memory: 146Mi
     limits:
-      cpu: 200m
-      memory: 128Mi
+      memory: 146Mi
 speaker:
   resources:
     requests:
-      cpu: 20m
-      memory: 96Mi
+      cpu: 10m
+      memory: 100Mi
     limits:
-      cpu: 200m
-      memory: 192Mi
+      memory: 100Mi
+  frr:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 100Mi
+      limits:
+        memory: 100Mi
+  frrMetrics:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 100Mi
+      limits:
+        memory: 100Mi
+  reloader:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 100Mi
+      limits:
+        memory: 100Mi

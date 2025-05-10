@@ -45,10 +45,9 @@ controllers:
         resources:
           requests:
             cpu: 10m
-            memory: 256Mi
+            memory: 213Mi
           # necessary for yarn!
           limits:
-            cpu: "1"
             memory: 1Gi
 
     initContainers:
