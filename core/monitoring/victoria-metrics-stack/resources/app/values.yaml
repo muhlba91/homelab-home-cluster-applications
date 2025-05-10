@@ -92,9 +92,9 @@ vmagent:
     resources:
       requests:
         cpu: 25m
-        memory: 384Mi
+        memory: 256Mi
       limits:
-        memory: 384Mi
+        memory: 512Mi
     externalLabels:
       cluster: home
       environment: prod
