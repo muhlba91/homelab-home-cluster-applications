@@ -51,6 +51,13 @@ securityContext:
 prometheus:
   enabled: true
 
+resources:
+  requests:
+    cpu: 50m
+    memory: 1152Mi
+  limits:
+    memory: 2048Mi
+
 operator:
   replicas: 1
   rollOutPods: true
@@ -62,6 +69,14 @@ operator:
       memory: 222Mi
     limits:
       memory: 222Mi
+
+envoy:
+  resources:
+    requests:
+      cpu: 20m
+      memory: 128Mi
+    limits:
+      memory: 192Mi
 
 preflight:
   enabled: false
