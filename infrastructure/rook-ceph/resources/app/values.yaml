@@ -1,6 +1,143 @@
 ---
 csi:
   provisionerReplicas: 1
+  csiRBDProvisionerResource: |
+    - name : csi-provisioner
+      resource:
+        requests:
+          memory: 100Mi
+          cpu: 10m
+        limits:
+          memory: 100Mi
+    - name : csi-resizer
+      resource:
+        requests:
+          memory: 100Mi
+          cpu: 10m
+        limits:
+          memory: 100Mi
+    - name : csi-attacher
+      resource:
+        requests:
+          memory: 100Mi
+          cpu: 10m
+        limits:
+          memory: 100Mi
+    - name : csi-snapshotter
+      resource:
+        requests:
+          memory: 100Mi
+          cpu: 10m
+        limits:
+          memory: 100Mi
+    - name : csi-rbdplugin
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 10m
+        limits:
+          memory: 1024Mi
+    - name : csi-omap-generator
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 10m
+        limits:
+          memory: 1024Mi
+    - name : liveness-prometheus
+      resource:
+        requests:
+          memory: 100Mi
+          cpu: 10m
+        limits:
+          memory: 100Mi
+  csiRBDPluginResource: |
+    - name : driver-registrar
+      resource:
+        requests:
+          memory: 100Mi
+          cpu: 10m
+        limits:
+          memory: 100Mi
+    - name : csi-rbdplugin
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 10m
+        limits:
+          memory: 1Gi
+    - name : liveness-prometheus
+      resource:
+        requests:
+          memory: 100Mi
+          cpu: 10m
+        limits:
+          memory: 100Mi
+  csiCephFSProvisionerResource: |
+    - name : csi-provisioner
+      resource:
+        requests:
+          memory: 100Mi
+          cpu: 10m
+        limits:
+          memory: 100Mi
+    - name : csi-resizer
+      resource:
+        requests:
+          memory: 100Mi
+          cpu: 10m
+        limits:
+          memory: 100Mi
+    - name : csi-attacher
+      resource:
+        requests:
+          memory: 100Mi
+          cpu: 10m
+        limits:
+          memory: 100Mi
+    - name : csi-snapshotter
+      resource:
+        requests:
+          memory: 100Mi
+          cpu: 10m
+        limits:
+          memory: 100Mi
+    - name : csi-cephfsplugin
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 10m
+        limits:
+          memory: 1024Mi
+    - name : liveness-prometheus
+      resource:
+        requests:
+          memory: 100Mi
+          cpu: 10m
+        limits:
+          memory: 100Mi
+  csiCephFSPluginResource: |
+    - name : driver-registrar
+      resource:
+        requests:
+          memory: 100Mi
+          cpu: 10m
+        limits:
+          memory: 100Mi
+    - name : csi-cephfsplugin
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 10m
+        limits:
+          memory: 1024Mi
+    - name : liveness-prometheus
+      resource:
+        requests:
+          memory: 100Mi
+          cpu: 10m
+        limits:
+          memory: 100Mi
 
 resources:
   requests:
