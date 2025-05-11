@@ -2,9 +2,9 @@
 resources:
   requests:
     cpu: 10m
-    memory: 245Mi
+    memory: 384Mi
   limits:
-    memory: 245Mi
+    memory: 384Mi
 
 initContainers:
   - name: velero-plugin-for-gcp
