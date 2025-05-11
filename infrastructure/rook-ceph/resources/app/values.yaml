@@ -1,3 +1,10 @@
 ---
 csi:
   provisionerReplicas: 1
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 555Mi
+  limits:
+    memory: 555Mi
