@@ -1,6 +1,12 @@
 ---
 toolbox:
   enabled: true
+  resources:
+    requests:
+      cpu: 10m
+      memory: 128Mi
+    limits:
+      memory: 256Mi
 
 cephClusterSpec:
   cephVersion:
@@ -37,6 +43,46 @@ cephClusterSpec:
     useAllNodes: true
     useAllDevices: false
     deviceFilter: "^sd."
+  resources:
+    mgr:
+      requests:
+        cpu: 75m
+        memory: 1024Mi
+      limits:
+        memory: 1024Mi
+    mon:
+      requests:
+        cpu: 50m
+        memory: 586Mi
+      limits:
+        memory: 2048Mi
+    osd:
+      requests:
+        cpu: 75m
+        memory: 3072Mi
+      limits:
+        memory: 4096Mi
+    # prepareosd: # not set
+    # mgr-sidecar: # not set
+    crashcollector:
+      requests:
+        cpu: 10m
+        memory: 100Mi
+      limits:
+        memory: 100Mi
+    logcollector:
+      requests:
+        cpu: 10m
+        memory: 100Mi
+      limits:
+        memory: 192Mi
+    # cleanup # not set
+    exporter:
+      requests:
+        cpu: 10m
+        memory: 100Mi
+      limits:
+        memory: 100Mi
 
 ingress:
   dashboard:
