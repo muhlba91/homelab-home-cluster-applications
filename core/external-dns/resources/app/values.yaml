@@ -30,6 +30,7 @@ domainFilters:
   - muehlbachler.io
 annotationFilter: external-dns.alpha.kubernetes.io/provider=public
 
+policy: sync
 txtOwnerId: external-dns-prod-google
 txtPrefix: extdns-
 provider: google
