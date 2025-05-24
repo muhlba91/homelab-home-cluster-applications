@@ -10,7 +10,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   rules:
-    - host: &domain omada.network.home.muehlbachler.io
+    - host: &domain omada.network.vie.home.muehlbachler.io
       http:
         paths:
           - path: /

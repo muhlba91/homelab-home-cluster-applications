@@ -31,7 +31,7 @@ ingress:
     external-dns.alpha.kubernetes.io/target: 144.208.195.224,2a01:aea0:dd3:25a:1000:3:3:1
     traefik.ingress.kubernetes.io/router.tls: "true"
   hosts:
-    - &domain grafana.home.muehlbachler.io
+    - &domain grafana.vie.home.muehlbachler.io
   tls:
     - secretName: grafana-tls-cert
       hosts:
@@ -62,7 +62,7 @@ grafana.ini:
     signout_redirect_url: "$${OIDC_SIGNOUT_URL}"
     oauth_auto_login: "false"
   server:
-    root_url: "https://grafana.home.muehlbachler.io"
+    root_url: "https://grafana.vie.home.muehlbachler.io"
   auth.generic_oauth:
     enabled: true
     allow_sign_up: true

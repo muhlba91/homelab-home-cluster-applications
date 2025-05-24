@@ -86,7 +86,7 @@ ingress:
       external-dns.alpha.kubernetes.io/target: 144.208.195.224,2a01:aea0:dd3:25a:1000:3:3:1
       traefik.ingress.kubernetes.io/router.tls: "true"
     hosts:
-      - host: &domain status.home.muehlbachler.io
+      - host: &domain status.vie.home.muehlbachler.io
         paths:
           - path: /
             pathType: ImplementationSpecific
