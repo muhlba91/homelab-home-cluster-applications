@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: external-dns
-      version: 8.8.2
+      version: 8.8.3
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
