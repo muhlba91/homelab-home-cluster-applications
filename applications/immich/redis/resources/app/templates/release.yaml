@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: redis
-      version: 21.1.8
+      version: 21.1.9
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
