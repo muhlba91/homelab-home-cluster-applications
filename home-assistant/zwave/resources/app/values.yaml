@@ -60,7 +60,7 @@ controllers:
       backup:
         image:
           repository: alpine
-          tag: 3.21
+          tag: 3.22
           pullPolicy: IfNotPresent
         command:
           - /scripts/backup_restore.sh
