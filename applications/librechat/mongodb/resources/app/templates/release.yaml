@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: mongodb
-      version: 16.5.16
+      version: 16.5.20
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
