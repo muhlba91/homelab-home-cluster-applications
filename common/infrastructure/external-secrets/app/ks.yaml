@@ -11,7 +11,7 @@ spec:
     name: cluster-applications
   decryption:
     provider: sops
-  path: ./infrastructure/external-secrets/app/
+  path: ./common/infrastructure/external-secrets/app/
   interval: 10m
   retryInterval: 2m
   prune: true
