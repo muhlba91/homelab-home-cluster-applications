@@ -270,7 +270,7 @@ service:
     type: LoadBalancer
     externalTrafficPolicy: Local
     annotations:
-      metallb.universe.tf/loadBalancerIPs: "10.0.74.21,2a01:aea0:dd3:25a:1000:3:5:21"
+      metallb.universe.tf/loadBalancerIPs: "${IMMICH_SAMBA_DANIEL_IP}"
       external-dns.alpha.kubernetes.io/provider: internal
       external-dns.alpha.kubernetes.io/hostname: photos-daniel.smb.${INTERNAL_DOMAIN}
     ports:
@@ -305,7 +305,7 @@ service:
     type: LoadBalancer
     externalTrafficPolicy: Local
     annotations:
-      metallb.universe.tf/loadBalancerIPs: "10.0.74.22,2a01:aea0:dd3:25a:1000:3:5:22"
+      metallb.universe.tf/loadBalancerIPs: "${IMMICH_SAMBA_KASIA_IP}"
       external-dns.alpha.kubernetes.io/provider: internal
       external-dns.alpha.kubernetes.io/hostname: photos-kasia.smb.${INTERNAL_DOMAIN}
     ports:
