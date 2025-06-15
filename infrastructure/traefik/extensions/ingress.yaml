@@ -9,7 +9,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   rules:
-    - host: &host traefik.internal.muehlbachler.io
+    - host: &host traefik.${LOCAL_INTERNAL_DOMAIN}
       http:
         paths:
           - path: /
