@@ -23,7 +23,7 @@ ingress:
   enabled: true
   tls: true
   secretName: influxdb-tls-cert
-  hostname: influxdb.internal.muehlbachler.io
+  hostname: influxdb.${LOCAL_INTERNAL_DOMAIN}
   annotations:
     cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
     external-dns.alpha.kubernetes.io/provider: internal
