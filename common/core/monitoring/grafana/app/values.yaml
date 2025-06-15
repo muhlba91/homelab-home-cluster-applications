@@ -40,7 +40,7 @@ ingress:
 persistence:
   enabled: true
   type: statefulset
-  storageClassName: rook-ceph-block
+  storageClassName: ${DEFAULT_STORAGE_CLASS}
   size: 1Gi
 
 initChownData:

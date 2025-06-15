@@ -64,7 +64,7 @@ vmsingle:
       limits:
         memory: 1867Mi
     storage:
-      storageClassName: rook-ceph-block
+      storageClassName: ${DEFAULT_STORAGE_CLASS}
       accessModes:
         - ReadWriteOnce
       resources:

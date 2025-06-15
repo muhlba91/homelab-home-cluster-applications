@@ -360,7 +360,7 @@ persistence:
   data:
     enabled: true
     type: persistentVolumeClaim
-    storageClass: rook-ceph-block
+    storageClass: ${DEFAULT_STORAGE_CLASS}
     accessMode: ReadWriteOnce
     size: 256Gi
     advancedMounts:
@@ -378,7 +378,7 @@ persistence:
   machine-learning-cache:
     enabled: true
     type: persistentVolumeClaim
-    storageClass: rook-ceph-block
+    storageClass: ${DEFAULT_STORAGE_CLASS}
     accessMode: ReadWriteOnce
     size: 15Gi
     advancedMounts:

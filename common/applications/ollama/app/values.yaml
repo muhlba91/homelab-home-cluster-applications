@@ -37,5 +37,5 @@ resources:
 
 persistentVolume:
   enabled: true
-  storageClass: rook-ceph-block
+  storageClass: ${DEFAULT_STORAGE_CLASS}
   size: 50Gi

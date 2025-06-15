@@ -12,7 +12,7 @@ spec:
 
   storage:
     size: 10Gi
-    storageClass: rook-ceph-block
+    storageClass: ${DEFAULT_STORAGE_CLASS}
 
   resources:
     requests:

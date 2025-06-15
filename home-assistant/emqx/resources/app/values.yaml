@@ -21,7 +21,7 @@ ingress:
 
 persistence:
   enabled: true
-  storageClassName: rook-ceph-block
+  storageClassName: ${DEFAULT_STORAGE_CLASS}
   accessMode: ReadWriteOnce
   size: 512Mi
 

@@ -22,7 +22,7 @@ networkPolicy:
 
 persistence:
   enabled: true
-  storageClass: rook-ceph-block
+  storageClass: ${DEFAULT_STORAGE_CLASS}
   size: 5Gi
 
 volumePermissions:

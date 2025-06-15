@@ -101,7 +101,7 @@ ingress:
 persistence:
   data:
     enabled: true
-    storageClass: rook-ceph-block
+    storageClass: ${DEFAULT_STORAGE_CLASS}
     accessMode: ReadWriteOnce
     size: 200Mi
     retain: false

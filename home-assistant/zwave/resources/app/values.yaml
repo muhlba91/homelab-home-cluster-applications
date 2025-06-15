@@ -116,7 +116,7 @@ persistence:
   config:
     enabled: true
     type: persistentVolumeClaim
-    storageClass: rook-ceph-block
+    storageClass: ${DEFAULT_STORAGE_CLASS}
     accessMode: ReadWriteOnce
     size: 512Mi
     retain: false
