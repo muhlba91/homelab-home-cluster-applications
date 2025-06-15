@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: flux-system
+  name: cluster-configuration
+data:
+  # domain names
+  HOME_DOMAIN: home.muehlbachler.io
+  LOCAL_HOME_DOMAIN: vie.home.muehlbachler.io
+  INTERNAL_DOMAIN: internal.muehlbachler.io
+  LOCAL_INTERNAL_DOMAIN: internal.vie.home.muehlbachler.io
