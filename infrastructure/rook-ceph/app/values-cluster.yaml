@@ -90,7 +90,7 @@ ingress:
       cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
       external-dns.alpha.kubernetes.io/provider: internal
     host:
-      name: &domain rook.${LOCAL_INTERNAL_DOMAIN}
+      name: &domain rook.internal.muehlbachler.io
     tls:
       - secretName: rook-ceph-dashboard-tls-cert
         hosts:
