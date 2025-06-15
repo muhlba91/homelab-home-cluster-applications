@@ -11,7 +11,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./infrastructure/traefik/extensions/
+  path: ./common/infrastructure/traefik/extensions/
   interval: 10m
   retryInterval: 2m
   prune: true

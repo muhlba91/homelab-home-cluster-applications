@@ -9,6 +9,6 @@ resources:
   - ./external-secrets/
   - ./rook-ceph/
   - ./metallb/
-  - ./traefik/
+  - ../common/infrastructure/traefik/
   - ./flux-extensions/
   - ../common/infrastructure/reloader/
