@@ -149,7 +149,7 @@ ingress:
       external-dns.alpha.kubernetes.io/provider: internal
       traefik.ingress.kubernetes.io/router.tls: "true"
     hosts:
-      - host: &domain node-red.iot.internal.muehlbachler.io
+      - host: &domain node-red.iot.${LOCAL_INTERNAL_DOMAIN}
         paths:
           - path: /
             pathType: ImplementationSpecific

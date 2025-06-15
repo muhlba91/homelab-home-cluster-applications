@@ -4,7 +4,7 @@ kind: ConfigMap
 metadata:
   name: node-red-config
 data:
-  url: "https://node-red.iot.internal.muehlbachler.io"
+  url: "https://node-red.iot.${LOCAL_INTERNAL_DOMAIN}"
   packages.txt: |-
     bcryptjs@2.4.3
     js-yaml@4.1.0
@@ -130,7 +130,7 @@ data:
             userInfoURL: process.env.OIDC_USER_INFO_URL,
             clientID: process.env.NODE_RED_OIDC_CLIENT_ID,
             clientSecret: process.env.NODE_RED_OIDC_CLIENT_SECRET,
-            callbackURL: 'https://node-red.iot.internal.muehlbachler.io/auth/strategy/callback/',
+            callbackURL: 'https://node-red.iot.${LOCAL_INTERNAL_DOMAIN}/auth/strategy/callback/',
             scope: ['email', 'profile', 'openid'],
             proxy: true,
             verify: function(issuer, profile, done) {

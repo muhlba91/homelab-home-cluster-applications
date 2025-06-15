@@ -5,7 +5,7 @@ metadata:
   name: emqx-mqtt
   annotations:
     external-dns.alpha.kubernetes.io/provider: internal
-    external-dns.alpha.kubernetes.io/hostname: mqtt.iot.internal.muehlbachler.io
+    external-dns.alpha.kubernetes.io/hostname: mqtt.iot.${LOCAL_INTERNAL_DOMAIN}}
     metallb.universe.tf/loadBalancerIPs: "10.0.73.1,2a01:aea0:dd3:25a:1000:3:4:1"
 spec:
   type: LoadBalancer

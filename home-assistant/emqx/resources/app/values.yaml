@@ -13,7 +13,7 @@ ingress:
       external-dns.alpha.kubernetes.io/provider: internal
       traefik.ingress.kubernetes.io/router.tls: "true"
     hosts:
-      - &domain emqx.iot.internal.muehlbachler.io
+      - &domain emqx.iot.${LOCAL_INTERNAL_DOMAIN}
     tls:
       - secretName: home-assistant-emqx-tls-cert
         hosts:

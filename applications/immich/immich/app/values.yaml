@@ -272,7 +272,7 @@ service:
     annotations:
       metallb.universe.tf/loadBalancerIPs: "10.0.74.21,2a01:aea0:dd3:25a:1000:3:5:21"
       external-dns.alpha.kubernetes.io/provider: internal
-      external-dns.alpha.kubernetes.io/hostname: photos-daniel.smb.internal.muehlbachler.io
+      external-dns.alpha.kubernetes.io/hostname: photos-daniel.smb.${INTERNAL_DOMAIN}
     ports:
       smb:
         enabled: true
@@ -307,7 +307,7 @@ service:
     annotations:
       metallb.universe.tf/loadBalancerIPs: "10.0.74.22,2a01:aea0:dd3:25a:1000:3:5:22"
       external-dns.alpha.kubernetes.io/provider: internal
-      external-dns.alpha.kubernetes.io/hostname: photos-kasia.smb.internal.muehlbachler.io
+      external-dns.alpha.kubernetes.io/hostname: photos-kasia.smb.${INTERNAL_DOMAIN}
     ports:
       smb:
         enabled: true

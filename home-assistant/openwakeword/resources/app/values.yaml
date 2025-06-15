@@ -47,7 +47,7 @@ service:
     annotations:
       metallb.universe.tf/loadBalancerIPs: "10.0.73.22,2a01:aea0:dd3:25a:1000:3:4:22"
       external-dns.alpha.kubernetes.io/provider: internal
-      external-dns.alpha.kubernetes.io/hostname: openwakeword.iot.internal.muehlbachler.io
+      external-dns.alpha.kubernetes.io/hostname: openwakeword.iot.${LOCAL_INTERNAL_DOMAIN}
     ports:
       http:
         port: 10400
