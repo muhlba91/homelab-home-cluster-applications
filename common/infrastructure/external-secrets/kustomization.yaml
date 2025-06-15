@@ -5,4 +5,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./app/ks.yaml
-  - ./extenstions/ks.yaml
+  - ./extensions/ks.yaml
