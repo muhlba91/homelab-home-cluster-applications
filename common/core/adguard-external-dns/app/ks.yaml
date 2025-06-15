@@ -9,7 +9,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./applications/adguard-external-dns/resources/app/
+  path: ./common/core/adguard-external-dns/app/
   interval: 10m
   retryInterval: 2m
   prune: true
