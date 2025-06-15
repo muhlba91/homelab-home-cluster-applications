@@ -3,13 +3,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &application victoria-metrics-stack
+  name: &application grafana
   namespace: flux-system
 spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./core/monitoring/victoria-metrics-stack/resources/app/
+  path: ./common/core/monitoring/grafana/app/
   interval: 10m
   retryInterval: 2m
   prune: true
@@ -18,5 +18,6 @@ spec:
   postBuild:
     substitute:
       APPLICATION: *application
-      APPLICATION_NAMESPACE: victoria-metrics
-      # TODO: vmagent and vmsingle gatus?
+      APPLICATION_NAMESPACE: *application
+      GATUS_NAME: Grafana
+      GATUS_GROUP: 006 - Monitoring
