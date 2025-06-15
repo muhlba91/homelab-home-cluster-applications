@@ -9,7 +9,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./common/cilium/app/
+  path: ./common/infrastructure/cilium/app/
   interval: 10m
   retryInterval: 2m
   prune: true
