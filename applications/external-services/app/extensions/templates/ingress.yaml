@@ -10,7 +10,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   rules:
-    - host: &domain router-001.network.internal.muehlbachler.io
+    - host: &domain router-001.network.${LOCAL_INTERNAL_DOMAIN}
       http:
         paths:
           - path: /
@@ -35,7 +35,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   rules:
-    - host: &domain switch-001.network.internal.muehlbachler.io
+    - host: &domain switch-001.network.${LOCAL_INTERNAL_DOMAIN}
       http:
         paths:
           - path: /
@@ -60,7 +60,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   rules:
-    - host: &domain switch-002.network.internal.muehlbachler.io
+    - host: &domain switch-002.network.${LOCAL_INTERNAL_DOMAIN}
       http:
         paths:
           - path: /
@@ -87,7 +87,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   rules:
-    - host: &domain adguard.internal.muehlbachler.io
+    - host: &domain adguard.${LOCAL_INTERNAL_DOMAIN}
       http:
         paths:
           - path: /
