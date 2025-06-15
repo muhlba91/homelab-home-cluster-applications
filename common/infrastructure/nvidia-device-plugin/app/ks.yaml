@@ -9,7 +9,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./infrastructure/nvidia-device-plugin/app/
+  path: ./common/infrastructure/nvidia-device-plugin/app/
   interval: 10m
   retryInterval: 2m
   prune: true

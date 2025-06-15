@@ -5,10 +5,10 @@ resources:
   - ./cilium/
   - ./kubelet-serving-cert-approver/
   - ./metrics-server/
-  - ./nvidia-device-plugin/
+  - ../common/infrastructure/nvidia-device-plugin/
   - ./external-secrets/
   - ./rook-ceph/
   - ./metallb/
   - ./traefik/
   - ./flux-extensions/
-  - ./../common/infrastructure/reloader/
+  - ../common/infrastructure/reloader/
