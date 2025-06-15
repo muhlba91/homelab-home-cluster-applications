@@ -11,4 +11,4 @@ resources:
   - ./metallb/
   - ./traefik/
   - ./flux-extensions/
-  - ./reloader/
+  - ./../common/infrastructure/reloader/

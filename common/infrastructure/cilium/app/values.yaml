@@ -1,0 +1,85 @@
+---
+rollOutCiliumPods: true
+
+ipam:
+  mode: kubernetes
+ipv6:
+  enabled: true
+
+kubeProxyReplacement: true
+kubeProxyReplacementHealthzBindAddr: "0.0.0.0:10256"
+
+k8sServiceHost: 127.0.0.1
+k8sServicePort: 7445
+
+k8sClientRateLimit:
+  qps: 30
+  burst: 60
+
+l2announcements:
+  enabled: false
+externalIPs:
+  enabled: false
+
+cgroup:
+  autoMount:
+    enabled: false
+  hostRoot: /sys/fs/cgroup
+
+bpf:
+  masquerade: true
+
+securityContext:
+  capabilities:
+    ciliumAgent:
+      - CHOWN
+      - KILL
+      - NET_ADMIN
+      - NET_RAW
+      - IPC_LOCK
+      - SYS_ADMIN
+      - SYS_RESOURCE
+      - DAC_OVERRIDE
+      - FOWNER
+      - SETGID
+      - SETUID
+    cleanCiliumState:
+      - NET_ADMIN
+      - SYS_ADMIN
+      - SYS_RESOURCE
+
+prometheus:
+  enabled: true
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 1152Mi
+  limits:
+    memory: 2048Mi
+
+operator:
+  replicas: 1
+  rollOutPods: true
+  prometheus:
+    enabled: true
+  resources:
+    requests:
+      cpu: 10m
+      memory: 222Mi
+    limits:
+      memory: 222Mi
+
+envoy:
+  resources:
+    requests:
+      cpu: 20m
+      memory: 128Mi
+    limits:
+      memory: 192Mi
+
+preflight:
+  enabled: false
+
+hubble:
+  enabled: false

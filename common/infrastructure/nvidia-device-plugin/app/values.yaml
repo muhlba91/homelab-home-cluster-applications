@@ -1,0 +1,40 @@
+---
+runtimeClassName: nvidia
+
+compatWithCPUManager: false
+
+gfd:
+  enabled: true
+
+config:
+  default: default
+  map:
+    default: |-
+      version: v1
+      flags:
+        migStrategy: "none"
+        failOnInitError: false
+        nvidiaDriverRoot: "/"
+        plugin:
+          passDeviceSpecs: false
+          deviceListStrategy:
+            - envvar
+          deviceIDStrategy: uuid
+      sharing:
+        timeSlicing:
+          renameByDefault: false
+          failRequestsGreaterThanOne: true
+          resources:
+            - name: nvidia.com/gpu
+              replicas: 10
+        # mps:
+        #   resources:
+        #     - name: nvidia.com/gpu
+        #       replicas: 10
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 100Mi
+  limits:
+    memory: 100Mi

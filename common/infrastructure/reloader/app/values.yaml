@@ -1,0 +1,9 @@
+---
+reloader:
+  deployment:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 226Mi
+      limits:
+        memory: 226Mi

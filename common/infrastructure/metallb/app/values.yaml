@@ -1,0 +1,40 @@
+---
+rbac:
+  create: true
+psp:
+  create: true
+controller:
+  resources:
+    requests:
+      cpu: 15m
+      memory: 146Mi
+    limits:
+      memory: 146Mi
+speaker:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 100Mi
+    limits:
+      memory: 100Mi
+  frr:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 100Mi
+      limits:
+        memory: 100Mi
+  frrMetrics:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 100Mi
+      limits:
+        memory: 100Mi
+  reloader:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 100Mi
+      limits:
+        memory: 100Mi

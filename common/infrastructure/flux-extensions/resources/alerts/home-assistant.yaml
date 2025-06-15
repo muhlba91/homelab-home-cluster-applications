@@ -1,0 +1,68 @@
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta2
+kind: Alert
+metadata:
+  name: home-assistant-github
+  namespace: flux-system
+spec:
+  providerRef:
+    name: github-status
+  eventSources:
+    - kind: Kustomization
+      name: home-assistant
+
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta2
+kind: Alert
+metadata:
+  name: home-assistant-error
+  namespace: flux-system
+spec:
+  summary: Home Assistant Impacted
+  providerRef:
+    name: slack
+  eventSeverity: error
+  eventSources:
+    - kind: Kustomization
+      name: '*'
+      namespace: flux-system
+      matchLabels:
+        kustomize.toolkit.fluxcd.io/name: home-assistant
+    - kind: HelmRelease
+      name: '*'
+      namespace: flux-system
+      matchLabels:
+        kustomize.toolkit.fluxcd.io/name: home-assistant
+  eventMetadata:
+    app.kubernetes.io/env: production
+    app.kubernetes.io/component: home-assistant
+
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta2
+kind: Alert
+metadata:
+  name: home-assistant-succeeded
+  namespace: flux-system
+spec:
+  summary: Home Assistant Sync Succeeded
+  providerRef:
+    name: slack
+  inclusionList:
+    - ".*succeeded.*"
+  exclusionList:
+    - ".*uninstall.*"
+    - ".*test.*"
+  eventSources:
+    - kind: Kustomization
+      name: '*'
+      namespace: flux-system
+      matchLabels:
+        kustomize.toolkit.fluxcd.io/name: home-assistant
+    - kind: HelmRelease
+      name: '*'
+      namespace: flux-system
+      matchLabels:
+        kustomize.toolkit.fluxcd.io/name: home-assistant
+  eventMetadata:
+    app.kubernetes.io/env: production
+    app.kubernetes.io/component: home-assistant
