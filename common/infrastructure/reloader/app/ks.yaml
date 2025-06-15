@@ -9,7 +9,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./infrastructure/reloader/app/
+  path: ./common/infrastructure/reloader/app/
   interval: 10m
   retryInterval: 2m
   prune: true
