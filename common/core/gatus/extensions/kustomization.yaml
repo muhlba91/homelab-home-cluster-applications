@@ -5,4 +5,3 @@ kind: Kustomization
 namespace: ${APPLICATION_NAMESPACE}
 resources:
   - ./rbac.yaml
-  - ./configmap.yaml
