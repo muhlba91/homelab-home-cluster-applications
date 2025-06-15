@@ -9,7 +9,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./core/velero/resources/app/
+  path: ./common/core/velero/app/
   interval: 10m
   retryInterval: 2m
   prune: true
