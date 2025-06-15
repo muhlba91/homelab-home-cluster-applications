@@ -5,7 +5,7 @@ resources:
   - ./external-services/
   - ../common/applications/omada-controller/
   - ./influxdb/
-  - ./ollama/
+  - ../common/applications/ollama/
   - ./immich/
   - ./librechat/
   - ./mealie/

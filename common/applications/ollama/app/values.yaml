@@ -1,0 +1,41 @@
+---
+runtimeClassName: nvidia
+
+${APPLICATION}:
+  gpu:
+    enabled: true
+    type: nvidia
+    nvidiaResource: nvidia.com/gpu
+    number: 1
+  models:
+    pull:
+      # https://github.com/allenporter/home-assistant-datasets/tree/main/reports
+      - qwen2.5:7b-instruct-q4_K_M
+
+ingress:
+  enabled: false
+  annotations:
+    cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+    external-dns.alpha.kubernetes.io/provider: internal
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  hosts:
+    - host: &domain ollama.internal.muehlbachler.io
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: ollama-tls-cert
+      hosts:
+        - *domain
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 100Mi
+  limits:
+    memory: 4Gi
+
+persistentVolume:
+  enabled: true
+  storageClass: rook-ceph-block
+  size: 50Gi
