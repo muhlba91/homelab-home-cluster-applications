@@ -9,7 +9,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./infrastructure/metrics-server/app/
+  path: ./common/infrastructure/metrics-server/app/
   interval: 10m
   retryInterval: 2m
   prune: true
