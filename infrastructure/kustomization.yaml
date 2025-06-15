@@ -6,7 +6,7 @@ resources:
   - ../common/infrastructure/kubelet-serving-cert-approver/
   - ../common/infrastructure/metrics-server/
   - ../common/infrastructure/nvidia-device-plugin/
-  - ../common/infrastructure/external-secrets/
+  - ./external-secrets/
   - ./rook-ceph/
   - ./metallb/
   - ./traefik/
