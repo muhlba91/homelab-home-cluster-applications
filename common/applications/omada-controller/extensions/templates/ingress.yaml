@@ -6,11 +6,11 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: cluster-issuer-home-muehlbachler-io
     external-dns.alpha.kubernetes.io/provider: public
-    external-dns.alpha.kubernetes.io/target: 144.208.195.224,2a01:aea0:dd3:25a:1000:3:3:1
+    external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   rules:
-    - host: &domain omada.network.vie.home.muehlbachler.io
+    - host: &domain omada.network.${LOCAL_HOME_DOMAIN}
       http:
         paths:
           - path: /

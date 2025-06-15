@@ -19,7 +19,7 @@ ingress:
     external-dns.alpha.kubernetes.io/provider: internal
     traefik.ingress.kubernetes.io/router.tls: "true"
   hosts:
-    - host: &domain ollama.internal.muehlbachler.io
+    - host: &domain ollama.${LOCAL_INTERNAL_DOMAIN}
       paths:
         - path: /
           pathType: ImplementationSpecific
