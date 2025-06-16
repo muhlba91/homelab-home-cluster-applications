@@ -9,7 +9,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./home-assistant/zwave/resources/app/
+  path: ./home-assistant/zwave/app/
   interval: 10m
   retryInterval: 2m
   prune: true
