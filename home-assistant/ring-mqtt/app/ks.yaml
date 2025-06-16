@@ -3,13 +3,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &application home-assistant-ecowitt2mqtt
+  name: &application home-assistant-ring-mqtt
   namespace: flux-system
 spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./home-assistant/ecowitt2mqtt/resources/app/
+  path: ./home-assistant/ring-mqtt/app/
   interval: 10m
   retryInterval: 2m
   prune: true
@@ -19,6 +19,3 @@ spec:
     substitute:
       APPLICATION: *application
       APPLICATION_NAMESPACE: *application
-      GATUS_NAME: Ecowitt 2 MQTT
-      GATUS_GROUP: 003 - Home Automation
-      GATUS_STATUS: "404"

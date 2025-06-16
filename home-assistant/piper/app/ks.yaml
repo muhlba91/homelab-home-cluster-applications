@@ -3,13 +3,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &application home-assistant-openwakeword
+  name: &application home-assistant-piper
   namespace: flux-system
 spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./home-assistant/openwakeword/resources/app/
+  path: ./home-assistant/piper/app/
   interval: 10m
   retryInterval: 2m
   prune: true

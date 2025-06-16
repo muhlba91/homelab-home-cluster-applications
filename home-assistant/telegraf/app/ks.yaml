@@ -3,13 +3,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &application home-assistant-ring-mqtt
+  name: &application home-assistant-telegraf
   namespace: flux-system
 spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./home-assistant/ring-mqtt/resources/app/
+  path: ./home-assistant/telegraf/app/
   interval: 10m
   retryInterval: 2m
   prune: true
@@ -19,3 +19,7 @@ spec:
     substitute:
       APPLICATION: *application
       APPLICATION_NAMESPACE: *application
+      GATUS_NAME: Telegraf
+      GATUS_GROUP: 003 - Home Automation
+      GATUS_PORT: "8086"
+      GATUS_STATUS: "404"

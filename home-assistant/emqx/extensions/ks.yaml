@@ -3,13 +3,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &application home-assistant-emqx
+  name: &application home-assistant-emqx-extensions
   namespace: flux-system
 spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./home-assistant/emqx/resources/app/
+  path: ./home-assistant/emqx/extensions/
   interval: 10m
   retryInterval: 2m
   prune: true
@@ -19,7 +19,3 @@ spec:
     substitute:
       APPLICATION: *application
       APPLICATION_NAMESPACE: home-assistant-mqtt
-      GATUS_NAME: MQTT
-      GATUS_GROUP: 003 - Home Automation
-      GATUS_SERVICE: emqx-mqtt
-      GATUS_PORT: "1883"
