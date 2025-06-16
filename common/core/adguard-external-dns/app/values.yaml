@@ -29,6 +29,7 @@ domainFilters:
   - internal.muehlbachler.io
 annotationFilter: external-dns.alpha.kubernetes.io/provider=internal
 
+policy: sync
 txtOwnerId: external-dns-prod-adguard
 provider: webhook
 extraArgs:
