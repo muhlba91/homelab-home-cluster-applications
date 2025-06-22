@@ -12,7 +12,7 @@ spec:
     - name: infrastructure
   interval: 10m
   retryInterval: 2m
-  timeout: 3m
+  timeout: 30m
   wait: true
   prune: true
   force: false

@@ -10,7 +10,7 @@ spec:
   path: ./infrastructure/
   interval: 5m
   retryInterval: 2m
-  timeout: 10m
+  timeout: 30m
   wait: true
   prune: true
   force: false
