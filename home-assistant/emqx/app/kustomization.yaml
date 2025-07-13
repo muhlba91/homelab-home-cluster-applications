@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - ./templates/repository.yaml
   - ./templates/release.yaml
-  - ../../../core/templates/gatus/internal-tcp
+  - ../../../templates/gatus/internal-tcp
 configMapGenerator:
   - name: ${APPLICATION}-values
     namespace: flux-system
