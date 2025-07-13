@@ -40,7 +40,6 @@ The [templates](templates/) directory contains the following templates:
   - [internal-http](templates/gatus/internal-http/) - templates for internal HTTP services
   - [internal-tcp](templates/gatus/internal-tcp/) - templates for internal TCP services
 
-
 ---
 
 ## App-of-Apps
@@ -105,11 +104,11 @@ The [sites](sites/) directory contains cluster specific applications.
 
 ### Munich (MUC)
 
-The [munich](sites/munich/) site contains the following applications:
+The [MUC](sites/muc/) site contains the following applications:
 
 #### Infrastructure (MUC)
 
-The following applications are defined in [`sites/munich/infrastructure/`](sites/munich/infrastructure/).
+The following applications are defined in [`sites/muc/infrastructure/`](sites/muc/infrastructure/).
 
 - [x] cilium
 - [x] external-secrets
@@ -122,7 +121,7 @@ The following applications are defined in [`sites/munich/infrastructure/`](sites
 
 #### Core Applications (MUC)
 
-The following applications are defined in [`sites/munich/core/`](sites/munich/core/).
+The following applications are defined in [`sites/muc/core/`](sites/muc/core/).
 
 - [x] adguard-external-dns
 - [x] cert-manager
@@ -135,60 +134,62 @@ The following applications are defined in [`sites/munich/core/`](sites/munich/co
 
 #### (User) Applications (MUC)
 
-The following applications are defined in [`sites/munich/applications/`](sites/munich/applications/).
+The following applications are defined in [`sites/muc/applications/`](sites/muc/applications/).
 
 - [x] external-services
 - [x] omada-controller
 - [x] influxdb
 
----
+#### Home Assistant (MUC)
 
-## Hosted Services (VIE)
+The following applications are defined in [`sites/muc/home-assistant/`](sites/muc/home-assistant/).
 
-### Infrastructure (VIE)
+### Vienna (VIE)
 
-The following applications are defined in [`infrastructure/`](infrastructure/).
+The [VIE](sites/vie/) site contains the following applications:
 
-- [x] [Cilium](https://cilium.io) - Provides the cluster CNI.
-- [x] [External Secrets Operator](http://external-secrets.io) - Synchronizes secrets from external stores to Kubernetes `Secret` objects.
+#### Infrastructure (VIE)
+
+The following applications are defined in [`sites/vie/infrastructure/`](sites/vie/infrastructure/).
+
+- [x] cilium
+- [x] external-secrets
   - [x] [External Secrets Stores](infrastructure/external-secrets/) - Deploys the required `ClusterSecretStore`s and Vault credentials as Kubernetes `Secret`s.
-- [x] [Kubelet Serving Cert Approver](https://github.com/alex1989hu/kubelet-serving-cert-approver) - Enables automatic certificate approval by the kubelet.
-- [x] [MetalLB](https://metallb.universe.tf) - Provides a Kubernetes network load balancer to expose Kubernetes `Service`s.
-- [x] [Metrics Server](https://github.com/kubernetes-sigs/metrics-server) - Collects container resource metrics.
-- [x] [NVIDIA Device Plugin](https://github.com/NVIDIA/k8s-device-plugin) - Makes the NVIDIA GPU accessible in the cluster.
-- [x] [Reloader](https://github.com/stakater/Reloader) - Automatically reloads Kubernetes resources when secrets or configmaps change.
+- [x] kubelet-serving-cert-approver
+- [x] metallb
+- [x] metrics-server
+- [x] nvidia-device-plugin
+- [x] reloader
 - [x] [Rook Ceph](https://rook.io) - Manages persistent storage in the cluster.
-- [x] [Traefik](https://traefik.io) - Exposes Kubernetes `Ingress` resources to the "outside world".
+- [x] traefik
 
-### Core Applications (VIE)
+#### Core Applications (VIE)
 
-The following applications are defined in [`core/`](core/).
+The following applications are defined in [`sites/vie/core/`](sites/vie/core/).
 
-- [x] [Cert Manager](https://cert-manager.io) - Certificate management using ACME Let's Encrypt.
-- [x] [CloudNativePG](https://cloudnative-pg.io/documentation/current/) - PostgreSQL database operator.
-- [x] [External DNS with Google Cloud DNS integration](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Google Cloud DNS domains for publicly reachable services.
-- [x] [Gatus](https://gatus.io) - Service status page.
-- [x] [Victoria Metrics Stack](https://github.com/VictoriaMetrics/helm-charts/tree/master/charts/victoria-metrics-k8s-stack) - Monitoring stack using [Victoria Metrics](https://victoriametrics.com).
-- [x] [Grafana](http://grafana.com) - Visualization of metrics, and other data.
-- [x] [Velero](https://velero.io) - Performs cluster backups.
+- [x] cert-manager
+- [x] cloudnative-pg
+- [x] external-dns
+- [x] gatus
+- [x] monitoring
+- [x] velero
   - [x] Includes deployment of backup schedules.
 
-### (User) Applications (VIE)
+#### (User) Applications (VIE)
 
-The following applications are defined in [`applications/`](applications/).
+The following applications are defined in [`sites/vie/applications/`](sites/vie/applications/).
 
-- [x] [External DNS with Adguard integration](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Adguard for internal, local only, reachable services. Uses the [External DNS Adguard Webhook provider](https://github.com/muhlba91/external-dns-provider-adguard).
-- [x] External Services - Deploys Kubernetes `Service`s and `Ingress`es to local endpoints, and existing services outside of the cluster.
+- [x] external-services
 - [x] [Immich](https://immich.app) - Photo management solution.
-- [x] [InfluxDB](https://www.influxdata.com) - Time-Series database.
+- [x] influxdb
 - [x] [LibreChat](https://librechat.ai) - Open-source chat application for AI conversations.
 - [x] [Mealie](https://mealie.io) - Recipe management application.
 - [x] [Ollama](https://ollama.com) - Run LLM models locally. *(testing)*
-- [x] [Omada Controller](https://www.tp-link.com/us/business-networking/omada-sdn-controller/) - TP-Link Omada Controller.
+- [x] omada-controller
 
-### Home Assistant (VIE)
+#### Home Assistant (VIE)
 
-The following applications are defined in [`home-assistant/`](home-assistant/).
+The following applications are defined in [`sites/vie/home-assistant/`](sites/vie/home-assistant/).
 
 - [x] [ecowitt2mqtt](https://github.com/bachya/ecowitt2mqtt) - Forwards data received from ecowitt devices to the MQTT broker.
 - [x] [EMQX](https://www.emqx.io) - A MQTT broker.
