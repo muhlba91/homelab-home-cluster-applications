@@ -1,0 +1,23 @@
+---
+global:
+  fullnameOverride: meilisearch
+
+environment:
+  MEILI_ENV: production
+  MEILI_MAX_INDEXING_MEMORY: 150Mb
+  MEILI_EXPERIMENTAL_REDUCE_INDEXING_MEMORY_USAGE: "true"
+  MEILI_MAX_INDEXING_THREADS: "1"
+auth:
+  existingMasterKeySecret: librechat-meilisearch-master-key
+
+persistence:
+  enabled: true
+  storageClass: ${DEFAULT_STORAGE_CLASS}
+  size: 5Gi
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 127Mi
+  limits:
+    memory: 256Mi

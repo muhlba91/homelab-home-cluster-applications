@@ -1,0 +1,20 @@
+---
+fullnameOverride: redis
+
+architecture: standalone
+
+auth:
+  enabled: false
+
+master:
+  persistence:
+    enabled: false
+  resources:
+    requests:
+      cpu: 30m
+      memory: 100Mi
+    limits:
+      memory: 100Mi
+
+networkPolicy:
+  enabled: false

@@ -7,7 +7,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./applications/
+  path: ./sites/vie/applications/
   dependsOn:
     - name: infrastructure
     - name: core

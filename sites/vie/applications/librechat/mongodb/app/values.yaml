@@ -1,0 +1,36 @@
+---
+global:
+  fullnameOverride: mongodb
+
+rbac:
+  create: true
+
+architecture: standalone
+useStatefulSet: true
+replicaCount: 1
+arbiter:
+  enabled: false
+
+auth:
+  enabled: false
+
+serviceBindings:
+  enabled: true
+
+networkPolicy:
+  enabled: false
+
+persistence:
+  enabled: true
+  storageClass: ${DEFAULT_STORAGE_CLASS}
+  size: 5Gi
+
+volumePermissions:
+  enabled: false
+
+resources:
+  requests:
+    cpu: 110m
+    memory: 421Mi
+  limits:
+    memory: 421Mi

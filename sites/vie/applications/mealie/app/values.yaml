@@ -1,0 +1,104 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.3.0/charts/library/common/values.schema.json
+controllers:
+  main:
+    pod:
+      annotations:
+        backup.velero.io/backup-volumes: data
+    containers:
+      mealie:
+        image:
+          repository: ghcr.io/mealie-recipes/mealie
+          pullPolicy: IfNotPresent
+          tag: v3.0.1
+
+        envFrom:
+          - configMapRef:
+              name: mealie-env
+          - secretRef:
+              name: mealie-oidc
+          - secretRef:
+              name: mealie-openai
+          - secretRef:
+              name: mealie-smtp
+
+        env:
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: mealie-database
+                key: username
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mealie-database
+                key: password
+
+        resources:
+          requests:
+            cpu: 10m
+            memory: 552Mi
+          limits:
+            memory: 552Mi
+
+        probes:
+          liveness: &server_probes
+            enabled: true
+            custom: true
+            spec:
+              httpGet:
+                path: /
+                port: 9000
+              initialDelaySeconds: 0
+              periodSeconds: 30
+              timeoutSeconds: 1
+              failureThreshold: 5
+          readiness: *server_probes
+          startup:
+            enabled: false
+
+serviceAccount:
+  create: true
+
+defaultPodOptions:
+  automountServiceAccountToken: false
+
+service:
+  mealie:
+    controller: main
+    ports:
+      http:
+        port: 9000
+
+ingress:
+  mealie:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: cluster-issuer-home-muehlbachler-io
+      external-dns.alpha.kubernetes.io/provider: public
+      external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    hosts:
+      - host: &domain recipes.${HOME_DOMAIN}
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            service:
+              identifier: mealie
+              port: 9000
+    tls:
+      - secretName: mealie-tls-cert
+        hosts:
+          - *domain
+
+persistence:
+  data:
+    enabled: true
+    type: persistentVolumeClaim
+    storageClass: ${DEFAULT_STORAGE_CLASS}
+    accessMode: ReadWriteOnce
+    size: 1Gi
+    advancedMounts:
+      main:
+        mealie:
+          - path: /app/data

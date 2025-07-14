@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: immich-env
+data:
+  REDIS_HOSTNAME: redis-master
+  DB_HOSTNAME: immich-postgresql-rw
+  DB_DATABASE_NAME: immich
+  IMMICH_CONFIG_FILE: /config/immich.yaml
+  UPLOAD_LOCATION: /data/upload
+  IMMICH_MEDIA_LOCATION: /data/upload
