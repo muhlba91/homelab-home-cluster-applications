@@ -7,7 +7,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./infrastructure/
+  path: ./sites/vie/infrastructure/
   interval: 5m
   retryInterval: 2m
   timeout: 30m
