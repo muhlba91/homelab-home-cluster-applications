@@ -1,0 +1,70 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.3.0/charts/library/common/values.schema.json
+controllers:
+  main:
+    type: deployment
+    pod:
+      runtimeClassName: nvidia
+      tolerations:
+        - key: nvidia.com/gpu
+          operator: Exists
+          effect: NoSchedule
+    containers:
+      faster-whisper:
+        image:
+          repository: quay.io/linuxserver.io/faster-whisper
+          pullPolicy: IfNotPresent
+          tag: 2.5.0-gpu
+
+        env:
+          - name: NVIDIA_DRIVER_CAPABILITIES
+            value: compute,utility
+          - name: NVIDIA_VISIBLE_DEVICES
+            value: all
+          - name: WHISPER_MODEL
+            value: base-int8
+          - name: WHISPER_LANG
+            value: en
+          - name: WHISPER_BEAM
+            value: "1"
+
+        resources:
+          requests:
+            cpu: 50m
+            memory: 253Mi
+            nvidia.com/gpu: "1"
+          limits:
+            memory: 2048Mi
+            nvidia.com/gpu: "1"
+
+        probes:
+          liveness:
+            enabled: true
+          readiness:
+            enabled: true
+          startup:
+            enabled: true
+            spec:
+              failureThreshold: 30
+              periodSeconds: 5
+
+serviceAccount:
+  create: true
+
+defaultPodOptions:
+  automountServiceAccountToken: false
+
+service:
+  faster-whisper:
+    controller: main
+    enabled: true
+    type: LoadBalancer
+    ipFamilyPolicy: PreferDualStack
+    annotations:
+      metallb.universe.tf/loadBalancerIPs: "${HOME_ASSISTANT_FASTER_WHISPER_IP}"
+      external-dns.alpha.kubernetes.io/provider: internal
+      external-dns.alpha.kubernetes.io/hostname: whisper.iot.${LOCAL_INTERNAL_DOMAIN}
+    ports:
+      http:
+        port: 10300
+        targetPort: 10300

@@ -1,0 +1,199 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.3.0/charts/library/common/values.schema.json
+controllers:
+  main:
+    type: statefulset
+    containers:
+      node-red:
+        image:
+          repository: ghcr.io/muhlba91/node-red
+          pullPolicy: IfNotPresent
+          tag: v5.0.6
+
+        env:
+          - name: TZ
+            value: UTC
+          - name: NODE_RED_ENABLE_PROJECTS
+            value: false
+          - name: FLOWS
+            value: flows.json
+          - name: NODE_RED_URL
+            valueFrom:
+              configMapKeyRef:
+                name: node-red-config
+                key: url
+
+        envFrom:
+          - secretRef:
+              name: node-red-credentials
+
+        probes:
+          startup:
+            spec:
+              initialDelaySeconds: 30
+              periodSeconds: 15
+              failureThreshold: 90
+          readiness:
+            enabled: true
+            spec:
+              initialDelaySeconds: 10
+          liveness:
+            enabled: true
+            spec:
+              initialDelaySeconds: 10
+
+        resources:
+          requests:
+            cpu: 10m
+            memory: 213Mi
+          # necessary for yarn!
+          limits:
+            memory: 1Gi
+
+    initContainers:
+      init-chown-data:
+        image:
+          repository: alpine
+          tag: 3.22
+          pullPolicy: IfNotPresent
+        command:
+          - chown
+          - '-R'
+          - '1000:0'
+          - /data
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 32Mi
+        securityContext:
+          capabilities:
+            add:
+              - CHOWN
+      init-chown-node-modules:
+        image:
+          repository: alpine
+          tag: 3.22
+          pullPolicy: IfNotPresent
+        command:
+          - chown
+          - '-R'
+          - '1000:0'
+          - /node_modules
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 32Mi
+        securityContext:
+          capabilities:
+            add:
+              - CHOWN
+
+  backup:
+    type: cronjob
+    cronjob:
+      concurrencyPolicy: Replace
+      schedule: 0 0 * * *
+      successfulJobsHistory: 3
+      failedJobsHistory: 3
+      startingDeadlineSeconds: 30
+      backoffLimit: 2
+    pod:
+      restartPolicy: OnFailure
+      automountServiceAccountToken: true
+    containers:
+      backup:
+        image:
+          repository: python
+          tag: 3.13-alpine
+          pullPolicy: IfNotPresent
+        command:
+          - /scripts/backup_restore.sh
+        envFrom:
+          - secretRef:
+              name: node-red-backup
+          - secretRef:
+              name: node-red-credentials
+        resources:
+          requests:
+            cpu: 20m
+            memory: 160Mi
+          limits:
+            cpu: "1"
+            memory: 320Mi
+
+serviceAccount:
+  create: true
+
+defaultPodOptions:
+  automountServiceAccountToken: false
+
+service:
+  node-red:
+    controller: main
+    ipFamilyPolicy: PreferDualStack
+    ports:
+      http:
+        port: 1880
+
+ingress:
+  node-red:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+      external-dns.alpha.kubernetes.io/provider: internal
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    hosts:
+      - host: &domain node-red.iot.${LOCAL_INTERNAL_DOMAIN}
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            service:
+              identifier: node-red
+              port: 1880
+    tls:
+      - secretName: home-assistant-node-red-tls-cert
+        hosts:
+          - *domain
+
+persistence:
+  data:
+    enabled: true
+    type: persistentVolumeClaim
+    storageClass: ${DEFAULT_STORAGE_CLASS}
+    accessMode: ReadWriteOnce
+    size: 1Gi
+    retain: false
+  node-modules:
+    enabled: true
+    type: persistentVolumeClaim
+    storageClass: ${DEFAULT_STORAGE_CLASS}
+    accessMode: ReadWriteOnce
+    size: 1Gi
+    retain: false
+    advancedMounts:
+      main:
+        node-red:
+          - path: /usr/src/node-red/node_modules
+        init-chown-node-modules:
+          - path: /node_modules
+  packages:
+    enabled: true
+    type: configMap
+    name: node-red-config
+    globalMounts:
+      - path: /init
+  scripts:
+    enabled: true
+    type: configMap
+    name: node-red-scripts
+    defaultMode: 511
+    advancedMounts:
+      backup:
+        backup:
+          - path: /scripts

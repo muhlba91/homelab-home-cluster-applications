@@ -1,0 +1,152 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.3.0/charts/library/common/values.schema.json
+controllers:
+  main:
+    type: statefulset
+    containers:
+      ring-mqtt:
+        image:
+          repository: tsightler/ring-mqtt
+          pullPolicy: IfNotPresent
+          tag: 5.8.1@sha256:bb85fa851d22fc75a6738a231498d29c06b3134271adc20b4647c354d96e093d
+
+        env:
+          - name: DATA_PATH
+            value: /config
+          - name: GOOGLE_APPLICATION_CREDENTIALS
+            value: /gcp-credentials/credentials.json
+          - name: GOOGLE_CREDENTIALS
+            valueFrom:
+              secretKeyRef:
+                name: ring-mqtt-gcp-credentials
+                key: credentials.json
+
+        envFrom:
+          - secretRef:
+              name: ring-mqtt-backup
+          - configMapRef:
+              name: ring-mqtt-git
+
+        resources:
+          requests:
+            cpu: 10m
+            memory: 165Mi
+          limits:
+            memory: 165Mi
+
+    initContainers:
+      backup-restore:
+        image:
+          repository: alpine
+          tag: 3.22
+          pullPolicy: IfNotPresent
+        command:
+          - /scripts/backup_restore.sh
+          - "true"
+        envFrom:
+          - secretRef:
+              name: ring-mqtt-backup
+          - configMapRef:
+              name: ring-mqtt-git
+        env:
+          - name: DATA_PATH
+            value: /data
+          - name: GOOGLE_APPLICATION_CREDENTIALS
+            value: /gcp-credentials/credentials.json
+          - name: GOOGLE_CREDENTIALS
+            valueFrom:
+              secretKeyRef:
+                name: ring-mqtt-gcp-credentials
+                key: credentials.json
+        resources:
+          requests:
+            cpu: 3m
+            memory: 96Mi
+          limits:
+            cpu: "1"
+            memory: 256Mi
+
+  backup:
+    type: cronjob
+    cronjob:
+      concurrencyPolicy: Replace
+      schedule: 0 0 * * *
+      successfulJobsHistory: 3
+      failedJobsHistory: 3
+      startingDeadlineSeconds: 30
+      backoffLimit: 2
+    pod:
+      restartPolicy: OnFailure
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - home-assistant-ring-mqtt
+              topologyKey: kubernetes.io/hostname
+    containers:
+      backup:
+        image:
+          repository: alpine
+          tag: 3.22
+          pullPolicy: IfNotPresent
+        command:
+          - /scripts/backup_restore.sh
+        envFrom:
+          - secretRef:
+              name: ring-mqtt-backup
+          - configMapRef:
+              name: ring-mqtt-git
+        env:
+          - name: DATA_PATH
+            value: /data
+          - name: GOOGLE_APPLICATION_CREDENTIALS
+            value: /gcp-credentials/credentials.json
+          - name: GOOGLE_CREDENTIALS
+            valueFrom:
+              secretKeyRef:
+                name: ring-mqtt-gcp-credentials
+                key: credentials.json
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: "1"
+            memory: 256Mi
+
+serviceAccount:
+  create: true
+
+defaultPodOptions:
+  automountServiceAccountToken: false
+
+persistence:
+  data:
+    enabled: true
+    type: persistentVolumeClaim
+    storageClass: ${DEFAULT_STORAGE_CLASS}
+    accessMode: ReadWriteOnce
+    size: 32Mi
+    retain: false
+  scripts:
+    enabled: true
+    type: configMap
+    name: ring-mqtt-scripts
+    defaultMode: 0o0777
+  gcp-credentials:
+    enabled: true
+    type: secret
+    name: ring-mqtt-gcp-credentials
+    advancedMounts:
+      main:
+        backup-restore:
+          - path: /gcp-credentials
+            readOnly: true
+      backup:
+        backup:
+          - path: /gcp-credentials
+            readOnly: true

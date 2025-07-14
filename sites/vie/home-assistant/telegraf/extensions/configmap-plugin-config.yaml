@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: telegraf-plugin-config
+data:
+  firehose.conf: |
+    [[outputs.firehose]]
+      region = "$${AWS_REGION}"
+      access_key = "$${AWS_ACCESS_KEY_ID}"
+      secret_key = "$${AWS_SECRET_ACCESS_KEY}"
+
+      stream_name = "$${FIREHOSE_DELIVERY_STREAM}"
+
+      batch_size = 500
+
+      flatten = true
+      normalize_keys = true
+      name_key_rename = "unit"
+      timestamp_as_rfc3339 = false
+      timestamp_units = "1ms"

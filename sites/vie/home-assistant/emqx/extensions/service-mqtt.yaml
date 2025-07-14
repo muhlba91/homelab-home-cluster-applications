@@ -1,0 +1,25 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: emqx-mqtt
+  annotations:
+    external-dns.alpha.kubernetes.io/provider: internal
+    external-dns.alpha.kubernetes.io/hostname: mqtt.iot.${LOCAL_INTERNAL_DOMAIN}
+    metallb.universe.tf/loadBalancerIPs: "${HOME_ASSISTANT_MQTT_IP}"
+spec:
+  type: LoadBalancer
+  ipFamilyPolicy: PreferDualStack
+  externalTrafficPolicy: Local
+  ports:
+    - name: mqtt
+      port: 1883
+      protocol: TCP
+      targetPort: mqtt
+    - name: mqttssl
+      port: 8883
+      protocol: TCP
+      targetPort: mqttssl
+  selector:
+    app.kubernetes.io/instance: home-assistant-emqx
+    app.kubernetes.io/name: emqx

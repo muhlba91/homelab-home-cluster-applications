@@ -1,0 +1,24 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &application home-assistant-ecowitt2mqtt
+  namespace: flux-system
+spec:
+  sourceRef:
+    kind: GitRepository
+    name: cluster-applications
+  path: ./sites/vie/home-assistant/ecowitt2mqtt/app/
+  interval: 10m
+  retryInterval: 2m
+  prune: true
+  force: false
+  wait: false
+  postBuild:
+    substitute:
+      APPLICATION: *application
+      APPLICATION_NAMESPACE: *application
+      GATUS_NAME: Ecowitt 2 MQTT
+      GATUS_GROUP: 003 - Home Automation
+      GATUS_STATUS: "404"

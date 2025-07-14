@@ -1,0 +1,12 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: ${APPLICATION_NAMESPACE}
+resources:
+  - ./configmap-scripts.yaml
+  - ./external-secret-backup.yaml
+  - ./external-secret-network.yaml
+  - ./external-secret-session.yaml
+  - ./rbac-backup.yaml
+  - ./restore-job.yaml

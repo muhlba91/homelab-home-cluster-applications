@@ -1,0 +1,144 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.3.0/charts/library/common/values.schema.json
+controllers:
+  main:
+    type: statefulset
+    containers:
+      zwave-js:
+        image:
+          repository: zwavejs/zwave-js-ui
+          pullPolicy: IfNotPresent
+          tag: 10.9.0@sha256:6db7cdfde1a037b5263e4434d0890619710772464ef72477d1be6c3c3c6b5419
+
+        envFrom:
+          - secretRef:
+              name: zwave-js-network
+
+        env:
+          - name: TZ
+            value: UTC
+          - name: SESSION_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: zwave-js-session
+                key: secret
+
+        securityContext:
+          privileged: true
+
+        resources:
+          requests:
+            cpu: 10m
+            memory: 192Mi
+          limits:
+            memory: 284Mi
+
+        probes:
+          liveness:
+            enabled: true
+          readiness:
+            enabled: true
+          startup:
+            enabled: true
+            spec:
+              failureThreshold: 30
+              periodSeconds: 5
+
+  backup:
+    type: cronjob
+    cronjob:
+      concurrencyPolicy: Replace
+      schedule: 0 0 * * *
+      successfulJobsHistory: 3
+      failedJobsHistory: 3
+      startingDeadlineSeconds: 30
+      backoffLimit: 2
+    pod:
+      restartPolicy: OnFailure
+      automountServiceAccountToken: true
+    containers:
+      backup:
+        image:
+          repository: alpine
+          tag: 3.22
+          pullPolicy: IfNotPresent
+        command:
+          - /scripts/backup_restore.sh
+        envFrom:
+          - secretRef:
+              name: zwave-js-backup
+        resources:
+          requests:
+            cpu: 50m
+            memory: 128Mi
+          limits:
+            cpu: "1"
+            memory: 256Mi
+
+serviceAccount:
+  create: true
+
+defaultPodOptions:
+  automountServiceAccountToken: false
+
+service:
+  zwave-js:
+    controller: main
+    ipFamilyPolicy: PreferDualStack
+    ports:
+      http:
+        port: 8091
+      ws:
+        enabled: true
+        port: 3000
+
+ingress:
+  zwave-js:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+      external-dns.alpha.kubernetes.io/provider: internal
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    hosts:
+      - host: &domain zwave.iot.${LOCAL_INTERNAL_DOMAIN}
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            service:
+              identifier: zwave-js
+              port: 8091
+    tls:
+      - secretName: home-assistant-zwave-tls-cert
+        hosts:
+          - *domain
+
+persistence:
+  config:
+    enabled: true
+    type: persistentVolumeClaim
+    storageClass: ${DEFAULT_STORAGE_CLASS}
+    accessMode: ReadWriteOnce
+    size: 512Mi
+    retain: false
+    advancedMounts:
+      main:
+        zwave-js:
+          - path: /usr/src/app/store
+  usb:
+    enabled: true
+    type: hostPath
+    hostPath: /dev
+    hostPathType: Directory
+    advancedMounts:
+      main:
+        zwave-js:
+          - path: /dev
+  scripts:
+    enabled: true
+    type: configMap
+    name: zwave-js-scripts
+    defaultMode: 511
+    advancedMounts:
+      backup:
+        backup:
+          - path: /scripts

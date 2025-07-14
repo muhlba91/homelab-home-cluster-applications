@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: emqx-tls
+spec:
+  dnsNames:
+    - mqtt.iot.${LOCAL_INTERNAL_DOMAIN}
+    - mqtt.iot.${INTERNAL_DOMAIN}
+  issuerRef:
+    kind: ClusterIssuer
+    name: cluster-issuer-internal-muehlbachler-io
+  secretName: emqx-tls

@@ -1,0 +1,27 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: home-assistant-scripts
+data:
+  backup_restore.sh: |
+    #!/bin/sh
+
+    COPY_CONFIGURATION=$${1:-false}
+
+    apk --no-cache add git s3cmd bash
+    wget -O /usr/bin/sops https://github.com/mozilla/sops/releases/download/v3.7.3/sops-v3.7.3.linux.amd64 &> /dev/null
+    chmod +x /usr/bin/sops
+
+    rm -rf /tmp/repo
+    git clone $${GIT_REPO} /tmp/repo
+    cd /tmp/repo
+
+    /tmp/repo/lifecycle/sops.sh d /tmp/repo
+    /tmp/repo/lifecycle/backup_restore.sh $${DATA_PATH} $${COPY_CONFIGURATION} /tmp/repo
+
+    if [[ "$${COPY_CONFIGURATION}" == true ]]; then
+      /tmp/repo/lifecycle/prepare.sh $${DATA_PATH} /tmp/repo
+    fi
+  dockerenv: |
+    # TODO: remove once https://github.com/home-assistant/core/issues/127966 (PR: https://github.com/home-assistant/core/pull/132404) is fixed
