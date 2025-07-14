@@ -7,7 +7,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./core/
+  path: ./sites/vie/core/
   dependsOn:
     - name: infrastructure
   interval: 10m

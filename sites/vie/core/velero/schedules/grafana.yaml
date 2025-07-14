@@ -1,0 +1,22 @@
+---
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: grafana
+spec:
+  paused: false
+  schedule: "0 2 * * *"
+  useOwnerReferencesInBackup: false
+  template:
+    ttl: 72h
+    includedNamespaces:
+      - grafana
+    includedResources:
+      - pod
+      - pvc
+      - pv
+    storageLocation: google-cloud
+    defaultVolumesToFsBackup: false
+    snapshotMoveData: false
+    uploaderConfig:
+      parallelFilesUpload: 8
