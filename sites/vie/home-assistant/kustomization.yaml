@@ -8,7 +8,7 @@ resources:
   - ./ring-mqtt/
   - ./zwave/
   - ./home-assistant/
-  - ./node-red/
+  - ../../../common/home-assistant/node-red/
   - ./faster-whisper/
   - ./piper/
   - ./openwakeword/

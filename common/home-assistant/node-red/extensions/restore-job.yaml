@@ -1,0 +1,42 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: node-red-restore
+  annotations:
+    helm.sh/hook: post-install
+    helm.sh/hook-weight: "1"
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+spec:
+  backoffLimit: 5
+  template:
+    spec:
+      automountServiceAccountToken: true
+      serviceAccountName: home-assistant-node-red
+      restartPolicy: OnFailure
+      containers:
+        - name: backup
+          image: python:3.11-alpine
+          imagePullPolicy: IfNotPresent
+          command:
+            - /scripts/backup_restore.sh
+          envFrom:
+            - secretRef:
+                name: node-red-backup
+            - secretRef:
+                name: node-red-credentials
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: "1"
+              memory: 256Mi
+      volumes:
+        - name: scripts
+          configMap:
+            name: node-red-scripts
+            defaultMode: 511
