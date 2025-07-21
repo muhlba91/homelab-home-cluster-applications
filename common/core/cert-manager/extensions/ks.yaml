@@ -3,13 +3,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &application adguard-external-dns-extensions
+  name: &application cert-manager-extensions
   namespace: flux-system
 spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./sites/vie/core/adguard-external-dns/extensions/
+  path: ./common/core/cert-manager/extensions/
   interval: 10m
   retryInterval: 2m
   prune: true
@@ -18,4 +18,4 @@ spec:
   postBuild:
     substitute:
       APPLICATION: *application
-      APPLICATION_NAMESPACE: adguard
+      APPLICATION_NAMESPACE: cert-manager
