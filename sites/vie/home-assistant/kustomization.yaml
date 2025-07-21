@@ -6,7 +6,7 @@ resources:
   - ../../../common/home-assistant/telegraf/
   - ./ecowitt2mqtt/
   - ./ring-mqtt/
-  - ./zwave/
+  - ../../../common/home-assistant/zwave/
   - ./home-assistant/
   - ../../../common/home-assistant/node-red/
   - ./faster-whisper/

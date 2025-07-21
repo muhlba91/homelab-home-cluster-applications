@@ -28,7 +28,7 @@ spec:
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: home-assistant-node-red
+        name: home-assistant-zwave
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap

@@ -3,13 +3,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &application home-assistant-node-red
+  name: &application home-assistant-zwave
   namespace: flux-system
 spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./sites/vie/home-assistant/node-red/app/
+  path: ./common/home-assistant/zwave/app/
   interval: 10m
   retryInterval: 2m
   prune: true
@@ -19,6 +19,6 @@ spec:
     substitute:
       APPLICATION: *application
       APPLICATION_NAMESPACE: *application
-      GATUS_NAME: Node-RED
+      GATUS_NAME: ZWave JS
       GATUS_GROUP: 003 - Home Automation
-      GATUS_PORT: "1880"
+      GATUS_PORT: "8091"
