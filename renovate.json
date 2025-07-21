@@ -19,34 +19,34 @@
         "pre-commit"
     ],
     "helm-values": {
-        "fileMatch": [
-            "(^|/)values\\.yaml$"
+        "managerFilePatterns": [
+            "/(^|/)values\\.yaml$/"
         ],
         "pinDigests": false
     },
     "helmv3": {
-        "fileMatch": [
-            "(^|/)Chart\\.yaml$"
+        "managerFilePatterns": [
+            "/(^|/)Chart\\.yaml$/"
         ]
     },
     "flux": {
-        "fileMatch": [
-            "(^|/)applications/.+\\.ya?ml$",
-            "(^|/)core/.+\\.ya?ml$",
-            "(^|/)home-assistant/.+\\.ya?ml$",
-            "(^|/)infrastructure/.+\\.ya?ml$"
+        "managerFilePatterns": [
+            "/(^|/)applications/.+\\.ya?ml$/",
+            "/(^|/)core/.+\\.ya?ml$/",
+            "/(^|/)home-assistant/.+\\.ya?ml$/",
+            "/(^|/)infrastructure/.+\\.ya?ml$/"
         ]
     },
     "github-actions": {
-        "fileMatch": [
-            "^(workflow-templates|\\.github/workflows)/[^/]+\\.ya?ml$",
-            "(^|/)action\\.ya?ml$"
+        "managerFilePatterns": [
+            "/^(workflow-templates|\\.github/workflows)/[^/]+\\.ya?ml$/",
+            "/(^|/)action\\.ya?ml$/"
         ]
     },
     "pre-commit": {
         "enabled": true,
-        "fileMatch": [
-            "(^|/)\\.pre-commit-config\\.ya?ml$"
+        "managerFilePatterns": [
+            "/(^|/)\\.pre-commit-config\\.ya?ml$/"
         ]
     }
 }
