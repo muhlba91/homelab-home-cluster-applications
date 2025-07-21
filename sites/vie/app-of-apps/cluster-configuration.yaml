@@ -5,6 +5,9 @@ metadata:
   namespace: flux-system
   name: cluster-configuration
 data:
+  # cluster configuration
+  SITE: vie
+
   # domain names
   HOME_DOMAIN: home.muehlbachler.io
   LOCAL_HOME_DOMAIN: vie.home.muehlbachler.io
