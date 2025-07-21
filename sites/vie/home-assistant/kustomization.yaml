@@ -4,11 +4,11 @@ kind: Kustomization
 resources:
   - ../../../common/home-assistant/mqtt/
   - ../../../common/home-assistant/telegraf/
+  - ../../../common/home-assistant/zwave/
+  - ../../../common/home-assistant/home-assistant/
+  - ../../../common/home-assistant/node-red/
   - ./ecowitt2mqtt/
   - ./ring-mqtt/
-  - ../../../common/home-assistant/zwave/
-  - ./home-assistant/
-  - ../../../common/home-assistant/node-red/
   - ./faster-whisper/
   - ./piper/
   - ./openwakeword/
