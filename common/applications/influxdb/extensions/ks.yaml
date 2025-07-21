@@ -9,7 +9,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./sites/vie/applications/influxdb/extensions/
+  path: ./common/applications/influxdb/extensions/
   interval: 10m
   retryInterval: 2m
   prune: true

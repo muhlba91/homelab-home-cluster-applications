@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./external-services/
   - ../../../common/applications/omada-controller/
-  - ./influxdb/
+  - ../../../common/applications/influxdb/
   - ../../../common/applications/ollama/
   - ./immich/
   - ./librechat/
