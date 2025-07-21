@@ -18,10 +18,10 @@ data:
     cd /tmp/repo
 
     /tmp/repo/lifecycle/sops.sh d /tmp/repo
-    /tmp/repo/lifecycle/backup_restore.sh $${DATA_PATH} $${COPY_CONFIGURATION} /tmp/repo
+    /tmp/repo/lifecycle/backup_restore.sh $${DATA_PATH} $${COPY_CONFIGURATION} /tmp/repo ${SITE}
 
     if [[ "$${COPY_CONFIGURATION}" == true ]]; then
-      /tmp/repo/lifecycle/prepare.sh $${DATA_PATH} /tmp/repo
+      /tmp/repo/lifecycle/prepare.sh $${DATA_PATH} /tmp/repo ${SITE}
     fi
   dockerenv: |
     # TODO: remove once https://github.com/home-assistant/core/issues/127966 (PR: https://github.com/home-assistant/core/pull/132404) is fixed
