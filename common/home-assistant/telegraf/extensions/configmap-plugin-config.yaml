@@ -1,0 +1,8 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: telegraf-plugin-config
+data:
+  empty.conf: |
+    ""

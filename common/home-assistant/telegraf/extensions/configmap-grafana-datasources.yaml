@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasources
+data:
+  influxdb.yml: |
+    ---
+    apiVersion: v1
+    kind: Secret
+    type: Opaque
+    metadata:
+      name: home-assistant-influxdb-grafana
+      labels:
+        grafana_datasource: "1"
+    stringData:
+      datasource.yaml: |
+        ---
+        apiVersion: 1
+        datasources:
+          - name: Home Assistant - InfluxDB
+            type: influxdb
+            access: proxy
+            url: http://influxdb.influxdb
+            jsonData:
+              version: Flux
+              organization: home
+              defaultBucket: home-assistant
+              tlsSkipVerify: true
+            secureJsonData:
+              token: "#TELEGRAF_INFLUXDB_TOKEN#"

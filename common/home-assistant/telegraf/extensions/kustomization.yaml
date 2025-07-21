@@ -1,0 +1,14 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: ${APPLICATION_NAMESPACE}
+resources:
+  - ./configmap-grafana-datasources.yaml
+  - ./configmap-plugin-config.yaml
+  - ./configmap-scripts.yaml
+  - ./configmap-telegraf-config.yaml
+  - ./external-secret-influxdb-auth.yaml
+  - ./rbac-grafana.yaml
+  - ./rbac-influxdb.yaml
+  - ./influxdb-job.yaml

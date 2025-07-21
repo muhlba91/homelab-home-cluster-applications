@@ -1,0 +1,121 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.3.0/charts/library/common/values.schema.json
+controllers:
+  main:
+    type: deployment
+    containers:
+      telegraf:
+        image:
+          repository: telegraf
+          pullPolicy: IfNotPresent
+          tag: 1.35.2
+
+        envFrom:
+          - secretRef:
+              name: influxdb-token
+
+        resources:
+          requests:
+            cpu: 10m
+            memory: 219Mi
+          limits:
+            memory: 219Mi
+
+        probes:
+          liveness:
+            enabled: true
+          readiness:
+            enabled: true
+          startup:
+            enabled: true
+            spec:
+              failureThreshold: 30
+              periodSeconds: 5
+
+    initContainers:
+      plugins:
+        image:
+          repository: alpine
+          tag: 3.22
+          pullPolicy: IfNotPresent
+        command:
+          - /scripts/plugins.sh
+        resources:
+          requests:
+            cpu: 10m
+            memory: 64Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
+      grafana:
+        image:
+          repository: bitnami/kubectl
+          tag: 1.33
+          pullPolicy: IfNotPresent
+        command:
+          - /scripts/grafana.sh
+        envFrom:
+          - secretRef:
+              name: influxdb-token
+        resources:
+          requests:
+            cpu: 10m
+            memory: 64Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
+
+serviceAccount:
+  create: true
+defaultPodOptions:
+  automountServiceAccountToken: true
+
+service:
+  telegraf:
+    controller: main
+    ipFamilyPolicy: PreferDualStack
+    ports:
+      http:
+        port: 8086
+
+persistence:
+  config:
+    enabled: true
+    type: configMap
+    name: telegraf-config
+    defaultMode: 420
+    globalMounts:
+      - path: /etc/telegraf/telegraf.conf
+        subPath: telegraf.conf
+  plugins:
+    enabled: true
+    type: emptyDir
+    globalMounts:
+      - path: /plugins/bin
+  plugin-configuration:
+    enabled: true
+    type: configMap
+    name: telegraf-plugin-config
+    defaultMode: 420
+    globalMounts:
+      - path: /plugins/config
+  scripts:
+    enabled: true
+    type: configMap
+    name: telegraf-scripts
+    defaultMode: 511
+    advancedMounts:
+      main:
+        plugins:
+          - path: /scripts
+        grafana:
+          - path: /scripts
+  grafana-datasources:
+    enabled: true
+    type: configMap
+    name: grafana-datasources
+    defaultMode: 511
+    advancedMounts:
+      main:
+        grafana:
+          - path: /grafana-datasources
