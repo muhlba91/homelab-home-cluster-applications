@@ -5,15 +5,10 @@ kind: Kustomization
 resources:
   - ./templates/repository.yaml
   - ./templates/release.yaml
-  # - ./templates/release-cluster.yaml
 configMapGenerator:
   - name: ${APPLICATION}-values
     namespace: flux-system
     files:
       - values.yaml=values.yaml
-  - name: ${APPLICATION}-cluster-values
-    namespace: flux-system
-    files:
-      - values.yaml=values-cluster.yaml
 configurations:
   - kustomizeconfig.yaml
