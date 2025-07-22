@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - ./templates/repository.yaml
   - ./templates/release.yaml
-  - ./templates/release-cluster.yaml
+  # - ./templates/release-cluster.yaml
 configMapGenerator:
   - name: ${APPLICATION}-values
     namespace: flux-system
