@@ -12,8 +12,7 @@ spec:
   path: ./sites/vie/infrastructure/rook-ceph/cluster/
   interval: 10m
   retryInterval: 2m
-  # prune: true
-  prune: false # FIXME: temporary workaround for moving cluster resource
+  prune: true
   force: false
   wait: true
   postBuild:
