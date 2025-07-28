@@ -52,7 +52,7 @@ spec:
 
   backup:
     barmanObjectStore:
-      destinationPath: gs://infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157/cluster/home/backup/immich
+      destinationPath: gs://infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157/cluster/${SITE}/immich
       serverName: postgresql
       googleCredentials:
         applicationCredentials:
@@ -68,7 +68,7 @@ spec:
   externalClusters:
     - name: immich-postgresql-backup
       barmanObjectStore:
-        destinationPath: gs://infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157/cluster/home/backup/immich
+        destinationPath: gs://infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157/cluster/${SITE}/immich
         serverName: postgresql
         googleCredentials:
           applicationCredentials:

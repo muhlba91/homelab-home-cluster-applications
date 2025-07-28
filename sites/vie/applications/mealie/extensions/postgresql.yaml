@@ -48,7 +48,7 @@ spec:
 
   backup:
     barmanObjectStore:
-      destinationPath: gs://infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157/cluster/home/backup/mealie
+      destinationPath: gs://infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157/cluster/${SITE}/mealie
       serverName: postgresql
       googleCredentials:
         applicationCredentials:
@@ -64,7 +64,7 @@ spec:
   externalClusters:
     - name: mealie-postgresql-backup
       barmanObjectStore:
-        destinationPath: gs://infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157/cluster/home/backup/mealie
+        destinationPath: gs://infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157/cluster/${SITE}/mealie
         serverName: postgresql
         googleCredentials:
           applicationCredentials:
