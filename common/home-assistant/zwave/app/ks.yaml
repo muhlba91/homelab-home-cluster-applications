@@ -21,4 +21,5 @@ spec:
       APPLICATION_NAMESPACE: *application
       GATUS_NAME: ZWave JS
       GATUS_GROUP: 003 - Home Automation
+      GATUS_SERVICE: home-assistant-zwave-zwave-js
       GATUS_PORT: "8091"
