@@ -44,12 +44,6 @@ controllers:
               failureThreshold: 30
               periodSeconds: 5
 
-serviceAccount:
-  create: true
-
-defaultPodOptions:
-  automountServiceAccountToken: false
-
 service:
   ecowitt2mqtt:
     controller: main
