@@ -12,11 +12,11 @@ spec:
   maxHistory: 3
   install:
     createNamespace: true
-    crds: Create
+    crds: Skip
     remediation:
       retries: -1
   upgrade:
-    crds: CreateReplace
+    crds: Skip
     remediation:
       retries: -1
   rollback:
