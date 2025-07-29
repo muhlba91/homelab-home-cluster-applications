@@ -74,6 +74,7 @@ The following applications are defined in [`common/infrastructure/`](common/infr
 - [x] [Metrics Server](https://github.com/kubernetes-sigs/metrics-server) - Collects container resource metrics.
 - [x] [NVIDIA Device Plugin](https://github.com/NVIDIA/k8s-device-plugin) - Makes the NVIDIA GPU accessible in the cluster.
 - [x] [Reloader](https://github.com/stakater/Reloader) - Automatically reloads Kubernetes resources when secrets or configmaps change.
+- [x] [Rook Ceph](https://rook.io) - Manages persistent storage in the cluster.
 - [x] [Traefik](https://traefik.io) - Exposes Kubernetes `Ingress` resources to the "outside world".
 
 ### Core Applications
@@ -85,6 +86,7 @@ The following applications are defined in [`common/core/`](common/core/).
 - [x] [CloudNativePG](https://cloudnative-pg.io/documentation/current/) - PostgreSQL database operator.
 - [x] [External DNS](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Google Cloud DNS domains for publicly reachable services.
 - [x] [Gatus](https://gatus.io) - Service status page.
+- [x] [Kyverno](https://kyverno.io) - Policy engine designed for Kubernetes.
 - [x] [Monitoring (Victoria Metrics & Grafana)](https://victoriametrics.com) - Monitoring stack using Victoria Metrics and [Grafana](http://grafana.com).
 - [x] [Velero](https://velero.io) - Performs cluster backups.
 
@@ -95,6 +97,17 @@ The following applications are defined in [`common/applications/`](common/applic
 - [x] [InfluxDB](https://www.influxdata.com) - InfluxDB time-series database.
 - [x] [Ollama](https://ollama.com) - Ollama local LLM model runner.
 - [x] [Omada Controller](https://www.tp-link.com/us/business-networking/omada-sdn-controller/) - TP-Link Omada Controller.
+
+#### Home Assistant
+
+The following applications are defined in [`common/home-assistant/`](common/home-assistant/).
+
+- [x] [EMQX](https://www.emqx.io) - A MQTT broker.
+- [x] [Home Assistant](https://home-assistant.io) - The Home Assistant instance.
+  - [x] PostgreSQL instance as the Home Assistant recorder target and configured via the CloudNativePG operator.
+- [x] [Node-RED](https://nodered.org) - Automation based on flows and Home Assistant data.
+- [x] [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) - Forwards Home Assistant state changes to a local [InfluxDB](https://www.influxdata.com) instance.
+- [x] [Z-Wave JS](https://github.com/zwave-js/zwave-js-ui) - Full featured Z-Wave Control Panel and MQTT Gateway.
 
 ---
 
@@ -160,7 +173,7 @@ The following applications are defined in [`sites/vie/infrastructure/`](sites/vi
 - [x] metrics-server
 - [x] nvidia-device-plugin
 - [x] reloader
-- [x] [Rook Ceph](https://rook.io) - Manages persistent storage in the cluster.
+- [x] rook-ceph
 - [x] traefik
 
 #### Core Applications (VIE)
@@ -172,6 +185,7 @@ The following applications are defined in [`sites/vie/core/`](sites/vie/core/).
 - [x] external-dns
 - [x] gatus
 - [x] monitoring
+- [x] kyverno
 - [x] velero
   - [x] Includes deployment of backup schedules.
 
@@ -192,13 +206,12 @@ The following applications are defined in [`sites/vie/applications/`](sites/vie/
 The following applications are defined in [`sites/vie/home-assistant/`](sites/vie/home-assistant/).
 
 - [x] [ecowitt2mqtt](https://github.com/bachya/ecowitt2mqtt) - Forwards data received from ecowitt devices to the MQTT broker.
-- [x] [EMQX](https://www.emqx.io) - A MQTT broker.
-- [x] [Home Assistant](https://home-assistant.io) - The Home Assistant instance.
-  - [x] PostgreSQL instance as the Home Assistant recorder target and configured via the CloudNativePG operator.
-- [x] [Node-RED](https://nodered.org) - Automation based on flows and Home Assistant data.
+- [x] emqx
+- [x] home-assistant
+- [x] node-red
 - [x] [Ring MQTT](https://github.com/tsightler/ring-mqtt) - Amazon Ring devices to MQTT bridge.
-- [x] [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) - Forwards Home Assistant state changes to a local [InfluxDB](https://www.influxdata.com) instance.
-- [x] [Z-Wave JS](https://github.com/zwave-js/zwave-js-ui) - Full featured Z-Wave Control Panel and MQTT Gateway.
+- [x] telegraf
+- [x] zwave
 - [x] [Faster Whisper](https://github.com/SYSTRAN/faster-whisper) - Faster Whisper transcription with CTranslate2. *(testing)*
 - [x] [OpenWakeWord](https://github.com/dscripka/openWakeWord) - An open-source audio wake word (or phrase) detection framework. *(testing)*
 - [x] [Piper](https://github.com/rhasspy/piper) - A local TTS server. *(testing)*
