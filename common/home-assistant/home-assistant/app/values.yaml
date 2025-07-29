@@ -1,5 +1,8 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.3.0/charts/library/common/values.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-4.2.0/charts/library/common/values.schema.json
+global:
+  alwaysAppendIdentifierToResourceName: true
+
 controllers:
   main:
     type: statefulset
@@ -83,12 +86,6 @@ controllers:
           limits:
             cpu: "1"
             memory: 512Mi
-
-serviceAccount:
-  create: true
-
-defaultPodOptions:
-  automountServiceAccountToken: false
 
 service:
   home-assistant:
