@@ -29,8 +29,9 @@ env:
 
 extraArgs:
   annotation-filter: "external-dns.alpha.kubernetes.io/provider=public"
-  traefik-disable-legacy: ""
+  traefik-disable-legacy:
   google-project: muehlbachler-dns
+  google-batch-change-size: 1000
 
 extraVolumes:
   - name: google-service-account
