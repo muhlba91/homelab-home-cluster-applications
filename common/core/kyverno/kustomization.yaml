@@ -6,4 +6,4 @@ resources:
   - ./namespace.yaml
   - ./extensions/ks.yaml
   - ./reports-server/ks.yaml
-  # - ./app/ks.yaml
+  - ./app/ks.yaml
