@@ -8,8 +8,41 @@
     ],
     "prHourlyLimit": 0,
     "prConcurrentLimit": 0,
-    "baseBranches": [
+    "configMigration": true,
+    "assignAutomerge": true,
+    "automergeStrategy": "rebase",
+    "automergeType": "pr-comment",
+    "platformAutomerge": true,
+    "baseBranchPatterns": [
         "main"
+    ],
+    "labels": [
+        "dependencies"
+    ],
+    "packageRules": [
+        {
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "digest"
+            ],
+            "labels": [
+                "dependencies",
+                "renovate-minor-patch",
+                "renovate-automerge"
+            ],
+            "automerge": true,
+            "automergeComment": "Renovate `minor` and `patch` version bumps are merged automatically."
+        },
+        {
+            "matchUpdateTypes": [
+                "major"
+            ],
+            "labels": [
+                "dependencies",
+                "renovate-major"
+            ]
+        }
     ],
     "enabledManagers": [
         "helm-values",
