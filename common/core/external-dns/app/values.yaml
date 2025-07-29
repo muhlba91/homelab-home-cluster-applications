@@ -1,16 +1,4 @@
 ---
-global:
-  security:
-    allowInsecureImages: true
-
-image:
-  registry: registry.k8s.io
-  repository: external-dns/external-dns
-  tag: v0.18.0
-
-crd:
-  create: true
-
 sources:
   - crd
   - service
@@ -28,17 +16,30 @@ logLevel: warning
 
 domainFilters:
   - muehlbachler.io
-annotationFilter: external-dns.alpha.kubernetes.io/provider=public
 
 policy: sync
 txtOwnerId: external-dns-prod-google
 txtPrefix: extdns-
-provider: google
-google:
-  serviceAccountSecret: external-dns-google
-  project: muehlbachler-dns
+provider:
+  name: google
+
+env:
+  - name: GOOGLE_APPLICATION_CREDENTIALS
+    value: /etc/secrets/service-account/credentials.json
+
 extraArgs:
+  annotation-filter: "external-dns.alpha.kubernetes.io/provider=public"
   traefik-disable-legacy: ""
+  google-project: muehlbachler-dns
+
+extraVolumes:
+  - name: google-service-account
+    secret:
+      secretName: external-dns-google
+extraVolumeMounts:
+  - name: google-service-account
+    mountPath: /etc/secrets/service-account
+    readOnly: true
 
 resources:
   requests:
