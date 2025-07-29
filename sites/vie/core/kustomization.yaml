@@ -7,5 +7,6 @@ resources:
   - ../../../common/core/cert-manager/
   - ../../../common/core/cloudnative-pg/
   - ../../../common/core/monitoring/
+  - ../../../common/core/kyverno/
   - ./gatus/
   - ./velero/

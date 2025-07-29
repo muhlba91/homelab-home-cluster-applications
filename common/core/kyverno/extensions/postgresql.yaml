@@ -1,0 +1,34 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: kyverno-postgresql
+spec:
+  instances: 1
+
+  imageName: ghcr.io/cloudnative-pg/postgresql:17.5
+
+  storage:
+    size: 10Gi
+    storageClass: ${DEFAULT_STORAGE_CLASS}
+
+  resources:
+    requests:
+      cpu: 20m
+      memory: 256Mi
+    limits:
+      memory: 512Mi
+
+  enableSuperuserAccess: true
+  managed:
+    roles:
+      - name: kyverno
+        ensure: present
+        comment: Kyverno
+        login: true
+
+  bootstrap:
+    initdb:
+      database: reportsdb
+      owner: kyverno
+      encoding: UTF8

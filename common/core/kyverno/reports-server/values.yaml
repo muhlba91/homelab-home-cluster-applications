@@ -1,0 +1,19 @@
+---
+postgresql:
+  enabled: false
+
+config:
+  db:
+    secretName: kyverno-postgresql-app
+    hostSecretKeyName: host
+    portSecretKeyName: port
+    dbNameSecretKeyName: dbname
+    userSecretKeyName: user
+    passwordSecretKeyName: password
+
+resources:
+  requests:
+    cpu: 15m
+    memory: 128Mi
+  limits:
+    memory: 128Mi
