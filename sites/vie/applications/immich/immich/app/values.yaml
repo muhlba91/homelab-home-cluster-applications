@@ -146,7 +146,7 @@ controllers:
                     operator: In
                     values:
                       - immich
-                  - key: app.kubernetes.io/component
+                  - key: app.kubernetes.io/controller
                     operator: In
                     values:
                       - main
@@ -205,7 +205,7 @@ controllers:
                     operator: In
                     values:
                       - immich
-                  - key: app.kubernetes.io/component
+                  - key: app.kubernetes.io/controller
                     operator: In
                     values:
                       - main
