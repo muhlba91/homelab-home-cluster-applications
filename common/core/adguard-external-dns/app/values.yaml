@@ -1,16 +1,4 @@
 ---
-global:
-  security:
-    allowInsecureImages: true
-
-image:
-  registry: registry.k8s.io
-  repository: external-dns/external-dns
-  tag: v0.18.0
-
-crd:
-  create: false
-
 sources:
   - service
   - ingress
@@ -27,37 +15,17 @@ logLevel: warning
 
 domainFilters:
   - internal.muehlbachler.io
-annotationFilter: external-dns.alpha.kubernetes.io/provider=internal
 
 policy: sync
 txtOwnerId: external-dns-prod-adguard
-provider: webhook
-extraArgs:
-  webhook-provider-url: http://localhost:8888
-  traefik-disable-legacy: ""
-sidecars:
-  - name: adguard-webhook
-    image: ghcr.io/muhlba91/external-dns-provider-adguard:v9.0.1
-    imagePullPolicy: IfNotPresent
-    ports:
-      - containerPort: 8888
-        name: http
-      - containerPort: 8080
-        name: healthz
-    livenessProbe:
-      httpGet:
-        path: /healthz
-        port: healthz
-      initialDelaySeconds: 10
-      timeoutSeconds: 5
-      periodSeconds: 60
-    readinessProbe:
-      httpGet:
-        path: /healthz
-        port: healthz
-      initialDelaySeconds: 10
-      timeoutSeconds: 5
-      periodSeconds: 60
+provider:
+  name: webhook
+  webhook:
+    image:
+      repository: ghcr.io/muhlba91/external-dns-provider-adguard
+      tag: v9.0.1
+    service:
+      port: 8888
     env:
       - name: LOG_LEVEL
         value: info
@@ -82,6 +50,10 @@ sidecars:
         memory: 100Mi
       limits:
         memory: 100Mi
+
+extraArgs:
+  annotation-filter: "external-dns.alpha.kubernetes.io/provider=internal"
+  traefik-disable-legacy:
 
 resources:
   requests:
