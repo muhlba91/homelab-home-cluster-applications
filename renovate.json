@@ -1,53 +1,8 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
-        "config:recommended",
-        "helpers:pinGitHubActionDigests",
-        ":dependencyDashboard",
-        ":semanticCommitTypeAll(chore)"
-    ],
-    "prHourlyLimit": 0,
-    "prConcurrentLimit": 0,
-    "configMigration": true,
-    "assignAutomerge": true,
-    "automergeStrategy": "rebase",
-    "automergeType": "pr-comment",
-    "platformAutomerge": true,
-    "baseBranchPatterns": [
-        "main"
-    ],
-    "labels": [
-        "dependencies"
-    ],
-    "packageRules": [
-        {
-            "matchUpdateTypes": [
-                "patch",
-                "digest"
-            ],
-            "labels": [
-                "dependencies",
-                "renovate-patch"
-            ]
-        },
-        {
-            "matchUpdateTypes": [
-                "minor"
-            ],
-            "labels": [
-                "dependencies",
-                "renovate-minor"
-            ]
-        },
-        {
-            "matchUpdateTypes": [
-                "major"
-            ],
-            "labels": [
-                "dependencies",
-                "renovate-major"
-            ]
-        }
+        "github>muhlba91/renovate-config",
+        "github>muhlba91/renovate-config:automerge(patch)"
     ],
     "enabledManagers": [
         "helm-values",
@@ -56,35 +11,12 @@
         "github-actions",
         "pre-commit"
     ],
-    "helm-values": {
-        "managerFilePatterns": [
-            "/(^|/)values\\.yaml$/"
-        ],
-        "pinDigests": false
-    },
-    "helmv3": {
-        "managerFilePatterns": [
-            "/(^|/)Chart\\.yaml$/"
-        ]
-    },
     "flux": {
         "managerFilePatterns": [
             "/(^|/)applications/.+\\.ya?ml$/",
             "/(^|/)core/.+\\.ya?ml$/",
             "/(^|/)home-assistant/.+\\.ya?ml$/",
             "/(^|/)infrastructure/.+\\.ya?ml$/"
-        ]
-    },
-    "github-actions": {
-        "managerFilePatterns": [
-            "/^(workflow-templates|\\.github/workflows)/[^/]+\\.ya?ml$/",
-            "/(^|/)action\\.ya?ml$/"
-        ]
-    },
-    "pre-commit": {
-        "enabled": true,
-        "managerFilePatterns": [
-            "/(^|/)\\.pre-commit-config\\.ya?ml$/"
         ]
     }
 }
