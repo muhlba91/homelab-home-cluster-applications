@@ -35,3 +35,4 @@ TODO.md
 !**/secret-generator.yml
 local.env
 .vscode/
+gcp-*-key.json

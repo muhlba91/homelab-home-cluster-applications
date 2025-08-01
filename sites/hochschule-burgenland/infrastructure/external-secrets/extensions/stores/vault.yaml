@@ -1,0 +1,19 @@
+---
+apiVersion: external-secrets.io/v1
+kind: ClusterSecretStore
+metadata:
+  name: &name vault-auth
+spec:
+  provider:
+    vault:
+      server: https://vault.platform.muehlbachler.io:8200
+      path: kubernetes-public-services-cluster
+      version: v2
+      auth:
+        appRole:
+          path: approle
+          roleId: c01cd705-2c92-da95-0ff4-3f1a3e3d92d8
+          secretRef:
+            namespace: external-secrets
+            name: *name
+            key: secret-id

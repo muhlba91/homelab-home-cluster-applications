@@ -216,6 +216,12 @@ The following applications are defined in [`sites/vie/home-assistant/`](sites/vi
 - [x] [OpenWakeWord](https://github.com/dscripka/openWakeWord) - An open-source audio wake word (or phrase) detection framework. *(testing)*
 - [x] [Piper](https://github.com/rhasspy/piper) - A local TTS server. *(testing)*
 
+### Hochschule Burgenland (hochschule-burgenland)
+
+The [Hochschule Burgenland](sites/hochschule-burgenland/) site contains the applications used in the Hochschule Burgenland lectures.
+
+This site is under active development.
+
 ---
 
 ## Backup and Restore

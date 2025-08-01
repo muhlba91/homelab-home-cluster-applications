@@ -1,0 +1,24 @@
+---
+node:
+  kubeletHostPath: /var/lib/k0s/kubelet
+  driver:
+    image:
+      registry: ghcr.io/democratic-csi/democratic-csi
+      tag: v1.9.3
+
+csiDriver:
+  name: "org.democratic-csi.iscsi"
+
+storageClasses: []
+volumeSnapshotClasses: []
+
+driver:
+  existingConfigSecret: democratic-csi-driver-config
+  config:
+    driver: zfs-generic-iscsi
+
+controller:
+  driver:
+    image:
+      registry: ghcr.io/democratic-csi/democratic-csi
+      tag: v1.9.3

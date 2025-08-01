@@ -1,0 +1,132 @@
+---
+global:
+  domain: &domain argocd.${PUBLIC_DOMAIN}
+  dualStack:
+    ipFamilyPolicy: PreferDualStack
+    ipFamilies:
+      - IPv4
+      - IPv6
+
+crds:
+  install: true
+  keep: false
+
+configs:
+  params:
+    server.insecure: true
+    application.namespaces: "*"
+  cm:
+    resource.customizations.health.argoproj.io_Application: |
+      hs = {}
+      hs.status = "Progressing"
+      hs.message = ""
+      if obj.status ~= nil then
+        if obj.status.health ~= nil then
+          hs.status = obj.status.health.status
+          if obj.status.health.message ~= nil then
+      hs.message = obj.status.health.message
+          end
+        end
+      end
+      return hs
+    resource.customizations: |
+      networking.k8s.io/Ingress:
+        health.lua: |
+          hs = {}
+          hs.status = "Healthy"
+          return hs
+    resource.compareoptions: |
+      # disables status field diffing in specified resource types
+      ignoreAggregatedRoles: true
+    dex.config: |
+      connectors:
+        - type: github
+          id: github
+          name: GitHub
+          config:
+            clientID: $argocd-oidc:clientID
+            clientSecret: $argocd-oidc:clientSecret
+            teamNameField: slug
+            orgs:
+              - name: fhburgenland-bswe
+  rbac:
+    policy.default: role:unauthenticated
+    # https://argo-cd.readthedocs.io/en/stable/operator-manual/rbac/#using-sso-usersgroups
+    # https://argo-cd.readthedocs.io/en/stable/operator-manual/rbac/#rbac-model-structure
+    # Policy rules are in the form:
+    #  p, subject, resource, action, object, effect
+    # Role definitions and bindings are in the form:
+    #  g, subject, inherited-subject
+    # g, fhburgenland-bswe:dmuehlbachler, role:admin
+    # policy.csv: |
+    #   p, role:org-admin, applications, *, */*, allow
+    #   p, role:org-admin, clusters, get, *, allow
+    #   p, role:org-admin, repositories, *, *, allow
+    #   p, role:org-admin, logs, get, *, allow
+    #   p, role:org-admin, exec, create, */*, allow
+    #   p, role:unauthenticated, repositories, get, *, allow
+    #   p, role:unauthenticated, clusters, get, *, allow
+
+server:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: cluster-issuer-muehlbachler-xyz
+      external-dns.alpha.kubernetes.io/provider: public
+      external-dns.alpha.kubernetes.io/target: ${PUBLIC_IP}
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    extraTls:
+      - hosts:
+          - *domain
+        secretName: hochschule-burgenland-argocd-tls
+
+applicationSet:
+  webhook:
+    ingress:
+      enabled: true
+      annotations:
+      cert-manager.io/cluster-issuer: cluster-issuer-muehlbachler-xyz
+      external-dns.alpha.kubernetes.io/provider: public
+      external-dns.alpha.kubernetes.io/target: ${PUBLIC_IP}
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      hosts:
+        - &webhookDomain webhook.argocd.${PUBLIC_DOMAIN}
+      tls:
+        - secretName: hochschule-burgenland-argocd-webhook-tls
+          hosts:
+            - *webhookDomain
+
+notifications:
+  argocdUrl: https://argocd.${PUBLIC_DOMAIN}
+  secret:
+    create: true
+  cm:
+    create: true
+  notifiers:
+    service.github: |
+      appID: $argocd-github:appId
+      installationID: $argocd-github:installationId
+      privateKey: $argocd-github:privateKey
+  triggers:
+    trigger.on-deployed: |
+      - description: Application is synced and healthy. Triggered once per commit.
+        send:
+        - app-deployed
+        when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'
+  templates:
+    template.app-deployed: |
+      message: |
+        Application {{.app.metadata.name}} is now running in a preview environment.
+      github:
+        repoURLPath: "{{ .app.spec.source.repoURL }}"
+        revisionPath: "{{ .app.metadata.annotations.revision }}"
+        status:
+          state: success
+          label: "continuous-delivery/{{ .app.metadata.name }}"
+          targetURL: "{{ .context.argocdUrl }}/applications/{{ .app.metadata.name }}?operation=true"
+        deployment:
+          state: success
+          environment: preview-{{ .app.metadata.name }}
+          environmentURL: "https://{{ .app.metadata.name }}.demo.${PUBLIC_DOMAIN}"
+          logURL: "{{ .context.argocdUrl }}/applications/{{ .app.metadata.name }}?operation=true"
+          requiredContexts: []

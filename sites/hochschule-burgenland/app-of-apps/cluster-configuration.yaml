@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: flux-system
+  name: cluster-configuration
+data:
+  # cluster configuration
+  SITE: hochschule-burgenland
+
+  # domain names
+  PUBLIC_DOMAIN: hochschule-burgenland.muehlbachler.xyz
+
+  # load balancer ip addresses
+  TRAEFIK_IP: "10.100.72.1,2a01:4f8:121:14e2:100:3:3:1"
+
+  # public ip addresses
+  PUBLIC_IP: "178.63.69.250,2a01:4f8:121:14e2:100:3:3:1"
+
+  # storage classes
+  DEFAULT_STORAGE_CLASS: "zfs"

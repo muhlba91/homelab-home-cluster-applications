@@ -1,0 +1,11 @@
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: range-global
+spec:
+  addresses:
+    - 10.100.70.1-10.100.79.255
+    - 2a01:4f8:121:14e2:100:3:1:1-2a01:4f8:121:14e2:100:3:10:255
+  autoAssign: true
+  avoidBuggyIPs: false

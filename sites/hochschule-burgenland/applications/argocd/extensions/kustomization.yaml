@@ -1,0 +1,12 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: ${APPLICATION_NAMESPACE}
+resources:
+  - ./external-secret-argocd-oidc.yaml
+  - ./external-secret-argocd-github.yaml
+  - ./repository-apps.yaml
+  - ./external-secret-assignment-repository.yaml
+  - ./external-secret-ghcr-credentials.yaml
+  - ./application-app-of-apps.yaml
