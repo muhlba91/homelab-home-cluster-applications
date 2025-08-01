@@ -19,7 +19,7 @@ domainFilters:
   - muehlbachler.xyz
 
 policy: sync
-txtOwnerId: external-dns-prod-google
+txtOwnerId: external-dns-${SITE}-google
 txtPrefix: extdns-
 provider:
   name: google
