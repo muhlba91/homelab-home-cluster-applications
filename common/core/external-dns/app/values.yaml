@@ -16,6 +16,7 @@ logLevel: warning
 
 domainFilters:
   - muehlbachler.io
+  - muehlbachler.xyz
 
 policy: sync
 txtOwnerId: external-dns-prod-google

@@ -15,6 +15,7 @@ logLevel: warning
 
 domainFilters:
   - internal.muehlbachler.io
+  - internal.muehlbachler.xyz
 
 policy: sync
 txtOwnerId: external-dns-prod-adguard

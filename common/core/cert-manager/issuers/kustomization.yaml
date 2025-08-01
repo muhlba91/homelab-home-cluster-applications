@@ -6,3 +6,4 @@ namespace: ${APPLICATION_NAMESPACE}
 resources:
   - ./home-muehlbachler-io.yaml
   - ./internal-muehlbachler-io.yaml
+  - ./muehlbachler-xyz.yaml
