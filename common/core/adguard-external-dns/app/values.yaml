@@ -18,7 +18,7 @@ domainFilters:
   - internal.muehlbachler.xyz
 
 policy: sync
-txtOwnerId: external-dns-prod-adguard
+txtOwnerId: external-dns-${SITE}-adguard
 provider:
   name: webhook
   webhook:
