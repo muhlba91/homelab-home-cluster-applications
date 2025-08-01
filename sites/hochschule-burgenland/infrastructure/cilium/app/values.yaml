@@ -1,0 +1,42 @@
+---
+rollOutCiliumPods: true
+
+ipam:
+  mode: kubernetes
+ipv6:
+  enabled: false
+envoy:
+  baseID: 1
+
+kubeProxyReplacement: true
+kubeProxyReplacementHealthzBindAddr: "0.0.0.0:10256"
+
+k8sServiceHost: 127.0.0.1
+k8sServicePort: 6443
+
+bpf:
+  masquerade: true
+
+k8sClientRateLimit:
+  qps: 30
+  burst: 60
+
+l2announcements:
+  enabled: false
+externalIPs:
+  enabled: false
+
+prometheus:
+  enabled: true
+
+operator:
+  replicas: 1
+  rollOutPods: true
+  prometheus:
+    enabled: true
+
+preflight:
+  enabled: false
+
+hubble:
+  enabled: false
