@@ -10,7 +10,7 @@ kubeProxyReplacement: true
 kubeProxyReplacementHealthzBindAddr: "0.0.0.0:10256"
 
 k8sServiceHost: 127.0.0.1
-k8sServicePort: 7445
+k8sServicePort: ${K8S_SERVICE_PORT:-7445}
 
 k8sClientRateLimit:
   qps: 30

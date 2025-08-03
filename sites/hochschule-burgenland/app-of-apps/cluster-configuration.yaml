@@ -7,6 +7,7 @@ metadata:
 data:
   # cluster configuration
   SITE: hochschule-burgenland
+  K8S_SERVICE_PORT: "6443"
 
   # domain names
   PUBLIC_DOMAIN: hochschule-burgenland.muehlbachler.xyz
