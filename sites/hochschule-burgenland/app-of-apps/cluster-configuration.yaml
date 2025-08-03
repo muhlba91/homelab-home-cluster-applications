@@ -7,7 +7,11 @@ metadata:
 data:
   # cluster configuration
   SITE: hochschule-burgenland
+
+  # cilium
   K8S_SERVICE_PORT: "6443"
+  CILIUM_CGROUP_AUTO_MOUNT_ENABLED: "true"
+  CILIUM_CGROUP_HOST_ROOT: "/run/cilium/cgroupv2"
 
   # domain names
   PUBLIC_DOMAIN: hochschule-burgenland.muehlbachler.xyz

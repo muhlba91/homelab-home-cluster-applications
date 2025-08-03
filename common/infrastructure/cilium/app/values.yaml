@@ -23,8 +23,8 @@ externalIPs:
 
 cgroup:
   autoMount:
-    enabled: false
-  hostRoot: /sys/fs/cgroup
+    enabled: ${CILIUM_CGROUP_AUTO_MOUNT_ENABLED:-false}
+  hostRoot: ${CILIUM_CGROUP_HOST_ROOT:-/sys/fs/cgroup}
 
 bpf:
   masquerade: true
