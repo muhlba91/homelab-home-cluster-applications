@@ -106,7 +106,7 @@ data:
       - name: Victoria Metrics VMSingle
         group: 006 - Monitoring
         enabled: true
-        url: http://vmsingle-victoria-metrics.victoria-metrics.svc.cluster.local:8429
+        url: http://vmsingle-victoria-metrics.victoria-metrics.svc.cluster.local:8428
         method: GET
         interval: 5m
         conditions:
