@@ -96,15 +96,14 @@ service:
         port: 8123
 
 ingress:
-  home-assistant:
+  home-assistant-internal:
     enabled: true
     annotations:
-      cert-manager.io/cluster-issuer: cluster-issuer-home-muehlbachler-io
-      external-dns.alpha.kubernetes.io/provider: public
-      external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
+      cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+      external-dns.alpha.kubernetes.io/provider: internal
       traefik.ingress.kubernetes.io/router.tls: "true"
-    hosts: # FIXME: home assistant domain
-      - host: &domain manage.iot.home.muehlbachler.io
+    hosts:
+      - host: &internal_domain manage.iot.${LOCAL_INTERNAL_DOMAIN}
         paths:
           - path: /
             pathType: ImplementationSpecific
@@ -112,9 +111,28 @@ ingress:
               identifier: home-assistant
               port: 8123
     tls:
-      - secretName: home-assistant-home-assistant-tls-cert
+      - secretName: home-assistant-home-assistant-internal-tls-cert
         hosts:
-          - *domain
+          - *internal_domain
+  home-assistant-external:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: cluster-issuer-home-muehlbachler-io
+      external-dns.alpha.kubernetes.io/provider: public
+      external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    hosts: # FIXME: home assistant domain
+      - host: &external_domain manage.iot.home.muehlbachler.io
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            service:
+              identifier: home-assistant
+              port: 8123
+    tls:
+      - secretName: home-assistant-home-assistant-external-tls-cert
+        hosts:
+          - *external_domain
 
 persistence:
   config:
