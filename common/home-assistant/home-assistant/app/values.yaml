@@ -121,8 +121,8 @@ ingress:
       external-dns.alpha.kubernetes.io/provider: public
       external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
       traefik.ingress.kubernetes.io/router.tls: "true"
-    hosts: # FIXME: home assistant domain
-      - host: &external_domain manage.iot.home.muehlbachler.io
+    hosts:
+      - host: &external_domain jarvis.$(LOCAL_HOME_DOMAIN)
         paths:
           - path: /
             pathType: ImplementationSpecific
