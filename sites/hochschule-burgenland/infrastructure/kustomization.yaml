@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - ../../../common/infrastructure/cilium/
   - ../../../common/infrastructure/kubelet-serving-cert-approver/
-  - ../../../common/infrastructure/metrics-server/
   - ./external-secrets/
   - ./democratic-csi/
   - ./metallb/

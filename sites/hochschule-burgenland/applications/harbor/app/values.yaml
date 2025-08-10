@@ -1,0 +1,68 @@
+---
+updateStrategy:
+  type: Recreate
+
+expose:
+  type: ingress
+  ingress:
+    hosts:
+      core: registry.${PUBLIC_DOMAIN}
+    annotations:
+      cert-manager.io/cluster-issuer: cluster-issuer-muehlbachler-xyz
+      external-dns.alpha.kubernetes.io/provider: public
+      external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
+      traefik.ingress.kubernetes.io/router.tls: "true"
+
+externalURL: https://registry.${PUBLIC_DOMAIN}
+
+persistence:
+  enabled: true
+  persistentVolumeClaim:
+    registry:
+      storageClass: ${DEFAULT_STORAGE_CLASS}
+      size: 25Gi
+    jobservice:
+      jobLog:
+        storageClass: ${DEFAULT_STORAGE_CLASS}
+        size: 5Gi
+    database:
+      storageClass: ${DEFAULT_STORAGE_CLASS}
+      size: 5Gi
+    redis:
+      storageClass: ${DEFAULT_STORAGE_CLASS}
+      size: 5Gi
+    trivy:
+      storageClass: ${DEFAULT_STORAGE_CLASS}
+      size: 25Gi
+
+imageChartStorage:
+  type: gcs
+  gcs:
+    bucket: harbor-a24964b0-32e7-4792-8dc4-5c0b27237405
+    existingSecret: google-credentials
+
+existingSecretAdminPassword: admin-password
+
+logLevel: warning
+metrics:
+  enabled: true
+
+cache:
+  enabled: true
+  expireHours: 24
+
+core:
+  existingSecret: harbor-secrets
+  existingXsrfSecret: harbor-secrets
+
+jobservice:
+  existingSecret: harbor-secrets
+
+registry:
+  existingSecret: harbor-secrets
+  credentials:
+    username: harbor_registry_user
+    htpasswdString: "$apr1$5kvwehx2$4jdTxm8Lt3LlLBfVVeOdy0"
+
+trivy:
+  severity: "LOW,MEDIUM,HIGH,CRITICAL"
