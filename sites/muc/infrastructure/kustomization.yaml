@@ -6,7 +6,7 @@ resources:
   - ../../../common/infrastructure/kubelet-serving-cert-approver/
   - ../../../common/infrastructure/metrics-server/
   - ./external-secrets/
-  # - ./rook-ceph/
+  - ./rook-ceph/
   - ./metallb/
   - ../../../common/infrastructure/traefik/
   # - ./flux-extensions/
