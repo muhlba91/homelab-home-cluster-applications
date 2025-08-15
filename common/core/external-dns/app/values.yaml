@@ -6,7 +6,6 @@ sources:
   - traefik-proxy
   - gateway-grpcroute
   - gateway-httproute
-  - gateway-tlsroute
   - gateway-udproute
   - gateway-tcproute
 
