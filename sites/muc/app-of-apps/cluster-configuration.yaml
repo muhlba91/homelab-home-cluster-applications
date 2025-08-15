@@ -8,6 +8,9 @@ data:
   # cluster configuration
   SITE: muc
 
+  # network configuration
+  ROUTER_IP: "10.1.0.1"
+
   # domain names
   HOME_DOMAIN: home.muehlbachler.io
   LOCAL_HOME_DOMAIN: muc.home.muehlbachler.io
