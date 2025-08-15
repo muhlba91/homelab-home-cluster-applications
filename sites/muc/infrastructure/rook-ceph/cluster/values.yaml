@@ -126,7 +126,6 @@ cephBlockPools:
       allowVolumeExpansion: true
       reclaimPolicy: Delete
       parameters:
-        clusterID: rook-ceph
         imageFormat: "2"
         imageFeatures: layering,fast-diff,object-map,deep-flatten,exclusive-lock
 
