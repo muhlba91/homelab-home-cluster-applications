@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: keycloak
-      version: 25.0.2
+      version: 25.1.0
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
