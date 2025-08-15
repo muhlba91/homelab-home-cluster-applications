@@ -3,11 +3,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ../../../common/infrastructure/cilium/
-  - ../../../common/infrastructure/kubelet-serving-cert-approver/
-  - ../../../common/infrastructure/metrics-server/
-  - ./external-secrets/
+  # - ../../../common/infrastructure/kubelet-serving-cert-approver/
+  # - ../../../common/infrastructure/metrics-server/
+  # - ./external-secrets/
   # - ./rook-ceph/
-  - ./metallb/
-  - ../../../common/infrastructure/traefik/
-  - ./flux-extensions/
-  - ../../../common/infrastructure/reloader/
+  # - ./metallb/
+  # - ../../../common/infrastructure/traefik/
+  # - ./flux-extensions/
+  # - ../../../common/infrastructure/reloader/
