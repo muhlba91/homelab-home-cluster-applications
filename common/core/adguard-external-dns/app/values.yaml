@@ -26,7 +26,7 @@ provider:
       - name: LOG_LEVEL
         value: info
       - name: ADGUARD_URL
-        value: "http://{ROUTER_IP}:3000"
+        value: "http://${ROUTER_IP}:3000"
       - name: ADGUARD_USER
         value: "admin"
       - name: ADGUARD_PASSWORD
