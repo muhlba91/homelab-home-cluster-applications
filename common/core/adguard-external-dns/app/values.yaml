@@ -3,10 +3,6 @@ sources:
   - service
   - ingress
   - traefik-proxy
-  - gateway-grpcroute
-  - gateway-httproute
-  - gateway-udproute
-  - gateway-tcproute
 
 interval: 2m
 
