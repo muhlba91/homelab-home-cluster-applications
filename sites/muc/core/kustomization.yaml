@@ -6,5 +6,5 @@ resources:
   - ../../../common/core/adguard-external-dns/
   - ../../../common/core/cert-manager/
   - ../../../common/core/cloudnative-pg/
-  - ./gatus/
+  # - ./gatus/
   # - ./velero/
