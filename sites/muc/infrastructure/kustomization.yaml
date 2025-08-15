@@ -7,7 +7,7 @@ resources:
   - ../../../common/infrastructure/metrics-server/
   - ./external-secrets/
   # - ./rook-ceph/
-  # - ./metallb/
+  - ./metallb/
   # - ../../../common/infrastructure/traefik/
   # - ./flux-extensions/
-  # - ../../../common/infrastructure/reloader/
+  - ../../../common/infrastructure/reloader/
