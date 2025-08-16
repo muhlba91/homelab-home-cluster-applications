@@ -1,0 +1,45 @@
+---
+config:
+  issuer: https://auth.${PUBLIC_DOMAIN}/api/dex
+  oauth2:
+    skipApprovalScreen: true
+  storage:
+    type: memory
+  connectors:
+    - type: github
+      id: github
+      name: GitHub
+      config:
+        clientID: $$GITHUB_CLIENT_ID
+        clientSecret: $$GITHUB_CLIENT_SECRET
+        redirectURI: https://auth.${PUBLIC_DOMAIN}/dex/callback
+        teamNameField: slug
+        orgs:
+          - name: fhburgenland-bswe
+  staticClients:
+    - id: harbor
+      secret: $$HARBOR_CLIENT_SECRET
+      name: Harbor
+      redirectURIs:
+        - https://registry.${PUBLIC_DOMAIN}/c/oidc/callback
+
+envFrom:
+  - secretRef:
+      name: dex-config
+
+ingress:
+  enabled: true
+  hosts:
+    - host: &domain auth.${PUBLIC_DOMAIN}
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+   - secretName: dex-tls-cert
+     hosts:
+       - *domain
+  annotations:
+    cert-manager.io/cluster-issuer: cluster-issuer-muehlbachler-xyz
+    external-dns.alpha.kubernetes.io/provider: public
+    external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
+    traefik.ingress.kubernetes.io/router.tls: "true"
