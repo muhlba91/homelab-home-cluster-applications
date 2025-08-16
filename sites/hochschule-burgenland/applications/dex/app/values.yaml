@@ -12,7 +12,7 @@ config:
       config:
         clientID: $$GITHUB_CLIENT_ID
         clientSecret: $$GITHUB_CLIENT_SECRET
-        redirectURI: https://auth.${PUBLIC_DOMAIN}/dex/callback
+        redirectURI: https://auth.${PUBLIC_DOMAIN}/api/dex/callback
         teamNameField: slug
         orgs:
           - name: fhburgenland-bswe
