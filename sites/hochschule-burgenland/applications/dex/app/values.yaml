@@ -35,9 +35,9 @@ ingress:
         - path: /
           pathType: ImplementationSpecific
   tls:
-   - secretName: dex-tls-cert
-     hosts:
-       - *domain
+    - secretName: dex-tls-cert
+      hosts:
+        - *domain
   annotations:
     cert-manager.io/cluster-issuer: cluster-issuer-muehlbachler-xyz
     external-dns.alpha.kubernetes.io/provider: public
