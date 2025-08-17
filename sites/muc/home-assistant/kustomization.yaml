@@ -5,4 +5,4 @@ resources:
   - ../../../common/home-assistant/mqtt/
   - ../../../common/home-assistant/telegraf/
   - ../../../common/home-assistant/home-assistant/
-  - ../../../common/home-assistant/node-red/
+  # - ../../../common/home-assistant/node-red/
