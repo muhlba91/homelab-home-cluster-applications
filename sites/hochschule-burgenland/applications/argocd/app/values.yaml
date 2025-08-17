@@ -48,8 +48,10 @@ configs:
             clientID: argo-cd
             clientSecret: $argocd-oidc:clientSecret
             scopes:
+              - openid
               - profile
               - email
+              - groups
               - offline_access
             insecureSkipEmailVerified: true
             getUserInfo: true
