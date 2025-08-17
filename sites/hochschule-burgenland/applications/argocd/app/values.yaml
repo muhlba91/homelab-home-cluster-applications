@@ -40,15 +40,21 @@ configs:
       ignoreAggregatedRoles: true
     dex.config: |
       connectors:
-        - type: github
-          id: github
+        - type: oidc
+          id: dex
           name: GitHub
           config:
-            clientID: $argocd-oidc:clientID
+            issuer: https://auth.${PUBLIC_DOMAIN}/api/dex
+            clientID: argo-cd
             clientSecret: $argocd-oidc:clientSecret
-            teamNameField: slug
-            orgs:
-              - name: fhburgenland-bswe
+            scopes:
+              - profile
+              - email
+              - offline_access
+            insecureSkipEmailVerified: true
+            getUserInfo: true
+            userNameKey: preferred_username
+            promptType: none
   rbac:
     policy.default: role:unauthenticated
     # https://argo-cd.readthedocs.io/en/stable/operator-manual/rbac/#using-sso-usersgroups
