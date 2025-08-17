@@ -54,6 +54,7 @@ configs:
               - groups
               - offline_access
             insecureSkipEmailVerified: true
+            insecureEnableGroups: true
             getUserInfo: true
             userNameKey: preferred_username
             promptType: none
