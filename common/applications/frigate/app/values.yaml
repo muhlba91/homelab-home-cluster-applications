@@ -62,7 +62,7 @@ controllers:
             spec:
               tcpSocket:
                 port: 5000
-              initialDelaySeconds: 60
+              initialDelaySeconds: 30
               periodSeconds: 60
               timeoutSeconds: 1
               failureThreshold: 5
@@ -74,6 +74,8 @@ service:
   frigate-http:
     controller: main
     ipFamilyPolicy: PreferDualStack
+    annotations:
+      traefik.ingress.kubernetes.io/service.serversscheme: https
     ports:
       http:
         port: 5000
