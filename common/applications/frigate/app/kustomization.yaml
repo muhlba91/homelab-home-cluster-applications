@@ -20,8 +20,6 @@ patches:
       kind: HelmRelease
       metadata:
         name: not-used
-        labels:
-          mylabel: ok
       spec:
         postRenderers:
           - kustomize:
@@ -46,4 +44,5 @@ patches:
                                   squat.ai/coral: "1"
                                   # nvidia.com/gpu: "1" # TODO: nvidia vs intel
                                 limits:
+                                  squat.ai/coral: "1"
                                   # nvidia.com/gpu: "1" # TODO: nvidia vs intel
