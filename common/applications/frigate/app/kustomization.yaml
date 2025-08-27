@@ -21,9 +21,8 @@ patches:
       kind: HelmRelease
       metadata:
         name: not-used
-        metadata:
-          labels:
-            mylabel: ok
+        labels:
+          mylabel: ok
       spec:
         postRenderers:
           - kustomize:
