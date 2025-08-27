@@ -22,7 +22,7 @@ spec:
     - match: Host(`nvr-auth.${LOCAL_HOME_DOMAIN}`) && PathPrefix(`/oauth2/`)
       kind: Rule
       services:
-        - name: oauth2-proxy
+        - name: frigate-auth-proxy-oauth2-proxy
           port: 80
   tls:
     secretName: frigate-auth-tls-cert
