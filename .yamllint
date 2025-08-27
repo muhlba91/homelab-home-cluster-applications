@@ -3,6 +3,7 @@ extends: default
 
 ignore:
   - secret-*.enc.yml
+  - "*-patch.yaml"
 
 rules:
   line-length:

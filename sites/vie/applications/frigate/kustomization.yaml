@@ -1,0 +1,12 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../../../common/applications/frigate/
+  - ./config/ks.yaml
+patches:
+  - target:
+      kind: Kustomization
+      name: frigate
+    path: ./helmrelease-patch.yaml
