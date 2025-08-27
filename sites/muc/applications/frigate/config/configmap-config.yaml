@@ -8,6 +8,7 @@ data:
     version: 0.16-0
 
     mqtt:
+      enabled: false
       host: emqx.home-assistant-mqtt
       port: 1883
       topic_prefix: frigate
