@@ -5,3 +5,4 @@ resources:
   # - ../../../common/applications/omada-controller/
   - ../../../common/applications/influxdb/
   - ./external-services/
+  - ./frigate/
