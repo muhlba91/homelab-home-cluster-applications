@@ -27,11 +27,8 @@ spec:
                           spec:
                             containers:
                               - name: frigate
-                                # runtimeClassName: nvidia
                                 resources:
                                   requests:
                                     squat.ai/coral: "1"
-                                    # nvidia.com/gpu: "1"
                                   limits:
                                     squat.ai/coral: "1"
-                                    # nvidia.com/gpu: "1"
