@@ -9,7 +9,7 @@ alphaConfig:
 
 extraArgs:
   - --email-domain=*
-  - --redirect-url=https://nvr-auth.${LOCAL_HOME_DOMAIN}/oauth2/callback
+  - --redirect-url=https://nvr.${LOCAL_HOME_DOMAIN}/oauth2/callback
 
 envFrom:
   - secretRef:

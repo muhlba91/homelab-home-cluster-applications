@@ -2,11 +2,11 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: frigate-auth-tls
+  name: frigate-auth-tls-cert
 spec:
   secretName: frigate-auth-tls-cert
   dnsNames:
-    - nvr-auth.${LOCAL_HOME_DOMAIN}
+    - nvr.${LOCAL_HOME_DOMAIN}
   issuerRef:
     kind: ClusterIssuer
     name: cluster-issuer-home-muehlbachler-io

@@ -11,7 +11,7 @@ spec:
     - web
     - websecure
   routes:
-    - match: Host(`nvr-auth.${LOCAL_HOME_DOMAIN}`)
+    - match: Host(`nvr.${LOCAL_HOME_DOMAIN}`)
       kind: Rule
       middlewares:
         - name: frigate-auth-proxy
@@ -19,7 +19,7 @@ spec:
       services:
         - name: frigate-frigate-http
           port: 8971
-    - match: Host(`nvr-auth.${LOCAL_HOME_DOMAIN}`) && PathPrefix(`/oauth2/`)
+    - match: Host(`nvr.${LOCAL_HOME_DOMAIN}`) && PathPrefix(`/oauth2/`)
       kind: Rule
       services:
         - name: frigate-auth-proxy-oauth2-proxy

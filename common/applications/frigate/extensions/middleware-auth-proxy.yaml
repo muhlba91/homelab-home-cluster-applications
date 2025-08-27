@@ -5,7 +5,7 @@ metadata:
   name: frigate-auth-proxy
 spec:
   forwardAuth:
-    address: "https://nvr-auth.${LOCAL_HOME_DOMAIN}/oauth2/"
+    address: "https://nvr.${LOCAL_HOME_DOMAIN}/oauth2/"
     trustForwardHeader: true
     authResponseHeaders:
       - X-Forwarded-User

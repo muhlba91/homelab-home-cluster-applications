@@ -95,27 +95,6 @@ service:
       go2rtc-admin:
         port: 1984
 
-ingress:
-  frigate:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: cluster-issuer-home-muehlbachler-io
-      external-dns.alpha.kubernetes.io/provider: public
-      external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
-      traefik.ingress.kubernetes.io/router.tls: "true"
-    hosts:
-      - host: &domain nvr.${LOCAL_HOME_DOMAIN}
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-            service:
-              identifier: frigate-http
-              port: 8971
-    tls:
-      - secretName: frigate-tls-cert
-        hosts:
-          - *domain
-
 persistence:
   configfile:
     enabled: true
