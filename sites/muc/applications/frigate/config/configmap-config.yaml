@@ -39,6 +39,7 @@ data:
       path: /config/frigate.db
 
     proxy:
+      logout_url: /oauth2/sign_out
       header_map:
         user: X-Forwarded-User
         role: X-Forwarded-Groups
