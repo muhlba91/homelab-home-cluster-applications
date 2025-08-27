@@ -34,3 +34,17 @@ spec:
     - kind: ConfigMap
       name: ${APPLICATION}-values
       valuesKey: values.yaml
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              version: v1
+              kind: Deployment
+              labels:
+                app.kubernetes.io/controller: main
+                app.kubernetes.io/instance: frigate
+                app.kubernetes.io/name: frigate
+            patch: |
+              - op: add
+                path: /spec/template/spec/containers/0/resources/requests/squat.ai~1coral
+                value: "1"

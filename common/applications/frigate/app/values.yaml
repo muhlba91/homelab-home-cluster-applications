@@ -36,7 +36,7 @@ controllers:
         image:
           repository: ghcr.io/blakeblackshear/frigate
           pullPolicy: IfNotPresent
-          tag: 0.16.0 # TODO: nvidia vs intel
+          tag: 0.16.0
 
         env:
           - name: NVIDIA_DRIVER_CAPABILITIES
