@@ -82,17 +82,6 @@ service:
         port: 5000
       auth:
         port: 8971
-  frigate-lb:
-    controller: main
-    type: LoadBalancer
-    ipFamilyPolicy: PreferDualStack
-    annotations:
-      metallb.universe.tf/loadBalancerIPs: "10.1.72.12,fd40:2e3:42a::1000:3:3:12"
-    ports:
-      http:
-        port: 5000
-      auth:
-        port: 8971
   frigate:
     controller: main
     ipFamilyPolicy: PreferDualStack
