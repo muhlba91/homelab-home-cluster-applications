@@ -63,7 +63,8 @@ controllers:
             spec:
               httpGet:
                 port: 5000
-                path: /favicon.ico
+                path: /
+                scheme: HTTP
               initialDelaySeconds: 15
               periodSeconds: 30
               timeoutSeconds: 1
@@ -75,6 +76,15 @@ controllers:
 service:
   frigate-http:
     controller: main
+    ipFamilyPolicy: PreferDualStack
+    ports:
+      http:
+        port: 5000
+      auth:
+        port: 8971
+  frigate-lb:
+    controller: main
+    type: LoadBalancer
     ipFamilyPolicy: PreferDualStack
     ports:
       http:
