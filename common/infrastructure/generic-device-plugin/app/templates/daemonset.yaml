@@ -28,10 +28,26 @@ spec:
           args:
             - --device
             - |
+              name: serial
+              groups:
+                - paths:
+                    - path: /dev/ttyUSB*
+                - paths:
+                    - path: /dev/ttyACM*
+                - paths:
+                    - path: /dev/tty.usb*
+                - paths:
+                    - path: /dev/cu.*
+                - paths:
+                    - path: /dev/cuaU*
+                - paths:
+                    - path: /dev/rfcomm*
+            - --device
+            - |
               name: coral
               groups:
                 - paths:
-                    - path: /dev/apex_0
+                    - path: /dev/apex*
           name: generic-device-plugin
           resources:
             requests:
