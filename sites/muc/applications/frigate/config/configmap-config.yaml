@@ -56,7 +56,7 @@ data:
       default: info
 
     birdseye:
-      enabled: true
+      enabled: false
       quality: 8
       mode: objects
 
@@ -73,11 +73,11 @@ data:
 
     review:
       alerts:
-        enabled: true
+        enabled: false
         labels:
           - person
       detections:
-        enabled: true
+        enabled: false
         labels:
           - person
 
@@ -125,7 +125,7 @@ data:
       model_size: small
 
     face_recognition:
-      enabled: true
+      enabled: false
       unknown_score: 0.8
       detection_threshold: 0.7
       recognition_threshold: 0.9
@@ -144,9 +144,6 @@ data:
     ui:
       time_format: 12hour
       strftime_fmt: '%Y-%m-%d %r'
-
-    telemetry:
-      version_check: true
 
     go2rtc:
       streams: {}
