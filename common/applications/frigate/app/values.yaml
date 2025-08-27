@@ -82,6 +82,15 @@ service:
         port: 5000
       auth:
         port: 8971
+  frigate-np:
+    controller: main
+    ipFamilyPolicy: PreferDualStack
+    type: NodePort
+    ports:
+      http:
+        port: 5000
+      auth:
+        port: 8971
   frigate:
     controller: main
     ipFamilyPolicy: PreferDualStack
