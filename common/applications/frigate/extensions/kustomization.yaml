@@ -5,3 +5,7 @@ kind: Kustomization
 namespace: ${APPLICATION_NAMESPACE}
 resources:
   - ./external-secret-rtsp-credentials.yaml
+  - ./external-secret-auth-proxy-env.yaml
+  - ./external-secret-auth-proxy-config.yaml
+  - ./middleware-auth-proxy.yaml
+  - ./ingressroute.yaml

@@ -1,0 +1,21 @@
+---
+alphaConfig:
+  enabled: true
+  existingSecret: frigate-auth-proxy-config
+
+env:
+  OAUTH2_PROXY_EMAIL_DOMAINS: "*"
+  OAUTH2_PROXY_REDIRECT_URL: "https://nvr-auth.${LOCAL_HOME_DOMAIN}/oauth2/callback"
+
+envFrom:
+  - secretRef:
+      name: frigate-auth-proxy-env
+
+service:
+  ipDualStack:
+    enabled: true
+
+ingress:
+  enabled: false
+
+resources: {}

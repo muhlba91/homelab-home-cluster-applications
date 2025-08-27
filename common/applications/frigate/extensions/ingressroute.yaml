@@ -1,0 +1,23 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: frigate
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`nvr-auth.${LOCAL_HOME_DOMAIN}`)
+      kind: Rule
+      middlewares:
+        - name: frigate-auth-proxy
+          namespace: ${APPLICATION_NAMESPACE}
+      services:
+        - name: frigate-frigate-http
+          port: 8971
+    - match: Host(`nvr-auth.${LOCAL_HOME_DOMAIN}`) && PathPrefix(`/oauth2/`)
+      kind: Rule
+      services:
+        - name: oauth2-proxy
+          port: 80

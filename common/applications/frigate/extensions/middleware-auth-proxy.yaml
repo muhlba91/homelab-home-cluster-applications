@@ -1,0 +1,14 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: frigate-auth-proxy
+spec:
+  forwardAuth:
+    address: "https://nvr-auth.${LOCAL_HOME_DOMAIN}/oauth2/"
+    trustForwardHeader: true
+    authResponseHeaders:
+      - X-Forwarded-User
+      - X-Forwarded-Groups
+    tls:
+      insecureSkipVerify: true
