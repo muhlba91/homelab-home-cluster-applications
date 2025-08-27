@@ -62,8 +62,8 @@ controllers:
             spec:
               tcpSocket:
                 port: 5000
-              initialDelaySeconds: 30
-              periodSeconds: 60
+              initialDelaySeconds: 15
+              periodSeconds: 30
               timeoutSeconds: 1
               failureThreshold: 5
           readiness: *server_probes
