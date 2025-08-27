@@ -15,7 +15,8 @@ configurations:
   - kustomizeconfig.yml
 patches:
   - target:
-      version: helm.toolkit.fluxcd.io/v2beta1
+      group: helm.toolkit.fluxcd.io
+      version: v2beta1
       kind: HelmRelease
       name: ${APPLICATION}
     patch: |-
