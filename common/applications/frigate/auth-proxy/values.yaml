@@ -1,4 +1,6 @@
 ---
+proxyVarsAsSecrets: false
+
 alphaConfig:
   enabled: true
   existingSecret: frigate-auth-proxy-config
