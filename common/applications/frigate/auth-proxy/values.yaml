@@ -1,5 +1,7 @@
 ---
 proxyVarsAsSecrets: false
+config:
+  configFile: ""
 
 alphaConfig:
   enabled: true
