@@ -37,10 +37,9 @@ data:
     database:
       path: /config/frigate.db
 
-    proxy:
-      # only used if auth is disabled
-      auth_secret: None
-      default_role: viewer
+    # proxy:
+    #   auth_secret: None
+    #   default_role: viewer
 
     auth:
       enabled: true
