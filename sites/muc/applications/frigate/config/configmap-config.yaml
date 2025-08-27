@@ -8,7 +8,7 @@ data:
     version: 0.16-0
 
     mqtt:
-      enabled: false
+      enabled: true
       host: emqx.home-assistant-mqtt
       port: 1883
       topic_prefix: frigate
@@ -44,8 +44,8 @@ data:
 
     auth:
       enabled: true
-      # trusted_proxies:
-      #   - 10.0.0.0/8
+      trusted_proxies:
+        - 10.0.0.0/8
 
     tls:
       enabled: false
@@ -57,7 +57,7 @@ data:
       default: info
 
     birdseye:
-      enabled: false
+      enabled: true
       quality: 8
       mode: objects
 
@@ -66,7 +66,7 @@ data:
       apple_compatibility: true
 
     detect:
-      enabled: false
+      enabled: true
 
     objects:
       track:
@@ -74,23 +74,23 @@ data:
 
     review:
       alerts:
-        enabled: false
+        enabled: true
         labels:
           - person
       detections:
-        enabled: false
+        enabled: true
         labels:
           - person
 
     motion:
       # must be enabled for object detection to work
-      enabled: false
+      enabled: true
 
     notifications:
       enabled: false
 
     record:
-      enabled: false
+      enabled: true
       expire_interval: 60
       sync_recordings: true
       retain:
@@ -112,7 +112,7 @@ data:
           mode: motion
 
     snapshots:
-      enabled: false
+      enabled: true
       clean_copy: true
       timestamp: false
       retain:
@@ -126,7 +126,7 @@ data:
       model_size: small
 
     face_recognition:
-      enabled: false
+      enabled: true
       unknown_score: 0.8
       detection_threshold: 0.7
       recognition_threshold: 0.9
