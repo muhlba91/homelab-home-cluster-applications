@@ -42,8 +42,8 @@ data:
 
     auth:
       enabled: true
-      trusted_proxies:
-        - 10.0.0.0/8
+      # trusted_proxies:
+      #   - 10.0.0.0/8
 
     audio:
       enabled: false
