@@ -34,28 +34,3 @@ spec:
     - kind: ConfigMap
       name: ${APPLICATION}-values
       valuesKey: values.yaml
-  postRenderers:
-    - kustomize:
-        patches:
-          - target:
-              version: v1
-              kind: Deployment
-              labelSelector: "app.kubernetes.io/controller=main,app.kubernetes.io/instance=frigate,app.kubernetes.io/name=frigate"
-            patch: |-
-              apiVersion: apps/v1
-              kind: Deployment
-              metadata:
-                name: not-used
-              spec:
-                template:
-                  spec:
-                    containers:
-                      - name: frigate
-                        # runtimeClassName: nvidia # TODO: nvidia vs intel
-                        resources:
-                          requests:
-                            squat.ai/coral: "1"
-                            # nvidia.com/gpu: "1" # TODO: nvidia vs intel
-                          limits:
-                            squat.ai/coral: "1"
-                            # nvidia.com/gpu: "1" # TODO: nvidia vs intel
