@@ -4,7 +4,7 @@ global:
   alwaysAppendIdentifierToResourceName: true
 
 defaultPodOptions:
-  runtimeClassName: ${FRIGATE_RUNTIME_CLASS}
+  # runtimeClassName: ${FRIGATE_RUNTIME_CLASS} # TODO: nvidia vs intel
   tolerations:
     - key: nvidia.com/gpu
       operator: Exists
