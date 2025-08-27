@@ -16,14 +16,17 @@ configurations:
 patches:
   - target:
       group: helm.toolkit.fluxcd.io
-      version: v2beta1
+      version: v2
       kind: HelmRelease
       name: ${APPLICATION}
     patch: |-
-      apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       metadata:
         name: not-used
+        metadata:
+          labels:
+            mylabel: ok
       spec:
         postRenderers:
           - kustomize:
