@@ -60,8 +60,9 @@ controllers:
             enabled: true
             custom: true
             spec:
-              tcpSocket:
+              httpGet:
                 port: 5000
+                path: /favicon.ico
               initialDelaySeconds: 15
               periodSeconds: 30
               timeoutSeconds: 1
@@ -74,11 +75,15 @@ service:
   frigate-http:
     controller: main
     ipFamilyPolicy: PreferDualStack
-    # annotations:
-    #   traefik.ingress.kubernetes.io/service.serversscheme: https
     ports:
       http:
         port: 5000
+  frigate-auth:
+    controller: main
+    ipFamilyPolicy: PreferDualStack
+    annotations:
+      traefik.ingress.kubernetes.io/service.serversscheme: https
+    ports:
       auth:
         port: 8971
   frigate:
@@ -111,8 +116,8 @@ ingress:
           - path: /
             pathType: ImplementationSpecific
             service:
-              identifier: frigate-http
-              port: 5000
+              identifier: frigate-auth
+              port: 8971
     tls:
       - secretName: frigate-tls-cert
         hosts:
