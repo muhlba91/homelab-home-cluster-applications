@@ -7,9 +7,9 @@ alphaConfig:
   enabled: true
   existingSecret: frigate-auth-proxy-config
 
-extraEnv:
-  OAUTH2_PROXY_EMAIL_DOMAINS: "*"
-  OAUTH2_PROXY_REDIRECT_URL: "https://nvr-auth.${LOCAL_HOME_DOMAIN}/oauth2/callback"
+extraArgs:
+  - --email-domain=*
+  - --redirect-url=https://nvr-auth.${LOCAL_HOME_DOMAIN}/oauth2/callback
 
 envFrom:
   - secretRef:
