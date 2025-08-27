@@ -27,6 +27,7 @@ controllers:
           requests:
             cpu: 10m
             memory: 16Mi
+            squat.ai/coral: "1"
           limits:
             cpu: 100m
             memory: 32Mi
