@@ -20,7 +20,7 @@ controllers:
           pullPolicy: IfNotPresent
         command:
           - cp
-          - '-v'
+          - "-v"
           - /config.yaml
           - /config/config.yaml
         resources:
@@ -53,7 +53,7 @@ controllers:
           limits:
             memory: 2048Mi
             squat.ai/coral: "1"
-            nvidia.com/gpu: "1"
+            # nvidia.com/gpu: "1" # TODO: nvidia vs intel
 
         probes:
           liveness: &server_probes
