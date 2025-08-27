@@ -32,5 +32,8 @@ data:
   # public ip addresses
   PUBLIC_IP: "88.217.198.211"
 
+  # runtime classes
+  FRIGATE_RUNTIME_CLASS: ""
+
   # storage classes
   DEFAULT_STORAGE_CLASS: "rook-ceph-block"

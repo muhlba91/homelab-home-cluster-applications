@@ -1,0 +1,174 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frigate-config
+data:
+  config.yaml: |
+    mqtt:
+      host: emqx.home-assistant-mqtt
+      port: 1883
+      topic_prefix: frigate
+      client_id: frigate
+      stats_interval: 60
+
+    detectors:
+      coral-tpu:
+        type: edgetpu
+        device: pci
+      # onnx-gpu:
+      #   type: onnx
+      # openvino-cpu:
+      #   type: openvino
+      #   device: CPU
+
+    model:
+      # if using ONNX: download model, e.g. https://github.com/blakeblackshear/blakeshome-charts/issues/46
+      path: /edgetpu_model.tflite # openvino: /openvino-model/ssdlite_mobilenet_v2.xml
+      labelmap_path: /labelmap.txt # openvino: /openvino-model/coco_91cl_bkgr.txt
+      model_type: ssd # only used with openvino
+      width: 320 # openvino: 300
+      height: 320 # openvino: 300
+      input_pixel_format: rgb # openvino: bgr
+      input_tensor: nhwc
+
+    database:
+      path: /config/frigate.db
+
+    proxy:
+      # only used if auth is disabled
+      auth_secret: None
+      default_role: viewer
+
+    auth:
+      enabled: true
+      trusted_proxies:
+        - 10.0.0.0/8
+
+    audio:
+      enabled: false
+
+    logger:
+      default: warning
+
+    birdseye:
+      enabled: true
+      quality: 8
+      mode: objects
+
+    ffmpeg:
+      # hwaccel_args: preset-nvidia
+      apple_compatibility: true
+
+    detect:
+      enabled: false
+
+    objects:
+      track:
+        - person
+
+    review:
+      alerts:
+        enabled: true
+        labels:
+          - person
+      detections:
+        enabled: true
+        labels:
+          - person
+
+    motion:
+      # must be enabled for object detection to work
+      enabled: false
+
+    notifications:
+      enabled: false
+
+    record:
+      enabled: false
+      expire_interval: 60
+      sync_recordings: true
+      retain:
+        days: 0
+        mode: all
+      preview:
+        quality: medium
+      alerts:
+        pre_capture: 10
+        post_capture: 10
+        retain:
+          days: 14
+          mode: motion
+      detections:
+        pre_capture: 5
+        post_capture: 5
+        retain:
+          days: 14
+          mode: motion
+
+    snapshots:
+      enabled: false
+      clean_copy: true
+      timestamp: false
+      retain:
+        default: 10
+        objects:
+          person: 14
+
+    semantic_search:
+      enabled: false
+      model: "jinav1"
+      model_size: "small"
+
+    face_recognition:
+      enabled: true
+      unknown_score: 0.8
+      detection_threshold: 0.7
+      recognition_threshold: 0.9
+      model_size: small
+
+    lpr:
+      enabled: false
+
+    genai:
+      enabled: false
+
+    timestamp_style:
+      position: br
+      format: "%Y-%m-%d %r"
+
+    ui:
+      time_format: 12hour
+      strftime_fmt: "%Y-%m-%d %r"
+
+    telemetry:
+      version_check: true
+
+    go2rtc:
+      streams: []
+        # camera-placeholder:
+        #   - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@10.0.10.10:554/cam/realmonitor?channel=1&subtype=2
+        #   - "ffmpeg:camera_placeholder#audio=opus"
+
+    cameras: []
+      # camera-placeholder:
+      #   enabled: false
+      #   ffmpeg:
+      #     output_args:
+      #       record: preset-record-generic-audio-copy
+      #     inputs:
+      #       - path: rtsp://127.0.0.1:8554/camera_placeholder
+      #         input_args: preset-rtsp-restream
+      #         roles:
+      #           - audio
+      #           - detect
+      #           - record
+      #   # configure onvif for PTZ control
+      #   ui:
+      #     dashboard: true
+
+    camera_groups: []
+      # group-placeholder:
+      #   icon: LuCar
+      #   cameras:
+      #     - camera-placeholder

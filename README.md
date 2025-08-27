@@ -69,6 +69,7 @@ The following applications are defined in [`common/infrastructure/`](common/infr
 
 - [x] [Cilium](https://cilium.io) - Provides the cluster CNI.
 - [x] [External Secrets Operator](http://external-secrets.io) - Synchronizes secrets from external stores to Kubernetes `Secret` objects.
+- [x] [Generic Device Plugin](https://github.com/squat/generic-device-plugin) - Makes custom hardware devices accessible in the cluster.
 - [x] [Kubelet Serving Cert Approver](https://github.com/alex1989hu/kubelet-serving-cert-approver) - Enables automatic certificate approval by the kubelet.
 - [x] [MetalLB](https://metallb.universe.tf) - Provides a Kubernetes network load balancer to expose Kubernetes `Service`s.
 - [x] [Metrics Server](https://github.com/kubernetes-sigs/metrics-server) - Collects container resource metrics.
@@ -94,6 +95,7 @@ The following applications are defined in [`common/core/`](common/core/).
 
 The following applications are defined in [`common/applications/`](common/applications/).
 
+- [x] [Frigate](https://frigate.video) - NVR with real-time object detection for IP cameras.
 - [x] [InfluxDB](https://www.influxdata.com) - InfluxDB time-series database.
 - [x] [Ollama](https://ollama.com) - Ollama local LLM model runner.
 - [x] [Omada Controller](https://www.tp-link.com/us/business-networking/omada-sdn-controller/) - TP-Link Omada Controller.
@@ -127,6 +129,7 @@ The following applications are defined in [`sites/muc/infrastructure/`](sites/mu
 - [x] external-secrets
   - [x] [External Secrets Stores](sites/muc/infrastructure/external-secrets/) - Deploys the required `ClusterSecretStore`s and Vault credentials as Kubernetes `Secret`s.
 - [x] kubelet-serving-cert-approver
+- [x] generic-device-plugin
 - [x] metallb
 - [x] metrics-server
 - [x] reloader
@@ -149,8 +152,8 @@ The following applications are defined in [`sites/muc/core/`](sites/muc/core/).
 
 The following applications are defined in [`sites/muc/applications/`](sites/muc/applications/).
 
+- [x] frigate
 - [x] external-services
-- [x] omada-controller
 - [x] influxdb
 
 #### Home Assistant (MUC)
