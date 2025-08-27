@@ -4,7 +4,8 @@ kind: IngressRoute
 metadata:
   name: frigate
   annotations:
-    external-dns.alpha.kubernetes.io/target: nvr-auth.${LOCAL_HOME_DOMAIN}
+    external-dns.alpha.kubernetes.io/provider: public
+    external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
 spec:
   entryPoints:
     - web
@@ -23,3 +24,5 @@ spec:
       services:
         - name: oauth2-proxy
           port: 80
+  tls:
+    secretName: frigate-auth-tls-cert

@@ -8,4 +8,5 @@ resources:
   - ./external-secret-auth-proxy-env.yaml
   - ./external-secret-auth-proxy-config.yaml
   - ./middleware-auth-proxy.yaml
+  - ./certificate.yaml
   - ./ingressroute.yaml
