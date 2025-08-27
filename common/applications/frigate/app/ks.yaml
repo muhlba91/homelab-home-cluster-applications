@@ -21,4 +21,5 @@ spec:
       APPLICATION_NAMESPACE: *application
       GATUS_NAME: Frigate
       GATUS_GROUP: 002 - Applications
+      GATUS_SERVICE: frigate-frigate-http
       GATUS_PORT: "5000"
