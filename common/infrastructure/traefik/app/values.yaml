@@ -42,6 +42,10 @@ ports:
         - 10.0.0.0/8
       insecure: true
 
+ingressRoute:
+  dashboard:
+    enabled: true
+
 service:
   ipFamilyPolicy: PreferDualStack
   externalTrafficPolicy: Local

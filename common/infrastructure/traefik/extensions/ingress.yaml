@@ -18,7 +18,7 @@ spec:
               service:
                 name: traefik
                 port:
-                  number: 9000
+                  number: 8080
   tls:
     - secretName: traefik-dashboard-tls-cert
       hosts:
