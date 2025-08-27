@@ -38,12 +38,14 @@ data:
     database:
       path: /config/frigate.db
 
-    # proxy:
-    #   auth_secret: None
-    #   default_role: viewer
+    proxy:
+      header_map:
+        user: X-Forwarded-User
+        role: X-Forwarded-Groups
+      default_role: viewer
 
     auth:
-      enabled: true
+      enabled: false
       trusted_proxies:
         - 10.0.0.0/8
 
