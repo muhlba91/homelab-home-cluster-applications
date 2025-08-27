@@ -16,7 +16,6 @@ configurations:
 patches:
   - target:
       kind: HelmRelease
-      name: ${APPLICATION}
     patch: |-
       kind: HelmRelease
       metadata:
