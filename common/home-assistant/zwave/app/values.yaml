@@ -11,7 +11,7 @@ controllers:
         image:
           repository: zwavejs/zwave-js-ui
           pullPolicy: IfNotPresent
-          tag: 11.2.0@sha256:dc139e24cc595ddc1fefde576171f6891504bb6b9b104347152f3da05737e0e8
+          tag: 11.2.1@sha256:7fc0a78a6c843654eb93166decd13192b5a1f53637cf117ea13569f2a33a0e94
 
         envFrom:
           - secretRef:
