@@ -40,11 +40,17 @@ spec:
           - target:
               version: v1
               kind: Deployment
-              labels:
-                app.kubernetes.io/controller: main
-                app.kubernetes.io/instance: frigate
-                app.kubernetes.io/name: frigate
-            patch: |
-              - op: add
-                path: /spec/template/spec/containers/0/resources/requests/squat.ai~1coral
-                value: "1"
+              labelSelector: "app.kubernetes.io/controller=main,app.kubernetes.io/instance=frigate,app.kubernetes.io/name=frigate"
+            patch: |-
+              apiVersion: apps/v1
+              kind: Deployment
+              metadata:
+                name: not-used
+              spec:
+                template:
+                  spec:
+                    containers:
+                      - name: frigate
+                        resources:
+                          requests:
+                            squat.ai/coral: "1"
