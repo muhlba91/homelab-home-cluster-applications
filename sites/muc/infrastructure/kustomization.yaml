@@ -5,6 +5,7 @@ resources:
   - ../../../common/infrastructure/cilium/
   - ../../../common/infrastructure/kubelet-serving-cert-approver/
   - ../../../common/infrastructure/metrics-server/
+  - ./generic-device-plugin/
   - ./external-secrets/
   - ./rook-ceph/
   - ./metallb/
