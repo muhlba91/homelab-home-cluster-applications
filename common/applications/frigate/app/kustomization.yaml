@@ -43,5 +43,6 @@ patches:
                                 requests:
                                   squat.ai/coral: "1"
                                   # nvidia.com/gpu: "1" # TODO: nvidia vs intel
-                                # limits:
+                                limits:
+                                  squat.ai/coral: "1"
                                   # nvidia.com/gpu: "1" # TODO: nvidia vs intel

@@ -52,7 +52,6 @@ controllers:
             memory: 2048Mi
           limits:
             memory: 2048Mi
-            squat.ai/coral: "1"
 
         probes:
           liveness: &server_probes
