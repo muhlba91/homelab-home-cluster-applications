@@ -131,7 +131,7 @@ persistence:
     type: persistentVolumeClaim
     storageClass: ${DEFAULT_STORAGE_CLASS}
     accessMode: ReadWriteOnce
-    size: 100Mi
+    size: 1Gi
     globalMounts:
       - path: /config
   media:
