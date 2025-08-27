@@ -47,6 +47,9 @@ data:
       # trusted_proxies:
       #   - 10.0.0.0/8
 
+    tls:
+      enabled: false
+
     audio:
       enabled: false
 

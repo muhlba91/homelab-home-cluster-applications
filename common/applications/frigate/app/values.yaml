@@ -79,12 +79,6 @@ service:
     ports:
       http:
         port: 5000
-  frigate-auth:
-    controller: main
-    ipFamilyPolicy: PreferDualStack
-    annotations:
-      traefik.ingress.kubernetes.io/service.serversscheme: https
-    ports:
       auth:
         port: 8971
   frigate:
@@ -117,7 +111,7 @@ ingress:
           - path: /
             pathType: ImplementationSpecific
             service:
-              identifier: frigate-auth
+              identifier: frigate-http
               port: 8971
     tls:
       - secretName: frigate-tls-cert
