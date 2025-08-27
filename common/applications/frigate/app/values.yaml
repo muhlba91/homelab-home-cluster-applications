@@ -33,7 +33,7 @@ controllers:
     containers:
       frigate:
         image:
-          repository: blakeblackshear/frigate
+          repository: ghcr.io/blakeblackshear/frigate
           pullPolicy: IfNotPresent
           tag: 0.16.0 # TODO: nvidia vs intel
 
