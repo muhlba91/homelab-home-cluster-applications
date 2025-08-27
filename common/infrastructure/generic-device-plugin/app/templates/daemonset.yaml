@@ -28,20 +28,10 @@ spec:
           args:
             - --device
             - |
-              name: serial
+              name: zwave
               groups:
                 - paths:
-                    - path: /dev/ttyUSB*
-                - paths:
                     - path: /dev/ttyACM*
-                - paths:
-                    - path: /dev/tty.usb*
-                - paths:
-                    - path: /dev/cu.*
-                - paths:
-                    - path: /dev/cuaU*
-                - paths:
-                    - path: /dev/rfcomm*
             - --device
             - |
               name: coral
