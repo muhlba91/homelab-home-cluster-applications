@@ -9,8 +9,6 @@ spec:
         kind: HelmRelease
         metadata:
           name: not-used
-          labels:
-            mylabel: ok
         spec:
           postRenderers:
             - kustomize:
@@ -29,11 +27,11 @@ spec:
                           spec:
                             containers:
                               - name: frigate
-                                # runtimeClassName: nvidia # TODO: nvidia vs intel
+                                # runtimeClassName: nvidia
                                 resources:
                                   requests:
                                     squat.ai/coral: "1"
-                                    # nvidia.com/gpu: "1" # TODO: nvidia vs intel
+                                    # nvidia.com/gpu: "1"
                                   limits:
                                     squat.ai/coral: "1"
-                                    # nvidia.com/gpu: "1" # TODO: nvidia vs intel
+                                    # nvidia.com/gpu: "1"
