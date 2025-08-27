@@ -145,12 +145,12 @@ data:
       version_check: true
 
     go2rtc:
-      streams: []
+      streams: {}
         # camera-placeholder:
         #   - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@10.0.10.10:554/cam/realmonitor?channel=1&subtype=2
         #   - "ffmpeg:camera_placeholder#audio=opus"
 
-    cameras: []
+    cameras: {}
       # camera-placeholder:
       #   enabled: false
       #   ffmpeg:
@@ -167,7 +167,7 @@ data:
       #   ui:
       #     dashboard: true
 
-    camera_groups: []
+    camera_groups: {}
       # group-placeholder:
       #   icon: LuCar
       #   cameras:
