@@ -32,8 +32,5 @@ data:
   # public ip addresses
   PUBLIC_IP: "144.208.195.224,2a01:aea0:dd3:25a:1000:3:3:1"
 
-  # runtime classes
-  FRIGATE_RUNTIME_CLASS: nvidia
-
   # storage classes
   DEFAULT_STORAGE_CLASS: "rook-ceph-block"

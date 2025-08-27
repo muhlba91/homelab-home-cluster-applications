@@ -5,7 +5,6 @@ global:
 
 defaultPodOptions:
   terminationGracePeriodSeconds: 60
-  # runtimeClassName: ${FRIGATE_RUNTIME_CLASS} # TODO: nvidia vs intel
   tolerations:
     - key: nvidia.com/gpu
       operator: Exists
@@ -53,8 +52,6 @@ controllers:
             memory: 2048Mi
           limits:
             memory: 2048Mi
-            squat.ai/coral: "1"
-            # nvidia.com/gpu: "1" # TODO: nvidia vs intel
 
         probes:
           liveness: &server_probes

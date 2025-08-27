@@ -51,6 +51,11 @@ spec:
                   spec:
                     containers:
                       - name: frigate
+                        # runtimeClassName: nvidia # TODO: nvidia vs intel
                         resources:
                           requests:
                             squat.ai/coral: "1"
+                            # nvidia.com/gpu: "1" # TODO: nvidia vs intel
+                          limits:
+                            squat.ai/coral: "1"
+                            # nvidia.com/gpu: "1" # TODO: nvidia vs intel
