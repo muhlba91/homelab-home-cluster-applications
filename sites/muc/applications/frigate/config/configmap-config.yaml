@@ -19,20 +19,14 @@ data:
       coral-tpu:
         type: edgetpu
         device: pci
-      # onnx-gpu:
-      #   type: onnx
-      # openvino-cpu:
-      #   type: openvino
-      #   device: CPU
 
     model:
-      # if using ONNX: download model, e.g. https://github.com/blakeblackshear/blakeshome-charts/issues/46
-      path: /edgetpu_model.tflite # openvino: /openvino-model/ssdlite_mobilenet_v2.xml
-      labelmap_path: /labelmap.txt # openvino: /openvino-model/coco_91cl_bkgr.txt
-      model_type: ssd # only used with openvino
-      width: 320 # openvino: 300
-      height: 320 # openvino: 300
-      input_pixel_format: rgb # openvino: bgr
+      path: /edgetpu_model.tflite
+      labelmap_path: /labelmap.txt
+      model_type: ssd
+      width: 320
+      height: 320
+      input_pixel_format: rgb
       input_tensor: nhwc
 
     database:
@@ -65,7 +59,6 @@ data:
       mode: objects
 
     ffmpeg:
-      # hwaccel_args: preset-nvidia
       apple_compatibility: true
 
     detect:

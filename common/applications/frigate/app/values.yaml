@@ -26,10 +26,25 @@ controllers:
         resources:
           requests:
             cpu: 10m
-            memory: 16Mi
-          limits:
-            cpu: 100m
             memory: 32Mi
+          limits:
+            memory: 32Mi
+      download-models:
+        image:
+          repository: alpine
+          tag: 3.22
+          pullPolicy: IfNotPresent
+        command:
+          - /scripts/download_models.sh
+        envFrom:
+          - secretRef:
+              name: frigate-s3-credentials
+        resources:
+          requests:
+            cpu: 10m
+            memory: 128Mi
+          limits:
+            memory: 128Mi
     containers:
       frigate:
         image:
@@ -113,6 +128,11 @@ persistence:
     size: 1Gi
     globalMounts:
       - path: /config
+  models:
+    enabled: true
+    type: emptyDir
+    globalMounts:
+      - path: /models
   media:
     enabled: true
     type: persistentVolumeClaim
@@ -135,3 +155,12 @@ persistence:
     sizeLimit: 1Gi
     globalMounts:
       - path: /tmp
+  scripts:
+    enabled: true
+    type: configMap
+    name: frigate-scripts
+    defaultMode: 511
+    advancedMounts:
+      main:
+        download-models:
+          - path: /scripts

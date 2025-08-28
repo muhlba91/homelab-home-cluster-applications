@@ -4,7 +4,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: ${APPLICATION_NAMESPACE}
 resources:
+  - ./configmap-scripts.yaml
   - ./external-secret-rtsp-credentials.yaml
+  - ./external-secret-s3-credentials.yaml
   - ./external-secret-auth-proxy-env.yaml
   - ./external-secret-auth-proxy-config.yaml
   - ./middleware-auth-proxy.yaml

@@ -16,34 +16,30 @@ data:
       stats_interval: 60
 
     detectors:
-      # coral-tpu:
-      #   type: edgetpu
-      #   device: pci
-      onnx-gpu:
+      onnx-gpu-0:
         type: onnx
-      # openvino-cpu:
-      #   type: openvino
-      #   device: CPU
 
-    model: # FIXME: download model, e.g. https://github.com/blakeblackshear/blakeshome-charts/issues/46
-      # if using ONNX: download model, e.g. https://github.com/blakeblackshear/blakeshome-charts/issues/46
-      path: /edgetpu_model.tflite # openvino: /openvino-model/ssdlite_mobilenet_v2.xml
-      labelmap_path: /labelmap.txt # openvino: /openvino-model/coco_91cl_bkgr.txt
-      model_type: ssd # only used with openvino
-      width: 320 # openvino: 300
-      height: 320 # openvino: 300
-      input_pixel_format: rgb # openvino: bgr
-      input_tensor: nhwc
+    model:
+      path: /models/dfine_s_obj2coco.onnx
+      labelmap_path: /labelmap/coco-80.txt
+      model_type: dfine
+      width: 640
+      height: 640
+      input_tensor: nchw
+      input_dtype: float
 
     database:
       path: /config/frigate.db
 
-    # proxy:
-    #   auth_secret: None
-    #   default_role: viewer
+    proxy:
+      logout_url: /oauth2/sign_out
+      header_map:
+        user: X-Forwarded-User
+        role: X-Forwarded-Groups
+      default_role: viewer
 
     auth:
-      enabled: true
+      enabled: false
       trusted_proxies:
         - 10.0.0.0/8
 
