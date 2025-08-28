@@ -9,3 +9,4 @@ resources:
   - ./immich/
   - ./librechat/
   - ./mealie/
+  - ./frigate/
