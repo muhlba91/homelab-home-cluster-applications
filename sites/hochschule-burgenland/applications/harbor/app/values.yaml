@@ -62,7 +62,7 @@ registry:
   existingSecret: harbor-secrets
   credentials:
     username: harbor_registry_user
-    htpasswdString: "harbor_registry_user:$2y$10$tUTfsy.0q3mHXRGxlO3pjunH/tkgToe.nD0Ss/CAGbxKHf.JUaTJe"
+    htpasswdString: "harbor_registry_user:$2y$10$lxiEev2WBEL3zcCzplq3lOLVr2.KETk22F8L74GtKgR5NEAU5.K9."
 
 trivy:
   severity: "LOW,MEDIUM,HIGH,CRITICAL"
