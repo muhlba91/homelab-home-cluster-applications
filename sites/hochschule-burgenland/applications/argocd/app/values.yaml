@@ -94,10 +94,10 @@ applicationSet:
     ingress:
       enabled: true
       annotations:
-      cert-manager.io/cluster-issuer: cluster-issuer-muehlbachler-xyz
-      external-dns.alpha.kubernetes.io/provider: public
-      external-dns.alpha.kubernetes.io/target: ${PUBLIC_IP}
-      traefik.ingress.kubernetes.io/router.tls: "true"
+        cert-manager.io/cluster-issuer: cluster-issuer-muehlbachler-xyz
+        external-dns.alpha.kubernetes.io/provider: public
+        external-dns.alpha.kubernetes.io/target: ${PUBLIC_IP}
+        traefik.ingress.kubernetes.io/router.tls: "true"
       hosts:
         - &webhookDomain webhook.argocd.${PUBLIC_DOMAIN}
       tls:
