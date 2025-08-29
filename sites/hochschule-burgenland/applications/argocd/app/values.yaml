@@ -97,9 +97,9 @@ applicationSet:
       external-dns.alpha.kubernetes.io/provider: public
       external-dns.alpha.kubernetes.io/target: ${PUBLIC_IP}
       traefik.ingress.kubernetes.io/router.tls: "true"
-    hosts:
-      - &webhookDomain webhook.argocd.${PUBLIC_DOMAIN}
-    tls:
+    hostname: &webhookDomain webhook.argocd.${PUBLIC_DOMAIN}
+    tls: true
+    extraTls:
       - secretName: hochschule-burgenland-argocd-webhook-tls
         hosts:
           - *webhookDomain
