@@ -55,7 +55,7 @@ controllers:
       grafana:
         image:
           repository: rancher/kubectl
-          tag: v1.33.3
+          tag: v1.34.0
           pullPolicy: IfNotPresent
         command:
           - /scripts/grafana.sh
