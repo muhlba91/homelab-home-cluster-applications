@@ -4,7 +4,7 @@ kind: ConfigMap
 metadata:
   name: immich-env
 data:
-  REDIS_HOSTNAME: redis-master
+  REDIS_HOSTNAME: valkey
   DB_HOSTNAME: immich-postgresql-rw
   DB_DATABASE_NAME: immich
   IMMICH_CONFIG_FILE: /config/immich.yaml

@@ -23,12 +23,12 @@ spec:
     recreate: true
   chart:
     spec:
-      chart: redis
-      version: 22.0.7
+      chart: app-template
+      version: 4.2.0
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: immich-redis
+        name: immich-valkey
         namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
