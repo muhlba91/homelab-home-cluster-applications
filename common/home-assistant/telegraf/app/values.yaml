@@ -54,8 +54,8 @@ controllers:
             memory: 128Mi
       grafana:
         image:
-          repository: rancher/kubectl
-          tag: v1.33.3
+          repository: alpine/k8s
+          tag: 1.33.3
           pullPolicy: IfNotPresent
         command:
           - /scripts/grafana.sh
