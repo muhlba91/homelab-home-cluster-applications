@@ -9,7 +9,7 @@ data:
 
     COPY_CONFIGURATION=$${1:-false}
 
-    apk --no-cache add git s3cmd bash
+    apk --no-cache add git s3cmd bash libarchive-tools
     wget -O /usr/bin/sops https://github.com/mozilla/sops/releases/download/v3.7.3/sops-v3.7.3.linux.amd64 &> /dev/null
     chmod +x /usr/bin/sops
 
