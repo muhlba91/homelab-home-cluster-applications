@@ -26,7 +26,6 @@ env:
     value: /etc/secrets/service-account/credentials.json
 
 extraArgs:
-  traefik-disable-legacy:
   google-project: muehlbachler-dns
   google-batch-change-size: 1000
 
