@@ -12,6 +12,8 @@ domainFilters:
   - internal.muehlbachler.io
   - internal.muehlbachler.xyz
 
+annotationFilter: "external-dns.alpha.kubernetes.io/provider=internal"
+
 policy: sync
 txtOwnerId: external-dns-${SITE}-adguard
 provider:
@@ -46,10 +48,6 @@ provider:
         memory: 100Mi
       limits:
         memory: 100Mi
-
-extraArgs:
-  annotation-filter: "external-dns.alpha.kubernetes.io/provider=internal"
-  traefik-disable-legacy:
 
 resources:
   requests:
