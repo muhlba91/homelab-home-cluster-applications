@@ -13,6 +13,8 @@ domainFilters:
   - muehlbachler.io
   - muehlbachler.xyz
 
+annotationFilter: "external-dns.alpha.kubernetes.io/provider=public"
+
 policy: sync
 txtOwnerId: external-dns-${SITE}-google
 txtPrefix: extdns-
@@ -24,7 +26,6 @@ env:
     value: /etc/secrets/service-account/credentials.json
 
 extraArgs:
-  annotation-filter: "external-dns.alpha.kubernetes.io/provider=public"
   traefik-disable-legacy:
   google-project: muehlbachler-dns
   google-batch-change-size: 1000
