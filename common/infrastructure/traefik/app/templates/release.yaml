@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: 37.1.0
+      version: 37.1.1
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
