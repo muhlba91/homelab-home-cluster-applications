@@ -28,6 +28,7 @@ spec:
                             runtimeClassName: nvidia
                             containers:
                               - name: frigate
+                                image: ghcr.io/blakeblackshear/frigate:0.16.1-tensorrt
                                 resources:
                                   requests:
                                     nvidia.com/gpu: "1"
