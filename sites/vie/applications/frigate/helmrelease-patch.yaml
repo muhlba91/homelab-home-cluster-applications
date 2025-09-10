@@ -25,9 +25,9 @@ spec:
                       spec:
                         template:
                           spec:
+                            runtimeClassName: nvidia
                             containers:
                               - name: frigate
-                                runtimeClassName: nvidia
                                 resources:
                                   requests:
                                     nvidia.com/gpu: "1"
