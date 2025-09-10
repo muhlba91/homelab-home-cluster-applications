@@ -9,7 +9,8 @@
         "helmv3",
         "flux",
         "github-actions",
-        "pre-commit"
+        "pre-commit",
+        "custom.regex"
     ],
     "flux": {
         "managerFilePatterns": [
@@ -18,5 +19,16 @@
             "/(^|/)home-assistant/.+\\.ya?ml$/",
             "/(^|/)infrastructure/.+\\.ya?ml$/"
         ]
-    }
+    },
+    "customManagers": [
+        {
+            "customType": "regex",
+            "managerFilePatterns": [
+                "/(^|/|\\.).*-patch\\.ya?ml$/"
+            ],
+            "matchStrings": [
+                "# renovate: datasource=(?<datasource>[a-z-]+) packageName=(?<packageName>.+)\\s+image:.+:(?<currentValue>.+)"
+            ]
+        }
+    ]
 }
