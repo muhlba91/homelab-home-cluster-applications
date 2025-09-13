@@ -13,7 +13,7 @@ controllers:
         image:
           repository: ghcr.io/immich-app/immich-server
           pullPolicy: IfNotPresent
-          tag: v1.141.1
+          tag: v1.142.0
 
         envFrom:
           - configMapRef:
