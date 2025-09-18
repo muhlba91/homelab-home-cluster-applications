@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: harbor
-      version: 1.17.2
+      version: 1.18.0
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
