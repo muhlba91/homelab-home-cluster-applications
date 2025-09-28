@@ -13,7 +13,7 @@ controllers:
         image:
           repository: ghcr.io/mealie-recipes/mealie
           pullPolicy: IfNotPresent
-          tag: v3.2.1
+          tag: v3.3.0
 
         envFrom:
           - configMapRef:
