@@ -114,7 +114,7 @@ controllers:
       backup:
         image:
           repository: python
-          tag: 3.13-alpine
+          tag: 3.14-alpine
           pullPolicy: IfNotPresent
         command:
           - /scripts/backup_restore.sh
