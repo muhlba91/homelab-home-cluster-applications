@@ -2,6 +2,9 @@
 global:
   fullnameOverride: mongodb
 
+image:
+  repository: bitnamilegacy/mongodb
+
 rbac:
   create: true
 
