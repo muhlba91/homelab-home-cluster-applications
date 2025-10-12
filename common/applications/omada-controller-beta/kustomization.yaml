@@ -5,5 +5,5 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./mongodb/
-  # - ./app/ks.yaml
+  - ./app/ks.yaml
   - ./extensions/ks.yaml
