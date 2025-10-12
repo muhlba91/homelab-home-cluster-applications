@@ -2,6 +2,7 @@
 global:
   fullnameOverride: mongodb
 
+# FIXME: https://github.com/muhlba91/homelab-home-cluster-applications/issues/1315
 image:
   repository: bitnamilegacy/mongodb
 
