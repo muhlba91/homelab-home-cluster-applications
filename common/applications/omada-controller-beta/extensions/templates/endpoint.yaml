@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: omada-controller-web
+subsets:
+  - addresses:
+      - ip: ${OMADA_CONTROLLER_IP_WEB}
+    ports:
+      - name: http
+        port: 443
+        protocol: TCP
