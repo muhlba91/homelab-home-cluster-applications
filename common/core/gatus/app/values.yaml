@@ -26,9 +26,9 @@ controllers:
         resources: &configSyncResources
           requests:
             cpu: 10m
-            memory: 116Mi
+            memory: 256Mi
           limits:
-            memory: 116Mi
+            memory: 256Mi
     containers:
       gatus:
         image:
@@ -43,9 +43,9 @@ controllers:
         resources:
           requests:
             cpu: 10m
-            memory: 133Mi
+            memory: 256Mi
           limits:
-            memory: 133Mi
+            memory: 256Mi
 
         probes:
           liveness:
