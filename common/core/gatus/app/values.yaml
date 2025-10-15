@@ -13,7 +13,7 @@ controllers:
       init-config:
         image: &configSyncImage
           repository: ghcr.io/kiwigrid/k8s-sidecar
-          tag: 1.30.11
+          tag: 1.30.10
 
         env:
           FOLDER: /config
@@ -26,9 +26,9 @@ controllers:
         resources: &configSyncResources
           requests:
             cpu: 10m
-            memory: 256Mi
+            memory: 116Mi
           limits:
-            memory: 256Mi
+            memory: 116Mi
     containers:
       gatus:
         image:
@@ -43,9 +43,9 @@ controllers:
         resources:
           requests:
             cpu: 10m
-            memory: 256Mi
+            memory: 133Mi
           limits:
-            memory: 256Mi
+            memory: 133Mi
 
         probes:
           liveness:
