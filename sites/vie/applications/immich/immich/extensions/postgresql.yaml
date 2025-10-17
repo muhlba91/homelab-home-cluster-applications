@@ -11,7 +11,7 @@ spec:
   imageName: ghcr.io/muhlba91/postgresql-pgvecto:16.10-0.4.3-v5.2.0
 
   storage:
-    size: 10Gi
+    size: 20Gi
     storageClass: ${DEFAULT_STORAGE_CLASS}
 
   resources:
