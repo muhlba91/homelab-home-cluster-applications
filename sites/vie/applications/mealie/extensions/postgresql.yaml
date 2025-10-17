@@ -46,20 +46,12 @@ spec:
       secret:
         name: mealie-database
 
-  backup:
-    barmanObjectStore:
-      destinationPath: gs://infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157/cluster/${SITE}/mealie
-      serverName: postgresql
-      googleCredentials:
-        applicationCredentials:
-          name: cloudnativepg-google-cloud
-          key: credentials
-      wal:
-        compression: gzip
-        maxParallel: 4
-      data:
-        compression: gzip
-    retentionPolicy: 7d
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: mealie-postgresql
+        serverName: postgresql
 
   externalClusters:
     - name: mealie-postgresql-backup
