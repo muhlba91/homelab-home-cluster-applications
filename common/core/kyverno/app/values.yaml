@@ -19,9 +19,9 @@ backgroundController:
   resources:
     requests:
       cpu: 10m
-      memory: 96Mi
+      memory: 160Mi
     limits:
-      memory: 96Mi
+      memory: 160Mi
 
 cleanupController:
   resources:
