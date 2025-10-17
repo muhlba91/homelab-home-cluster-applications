@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: velero
-      version: 11.1.0
+      version: 11.1.1
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
