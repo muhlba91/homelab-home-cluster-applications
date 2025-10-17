@@ -11,4 +11,5 @@ resources:
   - ./external-secret-immich-database.yaml
   - ./external-secret-cloudnativepg-google-cloud.yaml
   - ./postgresql.yaml
+  - ./postgresql-objectstore.yaml
   - ./postgresql-backup.yaml

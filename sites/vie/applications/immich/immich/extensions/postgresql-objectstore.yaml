@@ -1,0 +1,19 @@
+---
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: immich-postgresql
+spec:
+  configuration:
+    destinationPath: gs://infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157/cluster/${SITE}/immich
+    serverName: postgresql
+    googleCredentials:
+      applicationCredentials:
+        name: cloudnativepg-google-cloud
+        key: credentials
+    wal:
+      compression: gzip
+      maxParallel: 4
+    data:
+      compression: gzip
+  retentionPolicy: 7d
