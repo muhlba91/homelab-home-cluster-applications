@@ -11,11 +11,11 @@ controllers:
         image:
           repository: rhasspy/wyoming-openwakeword
           pullPolicy: IfNotPresent
-          tag: 1.10.0
+          tag: 2.0.0
 
         args:
           - --model
-          - ok_nabu
+          - okay_nabu
 
         resources:
           requests:
