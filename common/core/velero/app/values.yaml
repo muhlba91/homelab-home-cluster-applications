@@ -1,4 +1,9 @@
 ---
+# see https://github.com/vmware-tanzu/helm-charts/issues/698
+kubectl:
+  image:
+    tag: 1.33.4
+
 resources:
   requests:
     cpu: 10m
