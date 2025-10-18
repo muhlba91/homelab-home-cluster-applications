@@ -15,6 +15,8 @@ data:
 
   # domain names
   PUBLIC_DOMAIN: hochschule-burgenland.muehlbachler.xyz
+  INTERNAL_DOMAIN: internal.muehlbachler.xyz
+  LOCAL_INTERNAL_DOMAIN: hochschule-burgenland.internal.muehlbachler.xyz
 
   # load balancer ip addresses
   TRAEFIK_IP: "10.100.72.1,2a01:4f8:121:14e2:100:3:3:1"
