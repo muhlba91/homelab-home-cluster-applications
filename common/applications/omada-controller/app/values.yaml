@@ -10,7 +10,7 @@ controllers:
         image:
           repository: mbentley/omada-controller
           pullPolicy: IfNotPresent
-          tag: 5.15.24.19
+          tag: beta-6.0.0.23
 
         env:
           - name: MANAGE_HTTP_PORT
@@ -21,6 +21,10 @@ controllers:
             value: 8088
           - name: PORTAL_HTTPS_PORT
             value: 8843
+          - name: MONGO_EXTERNAL
+            value: "true"
+          - name: EAP_MONGOD_URI
+            value: "mongodb://omada-controller-mongodb:27017/omada"
 
         securityContext:
           capabilities:
@@ -101,6 +105,8 @@ service:
         port: 29815
       rtty:
         port: 29816
+      device-monitor:
+        port: 29817
 
 # TODO: we cannot use the ingress due to https://github.com/mbentley/docker-omada-controller/discussions/317
 # hence, we are setting the endpoint to the load balancer and create a new ingress resource using our extensions
