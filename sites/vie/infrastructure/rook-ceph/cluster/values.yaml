@@ -4,9 +4,9 @@ toolbox:
   resources:
     requests:
       cpu: 10m
-      memory: 128Mi
+      memory: 100Mi
     limits:
-      memory: 256Mi
+      memory: 100Mi
 
 cephClusterSpec:
   cephVersion:
@@ -46,20 +46,20 @@ cephClusterSpec:
   resources:
     mgr:
       requests:
-        cpu: 75m
+        cpu: 30m
         memory: 1024Mi
       limits:
         memory: 1024Mi
     mon:
       requests:
-        cpu: 50m
-        memory: 586Mi
+        cpu: 25m
+        memory: 543Mi
       limits:
-        memory: 2048Mi
+        memory: 1024Mi
     osd:
       requests:
-        cpu: 75m
-        memory: 3072Mi
+        cpu: 58m
+        memory: 2556Mi
       limits:
         memory: 4096Mi
     # prepareosd: # not set
@@ -75,11 +75,11 @@ cephClusterSpec:
         cpu: 10m
         memory: 100Mi
       limits:
-        memory: 192Mi
+        memory: 100Mi
     # cleanup # not set
     exporter:
       requests:
-        cpu: 10m
+        cpu: 15m
         memory: 100Mi
       limits:
         memory: 100Mi

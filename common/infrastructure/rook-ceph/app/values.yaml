@@ -33,10 +33,10 @@ csi:
     - name : csi-rbdplugin
       resource:
         requests:
-          memory: 128Mi
+          memory: 100Mi
           cpu: 10m
         limits:
-          memory: 1024Mi
+          memory: 256Mi
     - name : csi-omap-generator
       resource:
         requests:
@@ -62,10 +62,10 @@ csi:
     - name : csi-rbdplugin
       resource:
         requests:
-          memory: 128Mi
+          memory: 100Mi
           cpu: 10m
         limits:
-          memory: 1Gi
+          memory: 256Mi
     - name : liveness-prometheus
       resource:
         requests:
@@ -105,10 +105,10 @@ csi:
     - name : csi-cephfsplugin
       resource:
         requests:
-          memory: 128Mi
+          memory: 100Mi
           cpu: 10m
         limits:
-          memory: 1024Mi
+          memory: 256Mi
     - name : liveness-prometheus
       resource:
         requests:
@@ -127,10 +127,10 @@ csi:
     - name : csi-cephfsplugin
       resource:
         requests:
-          memory: 128Mi
+          memory: 100Mi
           cpu: 10m
         limits:
-          memory: 1024Mi
+          memory: 256Mi
     - name : liveness-prometheus
       resource:
         requests:
@@ -141,7 +141,7 @@ csi:
 
 resources:
   requests:
-    cpu: 50m
-    memory: 555Mi
+    cpu: 37m
+    memory: 258Mi
   limits:
-    memory: 555Mi
+    memory: 284Mi
