@@ -17,13 +17,13 @@ cainjector:
   resources:
     requests:
       cpu: 10m
-      memory: 147Mi
+      memory: 126Mi
     limits:
-      memory: 147Mi
+      memory: 126Mi
 
 resources:
   requests:
     cpu: 10m
-    memory: 108Mi
+    memory: 110Mi
   limits:
-    memory: 108Mi
+    memory: 110Mi

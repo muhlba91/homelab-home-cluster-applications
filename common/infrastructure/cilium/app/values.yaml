@@ -66,9 +66,9 @@ operator:
   resources:
     requests:
       cpu: 10m
-      memory: 222Mi
+      memory: 218Mi
     limits:
-      memory: 222Mi
+      memory: 218Mi
 
 envoy:
   resources:

@@ -44,7 +44,7 @@ provider:
         value: "false"
     resources:
       requests:
-        cpu: 3m
+        cpu: 10m
         memory: 100Mi
       limits:
         memory: 100Mi
@@ -52,6 +52,6 @@ provider:
 resources:
   requests:
     cpu: 10m
-    memory: 110Mi
+    memory: 116Mi
   limits:
-    memory: 110Mi
+    memory: 116Mi
