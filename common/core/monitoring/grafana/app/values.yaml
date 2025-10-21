@@ -87,9 +87,9 @@ sidecar:
   resources:
     requests:
       cpu: 10m
-      memory: 133Mi
+      memory: 130Mi
     limits:
-      memory: 133Mi
+      memory: 130Mi
   dashboards:
     enabled: true
     labelValue: "1"
@@ -109,7 +109,7 @@ sidecar:
 
 resources:
   requests:
-    cpu: 10m
-    memory: 398Mi
+    cpu: 12m
+    memory: 403Mi
   limits:
-    memory: 1Gi
+    memory: 1024Mi

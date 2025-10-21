@@ -4,6 +4,6 @@ reloader:
     resources:
       requests:
         cpu: 10m
-        memory: 226Mi
+        memory: 160Mi
       limits:
-        memory: 226Mi
+        memory: 160Mi

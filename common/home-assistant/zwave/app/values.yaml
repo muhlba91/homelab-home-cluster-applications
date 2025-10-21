@@ -32,9 +32,9 @@ controllers:
         resources:
           requests:
             cpu: 10m
-            memory: 192Mi
+            memory: 207Mi
           limits:
-            memory: 284Mi
+            memory: 207Mi
 
         probes:
           liveness:
@@ -73,11 +73,10 @@ controllers:
               name: zwave-js-backup
         resources:
           requests:
-            cpu: 50m
-            memory: 128Mi
+            cpu: 14m
+            memory: 100Mi
           limits:
-            cpu: "1"
-            memory: 256Mi
+            memory: 100Mi
 
 serviceAccount:
   home-assistant-zwave: {}

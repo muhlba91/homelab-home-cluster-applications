@@ -48,7 +48,7 @@ controllers:
         resources:
           requests:
             cpu: 10m
-            memory: 213Mi
+            memory: 208Mi
           # necessary for yarn!
           limits:
             memory: 1Gi

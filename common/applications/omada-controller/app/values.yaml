@@ -33,10 +33,10 @@ controllers:
 
         resources:
           requests:
-            cpu: 75m
-            memory: 2342Mi
+            cpu: 100m
+            memory: 2875Mi
           limits:
-            memory: 2342Mi
+            memory: 2875Mi
 
         probes:
           liveness: &server_probes

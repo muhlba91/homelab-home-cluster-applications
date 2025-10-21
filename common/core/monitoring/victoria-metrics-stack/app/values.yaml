@@ -12,9 +12,9 @@ victoria-metrics-operator:
   resources:
     requests:
       cpu: 10m
-      memory: 100Mi
+      memory: 106Mi
     limits:
-      memory: 100Mi
+      memory: 106Mi
 
 defaultRules:
   create: true
@@ -59,10 +59,10 @@ vmsingle:
       maxLabelsPerTimeseries: "150"
     resources:
       requests:
-        cpu: 105m
-        memory: 1867Mi
+        cpu: 22m
+        memory: 1511Mi
       limits:
-        memory: 1867Mi
+        memory: 1511Mi
     storage:
       storageClassName: ${DEFAULT_STORAGE_CLASS}
       accessModes:
@@ -91,8 +91,8 @@ vmagent:
     logLevel: WARN
     resources:
       requests:
-        cpu: 25m
-        memory: 256Mi
+        cpu: 53m
+        memory: 515Mi
       limits:
         memory: 512Mi
     externalLabels:
@@ -122,9 +122,9 @@ kube-state-metrics:
   resources:
     requests:
       cpu: 10m
-      memory: 156Mi
+      memory: 130Mi
     limits:
-      memory: 156Mi
+      memory: 130Mi
 
 kubelet:
   enabled: true

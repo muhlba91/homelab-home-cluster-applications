@@ -6,10 +6,10 @@ psp:
 controller:
   resources:
     requests:
-      cpu: 15m
-      memory: 146Mi
+      cpu: 10m
+      memory: 151Mi
     limits:
-      memory: 146Mi
+      memory: 151Mi
 speaker:
   resources:
     requests:
