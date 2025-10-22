@@ -9,4 +9,4 @@ spec:
     - nvr.${LOCAL_HOME_DOMAIN}
   issuerRef:
     kind: ClusterIssuer
-    name: cluster-issuer-home-muehlbachler-io
+    name: "${PUBLIC_CLUSTER_ISSUER}"

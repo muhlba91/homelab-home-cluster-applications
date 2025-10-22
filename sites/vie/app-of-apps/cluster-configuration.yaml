@@ -17,6 +17,10 @@ data:
   INTERNAL_DOMAIN: internal.muehlbachler.io
   LOCAL_INTERNAL_DOMAIN: vie.internal.muehlbachler.io
 
+  # cluster issuers
+  PUBLIC_CLUSTER_ISSUER: cluster-issuer-home-muehlbachler-io
+  INTERNAL_CLUSTER_ISSUER: cluster-issuer-internal-muehlbachler-io
+
   # load balancer ip addresses
   TRAEFIK_IP: "10.0.72.1,2a01:aea0:dd3:25a:1000:3:3:1"
   OMADA_CONTROLLER_IP: "10.0.71.1,2a01:aea0:dd3:25a:1000:3:2:1"

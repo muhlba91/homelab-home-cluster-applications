@@ -76,7 +76,7 @@ ingress:
   librechat:
     enabled: true
     annotations:
-      cert-manager.io/cluster-issuer: cluster-issuer-home-muehlbachler-io
+      cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
       external-dns.alpha.kubernetes.io/provider: public
       external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
       traefik.ingress.kubernetes.io/router.tls: "true"

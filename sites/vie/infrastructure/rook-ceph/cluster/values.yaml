@@ -87,7 +87,7 @@ cephClusterSpec:
 ingress:
   dashboard:
     annotations:
-      cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+      cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
       external-dns.alpha.kubernetes.io/provider: internal
     host:
       name: &domain rook.${LOCAL_INTERNAL_DOMAIN}

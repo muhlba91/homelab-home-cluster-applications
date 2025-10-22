@@ -9,5 +9,5 @@ spec:
     - mqtt.iot.${INTERNAL_DOMAIN}
   issuerRef:
     kind: ClusterIssuer
-    name: cluster-issuer-internal-muehlbachler-io
+    name: "${INTERNAL_CLUSTER_ISSUER}"
   secretName: emqx-tls

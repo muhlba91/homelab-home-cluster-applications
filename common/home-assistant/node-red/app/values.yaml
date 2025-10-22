@@ -146,7 +146,7 @@ ingress:
   node-red:
     enabled: true
     annotations:
-      cert-manager.io/cluster-issuer: cluster-issuer-internal-muehlbachler-io
+      cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
       external-dns.alpha.kubernetes.io/provider: internal
       traefik.ingress.kubernetes.io/router.tls: "true"
     hosts:
