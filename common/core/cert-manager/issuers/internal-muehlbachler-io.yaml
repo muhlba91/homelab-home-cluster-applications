@@ -2,12 +2,12 @@
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: "${INTERNAL_CLUSTER_ISSUER}"
+  name: cluster-issuer-internal-muehlbachler-io
 spec:
   acme:
     email: "noreply@muehlbachler.xyz"
     privateKeySecretRef:
-      name: "${INTERNAL_CLUSTER_ISSUER}"-account-key
+      name: cluster-issuer-internal-muehlbachler-io-account-key
     server: https://acme-v02.api.letsencrypt.org/directory
     solvers:
       - selector:
