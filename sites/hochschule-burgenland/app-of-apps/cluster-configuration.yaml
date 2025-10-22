@@ -20,8 +20,8 @@ data:
   LOCAL_HOME_DOMAIN: hochschule-burgenland.muehlbachler.xyz
 
   # cluster issuers
-  PUBLIC_CLUSTER_ISSUER: cluster-issuer-home-muehlbachler-xyz
-  INTERNAL_CLUSTER_ISSUER: cluster-issuer-home-muehlbachler-xyz
+  PUBLIC_CLUSTER_ISSUER: cluster-issuer-muehlbachler-xyz
+  INTERNAL_CLUSTER_ISSUER: cluster-issuer-muehlbachler-xyz
 
   # load balancer ip addresses
   TRAEFIK_IP: "10.100.72.1,2a01:4f8:121:14e2:100:3:3:1"
