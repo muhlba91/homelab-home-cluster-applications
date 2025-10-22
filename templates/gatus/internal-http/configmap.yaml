@@ -19,3 +19,7 @@ data:
           insecure: true
         conditions:
           - "[STATUS] == ${GATUS_STATUS:-200}"
+        alerts:
+          - type: ntfy
+            priority: ${GATUS_ALERT_PRIORITY:-2}
+            enabled: ${GATUS_ALERT_ENABLED:-true}

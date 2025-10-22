@@ -16,3 +16,7 @@ data:
         interval: 5m
         conditions:
           - "[CONNECTED] == true"
+        alerts:
+          - type: ntfy
+            priority: ${GATUS_ALERT_PRIORITY:-2}
+            enabled: ${GATUS_ALERT_ENABLED:-true}

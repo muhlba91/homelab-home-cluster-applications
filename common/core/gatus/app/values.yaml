@@ -39,6 +39,9 @@ controllers:
         env:
           - name: GATUS_CONFIG_PATH
             value: /config
+        envFrom:
+          - secretRef:
+              name: gatus-ntfy
 
         resources:
           requests:

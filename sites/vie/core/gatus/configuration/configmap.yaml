@@ -11,8 +11,22 @@ data:
 
     ui:
       title: Status Dashboard
-      description: The current service status of the muehlbachler organization.
+      description: The current service status of the muehlbachler organization, specifically to the VIE site.
       header: Health Status
+      default-sort-by: name
+
+    alerting:
+      ntfy:
+        url: https://notify.infrastructure.muehlbachler.io
+        topic: ${NTFY_TOPIC}
+        token: ${NTFY_TOKEN}
+        priority: 2
+        click: https://status.${LOCAL_HOME_DOMAIN}
+        default-alert:
+          description: site ${SITE}
+          send-on-resolved: true
+          failure-threshold: 6
+          success-threshold: 3
 
     endpoints:
       # 001 - Mail
@@ -24,6 +38,9 @@ data:
         conditions:
           - "[CONNECTED] == true"
           - "[CERTIFICATE_EXPIRATION] > 48h"
+        alerts:
+          - type: ntfy
+            priority: 4
       - name: SMTP Outgoing (Soverin)
         group: 001 - Mail
         enabled: true
@@ -32,6 +49,9 @@ data:
         conditions:
           - "[CONNECTED] == true"
           - "[CERTIFICATE_EXPIRATION] > 48h"
+        alerts:
+          - type: ntfy
+            priority: 4
       - name: SMTP Incoming (Soverin)
         group: 001 - Mail
         enabled: true
@@ -39,6 +59,9 @@ data:
         interval: 5m
         conditions:
           - "[CONNECTED] == true"
+        alerts:
+          - type: ntfy
+            priority: 4
       - name: IMAP
         group: 001 - Mail
         enabled: true
@@ -47,6 +70,9 @@ data:
         conditions:
           - "[CONNECTED] == true"
           - "[CERTIFICATE_EXPIRATION] > 48h"
+        alerts:
+          - type: ntfy
+            priority: 4
       - name: SMTP Outgoing
         group: 001 - Mail
         enabled: true
@@ -55,6 +81,9 @@ data:
         conditions:
           - "[CONNECTED] == true"
           - "[CERTIFICATE_EXPIRATION] > 48h"
+        alerts:
+          - type: ntfy
+            priority: 4
       - name: SMTP Incoming
         group: 001 - Mail
         enabled: true
@@ -62,6 +91,9 @@ data:
         interval: 5m
         conditions:
           - "[CONNECTED] == true"
+        alerts:
+          - type: ntfy
+            priority: 4
       # 002 - Applications
       - name: SimpleLogin Aliases
         group: 002 - Applications
@@ -71,6 +103,9 @@ data:
         interval: 5m
         conditions:
           - "[STATUS] == 200"
+        alerts:
+          - type: ntfy
+            priority: 3
       # 004 - Samba
       - name: Immich Daniel
         group: 004 - Samba
@@ -79,6 +114,9 @@ data:
         interval: 5m
         conditions:
           - "[CONNECTED] == true"
+        alerts:
+          - type: ntfy
+            enabled: false
       - name: Immich Kasia
         group: 004 - Samba
         enabled: true
@@ -86,6 +124,9 @@ data:
         interval: 5m
         conditions:
           - "[CONNECTED] == true"
+        alerts:
+          - type: ntfy
+            enabled: false
       # 005 - DNS
       - name: AdGuard Home
         group: 005 - DNS
@@ -94,6 +135,9 @@ data:
         interval: 5m
         conditions:
           - "[CONNECTED] == true"
+        alerts:
+          - type: ntfy
+            priority: 5
       # 006 - Monitoring
       - name: Victoria Metrics VMAgent
         group: 006 - Monitoring
@@ -103,6 +147,9 @@ data:
         interval: 5m
         conditions:
           - "[STATUS] == 200"
+        alerts:
+          - type: ntfy
+            enabled: false
       - name: Victoria Metrics VMSingle
         group: 006 - Monitoring
         enabled: true
@@ -111,6 +158,9 @@ data:
         interval: 5m
         conditions:
           - "[STATUS] == 200"
+        alerts:
+          - type: ntfy
+            enabled: false
       # 007 - Infrastructure
       - name: Vault
         group: 007 - Infrastructure
@@ -120,3 +170,6 @@ data:
         interval: 5m
         conditions:
           - "[STATUS] == 200"
+        alerts:
+          - type: ntfy
+            priority: 5
