@@ -10,7 +10,7 @@ controllers:
         image:
           repository: valkey/valkey
           pullPolicy: IfNotPresent
-          tag: 8.1.4-alpine
+          tag: 9.0.0-alpine
 
         resources:
           requests:
