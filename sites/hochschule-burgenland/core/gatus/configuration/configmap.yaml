@@ -1,0 +1,29 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gatus-config
+data:
+  config.yaml: |
+    storage:
+      type: sqlite
+      path: /data/data.db
+
+    ui:
+      title: Status Dashboard
+      description: The current service status of the muehlbachler organization, specifically to the Hochschule Burgenland site.
+      header: Health Status
+      default-sort-by: name
+
+    alerting:
+      ntfy:
+        url: https://notify.infrastructure.muehlbachler.io
+        topic: ${NTFY_TOPIC}
+        token: ${NTFY_TOKEN}
+        priority: 2
+        click: https://status.${LOCAL_HOME_DOMAIN}
+        default-alert:
+          description: site ${SITE}
+          send-on-resolved: true
+          failure-threshold: 6
+          success-threshold: 3

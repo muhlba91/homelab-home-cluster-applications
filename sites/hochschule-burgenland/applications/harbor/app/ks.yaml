@@ -19,3 +19,6 @@ spec:
     substitute:
       APPLICATION: *application
       APPLICATION_NAMESPACE: *application
+      GATUS_NAME: Harbor
+      GATUS_GROUP: 002 - Applications
+      GATUS_SERVICE: harbor-portal

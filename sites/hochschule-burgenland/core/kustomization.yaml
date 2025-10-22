@@ -6,3 +6,4 @@ resources:
   - ../../../common/core/cert-manager/
   - ../../../common/core/cloudnative-pg/
   - ../../../common/core/kyverno/
+  - ./gatus/
