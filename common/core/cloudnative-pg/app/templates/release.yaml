@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: cloudnative-pg
-      version: 0.26.0
+      version: 0.26.1
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
