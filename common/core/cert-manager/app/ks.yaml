@@ -19,7 +19,7 @@ spec:
     substitute:
       APPLICATION: *application
       APPLICATION_NAMESPACE: *application
-      GATUS_NAME: Cert Manager Home
+      GATUS_NAME: Cert Manager
       GATUS_GROUP: 007 - Infrastructure
       GATUS_PORT: "9402"
       GATUS_STATUS: "404"

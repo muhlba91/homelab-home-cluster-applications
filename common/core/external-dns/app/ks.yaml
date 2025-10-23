@@ -19,7 +19,7 @@ spec:
     substitute:
       APPLICATION: *application
       APPLICATION_NAMESPACE: *application
-      GATUS_NAME: External DNS Home
+      GATUS_NAME: External DNS
       GATUS_GROUP: 005 - DNS
       GATUS_PORT: "7979"
       GATUS_STATUS: "404"
