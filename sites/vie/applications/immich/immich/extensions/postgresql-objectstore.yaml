@@ -12,7 +12,7 @@ spec:
         key: credentials
     wal:
       compression: gzip
-      maxParallel: 4
+      maxParallel: 1
     data:
       compression: gzip
   retentionPolicy: 7d
