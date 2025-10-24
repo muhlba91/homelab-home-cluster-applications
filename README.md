@@ -74,6 +74,7 @@ The following applications are defined in [`common/infrastructure/`](common/infr
 - [x] [MetalLB](https://metallb.universe.tf) - Provides a Kubernetes network load balancer to expose Kubernetes `Service`s.
 - [x] [Metrics Server](https://github.com/kubernetes-sigs/metrics-server) - Collects container resource metrics.
 - [x] [NVIDIA Device Plugin](https://github.com/NVIDIA/k8s-device-plugin) - Makes the NVIDIA GPU accessible in the cluster.
+- [x] [Reflector](https://github.com/reflector/reflector) - Watches Kubernetes resources and reflects changes to another namespace.
 - [x] [Reloader](https://github.com/stakater/Reloader) - Automatically reloads Kubernetes resources when secrets or configmaps change.
 - [x] [Rook Ceph](https://rook.io) - Manages persistent storage in the cluster.
 - [x] [Traefik](https://traefik.io) - Exposes Kubernetes `Ingress` resources to the "outside world".
@@ -104,9 +105,9 @@ The following applications are defined in [`common/applications/`](common/applic
 
 The following applications are defined in [`common/home-assistant/`](common/home-assistant/).
 
-- [x] [EMQX](https://www.emqx.io) - A MQTT broker.
 - [x] [Home Assistant](https://home-assistant.io) - The Home Assistant instance.
   - [x] PostgreSQL instance as the Home Assistant recorder target and configured via the CloudNativePG operator.
+- [x] [EMQX](https://www.emqx.io) - A MQTT broker.
 - [x] [Node-RED](https://nodered.org) - Automation based on flows and Home Assistant data.
 - [x] [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) - Forwards Home Assistant state changes to a local [InfluxDB](https://www.influxdata.com) instance.
 - [x] [Z-Wave JS](https://github.com/zwave-js/zwave-js-ui) - Full featured Z-Wave Control Panel and MQTT Gateway.
@@ -126,39 +127,46 @@ The [MUC](sites/muc/) site contains the following applications:
 The following applications are defined in [`sites/muc/infrastructure/`](sites/muc/infrastructure/).
 
 - [x] cilium
+- [x] kubelet-serving-cert-approver
+- [x] metrics-server
+- [x] generic-device-plugin
 - [x] external-secrets
   - [x] [External Secrets Stores](sites/muc/infrastructure/external-secrets/) - Deploys the required `ClusterSecretStore`s and Vault credentials as Kubernetes `Secret`s.
-- [x] kubelet-serving-cert-approver
-- [x] generic-device-plugin
+- [x] rook-ceph
 - [x] metallb
-- [x] metrics-server
-- [x] reloader
 - [x] traefik
+- [x] reloader
 
 #### Core Applications (MUC)
 
 The following applications are defined in [`sites/muc/core/`](sites/muc/core/).
 
+- [x] external-dns
 - [x] adguard-external-dns
 - [x] cert-manager
 - [x] cloudnative-pg
-- [x] external-dns
 - [x] gatus
-- [x] monitoring
-- [x] velero
-  - [x] Includes deployment of backup schedules.
+- [ ] monitoring
+- [ ] velero
+  - [ ] Includes deployment of backup schedules.
 
 #### (User) Applications (MUC)
 
 The following applications are defined in [`sites/muc/applications/`](sites/muc/applications/).
 
-- [x] frigate
-- [x] external-services
+- [x] omada-controller
 - [x] influxdb
+- [x] external-services
+- [x] frigate
 
 #### Home Assistant (MUC)
 
 The following applications are defined in [`sites/muc/home-assistant/`](sites/muc/home-assistant/).
+
+- [x] emqx
+- [x] telegraf
+- [x] home-assistant
+- [x] node-red
 
 ### Vienna (VIE)
 
@@ -169,26 +177,28 @@ The [VIE](sites/vie/) site contains the following applications:
 The following applications are defined in [`sites/vie/infrastructure/`](sites/vie/infrastructure/).
 
 - [x] cilium
-- [x] external-secrets
-  - [x] [External Secrets Stores](infrastructure/external-secrets/) - Deploys the required `ClusterSecretStore`s and Vault credentials as Kubernetes `Secret`s.
 - [x] kubelet-serving-cert-approver
-- [x] metallb
 - [x] metrics-server
 - [x] nvidia-device-plugin
-- [x] reloader
+- [x] external-secrets
+  - [x] [External Secrets Stores](infrastructure/external-secrets/) - Deploys the required `ClusterSecretStore`s and Vault credentials as Kubernetes `Secret`s.
 - [x] rook-ceph
+- [x] metallb
 - [x] traefik
+- [x] flux extensions
+- [x] reloader
 
 #### Core Applications (VIE)
 
 The following applications are defined in [`sites/vie/core/`](sites/vie/core/).
 
+- [x] external-dns
+- [x] adguard-external-dns
 - [x] cert-manager
 - [x] cloudnative-pg
-- [x] external-dns
-- [x] gatus
 - [x] monitoring
 - [x] kyverno
+- [x] gatus
 - [x] velero
   - [x] Includes deployment of backup schedules.
 
@@ -196,34 +206,66 @@ The following applications are defined in [`sites/vie/core/`](sites/vie/core/).
 
 The following applications are defined in [`sites/vie/applications/`](sites/vie/applications/).
 
+- [x] omada-controller
+- [x] influxdb
+- [x] [Ollama](https://ollama.com) - Run LLM models locally. *(testing)*
 - [x] external-services
 - [x] [Immich](https://immich.app) - Photo management solution.
-- [x] influxdb
 - [x] [LibreChat](https://librechat.ai) - Open-source chat application for AI conversations.
 - [x] [Mealie](https://mealie.io) - Recipe management application.
-- [x] [Ollama](https://ollama.com) - Run LLM models locally. *(testing)*
-- [x] omada-controller
+- [x] frigate
 
 #### Home Assistant (VIE)
 
 The following applications are defined in [`sites/vie/home-assistant/`](sites/vie/home-assistant/).
 
-- [x] [ecowitt2mqtt](https://github.com/bachya/ecowitt2mqtt) - Forwards data received from ecowitt devices to the MQTT broker.
 - [x] emqx
-- [x] home-assistant
-- [x] node-red
-- [x] [Ring MQTT](https://github.com/tsightler/ring-mqtt) - Amazon Ring devices to MQTT bridge.
 - [x] telegraf
 - [x] zwave
+- [x] home-assistant
+- [x] node-red
+- [x] [ecowitt2mqtt](https://github.com/bachya/ecowitt2mqtt) - Forwards data received from ecowitt devices to the MQTT broker.
+- [x] [Ring MQTT](https://github.com/tsightler/ring-mqtt) - Amazon Ring devices to MQTT bridge.
 - [x] [Faster Whisper](https://github.com/SYSTRAN/faster-whisper) - Faster Whisper transcription with CTranslate2. *(testing)*
-- [x] [OpenWakeWord](https://github.com/dscripka/openWakeWord) - An open-source audio wake word (or phrase) detection framework. *(testing)*
 - [x] [Piper](https://github.com/rhasspy/piper) - A local TTS server. *(testing)*
+- [x] [OpenWakeWord](https://github.com/dscripka/openWakeWord) - An open-source audio wake word (or phrase) detection framework. *(testing)*
 
 ### Hochschule Burgenland (hochschule-burgenland)
 
 The [Hochschule Burgenland](sites/hochschule-burgenland/) site contains the applications used in the Hochschule Burgenland lectures.
 
-This site is under active development.
+#### Infrastructure (hochschule-burgenland)
+
+The following applications are defined in [`sites/hochschule-burgenland/infrastructure/`](sites/hochschule-burgenland/infrastructure/).
+
+- [x] cilium
+- [x] kubelet-serving-cert-approver
+- [x] metrics-server
+- [x] external-secrets
+  - [x] [External Secrets Stores](infrastructure/external-secrets/) - Deploys the required `ClusterSecretStore`s and Vault credentials as Kubernetes `Secret`s.
+- [x] [Democratic CSI](https://github.com/democratic-csi/democratic-csi) - Container Storage Interface (CSI) driver for dynamic provisioning of storage using iSCSI on Proxmox VE.
+- [x] metallb
+- [x] traefik
+- [x] reloader
+- [x] reflector
+
+#### Core Applications (hochschule-burgenland)
+
+The following applications are defined in [`sites/hochschule-burgenland/core/`](sites/hochschule-burgenland/core/).
+
+- [x] external-dns
+- [x] cert-manager
+- [x] cloudnative-pg
+- [x] kyverno
+- [x] gatus
+
+#### (User) Applications (hochschule-burgenland)
+
+The following applications are defined in [`sites/hochschule-burgenland/applications/`](sites/hochschule-burgenland/applications/).
+
+- [x] [Dex](https://dexidp.io) - OpenID Connect Identity (OIDC) and OAuth 2.0 Provider with LDAP backend for student authentication using GitHub.
+- [x] [Harbor](https://goharbor.io) - Container image registry.
+- [x] [ArgoCD](https://argo-cd.readthedocs.io) - GitOps continuous delivery tool for Kubernetes.
 
 ---
 
