@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: reflector
-      version: 9.1.37
+      version: 9.1.38
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
