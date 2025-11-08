@@ -13,7 +13,7 @@ controllers:
       init-config:
         image: &configSyncImage
           repository: ghcr.io/kiwigrid/k8s-sidecar
-          tag: 1.30.10
+          tag: 2.1.2
 
         env:
           FOLDER: /config
@@ -29,6 +29,26 @@ controllers:
             memory: 125Mi
           limits:
             memory: 125Mi
+
+        probes: &configSyncProbes
+          liveness:
+            enabled: true
+            custom: true
+            spec:
+              httpGet:
+                path: /healthz
+                port: 8080
+              initialDelaySeconds: 35
+              periodSeconds: 10
+          readiness:
+            enabled: true
+            custom: true
+            spec:
+              httpGet:
+                path: /healthz
+                port: 8080
+              initialDelaySeconds: 20
+              periodSeconds: 5
     containers:
       gatus:
         image:
@@ -71,6 +91,7 @@ controllers:
           UNIQUE_FILENAMES: true
           METHOD: WATCH
         resources: *configSyncResources
+        probes: *configSyncProbes
 
 serviceAccount:
   gatus: {}
