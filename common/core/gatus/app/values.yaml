@@ -16,6 +16,7 @@ controllers:
           tag: 2.1.2
 
         env:
+          HEALTH_PORT: "8888"
           FOLDER: /config
           LABEL: gatus.io/enabled
           NAMESPACE: ALL
@@ -64,6 +65,7 @@ controllers:
       config-sync:
         image: *configSyncImage
         env:
+          HEALTH_PORT: "8888"
           FOLDER: /config
           LABEL: gatus.io/enabled
           NAMESPACE: ALL
