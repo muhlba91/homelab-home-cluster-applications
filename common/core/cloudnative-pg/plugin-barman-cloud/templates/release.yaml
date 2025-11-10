@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: plugin-barman-cloud
-      version: 0.2.0
+      version: 0.3.0
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
