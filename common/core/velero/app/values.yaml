@@ -7,9 +7,9 @@ kubectl:
 resources:
   requests:
     cpu: 128m
-    memory: 114Mi
+    memory: 256Mi
   limits:
-    memory: 114Mi
+    memory: 256Mi
 
 initContainers:
   - name: velero-plugin-for-gcp
@@ -32,6 +32,6 @@ nodeAgent:
   resources:
     requests:
       cpu: 10m
-      memory: 112Mi
+      memory: 256Mi
     limits:
       memory: 2Gi
