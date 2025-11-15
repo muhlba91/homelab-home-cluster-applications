@@ -10,6 +10,8 @@ providers:
     allowEmptyServices: true
     publishedService:
       enabled: true
+  kubernetesGateway:
+    enabled: true
 
 additionalArguments:
   - "--serversTransport.insecureSkipVerify=true"
