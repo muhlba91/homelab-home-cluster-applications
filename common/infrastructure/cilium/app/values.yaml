@@ -23,6 +23,9 @@ k8sClientRateLimit:
   qps: 30
   burst: 60
 
+bgpControlPlane:
+  enabled: true
+
 l2announcements:
   enabled: false
 externalIPs:
@@ -35,6 +38,7 @@ cgroup:
 
 bpf:
   masquerade: true
+  lbExternalClusterIP: true
 
 securityContext:
   capabilities:
