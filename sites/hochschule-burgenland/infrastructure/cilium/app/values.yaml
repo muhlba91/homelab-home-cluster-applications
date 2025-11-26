@@ -2,14 +2,7 @@
 rollOutCiliumPods: true
 
 ipam:
-  mode: cluster-pool
-  operator:
-    clusterPoolIPv4PodCIDRList:
-      - ${CILIUM_IPV4_POD_CIDR}
-    clusterPoolIPv4MaskSize: 24
-    clusterPoolIPv6PodCIDRList:
-      - ${CILIUM_IPV6_POD_CIDR}
-    clusterPoolIPv6MaskSize: 120
+  mode: kubernetes
 ipv6:
   enabled: true
 
