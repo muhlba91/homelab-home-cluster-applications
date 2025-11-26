@@ -22,8 +22,8 @@ data:
   INTERNAL_CLUSTER_ISSUER: cluster-issuer-internal-muehlbachler-io
 
   # CIDRs
-  CILIUM_IPV4_POD_CIDR: "10.56.0.0/16"
-  CILIUM_IPV6_POD_CIDR: "fc00:db8:56::/56"
+  CILIUM_IPV4_POD_CIDR: "10.102.0.0/16"
+  CILIUM_IPV6_POD_CIDR: "fc00:db8:102::/112"
 
   # load balancer ip addresses
   TRAEFIK_IP: "10.1.72.1,fd40:2e3:42a::1000:3:3:1"
