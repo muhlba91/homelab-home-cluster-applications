@@ -1,0 +1,15 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumBGPClusterConfig
+metadata:
+  name: cilium-bgp
+spec:
+  bgpInstances:
+    - name: "64551"
+      localASN: 64551
+      peers:
+        - name: "65111"
+          peerASN: 65111
+          peerAddress: 2a01:aea0:dd3:25a::1
+          peerConfigRef:
+            name: cilium-peer
