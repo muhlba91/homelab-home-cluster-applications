@@ -7,3 +7,4 @@ spec:
   blocks:
     - cidr: 10.111.0.0/16
     - cidr: fc00:db8:111::/96
+  disabled: true
