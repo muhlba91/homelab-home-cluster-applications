@@ -6,7 +6,7 @@ metadata:
 spec:
   blocks:
     - cidr: 10.112.0.0/16
-    - cidr: fc00:db8:112::/112
+    - cidr: fc00:db8:112::/96
 ---
 apiVersion: cilium.io/v2
 kind: CiliumLoadBalancerIPPool
