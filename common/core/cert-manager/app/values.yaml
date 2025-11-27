@@ -5,7 +5,10 @@ extraArgs:
   - "--dns01-recursive-nameservers-only"
   - "--dns01-recursive-nameservers=1.1.1.1:53,1.0.0.1:53"
 
+serviceIPFamilyPolicy: PreferDualStack
+
 webhook:
+  serviceIPFamilyPolicy: PreferDualStack
   resources:
     requests:
       cpu: 10m

@@ -9,6 +9,8 @@ victoria-metrics-operator:
   operator:
     disable_prometheus_converter: false
     enable_converter_ownership: true
+  service:
+    ipFamilyPolicy: PreferDualStack
   resources:
     requests:
       cpu: 10m
@@ -57,6 +59,9 @@ vmsingle:
     logLevel: WARN
     extraArgs:
       maxLabelsPerTimeseries: "150"
+    serviceSpec:
+      spec:
+        ipFamilyPolicy: PreferDualStack
     resources:
       requests:
         cpu: 22m
@@ -89,6 +94,9 @@ vmagent:
     minScrapeInterval: 60s
     maxScrapeInterval: 900s
     logLevel: WARN
+    serviceSpec:
+      spec:
+        ipFamilyPolicy: PreferDualStack
     resources:
       requests:
         cpu: 53m
@@ -110,6 +118,9 @@ grafana:
 
 prometheus-node-exporter:
   enabled: true
+  service:
+    ipDualStack:
+      enabled: true
   resources:
     requests:
       cpu: 10m
@@ -119,6 +130,9 @@ prometheus-node-exporter:
 
 kube-state-metrics:
   enabled: true
+  service:
+    ipDualStack:
+      enabled: true
   resources:
     requests:
       cpu: 10m

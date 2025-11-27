@@ -38,6 +38,9 @@ extraVolumeMounts:
     mountPath: /etc/secrets/service-account
     readOnly: true
 
+service:
+  ipFamilyPolicy: PreferDualStack
+
 resources:
   requests:
     cpu: 10m

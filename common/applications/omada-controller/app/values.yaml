@@ -63,6 +63,7 @@ defaultPodOptions:
 service:
   omada-controller-http:
     controller: main
+    ipFamilyPolicy: PreferDualStack
     ports:
       manage:
         port: 80
@@ -70,6 +71,7 @@ service:
         port: 8088
   omada-controller-https:
     controller: main
+    ipFamilyPolicy: PreferDualStack
     annotations:
       traefik.ingress.kubernetes.io/service.serversscheme: https
     ports:

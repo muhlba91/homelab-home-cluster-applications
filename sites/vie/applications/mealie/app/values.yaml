@@ -63,6 +63,7 @@ controllers:
 service:
   mealie:
     controller: main
+    ipFamilyPolicy: PreferDualStack
     ports:
       http:
         port: 9000

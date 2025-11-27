@@ -14,6 +14,9 @@ rbac:
 serviceAccount:
   create: true
 
+service:
+  ipFamilyPolicy: PreferDualStack
+
 testFramework:
   enabled: false
 

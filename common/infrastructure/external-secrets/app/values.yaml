@@ -1,4 +1,7 @@
 ---
+service:
+  ipFamilyPolicy: PreferDualStack
+
 resources:
   requests:
     cpu: 10m

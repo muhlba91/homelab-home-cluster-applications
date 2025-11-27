@@ -49,6 +49,9 @@ provider:
       limits:
         memory: 100Mi
 
+service:
+  ipFamilyPolicy: PreferDualStack
+
 resources:
   requests:
     cpu: 10m

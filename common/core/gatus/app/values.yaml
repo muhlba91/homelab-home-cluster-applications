@@ -80,6 +80,7 @@ serviceAccount:
 service:
   gatus:
     controller: main
+    ipFamilyPolicy: PreferDualStack
     ports:
       http:
         port: 8080

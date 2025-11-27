@@ -36,6 +36,7 @@ controllers:
 service:
   valkey:
     controller: main
+    ipFamilyPolicy: PreferDualStack
     ports:
       valkey:
         port: 6379

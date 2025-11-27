@@ -88,7 +88,7 @@ controllers:
 service:
   frigate-http:
     controller: main
-    ipFamilyPolicy: SingleStack
+    ipFamilyPolicy: PreferDualStack
     ports:
       http:
         port: 5000
@@ -96,7 +96,7 @@ service:
         port: 8971
   frigate:
     controller: main
-    ipFamilyPolicy: SingleStack
+    ipFamilyPolicy: PreferDualStack
     ports:
       rtmp:
         port: 1935
