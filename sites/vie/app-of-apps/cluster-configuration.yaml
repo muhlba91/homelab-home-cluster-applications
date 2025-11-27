@@ -26,7 +26,7 @@ data:
   CILIUM_IPV6_POD_CIDR: "fc00:db8:101::/112"
 
   # load balancer
-  LB_IP_ANNOTATION: "metallb.universe.tf/loadBalancerIPs"
+  LB_IP_ANNOTATION: "metallb.io/loadBalancerIPs"
   TRAEFIK_IP: "10.0.72.1,2a01:aea0:dd3:25a:1000:3:3:1"
   OMADA_CONTROLLER_IP: "10.0.71.1,2a01:aea0:dd3:25a:1000:3:2:1"
   OMADA_CONTROLLER_IP_WEB_IPV4: "10.0.71.1"
