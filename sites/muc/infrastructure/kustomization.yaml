@@ -8,6 +8,7 @@ resources:
   - ../../../common/infrastructure/generic-device-plugin/
   - ./external-secrets/
   - ./rook-ceph/
+  - ./metallb/
   - ../../../common/infrastructure/traefik/
   # - ./flux-extensions/
   - ../../../common/infrastructure/reloader/
