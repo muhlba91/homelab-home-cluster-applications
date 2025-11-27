@@ -27,7 +27,7 @@ bgpControlPlane:
   enabled: true
 
 l2announcements:
-  enabled: true
+  enabled: false
 externalIPs:
   enabled: true
 
