@@ -5,7 +5,7 @@ metadata:
   name: omada-controller-web
 subsets:
   - addresses:
-      - ip: ${OMADA_CONTROLLER_IP_WEB}
+      - ip: ${OMADA_CONTROLLER_IP_WEB_IPV4}
     ports:
       - name: http
         port: 443
