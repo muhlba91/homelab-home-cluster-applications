@@ -110,7 +110,7 @@ data:
       - name: Immich Daniel
         group: 004 - Samba
         enabled: true
-        url: tcp://10.0.74.21:445
+        url: tcp://10.111.74.21:445
         interval: 5m
         conditions:
           - "[CONNECTED] == true"
@@ -120,7 +120,7 @@ data:
       - name: Immich Kasia
         group: 004 - Samba
         enabled: true
-        url: tcp://10.0.74.22:445
+        url: tcp://10.111.74.22:445
         interval: 5m
         conditions:
           - "[CONNECTED] == true"
