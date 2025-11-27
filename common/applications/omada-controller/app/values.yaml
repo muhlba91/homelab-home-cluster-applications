@@ -86,6 +86,7 @@ service:
     externalTrafficPolicy: Local
     annotations:
       ${LB_IP_ANNOTATION}: "${OMADA_CONTROLLER_IP}"
+    labels:
       "loadbalancer/type": local
     ports:
       manage:
