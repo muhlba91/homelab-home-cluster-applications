@@ -7,3 +7,4 @@ resources:
   - ciliumbgpclusterconfig.yaml
   - ciliumpeerconfig.yaml
   - ciliumbgpadvertisement.yaml
+  - ciliumloadbalancerpool.yaml
