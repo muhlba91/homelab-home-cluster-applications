@@ -29,7 +29,7 @@ bgpControlPlane:
 l2announcements:
   enabled: false
 externalIPs:
-  enabled: false
+  enabled: true
 
 cgroup:
   autoMount:
