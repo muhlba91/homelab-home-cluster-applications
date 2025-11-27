@@ -40,7 +40,7 @@ data:
   HOME_ASSISTANT_PIPER_IP: "10.111.73.21,fc00:db8:111::73:21"
 
   # public ip addresses
-  PUBLIC_IP: "144.208.195.224,2a01:aea0:dd3:25a::1"
+  PUBLIC_IP: "144.208.195.224,2a01:aea0:dd3:25a::2"
 
   # storage classes
   DEFAULT_STORAGE_CLASS: "rook-ceph-block"
