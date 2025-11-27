@@ -27,7 +27,8 @@ data:
   CILIUM_IPV4_POD_CIDR: "10.103.0.0/16"
   CILIUM_IPV6_POD_CIDR: "fc00:db8:103::/112"
 
-  # load balancer ip addresses
+  # load balancer
+  LB_IP_ANNOTATION: "metallb.universe.tf/loadBalancerIPs"
   TRAEFIK_IP: "10.100.72.1,2a01:4f8:121:14e2:100:3:3:1"
 
   # public ip addresses

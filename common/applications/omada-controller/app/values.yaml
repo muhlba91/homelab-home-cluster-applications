@@ -85,7 +85,7 @@ service:
     type: LoadBalancer
     externalTrafficPolicy: Local
     annotations:
-      metallb.universe.tf/loadBalancerIPs: "${OMADA_CONTROLLER_IP}"
+      ${LB_IP_ANNOTATION}: "${OMADA_CONTROLLER_IP}"
     ports:
       manage:
         port: 443
