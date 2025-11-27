@@ -6,7 +6,7 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/provider: internal
     external-dns.alpha.kubernetes.io/hostname: mqtt.iot.${LOCAL_INTERNAL_DOMAIN}
-    metallb.universe.tf/loadBalancerIPs: "${HOME_ASSISTANT_MQTT_IP}"
+    ${LB_IP_ANNOTATION}: "${HOME_ASSISTANT_MQTT_IP}"
 spec:
   type: LoadBalancer
   ipFamilyPolicy: PreferDualStack

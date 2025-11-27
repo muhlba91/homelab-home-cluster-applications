@@ -50,7 +50,7 @@ service:
     type: LoadBalancer
     ipFamilyPolicy: PreferDualStack
     annotations:
-      metallb.universe.tf/loadBalancerIPs: "${HOME_ASSISTANT_PIPER_IP}"
+      ${LB_IP_ANNOTATION}: "${HOME_ASSISTANT_PIPER_IP}"
       external-dns.alpha.kubernetes.io/provider: internal
       external-dns.alpha.kubernetes.io/hostname: piper.iot.${LOCAL_INTERNAL_DOMAIN}
     ports:

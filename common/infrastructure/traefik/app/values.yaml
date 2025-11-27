@@ -52,7 +52,7 @@ service:
   ipFamilyPolicy: PreferDualStack
   externalTrafficPolicy: Local
   annotations:
-    metallb.universe.tf/loadBalancerIPs: "${TRAEFIK_IP}"
+    ${LB_IP_ANNOTATION}: "${TRAEFIK_IP}"
 
 resources:
   requests:
