@@ -28,8 +28,6 @@ data:
   CILIUM_IPV6_POD_CIDR: "fc00:db8:103::/112"
 
   # load balancer
-  DEFAULT_LB_CLASS: "io.metallb/load-balancer"
-  DEFAULT_LB_IP_ANNOTATION: "metallb.io/loadBalancerIPs"
   METALLB_LB_CLASS: "io.metallb/load-balancer"
   METALLB_IP_ANNOTATION: "metallb.io/loadBalancerIPs"
   CILIUM_LB_CLASS: "io.cilium/bgp-control-plane"

@@ -51,9 +51,9 @@ ingressRoute:
 service:
   ipFamilyPolicy: PreferDualStack
   externalTrafficPolicy: Local
-  loadBalancerClass: ${DEFAULT_LB_CLASS}
+  loadBalancerClass: ${METALLB_LB_CLASS}
   annotations:
-    ${DEFAULT_LB_IP_ANNOTATION}: "${TRAEFIK_IP}"
+    ${METALLB_IP_ANNOTATION}: "${TRAEFIK_IP}"
 
 resources:
   requests:

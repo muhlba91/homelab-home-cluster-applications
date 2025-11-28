@@ -26,8 +26,6 @@ data:
   CILIUM_IPV6_POD_CIDR: "fc00:db8:101::/112"
 
   # load balancer
-  DEFAULT_LB_CLASS: "io.metallb/load-balancer"
-  DEFAULT_LB_IP_ANNOTATION: "metallb.io/loadBalancerIPs"
   METALLB_LB_CLASS: "io.metallb/load-balancer"
   METALLB_IP_ANNOTATION: "metallb.io/loadBalancerIPs"
   CILIUM_LB_CLASS: "io.cilium/bgp-control-plane"
@@ -38,13 +36,6 @@ data:
   OMADA_CONTROLLER_IP: "10.0.71.1,2a01:aea0:dd3:25a:1000:3:2:1"
   OMADA_CONTROLLER_IPV4: "10.0.71.1"
   OMADA_CONTROLLER_IPV6: "2a01:aea0:dd3:25a:1000:3:2:1"
-  IMMICH_SAMBA_DANIEL_IP: "10.0.74.21,2a01:aea0:dd3:25a:1000:3:5:21"
-  IMMICH_SAMBA_KASIA_IP: "10.0.74.22,2a01:aea0:dd3:25a:1000:3:5:22"
-  HOME_ASSISTANT_ECOWITT2MQTT_IP: "10.0.73.10,2a01:aea0:dd3:25a:1000:3:4:10"
-  HOME_ASSISTANT_MQTT_IP: "10.0.73.1,2a01:aea0:dd3:25a:1000:3:4:1"
-  HOME_ASSISTANT_FASTER_WHISPER_IP: "10.0.73.20,2a01:aea0:dd3:25a:1000:3:4:20"
-  HOME_ASSISTANT_OPENWAKEWORD_IP: "10.0.73.22,2a01:aea0:dd3:25a:1000:3:4:22"
-  HOME_ASSISTANT_PIPER_IP: "10.0.73.21,2a01:aea0:dd3:25a:1000:3:4:21"
 
   # public ip addresses
   PUBLIC_IP: "144.208.195.224,2a01:aea0:dd3:25a:1000:3:3:1"
