@@ -11,6 +11,5 @@ spec:
       stop: 2a01:aea0:dd3:25a:1000:3:10:255
   serviceSelector:
     matchLabels:
-      loadbalancer/type: cilium
       loadbalancer/mode: l2
   disabled: false

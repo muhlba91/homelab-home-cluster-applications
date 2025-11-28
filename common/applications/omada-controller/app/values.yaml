@@ -86,43 +86,9 @@ service:
     loadBalancerClass: ${CILIUM_L2_LB_CLASS}
     externalTrafficPolicy: Local
     annotations:
-      ${CILIUM_IP_ANNOTATION}: "${OMADA_CONTROLLER_IP_WEB_IPV4}"
+      ${CILIUM_IP_ANNOTATION}: "${OMADA_CONTROLLER_IPV4}"
     labels:
-      "loadbalancer/type": cilium
       "loadbalancer/mode": l2
-    ports:
-      manage:
-        port: 443
-      app-discovery:
-        port: 27001
-        protocol: UDP
-      discovery:
-        port: 29810
-        protocol: UDP
-      manager-v1:
-        port: 29811
-      adopt-v1:
-        port: 29812
-      upgrade-v1:
-        port: 29813
-      manager-v2:
-        port: 29814
-      transfer-v2:
-        port: 29815
-      rtty:
-        port: 29816
-      device-monitor:
-        port: 29817
-  omada-controller-cilium: # FIXME: lb class
-    controller: main
-    ipFamilyPolicy: PreferDualStack
-    type: LoadBalancer
-    loadBalancerClass: ${CILIUM_LB_CLASS}
-    externalTrafficPolicy: Local
-    annotations:
-      ${CILIUM_IP_ANNOTATION}: "10.111.71.1,fc00:db8:111::71:1"
-    labels:
-      "loadbalancer/type": cilium
     ports:
       manage:
         port: 443
