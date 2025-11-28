@@ -86,7 +86,7 @@ service:
     loadBalancerClass: ${CILIUM_L2_LB_CLASS}
     externalTrafficPolicy: Local
     annotations:
-      ${CILIUM_IP_ANNOTATION}: "${OMADA_CONTROLLER_IP}"
+      ${CILIUM_IP_ANNOTATION}: "${OMADA_CONTROLLER_IP_WEB_IPV4}"
     labels:
       "loadbalancer/type": cilium
       "loadbalancer/mode": l2
