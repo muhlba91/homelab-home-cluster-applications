@@ -266,10 +266,10 @@ service:
     controller: samba-daniel
     ipFamilyPolicy: PreferDualStack
     type: LoadBalancer
-    loadBalancerClass: ${DEFAULT_LB_CLASS}
+    loadBalancerClass: ${CILIUM_LB_CLASS}
     externalTrafficPolicy: Local
     annotations:
-      ${DEFAULT_LB_IP_ANNOTATION}: "${IMMICH_SAMBA_DANIEL_IP}"
+      ${CILIUM_IP_ANNOTATION}: "${IMMICH_SAMBA_DANIEL_IP}"
       external-dns.alpha.kubernetes.io/provider: internal
       external-dns.alpha.kubernetes.io/hostname: photos-daniel.smb.${INTERNAL_DOMAIN}
     ports:
@@ -302,10 +302,10 @@ service:
     controller: samba-kasia
     ipFamilyPolicy: PreferDualStack
     type: LoadBalancer
-    loadBalancerClass: ${DEFAULT_LB_CLASS}
+    loadBalancerClass: ${CILIUM_LB_CLASS}
     externalTrafficPolicy: Local
     annotations:
-      ${DEFAULT_LB_IP_ANNOTATION}: "${IMMICH_SAMBA_KASIA_IP}"
+      ${CILIUM_IP_ANNOTATION}: "${IMMICH_SAMBA_KASIA_IP}"
       external-dns.alpha.kubernetes.io/provider: internal
       external-dns.alpha.kubernetes.io/hostname: photos-kasia.smb.${INTERNAL_DOMAIN}
     ports:
