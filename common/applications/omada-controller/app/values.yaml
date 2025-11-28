@@ -111,6 +111,38 @@ service:
         port: 29816
       device-monitor:
         port: 29817
+  omada-controller-cilium:
+    controller: main
+    ipFamilyPolicy: PreferDualStack
+    type: LoadBalancer
+    externalTrafficPolicy: Local
+    annotations:
+      "lbipam.cilium.io/ips": "10.111.71.1,fc00:db8:111::71:1"
+    labels:
+      "loadbalancer/type": cilium
+    ports:
+      manage:
+        port: 443
+      app-discovery:
+        port: 27001
+        protocol: UDP
+      discovery:
+        port: 29810
+        protocol: UDP
+      manager-v1:
+        port: 29811
+      adopt-v1:
+        port: 29812
+      upgrade-v1:
+        port: 29813
+      manager-v2:
+        port: 29814
+      transfer-v2:
+        port: 29815
+      rtty:
+        port: 29816
+      device-monitor:
+        port: 29817
 
 # TODO: we cannot use the ingress due to https://github.com/mbentley/docker-omada-controller/discussions/317
 # hence, we are setting the endpoint to the load balancer and create a new ingress resource using our extensions
