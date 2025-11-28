@@ -113,6 +113,7 @@ service:
     controller: main
     ipFamilyPolicy: PreferDualStack
     type: LoadBalancer
+    loadBalancerClass: io.cilium/bgp-control-plane
     externalTrafficPolicy: Local
     annotations:
       "lbipam.cilium.io/ips": "10.111.71.1,fc00:db8:111::71:1"
