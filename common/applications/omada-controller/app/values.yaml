@@ -83,10 +83,13 @@ service:
     controller: main
     ipFamilyPolicy: PreferDualStack
     type: LoadBalancer
-    loadBalancerClass: ${DEFAULT_LB_CLASS}
+    loadBalancerClass: ${CILIUM_L2_LB_CLASS}
     externalTrafficPolicy: Local
     annotations:
-      ${DEFAULT_LB_IP_ANNOTATION}: "${OMADA_CONTROLLER_IP}"
+      ${CILIUM_IP_ANNOTATION}: "${OMADA_CONTROLLER_IP}"
+    labels:
+      "loadbalancer/type": cilium
+      "loadbalancer/mode": l2
     ports:
       manage:
         port: 443
