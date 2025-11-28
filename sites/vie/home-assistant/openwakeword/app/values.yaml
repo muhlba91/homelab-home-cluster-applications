@@ -40,9 +40,10 @@ service:
     controller: main
     enabled: true
     type: LoadBalancer
+    loadBalancerClass: ${DEFAULT_LB_CLASS}
     ipFamilyPolicy: PreferDualStack
     annotations:
-      ${LB_IP_ANNOTATION}: "${HOME_ASSISTANT_OPENWAKEWORD_IP}"
+      ${DEFAULT_LB_IP_ANNOTATION}: "${HOME_ASSISTANT_OPENWAKEWORD_IP}"
       external-dns.alpha.kubernetes.io/provider: internal
       external-dns.alpha.kubernetes.io/hostname: openwakeword.iot.${LOCAL_INTERNAL_DOMAIN}
     ports:

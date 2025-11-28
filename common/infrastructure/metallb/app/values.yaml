@@ -1,4 +1,6 @@
 ---
+loadBalancerClass: io.metallb/load-balancer
+
 rbac:
   create: true
 psp:

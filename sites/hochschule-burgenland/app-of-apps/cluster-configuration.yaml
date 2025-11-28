@@ -28,7 +28,14 @@ data:
   CILIUM_IPV6_POD_CIDR: "fc00:db8:103::/112"
 
   # load balancer
-  LB_IP_ANNOTATION: "metallb.io/loadBalancerIPs"
+  DEFAULT_LB_CLASS: "io.metallb/load-balancer"
+  DEFAULT_LB_IP_ANNOTATION: "metallb.io/loadBalancerIPs"
+  METALLB_LB_CLASS: "io.metallb/load-balancer"
+  METALLB_IP_ANNOTATION: "metallb.io/loadBalancerIPs"
+  CILIUM_LB_CLASS: "io.cilium/bgp-control-plane"
+  CILIUM_L2_LB_CLASS: "io.cilium/l2-announcer"
+  CILIUM_IP_ANNOTATION: "lbipam.cilium.io/ips"
+  # ip addresses for services
   TRAEFIK_IP: "10.100.72.1,2a01:4f8:121:14e2:100:3:3:1"
 
   # public ip addresses

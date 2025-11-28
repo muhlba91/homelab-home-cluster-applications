@@ -83,9 +83,10 @@ service:
     controller: main
     ipFamilyPolicy: PreferDualStack
     type: LoadBalancer
+    loadBalancerClass: ${DEFAULT_LB_CLASS}
     externalTrafficPolicy: Local
     annotations:
-      ${LB_IP_ANNOTATION}: "${OMADA_CONTROLLER_IP}"
+      ${DEFAULT_LB_IP_ANNOTATION}: "${OMADA_CONTROLLER_IP}"
     ports:
       manage:
         port: 443
@@ -113,10 +114,10 @@ service:
     controller: main
     ipFamilyPolicy: PreferDualStack
     type: LoadBalancer
-    loadBalancerClass: io.cilium/bgp-control-plane
+    loadBalancerClass: ${CILIUM_LB_CLASS}
     externalTrafficPolicy: Local
     annotations:
-      "lbipam.cilium.io/ips": "10.111.71.1,fc00:db8:111::71:1"
+      ${CILIUM_IP_ANNOTATION}: "10.111.71.1,fc00:db8:111::71:1"
     labels:
       "loadbalancer/type": cilium
     ports:

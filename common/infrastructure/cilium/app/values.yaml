@@ -27,11 +27,11 @@ bgpControlPlane:
   enabled: true
 
 l2announcements:
-  enabled: false
+  enabled: true
 externalIPs:
   enabled: true
 
-defaultLBServiceIPAM: none # FIXME: lb class
+defaultLBServiceIPAM: none
 
 cgroup:
   autoMount:

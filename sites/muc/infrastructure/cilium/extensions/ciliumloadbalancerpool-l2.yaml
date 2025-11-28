@@ -2,12 +2,15 @@
 apiVersion: cilium.io/v2
 kind: CiliumLoadBalancerIPPool
 metadata:
-  name: default
+  name: l2
 spec:
   blocks:
-    - cidr: 10.112.0.0/16
-    - cidr: fc00:db8:112::/96
+    - start: 10.1.70.1
+      stop: 10.1.79.255
+    - start: fd40:2e3:42a::1000:3:1:1
+      stop: fd40:2e3:42a::1000:3:10:255
   serviceSelector:
     matchLabels:
       loadbalancer/type: cilium
+      loadbalancer/mode: l2
   disabled: false
