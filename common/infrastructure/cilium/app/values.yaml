@@ -31,6 +31,8 @@ l2announcements:
 externalIPs:
   enabled: true
 
+defaultLBServiceIPAM: none # FIXME: lb class
+
 cgroup:
   autoMount:
     enabled: ${CILIUM_CGROUP_AUTO_MOUNT_ENABLED:-false}

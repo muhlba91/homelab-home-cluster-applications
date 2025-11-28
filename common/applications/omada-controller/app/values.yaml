@@ -86,8 +86,6 @@ service:
     externalTrafficPolicy: Local
     annotations:
       ${LB_IP_ANNOTATION}: "${OMADA_CONTROLLER_IP}"
-    labels:
-      "loadbalancer/type": local
     ports:
       manage:
         port: 443
@@ -111,7 +109,7 @@ service:
         port: 29816
       device-monitor:
         port: 29817
-  omada-controller-cilium:
+  omada-controller-cilium: # FIXME: lb class
     controller: main
     ipFamilyPolicy: PreferDualStack
     type: LoadBalancer
