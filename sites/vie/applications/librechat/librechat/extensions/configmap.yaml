@@ -57,12 +57,7 @@ data:
       "Home Assistant":
         type: streamable-http
         url: "https://jarvis.${LOCAL_HOME_DOMAIN}/api/mcp"
-        env:
-          API_ACCESS_TOKEN: "{{ API_ACCESS_TOKEN }}"
-        customUserVars:
-          API_ACCESS_TOKEN:
-            title: "API Access Token"
-            description: "Home Assistant long-lived Access Token"
+        initTimeout: 150000
       "GitHub":
         type: streamable-http
         url: "https://api.githubcopilot.com/mcp/"
