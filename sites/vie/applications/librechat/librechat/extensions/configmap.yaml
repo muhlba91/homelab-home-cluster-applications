@@ -61,13 +61,8 @@ data:
       "GitHub":
         type: streamable-http
         url: "https://api.githubcopilot.com/mcp/"
-        headers:
-          Authorization: "Bearer \\{\\{PAT_TOKEN}}"
-        customUserVars:
-          PAT_TOKEN:
-            title: "GitHub PAT Token"
-            description: "GitHub Personal Access Token"
         startup: false
+        initTimeout: 150000
       "Perplexity":
         command: npx
         args:
