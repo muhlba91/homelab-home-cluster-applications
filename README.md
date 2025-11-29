@@ -67,11 +67,12 @@ The [common](common/) directory contains applications and templates that can be 
 
 The following applications are defined in [`common/infrastructure/`](common/infrastructure/).
 
-- [x] [Cilium](https://cilium.io) - Provides the cluster CNI.
+- [x] [Cilium](https://cilium.io) - Provides the cluster CNI and load balancing.
 - [x] [External Secrets Operator](http://external-secrets.io) - Synchronizes secrets from external stores to Kubernetes `Secret` objects.
 - [x] [Generic Device Plugin](https://github.com/squat/generic-device-plugin) - Makes custom hardware devices accessible in the cluster.
 - [x] [Kubelet Serving Cert Approver](https://github.com/alex1989hu/kubelet-serving-cert-approver) - Enables automatic certificate approval by the kubelet.
 - [x] [MetalLB](https://metallb.universe.tf) - Provides a Kubernetes network load balancer to expose Kubernetes `Service`s.
+  - deprecated in favor of Cilium load balancer
 - [x] [Metrics Server](https://github.com/kubernetes-sigs/metrics-server) - Collects container resource metrics.
 - [x] [NVIDIA Device Plugin](https://github.com/NVIDIA/k8s-device-plugin) - Makes the NVIDIA GPU accessible in the cluster.
 - [x] [Reflector](https://github.com/reflector/reflector) - Watches Kubernetes resources and reflects changes to another namespace.
@@ -133,7 +134,6 @@ The following applications are defined in [`sites/muc/infrastructure/`](sites/mu
 - [x] external-secrets
   - [x] [External Secrets Stores](sites/muc/infrastructure/external-secrets/) - Deploys the required `ClusterSecretStore`s and Vault credentials as Kubernetes `Secret`s.
 - [x] rook-ceph
-- [x] metallb
 - [x] traefik
 - [x] reloader
 
@@ -183,7 +183,6 @@ The following applications are defined in [`sites/vie/infrastructure/`](sites/vi
 - [x] external-secrets
   - [x] [External Secrets Stores](infrastructure/external-secrets/) - Deploys the required `ClusterSecretStore`s and Vault credentials as Kubernetes `Secret`s.
 - [x] rook-ceph
-- [x] metallb
 - [x] traefik
 - [x] flux extensions
 - [x] reloader
@@ -238,7 +237,7 @@ The [Hochschule Burgenland](sites/hochschule-burgenland/) site contains the appl
 
 The following applications are defined in [`sites/hochschule-burgenland/infrastructure/`](sites/hochschule-burgenland/infrastructure/).
 
-- [x] cilium
+- [x] cilium (no load balancer)
 - [x] kubelet-serving-cert-approver
 - [x] metrics-server
 - [x] external-secrets
