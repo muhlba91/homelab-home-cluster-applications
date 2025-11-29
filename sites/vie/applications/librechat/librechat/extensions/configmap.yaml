@@ -49,6 +49,12 @@ data:
       apiKey: "${MISTRAL_API_KEY}"
       strategy: mistral_ocr
 
+    mcpServers:
+      server:
+        command: npx
+        args:
+          - "@modelcontextprotocol/server-memory"
+
     endpoints:
       agents:
         recursionLimit: 50
