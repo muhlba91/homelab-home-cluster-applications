@@ -62,7 +62,7 @@ data:
         type: streamable-http
         url: "https://api.githubcopilot.com/mcp/"
         headers:
-          Authorization: "Bearer {{ PAT_TOKEN }}"
+          Authorization: "Bearer \\{\\{ PAT_TOKEN }}"
         customUserVars:
           PAT_TOKEN:
             title: "GitHub PAT Token"
@@ -73,7 +73,7 @@ data:
         args:
           - "@perplexity-ai/mcp-server"
         env:
-          PERPLEXITY_API_KEY: "{{ PERPLEXITY_API_KEY }}"
+          PERPLEXITY_API_KEY: "\\{\\{ PERPLEXITY_API_KEY }}"
         customUserVars:
           PERPLEXITY_API_KEY:
             title: "Perplexity API Key"
