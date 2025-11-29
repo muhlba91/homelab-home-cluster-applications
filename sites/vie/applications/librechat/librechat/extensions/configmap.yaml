@@ -5,7 +5,7 @@ metadata:
   name: librechat-config
 data:
   librechat.yaml: |
-    version: 1.0.3
+    version: 1.2.8
 
     cache: true
 
@@ -34,9 +34,13 @@ data:
         - "muehlbachler.io"
 
     endpoints:
-      # assistants:
-      #   supportedIds:
-      #     - asst_supportedAssistantId1
+      agents:
+        recursionLimit: 50
+        maxRecursionLimit: 100
+        disableBuilder: false
+        maxCitations: 30
+        maxCitationsPerFile: 7
+        minRelevanceScore: 0.45
       custom:
         - name: "Mistral"
           modelDisplayLabel: "Mistral AI"
