@@ -54,6 +54,30 @@ data:
         command: npx
         args:
           - "@modelcontextprotocol/server-memory"
+      "Home Assistant":
+        type: streamable-http
+        url: "https://jarvis.${LOCAL_HOME_DOMAIN}/api/mcp"
+      "GitHub":
+        type: streamable-http
+        url: "https://api.githubcopilot.com/mcp/"
+        headers:
+          Authorization: "{{ PAT_TOKEN }}"
+        customUserVars:
+          PAT_TOKEN:
+            title: "GitHub PAT Token"
+            description: "GitHub Personal Access Token"
+        startup: false
+      "Perplexity":
+        command: npx
+        args:
+          - "@perplexity-ai/mcp-server"
+        env:
+          PERPLEXITY_API_KEY: "{{ PERPLEXITY_API_KEY }}"
+        customUserVars:
+          PERPLEXITY_API_KEY:
+            title: "Perplexity API Key"
+            description: "The Perplexity API Key"
+        startup: false
 
     endpoints:
       agents:
