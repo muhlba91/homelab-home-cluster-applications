@@ -50,7 +50,7 @@ data:
       strategy: mistral_ocr
 
     mcpServers:
-      server:
+      "Memory":
         command: npx
         args:
           - "@modelcontextprotocol/server-memory"
