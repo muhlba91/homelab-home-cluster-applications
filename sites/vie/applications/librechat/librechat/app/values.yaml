@@ -68,7 +68,7 @@ controllers:
 service:
   librechat:
     controller: main
-    ipFamilyPolicy: PreferDualStack
+    # ipFamilyPolicy: PreferDualStack
     ports:
       http:
         port: 3080
