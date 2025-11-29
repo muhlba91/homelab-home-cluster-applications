@@ -32,7 +32,7 @@ data:
   CILIUM_L2_LB_CLASS: "io.cilium/l2-announcer"
   CILIUM_IP_ANNOTATION: "lbipam.cilium.io/ips"
   # traefik specific load balancer
-  TRAEFIK_LB_CLASS: "io.cilium/bgp-control-plane"
+  TRAEFIK_LB_CLASS: "io.cilium/l2-announcer"
   TRAEFIK_IP_ANNOTATION: "lbipam.cilium.io/ips"
   # ip addresses for services
   TRAEFIK_IP: "10.0.72.1,2a01:aea0:dd3:25a:1000:3:3:1"
