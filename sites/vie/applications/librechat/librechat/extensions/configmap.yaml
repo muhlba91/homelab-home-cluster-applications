@@ -54,10 +54,10 @@ data:
         command: npx
         args:
           - "@modelcontextprotocol/server-memory"
-      "Home Assistant":
-        type: streamable-http
-        url: "https://jarvis.${LOCAL_HOME_DOMAIN}/api/mcp"
-        initTimeout: 150000
+      # "Home Assistant":
+      #   type: streamable-http
+      #   url: "https://jarvis.${LOCAL_HOME_DOMAIN}/api/mcp"
+      #   initTimeout: 150000
       "GitHub":
         type: streamable-http
         url: "https://api.githubcopilot.com/mcp/"
