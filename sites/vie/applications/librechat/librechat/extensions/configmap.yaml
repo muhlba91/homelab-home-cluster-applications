@@ -14,9 +14,8 @@ data:
     fileConfig:
       endpoints:
         default:
-          fileLimit: 5
           fileSizeLimit: 10
-          totalSizeLimit: 50
+          totalSizeLimit: 100
       serverFileSizeLimit: 100
       avatarSizeLimit: 4
 
@@ -32,6 +31,23 @@ data:
         - openid
       allowedDomains:
         - "muehlbachler.io"
+    
+    memory:
+      disabled: false
+      messageWindowSize: 10
+      agent:
+        provider: google
+        model: gemini-2.5-pro
+        model_parameters:
+          temperature: 0.2
+          max_tokens: 2000
+          top_p: 0.8
+          frequency_penalty: 0.1
+
+    ocr:
+      mistralModel: mistral-ocr-latest
+      apiKey: "${MISTRAL_API_KEY}"
+      strategy: mistral_ocr
 
     endpoints:
       agents:
