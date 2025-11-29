@@ -11,5 +11,5 @@ spec:
       stop: fd40:2e3:42a::1000:3:10:255
   serviceSelector:
     matchLabels:
-      loadbalancer/mode: l2
+      loadbalancer/pool: l2
   disabled: false

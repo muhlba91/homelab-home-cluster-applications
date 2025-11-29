@@ -88,7 +88,7 @@ service:
     annotations:
       ${CILIUM_IP_ANNOTATION}: "${OMADA_CONTROLLER_IPV4}"
     labels:
-      "loadbalancer/mode": l2
+      "loadbalancer/pool": l2
     ports:
       manage:
         port: 443
