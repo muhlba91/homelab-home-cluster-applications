@@ -7,6 +7,7 @@ resources:
   - ./configmap-env.yaml
   - ./configmap-rag-env.yaml
   - ./configmap.yaml
+  - ./external-secret-librechat-database.yaml
   - ./external-secret-librechat-meilisearch-master-key.yaml
   - ./external-secret-librechat-secrets.yaml
   - ./external-secret-librechat-rag-secrets.yaml
