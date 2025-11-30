@@ -56,12 +56,6 @@ data:
           - "@modelcontextprotocol/server-memory"
         startup: false
         initTimeout: 15000
-      apple:
-        command: npx
-        args:
-          - "apple-mcp"
-        startup: false
-        initTimeout: 15000
       home-assistant:
         type: streamable-http
         url: https://jarvis.${LOCAL_HOME_DOMAIN}/api/mcp
