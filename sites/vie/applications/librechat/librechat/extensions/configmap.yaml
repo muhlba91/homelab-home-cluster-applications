@@ -60,7 +60,7 @@ data:
         type: streamable-http
         url: "https://api.githubcopilot.com/mcp/"
         headers:
-          Authorization: "Bearer \{\{PAT_TOKEN}}"
+          Authorization: "Bearer \\{\\{PAT_TOKEN}}"
         customUserVars:
           PAT_TOKEN:
             title: "GitHub PAT Token"
