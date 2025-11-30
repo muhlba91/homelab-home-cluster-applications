@@ -54,7 +54,7 @@ data:
         command: npx
         args:
           - "@modelcontextprotocol/server-memory"
-        startup: true
+        startup: false
         initTimeout: 15000
       "GitHub":
         type: streamable-http
@@ -67,6 +67,16 @@ data:
             description: "GitHub Personal Access Token"
         startup: false
         initTimeout: 15000
+      "Home Assistant":
+        type: streamable-http
+        url: https://jarvis.${LOCAL_HOME_DOMAIN}/api/mcp
+        oauth:
+          authorization_url: https://jarvis.${LOCAL_HOME_DOMAIN}/auth/authorize
+          token_url: https://jarvis.${LOCAL_HOME_DOMAIN}/auth/token
+          client_id: https://gpt.${HOME_DOMAIN}
+          redirect_uri: https://gpt.${HOME_DOMAIN}/oauth/callback
+        initTimeout: 15000
+        startup: false
 
     endpoints:
       agents:
