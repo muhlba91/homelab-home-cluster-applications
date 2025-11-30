@@ -54,6 +54,19 @@ data:
         command: npx
         args:
           - "@modelcontextprotocol/server-memory"
+        startup: false
+        initTimeout: 15000
+      "GitHub":
+        type: streamable-http
+        url: "https://api.githubcopilot.com/mcp/"
+        headers:
+          Authorization: "Bearer \{\{PAT_TOKEN}}"
+        customUserVars:
+          PAT_TOKEN:
+            title: "GitHub PAT Token"
+            description: "GitHub Personal Access Token"
+        startup: false
+        initTimeout: 15000
 
     endpoints:
       agents:
