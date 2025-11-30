@@ -298,8 +298,8 @@ service:
         protocol: UDP
         targetPort: 5355
   samba-kasia:
-    # controller: samba-kasia
-    ipFamilyPolicy: PreferDualStack
+    controller: samba-kasia
+    # ipFamilyPolicy: PreferDualStack
     type: LoadBalancer
     loadBalancerClass: ${CILIUM_LB_CLASS}
     externalTrafficPolicy: Local
