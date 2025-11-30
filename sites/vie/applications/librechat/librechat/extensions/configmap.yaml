@@ -56,6 +56,18 @@ data:
           - "@modelcontextprotocol/server-memory"
         startup: false
         initTimeout: 15000
+      perplexity:
+        command: npx
+        args:
+          - "@perplexity-ai/mcp-server"
+        env:
+          PERPLEXITY_API_KEY: {{PERPLEXITY_API_KEY}}
+        customUserVars:
+          PERPLEXITY_API_KEY:
+            title: "Perplexity API Key"
+            description: "API Key for Perplexity"
+        startup: false
+        initTimeout: 15000
       github:
         type: streamable-http
         url: "https://api.githubcopilot.com/mcp/"
@@ -76,8 +88,8 @@ data:
           client_id: https://gpt.${HOME_DOMAIN}
           redirect_uri: https://gpt.${HOME_DOMAIN}/api/mcp/home-assistant/oauth/callback
           scope: "read execute"
-        initTimeout: 15000
         startup: false
+        initTimeout: 15000
 
     endpoints:
       agents:
