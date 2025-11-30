@@ -61,7 +61,7 @@ data:
         args:
           - "@perplexity-ai/mcp-server"
         env:
-          PERPLEXITY_API_KEY: {{PERPLEXITY_API_KEY}}
+          PERPLEXITY_API_KEY: "{{PERPLEXITY_API_KEY}}"
         customUserVars:
           PERPLEXITY_API_KEY:
             title: "Perplexity API Key"
