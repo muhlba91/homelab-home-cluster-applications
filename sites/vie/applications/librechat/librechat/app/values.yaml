@@ -43,7 +43,7 @@ controllers:
               periodSeconds: 5
 
     initContainers:
-      init-chown-data:
+      init-chown-images:
         image:
           repository: alpine
           tag: 3.22
@@ -53,6 +53,27 @@ controllers:
           - '-R'
           - '1000:1000'
           - /app/client/public/images
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 32Mi
+        securityContext:
+          capabilities:
+            add:
+              - CHOWN
+      init-chown-uploads:
+        image:
+          repository: alpine
+          tag: 3.22
+          pullPolicy: IfNotPresent
+        command:
+          - chown
+          - '-R'
+          - '1000:1000'
+          - /app/uploads
         resources:
           requests:
             cpu: 10m
@@ -146,6 +167,8 @@ persistence:
       main:
         librechat:
           - path: /app/client/public/images
+        init-chown-images:
+          - path: /app/client/public/images
   uploads:
     enabled: true
     type: persistentVolumeClaim
@@ -155,6 +178,8 @@ persistence:
     advancedMounts:
       main:
         librechat:
+          - path: /app/uploads
+        init-chown-uploads:
           - path: /app/uploads
       rag-api:
         api:
