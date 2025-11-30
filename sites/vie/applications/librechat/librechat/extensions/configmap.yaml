@@ -120,3 +120,21 @@ data:
             - user
             - presence_penalty
             - frequency_penalty
+        - name: "Perplexity"
+          modelDisplayLabel: "Perplexity AI"
+          iconURL: https://www.perplexity.ai/favicon.ico
+          apiKey: "user_provided"
+          baseURL: https://api.perplexity.ai
+          models:
+            default:
+              - sonar
+              - sonar-pro
+              - sonar-reasoning
+              - sonar-reasoning-pro
+              - sonar-deep-research
+            fetch: false # fetching list of models is not supported
+          titleConvo: true
+          titleModel: sonar
+          dropParams:
+            - stop
+            - frequency_penalty
