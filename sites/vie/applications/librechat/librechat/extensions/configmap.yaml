@@ -56,25 +56,6 @@ data:
           - "@modelcontextprotocol/server-memory"
         startup: false
         initTimeout: 15000
-      email:
-        command: uvx
-        args:
-          - "claude-post-mcp-server"
-        env:
-          EMAIL_ADDRESS: "{{EMAIL_ADDRESS}}"
-          EMAIL_PASSWORD: "{{EMAIL_PASSWORD}}"
-          IMAP_SERVER: "mail.muehlbachler.io"
-          SMTP_SERVER: "mail.muehlbachler.io"
-          SMTP_PORT: "465"
-        customUserVars:
-          EMAIL_ADDRESS:
-            title: "Email Address"
-            description: "Email Address for SMTP"
-          EMAIL_PASSWORD:
-            title: "Email Password"
-            description: "Email Password for SMTP"
-        startup: false
-        initTimeout: 15000
       home-assistant:
         type: streamable-http
         url: https://jarvis.${LOCAL_HOME_DOMAIN}/api/mcp
