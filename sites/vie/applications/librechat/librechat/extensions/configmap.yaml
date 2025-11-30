@@ -50,13 +50,13 @@ data:
       strategy: mistral_ocr
 
     mcpServers:
-      "Memory":
+      memory:
         command: npx
         args:
           - "@modelcontextprotocol/server-memory"
         startup: false
         initTimeout: 15000
-      "GitHub":
+      github:
         type: streamable-http
         url: "https://api.githubcopilot.com/mcp/"
         headers:
@@ -67,14 +67,14 @@ data:
             description: "GitHub Personal Access Token"
         startup: false
         initTimeout: 15000
-      "Home Assistant":
+      home-assistant:
         type: streamable-http
         url: https://jarvis.${LOCAL_HOME_DOMAIN}/api/mcp
         oauth:
           authorization_url: https://jarvis.${LOCAL_HOME_DOMAIN}/auth/authorize
           token_url: https://jarvis.${LOCAL_HOME_DOMAIN}/auth/token
           client_id: https://gpt.${HOME_DOMAIN}
-          redirect_uri: https://gpt.${HOME_DOMAIN}/api/mcp/homeassistant/oauth/callback
+          redirect_uri: https://gpt.${HOME_DOMAIN}/api/mcp/home-assistant/oauth/callback
           scope: "read execute"
         initTimeout: 15000
         startup: false
