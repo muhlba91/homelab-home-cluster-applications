@@ -65,7 +65,7 @@ data:
           EMAIL_PASSWORD: "{{EMAIL_PASSWORD}}"
           IMAP_SERVER: "mail.muehlbachler.io"
           SMTP_SERVER: "mail.muehlbachler.io"
-          SMTP_PORT: "587"
+          SMTP_PORT: "465"
         customUserVars:
           EMAIL_ADDRESS:
             title: "Email Address"
