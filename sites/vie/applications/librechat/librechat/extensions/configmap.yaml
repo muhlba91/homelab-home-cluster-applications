@@ -57,7 +57,7 @@ data:
         startup: false
         initTimeout: 15000
       email:
-        command: npx
+        command: uvx
         args:
           - "claude-post-mcp-server"
         env:
