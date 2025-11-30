@@ -74,7 +74,8 @@ data:
           authorization_url: https://jarvis.${LOCAL_HOME_DOMAIN}/auth/authorize
           token_url: https://jarvis.${LOCAL_HOME_DOMAIN}/auth/token
           client_id: https://gpt.${HOME_DOMAIN}
-          redirect_uri: https://gpt.${HOME_DOMAIN}/oauth/callback
+          redirect_uri: https://gpt.${HOME_DOMAIN}/api/mcp/homeassistant/oauth/callback
+          scope: "read execute"
         initTimeout: 15000
         startup: false
 
