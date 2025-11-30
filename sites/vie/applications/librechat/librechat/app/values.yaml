@@ -31,7 +31,7 @@ controllers:
           limits:
             memory: 768Mi
 
-        probes:
+        probes: &probes
           liveness:
             enabled: true
           readiness:
@@ -65,6 +65,41 @@ controllers:
             add:
               - CHOWN
 
+  rag-api:
+    containers:
+      api:
+        image:
+          repository: ghcr.io/danny-avila/librechat-rag-api-dev
+          pullPolicy: IfNotPresent
+          tag: v0.6.0
+
+        envFrom:
+          - configMapRef:
+              name: librechat-rag-env
+          - secretRef:
+              name: librechat-rag-secrets
+
+        env:
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: librechat-database
+                key: username
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: librechat-database
+                key: password
+
+        resources:
+          requests:
+            cpu: 10m
+            memory: 768Mi
+          limits:
+            memory: 768Mi
+
+        probes: *probes
+
 service:
   librechat:
     controller: main
@@ -72,6 +107,12 @@ service:
     ports:
       http:
         port: 3080
+  rag-api:
+    controller: rag-api
+    # ipFamilyPolicy: PreferDualStack
+    ports:
+      http:
+        port: 8000
 
 ingress:
   librechat:
@@ -95,19 +136,36 @@ ingress:
           - *domain
 
 persistence:
-  data:
+  images:
     enabled: true
     type: persistentVolumeClaim
     storageClass: ${DEFAULT_STORAGE_CLASS}
     accessMode: ReadWriteOnce
-    size: 5Gi
-    globalMounts:
-      - path: /app/client/public/images
+    size: 10Gi
+    advancedMounts:
+      main:
+        librechat:
+          - path: /app/client/public/images
+  uploads:
+    enabled: true
+    type: persistentVolumeClaim
+    storageClass: ${DEFAULT_STORAGE_CLASS}
+    accessMode: ReadWriteOnce
+    size: 10Gi
+    advancedMounts:
+      main:
+        librechat:
+          - path: /app/uploads
+      rag-api:
+        api:
+          - path: /app/uploads
   config:
     enabled: true
     type: configMap
     name: librechat-config
     defaultMode: 511
-    globalMounts:
-      - path: /app/librechat.yaml
-        subPath: librechat.yaml
+    advancedMounts:
+      main:
+        librechat:
+          - path: /app/librechat.yaml
+            subPath: librechat.yaml

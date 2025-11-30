@@ -9,7 +9,7 @@ data:
 
     cache: true
 
-    # fileStrategy: firebase
+    fileStrategy: local
 
     fileConfig:
       endpoints:

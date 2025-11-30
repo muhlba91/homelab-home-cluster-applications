@@ -1,0 +1,45 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: librechat-postgresql
+  annotations:
+    cnpg.io/skipEmptyWalArchiveCheck: enabled
+spec:
+  instances: 1
+
+  imageName: ghcr.io/muhlba91/postgresql-pgvecto:18.0-0.5.3-v7.0.0
+
+  storage:
+    size: 20Gi
+    storageClass: ${DEFAULT_STORAGE_CLASS}
+
+  resources:
+    requests:
+      cpu: 25m
+      memory: 512Mi
+    limits:
+      memory: 1024Mi
+
+  enableSuperuserAccess: true
+  managed:
+    roles:
+      - name: librechat
+        ensure: present
+        comment: LibreChat
+        login: true
+        superuser: true
+        passwordSecret:
+          name: librechat-database
+
+  bootstrap:
+    initdb:
+      database: librechat-rag
+      owner: librechat
+      encoding: UTF8
+      secret:
+        name: librechat-database
+
+  postgresql:
+    shared_preload_libraries:
+      - vchord.so
