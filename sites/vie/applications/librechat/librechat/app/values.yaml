@@ -87,6 +87,7 @@ controllers:
               - CHOWN
 
   rag-api:
+    enabled: false
     containers:
       api:
         image:
