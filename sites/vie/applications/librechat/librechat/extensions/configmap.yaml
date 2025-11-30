@@ -56,16 +56,15 @@ data:
           - "@modelcontextprotocol/server-memory"
         startup: false
         initTimeout: 15000
-      perplexity:
-        command: npx
-        args:
-          - "@perplexity-ai/mcp-server"
-        env:
-          PERPLEXITY_API_KEY: "{{PERPLEXITY_API_KEY}}"
-        customUserVars:
-          PERPLEXITY_API_KEY:
-            title: "Perplexity API Key"
-            description: "API Key for Perplexity"
+      home-assistant:
+        type: streamable-http
+        url: https://jarvis.${LOCAL_HOME_DOMAIN}/api/mcp
+        oauth:
+          authorization_url: https://jarvis.${LOCAL_HOME_DOMAIN}/auth/authorize
+          token_url: https://jarvis.${LOCAL_HOME_DOMAIN}/auth/token
+          client_id: https://gpt.${HOME_DOMAIN}
+          redirect_uri: https://gpt.${HOME_DOMAIN}/api/mcp/home-assistant/oauth/callback
+          scope: "read execute"
         startup: false
         initTimeout: 15000
       github:
@@ -79,15 +78,34 @@ data:
             description: "GitHub Personal Access Token"
         startup: false
         initTimeout: 15000
-      home-assistant:
-        type: streamable-http
-        url: https://jarvis.${LOCAL_HOME_DOMAIN}/api/mcp
-        oauth:
-          authorization_url: https://jarvis.${LOCAL_HOME_DOMAIN}/auth/authorize
-          token_url: https://jarvis.${LOCAL_HOME_DOMAIN}/auth/token
-          client_id: https://gpt.${HOME_DOMAIN}
-          redirect_uri: https://gpt.${HOME_DOMAIN}/api/mcp/home-assistant/oauth/callback
-          scope: "read execute"
+      perplexity:
+        command: npx
+        args:
+          - "@perplexity-ai/mcp-server"
+        env:
+          PERPLEXITY_API_KEY: "{{PERPLEXITY_API_KEY}}"
+        customUserVars:
+          PERPLEXITY_API_KEY:
+            title: "Perplexity API Key"
+            description: "API Key for Perplexity"
+        startup: false
+        initTimeout: 15000
+      opnsense:
+        command: npx
+        args:
+          - "@richard-stovall/opnsense-mcp-server"
+        env:
+          OPNSENSE_URL: "https://10.0.0.1"
+          OPNSENSE_API_KEY: "{{OPNSENSE_API_KEY}}"
+          OPNSENSE_API_SECRET: "{{OPNSENSE_API_SECRET}}"
+          OPNSENSE_VERIFY_SSL: "false"
+        customUserVars:
+          OPNSENSE_API_KEY:
+            title: "OPNSense API Key"
+            description: "API Key for OPNSense"
+          OPNSENSE_API_SECRET:
+            title: "OPNSense API Secret"
+            description: "API Secret for OPNSense"
         startup: false
         initTimeout: 15000
 
