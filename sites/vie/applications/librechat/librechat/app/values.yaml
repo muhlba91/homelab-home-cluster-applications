@@ -87,13 +87,12 @@ controllers:
               - CHOWN
 
   rag-api:
-    enabled: false
     containers:
       api:
         image:
-          repository: ghcr.io/danny-avila/librechat-rag-api-dev
+          repository: ghcr.io/danny-avila/librechat-rag-api-dev-lite
           pullPolicy: IfNotPresent
-          tag: v0.6.0
+          tag: 65c64ed8bca3b1b7f259382570e98586e530c1be # FIXME: waiting for new release to include google_genai
 
         envFrom:
           - configMapRef:
