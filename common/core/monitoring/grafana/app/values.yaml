@@ -93,22 +93,36 @@ sidecar:
       memory: 130Mi
     limits:
       memory: 130Mi
+  alerts:
+    enabled: false
+    labelValue: "1"
+    searchNamespace: ALL
+    env:
+      HEALTH_PORT: 8081
   dashboards:
     enabled: true
     labelValue: "1"
     searchNamespace: ALL
+    env:
+      HEALTH_PORT: 8082
   datasources:
     enabled: true
     labelValue: "1"
     searchNamespace: ALL
+    env:
+      HEALTH_PORT: 8083
   plugins:
     enabled: true
     labelValue: "1"
     searchNamespace: ALL
+    env:
+      HEALTH_PORT: 8084
   notifiers:
     enabled: false
     labelValue: "1"
     searchNamespace: ALL
+    env:
+      HEALTH_PORT: 8085
 
 resources:
   requests:
