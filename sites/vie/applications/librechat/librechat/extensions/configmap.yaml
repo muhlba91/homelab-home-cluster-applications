@@ -9,7 +9,7 @@ data:
 
     cache: true
 
-    fileStrategy: local
+    fileStrategy: s3
 
     fileConfig:
       endpoints:
