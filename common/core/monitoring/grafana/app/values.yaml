@@ -94,7 +94,7 @@ sidecar:
       cpu: 10m
       memory: 256Mi
     limits:
-      memory: 256Mi
+      memory: 312Mi
   alerts:
     enabled: false
     labelValue: "1"
