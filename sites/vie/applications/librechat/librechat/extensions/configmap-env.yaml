@@ -30,6 +30,8 @@ data:
   SEARCH: "true"
   MEILI_NO_ANALYTICS: "true"
   MEILI_HOST: "http://librechat-meilisearch:7700"
+  AWS_ENDPOINT_URL: "https://storage.googleapis.com"
+  AWS_REGION: auto
   LOGIN_MAX: "10"
   LOGIN_WINDOW: "5"
   LIMIT_CONCURRENT_MESSAGES: "true"
