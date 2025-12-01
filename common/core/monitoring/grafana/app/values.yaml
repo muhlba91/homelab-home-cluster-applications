@@ -87,6 +87,8 @@ plugins:
   - grafana-athena-datasource
 
 sidecar:
+  image:
+    tag: 2.1.4 # FIXME: remove once update happened
   resources:
     requests:
       cpu: 10m
