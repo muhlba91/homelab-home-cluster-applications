@@ -7,6 +7,7 @@ metadata:
 data:
   # cluster configuration
   SITE: vie
+  CILIUM_CLUSTER_ID: "1"
 
   # network configuration
   ROUTER_IP: "10.0.0.1"

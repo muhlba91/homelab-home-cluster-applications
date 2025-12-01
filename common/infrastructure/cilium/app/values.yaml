@@ -1,6 +1,10 @@
 ---
 rollOutCiliumPods: true
 
+cluster:
+  name: ${SITE}
+  id: ${CILIUM_CLUSTER_ID}
+
 ipam:
   mode: cluster-pool
   operator:
