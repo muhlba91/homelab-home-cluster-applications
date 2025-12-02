@@ -15,7 +15,6 @@ spec:
   prune: true
   force: false
   wait: true
-  suspend: true
   postBuild:
     substitute:
       APPLICATION: *application
