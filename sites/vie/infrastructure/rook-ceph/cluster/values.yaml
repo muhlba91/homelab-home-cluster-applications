@@ -123,6 +123,8 @@ cephECBlockPools:
         erasureCoded:
           dataChunks: 2
           codingChunks: 1
+        parameters:
+          allow_ec_optimizations: "true"
     parameters:
       clusterID: rook-ceph
       imageFormat: "2"
