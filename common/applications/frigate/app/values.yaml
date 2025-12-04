@@ -16,7 +16,7 @@ controllers:
       copy-config:
         image:
           repository: alpine
-          tag: 3.22
+          tag: 3.23
           pullPolicy: IfNotPresent
         command:
           - cp
@@ -32,7 +32,7 @@ controllers:
       download-models:
         image:
           repository: alpine
-          tag: 3.22
+          tag: 3.23
           pullPolicy: IfNotPresent
         command:
           - /scripts/download_models.sh

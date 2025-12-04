@@ -46,7 +46,7 @@ controllers:
       init-chown-images:
         image:
           repository: alpine
-          tag: 3.22
+          tag: 3.23
           pullPolicy: IfNotPresent
         command:
           - chown
@@ -67,7 +67,7 @@ controllers:
       init-chown-uploads:
         image:
           repository: alpine
-          tag: 3.22
+          tag: 3.23
           pullPolicy: IfNotPresent
         command:
           - chown
