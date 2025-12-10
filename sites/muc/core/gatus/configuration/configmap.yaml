@@ -129,3 +129,25 @@ data:
         alerts:
           - type: ntfy
             priority: 5
+      - name: ntfy
+        group: 007 - Infrastructure
+        enabled: true
+        url: https://notify.infrastructure.muehlbachler.io
+        method: GET
+        interval: 5m
+        conditions:
+          - "[STATUS] == 200"
+        alerts:
+          - type: ntfy
+            priority: 5
+      - name: VPN
+        group: 007 - Infrastructure
+        enabled: true
+        url: https://vpn.platform.muehlbachler.io/
+        method: GET
+        interval: 5m
+        conditions:
+          - "[STATUS] == 200"
+        alerts:
+          - type: ntfy
+            priority: 5
