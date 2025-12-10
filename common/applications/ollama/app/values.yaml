@@ -1,4 +1,8 @@
 ---
+image:
+  repository: ollama/ollama
+  tag: 0.13.2
+
 runtimeClassName: nvidia
 
 ${APPLICATION}:
@@ -8,9 +12,9 @@ ${APPLICATION}:
     nvidiaResource: nvidia.com/gpu
     number: 1
   models:
-    pull:
+    pull: []
       # https://github.com/allenporter/home-assistant-datasets/tree/main/reports
-      - qwen2.5:7b-instruct-q4_K_M
+      # - qwen2.5:7b-instruct-q4_K_M
 
 ingress:
   enabled: false
