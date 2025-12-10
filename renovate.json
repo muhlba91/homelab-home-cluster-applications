@@ -24,7 +24,7 @@
         {
             "customType": "regex",
             "managerFilePatterns": [
-                "/(^|/|\\.).*-patch\\.ya?ml$/"
+                "/(^|/|\\.).*\\.ya?ml$/"
             ],
             "matchStrings": [
                 "# renovate: datasource=(?<datasource>[a-z-]+) packageName=(?<packageName>.+)\\s+image:.+:(?<currentValue>.+)"
