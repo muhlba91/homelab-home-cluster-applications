@@ -12,9 +12,9 @@ ${APPLICATION}:
     nvidiaResource: nvidia.com/gpu
     number: 1
   models:
-    pull: []
+    pull:
       # https://github.com/allenporter/home-assistant-datasets/tree/main/reports
-      # - qwen2.5:7b-instruct-q4_K_M
+      - qwen3:8b-q4_K_M
 
 ingress:
   enabled: false
