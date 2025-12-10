@@ -1,0 +1,24 @@
+---
+args:
+  - --enable-dependency-version-upgrades
+
+provider:
+  packages: []
+configuration:
+  packages: []
+function:
+  packages: []
+
+resourcesCrossplane:
+  requests:
+    cpu: 10m
+    memory: 512Mi
+  limits:
+    memory: 512Mi
+
+resourcesRBACManager:
+  requests:
+    cpu: 10m
+    memory: 256Mi
+  limits:
+    memory: 256Mi

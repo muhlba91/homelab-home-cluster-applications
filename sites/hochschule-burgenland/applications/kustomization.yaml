@@ -5,3 +5,4 @@ resources:
   - ./dex/
   - ./harbor/
   - ./argocd/
+  - ./crossplane/
