@@ -6,6 +6,11 @@ global:
 controllers:
   main:
     pod:
+      runtimeClassName: nvidia
+      tolerations:
+        - key: nvidia.com/gpu
+          operator: Exists
+          effect: NoSchedule
       annotations:
         backup.velero.io/backup-volumes: data
     containers:
@@ -20,6 +25,10 @@ controllers:
               name: immich-env
 
         env:
+          - name: NVIDIA_DRIVER_CAPABILITIES
+            value: compute,utility,video
+          - name: NVIDIA_VISIBLE_DEVICES
+            value: all
           - name: DB_USERNAME
             valueFrom:
               secretKeyRef:
@@ -94,7 +103,7 @@ controllers:
 
         env:
           - name: NVIDIA_DRIVER_CAPABILITIES
-            value: compute,utility
+            value: compute,utility,video
           - name: NVIDIA_VISIBLE_DEVICES
             value: all
           - name: TRANSFORMERS_CACHE
