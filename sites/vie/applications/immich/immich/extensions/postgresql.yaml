@@ -8,7 +8,7 @@ metadata:
 spec:
   instances: 1
 
-  imageName: ghcr.io/muhlba91/postgresql-pgvecto:18.0-0.5.3-v7.0.0
+  imageName: ghcr.io/muhlba91/postgresql-pgvecto:18.1-0.5.3-v7.1.2
 
   storage:
     size: 20Gi
