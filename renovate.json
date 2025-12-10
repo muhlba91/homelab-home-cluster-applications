@@ -24,19 +24,10 @@
         {
             "customType": "regex",
             "managerFilePatterns": [
-                "/(^|/|\\.)postgresql\\.ya?ml$/"
-            ],
-            "matchStrings": [
-                "# renovate: datasource=(?<datasource>[a-z-]+) packageName=(?<packageName>.+)\\s+image:.+:(?<currentValue>.+)"
-            ]
-        },
-        {
-            "customType": "regex",
-            "managerFilePatterns": [
                 "/(^|/|\\.).*\\.ya?ml$/"
             ],
             "matchStrings": [
-                "# renovate: datasource=(?<datasource>[a-z-]+) packageName=(?<packageName>.+)\\s+imageName:.+:(?<currentValue>.+)"
+                "# renovate: datasource=(?<datasource>[a-z-]+) packageName=(?<packageName>.+)\\s+image(Name)?:.+:(?<currentValue>.+)"
             ]
         }
     ]
