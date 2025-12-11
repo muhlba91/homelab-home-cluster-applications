@@ -35,7 +35,7 @@ controllers:
         image:
           repository: ghcr.io/twin/gatus
           pullPolicy: IfNotPresent
-          tag: v5.33.0
+          tag: v5.33.1
 
         env:
           - name: GATUS_CONFIG_PATH
