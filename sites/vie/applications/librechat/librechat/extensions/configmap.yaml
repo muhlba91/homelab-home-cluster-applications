@@ -32,6 +32,9 @@ data:
       allowedDomains:
         - "muehlbachler.io"
 
+    transactions:
+      enabled: true
+
     memory:
       disabled: false
       messageWindowSize: 10
@@ -48,6 +51,11 @@ data:
       mistralModel: mistral-ocr-latest
       apiKey: "${MISTRAL_API_KEY}"
       strategy: mistral_ocr
+
+    webSearch:
+      searchProvider: serper
+      serperApiKey: "${SERPER_API_KEY}"
+      safeSearch: 0
 
     mcpServers:
       memory:
