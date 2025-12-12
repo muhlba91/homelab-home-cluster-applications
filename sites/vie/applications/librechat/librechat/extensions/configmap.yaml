@@ -129,7 +129,7 @@ data:
         - name: "Mistral"
           modelDisplayLabel: "Mistral AI"
           iconURL: https://raw.githubusercontent.com/mistralai/platform-docs-public/main/static/img/favicon.ico
-          apiKey: "$\\{MISTRAL_API_KEY}"
+          apiKey: "$\{MISTRAL_API_KEY}"
           baseURL: https://api.mistral.ai/v1
           models:
             default:
