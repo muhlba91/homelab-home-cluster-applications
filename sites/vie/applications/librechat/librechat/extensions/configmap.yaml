@@ -49,12 +49,12 @@ data:
 
     ocr:
       mistralModel: mistral-ocr-latest
-      apiKey: "${MISTRAL_API_KEY}"
+      apiKey: "$${MISTRAL_API_KEY}"
       strategy: mistral_ocr
 
     webSearch:
       searchProvider: serper
-      serperApiKey: "${SERPER_API_KEY}"
+      serperApiKey: "$${SERPER_API_KEY}"
       safeSearch: 0
 
     mcpServers:
