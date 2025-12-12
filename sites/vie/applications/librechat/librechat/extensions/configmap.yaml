@@ -55,6 +55,8 @@ data:
     webSearch:
       searchProvider: serper
       serperApiKey: "$${SERPER_API_KEY}"
+      rerankerType: jina
+      jinaApiKey: "$${JINA_API_KEY}"
       safeSearch: 0
 
     mcpServers:
