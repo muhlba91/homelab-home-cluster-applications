@@ -14,9 +14,9 @@ victoria-metrics-operator:
   resources:
     requests:
       cpu: 10m
-      memory: 106Mi
+      memory: 192Mi
     limits:
-      memory: 106Mi
+      memory: 192Mi
 
 defaultRules:
   create: true
