@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: grafana
-      version: 10.4.2
+      version: 10.4.3
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
