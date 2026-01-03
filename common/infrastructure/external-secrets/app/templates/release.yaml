@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: external-secrets
-      version: 1.2.0
+      version: 1.2.1
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
