@@ -13,7 +13,7 @@ controllers:
       init-config:
         image: &configSyncImage
           repository: ghcr.io/kiwigrid/k8s-sidecar
-          tag: 2.1.4
+          tag: 2.2.3
 
         env:
           HEALTH_PORT: "8888"
