@@ -61,7 +61,7 @@ spec:
   chart:
     spec:
       chart: prometheus-operator-crds
-      version: 25.0.1
+      version: 26.0.0
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
