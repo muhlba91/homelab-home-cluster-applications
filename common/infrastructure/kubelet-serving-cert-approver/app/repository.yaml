@@ -9,4 +9,4 @@ spec:
   interval: 10m
   url: https://github.com/alex1989hu/kubelet-serving-cert-approver
   ref:
-    tag: v0.10.1
+    tag: v0.10.2
