@@ -13,7 +13,7 @@ resources:
 
 initContainers:
   - name: velero-plugin-for-gcp
-    image: velero/velero-plugin-for-gcp:v1.13.1
+    image: velero/velero-plugin-for-gcp:v1.13.2
     imagePullPolicy: IfNotPresent
     volumeMounts:
       - mountPath: /target
