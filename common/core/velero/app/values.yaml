@@ -2,7 +2,8 @@
 # see https://github.com/vmware-tanzu/helm-charts/issues/698
 kubectl:
   image:
-    tag: 1.33.4
+    repository: public.ecr.aws/bitnami/kubectl
+    tag: 1.35.0
 
 resources:
   requests:
