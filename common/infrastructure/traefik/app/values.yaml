@@ -21,28 +21,30 @@ ports:
     expose:
       default: true
   web:
-    redirections:
-      entryPoint:
-        to: websecure
-        scheme: https
-        permanent: true
-    forwardedHeaders:
-      trustedIPs:
-        - 10.0.0.0/8
-      insecure: true
-    proxyProtocol:
-      trustedIPs:
-        - 10.0.0.0/8
-      insecure: true
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+          permanent: true
+      forwardedHeaders:
+        trustedIPs:
+          - 10.0.0.0/8
+        insecure: true
+      proxyProtocol:
+        trustedIPs:
+          - 10.0.0.0/8
+        insecure: true
   websecure:
-    forwardedHeaders:
-      trustedIPs:
-        - 10.0.0.0/8
-      insecure: true
-    proxyProtocol:
-      trustedIPs:
-        - 10.0.0.0/8
-      insecure: true
+    http:
+      forwardedHeaders:
+        trustedIPs:
+          - 10.0.0.0/8
+        insecure: true
+      proxyProtocol:
+        trustedIPs:
+          - 10.0.0.0/8
+        insecure: true
 
 ingressRoute:
   dashboard:
