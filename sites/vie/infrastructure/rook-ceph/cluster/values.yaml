@@ -8,10 +8,12 @@ toolbox:
     limits:
       memory: 100Mi
 
+cephImage:
+  repository: quay.io/ceph/ceph
+  tag: v20.2.0
+  allowUnsupported: false
+
 cephClusterSpec:
-  cephVersion:
-    image: quay.io/ceph/ceph:v20.2.0
-    allowUnsupported: false
   dataDirHostPath: /var/lib/rook
   skipUpgradeChecks: false
   continueUpgradeAfterChecksEvenIfNotHealthy: false
