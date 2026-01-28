@@ -10,3 +10,4 @@ data:
   IMMICH_CONFIG_FILE: /config/immich.yaml
   UPLOAD_LOCATION: /data/upload
   IMMICH_MEDIA_LOCATION: /data/upload
+  IMMICH_ALLOW_SETUP: "false"
