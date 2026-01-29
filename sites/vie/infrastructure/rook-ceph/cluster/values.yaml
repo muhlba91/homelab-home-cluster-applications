@@ -19,6 +19,8 @@ cephClusterSpec:
   continueUpgradeAfterChecksEvenIfNotHealthy: false
   cleanupPolicy:
     confirmation: "" # "yes-really-destroy-data"
+  disruptionManagement:
+    managePodBudgets: false
   cephConfig:
     global:
       osd_pool_default_size: "3"
