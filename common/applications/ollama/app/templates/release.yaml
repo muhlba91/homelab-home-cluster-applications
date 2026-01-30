@@ -25,7 +25,7 @@ spec:
   chart:
     spec:
       chart: ollama
-      version: 1.39.0
+      version: 1.40.0
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
