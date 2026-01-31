@@ -17,7 +17,7 @@ controllers:
         image:
           repository: quay.io/linuxserver.io/faster-whisper
           pullPolicy: IfNotPresent
-          tag: 3.0.2-gpu
+          tag: 3.1.0-gpu
 
         env:
           - name: NVIDIA_DRIVER_CAPABILITIES
