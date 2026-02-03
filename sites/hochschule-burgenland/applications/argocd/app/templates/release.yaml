@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: argo-cd
-      version: 9.3.7
+      version: 9.4.0
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
