@@ -11,7 +11,7 @@ controllers:
         image:
           repository: quay.io/linuxserver.io/piper
           pullPolicy: IfNotPresent
-          tag: 2.2.1
+          tag: 2.2.2
 
         env:
           - name: PIPER_VOICE
