@@ -11,7 +11,7 @@ controllers:
         image:
           repository: ghcr.io/home-assistant/home-assistant
           pullPolicy: IfNotPresent
-          tag: 2026.1.3
+          tag: 2026.2.1
 
         env:
           - name: TZ
