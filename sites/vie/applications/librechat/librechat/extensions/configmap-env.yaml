@@ -12,10 +12,10 @@ data:
   APP_TITLE: LibreChat
   ENDPOINTS: anthropic,google,openAI,agents
   BAN_VIOLATIONS: "false"
-  ANTHROPIC_MODELS: claude-haiku-4-5,claude-sonnet-4-5,claude-opus-4-5
-  OPENAI_MODELS: gpt-5-mini,gpt-5.1,gpt-5-pro,gpt-5-nano,o3-deep-research,o4-mini-deep-research
-  ASSISTANTS_MODELS: gpt-5-mini,gpt-5.1,gpt-5-pro,gpt-5-nano
-  GOOGLE_MODELS: gemini-2.5-flash,gemini-2.5-pro,gemini-3-pro-preview,gemini-2.5-flash-image,gemini-3-pro-image-preview,gemini-2.5-flash-lite
+  ANTHROPIC_MODELS: claude-haiku-4-5,claude-sonnet-4-5,claude-opus-4-6
+  OPENAI_MODELS: gpt-5-mini,gpt-5.2,gpt-5.2-pro,gpt-5-nano,o3-deep-research,o4-mini-deep-research
+  ASSISTANTS_MODELS: gpt-5-mini,gpt-5.2,gpt-5.2-pro,gpt-5-nano
+  GOOGLE_MODELS: gemini-3-flash-preview,gemini-2.5-flash,gemini-3-pro-preview,gemini-2.5-pro,gemini-2.5-flash-lite
   GEMINI_IMAGE_MODEL: gemini-2.5-flash-image # gemini-3-pro-image-preview
   GOOGLE_SAFETY_SEXUALLY_EXPLICIT: BLOCK_NONE
   GOOGLE_SAFETY_HATE_SPEECH: BLOCK_ONLY_HIGH
