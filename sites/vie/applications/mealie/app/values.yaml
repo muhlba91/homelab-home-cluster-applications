@@ -42,7 +42,7 @@ controllers:
             cpu: 10m
             memory: 512Mi
           limits:
-            memory: 512Mi
+            memory: 768Mi
 
         probes:
           liveness: &server_probes
