@@ -9,7 +9,7 @@ spec:
   instances: 1
 
   # renovate: datasource=docker packageName=ghcr.io/muhlba91/postgresql-pgvecto
-  imageName: ghcr.io/muhlba91/postgresql-pgvecto:18.1-0.5.3-v7.1.2
+  imageName: ghcr.io/muhlba91/postgresql-pgvecto:18.1-0.5.3-v7.1.6
 
   storage:
     size: 20Gi
