@@ -13,7 +13,7 @@ controllers:
         image:
           repository: telegraf
           pullPolicy: IfNotPresent
-          tag: 1.37.1
+          tag: 1.37.2
 
         envFrom:
           - secretRef:
