@@ -88,7 +88,7 @@ controllers:
 service:
   frigate-http:
     controller: main
-    ipFamilyPolicy: PreferDualStack
+    # ipFamilyPolicy: PreferDualStack
     ports:
       http:
         port: 5000
