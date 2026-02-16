@@ -15,6 +15,9 @@ spec:
     size: 20Gi
     storageClass: ${DEFAULT_STORAGE_CLASS}
 
+  stopDelay: 300
+  smartShutdownTimeout: 60
+
   resources:
     requests:
       cpu: 20m
