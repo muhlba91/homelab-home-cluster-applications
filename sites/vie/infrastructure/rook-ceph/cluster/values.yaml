@@ -47,6 +47,8 @@ cephClusterSpec:
     useAllNodes: true
     useAllDevices: false
     deviceFilter: "^sd."
+  priorityClassNames:
+    all: system-node-critical
   resources:
     mgr:
       requests:
