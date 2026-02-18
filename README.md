@@ -8,12 +8,6 @@ This repository contains applications deployed on the `home-cluster` via [Flux](
 
 ---
 
-> **⚠️ Attention:**  
-> This repository is undergoing active restructuring and refactoring.
-> The current documentation is not reflecting the current state of the repository!
-
----
-
 ## Bootstrapping
 
 A Kubernetes cluster needs to be bootstrapped with the [Cilium CNI](https://cilium.io) and Flux pointing to this repository.
@@ -48,7 +42,7 @@ The repository follows the app-of-apps pattern for each site.
 
 The first Flux `Kustomization` being defined needs to reference the `app-of-apps` directory in the respective site directory.
 
-These are bootstrapping the main Flux applications, referring to the respective `<PROJECT>/applications/` kosutomizations:
+These are bootstrapping the main Flux applications, referring to the respective `<PROJECT>/applications/` kustomizations:
 
 - `infrastructure`: core cluster infrastructure
 - `core`: core applications
@@ -127,46 +121,44 @@ The [MUC](sites/muc/) site contains the following applications:
 
 The following applications are defined in [`sites/muc/infrastructure/`](sites/muc/infrastructure/).
 
-- [x] cilium
-- [x] kubelet-serving-cert-approver
-- [x] metrics-server
-- [x] generic-device-plugin
-- [x] external-secrets
-  - [x] [External Secrets Stores](sites/muc/infrastructure/external-secrets/) - Deploys the required `ClusterSecretStore`s and Vault credentials as Kubernetes `Secret`s.
-- [x] rook-ceph
-- [x] traefik
-- [x] reloader
+- [x] Cilium
+- [x] Kubelet Serving Cert Approver
+- [x] Metrics Server
+- [x] Generic Device Plugin
+- [x] [External Secrets](sites/muc/infrastructure/external-secrets/) - Deploys required `ClusterSecretStore`s and Vault credentials.
+- [x] Rook Ceph
+- [x] Traefik
+- [x] Reloader
 
 #### Core Applications (MUC)
 
 The following applications are defined in [`sites/muc/core/`](sites/muc/core/).
 
-- [x] external-dns
-- [x] adguard-external-dns
-- [x] cert-manager
-- [x] cloudnative-pg
-- [x] gatus
-- [ ] monitoring
-- [ ] velero
-  - [ ] Includes deployment of backup schedules.
+- [x] External DNS
+- [x] Adguard External DNS
+- [x] Cert Manager
+- [x] CloudNativePG
+- [x] Gatus
+- [ ] Monitoring
+- [ ] Velero
 
 #### (User) Applications (MUC)
 
 The following applications are defined in [`sites/muc/applications/`](sites/muc/applications/).
 
-- [x] omada-controller
-- [x] influxdb
-- [x] external-services
-- [x] frigate
+- [x] Omada Controller
+- [x] InfluxDB
+- [x] External Services
+- [x] Frigate
 
 #### Home Assistant (MUC)
 
 The following applications are defined in [`sites/muc/home-assistant/`](sites/muc/home-assistant/).
 
-- [x] emqx
-- [x] telegraf
-- [x] home-assistant
-- [x] node-red
+- [x] EMQX (MQTT Broker)
+- [x] Telegraf
+- [x] Home Assistant
+- [x] Node-RED
 
 ### Vienna (VIE)
 
@@ -176,58 +168,56 @@ The [VIE](sites/vie/) site contains the following applications:
 
 The following applications are defined in [`sites/vie/infrastructure/`](sites/vie/infrastructure/).
 
-- [x] cilium
-- [x] kubelet-serving-cert-approver
-- [x] metrics-server
-- [x] nvidia-device-plugin
-- [x] external-secrets
-  - [x] [External Secrets Stores](infrastructure/external-secrets/) - Deploys the required `ClusterSecretStore`s and Vault credentials as Kubernetes `Secret`s.
-- [x] rook-ceph
-- [x] traefik
-- [x] flux extensions
-- [x] reloader
+- [x] Cilium
+- [x] Kubelet Serving Cert Approver
+- [x] Metrics Server
+- [x] NVIDIA Device Plugin
+- [x] External Secrets
+- [x] Rook Ceph
+- [x] Traefik
+- [x] [Flux Extensions](sites/vie/infrastructure/flux-extensions/) - Provides GitHub alerts and external secrets for Flux.
+- [x] Reloader
 
 #### Core Applications (VIE)
 
 The following applications are defined in [`sites/vie/core/`](sites/vie/core/).
 
-- [x] external-dns
-- [x] adguard-external-dns
-- [x] cert-manager
-- [x] cloudnative-pg
-- [x] monitoring
-- [x] kyverno
-- [x] gatus
-- [x] velero
-  - [x] Includes deployment of backup schedules.
+- [x] External DNS
+- [x] Adguard External DNS
+- [x] Cert Manager
+- [x] CloudNativePG
+- [x] Monitoring (Victoria Metrics & Grafana)
+- [x] Kyverno
+- [x] Gatus
+- [x] Velero
 
 #### (User) Applications (VIE)
 
 The following applications are defined in [`sites/vie/applications/`](sites/vie/applications/).
 
-- [x] omada-controller
-- [x] influxdb
-- [x] [Ollama](https://ollama.com) - Run LLM models locally. *(testing)*
-- [x] external-services
+- [x] Omada Controller
+- [x] InfluxDB
+- [x] Ollama
+- [x] External Services
 - [x] [Immich](https://immich.app) - Photo management solution.
 - [x] [LibreChat](https://librechat.ai) - Open-source chat application for AI conversations.
 - [x] [Mealie](https://mealie.io) - Recipe management application.
-- [x] frigate
+- [x] Frigate
 
 #### Home Assistant (VIE)
 
 The following applications are defined in [`sites/vie/home-assistant/`](sites/vie/home-assistant/).
 
-- [x] emqx
-- [x] telegraf
-- [x] zwave
-- [x] home-assistant
-- [x] node-red
+- [x] EMQX (MQTT Broker)
+- [x] Telegraf
+- [x] Z-Wave JS
+- [x] Home Assistant
+- [x] Node-RED
 - [x] [ecowitt2mqtt](https://github.com/bachya/ecowitt2mqtt) - Forwards data received from ecowitt devices to the MQTT broker.
 - [x] [Ring MQTT](https://github.com/tsightler/ring-mqtt) - Amazon Ring devices to MQTT bridge.
-- [x] [Faster Whisper](https://github.com/SYSTRAN/faster-whisper) - Faster Whisper transcription with CTranslate2. *(testing)*
-- [x] [Piper](https://github.com/rhasspy/piper) - A local TTS server. *(testing)*
-- [x] [OpenWakeWord](https://github.com/dscripka/openWakeWord) - An open-source audio wake word (or phrase) detection framework. *(testing)*
+- [x] [Faster Whisper](https://github.com/SYSTRAN/faster-whisper) - Faster Whisper transcription with CTranslate2.
+- [x] [Piper](https://github.com/rhasspy/piper) - A local TTS server.
+- [x] [OpenWakeWord](https://github.com/dscripka/openWakeWord) - An open-source audio wake word detection framework.
 
 ### Hochschule Burgenland (hochschule-burgenland)
 
@@ -237,34 +227,34 @@ The [Hochschule Burgenland](sites/hochschule-burgenland/) site contains the appl
 
 The following applications are defined in [`sites/hochschule-burgenland/infrastructure/`](sites/hochschule-burgenland/infrastructure/).
 
-- [x] cilium (no load balancer)
-- [x] kubelet-serving-cert-approver
-- [x] metrics-server
-- [x] external-secrets
-  - [x] [External Secrets Stores](infrastructure/external-secrets/) - Deploys the required `ClusterSecretStore`s and Vault credentials as Kubernetes `Secret`s.
-- [x] [Democratic CSI](https://github.com/democratic-csi/democratic-csi) - Container Storage Interface (CSI) driver for dynamic provisioning of storage using iSCSI on Proxmox VE.
-- [x] metallb
-- [x] traefik
-- [x] reloader
-- [x] reflector
+- [x] Cilium
+- [x] Kubelet Serving Cert Approver
+- [x] Metrics Server
+- [x] External Secrets
+- [x] [Democratic CSI](https://github.com/democratic-csi/democratic-csi) - CSI driver for dynamic provisioning of storage using iSCSI on Proxmox VE.
+- [x] MetalLB
+- [x] Traefik
+- [x] Reloader
+- [x] Reflector
 
 #### Core Applications (hochschule-burgenland)
 
 The following applications are defined in [`sites/hochschule-burgenland/core/`](sites/hochschule-burgenland/core/).
 
-- [x] external-dns
-- [x] cert-manager
-- [x] cloudnative-pg
-- [x] kyverno
-- [x] gatus
+- [x] External DNS
+- [x] Cert Manager
+- [x] CloudNativePG
+- [x] Kyverno
+- [x] Gatus
 
 #### (User) Applications (hochschule-burgenland)
 
 The following applications are defined in [`sites/hochschule-burgenland/applications/`](sites/hochschule-burgenland/applications/).
 
-- [x] [Dex](https://dexidp.io) - OpenID Connect Identity (OIDC) and OAuth 2.0 Provider with LDAP backend for student authentication using GitHub.
-- [x] [Harbor](https://goharbor.io) - Container image registry.
-- [x] [ArgoCD](https://argo-cd.readthedocs.io) - GitOps continuous delivery tool for Kubernetes.
+- [ ] [Dex](https://dexidp.io) - OpenID Connect Identity (OIDC) and OAuth 2.0 Provider.
+- [ ] [Harbor](https://goharbor.io) - Container image registry.
+- [ ] [ArgoCD](https://argo-cd.readthedocs.io) - GitOps continuous delivery tool for Kubernetes.
+- [ ] [Crossplane](https://www.crossplane.io) - Cloud-native control plane.
 
 ---
 
