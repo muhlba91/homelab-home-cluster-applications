@@ -8,6 +8,8 @@ data:
     #!/bin/sh
     set -euo pipefail
 
+    apk add --no-cache jq curl
+
     #region global configuration
     URL="http://home-assistant-zwave:8091/api"
     S3_ASSETS_BUCKET_BACKUP_PATH="$${S3_ASSETS_BUCKET}/$${S3_ASSETS_BUCKET_PATH}/zwave"
