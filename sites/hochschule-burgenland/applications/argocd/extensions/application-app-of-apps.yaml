@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     path: app-of-apps
-    repoURL: https://github.com/muhlba91/fh-burgenland-bswe-cluster-applications
+    repoURL: https://github.com/muhlba91/hochschule-burgenland-cluster-applications
     targetRevision: HEAD
   destination:
     namespace: argocd

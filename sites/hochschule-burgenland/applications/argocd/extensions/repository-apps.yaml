@@ -7,4 +7,4 @@ metadata:
     argocd.argoproj.io/secret-type: repository
 stringData:
   type: git
-  url: https://github.com/muhlba91/fh-burgenland-bswe-cluster-applications
+  url: https://github.com/muhlba91/hochschule-burgenland-cluster-applications
