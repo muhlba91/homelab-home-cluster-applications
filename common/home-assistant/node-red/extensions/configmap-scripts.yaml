@@ -48,6 +48,7 @@ data:
 
       # upload backup to S3
       s3cmd --access_key=$${GCS_ACCESS_KEY_ID} --secret_key="$${GCS_SECRET_ACCESS_KEY}" --host="https://storage.googleapis.com" --host-bucket="https://storage.googleapis.com" sync backup.json s3://$${S3_ASSETS_BUCKET_BACKUP_PATH}/
+      s3cmd --access_key=$${SCW_ACCESS_KEY} --secret_key="$${SCW_SECRET_KEY}" --host="https://s3.$${SCW_DEFAULT_REGION}.scw.cloud" --host-bucket="https://%(bucket)s.s3.$${SCW_DEFAULT_REGION}.scw.cloud" sync backup.json s3://$${S3_ASSETS_BUCKET_BACKUP_PATH}/
 
       echo "backed up and uploaded to s3://$${S3_ASSETS_BUCKET_BACKUP_PATH}/backup.json."
     }
@@ -57,6 +58,7 @@ data:
 
       # download backup from S3
       s3cmd --access_key=$${GCS_ACCESS_KEY_ID} --secret_key="$${GCS_SECRET_ACCESS_KEY}" --host="https://storage.googleapis.com" --host-bucket="https://storage.googleapis.com" --recursive --force get s3://$${S3_ASSETS_BUCKET_BACKUP_PATH}/backup.json ./
+      s3cmd --access_key=$${SCW_ACCESS_KEY} --secret_key="$${SCW_SECRET_KEY}" --host="https://s3.$${SCW_DEFAULT_REGION}.scw.cloud" --host-bucket="https://%(bucket)s.s3.$${SCW_DEFAULT_REGION}.scw.cloud" --recursive --force get s3://$${S3_ASSETS_BUCKET_BACKUP_PATH}/backup.json ./
 
       # restore backup
       token
