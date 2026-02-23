@@ -10,6 +10,10 @@ spec:
     bucket: infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157
     prefix: cluster/${SITE}/velero
 
+  config:
+    region: fr-par
+    s3Url: https://s3.fr-par.scw.cloud
+
   credential:
     name: velero-backup-credentials
     key: scaleway
