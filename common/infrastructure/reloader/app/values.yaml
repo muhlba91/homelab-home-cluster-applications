@@ -1,9 +1,17 @@
 ---
 reloader:
+  ignoreJobs: true
+  ignoreCronJobs: true
+  reloadOnCreate: false
+  reloadOnDelete: false
+
+  reloadStrategy: annotations
+  ignoreNamespaces: kube-system,cilium,rook-ceph
+
   deployment:
     resources:
       requests:
         cpu: 10m
-        memory: 160Mi
+        memory: 256Mi
       limits:
-        memory: 160Mi
+        memory: 256Mi
