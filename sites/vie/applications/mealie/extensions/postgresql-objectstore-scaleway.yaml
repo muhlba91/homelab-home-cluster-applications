@@ -10,7 +10,7 @@ spec:
     s3Credentials:
       accessKeyId:
         name: cloudnativepg-barman-credentials
-        key: scaleaway_access_key
+        key: scaleway_access_key
       secretAccessKey:
         name: cloudnativepg-barman-credentials
         key: scaleway_secret_key
