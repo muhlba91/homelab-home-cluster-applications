@@ -5,5 +5,4 @@ kind: Kustomization
 namespace: ${APPLICATION_NAMESPACE}
 resources:
   - ./external-secret-credentials.yaml
-  - ./backuplocation-google.yaml
   - ./backuplocation-scaleway.yaml

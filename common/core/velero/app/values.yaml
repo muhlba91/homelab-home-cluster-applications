@@ -19,12 +19,6 @@ initContainers:
     volumeMounts:
       - mountPath: /target
         name: plugins
-  - name: velero-plugin-for-gcp
-    image: velero/velero-plugin-for-gcp:v1.13.2
-    imagePullPolicy: IfNotPresent
-    volumeMounts:
-      - mountPath: /target
-        name: plugins
 
 credentials:
   extraSecretRef: velero-backup-credentials

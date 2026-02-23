@@ -11,6 +11,5 @@ resources:
   - ./external-secret-immich-database.yaml
   - ./external-secret-cloudnativepg-barman-credentials.yaml
   - ./postgresql.yaml
-  - ./postgresql-objectstore-google.yaml
   - ./postgresql-objectstore-scaleway.yaml
   - ./postgresql-backup.yaml
