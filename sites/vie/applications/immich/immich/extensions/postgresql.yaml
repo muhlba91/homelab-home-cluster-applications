@@ -58,7 +58,7 @@ spec:
     - name: barman-cloud.cloudnative-pg.io
       isWALArchiver: true
       parameters:
-        barmanObjectName: immich-postgresql
+        barmanObjectName: immich-postgresql-scaleway
         serverName: postgresql
 
   externalClusters:
@@ -66,5 +66,5 @@ spec:
       plugin:
         name: barman-cloud.cloudnative-pg.io
         parameters:
-          barmanObjectName: immich-postgresql
+          barmanObjectName: immich-postgresql-scaleway
           serverName: postgresql
