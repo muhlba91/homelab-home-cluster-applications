@@ -2,7 +2,7 @@
 apiVersion: velero.io/v1
 kind: BackupStorageLocation
 metadata:
-  name: google-scaleway
+  name: scaleway
 spec:
   provider: velero.io/aws
 

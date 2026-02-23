@@ -15,7 +15,7 @@ spec:
       - pod
       - pvc
       - pv
-    storageLocation: google-cloud
+    storageLocation: scaleway
     defaultVolumesToFsBackup: false
     snapshotMoveData: false
     uploaderConfig:

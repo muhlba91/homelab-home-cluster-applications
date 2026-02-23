@@ -21,7 +21,7 @@ spec:
     # labelSelector:
     #   matchLabels:
     #     velero.io/backup: "true"
-    storageLocation: google-cloud
+    storageLocation: scaleway
     # optionally, you can default to file system backups for all volumes = opt-out approach
     defaultVolumesToFsBackup: false
     snapshotMoveData: false
