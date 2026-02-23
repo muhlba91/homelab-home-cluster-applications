@@ -1,0 +1,22 @@
+---
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: immich-postgresql-scaleway
+spec:
+  configuration:
+    destinationPath: s3://infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157/cluster/${SITE}/immich
+    endpointURL: https://s3.fr-par.scw.cloud
+    s3Credentials:
+      accessKeyId:
+        name: cloudnativepg-barman-credentials
+        key: scaleaway_access_key
+      secretAccessKey:
+        name: cloudnativepg-barman-credentials
+        key: scaleway_secret_key
+    wal:
+      compression: gzip
+      maxParallel: 1
+    data:
+      compression: gzip
+  retentionPolicy: 7d

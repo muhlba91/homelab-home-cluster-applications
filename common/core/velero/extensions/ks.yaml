@@ -9,7 +9,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./sites/muc/core/velero/extensions/
+  path: ./common/core/velero/extensions/
   interval: 10m
   retryInterval: 2m
   prune: true

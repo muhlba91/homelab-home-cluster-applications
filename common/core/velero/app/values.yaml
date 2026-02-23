@@ -13,6 +13,12 @@ resources:
     memory: 256Mi
 
 initContainers:
+  - name: velero-plugin-for-aws
+    image: velero/velero-plugin-for-aws:v1.13.2
+    imagePullPolicy: IfNotPresent
+    volumeMounts:
+      - mountPath: /target
+        name: plugins
   - name: velero-plugin-for-gcp
     image: velero/velero-plugin-for-gcp:v1.13.2
     imagePullPolicy: IfNotPresent
@@ -21,12 +27,12 @@ initContainers:
         name: plugins
 
 credentials:
-  extraSecretRef: velero-google
+  extraSecretRef: velero-backup-credentials
 
 configuration:
   backupStorageLocation: []
   volumeSnapshotLocation: []
-  defaultBackupStorageLocation: google-cloud
+  defaultBackupStorageLocation: scaleway
 
 deployNodeAgent: true
 nodeAgent:

@@ -11,5 +11,5 @@ spec:
     prefix: cluster/${SITE}/velero
 
   credential:
-    name: velero-google
-    key: credentials
+    name: velero-backup-credentials
+    key: google

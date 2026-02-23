@@ -2,14 +2,14 @@
 apiVersion: velero.io/v1
 kind: BackupStorageLocation
 metadata:
-  name: google-cloud
+  name: google-scaleway
 spec:
-  provider: velero.io/gcp
+  provider: velero.io/aws
 
   objectStorage:
     bucket: infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157
     prefix: cluster/${SITE}/velero
 
   credential:
-    name: velero-google
-    key: credentials
+    name: velero-backup-credentials
+    key: scaleway
