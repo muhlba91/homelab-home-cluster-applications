@@ -16,4 +16,4 @@ python tools/deployment/export_onnx.py -c configs/dfine/objects365/dfine_hgnetv2
 
 ## Store ONNX model
 
-Store the generated ONNX model on the GCS bucket used to pull the models.
+Store the generated ONNX model on the S3 bucket used to pull the models.
