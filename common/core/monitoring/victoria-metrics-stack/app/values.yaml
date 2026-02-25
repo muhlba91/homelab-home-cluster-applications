@@ -168,9 +168,6 @@ vmagent:
         memory: 515Mi
       limits:
         memory: 512Mi
-    externalLabels:
-      cluster: home
-      environment: prod
 
 grafana:
   enabled: false
