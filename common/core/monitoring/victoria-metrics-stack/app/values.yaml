@@ -168,7 +168,7 @@ vmagent:
     resources:
       requests:
         cpu: 53m
-        memory: 515Mi
+        memory: 512Mi
       limits:
         memory: 512Mi
 
