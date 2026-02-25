@@ -5,7 +5,7 @@ reloader:
   reloadOnCreate: false
   reloadOnDelete: false
 
-  reloadStrategy: annotations
+  reloadStrategy: env-vars
   ignoreNamespaces: kube-system,cilium,rook-ceph
 
   deployment:

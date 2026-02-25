@@ -4,7 +4,7 @@ configSecret:
   name: dex-config
 
 deploymentAnnotations:
-  reloader.stakater.com/auto: "true"
+  reloader.stakater.com/auto: "false"
 
 ingress:
   enabled: true
