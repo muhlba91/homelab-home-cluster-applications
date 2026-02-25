@@ -12,6 +12,8 @@ defaultPodOptions:
 
 controllers:
   main:
+    annotations:
+      reloader.stakater.com/auto: "true"
     initContainers:
       copy-config:
         image:

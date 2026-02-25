@@ -1,6 +1,10 @@
 ---
 global:
   domain: &domain argocd.${PUBLIC_DOMAIN}
+  statefulsetAnnotations:
+    reloader.stakater.com/auto: "true"
+  deploymentAnnotations:
+    reloader.stakater.com/auto: "true"
   dualStack:
     ipFamilyPolicy: PreferDualStack
     ipFamilies:

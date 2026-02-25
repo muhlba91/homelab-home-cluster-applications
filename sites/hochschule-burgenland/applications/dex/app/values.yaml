@@ -3,6 +3,9 @@ configSecret:
   create: false
   name: dex-config
 
+deploymentAnnotations:
+  reloader.stakater.com/auto: "true"
+
 ingress:
   enabled: true
   hosts:

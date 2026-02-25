@@ -6,6 +6,8 @@ global:
 controllers:
   main:
     type: statefulset
+    annotations:
+      reloader.stakater.com/auto: "true"
     containers:
       zwave-js:
         image:

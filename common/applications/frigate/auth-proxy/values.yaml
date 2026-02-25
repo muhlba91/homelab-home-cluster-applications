@@ -7,6 +7,9 @@ alphaConfig:
   enabled: true
   existingSecret: frigate-auth-proxy-config
 
+deploymentAnnotations:
+  reloader.stakater.com/auto: "true"
+
 extraArgs:
   - --email-domain=*
   - --redirect-url=https://nvr.${LOCAL_HOME_DOMAIN}/oauth2/callback
