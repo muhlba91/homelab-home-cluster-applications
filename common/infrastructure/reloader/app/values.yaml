@@ -5,6 +5,7 @@ reloader:
   reloadOnCreate: false
   reloadOnDelete: false
 
+  logLevel: debug
   reloadStrategy: env-vars
   ignoreNamespaces: kube-system,cilium,rook-ceph
 
