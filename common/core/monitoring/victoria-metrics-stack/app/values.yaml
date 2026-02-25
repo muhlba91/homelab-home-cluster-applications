@@ -124,6 +124,7 @@ vmsingle:
     logLevel: WARN
     extraArgs:
       maxLabelsPerTimeseries: "150"
+      enableTCP6: "true"
     serviceSpec:
       spec:
         ipFamilyPolicy: PreferDualStack
@@ -160,7 +161,7 @@ vmagent:
     maxScrapeInterval: 900s
     logLevel: WARN
     extraArgs:
-      enableTCP6: true
+      enableTCP6: "true"
     serviceSpec:
       spec:
         ipFamilyPolicy: PreferDualStack
