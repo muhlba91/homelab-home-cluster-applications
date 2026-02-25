@@ -253,7 +253,7 @@ coreDns:
   enabled: true
 
 kubeEtcd:
-  enabled: false # restricted by certificates
+  enabled: true
   endpoints:
     - ${NODE_IP}
   vmScrape:
