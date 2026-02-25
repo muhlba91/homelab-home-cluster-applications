@@ -243,7 +243,7 @@ kubeControllerManager:
         tlsConfig:
           insecureSkipVerify: true
           caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-          serverName: kubernetes
+          serverName: localhost
 
 kubeDns:
   enabled: false
@@ -268,6 +268,7 @@ kubeScheduler:
         tlsConfig:
           insecureSkipVerify: true
           caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+          serverName: 127.0.0.1
 
 kubeProxy: # disabled
   enabled: false
