@@ -6,4 +6,6 @@ metadata:
   name: grafana
   namespace: flux-system
 spec:
-  url: https://grafana.github.io/helm-charts
+  interval: 10m
+  url: oci://ghcr.io/grafana-community/helm-charts
+  type: oci
