@@ -159,6 +159,8 @@ vmagent:
     minScrapeInterval: 60s
     maxScrapeInterval: 900s
     logLevel: WARN
+    extraArgs:
+      enableTCP6: true
     serviceSpec:
       spec:
         ipFamilyPolicy: PreferDualStack
