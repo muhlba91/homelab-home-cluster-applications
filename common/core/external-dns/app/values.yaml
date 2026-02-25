@@ -21,6 +21,9 @@ txtPrefix: extdns-
 provider:
   name: google
 
+deploymentAnnotations:
+  reloader.stakater.com/auto: "false"
+
 env:
   - name: GOOGLE_APPLICATION_CREDENTIALS
     value: /etc/secrets/service-account/credentials.json
