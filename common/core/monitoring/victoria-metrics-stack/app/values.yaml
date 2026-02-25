@@ -18,36 +18,101 @@ victoria-metrics-operator:
     limits:
       memory: 192Mi
 
+defaultDashboards:
+  enabled: true
+  grafanaOperator:
+    enabled: false
+  dashboards:
+    victoriametrics-vmalert:
+      enabled: true
+    victoriametrics-operator:
+      enabled: true
+    node-exporter-full:
+      enabled: true
+
 defaultRules:
   create: true
-  rules:
-    etcd: false # restricted by certificates
-    general: true
-    k8s: true
-    kubeApiserver: true
-    kubeApiserverAvailability: true
-    kubeApiserverBurnrate: true
-    kubeApiserverHistogram: true
-    kubeApiserverSlos: true
-    kubelet: true
-    kubePrometheusGeneral: true
-    kubePrometheusNodeRecording: true
-    kubernetesApps: true
-    kubernetesResources: true
-    kubernetesStorage: true
-    kubernetesSystem: true
-    kubeScheduler: true
-    kubeStateMetrics: true
-    network: true
-    node: true
-    vmagent: true
-    vmsingle: true
-    vmcluster: false
-    vmhealth: true
-    alertmanager: false
-
-defaultDashboardsEnabled: true
-experimentalDashboardsEnabled: true
+  groups:
+    etcd:
+      create: false
+    general:
+      create: true
+    k8sContainerCpuLimits:
+      create: true
+    k8sContainerCpuRequests:
+      create: true
+    k8sContainerCpuUsageSecondsTotal:
+      create: true
+    k8sContainerMemoryLimits:
+      create: true
+    k8sContainerMemoryRequests:
+      create: true
+    k8sContainerMemoryRss:
+      create: true
+    k8sContainerMemoryCache:
+      create: true
+    k8sContainerMemoryWorkingSetBytes:
+      create: true
+    k8sContainerMemorySwap:
+      create: true
+    k8sPodOwner:
+      create: true
+    k8sContainerResource:
+      create: true
+    kubeApiserver:
+      create: true
+    kubeApiserverAvailability:
+      create: true
+    kubeApiserverBurnrate:
+      create: true
+    kubeApiserverHistogram:
+      create: true
+    kubeApiserverSlos:
+      create: true
+    kubelet:
+      create: true
+    kubePrometheusGeneral:
+      create: true
+    kubePrometheusNodeRecording:
+      create: true
+    kubernetesApps:
+      create: true
+      targetNamespace: ".*"
+    kubernetesResources:
+      create: true
+    kubernetesStorage:
+      create: true
+      targetNamespace: ".*"
+    kubernetesSystem:
+      create: true
+    kubernetesSystemKubelet:
+      create: true
+    kubernetesSystemApiserver:
+      create: true
+    kubernetesSystemControllerManager:
+      create: true
+    kubeScheduler:
+      create: true
+    kubernetesSystemScheduler:
+      create: true
+    kubeStateMetrics:
+      create: true
+    nodeNetwork:
+      create: true
+    node:
+      create: true
+    vmagent:
+      create: true
+    vmsingle:
+      create: true
+    vmcluster:
+      create: false
+    vmHealth:
+      create: true
+    vmoperator:
+      create: true
+    alertmanager:
+      create: false
 
 vmsingle:
   enabled: true
@@ -166,7 +231,7 @@ kubeControllerManager:
   enabled: true
   service:
     selector:
-      k8s-app: kube-controller-manager
+      component: kube-controller-manager
   spec:
     jobLabel: jobLabel
     endpoints:
@@ -193,7 +258,7 @@ kubeScheduler:
   enabled: true
   service:
     selector:
-      k8s-app: kube-scheduler
+      component: kube-scheduler
   spec:
     jobLabel: jobLabel
     endpoints:
