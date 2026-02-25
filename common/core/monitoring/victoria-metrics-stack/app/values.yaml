@@ -254,6 +254,19 @@ coreDns:
 
 kubeEtcd:
   enabled: false # restricted by certificates
+  endpoints:
+    - ${NODE_IP}
+  vmScrape:
+    spec:
+      jobLabel: jobLabel
+      endpoints:
+        - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+          port: http-metrics
+          scheme: https
+          tlsConfig:
+            insecureSkipVerify: true
+            caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+            serverName: home-cluster-001
 
 kubeScheduler:
   enabled: true
