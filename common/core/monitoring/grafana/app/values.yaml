@@ -83,12 +83,9 @@ grafana.ini:
     role_attribute_path: contains("urn:zitadel:iam:org:project:254760536233776133:roles"."admin"."253178200153208318", 'muehlbachler.zitadel.cloud') && 'GrafanaAdmin' || 'Viewer'
 assertNoLeakedSecrets: false # TODO: can we get rid of this?
 
-plugins:
-  - grafana-athena-datasource
+plugins: []
 
 sidecar:
-  image:
-    tag: 2.1.4 # FIXME: remove once update happened
   resources:
     requests:
       cpu: 10m
