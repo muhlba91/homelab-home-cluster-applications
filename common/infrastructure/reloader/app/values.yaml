@@ -2,8 +2,8 @@
 reloader:
   ignoreJobs: true
   ignoreCronJobs: true
-  reloadOnCreate: false
-  reloadOnDelete: false
+  reloadOnCreate: true
+  reloadOnDelete: true
 
   logLevel: debug
   reloadStrategy: env-vars
