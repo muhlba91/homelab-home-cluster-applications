@@ -5,9 +5,9 @@ reloader:
   reloadOnCreate: true
   reloadOnDelete: true
 
-  logLevel: debug
+  logLevel: info
   reloadStrategy: env-vars
-  # ignoreNamespaces: kube-system,cilium,rook-ceph
+  ignoreNamespaces: kube-system,cilium,rook-ceph
 
   deployment:
     resources:

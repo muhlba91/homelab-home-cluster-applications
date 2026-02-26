@@ -22,7 +22,7 @@ provider:
   name: google
 
 deploymentAnnotations:
-  reloader.stakater.com/auto: "false"
+  reloader.stakater.com/auto: "true"
 
 env:
   - name: GOOGLE_APPLICATION_CREDENTIALS
