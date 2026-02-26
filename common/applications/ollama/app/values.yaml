@@ -1,7 +1,7 @@
 ---
 image:
   repository: ollama/ollama
-  tag: 0.17.0
+  tag: 0.17.1
 
 runtimeClassName: nvidia
 
