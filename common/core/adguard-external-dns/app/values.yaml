@@ -50,7 +50,7 @@ provider:
         memory: 100Mi
 
 deploymentAnnotations:
-  reloader.stakater.com/auto: "false"
+  reloader.stakater.com/auto: "true"
 
 service:
   ipFamilyPolicy: PreferDualStack
