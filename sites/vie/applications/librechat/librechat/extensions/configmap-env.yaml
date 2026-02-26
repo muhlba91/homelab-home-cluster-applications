@@ -52,4 +52,3 @@ data:
   CUSTOM_FOOTER: ""
   DEBUG_LOGGING: "false"
   DEBUG_CONSOLE: "false"
-  DEBUG_TEST: "false"
