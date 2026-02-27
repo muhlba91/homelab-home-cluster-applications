@@ -9,7 +9,7 @@ spec:
   instances: 1
 
   # renovate: datasource=docker packageName=ghcr.io/cloudnative-pg/postgresql
-  imageName: ghcr.io/cloudnative-pg/postgresql:18.2
+  imageName: ghcr.io/cloudnative-pg/postgresql:18.3
 
   storage:
     size: 20Gi
