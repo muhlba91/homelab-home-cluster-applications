@@ -29,7 +29,7 @@ spec:
                             containers:
                               - name: frigate
                                 # renovate: datasource=docker packageName=ghcr.io/blakeblackshear/frigate
-                                image: ghcr.io/blakeblackshear/frigate:0.16.4-tensorrt
+                                image: ghcr.io/blakeblackshear/frigate:0.17.0-tensorrt
                                 resources:
                                   requests:
                                     nvidia.com/gpu: "1"
