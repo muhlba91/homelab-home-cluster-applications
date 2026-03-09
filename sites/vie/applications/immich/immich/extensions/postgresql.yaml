@@ -12,7 +12,7 @@ spec:
   imageName: ghcr.io/muhlba91/postgresql-pgvecto:18.1-0.5.3-v7.1.6
 
   storage:
-    size: 20Gi
+    size: 30Gi
     storageClass: ${DEFAULT_STORAGE_CLASS}
 
   stopDelay: 300
