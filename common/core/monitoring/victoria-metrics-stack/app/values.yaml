@@ -2,21 +2,10 @@
 fullnameOverride: victoria-metrics
 
 crds:
-  enabled: true
+  enabled: false
 
 victoria-metrics-operator:
-  enabled: true
-  operator:
-    disable_prometheus_converter: false
-    enable_converter_ownership: true
-  service:
-    ipFamilyPolicy: PreferDualStack
-  resources:
-    requests:
-      cpu: 10m
-      memory: 192Mi
-    limits:
-      memory: 192Mi
+  enabled: false
 
 defaultDashboards:
   enabled: true
