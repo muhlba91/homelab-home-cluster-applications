@@ -9,5 +9,5 @@ resources:
   - ./external-secrets/
   # - ./rook-ceph/
   - ../../../common/infrastructure/traefik/
-  - ./flux-extensions/
+  # - ./flux-extensions/
   - ../../../common/infrastructure/reloader/
