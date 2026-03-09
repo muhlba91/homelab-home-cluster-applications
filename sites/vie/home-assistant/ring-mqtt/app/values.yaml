@@ -13,7 +13,7 @@ controllers:
         image:
           repository: tsightler/ring-mqtt
           pullPolicy: IfNotPresent
-          tag: 5.9.2@sha256:2f96b55bc97a72ff704eeabf48a68290f6cd0e7dbcab1bfecbb8c02b006680a5
+          tag: 5.9.3@sha256:4a4e0db460d7023aa5851ff25491401fd23b2fd153b7269af481f0953cd6f00a
 
         env:
           - name: DATA_PATH
