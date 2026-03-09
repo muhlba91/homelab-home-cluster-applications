@@ -8,4 +8,4 @@ resources:
   - infrastructure.yaml
   - core.yaml
   - applications.yaml
-  # - home-assistant.yaml
+  - home-assistant.yaml
