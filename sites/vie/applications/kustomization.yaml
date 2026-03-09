@@ -7,6 +7,6 @@ resources:
   - ../../../common/applications/ollama/
   - ./external-services/
   # - ./immich/
-  # - ./librechat/
+  - ./librechat/
   - ./mealie/
   - ./frigate/
