@@ -8,8 +8,8 @@ spec:
     - name: "64552"
       localASN: 64552
       peers:
-        - name: "65221"
-          peerASN: 65221
+        - name: router-001
+          peerASN: 201421
           peerAddress: fd40:2e3:42a::1
           peerConfigRef:
             name: cilium-peer
