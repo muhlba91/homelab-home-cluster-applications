@@ -6,7 +6,7 @@ resources:
   - ../../../common/applications/influxdb/
   - ../../../common/applications/ollama/
   - ./external-services/
-  - ./immich/
+  # - ./immich/
   - ./librechat/
-  - ./mealie/
+  # - ./mealie/
   - ./frigate/
