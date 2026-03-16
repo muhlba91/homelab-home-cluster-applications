@@ -8,5 +8,5 @@ resources:
   - ./external-services/
   # - ./immich/
   - ./librechat/
-  # - ./mealie/
+  - ./mealie/
   - ./frigate/
