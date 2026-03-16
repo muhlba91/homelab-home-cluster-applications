@@ -36,7 +36,7 @@ csi:
           memory: 100Mi
           cpu: 10m
         limits:
-          memory: 256Mi
+          memory: 384Mi
     - name : csi-omap-generator
       resource:
         requests:
@@ -65,7 +65,7 @@ csi:
           memory: 100Mi
           cpu: 10m
         limits:
-          memory: 256Mi
+          memory: 384Mi
     - name : liveness-prometheus
       resource:
         requests:
@@ -108,7 +108,7 @@ csi:
           memory: 100Mi
           cpu: 10m
         limits:
-          memory: 256Mi
+          memory: 384Mi
     - name : liveness-prometheus
       resource:
         requests:
@@ -130,7 +130,7 @@ csi:
           memory: 100Mi
           cpu: 10m
         limits:
-          memory: 256Mi
+          memory: 384Mi
     - name : liveness-prometheus
       resource:
         requests:
