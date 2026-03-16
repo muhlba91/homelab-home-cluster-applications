@@ -46,7 +46,7 @@ cephClusterSpec:
   storage:
     useAllNodes: true
     useAllDevices: false
-    deviceFilter: "^sd."
+    deviceFilter: "^sd[a-c]"
   priorityClassNames:
     all: system-node-critical
   resources:
