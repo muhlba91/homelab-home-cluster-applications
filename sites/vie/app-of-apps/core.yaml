@@ -16,6 +16,7 @@ spec:
   wait: true
   prune: true
   force: false
+  suspend: true
   postBuild:
     substituteFrom:
       - kind: ConfigMap
