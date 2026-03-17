@@ -5,8 +5,3 @@ kind: Kustomization
 resources:
   - ../../../../common/applications/frigate/
   - ./config/ks.yaml
-patches:
-  - target:
-      kind: Kustomization
-      name: frigate
-    path: ./helmrelease-patch.yaml

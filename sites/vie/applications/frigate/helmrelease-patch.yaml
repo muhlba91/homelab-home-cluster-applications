@@ -18,20 +18,14 @@ spec:
                       kind: Deployment
                       labelSelector: "app.kubernetes.io/controller=main,app.kubernetes.io/instance=frigate,app.kubernetes.io/name=frigate"
                     patch: |-
-                      apiVersion: apps/v1
-                      kind: Deployment
-                      metadata:
-                        name: not-used
-                      spec:
-                        template:
-                          spec:
-                            runtimeClassName: nvidia
-                            containers:
-                              - name: frigate
-                                # renovate: datasource=docker packageName=ghcr.io/blakeblackshear/frigate
-                                image: ghcr.io/blakeblackshear/frigate:0.17.0-tensorrt
-                                resources:
-                                  requests:
-                                    nvidia.com/gpu: "1"
-                                  limits:
-                                    nvidia.com/gpu: "1"
+                      - op: replace
+                        path: /spec/template/spec/containers/0/image
+                        # renovate: datasource=docker packageName=ghcr.io/blakeblackshear/frigate
+                        value: ghcr.io/blakeblackshear/frigate:0.17.0
+                      - op: replace
+                        path: /spec/template/spec/runtimeClassName
+                        value: nvidia
+                      - op: remove
+                        path: /spec/template/spec/containers/0/resources/requests/nvidia.com~1gpu
+                      - op: remove
+                        path: /spec/template/spec/containers/0/resources/limits/nvidia.com~1gpu

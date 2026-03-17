@@ -5,6 +5,7 @@ global:
 
 defaultPodOptions:
   terminationGracePeriodSeconds: 60
+  runtimeClassName: nvidia
   tolerations:
     - key: nvidia.com/gpu
       operator: Exists
@@ -52,7 +53,7 @@ controllers:
         image:
           repository: ghcr.io/blakeblackshear/frigate
           pullPolicy: IfNotPresent
-          tag: 0.17.0
+          tag: 0.17.0-tensorrt
 
         env:
           - name: NVIDIA_DRIVER_CAPABILITIES
@@ -67,8 +68,10 @@ controllers:
           requests:
             cpu: 489m
             memory: 2241Mi
+            nvidia.com/gpu: "1"
           limits:
             memory: 2241Mi
+            nvidia.com/gpu: "1"
 
         probes:
           liveness: &server_probes
