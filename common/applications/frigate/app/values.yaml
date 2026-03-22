@@ -53,7 +53,7 @@ controllers:
         image:
           repository: ghcr.io/blakeblackshear/frigate
           pullPolicy: IfNotPresent
-          tag: 0.17.0-tensorrt
+          tag: 0.17.1-tensorrt
 
         env:
           - name: NVIDIA_DRIVER_CAPABILITIES
