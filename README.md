@@ -174,6 +174,7 @@ The following applications are defined in [`sites/vie/infrastructure/`](sites/vi
 - [x] External Secrets
 - [x] Rook Ceph
 - [x] Traefik
+- [x] KGateway
 - [x] [Flux Extensions](sites/vie/infrastructure/flux-extensions/) - Provides GitHub alerts and external secrets for Flux.
 - [x] Reloader
 
