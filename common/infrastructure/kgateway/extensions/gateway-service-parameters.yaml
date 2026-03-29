@@ -12,3 +12,10 @@ spec:
         ${KGATEWAY_IP_ANNOTATION}: "${KGATEWAY_IP}"
       extraLabels:
         loadbalancer/pool: l2
+    envoyContainer:
+      resources:
+        limits:
+          memory: 128Mi
+        requests:
+          cpu: 20m
+          memory: 128Mi
