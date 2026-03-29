@@ -30,5 +30,21 @@
                 "# renovate: datasource=(?<datasource>[a-z-]+) packageName=(?<packageName>.+)\\s+image(Name)?:.+:(?<currentValue>.+)"
             ]
         }
+    ],
+    "packageRules": [
+        {
+            "description": "traefik early access",
+            "matchManagers": [
+                "flux"
+            ],
+            "matchDatasources": [
+                "helm"
+            ],
+            "matchPackageNames": [
+                "traefik"
+            ],
+            "ignoreUnstable": false,
+            "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<prerelease>ea\\.\\d+)$"
+        }
     ]
 }
