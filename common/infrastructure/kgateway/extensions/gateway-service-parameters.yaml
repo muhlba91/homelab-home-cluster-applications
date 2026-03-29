@@ -12,12 +12,9 @@ spec:
         ${KGATEWAY_IP_ANNOTATION}: "${KGATEWAY_IP}"
       extraLabels:
         loadbalancer/pool: l2
-    overlays:
-      kubernetes:
-        service:
-          patch:
-            spec:
-              ipFamilyPolicy: PreferDualStack
+    serviceOverlay:
+      spec:
+        ipFamilyPolicy: PreferDualStack
     envoyContainer:
       resources:
         limits:
