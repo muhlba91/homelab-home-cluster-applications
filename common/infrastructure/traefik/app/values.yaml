@@ -59,7 +59,6 @@ service:
     type: LoadBalancer
     loadBalancerClass: ${TRAEFIK_LB_CLASS}
     externalTrafficPolicy: Local
-    ipFamilyPolicy: PreferDualStack
 
 resources:
   requests:
