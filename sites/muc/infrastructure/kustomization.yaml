@@ -11,5 +11,6 @@ resources:
   - ../../../common/infrastructure/external-dns/
   - ../../../common/infrastructure/reloader/
   - ../../../common/infrastructure/traefik/
+  - ../../../common/infrastructure/kgateway/
   - ./rook-ceph/
   # - ./flux-extensions/

@@ -75,7 +75,7 @@ The following applications are defined in [`common/infrastructure/`](common/infr
 - [x] [Cert Manager](https://cert-manager.io) - Certificate management using ACME Let's Encrypt.
 - [x] [External DNS](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Google Cloud DNS domains for publicly reachable services.
 - [x] [Traefik](https://traefik.io) - Exposes Kubernetes `Ingress` resources to the "outside world".
-- [x] [KGateway](https://kgateway.dev) - Exposes Kubernetes `Gateway API` resources to the "outside world".
+- [x] [kgateway](https://kgateway.dev) - Exposes Kubernetes `Gateway API` resources to the "outside world".
 
 ### Core Applications
 
@@ -130,6 +130,7 @@ The following applications are defined in [`sites/muc/infrastructure/`](sites/mu
 - [x] Cert Manager
 - [x] External DNS
 - [x] Traefik
+- [x] kgateway
 - [x] Reloader
 
 #### Core Applications (MUC)
@@ -174,7 +175,7 @@ The following applications are defined in [`sites/vie/infrastructure/`](sites/vi
 - [x] External Secrets
 - [x] Rook Ceph
 - [x] Traefik
-- [x] KGateway
+- [x] kgateway
 - [x] Cert Manager
 - [x] External DNS
 - [x] [Flux Extensions](sites/vie/infrastructure/flux-extensions/) - Provides GitHub alerts and external secrets for Flux.
@@ -233,6 +234,7 @@ The following applications are defined in [`sites/hochschule-burgenland/infrastr
 - [x] [Democratic CSI](https://github.com/democratic-csi/democratic-csi) - CSI driver for dynamic provisioning of storage using iSCSI on Proxmox VE.
 - [x] MetalLB
 - [x] Traefik
+- [x] kgateway
 - [x] Cert Manager
 - [x] External DNS
 - [x] Reloader
