@@ -21,5 +21,6 @@ spec:
       APPLICATION_NAMESPACE: *application
       GATUS_NAME: KGateway
       GATUS_GROUP: 007 - Infrastructure
+      GATUS_SERVICE: kgateway-gateway
       GATUS_PORT: "443"
       GATUS_STATUS: "404"
