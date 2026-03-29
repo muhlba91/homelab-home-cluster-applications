@@ -8,8 +8,8 @@ spec:
     - group: gateway.networking.k8s.io
       kind: Gateway
       name: kgateway-gateway
-  config:
-    responseHeaderModifier:
-      add:
-        - name: "Strict-Transport-Security"
+  transformation:
+    response:
+      set:
+        - name: Strict-Transport-Security
           value: "max-age=31536000; includeSubDomains; preload"
