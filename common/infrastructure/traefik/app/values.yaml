@@ -51,14 +51,14 @@ ingressRoute:
     enabled: true
 
 service:
+  annotations:
+    ${TRAEFIK_IP_ANNOTATION}: "${TRAEFIK_IP}"
+  labels:
+    loadbalancer/pool: l2
   spec:
     ipFamilyPolicy: PreferDualStack
     externalTrafficPolicy: Local
     loadBalancerClass: ${TRAEFIK_LB_CLASS}
-    annotations:
-      ${TRAEFIK_IP_ANNOTATION}: "${TRAEFIK_IP}"
-    labels:
-      loadbalancer/pool: l2
 
 resources:
   requests:
