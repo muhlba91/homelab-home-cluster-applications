@@ -7,6 +7,6 @@ spec:
   kube:
     service:
       type: LoadBalancer
-      loadBalancerClass: "{KGATEWAY_LB_CLASS}"
+      loadBalancerClass: "${KGATEWAY_LB_CLASS}"
       extraAnnotations:
         ${KGATEWAY_IP_ANNOTATION}: "${KGATEWAY_IP}"
