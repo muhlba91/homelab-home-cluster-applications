@@ -91,7 +91,6 @@ The following applications are defined in [`common/core/`](common/core/).
 
 The following applications are defined in [`common/applications/`](common/applications/).
 
-- [x] [Frigate](https://frigate.video) - NVR with real-time object detection for IP cameras.
 - [x] [InfluxDB](https://www.influxdata.com) - InfluxDB time-series database.
 - [x] [Ollama](https://ollama.com) - Ollama local LLM model runner.
 - [x] [Omada Controller](https://www.tp-link.com/us/business-networking/omada-sdn-controller/) - TP-Link Omada Controller.
@@ -149,7 +148,6 @@ The following applications are defined in [`sites/muc/applications/`](sites/muc/
 - [x] Omada Controller
 - [x] InfluxDB
 - [x] External Services
-- [x] Frigate
 
 #### Home Assistant (MUC)
 
@@ -202,7 +200,6 @@ The following applications are defined in [`sites/vie/applications/`](sites/vie/
 - [x] [Immich](https://immich.app) - Photo management solution.
 - [x] [LibreChat](https://librechat.ai) - Open-source chat application for AI conversations.
 - [x] [Mealie](https://mealie.io) - Recipe management application.
-- [x] Frigate
 
 #### Home Assistant (VIE)
 
