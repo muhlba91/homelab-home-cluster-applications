@@ -6,3 +6,5 @@ namespace: ${APPLICATION_NAMESPACE}
 resources:
   - gateway-service-parameters.yaml
   - gateway.yaml
+  - global-https-redirect.yaml
+  - global-hsts.yaml
