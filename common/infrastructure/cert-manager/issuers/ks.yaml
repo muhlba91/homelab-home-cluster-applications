@@ -9,7 +9,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./common/core/cert-manager/issuers/
+  path: ./common/infrastructure/cert-manager/issuers/
   interval: 10m
   retryInterval: 2m
   prune: true
