@@ -6,7 +6,9 @@ metadata:
 spec:
   parentRefs:
     - name: kgateway-gateway
-      sectionName: https-443-passthrough
+      sectionName: https-443-passthrough-muehlbachler-io
+    - name: kgateway-gateway
+      sectionName: https-443-passthrough-muehlbachler-xyz
   hostnames:
     - "*.muehlbachler.io"
     - "*.muehlbachler.xyz"

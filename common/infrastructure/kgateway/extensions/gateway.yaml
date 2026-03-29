@@ -23,10 +23,19 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-    - name: https-443-passthrough
+    - name: https-443-passthrough-muehlbachler-io
       protocol: TLS
       port: 443
       hostname: "*.muehlbachler.io"
+      tls:
+        mode: Passthrough
+      allowedRoutes:
+        namespaces:
+          from: All
+    - name: https-443-passthrough-muehlbachler-xyz
+      protocol: TLS
+      port: 443
+      hostname: "*.muehlbachler.xyz"
       tls:
         mode: Passthrough
       allowedRoutes:
