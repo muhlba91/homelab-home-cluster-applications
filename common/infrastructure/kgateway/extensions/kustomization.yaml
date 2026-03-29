@@ -8,4 +8,4 @@ resources:
   - gateway.yaml
   - global-https-redirect.yaml
   # - global-hsts.yaml
-  - traefik-passthrough.yaml
+  - fallback-to-traefik.yaml

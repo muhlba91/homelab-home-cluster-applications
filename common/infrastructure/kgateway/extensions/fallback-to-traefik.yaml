@@ -7,6 +7,9 @@ spec:
   parentRefs:
     - name: kgateway-gateway
       sectionName: https-443-passthrough
+  hostnames:
+    - "*.muehlbachler.io"
+    - "*.muehlbachler.xyz"
   rules:
     - backendRefs:
         - name: traefik
