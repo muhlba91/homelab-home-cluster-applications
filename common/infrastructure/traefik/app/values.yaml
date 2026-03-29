@@ -54,7 +54,6 @@ service:
   spec:
     type: ClusterIP
     ipFamilyPolicy: PreferDualStack
-    externalTrafficPolicy: Local
 
 resources:
   requests:
