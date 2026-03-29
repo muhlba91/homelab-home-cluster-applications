@@ -36,7 +36,11 @@ data:
   # kgateway specific load balancer
   KGATEWAY_LB_CLASS: "io.metallb/load-balancer"
   KGATEWAY_IP_ANNOTATION: "metallb.io/loadBalancerIPs"
+  # traefik specific load balancer
+  TRAEFIK_LB_CLASS: "io.metallb/load-balancer"
+  TRAEFIK_IP_ANNOTATION: "metallb.io/loadBalancerIPs"
   # ip addresses for services
+  TRAEFIK_IP: "10.100.72.2"
   KGATEWAY_IP: "10.100.72.1,2a01:4f8:121:14e2:100:3:3:1"
 
   # public ip addresses

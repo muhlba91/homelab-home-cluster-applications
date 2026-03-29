@@ -36,7 +36,11 @@ data:
   # kgateway specific load balancer
   KGATEWAY_LB_CLASS: "io.cilium/l2-announcer"
   KGATEWAY_IP_ANNOTATION: "lbipam.cilium.io/ips"
+  # traefik specific load balancer
+  TRAEFIK_LB_CLASS: "io.cilium/l2-announcer"
+  TRAEFIK_IP_ANNOTATION: "lbipam.cilium.io/ips"
   # ip addresses for services
+  TRAEFIK_IP: "10.0.72.2"
   KGATEWAY_IP: "10.0.72.1,2a01:aea0:dd3:25a:1000:3:3:1"
   OMADA_CONTROLLER_IP: "10.0.71.1,2a01:aea0:dd3:25a:1000:3:2:1"
   OMADA_CONTROLLER_IPV4: "10.0.71.1"
