@@ -167,7 +167,7 @@ controllers:
         image:
           repository: ghcr.io/crazy-max/samba
           pullPolicy: IfNotPresent
-          tag: "4.21.4"
+          tag: "4.22.8"
 
         env:
           - name: TZ
@@ -226,7 +226,7 @@ controllers:
         image:
           repository: ghcr.io/crazy-max/samba
           pullPolicy: IfNotPresent
-          tag: "4.21.4"
+          tag: "4.22.8"
 
         env:
           - name: TZ
