@@ -72,6 +72,8 @@ The following applications are defined in [`common/infrastructure/`](common/infr
 - [x] [Reflector](https://github.com/reflector/reflector) - Watches Kubernetes resources and reflects changes to another namespace.
 - [x] [Reloader](https://github.com/stakater/Reloader) - Automatically reloads Kubernetes resources when secrets or configmaps change.
 - [x] [Rook Ceph](https://rook.io) - Manages persistent storage in the cluster.
+- [x] [Cert Manager](https://cert-manager.io) - Certificate management using ACME Let's Encrypt.
+- [x] [External DNS](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Google Cloud DNS domains for publicly reachable services.
 - [x] [Traefik](https://traefik.io) - Exposes Kubernetes `Ingress` resources to the "outside world".
 - [x] [KGateway](https://kgateway.dev) - Exposes Kubernetes `Gateway API` resources to the "outside world".
 
@@ -80,9 +82,7 @@ The following applications are defined in [`common/infrastructure/`](common/infr
 The following applications are defined in [`common/core/`](common/core/).
 
 - [x] [Adguard External DNS](common/core/adguard-external-dns/) - Adguard DNS integration for External DNS.
-- [x] [Cert Manager](https://cert-manager.io) - Certificate management using ACME Let's Encrypt.
 - [x] [CloudNativePG](https://cloudnative-pg.io/documentation/current/) - PostgreSQL database operator.
-- [x] [External DNS](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Google Cloud DNS domains for publicly reachable services.
 - [x] [Gatus](https://gatus.io) - Service status page.
 - [x] [Kyverno](https://kyverno.io) - Policy engine designed for Kubernetes.
 - [x] [Monitoring (Victoria Metrics & Grafana)](https://victoriametrics.com) - Monitoring stack using Victoria Metrics and [Grafana](http://grafana.com).
@@ -127,6 +127,8 @@ The following applications are defined in [`sites/muc/infrastructure/`](sites/mu
 - [x] Generic Device Plugin
 - [x] [External Secrets](sites/muc/infrastructure/external-secrets/) - Deploys required `ClusterSecretStore`s and Vault credentials.
 - [x] Rook Ceph
+- [x] Cert Manager
+- [x] External DNS
 - [x] Traefik
 - [x] Reloader
 
@@ -134,9 +136,7 @@ The following applications are defined in [`sites/muc/infrastructure/`](sites/mu
 
 The following applications are defined in [`sites/muc/core/`](sites/muc/core/).
 
-- [x] External DNS
 - [x] Adguard External DNS
-- [x] Cert Manager
 - [x] CloudNativePG
 - [x] Gatus
 - [ ] Monitoring
@@ -175,6 +175,8 @@ The following applications are defined in [`sites/vie/infrastructure/`](sites/vi
 - [x] Rook Ceph
 - [x] Traefik
 - [x] KGateway
+- [x] Cert Manager
+- [x] External DNS
 - [x] [Flux Extensions](sites/vie/infrastructure/flux-extensions/) - Provides GitHub alerts and external secrets for Flux.
 - [x] Reloader
 
@@ -182,9 +184,7 @@ The following applications are defined in [`sites/vie/infrastructure/`](sites/vi
 
 The following applications are defined in [`sites/vie/core/`](sites/vie/core/).
 
-- [x] External DNS
 - [x] Adguard External DNS
-- [x] Cert Manager
 - [x] CloudNativePG
 - [x] Monitoring (Victoria Metrics & Grafana)
 - [x] Kyverno
@@ -233,6 +233,8 @@ The following applications are defined in [`sites/hochschule-burgenland/infrastr
 - [x] [Democratic CSI](https://github.com/democratic-csi/democratic-csi) - CSI driver for dynamic provisioning of storage using iSCSI on Proxmox VE.
 - [x] MetalLB
 - [x] Traefik
+- [x] Cert Manager
+- [x] External DNS
 - [x] Reloader
 - [x] Reflector
 
@@ -240,8 +242,6 @@ The following applications are defined in [`sites/hochschule-burgenland/infrastr
 
 The following applications are defined in [`sites/hochschule-burgenland/core/`](sites/hochschule-burgenland/core/).
 
-- [x] External DNS
-- [x] Cert Manager
 - [x] CloudNativePG
 - [x] Kyverno
 - [x] Gatus

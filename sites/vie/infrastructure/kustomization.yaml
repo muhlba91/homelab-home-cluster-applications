@@ -7,8 +7,10 @@ resources:
   - ../../../common/infrastructure/metrics-server/
   - ../../../common/infrastructure/nvidia-device-plugin/
   - ./external-secrets/
-  - ./rook-ceph/
+  - ../../../common/infrastructure/cert-manager/
+  - ../../../common/infrastructure/external-dns/
+  - ../../../common/infrastructure/reloader/
   - ../../../common/infrastructure/traefik/
   - ../../../common/infrastructure/kgateway/
+  - ./rook-ceph/
   - ./flux-extensions/
-  - ../../../common/infrastructure/reloader/

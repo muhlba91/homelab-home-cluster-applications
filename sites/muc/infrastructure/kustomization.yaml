@@ -7,7 +7,9 @@ resources:
   - ../../../common/infrastructure/metrics-server/
   - ../../../common/infrastructure/generic-device-plugin/
   - ./external-secrets/
-  - ./rook-ceph/
-  - ../../../common/infrastructure/traefik/
-  # - ./flux-extensions/
+  - ../../../common/infrastructure/cert-manager/
+  - ../../../common/infrastructure/external-dns/
   - ../../../common/infrastructure/reloader/
+  - ../../../common/infrastructure/traefik/
+  - ./rook-ceph/
+  # - ./flux-extensions/
