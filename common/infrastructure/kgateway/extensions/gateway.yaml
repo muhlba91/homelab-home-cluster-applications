@@ -5,6 +5,11 @@ metadata:
   name: kgateway-gateway
 spec:
   gatewayClassName: kgateway
+  infrastructure:
+    parametersRef:
+      group: gateway.kgateway.dev
+      kind: GatewayParameters
+      name: kgateway-gateway-service-parameters
   listeners:
     - name: http-80
       protocol: HTTP
