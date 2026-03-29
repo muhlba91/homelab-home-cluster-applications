@@ -1,0 +1,14 @@
+---
+fullnameOverride: kgateway
+
+controller:
+  replicaCount: 1
+  extraEnv:
+    KGW_ENABLE_GATEWAY_API_EXPERIMENTAL_FEATURES: "true"
+
+resources:
+  requests:
+    cpu: 20m
+    memory: 384Mi
+  limits:
+    memory: 384Mi

@@ -73,6 +73,7 @@ The following applications are defined in [`common/infrastructure/`](common/infr
 - [x] [Reloader](https://github.com/stakater/Reloader) - Automatically reloads Kubernetes resources when secrets or configmaps change.
 - [x] [Rook Ceph](https://rook.io) - Manages persistent storage in the cluster.
 - [x] [Traefik](https://traefik.io) - Exposes Kubernetes `Ingress` resources to the "outside world".
+- [x] [KGateway](https://kgateway.dev) - Exposes Kubernetes `Gateway API` resources to the "outside world".
 
 ### Core Applications
 

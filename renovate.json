@@ -45,6 +45,34 @@
             ],
             "ignoreUnstable": false,
             "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<prerelease>ea\\.\\d+)$"
+        },
+        {
+            "description": "kgateway beta",
+            "matchManagers": [
+                "flux"
+            ],
+            "matchDatasources": [
+                "helm"
+            ],
+            "matchPackageNames": [
+                "kgateway"
+            ],
+            "ignoreUnstable": false,
+            "versioning": "semver"
+        },
+        {
+            "description": "kgateway-crds beta",
+            "matchManagers": [
+                "flux"
+            ],
+            "matchDatasources": [
+                "helm"
+            ],
+            "matchPackageNames": [
+                "kgateway-crds"
+            ],
+            "ignoreUnstable": false,
+            "versioning": "semver"
         }
     ]
 }
