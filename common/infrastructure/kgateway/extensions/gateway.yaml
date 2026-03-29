@@ -26,6 +26,7 @@ spec:
     - name: https-443-passthrough
       protocol: TLS
       port: 443
+      hostname: "*.muehlbachler.io"
       tls:
         mode: Passthrough
       allowedRoutes:
