@@ -59,8 +59,8 @@ spec:
     - name: adguard-listeners
       kind: ListenerSet
       group: gateway.networking.k8s.io
-  # hostnames:
-  #   - *domain
+  hostnames:
+    - *domain
   rules:
     - matches:
         - path:
