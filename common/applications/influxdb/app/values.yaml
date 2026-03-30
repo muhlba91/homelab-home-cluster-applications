@@ -19,6 +19,10 @@ persistence:
 initScripts:
   enabled: false
 
+service:
+  annotations:
+    gatus.home-operations.com/enabled: "true"
+
 ingress:
   enabled: true
   tls: true

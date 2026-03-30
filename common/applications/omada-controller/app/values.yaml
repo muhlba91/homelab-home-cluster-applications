@@ -87,6 +87,7 @@ service:
     externalTrafficPolicy: Local
     annotations:
       ${CILIUM_IP_ANNOTATION}: "${OMADA_CONTROLLER_IPV4}"
+      gatus.home-operations.com/enabled: "true"
     labels:
       "loadbalancer/pool": l2
     ports:
