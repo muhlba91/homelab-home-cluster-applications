@@ -26,7 +26,7 @@ spec:
       targetPort: http
 
 ---
-apiVersion: gateway.networking.x-k8s.io/v1
+apiVersion: gateway.networking.k8s.io/v1
 kind: ListenerSet
 metadata:
   name: adguard-listeners
