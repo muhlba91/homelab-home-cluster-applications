@@ -50,7 +50,7 @@ data:
   KGATEWAY_EXTERNAL_IP: "10.100.72.2,2a01:4f8:121:14e2:100:3:3:2"
 
   # public ip addresses
-  PUBLIC_IP: "178.63.69.250,2a01:4f8:121:14e2:100:3:3:1"
+  PUBLIC_IP: "178.63.69.250,2a01:4f8:121:14e2:100:3:3:2"
 
   # storage classes
   DEFAULT_STORAGE_CLASS: "zfs"

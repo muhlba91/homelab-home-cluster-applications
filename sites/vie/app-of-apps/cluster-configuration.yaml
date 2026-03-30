@@ -53,7 +53,7 @@ data:
   OMADA_CONTROLLER_IPV6: "2a01:aea0:dd3:25a:1000:3:2:1"
 
   # public ip addresses
-  PUBLIC_IP: "144.208.195.224,2a01:aea0:dd3:25a:1000:3:3:1"
+  PUBLIC_IP: "144.208.195.224,2a01:aea0:dd3:25a:1000:3:3:2"
 
   # storage classes
   DEFAULT_STORAGE_CLASS: "rook-ceph-block"
