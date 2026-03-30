@@ -10,6 +10,9 @@ spec:
       group: gateway.kgateway.dev
       kind: GatewayParameters
       name: kgateway-gateway-internal-service-parameters
+  allowedListeners:
+    namespaces:
+      from: All
   listeners:
     - name: http-80
       protocol: HTTP
