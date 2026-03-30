@@ -29,10 +29,9 @@ data:
           success-threshold: 3
 
     endpoints:
-      # 001 - Mail
+      # External - Mail
       - name: IMAP (Soverin)
-        group: 001 - Mail
-        enabled: true
+        group: External - Mail
         url: tls://imap.soverin.net:993
         interval: 5m
         conditions:
@@ -42,8 +41,7 @@ data:
           - type: ntfy
             priority: 4
       - name: SMTP Outgoing (Soverin)
-        group: 001 - Mail
-        enabled: true
+        group: External - Mail
         url: tls://smtp.soverin.net:465
         interval: 5m
         conditions:
@@ -53,8 +51,7 @@ data:
           - type: ntfy
             priority: 4
       - name: SMTP Incoming (Soverin)
-        group: 001 - Mail
-        enabled: true
+        group: External - Mail
         url: tcp://mx.soverin.net:25
         interval: 5m
         conditions:
@@ -63,8 +60,7 @@ data:
           - type: ntfy
             priority: 4
       - name: IMAP
-        group: 001 - Mail
-        enabled: true
+        group: External - Mail
         url: tls://mail.muehlbachler.io:993
         interval: 5m
         conditions:
@@ -74,8 +70,7 @@ data:
           - type: ntfy
             priority: 4
       - name: SMTP Outgoing
-        group: 001 - Mail
-        enabled: true
+        group: External - Mail
         url: tls://mail.muehlbachler.io:465
         interval: 5m
         conditions:
@@ -85,8 +80,7 @@ data:
           - type: ntfy
             priority: 4
       - name: SMTP Incoming
-        group: 001 - Mail
-        enabled: true
+        group: External - Mail
         url: tcp://mail.muehlbachler.io:25
         interval: 5m
         conditions:
@@ -94,43 +88,17 @@ data:
         alerts:
           - type: ntfy
             priority: 4
-      # 002 - Applications
       - name: SimpleLogin Aliases
-        group: 002 - Applications
-        enabled: true
+        group: External - Mail
         url: https://aliases.email.muehlbachler.io/auth/login
         method: GET
         interval: 5m
-        conditions:
-          - "[STATUS] == 200"
         alerts:
           - type: ntfy
             priority: 3
-      # 004 - Samba
-      - name: Immich Daniel
-        group: 004 - Samba
-        enabled: true
-        url: tcp://photos-daniel.smb.internal.muehlbachler.io:445
-        interval: 5m
-        conditions:
-          - "[CONNECTED] == true"
-        alerts:
-          - type: ntfy
-            enabled: false
-      - name: Immich Kasia
-        group: 004 - Samba
-        enabled: true
-        url: tcp://photos-kasia.smb.internal.muehlbachler.io:445
-        interval: 5m
-        conditions:
-          - "[CONNECTED] == true"
-        alerts:
-          - type: ntfy
-            enabled: false
-      # 005 - DNS
+      # External - Infrastructure
       - name: AdGuard Home
-        group: 005 - DNS
-        enabled: true
+        group: External - Infrastructure
         url: udp://10.0.71.10:53
         interval: 5m
         conditions:
@@ -138,60 +106,21 @@ data:
         alerts:
           - type: ntfy
             priority: 5
-      # 006 - Monitoring
-      - name: Victoria Metrics VMAgent
-        group: 006 - Monitoring
-        enabled: true
-        url: http://vmagent-victoria-metrics.victoria-metrics.svc.cluster.local:8429
-        method: GET
-        interval: 5m
-        conditions:
-          - "[STATUS] == 200"
-        alerts:
-          - type: ntfy
-            enabled: false
-      - name: Victoria Metrics VMSingle
-        group: 006 - Monitoring
-        enabled: true
-        url: http://vmsingle-victoria-metrics.victoria-metrics.svc.cluster.local:8428
-        method: GET
-        interval: 5m
-        conditions:
-          - "[STATUS] == 200"
-        alerts:
-          - type: ntfy
-            enabled: false
-      # 007 - Infrastructure
       - name: Vault
-        group: 007 - Infrastructure
-        enabled: true
+        group: External - Infrastructure
         url: https://vault.platform.muehlbachler.io:8200/ui/
-        method: GET
         interval: 5m
-        conditions:
-          - "[STATUS] == 200"
         alerts:
           - type: ntfy
             priority: 5
       - name: ntfy
-        group: 007 - Infrastructure
-        enabled: true
+        group: External - Infrastructure
         url: https://notify.infrastructure.muehlbachler.io
-        method: GET
         interval: 5m
-        conditions:
-          - "[STATUS] == 200"
-        alerts:
-          - type: ntfy
-            priority: 5
       - name: VPN
-        group: 007 - Infrastructure
-        enabled: true
+        group: External - Infrastructure
         url: https://vpn.platform.muehlbachler.io/
-        method: GET
         interval: 5m
-        conditions:
-          - "[STATUS] == 200"
         alerts:
           - type: ntfy
             priority: 5

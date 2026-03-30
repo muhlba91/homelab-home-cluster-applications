@@ -71,6 +71,7 @@ controllers:
           - --enable-httproute
           - --enable-ingress
           - --enable-service
+          - --default-interval=5m
           - --output=/config/gatus-sidecar.yaml
         resources: *configSyncResources
 
@@ -105,6 +106,7 @@ ingress:
       external-dns.alpha.kubernetes.io/provider: public
       external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
       traefik.ingress.kubernetes.io/router.tls: "true"
+      gatus.home-operations.com/enabled: "true"
     hosts:
       - host: &domain status.${LOCAL_HOME_DOMAIN}
         paths:
