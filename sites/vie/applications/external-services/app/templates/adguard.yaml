@@ -40,7 +40,7 @@ spec:
     - name: https-adguard
       protocol: HTTPS
       port: 443
-      hostname: "adguard.${LOCAL_INTERNAL_DOMAIN}"
+      hostname: adguard.${LOCAL_INTERNAL_DOMAIN}
       tls:
         mode: Terminate
         certificateRefs:
@@ -52,13 +52,15 @@ kind: HTTPRoute
 metadata:
   name: adguard
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: "adguard.${LOCAL_INTERNAL_DOMAIN}"
+    external-dns.alpha.kubernetes.io/hostname: &domain adguard.${LOCAL_INTERNAL_DOMAIN}
     external-dns.alpha.kubernetes.io/provider: internal
 spec:
   parentRefs:
     - name: adguard-listeners
       kind: ListenerSet
-      group: gateway.networking.x-k8s.io
+      group: gateway.networking.k8s.io
+  # hostnames:
+  #   - *domain
   rules:
     - matches:
         - path:
