@@ -2,14 +2,14 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: kgateway-gateway
+  name: kgateway-gateway-internal
 spec:
   gatewayClassName: kgateway
   infrastructure:
     parametersRef:
       group: gateway.kgateway.dev
       kind: GatewayParameters
-      name: kgateway-gateway-service-parameters
+      name: kgateway-gateway-internal-service-parameters
   listeners:
     - name: http-80
       protocol: HTTP

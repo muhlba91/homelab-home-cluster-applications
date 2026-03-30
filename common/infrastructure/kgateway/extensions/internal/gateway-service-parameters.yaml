@@ -1,0 +1,25 @@
+---
+apiVersion: gateway.kgateway.dev/v1alpha1
+kind: GatewayParameters
+metadata:
+  name: kgateway-gateway-internal-service-parameters
+spec:
+  kube:
+    service:
+      type: LoadBalancer
+      loadBalancerClass: "${KGATEWAY_INTERNAL_LB_CLASS}"
+      extraAnnotations:
+        ${KGATEWAY_INTERNAL_IP_ANNOTATION}: "${KGATEWAY_INTERNAL_IP}"
+      extraLabels:
+        loadbalancer/pool: l2
+    serviceOverlay:
+      spec:
+        ipFamilyPolicy: PreferDualStack
+        externalTrafficPolicy: Local
+    envoyContainer:
+      resources:
+        limits:
+          memory: 128Mi
+        requests:
+          cpu: 20m
+          memory: 128Mi

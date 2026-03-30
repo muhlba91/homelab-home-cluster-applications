@@ -7,6 +7,8 @@ spec:
   parentRefs:
     - name: kgateway-gateway
       sectionName: http-80
+    - name: kgateway-gateway-internal
+      sectionName: http-80
   rules:
     - filters:
         - type: RequestRedirect

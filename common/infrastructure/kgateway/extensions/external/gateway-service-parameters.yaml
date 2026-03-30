@@ -2,19 +2,20 @@
 apiVersion: gateway.kgateway.dev/v1alpha1
 kind: GatewayParameters
 metadata:
-  name: kgateway-gateway-service-parameters
+  name: kgateway-gateway-external-service-parameters
 spec:
   kube:
     service:
       type: LoadBalancer
-      loadBalancerClass: "${KGATEWAY_LB_CLASS}"
+      loadBalancerClass: "${KGATEWAY_EXTERNAL_LB_CLASS}"
       extraAnnotations:
-        ${KGATEWAY_IP_ANNOTATION}: "${KGATEWAY_IP}"
+        ${KGATEWAY_EXTERNAL_IP_ANNOTATION}: "${KGATEWAY_EXTERNAL_IP}"
       extraLabels:
         loadbalancer/pool: l2
     serviceOverlay:
       spec:
         ipFamilyPolicy: PreferDualStack
+        externalTrafficPolicy: Local
     envoyContainer:
       resources:
         limits:

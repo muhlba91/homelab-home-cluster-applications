@@ -8,6 +8,9 @@ spec:
     - group: gateway.networking.k8s.io
       kind: Gateway
       name: kgateway-gateway
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: kgateway-gateway-internal
   transformation:
     response:
       set:
