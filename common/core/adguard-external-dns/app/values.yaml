@@ -6,7 +6,7 @@ sources:
 
 interval: 2m
 
-logLevel: warning
+logLevel: debug
 
 domainFilters:
   - internal.muehlbachler.io
