@@ -62,6 +62,18 @@ controllers:
               failureThreshold: 30
               periodSeconds: 5
 
+      gatus-sidecar:
+        image:
+          repository: ghcr.io/home-operations/gatus-sidecar
+          pullPolicy: IfNotPresent
+          tag: 0.0.13
+        args:
+          - --enable-httproute
+          - --enable-ingress
+          - --enable-service
+          - --output=/config/gatus-sidecar.yaml
+        resources: *configSyncResources
+
       config-sync:
         image: *configSyncImage
         env:
