@@ -21,18 +21,7 @@ For [ksops](https://github.com/viaduct-ai/kustomize-sops) and Flux to decrypt th
 The repository is structured in:
 
 - a [common](common/) directory containing common applications applied to all clusters
-- a [templates](templates/) directory containing common templates used in the cluster, especially for gatus
 - a [sites](sites/) directory containing cluster specific applications
-
----
-
-## Templates
-
-The [templates](templates/) directory contains the following templates:
-
-- [gatus](templates/gatus/) - templates for the [Gatus](https://gatus.io) service status page
-  - [internal-http](templates/gatus/internal-http/) - templates for internal HTTP services
-  - [internal-tcp](templates/gatus/internal-tcp/) - templates for internal TCP services
 
 ---
 

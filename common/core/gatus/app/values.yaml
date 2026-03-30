@@ -25,26 +25,6 @@ controllers:
           limits:
             cpu: 50m
             memory: 8Mi
-      init-config:
-        image: &configSyncImage
-          repository: ghcr.io/kiwigrid/k8s-sidecar
-          tag: 2.5.0
-
-        env:
-          HEALTH_PORT: "8888"
-          FOLDER: /config
-          LABEL: gatus.io/enabled
-          NAMESPACE: ALL
-          RESOURCE: both
-          UNIQUE_FILENAMES: true
-          METHOD: LIST
-
-        resources: &configSyncResources
-          requests:
-            cpu: 10m
-            memory: 256Mi
-          limits:
-            memory: 312Mi
     containers:
       gatus:
         image:
@@ -90,19 +70,12 @@ controllers:
           - --enable-service
           - --default-interval=5m
           - --output=/config/gatus-sidecar.yaml
-        resources: *configSyncResources
-
-      config-sync:
-        image: *configSyncImage
-        env:
-          HEALTH_PORT: "8888"
-          FOLDER: /config
-          LABEL: gatus.io/enabled
-          NAMESPACE: ALL
-          RESOURCE: both
-          UNIQUE_FILENAMES: true
-          METHOD: WATCH
-        resources: *configSyncResources
+        resources:
+          requests:
+            cpu: 10m
+            memory: 64Mi
+          limits:
+            memory: 64Mi
 
 serviceAccount:
   gatus: {}
