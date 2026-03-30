@@ -2,7 +2,7 @@
 sources:
   - service
   - ingress
-  - traefik-proxy
+  - gateway-httproute
 
 interval: 2m
 
