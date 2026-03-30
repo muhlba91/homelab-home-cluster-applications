@@ -55,6 +55,8 @@ controllers:
         env:
           - name: GATUS_CONFIG_PATH
             value: /config
+          - name: GATUS_DELAY_START_SECONDS
+            value: "10"
         envFrom:
           - secretRef:
               name: gatus-ntfy
