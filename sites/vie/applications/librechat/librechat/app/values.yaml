@@ -52,8 +52,8 @@ controllers:
           pullPolicy: IfNotPresent
         command:
           - chown
-          - '-R'
-          - '1000:1000'
+          - "-R"
+          - "1000:1000"
           - /app/client/public/images
         resources:
           requests:
@@ -73,8 +73,8 @@ controllers:
           pullPolicy: IfNotPresent
         command:
           - chown
-          - '-R'
-          - '1000:1000'
+          - "-R"
+          - "1000:1000"
           - /app/uploads
         resources:
           requests:
@@ -126,6 +126,8 @@ controllers:
 service:
   librechat:
     controller: main
+    annotations:
+      gatus.home-operations.com/enabled: "true"
     # ipFamilyPolicy: PreferDualStack
     ports:
       http:

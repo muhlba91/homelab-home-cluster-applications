@@ -65,6 +65,8 @@ controllers:
 service:
   mealie:
     controller: main
+    annotations:
+      gatus.home-operations.com/enabled: "true"
     # ipFamilyPolicy: PreferDualStack
     ports:
       http:
