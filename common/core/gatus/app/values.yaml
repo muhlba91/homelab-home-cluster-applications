@@ -10,6 +10,21 @@ controllers:
     serviceAccount:
       identifier: gatus
     initContainers:
+      init-gatus-sidecar:
+        image:
+          repository: alpine
+          tag: 3.23
+          pullPolicy: IfNotPresent
+        command:
+          - touch
+          - /config/gatus-sidecar.yaml
+        resources:
+          requests:
+            cpu: 10m
+            memory: 8Mi
+          limits:
+            cpu: 50m
+            memory: 8Mi
       init-config:
         image: &configSyncImage
           repository: ghcr.io/kiwigrid/k8s-sidecar
