@@ -93,6 +93,8 @@ data:
         url: https://aliases.email.muehlbachler.io/auth/login
         method: GET
         interval: 5m
+        conditions:
+          - "[STATUS] == 200"
         alerts:
           - type: ntfy
             priority: 3
@@ -110,6 +112,8 @@ data:
         group: External - Infrastructure
         url: https://vault.platform.muehlbachler.io:8200/ui/
         interval: 5m
+        conditions:
+          - "[STATUS] == 200"
         alerts:
           - type: ntfy
             priority: 5
@@ -117,10 +121,17 @@ data:
         group: External - Infrastructure
         url: https://notify.infrastructure.muehlbachler.io
         interval: 5m
+        conditions:
+          - "[STATUS] == 200"
+        alerts:
+          - type: ntfy
+            priority: 5
       - name: VPN
         group: External - Infrastructure
         url: https://vpn.platform.muehlbachler.io/
         interval: 5m
+        conditions:
+          - "[STATUS] == 200"
         alerts:
           - type: ntfy
             priority: 5
