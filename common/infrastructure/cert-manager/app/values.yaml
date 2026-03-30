@@ -12,6 +12,8 @@ config:
     ListenerSets: true
 
 serviceIPFamilyPolicy: PreferDualStack
+serviceAnnotations:
+  gatus.home-operations.com/enabled: "true"
 
 webhook:
   serviceIPFamilyPolicy: PreferDualStack

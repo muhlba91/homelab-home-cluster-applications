@@ -81,6 +81,9 @@ configs:
     #   p, role:unauthenticated, clusters, get, *, allow
 
 server:
+  service:
+    annotations:
+      gatus.home-operations.com/enabled: "true"
   ingress:
     enabled: true
     annotations:

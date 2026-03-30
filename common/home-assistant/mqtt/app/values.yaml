@@ -5,6 +5,10 @@ envFromSecret: home-assistant-emqx
 
 replicaCount: 1
 
+service:
+  annotations:
+    gatus.home-operations.com/enabled: "true"
+
 ingress:
   dashboard:
     enabled: true

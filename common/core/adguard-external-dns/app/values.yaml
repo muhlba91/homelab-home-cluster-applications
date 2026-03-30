@@ -54,6 +54,8 @@ deploymentAnnotations:
 
 service:
   ipFamilyPolicy: PreferDualStack
+  annotations:
+    gatus.home-operations.com/enabled: "true"
 
 resources:
   requests:

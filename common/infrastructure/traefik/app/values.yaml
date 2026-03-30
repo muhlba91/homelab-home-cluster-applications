@@ -53,6 +53,7 @@ ingressRoute:
 service:
   annotations:
     ${TRAEFIK_IP_ANNOTATION}: "${TRAEFIK_IP}"
+    gatus.home-operations.com/enabled: "true"
   labels:
     loadbalancer/pool: l2
   spec:

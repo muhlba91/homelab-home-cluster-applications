@@ -6,6 +6,10 @@ configSecret:
 deploymentAnnotations:
   reloader.stakater.com/auto: "true"
 
+service:
+  annotations:
+    gatus.home-operations.com/enabled: "true"
+
 ingress:
   enabled: true
   hosts:

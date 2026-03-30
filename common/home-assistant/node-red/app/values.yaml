@@ -63,8 +63,8 @@ controllers:
           pullPolicy: IfNotPresent
         command:
           - chown
-          - '-R'
-          - '1000:0'
+          - "-R"
+          - "1000:0"
           - /data
         resources:
           requests:
@@ -84,8 +84,8 @@ controllers:
           pullPolicy: IfNotPresent
         command:
           - chown
-          - '-R'
-          - '1000:0'
+          - "-R"
+          - "1000:0"
           - /node_modules
         resources:
           requests:
@@ -139,6 +139,8 @@ serviceAccount:
 service:
   node-red:
     controller: main
+    annotations:
+      gatus.home-operations.com/enabled: "true"
     ipFamilyPolicy: PreferDualStack
     ports:
       http:

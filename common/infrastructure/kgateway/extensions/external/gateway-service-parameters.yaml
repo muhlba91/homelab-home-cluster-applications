@@ -10,6 +10,7 @@ spec:
       loadBalancerClass: "${KGATEWAY_EXTERNAL_LB_CLASS}"
       extraAnnotations:
         ${KGATEWAY_EXTERNAL_IP_ANNOTATION}: "${KGATEWAY_EXTERNAL_IP}"
+        gatus.home-operations.com/enabled: "true"
       extraLabels:
         loadbalancer/pool: l2
     serviceOverlay:

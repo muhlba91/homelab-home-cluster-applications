@@ -57,6 +57,7 @@ service:
     annotations:
       external-dns.alpha.kubernetes.io/provider: internal
       external-dns.alpha.kubernetes.io/hostname: ecowitt.iot.${LOCAL_INTERNAL_DOMAIN}
+      gatus.home-operations.com/enabled: "true"
     ports:
       http:
         port: 80
