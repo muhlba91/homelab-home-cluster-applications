@@ -9,7 +9,7 @@ config:
   enableGatewayAPI: true
   enableGatewayAPIListenerSet: true
   featureGates:
-    ListenerSets: false # TODO: set true once traefik updates the CRDs
+    ListenerSets: true
 
 serviceIPFamilyPolicy: PreferDualStack
 
