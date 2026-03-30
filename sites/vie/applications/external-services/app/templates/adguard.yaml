@@ -1,0 +1,95 @@
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: adguard
+subsets:
+  - addresses:
+      - ip: 10.0.0.1
+    ports:
+      - name: http
+        port: 3000
+        protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: adguard
+spec:
+  type: ClusterIP
+  ipFamilyPolicy: PreferDualStack
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http
+
+---
+apiVersion: gateway.networking.x-k8s.io/v1
+kind: ListenerSet
+metadata:
+  name: adguard-listeners
+  annotations:
+    cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
+spec:
+  parentRef:
+    name: kgateway-gateway-internal
+    namespace: kgateway
+  listeners:
+    - name: https-adguard
+      protocol: HTTPS
+      port: 443
+      hostname: "adguard.${LOCAL_INTERNAL_DOMAIN}"
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: adguard-tls-cert
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: adguard
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: "adguard.${LOCAL_INTERNAL_DOMAIN}"
+    external-dns.alpha.kubernetes.io/provider: internal
+spec:
+  parentRefs:
+    - name: adguard-listeners
+      kind: ListenerSet
+      group: gateway.networking.x-k8s.io
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: adguard
+          port: 80
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: &name adguard
+  annotations:
+    cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
+    external-dns.alpha.kubernetes.io/provider: internal
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  rules:
+    - host: &domain adguard.${LOCAL_INTERNAL_DOMAIN}
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: *name
+                port:
+                  number: 80
+  tls:
+    - secretName: adguard-tls-cert
+      hosts:
+        - *domain
