@@ -102,53 +102,6 @@ The following applications are defined in [`common/home-assistant/`](common/home
 
 The [sites](sites/) directory contains cluster specific applications.
 
-### Munich (MUC)
-
-The [MUC](sites/muc/) site contains the following applications:
-
-#### Infrastructure (MUC)
-
-The following applications are defined in [`sites/muc/infrastructure/`](sites/muc/infrastructure/).
-
-- [x] Cilium
-- [x] Kubelet Serving Cert Approver
-- [x] Metrics Server
-- [x] Generic Device Plugin
-- [x] [External Secrets](sites/muc/infrastructure/external-secrets/) - Deploys required `ClusterSecretStore`s and Vault credentials.
-- [x] Rook Ceph
-- [x] Cert Manager
-- [x] External DNS
-- [x] Traefik
-- [x] kgateway
-- [x] Reloader
-
-#### Core Applications (MUC)
-
-The following applications are defined in [`sites/muc/core/`](sites/muc/core/).
-
-- [x] Adguard External DNS
-- [x] CloudNativePG
-- [x] Gatus
-- [ ] Monitoring
-- [ ] Velero
-
-#### (User) Applications (MUC)
-
-The following applications are defined in [`sites/muc/applications/`](sites/muc/applications/).
-
-- [x] Omada Controller
-- [x] InfluxDB
-- [x] External Services
-
-#### Home Assistant (MUC)
-
-The following applications are defined in [`sites/muc/home-assistant/`](sites/muc/home-assistant/).
-
-- [x] EMQX (MQTT Broker)
-- [x] Telegraf
-- [x] Home Assistant
-- [x] Node-RED
-
 ### Vienna (VIE)
 
 The [VIE](sites/vie/) site contains the following applications:
