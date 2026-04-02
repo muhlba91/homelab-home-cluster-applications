@@ -10,7 +10,7 @@ controllers:
         image:
           repository: mbentley/omada-controller
           pullPolicy: IfNotPresent
-          tag: 6.1.0.19
+          tag: 6.2.0.17
 
         env:
           - name: MANAGE_HTTP_PORT
