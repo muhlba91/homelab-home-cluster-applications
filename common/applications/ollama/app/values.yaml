@@ -14,7 +14,7 @@ ${APPLICATION}:
   models:
     pull:
       # https://github.com/allenporter/home-assistant-datasets/tree/main/reports
-      - qwen3:8b-q4_K_M
+      - gemma4:e4b-it-q4_K_M
 
 service:
   annotations:
