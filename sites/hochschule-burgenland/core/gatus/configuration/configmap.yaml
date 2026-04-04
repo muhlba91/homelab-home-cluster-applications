@@ -18,8 +18,8 @@ data:
     alerting:
       ntfy:
         url: https://notify.infrastructure.muehlbachler.io
-        topic: ${NTFY_TOPIC}
-        token: ${NTFY_TOKEN}
+        topic: $${NTFY_TOPIC}
+        token: $${NTFY_TOKEN}
         priority: 2
         click: https://status.${LOCAL_HOME_DOMAIN}
         default-alert:
