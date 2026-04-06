@@ -37,6 +37,9 @@ customConfig:
       compression: gzip
       healthcheck:
         enabled: false
+      buffer:
+        type: disk
+        max_size: 1049000000
       request:
         headers:
           VL-Time-Field: timestamp
@@ -61,6 +64,6 @@ persistence:
 resources:
   requests:
     cpu: 50m
-    memory: 512Mi
+    memory: 768Mi
   limits:
-    memory: 512Mi
+    memory: 768Mi
