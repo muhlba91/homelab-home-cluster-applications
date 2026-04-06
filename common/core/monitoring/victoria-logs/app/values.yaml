@@ -23,9 +23,9 @@ server:
   resources:
     requests:
       cpu: 50m
-      memory: 256Mi
+      memory: 1Gi
     limits:
-      memory: 256Mi
+      memory: 1Gi
 
 dashboards:
   enabled: true
