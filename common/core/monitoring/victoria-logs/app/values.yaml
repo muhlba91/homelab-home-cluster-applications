@@ -24,3 +24,8 @@ server:
       memory: 256Mi
     limits:
       memory: 256Mi
+
+dashboards:
+  enabled: true
+  labels:
+    grafana_dashboard: "1"
