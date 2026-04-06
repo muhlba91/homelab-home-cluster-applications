@@ -10,6 +10,11 @@ customConfig:
   sources:
     k8s:
       type: kubernetes_logs
+      ignore_older_secs: 600
+      exclude_namespaces:
+        - vicoria-logs
+        - victoria-metrics
+      annotation_fields: null
     internal_metrics:
       type: internal_metrics
   transforms:
@@ -18,8 +23,18 @@ customConfig:
       inputs:
         - k8s
       source: |
+        if exists(.kubernetes.pod_labels) {
+          new_labels = {}
+          for_each(object!(.kubernetes.pod_labels)) -> |key, value| {
+              if starts_with(key, "app.kubernetes.io/") {
+                  new_labels = set!(new_labels, [key], value)
+              }
+          }
+          .kubernetes.pod_labels = new_labels
+        }
         .log = parse_json(.message) ?? .message
         del(.message)
+        del(.kubernetes.pod_annotations)
   sinks:
     exporter:
       type: prometheus_exporter
@@ -39,11 +54,11 @@ customConfig:
         enabled: false
       buffer:
         type: disk
-        max_size: 1049000000
+        max_size: 512MiB
       request:
         headers:
           VL-Time-Field: timestamp
-          VL-Stream-Fields: stream,kubernetes.pod_name,kubernetes.container_name,kubernetes.pod_namespace
+          VL-Stream-Fields: stream,kubernetes.pod_name,kubernetes.container_name,kubernetes.pod_namespace,kubernetes.pod_labels.app.kubernetes.io/name
           VL-Msg-Field: message,msg,_msg,log.msg,log.message,log
           AccountID: "0"
           ProjectID: "0"
@@ -64,6 +79,6 @@ persistence:
 resources:
   requests:
     cpu: 50m
-    memory: 1Gi
+    memory: 512Mi
   limits:
-    memory: 1Gi
+    memory: 512Mi
