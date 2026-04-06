@@ -11,6 +11,9 @@ customConfig:
     k8s:
       type: kubernetes_logs
       ignore_older_secs: 600
+      oldest_first: false
+      read_from: end
+      use_apiserver_cache: true
       namespace_annotation_fields:
         namespace_labels: ""
       node_annotation_fields:
