@@ -17,6 +17,8 @@ server:
     storageClassName: ${DEFAULT_STORAGE_CLASS}
     size: 20Gi
   service:
+    type: ClusterIP
+    clusterIP: ""
     ipFamilyPolicy: PreferDualStack
   resources:
     requests:
