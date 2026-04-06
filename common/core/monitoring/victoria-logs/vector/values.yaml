@@ -14,7 +14,19 @@ customConfig:
       exclude_namespaces:
         - vicoria-logs
         - victoria-metrics
-      annotation_fields: null
+      namespace_annotation_fields:
+        namespace_labels: ""
+      node_annotation_fields:
+        node_labels: ""
+      pod_annotation_fields:
+        container_id: ""
+        container_image_id: ""
+        pod_annotations: ""
+        pod_ip: ""
+        pod_ips: ""
+        pod_node_name: ""
+        pod_owner: ""
+        pod_uid: ""
     internal_metrics:
       type: internal_metrics
   transforms:
