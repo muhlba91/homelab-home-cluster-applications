@@ -86,7 +86,8 @@ grafana.ini:
       'muehlbachler.zitadel.cloud') && 'GrafanaAdmin' || 'Viewer'
 assertNoLeakedSecrets: false # TODO: can we get rid of this?
 
-plugins: []
+plugins:
+  - victoriametrics-logs-datasource
 
 sidecar:
   resources:
