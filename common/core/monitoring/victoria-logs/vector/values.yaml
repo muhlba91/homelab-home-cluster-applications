@@ -44,8 +44,10 @@ customConfig:
           }
           .kubernetes.pod_labels = new_labels
         }
+        if is_string(.message) {
+           .message = strip_ansi_escape_codes(string!(.message))
+        }
         .log = parse_json(.message) ?? .message
-        .log = strip_ansi_escape_codes(string!(.log))
         del(.message)
         del(.kubernetes.pod_annotations)
   sinks:
