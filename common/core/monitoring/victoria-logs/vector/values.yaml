@@ -66,7 +66,8 @@ customConfig:
         enabled: false
       buffer:
         type: disk
-        max_size: 512MiB
+        when_full: drop_newest
+        max_size: 1073741824
       request:
         headers:
           VL-Time-Field: timestamp
