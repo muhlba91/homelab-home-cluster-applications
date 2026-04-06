@@ -74,7 +74,12 @@ The following applications are defined in [`common/core/`](common/core/).
 - [x] [CloudNativePG](https://cloudnative-pg.io/documentation/current/) - PostgreSQL database operator.
 - [x] [Gatus](https://gatus.io) - Service status page.
 - [x] [Kyverno](https://kyverno.io) - Policy engine designed for Kubernetes.
-- [x] [Monitoring (Victoria Metrics & Grafana)](https://victoriametrics.com) - Monitoring stack using Victoria Metrics and [Grafana](http://grafana.com).
+- [x] Monitoring
+  - [x] [Victoria Metrics Operator](https://victoriametrics.com) - Victoria Metrics operator for Kubernetes.
+  - [x] [Victoria Metrics](https://victoriametrics.com) - Victoria Metrics time-series database.
+  - [x] [Victoria Logs](https://victoriametrics.com/logs/) - Victoria Metrics log collection and processing.
+  - [x] [Vector](https://vector.dev) - Log collection and processing.
+  - [x] [Grafana](http://grafana.com) - Visualization of monitoring data.
 - [x] [Velero](https://velero.io) - Performs cluster backups.
 
 ### (User) Applications
@@ -129,7 +134,7 @@ The following applications are defined in [`sites/vie/core/`](sites/vie/core/).
 
 - [x] Adguard External DNS
 - [x] CloudNativePG
-- [x] Monitoring (Victoria Metrics & Grafana)
+- [x] Monitoring (full stack)
 - [x] Kyverno
 - [x] Gatus
 - [x] Velero

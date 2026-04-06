@@ -1,0 +1,26 @@
+---
+fullnameOverride: victoria-logs
+
+serviceAccount:
+  create: true
+
+server:
+  extraArgs:
+    envflag.enable: true
+    envflag.prefix: VM_
+    loggerFormat: json
+    httpListenAddr: :9428
+    http.shutdownDelay: 15s
+    retentionPeriod: 3d
+    retention.maxDiskUsagePercent: "85"
+  persistentVolume:
+    storageClassName: ${DEFAULT_STORAGE_CLASS}
+    size: 20Gi
+  service:
+    ipFamilyPolicy: PreferDualStack
+  resources:
+    requests:
+      cpu: 50m
+      memory: 256Mi
+    limits:
+      memory: 256Mi

@@ -19,5 +19,3 @@ spec:
     substitute:
       APPLICATION: *application
       APPLICATION_NAMESPACE: *application
-      GATUS_NAME: Grafana
-      GATUS_GROUP: 006 - Monitoring

@@ -19,7 +19,3 @@ spec:
     substitute:
       APPLICATION: *application
       APPLICATION_NAMESPACE: *application
-      GATUS_NAME: Dex
-      GATUS_GROUP: 002 - Applications
-      GATUS_PORT: "5556"
-      GATUS_STATUS: "404"

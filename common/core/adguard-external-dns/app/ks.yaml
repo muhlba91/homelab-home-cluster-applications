@@ -19,7 +19,3 @@ spec:
     substitute:
       APPLICATION: *application
       APPLICATION_NAMESPACE: adguard
-      GATUS_NAME: AdGuard External DNS
-      GATUS_GROUP: 005 - DNS
-      GATUS_PORT: "7979"
-      GATUS_STATUS: "404"

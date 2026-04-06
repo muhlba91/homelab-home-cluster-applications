@@ -1,0 +1,67 @@
+---
+role: Agent
+
+customConfig:
+  data_dir: /vector-data-dir
+  api:
+    enabled: false
+    address: 0.0.0.0:8686
+    playground: true
+  sources:
+    k8s:
+      type: kubernetes_logs
+    internal_metrics:
+      type: internal_metrics
+  transforms:
+    parser:
+      type: remap
+      inputs:
+        - k8s
+      source: |
+        .log = parse_json(.message) ?? .message
+        del(.message)
+  sinks:
+    exporter:
+      type: prometheus_exporter
+      address: 0.0.0.0:9090
+      inputs:
+        - internal_metrics
+    vlogs:
+      type: elasticsearch
+      endpoints:
+        - http://victoria-logs-single-server:9428/insert/elasticsearch/
+      inputs:
+        - parser
+      mode: bulk
+      api_version: v8
+      compression: gzip
+      healthcheck:
+        enabled: false
+      request:
+        headers:
+          VL-Time-Field: "timestamp"
+          VL-Stream-Fields: "stream,kubernetes.pod_name,kubernetes.container_name,kuberne\
+            tes.pod_namespace"
+          VL-Msg-Field: "log,message,msg"
+          AccountID: "0"
+          ProjectID: "0"
+
+containerPorts:
+  - name: prom-exporter
+    containerPort: 9090
+    protocol: TCP
+
+service:
+  ipFamilyPolicy: PreferDualStack
+
+persistence:
+  enabled: false
+  hostPath:
+    enabled: false
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 384Mi
+  limits:
+    memory: 384Mi

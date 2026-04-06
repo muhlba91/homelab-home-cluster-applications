@@ -19,6 +19,3 @@ spec:
     substitute:
       APPLICATION: *application
       APPLICATION_NAMESPACE: *application
-      GATUS_NAME: Ollama
-      GATUS_GROUP: 002 - Applications
-      GATUS_PORT: "11434"

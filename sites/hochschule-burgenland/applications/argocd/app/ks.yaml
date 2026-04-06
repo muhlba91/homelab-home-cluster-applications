@@ -19,6 +19,3 @@ spec:
     substitute:
       APPLICATION: *application
       APPLICATION_NAMESPACE: *application
-      GATUS_NAME: Argo CD
-      GATUS_GROUP: 002 - Applications
-      GATUS_SERVICE: argocd-server

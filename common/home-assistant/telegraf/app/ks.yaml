@@ -19,7 +19,3 @@ spec:
     substitute:
       APPLICATION: *application
       APPLICATION_NAMESPACE: *application
-      GATUS_NAME: Telegraf
-      GATUS_GROUP: 003 - Home Automation
-      GATUS_PORT: "8086"
-      GATUS_STATUS: "404"

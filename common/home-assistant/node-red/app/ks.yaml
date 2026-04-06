@@ -19,6 +19,3 @@ spec:
     substitute:
       APPLICATION: *application
       APPLICATION_NAMESPACE: *application
-      GATUS_NAME: Node-RED
-      GATUS_GROUP: 003 - Home Automation
-      GATUS_PORT: "1880"

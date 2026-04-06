@@ -19,7 +19,3 @@ spec:
     substitute:
       APPLICATION: *application
       APPLICATION_NAMESPACE: home-assistant-mqtt
-      GATUS_NAME: MQTT
-      GATUS_GROUP: 003 - Home Automation
-      GATUS_SERVICE: emqx-mqtt
-      GATUS_PORT: "1883"
