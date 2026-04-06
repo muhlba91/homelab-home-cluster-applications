@@ -5,4 +5,5 @@ kind: Kustomization
 resources:
   - ./victoria-metrics-operator/
   - ./victoria-metrics-stack/
+  - ./victoria-logs/
   - ./grafana/
