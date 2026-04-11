@@ -74,18 +74,19 @@ customConfig:
         - mikrotik_syslog
       source: |
         .stream = "mikrotik"
+        # VictoriaLogs colors: "debug", "info", "warn", "error", "crit"
         sev_key = to_string(.severity) ?? "6"
         severity_map = {
-          "0": "emergency",
-          "1": "alert",
-          "2": "critical",
-          "3": "error",
-          "4": "warning",
-          "5": "notice",
-          "6": "info",
-          "7": "debug"
+          "0": "crit",   # emergency
+          "1": "crit",   # alert
+          "2": "crit",   # critical
+          "3": "error",  # error
+          "4": "warn",   # warning
+          "5": "info",   # notice
+          "6": "info",   # info
+          "7": "debug"   # debug
         }
-        .level = get(severity_map, [sev_key]) ?? "unknown"
+        .level = get(severity_map, [sev_key]) ?? "info"
         parts = split(string!(.message), " ", limit: 2)
         if length(parts) > 1 {
           .topics = split(string!(parts[0]), ",")
