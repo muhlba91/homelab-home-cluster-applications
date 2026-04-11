@@ -50,6 +50,10 @@ data:
   OMADA_CONTROLLER_IPV6: "2a01:aea0:dd3:25a:1000:3:2:1"
   MONITORING_LOG_VECTOR_IP: "10.111.200.1,fc00:db8:111::200:1"
 
+  # device IPs and CIDR prefixes
+  ROUTER_CIDR_PREFIX: "10.0.0."
+  WIFI_CIDR_PREFIX: "10.0.21."
+
   # public ip addresses
   PUBLIC_IP: "144.208.195.224,2a01:aea0:dd3:25a:1000:3:3:2"
 
