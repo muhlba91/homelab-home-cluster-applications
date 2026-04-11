@@ -4,6 +4,7 @@ extends: default
 ignore:
   - secret-*.enc.yml
   - "*-patch.yaml"
+  - snmp.yml
 
 rules:
   line-length:
