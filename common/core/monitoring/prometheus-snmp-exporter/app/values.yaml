@@ -16,10 +16,10 @@ service:
 configmapReload:
   enabled: true
   extraArgs:
-    - "--watched-dir=/etc/config"
+    - "--watched-dir=/config"
   extraVolumeMounts:
     - name: config
-      mountPath: "/etc/config"
+      mountPath: "/config"
       readOnly: true
   resources:
     requests:
