@@ -8,4 +8,4 @@ metadata:
 spec:
   interval: 10m
   url: oci://ghcr.io/prometheus-community/charts
-  oci: true
+  type: oci
