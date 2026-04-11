@@ -153,6 +153,7 @@ customConfig:
           VL-Time-Field: timestamp,_time
           VL-Stream-Fields: stream,host,service,level,kubernetes.pod_namespace,pod
           VL-Msg-Field: message,msg,_msg,log.msg,log.message,log
+          VL-Level-Field: level
           AccountID: "0"
           ProjectID: "0"
 
