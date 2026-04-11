@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring-scrapes
+  labels:
+    kustomize.toolkit.fluxcd.io/prune: disabled

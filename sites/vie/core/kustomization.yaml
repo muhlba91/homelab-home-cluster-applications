@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ../../../common/core/adguard-external-dns/
   - ../../../common/core/cloudnative-pg/
-  - ../../../common/core/monitoring/
+  - ./monitoring/
   - ../../../common/core/kyverno/
   - ./gatus/
   - ./velero/
