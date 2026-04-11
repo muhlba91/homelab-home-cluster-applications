@@ -75,16 +75,16 @@ customConfig:
       source: |
         .stream = "mikrotik"
         # VictoriaLogs colors: "debug", "info", "warn", "error", "crit"
-        sev_key = to_string(.severity) ?? "6"
+        sev_key = to_string(.severity) ?? "informational"
         severity_map = {
-          "0": "crit",   # emergency
-          "1": "crit",   # alert
-          "2": "crit",   # critical
-          "3": "error",  # error
-          "4": "warn",   # warning
-          "5": "info",   # notice
-          "6": "info",   # info
-          "7": "debug"   # debug
+          "emergency":     "crit",
+          "alert":         "crit",
+          "critical":      "crit",
+          "error":         "error",
+          "warning":       "warn",
+          "notice":        "info",
+          "informational": "info",
+          "debug":         "debug"
         }
         .level = get(severity_map, [sev_key]) ?? "info"
         parts = split(string!(.message), " ", limit: 2)
@@ -96,6 +96,8 @@ customConfig:
           .log = .message
         }
         .service = .topics[0] || .appname || "routeros"
+        .hostname = .host
+        .host = .source_ip || .host
         del(.message)
         del(.appname)
         del(.facility)
