@@ -74,6 +74,7 @@ customConfig:
         - mikrotik_syslog
       source: |
         .stream = "mikrotik"
+        sev_key = to_string(.severity) ?? "6"
         severity_map = {
           "0": "emergency",
           "1": "alert",
@@ -84,9 +85,9 @@ customConfig:
           "6": "info",
           "7": "debug"
         }
-        .level = severity_map[to_string(.severity)] || "unknown"
+        .level = get(severity_map, [sev_key]) ?? "unknown"
         parts = split(string!(.message), " ", limit: 2)
-        if array_length(parts) > 1 {
+        if length(parts) > 1 {
           .topics = split(parts[0], ",")
           .log = parts[1]
         } else {
