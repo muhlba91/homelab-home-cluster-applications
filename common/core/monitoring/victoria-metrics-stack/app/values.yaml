@@ -77,6 +77,7 @@ vmagent:
     logLevel: WARN
     extraArgs:
       enableTCP6: "true"
+      promscrape.maxScrapeSize: "67108864"
     serviceSpec:
       spec:
         ipFamilyPolicy: PreferDualStack
