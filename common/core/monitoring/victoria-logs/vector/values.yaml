@@ -65,13 +65,13 @@ customConfig:
         }
         parsed, err = parse_json(.message)
         if err == null && is_object(parsed) {
-          . = merge(., object!(parsed)) 
+          . = merge(., object!(parsed))
         }
-        .log = .message || .msg || .log
-        .service = .kubernetes.pod_labels."app.kubernetes.io/name" || 
+        .log = .msg || .log
+        .service = .kubernetes.pod_labels."app.kubernetes.io/name" ||
                   .kubernetes.pod_labels."app.kubernetes.io/instance" ||
                   .kubernetes.pod_labels.app ||
-                  .kubernetes.container_name || 
+                  .kubernetes.container_name ||
                   "unknown-service"
         .pod = .kubernetes.pod_name || "unknown-pod"
         .namespace = .kubernetes.pod_namespace
