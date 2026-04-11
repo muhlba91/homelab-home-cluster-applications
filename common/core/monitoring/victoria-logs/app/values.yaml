@@ -25,7 +25,7 @@ server:
       cpu: 30m
       memory: 512Mi
     limits:
-      memory: 768Mi
+      memory: 1Gi
 
 dashboards:
   enabled: true
