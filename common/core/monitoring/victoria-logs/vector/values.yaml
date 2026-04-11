@@ -74,7 +74,7 @@ customConfig:
         - mikrotik_syslog
       source: |
         .stream = "mikrotik"
-        appname_parts = split(string!(.appname) ?? "routeros", ",")
+        appname_parts = split(string(.appname) || "routeros", ",")
         raw_level = if length(appname_parts) > 1 {
           downcase(string!(appname_parts[1]))
         } else {
@@ -94,7 +94,7 @@ customConfig:
         .topics = [appname_parts[0]]
         .service = appname_parts[0] ?? "routeros"
         .hostname = string!(.host)
-        .host = string!(.source_ip) ?? .hostname
+        .host = string(.source_ip) || .hostname
         .log = .message
         del(.message)
         del(.appname)
