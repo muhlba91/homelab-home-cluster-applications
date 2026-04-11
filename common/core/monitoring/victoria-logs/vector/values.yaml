@@ -74,9 +74,30 @@ customConfig:
         - mikrotik_syslog
       source: |
         .stream = "mikrotik"
-        .service = .appname || "routeros"
-        .log = .message
+        severity_map = {
+          "0": "emergency",
+          "1": "alert",
+          "2": "critical",
+          "3": "error",
+          "4": "warning",
+          "5": "notice",
+          "6": "info",
+          "7": "debug"
+        }
+        .level = severity_map[to_string(.severity)] || "unknown"
+        parts = split(string!(.message), " ", limit: 2)
+        if array_length(parts) > 1 {
+          .topics = split(parts[0], ",")
+          .log = parts[1]
+        } else {
+          .topics = []
+          .log = .message
+        }
+        .service = .topics[0] || .appname || "routeros"
         del(.message)
+        del(.appname)
+        del(.facility)
+        del(.severity)
     network_parser:
       type: remap
       inputs:
@@ -128,7 +149,7 @@ customConfig:
       request:
         headers:
           VL-Time-Field: timestamp,_time
-          VL-Stream-Fields: stream,host,service,kubernetes.pod_namespace,pod
+          VL-Stream-Fields: stream,host,service,level,kubernetes.pod_namespace,pod
           VL-Msg-Field: message,msg,_msg,log.msg,log.message,log
           AccountID: "0"
           ProjectID: "0"
