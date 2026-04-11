@@ -88,7 +88,7 @@ customConfig:
         .level = get(severity_map, [sev_key]) ?? "unknown"
         parts = split(string!(.message), " ", limit: 2)
         if length(parts) > 1 {
-          .topics = split(parts[0], ",")
+          .topics = split!(string!(parts[0]), ",")
           .log = parts[1]
         } else {
           .topics = []
