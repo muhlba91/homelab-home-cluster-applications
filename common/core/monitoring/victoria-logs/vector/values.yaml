@@ -74,30 +74,28 @@ customConfig:
         - mikrotik_syslog
       source: |
         .stream = "mikrotik"
-        # VictoriaLogs colors: "debug", "info", "warn", "error", "crit"
-        sev_key = to_string(.severity) ?? "informational"
-        severity_map = {
-          "emergency":     "crit",
-          "alert":         "crit",
-          "critical":      "crit",
-          "error":         "error",
-          "warning":       "warn",
-          "notice":        "info",
-          "informational": "info",
-          "debug":         "debug"
-        }
-        .level = get(severity_map, [sev_key]) ?? "info"
-        parts = split(string!(.message), " ", limit: 2)
-        if length(parts) > 1 {
-          .topics = split(string!(parts[0]), ",")
-          .log = parts[1]
+        appname_parts = split(string!(.appname) ?? "routeros", ",")
+        raw_level = if length(appname_parts) > 1 {
+          downcase(string!(appname_parts[1]))
         } else {
-          .topics = []
-          .log = .message
+          "info"
         }
-        .service = .topics[0] || .appname || "routeros"
-        .hostname = .host
-        .host = .source_ip || .host
+        level_map = {
+          "debug":     "debug",
+          "info":      "info",
+          "notice":    "info",
+          "warning":   "warn",
+          "error":     "error",
+          "critical":  "crit",
+          "alert":     "crit",
+          "emergency": "crit"
+        }
+        .level = get(level_map, [raw_level]) ?? "info"
+        .topics = [appname_parts[0]]
+        .service = appname_parts[0] ?? "routeros"
+        .hostname = string!(.host)
+        .host = string!(.source_ip) ?? .hostname
+        .log = .message
         del(.message)
         del(.appname)
         del(.facility)
@@ -127,12 +125,6 @@ customConfig:
         .host = .host || ._HOSTNAME
         .log = .message || .msg || "no message"
   sinks:
-    debug_mikrotik:
-      type: console
-      inputs:
-        - mikrotik_syslog # <-- raw, BEFORE the parser
-      encoding:
-        codec: json
     exporter:
       type: prometheus_exporter
       address: 0.0.0.0:9090
