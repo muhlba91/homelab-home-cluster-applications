@@ -53,19 +53,19 @@ customConfig:
         if exists(.kubernetes.pod_labels) {
           new_labels = {}
           for_each(object!(.kubernetes.pod_labels)) -> |key, value| {
-              if starts_with(key, "app.kubernetes.io/") {
-                  new_labels = set!(new_labels, [key], value)
-              }
+            if starts_with(key, "app.kubernetes.io/") {
+              new_labels = set!(new_labels, [key], value)
+            }
           }
           .kubernetes.pod_labels = new_labels
         }
         if is_string(.message) {
-           .message = strip_ansi_escape_codes(string!(.message))
+          .message = strip_ansi_escape_codes(string!(.message))
         }
         .stream = "kubernetes"
-        .service = .kubernetes.pod_labels["app.kubernetes.io/name"] ?? "unknown-service"
-        .pod = .kubernetes.pod_name ?? "unknown-pod"
-        .log = parse_json(.message) ?? .message
+        .service = .kubernetes.pod_labels["app.kubernetes.io/name"] || "unknown-service"
+        .pod = .kubernetes.pod_name || "unknown-pod"
+        .log = parse_json(.message) || .message
         del(.message)
         del(.kubernetes.pod_annotations)
     mikrotik_parser:
@@ -74,7 +74,7 @@ customConfig:
         - mikrotik_syslog
       source: |
         .stream = "mikrotik"
-        .service = .appname ?? "routeros"
+        .service = .appname || "routeros"
         .log = .message
         del(.message)
     network_parser:
@@ -82,10 +82,14 @@ customConfig:
       inputs:
         - network_syslog
       source: |
-        if starts_with(string!(.host), "${ROUTER_CIDR_PREFIX}") { .stream = "router" }
-        else if starts_with(string!(.host), "${WIFI_CIDR_PREFIX}") { .stream = "wifi" }
-        else { .stream = "network-general" }
-        .service = .appname ?? "network-device"
+        if starts_with(string!(.host), "${ROUTER_CIDR_PREFIX}") {
+          .stream = "router"
+        } else if starts_with(string!(.host), "${WIFI_CIDR_PREFIX}") {
+          .stream = "wifi"
+        } else {
+          .stream = "network-general"
+        }
+        .service = .appname || "network-device"
         .log = .message
         del(.message)
     linux_parser:
@@ -94,8 +98,8 @@ customConfig:
         - linux_agents
       source: |
         .stream = "linux"
-        .service = ._SYSTEMD_UNIT ?? .appname ?? "system"
-        .host = .host ?? ._HOSTNAME
+        .service = ._SYSTEMD_UNIT || .appname || "system"
+        .host = .host || ._HOSTNAME
         .log = .message || .msg || "no message"
   sinks:
     exporter:
