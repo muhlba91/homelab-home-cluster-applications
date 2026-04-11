@@ -1,0 +1,36 @@
+---
+extraArgs:
+  - "--config.file=/config/snmp.yml"
+
+extraSecretMounts:
+  - name: config
+    mountPath: /config
+    secretName: snmp-config
+    readOnly: true
+    defaultMode: 420
+
+service:
+  ipDualStack:
+    enabled: true
+
+configmapReload:
+  enabled: true
+  extraArgs:
+    - "--watched-dir=/etc/config"
+  extraVolumeMounts:
+    - name: config
+      mountPath: "/etc/config"
+      readOnly: true
+  resources:
+    requests:
+      cpu: 5m
+      memory: 32Mi
+    limits:
+      memory: 32Mi
+
+resources:
+  requests:
+    cpu: 5m
+    memory: 64Mi
+  limits:
+    memory: 64Mi

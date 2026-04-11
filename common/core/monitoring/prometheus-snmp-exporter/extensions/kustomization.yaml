@@ -2,9 +2,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: ${APPLICATION_NAMESPACE}
 resources:
-  - ./victoria-metrics-operator/
-  - ./victoria-metrics-stack/
-  - ./victoria-logs/
-  - ./grafana/
-  # - ./prometheus-snmp-exporter/
+  - ./external-secret-snmp-config.yaml

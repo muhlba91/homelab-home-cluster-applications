@@ -8,7 +8,8 @@ customConfig:
     address: 0.0.0.0:8686
     playground: true
   sources:
-    k8s:
+    kubernetes_logs:
+      # Kubernetes Logs using the built-in Kubernetes API (no file monitoring)
       type: kubernetes_logs
       ignore_older_secs: 600
       oldest_first: false
@@ -27,13 +28,27 @@ customConfig:
         pod_node_name: ""
         pod_owner: ""
         pod_uid: ""
+    mikrotik_syslog:
+      # Old BSD Syslog (MikroTik)
+      type: syslog
+      address: 0.0.0.0:514
+      mode: udp
+    network_syslog:
+      # RFC5424 Syslog (VyOS, Omada, OPNsense)
+      type: syslog
+      address: 0.0.0.0:515
+      mode: udp
+    linux_agents:
+      # Vector-to-Vector (V2V) for Linux servers
+      type: vector
+      address: 0.0.0.0:6000
     internal_metrics:
       type: internal_metrics
   transforms:
-    parser:
+    kubernetes_parser:
       type: remap
       inputs:
-        - k8s
+        - kubernetes_logs
       source: |
         if exists(.kubernetes.pod_labels) {
           new_labels = {}
@@ -47,9 +62,41 @@ customConfig:
         if is_string(.message) {
            .message = strip_ansi_escape_codes(string!(.message))
         }
+        .stream = "kubernetes"
+        .service = .kubernetes.pod_labels["app.kubernetes.io/name"] ?? "unknown-service"
+        .pod = .kubernetes.pod_name ?? "unknown-pod"
         .log = parse_json(.message) ?? .message
         del(.message)
         del(.kubernetes.pod_annotations)
+    mikrotik_parser:
+      type: remap
+      inputs:
+        - mikrotik_syslog
+      source: |
+        .stream = "mikrotik"
+        .service = .appname ?? "routeros"
+        .log = .message
+        del(.message)
+    network_parser:
+      type: remap
+      inputs:
+        - network_syslog
+      source: |
+        if starts_with(string!(.host), "${ROUTER_CIDR_PREFIX}") { .stream = "router" }
+        else if starts_with(string!(.host), "${WIFI_CIDR_PREFIX}") { .stream = "wifi" }
+        else { .stream = "network-general" }
+        .service = .appname ?? "network-device"
+        .log = .message
+        del(.message)
+    linux_parser:
+      type: remap
+      inputs:
+        - linux_agents
+      source: |
+        .stream = "linux"
+        .service = ._SYSTEMD_UNIT ?? .appname ?? "system"
+        .host = .host ?? ._HOSTNAME
+        .log = .message || .msg || "no message"
   sinks:
     exporter:
       type: prometheus_exporter
@@ -61,7 +108,10 @@ customConfig:
       endpoints:
         - http://victoria-logs-server:9428/insert/elasticsearch/
       inputs:
-        - parser
+        - kubernetes_parser
+        - mikrotik_parser
+        - network_parser
+        - linux_parser
       mode: bulk
       api_version: v8
       compression: gzip
@@ -73,8 +123,8 @@ customConfig:
         max_size: 1073741824
       request:
         headers:
-          VL-Time-Field: timestamp
-          VL-Stream-Fields: stream,kubernetes.pod_name,kubernetes.container_name,kubernetes.pod_namespace,kubernetes.pod_labels.app.kubernetes.io/name
+          VL-Time-Field: timestamp,_time
+          VL-Stream-Fields: stream,host,service,kubernetes.pod_namespace,pod
           VL-Msg-Field: message,msg,_msg,log.msg,log.message,log
           AccountID: "0"
           ProjectID: "0"
@@ -83,9 +133,40 @@ containerPorts:
   - name: prom-exporter
     containerPort: 9090
     protocol: TCP
+  - name: mikrotik-syslog
+    containerPort: 514
+    protocol: UDP
+  - name: network-syslog
+    containerPort: 515
+    protocol: UDP
+  - name: linux-v2v
+    containerPort: 6000
+    protocol: TCP
 
 service:
+  type: LoadBalancer
   ipFamilyPolicy: PreferDualStack
+  externalTrafficPolicy: Local
+  annotations:
+    ${CILIUM_IP_ANNOTATION}: "${MONITORING_LOG_VECTOR_IP}"
+    gatus.home-operations.com/enabled: "true"
+  ports:
+    - name: mikrotik-syslog
+      port: 514
+      protocol: UDP
+      targetPort: 514
+    - name: network-syslog
+      port: 515
+      protocol: UDP
+      targetPort: 515
+    - name: linux-v2v
+      port: 6000
+      protocol: TCP
+      targetPort: 6000
+    # - name: prom-exporter
+    #   port: 9090
+    #   protocol: TCP
+    #   targetPort: 9090
 
 persistence:
   enabled: false
@@ -95,6 +176,6 @@ persistence:
 resources:
   requests:
     cpu: 30m
-    memory: 768Mi
+    memory: 384Mi
   limits:
     memory: 1Gi
