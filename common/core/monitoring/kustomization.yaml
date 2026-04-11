@@ -7,4 +7,4 @@ resources:
   - ./victoria-metrics-stack/
   - ./victoria-logs/
   - ./grafana/
-  # - ./prometheus-snmp-exporter/
+  - ./prometheus-snmp-exporter/
