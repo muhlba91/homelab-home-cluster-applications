@@ -1,0 +1,27 @@
+modules:
+  mikrotik:
+    walk:
+      - sysDescr # RouterOS Version / Hardware Model
+      - sysUpTime # Uptime
+      - sysName # Switch Identity Name
+      - ifTable # Port Status (Provides ifOperStatus as a metric, not a label)
+      - ifXTable # 64-bit counters for 10G+
+      - 1.3.6.1.4.1.14988.1.1.3.10 # mtxHlthTemperature
+      - 1.3.6.1.4.1.14988.1.1.3.11 # mtxHlthVoltage
+      - 1.3.6.1.4.1.14988.1.1.1.1 # mtxSFP
+      - hrProcessorLoad # CPU Usage
+      - hrStorageTable # Memory/Disk Usage
+    lookups:
+      - source_indexes:
+          - ifIndex
+        lookup: ifName # Sticking to static labels: Port Name
+      - source_indexes:
+          - ifIndex
+        lookup: ifAlias # Sticking to static labels: Port Comment
+    overrides:
+      ifAlias:
+        type: DisplayString
+      ifName:
+        type: DisplayString
+      sysDescr:
+        type: DisplayString
