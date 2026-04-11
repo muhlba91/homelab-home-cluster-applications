@@ -65,7 +65,7 @@ customConfig:
         .stream = "kubernetes"
         .service = .kubernetes.pod_labels["app.kubernetes.io/name"] || "unknown-service"
         .pod = .kubernetes.pod_name || "unknown-pod"
-        .log = parse_json(.message) || .message
+        .log = parse_json(.message) ?? .message
         del(.message)
         del(.kubernetes.pod_annotations)
     mikrotik_parser:
