@@ -9,6 +9,7 @@ spec:
     - targets:
         - 10.0.10.1
         - 10.0.10.2
+      path: /snmp
       interval: 5m
       scrapeTimeout: 30s
       params:
