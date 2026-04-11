@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vector-syslog-sink
+  annotations:
+    ${CILIUM_IP_ANNOTATION}: "${MONITORING_LOG_VECTOR_IP}"
+    gatus.home-operations.com/enabled: "true"
+spec:
+  type: LoadBalancer
+  loadBalancerClass: ${CILIUM_LB_CLASS}
+  ipFamilyPolicy: PreferDualStack
+  externalTrafficPolicy: Local
+  ports:
+    - name: mikrotik-syslog
+      port: 514
+      protocol: UDP
+      targetPort: 514
+    - name: network-syslog
+      port: 515
+      protocol: UDP
+      targetPort: 515
+    - name: linux-v2v
+      port: 6000
+      protocol: TCP
+      targetPort: 6000
+  selector:
+    app.kubernetes.io/instance: victoria-logs-vector
+    app.kubernetes.io/name: vector
+    app.kubernetes.io/component: Agent

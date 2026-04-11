@@ -5,3 +5,4 @@ kind: Kustomization
 namespace: ${APPLICATION_NAMESPACE}
 resources:
   - ./datasource.yaml
+  - ./service-vector-syslog-sink.yaml

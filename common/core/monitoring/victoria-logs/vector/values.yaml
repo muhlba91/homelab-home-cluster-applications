@@ -148,29 +148,13 @@ containerPorts:
     protocol: TCP
 
 service:
-  type: LoadBalancer
+  type: ClusterIP
   ipFamilyPolicy: PreferDualStack
-  externalTrafficPolicy: Local
-  annotations:
-    ${CILIUM_IP_ANNOTATION}: "${MONITORING_LOG_VECTOR_IP}"
-    gatus.home-operations.com/enabled: "true"
   ports:
-    - name: mikrotik-syslog
-      port: 514
-      protocol: UDP
-      targetPort: 514
-    - name: network-syslog
-      port: 515
-      protocol: UDP
-      targetPort: 515
-    - name: linux-v2v
-      port: 6000
+    - name: prom-exporter
+      port: 9090
       protocol: TCP
-      targetPort: 6000
-    # - name: prom-exporter
-    #   port: 9090
-    #   protocol: TCP
-    #   targetPort: 9090
+      targetPort: 9090
 
 persistence:
   enabled: false
