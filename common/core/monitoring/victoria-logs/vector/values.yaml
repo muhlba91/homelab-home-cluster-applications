@@ -50,6 +50,10 @@ customConfig:
       inputs:
         - kubernetes_logs
       source: |
+        .stream = "kubernetes"
+        if is_string(.message) {
+          .message = strip_ansi_escape_codes(string!(.message))
+        }
         if exists(.kubernetes.pod_labels) {
           new_labels = {}
           for_each(object!(.kubernetes.pod_labels)) -> |key, value| {
@@ -59,13 +63,17 @@ customConfig:
           }
           .kubernetes.pod_labels = new_labels
         }
-        if is_string(.message) {
-          .message = strip_ansi_escape_codes(string!(.message))
+        if err == null {
+          . = merge(., object!(parsed)) 
         }
-        .stream = "kubernetes"
-        .service = .kubernetes.pod_labels."app.kubernetes.io/name" || "unknown-service"
-        .pod = .kubernetes.pod_name || "unknown-pod"
-        .log = parse_json(.message) ?? .message
+        .log = .message || .msg || .log
+        .service = .kubernetes.pod_labels."app.kubernetes.io/name" || 
+                  .kubernetes.pod_labels."app.kubernetes.io/instance" ||
+                  .kubernetes.pod_labels.app ||
+                  .kubernetes.container_name || 
+                  "unknown-service"
+        .pod = .kubernetes.pod_name ?? "unknown-pod"
+        .namespace = .kubernetes.pod_namespace
         del(.message)
         del(.kubernetes.pod_annotations)
     mikrotik_parser:
@@ -151,9 +159,9 @@ customConfig:
       request:
         headers:
           VL-Time-Field: timestamp,_time
-          VL-Stream-Fields: stream,host,service,level,kubernetes.pod_namespace,pod
-          VL-Msg-Field: message,msg,_msg,log.msg,log.message,log
-          VL-Level-Field: level
+          VL-Stream-Fields: stream,host,service,level,namespace,pod
+          VL-Msg-Field: log,message,msg,_msg
+          VL-Level-Field: level,severity
           AccountID: "0"
           ProjectID: "0"
 
