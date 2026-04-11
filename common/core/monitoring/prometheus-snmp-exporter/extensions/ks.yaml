@@ -9,7 +9,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./common/core/prometheus-snmp-exporter/extensions/
+  path: ./common/core/monitoring/prometheus-snmp-exporter/extensions/
   interval: 10m
   retryInterval: 2m
   prune: true
