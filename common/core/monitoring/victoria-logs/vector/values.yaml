@@ -127,6 +127,12 @@ customConfig:
         .host = .host || ._HOSTNAME
         .log = .message || .msg || "no message"
   sinks:
+    debug_mikrotik:
+      type: console
+      inputs:
+        - mikrotik_syslog # <-- raw, BEFORE the parser
+      encoding:
+        codec: json
     exporter:
       type: prometheus_exporter
       address: 0.0.0.0:9090
