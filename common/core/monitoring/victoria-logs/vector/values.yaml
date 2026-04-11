@@ -63,7 +63,7 @@ customConfig:
           .message = strip_ansi_escape_codes(string!(.message))
         }
         .stream = "kubernetes"
-        .service = .kubernetes.pod_labels["app.kubernetes.io/name"] || "unknown-service"
+        .service = .kubernetes.pod_labels."app.kubernetes.io/name" || "unknown-service"
         .pod = .kubernetes.pod_name || "unknown-pod"
         .log = parse_json(.message) ?? .message
         del(.message)
