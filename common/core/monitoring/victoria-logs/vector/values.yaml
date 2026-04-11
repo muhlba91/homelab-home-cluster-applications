@@ -67,7 +67,7 @@ customConfig:
         if err == null && is_object(parsed) {
           . = merge(., object!(parsed))
         }
-        .log = .msg || .log
+        .log = .msg || .log || .message
         .service = .kubernetes.pod_labels."app.kubernetes.io/name" ||
                   .kubernetes.pod_labels."app.kubernetes.io/instance" ||
                   .kubernetes.pod_labels.app ||
