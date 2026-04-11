@@ -21,16 +21,10 @@ configmapReload:
     - name: config
       mountPath: "/config"
       readOnly: true
-  resources:
-    requests:
-      cpu: 5m
-      memory: 32Mi
-    limits:
-      memory: 32Mi
 
 resources:
   requests:
-    cpu: 5m
-    memory: 64Mi
+    cpu: 3m
+    memory: 24Mi
   limits:
-    memory: 64Mi
+    memory: 24Mi
