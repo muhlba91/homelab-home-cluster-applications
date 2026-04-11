@@ -63,7 +63,8 @@ customConfig:
           }
           .kubernetes.pod_labels = new_labels
         }
-        if err == null {
+        parsed, err = parse_json(.message)
+        if err == null && is_object(parsed) {
           . = merge(., object!(parsed)) 
         }
         .log = .message || .msg || .log
@@ -72,7 +73,7 @@ customConfig:
                   .kubernetes.pod_labels.app ||
                   .kubernetes.container_name || 
                   "unknown-service"
-        .pod = .kubernetes.pod_name ?? "unknown-pod"
+        .pod = .kubernetes.pod_name || "unknown-pod"
         .namespace = .kubernetes.pod_namespace
         del(.message)
         del(.kubernetes.pod_annotations)
