@@ -75,6 +75,7 @@ customConfig:
                   "unknown-service"
         .pod = .kubernetes.pod_name || "unknown-pod"
         .namespace = .kubernetes.pod_namespace
+        .level = .level || "info"
         del(.message)
         del(.kubernetes.pod_annotations)
     mikrotik_parser:
