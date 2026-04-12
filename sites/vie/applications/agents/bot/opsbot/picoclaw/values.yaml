@@ -33,7 +33,8 @@ controllers:
           pullPolicy: IfNotPresent
           tag: v0.2.6
 
-        args:
+        command:
+          - picoclaw
           - gateway
 
         env:
