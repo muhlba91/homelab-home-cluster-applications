@@ -14,7 +14,7 @@ controllers:
           - /scripts/sync.sh
         env:
           - name: DATA_PATH
-            value: /etc/picoclaw
+            value: /root/.picoclaw
           - name: AGENT_ID
             value: opsbot
         envFrom:
@@ -43,7 +43,7 @@ controllers:
           - name: TZ
             value: Etc/UTC
           - name: DATA_PATH
-            value: /etc/picoclaw
+            value: /root/.picoclaw
           - name: AGENT_ID
             value: opsbot
         envFrom:
@@ -90,7 +90,7 @@ persistence:
     accessMode: ReadWriteOnce
     size: 1Gi
     globalMounts:
-      - path: /etc/picoclaw
+      - path: /root/.picoclaw
   scripts:
     enabled: true
     type: configMap
