@@ -20,6 +20,8 @@ controllers:
             value: sse
           - name: MCP_LISTEN_ADDR
             value: 0.0.0.0:8080
+          - name: MCP_DISABLED_TOOLS
+            value: documentation
 
         probes:
           liveness:
@@ -48,9 +50,9 @@ controllers:
         resources:
           requests:
             cpu: 5m
-            memory: 256Mi
+            memory: 64Mi
           limits:
-            memory: 384Mi
+            memory: 128Mi
 
 service:
   mcp-server-victoria-metrics:
