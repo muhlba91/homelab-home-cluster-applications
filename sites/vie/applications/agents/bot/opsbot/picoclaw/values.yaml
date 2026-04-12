@@ -17,9 +17,11 @@ controllers:
             value: /root/.picoclaw
           - name: AGENT_ID
             value: opsbot
-        envFrom:
+        envFrom: &envFrom
           - configMapRef:
               name: agents-git-repo
+          - secretRef:
+              name: bot-opsbot-picoclaw-secrets-env
         resources:
           requests:
             cpu: 5m
@@ -42,11 +44,7 @@ controllers:
             value: /root/.picoclaw
           - name: AGENT_ID
             value: opsbot
-        envFrom:
-          - configMapRef:
-              name: agents-git-repo
-          - secretRef:
-              name: bot-opsbot-picoclaw-secrets-env
+        envFrom: *envFrom
 
         probes:
           liveness: &probe
