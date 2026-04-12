@@ -4,15 +4,31 @@ controllers:
   main:
     annotations:
       reloader.stakater.com/auto: "true"
+    initContainers:
+      config-init:
+        image:
+          repository: alpine
+          tag: 3.23
+          pullPolicy: IfNotPresent
+
+        command:
+          - cp
+          - /config/config.json
+          - /etc/picoclaw/config.json
+
+        resources:
+          requests:
+            cpu: 10m
+            memory: 8Mi
+          limits:
+            cpu: 50m
+            memory: 8Mi
     containers:
       server:
         image:
           repository: ghcr.io/sipeed/picoclaw
           pullPolicy: IfNotPresent
           tag: v0.2.6
-
-        args:
-          - gateway
 
         env:
           - name: PICOCLAW_CONFIG
@@ -66,10 +82,15 @@ persistence:
           - path: /workspace
   config:
     enabled: true
+    type: emptyDir
+    globalMounts:
+      - path: /etc/picoclaw
+  configmap:
+    enabled: true
     type: configMap
     name: bot-opsbot-picoclaw-config
     defaultMode: 511
     advancedMounts:
       main:
-        server:
-          - path: /etc/picoclaw/
+        config-init:
+          - path: /config
