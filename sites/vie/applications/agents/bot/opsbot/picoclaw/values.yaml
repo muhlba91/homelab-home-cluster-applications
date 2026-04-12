@@ -35,7 +35,7 @@ controllers:
 
         env:
           - name: PICOCLAW_CONFIG
-            value: /etc/picoclaw/config.json
+            value: /root/.picoclaw/config.json
           - name: TZ
             value: Etc/UTC
           - name: DATA_PATH
