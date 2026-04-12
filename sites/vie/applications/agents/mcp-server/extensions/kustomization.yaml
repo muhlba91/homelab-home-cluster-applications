@@ -5,4 +5,4 @@ kind: Kustomization
 namespace: ${APPLICATION_NAMESPACE}
 resources:
   - ./configmap-github-mcp-server-env.yaml
-  - ./external-secret-github-mcp-server-secrets.yaml
+  # - ./external-secret-github-mcp-server-secrets.yaml
