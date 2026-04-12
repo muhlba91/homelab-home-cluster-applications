@@ -14,7 +14,8 @@ controllers:
           tag: v0.0.60
 
         args:
-          - --config=/etc/kubernetes-mcp-server/config.toml
+          - --config
+          - /etc/kubernetes-mcp-server/config.toml
 
         probes:
           liveness: &probe
@@ -24,7 +25,7 @@ controllers:
               httpGet:
                 path: /healthz
                 port: 8080
-              initialDelaySeconds: 5
+              initialDelaySeconds: 10
               periodSeconds: 30
               timeoutSeconds: 1
               failureThreshold: 3
@@ -164,3 +165,10 @@ persistence:
         server:
           - path: /etc/kubernetes-mcp-server
             subPath: config.toml
+  config-dir:
+    enabled: true
+    type: emptyDir
+    advancedMounts:
+      main:
+        server:
+          - path: /etc/kubernetes-mcp-server/conf.d
