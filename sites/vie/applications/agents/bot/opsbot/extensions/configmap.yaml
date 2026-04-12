@@ -49,7 +49,7 @@ data:
           ],
           "group_trigger": {
             "mention_only": false
-          },
+          }
         }
       },
       "tools": {
@@ -57,13 +57,13 @@ data:
           "duckduckgo": {
             "enabled": true,
             "max_results": 5
-          },
+          }
         },
         "exec": {
           "enabled": true,
           "enable_deny_patterns": true,
           "custom_allow_patterns": [
-            "^picoclaw .*$",
+            "^picoclaw .*$"
           ]
         },
         "skills": {
