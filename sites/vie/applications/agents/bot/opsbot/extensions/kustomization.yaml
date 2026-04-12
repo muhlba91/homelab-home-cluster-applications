@@ -5,5 +5,4 @@ kind: Kustomization
 namespace: ${APPLICATION_NAMESPACE}
 resources:
   - ./configmap.yaml
-  - ./external-secret-secrets-config.yaml
   - ./external-secret-secrets-env.yaml
