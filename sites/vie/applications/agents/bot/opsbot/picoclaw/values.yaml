@@ -67,8 +67,7 @@ persistence:
     advancedMounts:
       main:
         server:
-          - path: /etc/picoclaw/config.json
-            subPath: config.json
+          - path: /etc/picoclaw/
   secrets:
     enabled: true
     type: secret
@@ -77,5 +76,4 @@ persistence:
     advancedMounts:
       main:
         server:
-          - path: /etc/picoclaw/.security.yml
-            subPath: security.yml
+          - path: /etc/picoclaw/
