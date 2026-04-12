@@ -1,8 +1,0 @@
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mcp-server-github-env
-data:
-  GITHUB_TOOLSETS: context,actions,issues,labels,notifications,pull_requests,repos
-  # GITHUB_DYNAMIC_TOOLSETS: "1"
