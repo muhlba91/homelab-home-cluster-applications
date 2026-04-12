@@ -163,7 +163,7 @@ persistence:
     advancedMounts:
       main:
         server:
-          - path: /etc/kubernetes-mcp-server
+          - path: /etc/kubernetes-mcp-server/config.toml
             subPath: config.toml
   config-dir:
     enabled: true
