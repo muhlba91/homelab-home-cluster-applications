@@ -22,11 +22,10 @@ controllers:
               name: agents-git-repo
         resources:
           requests:
-            cpu: 10m
-            memory: 8Mi
+            cpu: 5m
+            memory: 24Mi
           limits:
-            cpu: 50m
-            memory: 8Mi
+            memory: 64Mi
     containers:
       server:
         image:
