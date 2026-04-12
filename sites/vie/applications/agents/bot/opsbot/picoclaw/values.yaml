@@ -16,7 +16,7 @@ controllers:
             value: /etc/picoclaw/config.json
         envFrom:
           - secretRef:
-              name: opsbot-picoclaw-secrets-env
+              name: bot-opsbot-picoclaw-secrets-env
 
         probes:
           liveness: &probe
@@ -72,7 +72,7 @@ persistence:
   secrets:
     enabled: true
     type: secret
-    name: opsbot-picoclaw-secrets-config
+    name: bot-opsbot-picoclaw-secrets-config
     defaultMode: 511
     advancedMounts:
       main:
