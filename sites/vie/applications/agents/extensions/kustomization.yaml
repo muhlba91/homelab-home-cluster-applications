@@ -2,8 +2,7 @@
 # yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: ${APPLICATION_NAMESPACE}
 resources:
-  - ./namespace.yaml
-  - ./extensions/ks.yaml
-  - ./mcp-server/
-  - ./bot/
+  - ./configmap-scripts.yaml
+  - ./configmap-git-repo.yaml

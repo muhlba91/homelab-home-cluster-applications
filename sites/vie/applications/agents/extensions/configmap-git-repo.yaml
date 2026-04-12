@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: agents-git-repo
+data:
+  GIT_REPO: "https://github.com/muhlba91/homelab-agents-configuration.git"

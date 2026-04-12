@@ -5,17 +5,21 @@ controllers:
     annotations:
       reloader.stakater.com/auto: "true"
     initContainers:
-      config-init:
+      init:
         image:
           repository: alpine
           tag: 3.23
           pullPolicy: IfNotPresent
-
         command:
-          - cp
-          - /config/config.json
-          - /etc/picoclaw/config.json
-
+          - /scripts/sync.sh
+        env:
+          - name: DATA_PATH
+            value: /etc/picoclaw
+          - name: AGENT_ID
+            value: opsbot
+        envFrom:
+          - configMapRef:
+              name: agents-git-repo
         resources:
           requests:
             cpu: 10m
@@ -38,7 +42,13 @@ controllers:
             value: /etc/picoclaw/config.json
           - name: TZ
             value: Etc/UTC
+          - name: DATA_PATH
+            value: /etc/picoclaw
+          - name: AGENT_ID
+            value: opsbot
         envFrom:
+          - configMapRef:
+              name: agents-git-repo
           - secretRef:
               name: bot-opsbot-picoclaw-secrets-env
 
@@ -79,21 +89,12 @@ persistence:
     storageClass: ${DEFAULT_STORAGE_CLASS}
     accessMode: ReadWriteOnce
     size: 1Gi
-    advancedMounts:
-      main:
-        server:
-          - path: /workspace
-  config:
-    enabled: true
-    type: emptyDir
     globalMounts:
       - path: /etc/picoclaw
-  configmap:
+  scripts:
     enabled: true
     type: configMap
-    name: bot-opsbot-picoclaw-config
-    defaultMode: 511
-    advancedMounts:
-      main:
-        config-init:
-          - path: /config
+    name: agents-scripts
+    defaultMode: 0o777
+    globalMounts:
+      - path: /scripts

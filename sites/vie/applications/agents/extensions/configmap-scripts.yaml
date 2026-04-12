@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: agents-scripts
+data:
+  sync.sh: |
+    #!/bin/sh
+
+    apk add --no-cache rsync git bash
+
+    rm -rf /tmp/repo
+    git clone $${GIT_REPO} /tmp/repo
+
+    /tmp/repo/agents/$${AGENT_ID}/lifecycle/sync.sh $${DATA_PATH} /tmp/repo
