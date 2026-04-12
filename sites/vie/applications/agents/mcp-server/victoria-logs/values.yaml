@@ -48,9 +48,9 @@ controllers:
         resources:
           requests:
             cpu: 5m
-            memory: 64Mi
+            memory: 24Mi
           limits:
-            memory: 128Mi
+            memory: 96Mi
 
 service:
   mcp-server-victoria-logs:
