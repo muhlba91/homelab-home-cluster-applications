@@ -151,10 +151,13 @@ The following applications are defined in [`sites/vie/applications/`](sites/vie/
 - [x] [LibreChat](https://librechat.ai) - Open-source chat application for AI conversations.
 - [x] [Mealie](https://mealie.io) - Recipe management application.
 - [x] Personal Agents and Assistants
-  - [x] [GitHub MCP Server](https://github.com/github-corp/mcp-server) - MCP server to allow personal agents to interact with GitHub data.
-  - [x] [Kubernetes MCP Server](https://github.com/containers/kubernetes-mcp-server) - MCP server to allow personal agents to interact with Kubernetes data.
-  - [x] [Victoria Metrics MCP Server](https://github.com/VictoriaMetrics/mcp-victorialogs) - MCP server to allow personal agents to interact with Victoria Metrics data.
-  - [x] [Victoria Logs MCP Server](https://github.com/VictoriaMetrics/mcp-victorialogs) - MCP server to allow personal agents to interact with Victoria Logs data.
+  - [x] MCP Servers
+    - [x] [GitHub MCP Server](https://github.com/github-corp/mcp-server) - MCP server to allow personal agents to interact with GitHub data.
+    - [x] [Kubernetes MCP Server](https://github.com/containers/kubernetes-mcp-server) - MCP server to allow personal agents to interact with Kubernetes data.
+    - [x] [Victoria Metrics MCP Server](https://github.com/VictoriaMetrics/mcp-victorialogs) - MCP server to allow personal agents to interact with Victoria Metrics data.
+    - [x] [Victoria Logs MCP Server](https://github.com/VictoriaMetrics/mcp-victorialogs) - MCP server to allow personal agents to interact with Victoria Logs data.
+  - [x] Bots
+    - [x] [OpsBot](sites/vie/applications/agents/bot/opsbot/) - Personal assistant bot for operations (metrics, logs, kubernetes, git analysis).
 
 #### Home Assistant (VIE)
 

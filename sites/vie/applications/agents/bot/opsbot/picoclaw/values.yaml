@@ -1,0 +1,81 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-4.2.0/charts/library/common/values.schema.json
+controllers:
+  main:
+    annotations:
+      reloader.stakater.com/auto: "true"
+    containers:
+      server:
+        image:
+          repository: ghcr.io/sipeed/picoclaw
+          pullPolicy: IfNotPresent
+          tag: v0.2.6
+
+        env:
+          - name: PICOCLAW_CONFIG
+            value: /etc/picoclaw/config.json
+        envFrom:
+          - secretRef:
+              name: opsbot-picoclaw-secrets-env
+
+        probes:
+          liveness: &probe
+            enabled: true
+            custom: true
+            spec:
+              tcpSocket:
+                port: 18790
+              initialDelaySeconds: 10
+              periodSeconds: 30
+              timeoutSeconds: 1
+              failureThreshold: 3
+          readiness: *probe
+
+        resources:
+          requests:
+            cpu: 5m
+            memory: 24Mi
+          limits:
+            memory: 64Mi
+
+service:
+  bot-opsbot-picoclaw:
+    controller: main
+    annotations:
+      gatus.home-operations.com/enabled: "true"
+    ipFamilyPolicy: PreferDualStack
+    ports:
+      gateway:
+        port: 18790
+
+persistence:
+  workspace:
+    enabled: true
+    type: persistentVolumeClaim
+    storageClass: ${DEFAULT_STORAGE_CLASS}
+    accessMode: ReadWriteOnce
+    size: 1Gi
+    advancedMounts:
+      main:
+        server:
+          - path: /workspace
+  config:
+    enabled: true
+    type: configMap
+    name: opsbot-picoclaw-config
+    defaultMode: 511
+    advancedMounts:
+      main:
+        server:
+          - path: /etc/picoclaw/config.json
+            subPath: config.json
+  secrets:
+    enabled: true
+    type: secret
+    name: opsbot-picoclaw-secrets-config
+    defaultMode: 511
+    advancedMounts:
+      main:
+        server:
+          - path: /etc/picoclaw/.security.yml
+            subPath: security.yml

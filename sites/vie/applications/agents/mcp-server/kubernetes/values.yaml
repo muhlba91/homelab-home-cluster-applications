@@ -158,7 +158,7 @@ persistence:
   config:
     enabled: true
     type: configMap
-    name: kubernetes-mcp-server-config
+    name: mcp-server-kubernetes-config
     defaultMode: 511
     advancedMounts:
       main:

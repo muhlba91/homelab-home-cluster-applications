@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: kubernetes-mcp-server-config
+  name: mcp-server-kubernetes-config
 data:
   config.toml: |
     log_level = 2

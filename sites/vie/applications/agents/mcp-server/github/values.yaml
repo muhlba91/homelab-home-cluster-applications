@@ -16,7 +16,7 @@ controllers:
 
         envFrom:
           - configMapRef:
-              name: github-mcp-server-env
+              name: mcp-server-github-env
 
         probes:
           liveness: &probe

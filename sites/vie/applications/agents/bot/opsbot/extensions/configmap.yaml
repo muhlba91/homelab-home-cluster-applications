@@ -1,0 +1,124 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bot-opsbot-picoclaw-config
+data:
+  config.json: |
+    {
+      "version": 2,
+      "agents": {
+        "defaults": {
+          "workspace": "/workspace",
+          "restrict_to_workspace": true,
+          "model_name": "gpt-nano",
+          "max_tokens": 32768,
+          "max_tool_iterations": 5,
+          "summarize_token_percent": 50,
+          "summarize_message_threshold": 10
+        }
+      },
+      "model_list": [
+        {
+          "model_name": "gemini-flash",
+          "model": "gemini/gemini-3-flash-preview"
+        },
+        {
+          "model_name": "gpt-nano",
+          "model": "openai/gpt-5.4-nano"
+        },
+        {
+          "model_name": "gpt-mini",
+          "model": "openai/gpt-5.4-mini"
+        },
+        {
+          "model_name": "claude-haiku",
+          "model": "anthropic/claude-haiku-4-5"
+        },
+        {
+          "model_name": "ollama",
+          "model": "ollama/gemma4:e4b-it-q4_K_M",
+          "api_base": "http://ollama.ollama:11434/v1"
+        }
+      ],
+      "channels": {
+        "discord": {
+          "enabled": true,
+          "allow_from": [
+            "700068305230364768"
+          ],
+          "group_trigger": {
+            "mention_only": false
+          },
+        }
+      },
+      "tools": {
+        "web": {
+          "duckduckgo": {
+            "enabled": true,
+            "max_results": 5
+          },
+        },
+        "exec": {
+          "enabled": true,
+          "enable_deny_patterns": true,
+          "custom_allow_patterns": [
+            "^picoclaw .*$",
+          ]
+        },
+        "skills": {
+          "registries": {
+            "clawhub": {
+              "enabled": false
+            }
+          }
+        },
+        "cron": {
+          "enabled": true,
+          "exec_timeout_minutes": 10
+        },
+        "mcp": {
+          "enabled": true,
+          "discovery": {
+            "enabled": true,
+            "max_search_results": 5,
+            "ttl": 10,
+            "use_bm25": true
+          },
+          "servers": {
+            "kubernetes": {
+              "enabled": true,
+              "type": "sse",
+              "url": "http://agents-mcp-server-kubernetes:8080/sse"
+            },
+            "github": {
+              "enabled": true,
+              "type": "http",
+              "url": "http://agents-mcp-server-github:8082",
+              "headers": {
+                "Authorization": "Bearer $${GITHUB_MCP_TOKEN}"
+              }
+            },
+            "metrics": {
+              "enabled": true,
+              "type": "sse",
+              "url": "http://agents-mcp-server-victoria-metrics:8080/sse"
+            },
+            "logs": {
+              "enabled": true,
+              "type": "sse",
+              "url": "http://agents-mcp-server-victoria-logs:8080/sse"
+            }
+          }
+        }
+      },
+      "heartbeat": {
+        "enabled": true,
+        "interval": 60
+      },
+      "gateway": {
+        "host": "0.0.0.0",
+        "port": 18790,
+        "hot_reload": true
+      }
+    }
