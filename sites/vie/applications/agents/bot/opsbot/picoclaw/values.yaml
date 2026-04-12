@@ -47,17 +47,28 @@ controllers:
         envFrom: *envFrom
 
         probes:
-          liveness: &probe
+          liveness:
             enabled: true
             custom: true
             spec:
-              tcpSocket:
+              httpGet:
+                path: /health
                 port: 18790
               initialDelaySeconds: 10
               periodSeconds: 30
-              timeoutSeconds: 1
+              timeoutSeconds: 2
               failureThreshold: 3
-          readiness: *probe
+          readiness:
+            enabled: true
+            custom: true
+            spec:
+              httpGet:
+                path: /ready
+                port: 18790
+              initialDelaySeconds: 5
+              periodSeconds: 10
+              timeoutSeconds: 2
+              failureThreshold: 3
 
         resources:
           requests:
