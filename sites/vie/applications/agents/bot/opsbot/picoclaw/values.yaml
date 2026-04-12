@@ -33,6 +33,8 @@ controllers:
           pullPolicy: IfNotPresent
           tag: v0.2.6
 
+        args:
+          - --allow-empty
         env:
           - name: PICOCLAW_CONFIG
             value: /root/.picoclaw/config.json
