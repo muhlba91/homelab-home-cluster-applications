@@ -4,5 +4,5 @@ kind: ConfigMap
 metadata:
   name: mcp-server-github-env
 data:
-  # GITHUB_TOOLSETS: context,actions,issues,labels,notifications,pull_requests,repos
-  GITHUB_DYNAMIC_TOOLSETS: "1"
+  GITHUB_TOOLSETS: context,actions,issues,labels,notifications,pull_requests,repos
+  # GITHUB_DYNAMIC_TOOLSETS: "1"
