@@ -1,0 +1,27 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubernetes-mcp-server-config
+data:
+  config.toml: |
+    log_level = 2
+    port = "8080"
+    list_output = "table"
+    stateless = true
+
+    read_only = false
+    disable_destructive = true
+    toolsets = ["config", "core", "helm"]
+    disabled_tools = ["resources_create_or_update", "resources_delete", "helm_install", "helm_uninstall"]
+
+    server_instructions = ""
+
+    [[denied_resources]]
+    group = ""
+    version = "v1"
+    kind = "Secret"
+
+    [http]
+    read_header_timeout = "10s"
+    max_body_bytes = 16777216
