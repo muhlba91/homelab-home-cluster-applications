@@ -150,6 +150,8 @@ The following applications are defined in [`sites/vie/applications/`](sites/vie/
 - [x] [Immich](https://immich.app) - Photo management solution.
 - [x] [LibreChat](https://librechat.ai) - Open-source chat application for AI conversations.
 - [x] [Mealie](https://mealie.io) - Recipe management application.
+- [x] Personal Agents and Assistants
+  - [x] [GitHub MCP Server](https://github.com/github-corp/mcp-server) - MCP server to allow personal agents to interact with GitHub data.
 
 #### Home Assistant (VIE)
 

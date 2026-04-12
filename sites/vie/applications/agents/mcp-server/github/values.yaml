@@ -1,0 +1,35 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-4.2.0/charts/library/common/values.schema.json
+controllers:
+  main:
+    annotations:
+      reloader.stakater.com/auto: "true"
+    containers:
+      server:
+        image:
+          repository: ghcr.io/github/github-mcp-server
+          pullPolicy: IfNotPresent
+          tag: v0.33.0
+
+        envFrom:
+          - configMapRef:
+              name: github-mcp-server-env
+          - secretRef:
+              name: github-mcp-server-secrets
+
+        resources:
+          requests:
+            cpu: 5m
+            memory: 128Mi
+          limits:
+            memory: 256Mi
+
+service:
+  github-mcp-server:
+    controller: main
+    annotations:
+      gatus.home-operations.com/enabled: "true"
+    ipFamilyPolicy: PreferDualStack
+    ports:
+      http:
+        port: 3000
