@@ -9,7 +9,7 @@ controllers:
         image:
           repository: ghcr.io/victoriametrics/mcp-victoriametrics
           pullPolicy: IfNotPresent
-          tag: v1.20.1
+          tag: v1.120.1
 
         env:
           - name: VM_INSTANCE_ENTRYPOINT
