@@ -1,0 +1,61 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-4.2.0/charts/library/common/values.schema.json
+controllers:
+  main:
+    annotations:
+      reloader.stakater.com/auto: "true"
+    containers:
+      server:
+        image:
+          repository: ghcr.io/victoriametrics/mcp-victorialogs
+          pullPolicy: IfNotPresent
+          tag: v1.9.0
+
+        env:
+          - name: VL_INSTANCE_ENTRYPOINT
+            value: http://victoria-logs-server.victoria-logs:9428
+          - name: MCP_SERVER_MODE
+            value: sse
+          - name: MCP_LISTEN_ADDR
+            value: 0.0.0.0:8080
+
+        probes:
+          liveness:
+            enabled: true
+            custom: true
+            spec:
+              httpGet:
+                path: /health/liveness
+                port: 8080
+              initialDelaySeconds: 10
+              periodSeconds: 30
+              timeoutSeconds: 1
+              failureThreshold: 3
+          readiness:
+            enabled: true
+            custom: true
+            spec:
+              httpGet:
+                path: /health/readiness
+                port: 8080
+              initialDelaySeconds: 10
+              periodSeconds: 30
+              timeoutSeconds: 1
+              failureThreshold: 3
+
+        resources:
+          requests:
+            cpu: 5m
+            memory: 64Mi
+          limits:
+            memory: 128Mi
+
+service:
+  mcp-server-victoria-logs:
+    controller: main
+    annotations:
+      gatus.home-operations.com/enabled: "true"
+    ipFamilyPolicy: PreferDualStack
+    ports:
+      http:
+        port: 8080

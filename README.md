@@ -153,6 +153,8 @@ The following applications are defined in [`sites/vie/applications/`](sites/vie/
 - [x] Personal Agents and Assistants
   - [x] [GitHub MCP Server](https://github.com/github-corp/mcp-server) - MCP server to allow personal agents to interact with GitHub data.
   - [x] [Kubernetes MCP Server](https://github.com/containers/kubernetes-mcp-server) - MCP server to allow personal agents to interact with Kubernetes data.
+  - [x] [Victoria Metrics MCP Server](https://github.com/VictoriaMetrics/mcp-victorialogs) - MCP server to allow personal agents to interact with Victoria Metrics data.
+  - [x] [Victoria Logs MCP Server](https://github.com/VictoriaMetrics/mcp-victorialogs) - MCP server to allow personal agents to interact with Victoria Logs data.
 
 #### Home Assistant (VIE)
 
