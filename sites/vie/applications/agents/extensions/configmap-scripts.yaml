@@ -7,7 +7,7 @@ data:
   sync.sh: |
     #!/bin/sh
 
-    apk add --no-cache rsync git bash
+    apk add --no-cache rsync git bash gettext
 
     rm -rf /tmp/repo
     git clone $${GIT_REPO} /tmp/repo
