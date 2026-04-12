@@ -89,16 +89,6 @@ persistence:
     size: 1Gi
     globalMounts:
       - path: /root/.picoclaw
-  security:
-    enabled: true
-    type: secret
-    name: bot-opsbot-picoclaw-security
-    defaultMode: 0o600
-    advancedMounts:
-      main:
-        init:
-          - path: /security/security.yml
-            subPath: security.yml
   scripts:
     enabled: true
     type: configMap
