@@ -62,7 +62,7 @@ persistence:
   config:
     enabled: true
     type: configMap
-    name: opsbot-picoclaw-config
+    name: bot-opsbot-picoclaw-config
     defaultMode: 511
     advancedMounts:
       main:
