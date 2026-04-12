@@ -69,5 +69,4 @@ persistence:
     advancedMounts:
       main:
         server:
-          - path: /etc/picoclaw/config.json
-            subPath: config.json
+          - path: /etc/picoclaw/
