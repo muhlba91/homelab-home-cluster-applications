@@ -30,6 +30,9 @@ controllers:
           pullPolicy: IfNotPresent
           tag: v0.2.6
 
+        args:
+          - gateway
+
         env:
           - name: PICOCLAW_CONFIG
             value: /etc/picoclaw/config.json
