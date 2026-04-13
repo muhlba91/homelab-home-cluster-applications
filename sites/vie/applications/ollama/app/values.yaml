@@ -1,0 +1,49 @@
+---
+image:
+  repository: ollama/ollama
+  tag: 0.20.6
+
+runtimeClassName: nvidia
+
+${APPLICATION}:
+  gpu:
+    enabled: true
+    type: nvidia
+    nvidiaResource: nvidia.com/gpu
+    number: 1
+  models:
+    pull:
+      # https://github.com/allenporter/home-assistant-datasets/tree/main/reports
+      - gemma4:e4b-it-q4_K_M
+
+service:
+  annotations:
+    gatus.home-operations.com/enabled: "true"
+
+ingress:
+  enabled: false
+  annotations:
+    cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
+    external-dns.alpha.kubernetes.io/provider: internal
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  hosts:
+    - host: &domain ollama.${LOCAL_INTERNAL_DOMAIN}
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: ollama-tls-cert
+      hosts:
+        - *domain
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 226Mi
+  limits:
+    memory: 4Gi
+
+persistentVolume:
+  enabled: true
+  storageClass: ${DEFAULT_STORAGE_CLASS}
+  size: 50Gi

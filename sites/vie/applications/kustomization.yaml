@@ -4,8 +4,8 @@ kind: Kustomization
 resources:
   - ../../../common/applications/omada-controller/
   - ../../../common/applications/influxdb/
-  - ../../../common/applications/ollama/
   - ./external-services/
+  - ./ollama/
   - ./immich/
   - ./librechat/
   - ./mealie/
