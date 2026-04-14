@@ -37,18 +37,18 @@ spec:
           name: litellm-database
 
   bootstrap:
-    initdb:
-      database: litellm
-      owner: litellm
-      encoding: UTF8
-      secret:
-        name: litellm-database
-    # recovery:
-    #   source: litellm-postgresql-backup
+    # initdb:
     #   database: litellm
     #   owner: litellm
+    #   encoding: UTF8
     #   secret:
     #     name: litellm-database
+    recovery:
+      source: litellm-postgresql-backup
+      database: litellm
+      owner: litellm
+      secret:
+        name: litellm-database
 
   plugins:
     - name: barman-cloud.cloudnative-pg.io
