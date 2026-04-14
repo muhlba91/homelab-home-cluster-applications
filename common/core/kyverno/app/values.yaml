@@ -1,8 +1,4 @@
 ---
-crds:
-  reportsServer:
-    enabled: true
-
 grafana:
   enabled: true
 
