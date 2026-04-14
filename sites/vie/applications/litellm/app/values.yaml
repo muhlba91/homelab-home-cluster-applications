@@ -1,0 +1,69 @@
+---
+replicaCount: 1
+numWorkers: 1
+
+extraEnvVars:
+  LITELLM_MODE: PRODUCTION
+  DOCS_URL: "/docs"
+  ROOT_REDIRECT_URL: "/ui"
+  PROXY_BASE_URL: https://litellm.${LOCAL_INTERNAL_DOMAIN}
+  ALLOWED_EMAIL_DOMAINS: muehlbachler.io
+  GENERIC_SCOPES: openid email profile
+  PROXY_ADMIN_ID: litellm-proxy-admin # fetch from ui...
+  GENERIC_USER_ID_ATTRIBUTE: preferred_username
+  GENERIC_USER_EMAIL_ATTRIBUTE: email
+  GENERIC_USER_DISPLAY_NAME_ATTRIBUTE: name
+  GENERIC_USER_FIRST_NAME_ATTRIBUTE: given_name
+  GENERIC_USER_LAST_NAME_ATTRIBUTE: family_name
+  GENERIC_USER_ROLE_ATTRIBUTE: grants
+
+proxyConfigMap:
+  create: false
+  name: litellm-config
+  key: config.yaml
+
+db:
+  useExisting: true
+  deployStandalone: false
+  endpoint: litellm-postgresql-rw
+  database: litellm
+  secret:
+    name: litellm-database
+    usernameKey: username
+    passwordKey: password
+
+redis:
+  enabled: false
+
+deploymentAnnotations:
+  reloader.stakater.com/auto: "true"
+
+migrationJob:
+  hooks:
+    argocd:
+      enabled: false
+    helm:
+      enabled: true
+
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
+    external-dns.alpha.kubernetes.io/provider: internal
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  hosts:
+    - host: &domain litellm.${LOCAL_INTERNAL_DOMAIN}
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: litellm-tls-cert
+      hosts:
+        - *domain
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 768Mi
+  limits:
+    memory: 1536Mi

@@ -1,0 +1,70 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: litellm-postgresql
+  annotations:
+    cnpg.io/skipEmptyWalArchiveCheck: enabled
+spec:
+  instances: 1
+
+  # renovate: datasource=docker packageName=ghcr.io/muhlba91/postgresql-pgvecto
+  imageName: ghcr.io/muhlba91/postgresql-pgvecto:18.1-0.5.3-v7.1.6
+
+  storage:
+    size: 30Gi
+    storageClass: ${DEFAULT_STORAGE_CLASS}
+
+  stopDelay: 300
+  smartShutdownTimeout: 60
+
+  resources:
+    requests:
+      cpu: 25m
+      memory: 512Mi
+    limits:
+      memory: 1024Mi
+
+  enableSuperuserAccess: true
+  managed:
+    roles:
+      - name: litellm
+        ensure: present
+        comment: Litellm
+        login: true
+        superuser: true
+        passwordSecret:
+          name: litellm-database
+
+  bootstrap:
+    # initdb:
+    #   database: litellm
+    #   owner: litellm
+    #   encoding: UTF8
+    #   secret:
+    #     name: litellm-database
+    recovery:
+      source: litellm-postgresql-backup
+      database: litellm
+      owner: litellm
+      secret:
+        name: litellm-database
+
+  postgresql:
+    shared_preload_libraries:
+      - vchord.so
+
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: litellm-postgresql-scaleway
+        serverName: postgresql
+
+  externalClusters:
+    - name: litellm-postgresql-backup
+      plugin:
+        name: barman-cloud.cloudnative-pg.io
+        parameters:
+          barmanObjectName: litellm-postgresql-scaleway
+          serverName: postgresql

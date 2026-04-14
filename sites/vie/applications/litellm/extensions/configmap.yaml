@@ -1,0 +1,47 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: litellm-config
+data:
+  config.yaml: |
+    ---
+    model_list: []
+
+    litellm_settings:
+      enable_preview_features: true
+
+      turn_off_message_logging: true
+      disable_error_logs: true
+      set_verbose: false
+      json_logs: true
+
+      request_timeout: 600
+
+      cache: false
+
+    general_settings:
+      # master_key: os.environ/PROXY_MASTER_KEY
+      disable_master_key_return: true
+      disable_adding_master_key_hash_to_db: true
+
+      proxy_batch_write_at: 120
+      database_connection_pool_limit: 10
+
+      store_prompts_in_spend_logs: false
+      disable_spend_logs: false
+      disable_spend_updates: false
+      maximum_spend_logs_retention_period: 90d
+      maximum_spend_logs_retention_interval: 1d
+
+      max_parallel_requests: 0
+      global_max_parallel_requests: 0
+
+      proxy_budget_rescheduler_min_time: 1800
+      proxy_budget_rescheduler_max_time: 3600
+
+    router_settings:
+      routing_strategy: simple-shuffle
+      allowed_fails: 3
+      cooldown_time: 30
+      disable_cooldowns: false

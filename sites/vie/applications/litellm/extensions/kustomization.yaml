@@ -1,0 +1,12 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: ${APPLICATION_NAMESPACE}
+resources:
+  - ./configmap.yaml
+  - ./external-secret-database.yaml
+  - ./external-secret-cloudnativepg-barman-credentials.yaml
+  # - ./postgresql.yaml
+  # - ./postgresql-objectstore-scaleway.yaml
+  # - ./postgresql-backup.yaml
