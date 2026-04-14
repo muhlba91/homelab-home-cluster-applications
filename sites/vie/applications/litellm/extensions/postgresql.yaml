@@ -50,10 +50,6 @@ spec:
     #   secret:
     #     name: litellm-database
 
-  postgresql:
-    shared_preload_libraries:
-      - vchord.so
-
   plugins:
     - name: barman-cloud.cloudnative-pg.io
       isWALArchiver: true
