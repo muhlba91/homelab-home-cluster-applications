@@ -8,5 +8,5 @@ resources:
   - ./external-secret-database.yaml
   - ./external-secret-cloudnativepg-barman-credentials.yaml
   - ./postgresql.yaml
-  # - ./postgresql-objectstore-scaleway.yaml
-  # - ./postgresql-backup.yaml
+  - ./postgresql-objectstore-scaleway.yaml
+  - ./postgresql-backup.yaml
