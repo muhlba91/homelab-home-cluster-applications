@@ -34,8 +34,8 @@ environmentSecrets:
   - litellm-secrets-env
   - litellm-oidc
 
-masterkeySecretName: litellm-secrets
-masterkeySecretKey: masterkey
+masterkeySecretName: litellm-secrets-env
+masterkeySecretKey: LITELLM_MASTER_KEY
 
 proxyConfigMap:
   create: false

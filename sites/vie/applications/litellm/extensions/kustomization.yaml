@@ -9,7 +9,6 @@ resources:
   - ./external-secret-database.yaml
   - ./external-secret-oidc.yaml
   - ./external-secret-secrets-env.yaml
-  - ./external-secret-secrets.yaml
   - ./postgresql.yaml
   - ./postgresql-objectstore-scaleway.yaml
   - ./postgresql-backup.yaml
