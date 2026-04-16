@@ -3,24 +3,41 @@ replicaCount: 1
 numWorkers: 1
 
 extraEnvVars:
-  LITELLM_MODE: PRODUCTION
-  DISABLE_SCHEMA_UPDATE: "true"
-  DOCS_URL: "/docs"
-  ROOT_REDIRECT_URL: "/ui"
-  PROXY_BASE_URL: https://litellm.${LOCAL_INTERNAL_DOMAIN}
-  ALLOWED_EMAIL_DOMAINS: muehlbachler.io
-  GENERIC_SCOPES: openid email profile
-  PROXY_ADMIN_ID: litellm-proxy-admin # fetch from ui...
-  GENERIC_USER_ID_ATTRIBUTE: preferred_username
-  GENERIC_USER_EMAIL_ATTRIBUTE: email
-  GENERIC_USER_DISPLAY_NAME_ATTRIBUTE: name
-  GENERIC_USER_FIRST_NAME_ATTRIBUTE: given_name
-  GENERIC_USER_LAST_NAME_ATTRIBUTE: family_name
-  GENERIC_USER_ROLE_ATTRIBUTE: grants
+  - name: LITELLM_MODE
+    value: "PRODUCTION"
+  - name: DISABLE_SCHEMA_UPDATE
+    value: "true"
+  - name: DOCS_URL
+    value: "/docs"
+  - name: ROOT_REDIRECT_URL
+    value: "/ui"
+  - name: PROXY_BASE_URL
+    value: "https://litellm.${LOCAL_INTERNAL_DOMAIN}"
+  - name: ALLOWED_EMAIL_DOMAINS
+    value: "muehlbachler.io"
+  - name: GENERIC_SCOPES
+    value: "openid email profile"
+  - name: PROXY_ADMIN_ID
+    value: "litellm-proxy-admin"
+  - name: GENERIC_USER_ID_ATTRIBUTE
+    value: "preferred_username"
+  - name: GENERIC_USER_EMAIL_ATTRIBUTE
+    value: "email"
+  - name: GENERIC_USER_DISPLAY_NAME_ATTRIBUTE
+    value: "name"
+  - name: GENERIC_USER_FIRST_NAME_ATTRIBUTE
+    value: "given_name"
+  - name: GENERIC_USER_LAST_NAME_ATTRIBUTE
+    value: "family_name"
+  - name: GENERIC_USER_ROLE_ATTRIBUTE
+    value: "grants"
 
 environmentSecrets:
   - litellm-secrets-env
   - litellm-oidc
+
+masterkeySecretName: litellm-secrets
+masterkeySecretKey: masterkey
 
 proxyConfigMap:
   create: false
