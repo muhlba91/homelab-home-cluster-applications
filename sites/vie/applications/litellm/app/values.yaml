@@ -5,8 +5,6 @@ numWorkers: 1
 extraEnvVars:
   - name: LITELLM_MODE
     value: "PRODUCTION"
-  - name: DISABLE_SCHEMA_UPDATE
-    value: "true"
   - name: DOCS_URL
     value: "/docs"
   - name: ROOT_REDIRECT_URL
@@ -61,6 +59,7 @@ deploymentAnnotations:
   reloader.stakater.com/auto: "true"
 
 migrationJob:
+  enabled: false # also sets env vars for main container which then sets DISABLE_SCHEMA_UPDATE twice on the migration job
   hooks:
     argocd:
       enabled: false
