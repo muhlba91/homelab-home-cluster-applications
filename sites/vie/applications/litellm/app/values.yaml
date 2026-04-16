@@ -19,7 +19,9 @@ extraEnvVars:
   - name: GENERIC_SCOPES
     value: "openid email profile"
   - name: PROXY_ADMIN_ID
-    value: "litellm-proxy-admin"
+    value: daniel
+  - name: AUTO_REDIRECT_UI_LOGIN_TO_SSO
+    value: "true"
   - name: GENERIC_USER_ID_ATTRIBUTE
     value: "preferred_username"
   - name: GENERIC_USER_EMAIL_ATTRIBUTE
