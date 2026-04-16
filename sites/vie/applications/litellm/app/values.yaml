@@ -2,6 +2,9 @@
 replicaCount: 1
 numWorkers: 1
 
+strategy:
+  type: Recreate
+
 extraEnvVars:
   - name: LITELLM_MODE
     value: "PRODUCTION"
