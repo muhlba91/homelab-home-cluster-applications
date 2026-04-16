@@ -5,8 +5,10 @@ kind: Kustomization
 namespace: ${APPLICATION_NAMESPACE}
 resources:
   - ./configmap.yaml
-  - ./external-secret-database.yaml
   - ./external-secret-cloudnativepg-barman-credentials.yaml
+  - ./external-secret-database.yaml
+  - ./external-secret-oidc.yaml
+  - ./external-secret-secrets-env.yaml
   - ./postgresql.yaml
   - ./postgresql-objectstore-scaleway.yaml
   - ./postgresql-backup.yaml

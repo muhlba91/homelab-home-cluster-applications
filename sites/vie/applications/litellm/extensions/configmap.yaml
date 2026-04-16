@@ -40,6 +40,8 @@ data:
       proxy_budget_rescheduler_min_time: 1800
       proxy_budget_rescheduler_max_time: 3600
 
+      store_model_in_db: true
+
     router_settings:
       routing_strategy: simple-shuffle
       allowed_fails: 3

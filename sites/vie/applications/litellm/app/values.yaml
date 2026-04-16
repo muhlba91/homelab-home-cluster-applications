@@ -4,6 +4,7 @@ numWorkers: 1
 
 extraEnvVars:
   LITELLM_MODE: PRODUCTION
+  DISABLE_SCHEMA_UPDATE: "true"
   DOCS_URL: "/docs"
   ROOT_REDIRECT_URL: "/ui"
   PROXY_BASE_URL: https://litellm.${LOCAL_INTERNAL_DOMAIN}
@@ -16,6 +17,10 @@ extraEnvVars:
   GENERIC_USER_FIRST_NAME_ATTRIBUTE: given_name
   GENERIC_USER_LAST_NAME_ATTRIBUTE: family_name
   GENERIC_USER_ROLE_ATTRIBUTE: grants
+
+environmentSecrets:
+  - litellm-secrets-env
+  - litellm-oidc
 
 proxyConfigMap:
   create: false
