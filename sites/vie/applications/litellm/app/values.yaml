@@ -71,7 +71,7 @@ migrationJob:
 
 ingress:
   enabled: true
-  className: ""
+  className: traefik
   annotations:
     cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
     external-dns.alpha.kubernetes.io/provider: internal
