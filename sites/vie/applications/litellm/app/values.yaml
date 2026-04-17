@@ -14,6 +14,8 @@ extraEnvVars:
     value: "/ui"
   - name: PROXY_BASE_URL
     value: "https://litellm.${LOCAL_INTERNAL_DOMAIN}"
+  - name: BACKGROUND_HEALTH_CHECK_MAX_TOKENS
+    value: "16"
   - name: ALLOWED_EMAIL_DOMAINS
     value: "muehlbachler.io"
   - name: GENERIC_SCOPES
