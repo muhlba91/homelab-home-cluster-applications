@@ -14,7 +14,14 @@ ${APPLICATION}:
   models:
     pull:
       # https://github.com/allenporter/home-assistant-datasets/tree/main/reports
-      - gemma4:e4b-it-q4_K_M
+      - qwen3.5:9b-q4_K_M
+      - gemma4:e2b-it-q4_K_M
+
+extraEnv:
+  - name: OLLAMA_MAX_LOADED_MODELS
+    value: "2"
+  - name: OLLAMA_NUM_PARALLEL
+    value: "2"
 
 service:
   annotations:
