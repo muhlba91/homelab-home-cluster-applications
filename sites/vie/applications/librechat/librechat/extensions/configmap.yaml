@@ -36,19 +36,6 @@ data:
 
     memory:
       disabled: true
-      messageWindowSize: 8
-      validKeys:
-        - user_preferences
-        - learned_facts
-        - project_details
-        - tech_stack
-      agent:
-        provider: LiteLLM
-        model: gemini-3.1-flash-lite-preview
-        model_parameters:
-          temperature: 0.1
-          max_tokens: 1000
-          top_p: 0.1
 
     ocr:
       mistralModel: mistral-ocr-latest
@@ -62,38 +49,6 @@ data:
       rerankerType: jina
       jinaApiKey: "$${JINA_API_KEY}"
       safeSearch: 0
-
-    mcpServers:
-      memory:
-        command: npx
-        args:
-          - "@modelcontextprotocol/server-memory"
-        startup: false
-        initTimeout: 15000
-
-      home-assistant:
-        type: streamable-http
-        url: https://jarvis.${LOCAL_HOME_DOMAIN}/api/mcp
-        oauth:
-          authorization_url: https://jarvis.${LOCAL_HOME_DOMAIN}/auth/authorize
-          token_url: https://jarvis.${LOCAL_HOME_DOMAIN}/auth/token
-          client_id: https://gpt.${HOME_DOMAIN}
-          redirect_uri: https://gpt.${HOME_DOMAIN}/api/mcp/home-assistant/oauth/callback
-          scope: "read execute"
-        startup: false
-        initTimeout: 15000
-
-      github:
-        type: streamable-http
-        url: "https://api.githubcopilot.com/mcp/"
-        headers:
-          Authorization: "Bearer {{PAT_TOKEN}}"
-        customUserVars:
-          PAT_TOKEN:
-            title: "GitHub PAT Token"
-            description: "GitHub Personal Access Token"
-        startup: false
-        initTimeout: 30000
 
     endpoints:
       agents:
