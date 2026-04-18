@@ -22,6 +22,8 @@ extraEnv:
     value: "2"
   - name: OLLAMA_NUM_PARALLEL
     value: "2"
+  - name: OLLAMA_CONTEXT_LENGTH
+    value: "16384"
 
 service:
   annotations:
