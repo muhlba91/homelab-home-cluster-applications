@@ -11,7 +11,8 @@ data:
   COLLECTION_NAME: librechatrag
   # EMBEDDINGS
   EMBEDDINGS_PROVIDER: openai
-  RAG_OPENAI_BASEURL: http://litellm.litellm:4000/v1
+  RAG_API_URL: http://litellm.litellm:4000/v1/embeddings
+  RAG_OPENAI_BASEURL: http://litellm.litellm:4000
   EMBEDDINGS_MODEL: gemini-embedding-2-preview
   # FILE PROCESSING
   RAG_UPLOAD_DIR: /app/uploads/

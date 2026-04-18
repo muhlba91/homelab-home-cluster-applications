@@ -50,6 +50,19 @@ data:
       jinaApiKey: "$${JINA_API_KEY}"
       safeSearch: 0
 
+    modelSpecs:
+      list:
+        - name: gpt-5
+          label: GPT-5
+          group: OpenAI Proxy
+          authType: override_auth
+          webSearch: true
+          fileSearch: true
+          artifacts: true
+          preset:
+            endpoint: Model Proxy
+            model: gpt-5.4
+
     endpoints:
       agents:
         recursionLimit: 50
@@ -60,7 +73,7 @@ data:
         minRelevanceScore: 0.45
 
       custom:
-        - name: LiteLLM
+        - name: Model Proxy
           modelDisplayLabel: Model Proxy
           apiKey:  user_provided
           baseURL: http://litellm.litellm:4000/v1
