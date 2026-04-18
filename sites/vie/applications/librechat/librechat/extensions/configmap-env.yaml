@@ -6,8 +6,8 @@ metadata:
 data:
   # https://github.com/danny-avila/LibreChat/blob/main/.env.example
   # GENERAL APP SETTINGS
-  DOMAIN_CLIENT: "https://gpt.${HOME_DOMAIN}"
-  DOMAIN_SERVER: "https://gpt.${HOME_DOMAIN}"
+  DOMAIN_CLIENT: "https://chat.ai.${HOME_DOMAIN}"
+  DOMAIN_SERVER: "https://chat.ai.${HOME_DOMAIN}"
   NO_INDEX: "true"
   APP_TITLE: LibreChat
   # ENDPOINTS
