@@ -60,52 +60,6 @@ data:
         minRelevanceScore: 0.45
 
       custom:
-        - name: LiteLLM OpenAI
-          apiKey:  user_provided
-          baseURL: http://litellm.litellm:4000/v1
-          iconURL: /assets/openai.svg
-          models:
-            default:
-              - openai/gpt-5.4
-              - openai/gpt-5.4-mini
-              - openai/gpt-5.4-nano
-            fetch: false
-          titleConvo: true
-          titleModel: gemini-3.1-flash-lite-preview
-          titleMethod: completion
-          dropParams:
-            - metadata
-            - store
-            - vector_store_ids
-
-        - name: LiteLLM Anthropic
-          apiKey:  user_provided
-          baseURL: http://litellm.litellm:4000/v1
-          iconURL: /assets/anthropic.svg
-          models:
-            default:
-              - anthropic/claude-haiku-4-5
-              - anthropic/claude-opus-4-7
-              - anthropic/claude-sonnet-4-7
-            fetch: false
-          titleConvo: true
-          titleModel: gemini-3.1-flash-lite-preview
-          titleMethod: completion
-
-        - name: LiteLLM Mistral
-          apiKey:  user_provided
-          baseURL: http://litellm.litellm:4000/v1
-          iconURL: /assets/mistral.svg
-          models:
-            default:
-              - mistral/mistral-large-latest
-              - mistral/mistral-medium-latest
-              - mistral/mistral-small-latest
-            fetch: false
-          titleConvo: true
-          titleModel: gemini-3.1-flash-lite-preview
-          titleMethod: completion
-
         - name: LiteLLM
           modelDisplayLabel: Model Proxy
           apiKey:  user_provided
@@ -113,6 +67,9 @@ data:
           iconURL: https://raw.githubusercontent.com/BerriAI/litellm/main/docs/my-website/img/favicon.png
           models:
             default:
+              - claude-haiku-4-5
+              - claude-opus-4-6
+              - claude-sonnet-4-6
               - codestral-latest
               - devstral-latest
               - devstral-medium-latest
@@ -122,9 +79,15 @@ data:
               - gemini-3.1-pro-preview
               - gemini-embedding-2-preview
               - gemma4
+              - gpt-5.4
+              - gpt-5.4-mini
+              - gpt-5.4-nano
+              - mistral-large-latest
+              - mistral-medium-latest
               - mistral-ocr-latest
+              - mistral-small-latest
               - qwen3.5
-            fetch: true
+            fetch: false
           titleConvo: true
           titleModel: gemini-3.1-flash-lite-preview
           titleMethod: completion
