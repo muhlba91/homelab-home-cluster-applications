@@ -118,6 +118,10 @@ data:
           titleConvo: true
           titleModel: gemini-3.1-flash-lite-preview
           titleMethod: completion
+          dropParams:
+            - metadata
+            - store
+            - vector_store_ids
 
         - name: LiteLLM Anthropic
           apiKey:  user_provided
