@@ -5,50 +5,64 @@ metadata:
   name: librechat-env
 data:
   # https://github.com/danny-avila/LibreChat/blob/main/.env.example
+  # GENERAL APP SETTINGS
   DOMAIN_CLIENT: "https://gpt.${HOME_DOMAIN}"
   DOMAIN_SERVER: "https://gpt.${HOME_DOMAIN}"
   NO_INDEX: "true"
-  EMAIL_FROM: "noreply@muehlbachler.io"
   APP_TITLE: LibreChat
-  ENDPOINTS: anthropic,google,openAI,agents
-  BAN_VIOLATIONS: "false"
+  # ENDPOINTS
+  ENDPOINTS: custom,google,anthropic,openAI,agents
+  # MODEL LISTS
   ANTHROPIC_MODELS: claude-haiku-4-5,claude-sonnet-4-6,claude-opus-4-6
   OPENAI_MODELS: gpt-5-mini,gpt-5.4,gpt-5.4-pro,gpt-5-nano,o3-deep-research,o4-mini-deep-research
   ASSISTANTS_MODELS: gpt-5-mini,gpt-5.4,gpt-5.4-pro,gpt-5-nano
   GOOGLE_MODELS: gemini-3-flash-preview,gemini-3.1-pro-preview,gemini-3.1-flash-lite-preview
   GEMINI_IMAGE_MODEL: gemini-3.1-flash-image-preview # gemini-3-pro-image-preview
+  # SAFETY SETTINGS
+  BAN_VIOLATIONS: "false"
   GOOGLE_SAFETY_SEXUALLY_EXPLICIT: BLOCK_NONE
   GOOGLE_SAFETY_HATE_SPEECH: BLOCK_ONLY_HIGH
   GOOGLE_SAFETY_HARASSMENT: BLOCK_ONLY_HIGH
   GOOGLE_SAFETY_DANGEROUS_CONTENT: BLOCK_NONE
   GOOGLE_SAFETY_CIVIC_INTEGRITY: BLOCK_ONLY_HIGH
+  # TITLING & UI
   TITLE_CONVO: "true"
   OPENAI_TITLE_MODEL: gpt-5-nano
   ANTHROPIC_TITLE_MODEL: claude-haiku-4-5
   GOOGLE_TITLE_MODEL: gemini-3.1-flash-lite-preview
-  RAG_PORT: "8000"
-  RAG_API_URL: "http://librechat-rag-api:8000"
-  SEARCH: "true"
-  MEILI_NO_ANALYTICS: "true"
-  MEILI_HOST: "http://librechat-meilisearch:7700"
-  AWS_ENDPOINT_URL: "https://s3.fr-par.scw.cloud"
-  AWS_REGION: fr-par
-  LOGIN_MAX: "10"
-  LOGIN_WINDOW: "5"
+  HELP_AND_FAQ_URL: "/"
+  CUSTOM_FOOTER: ""
+  # LIMITS
   LIMIT_CONCURRENT_MESSAGES: "true"
   CONCURRENT_MESSAGE_MAX: "15"
   LIMIT_MESSAGE_IP: "false"
+  # INFRASTRUCTURE - RAG
+  RAG_PORT: "8000"
+  RAG_API_URL: "http://librechat-rag-api:8000"
+  # INFRASTRUCTURE - MEILISEARCH
+  SEARCH: "true"
+  MEILI_NO_ANALYTICS: "true"
+  MEILI_HOST: "http://librechat-meilisearch:7700"
+  # INFRASTRUCTURE - FILE STORAGE
+  AWS_ENDPOINT_URL: "https://s3.fr-par.scw.cloud"
+  AWS_REGION: fr-par
+  # INFRASTRUCTURE - EMAIL
+  EMAIL_FROM: "noreply@muehlbachler.io"
+  # AUTH & REGISTRATION - GENERAL
+  LOGIN_MAX: "10"
+  LOGIN_WINDOW: "5"
   ALLOW_EMAIL_LOGIN: "true"
   ALLOW_REGISTRATION: "false"
   ALLOW_SOCIAL_LOGIN: "true"
   ALLOW_SOCIAL_REGISTRATION: "true"
+  # AUTH & REGISTRATION - OPENID
   OPENID_SCOPE: openid profile email
   OPENID_CALLBACK_URL: /oauth/openid/callback
   OPENID_BUTTON_LABEL: "Login with SSO"
   # OPENID_IMAGE_URL: ""
-  SESSION_EXPIRY: "1000 * 60 * 30" # 30 min
-  REFRESH_TOKEN_EXPIRY: "(1000 * 60 * 60 * 24) * 7" # 7 <ys
-  HELP_AND_FAQ_URL: "/"
-  CUSTOM_FOOTER: ""
+  # AUTH & REGISTRATION - SESSION SETTINGS
+  SESSION_EXPIRY: "1800000" # 30 min
+  REFRESH_TOKEN_EXPIRY: "604800000"
+  # LOGGING
   DEBUG_LOGGING: "false"
   DEBUG_CONSOLE: "false"

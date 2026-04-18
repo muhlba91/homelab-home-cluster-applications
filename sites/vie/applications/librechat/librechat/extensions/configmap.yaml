@@ -37,19 +37,24 @@ data:
 
     memory:
       disabled: false
-      messageWindowSize: 10
+      messageWindowSize: 8
+      validKeys:
+        - user_preferences
+        - learned_facts
+        - project_details
+        - tech_stack
       agent:
-        provider: google
-        model: gemini-2.5-pro
+        provider: LiteLLM
+        model: gemini-3.1-flash-lite-preview
         model_parameters:
-          temperature: 0.2
-          max_tokens: 2000
-          top_p: 0.8
-          frequency_penalty: 0.1
+          temperature: 0.1
+          max_tokens: 1000
+          top_p: 0.1
 
     ocr:
       mistralModel: mistral-ocr-latest
-      apiKey: "$${MISTRAL_API_KEY}"
+      baseURL: http://litellm.litellm:4000/v1
+      apiKey: "$${LITELLM_API_KEY}"
       strategy: mistral_ocr
 
     webSearch:
@@ -87,37 +92,7 @@ data:
             title: "GitHub PAT Token"
             description: "GitHub Personal Access Token"
         startup: false
-        initTimeout: 15000
-      perplexity:
-        command: npx
-        args:
-          - "@perplexity-ai/mcp-server"
-        env:
-          PERPLEXITY_API_KEY: "{{PERPLEXITY_API_KEY}}"
-        customUserVars:
-          PERPLEXITY_API_KEY:
-            title: "Perplexity API Key"
-            description: "API Key for Perplexity"
-        startup: false
-        initTimeout: 15000
-      opnsense:
-        command: npx
-        args:
-          - "@richard-stovall/opnsense-mcp-server"
-        env:
-          OPNSENSE_URL: "https://10.0.0.1"
-          OPNSENSE_API_KEY: "{{OPNSENSE_API_KEY}}"
-          OPNSENSE_API_SECRET: "{{OPNSENSE_API_SECRET}}"
-          OPNSENSE_VERIFY_SSL: "false"
-        customUserVars:
-          OPNSENSE_API_KEY:
-            title: "OPNSense API Key"
-            description: "API Key for OPNSense"
-          OPNSENSE_API_SECRET:
-            title: "OPNSense API Secret"
-            description: "API Secret for OPNSense"
-        startup: false
-        initTimeout: 15000
+        initTimeout: 30000
 
     endpoints:
       agents:
@@ -128,41 +103,16 @@ data:
         maxCitationsPerFile: 7
         minRelevanceScore: 0.45
       custom:
-        - name: "Mistral"
-          modelDisplayLabel: "Mistral AI"
-          iconURL: https://raw.githubusercontent.com/mistralai/platform-docs-public/main/static/img/favicon.ico
-          apiKey: "$${MISTRAL_API_KEY}"
-          baseURL: https://api.mistral.ai/v1
+        - name: LiteLLM
+          modelDisplayLabel: Model Proxy
+          apiKey:  user_provided
+          baseURL: http://litellm.litellm:4000/v1
+          iconURL: https://raw.githubusercontent.com/BerriAI/litellm/main/docs/my-docs/static/img/litellm_logo.png
           models:
             default:
-              - mistral-medium-latest
-              - mistral-small-latest
-              - mistral-large-latest
-            fetch: false
-            userIdQuery: false
+              - qwen3.5
+              - gemma4
+            fetch: true
           titleConvo: true
-          titleModel: mistral-small-latest
-          # NOTE: For Mistral, it is necessary to drop the following parameters or you will encounter a 422 Error:
-          dropParams:
-            - stop
-            - user
-            - presence_penalty
-            - frequency_penalty
-        - name: "Perplexity"
-          modelDisplayLabel: "Perplexity AI"
-          iconURL: https://www.perplexity.ai/favicon.ico
-          apiKey: "user_provided"
-          baseURL: https://api.perplexity.ai
-          models:
-            default:
-              - sonar
-              - sonar-pro
-              - sonar-reasoning
-              - sonar-reasoning-pro
-              - sonar-deep-research
-            fetch: false # fetching list of models is not supported
-          titleConvo: true
-          titleModel: sonar
-          dropParams:
-            - stop
-            - frequency_penalty
+          titleModel: gemini-3.1-flash-lite-preview
+          titleMethod: completion

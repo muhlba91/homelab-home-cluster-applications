@@ -4,11 +4,18 @@ kind: ConfigMap
 metadata:
   name: librechat-rag-env
 data:
+  # DATABASE
   DB_HOST: librechat-postgresql-rw
   DB_PORT: "5432"
   POSTGRES_DB: librechat-rag
-  EMBEDDINGS_PROVIDER: google_genai
-  EMBEDDINGS_MODEL: gemini-embedding-001
   COLLECTION_NAME: librechatrag
+  # EMBEDDINGS
+  EMBEDDINGS_PROVIDER: openai
+  RAG_OPENAI_BASEURL: http://litellm.litellm:4000/v1
+  EMBEDDINGS_MODEL: gemini-embedding-2-preview
+  # FILE PROCESSING
   RAG_UPLOAD_DIR: /app/uploads/
   PDF_EXTRACT_IMAGES: "true"
+  # PERFORMANCE
+  CHUNK_SIZE: "1000"
+  CHUNK_OVERLAP: "100"
