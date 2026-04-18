@@ -97,7 +97,7 @@ data:
 
     modelSpecs:
       enforce: false
-      prioritize: true
+      prioritize: false
       list:
         # OPENAI
         - name: gpt-5
