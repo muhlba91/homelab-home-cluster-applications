@@ -50,19 +50,6 @@ data:
       jinaApiKey: "$${JINA_API_KEY}"
       safeSearch: 0
 
-    modelSpecs:
-      list:
-        - name: gpt-5
-          label: GPT-5
-          group: OpenAI Proxy
-          authType: override_auth
-          webSearch: true
-          fileSearch: true
-          artifacts: true
-          preset:
-            endpoint: Model Proxy
-            model: gpt-5.4
-
     endpoints:
       agents:
         recursionLimit: 50
