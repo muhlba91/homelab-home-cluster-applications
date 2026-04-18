@@ -141,6 +141,8 @@ service:
       http:
         port: 8000
 
+# TODO: migrate to chat.ai.${HOME_DOMAIN} in due time
+# change DOMAIN_CLIENT and DOMAIN_SERVER in librechat-env configmap
 ingress:
   librechat:
     enabled: true
@@ -150,7 +152,14 @@ ingress:
       external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
       traefik.ingress.kubernetes.io/router.tls: "true"
     hosts:
-      - host: &domain gpt.${HOME_DOMAIN}
+      - host: &domain chat.ai.${HOME_DOMAIN}
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            service:
+              identifier: librechat
+              port: 3080
+      - host: gpt.${HOME_DOMAIN}
         paths:
           - path: /
             pathType: ImplementationSpecific
@@ -161,6 +170,7 @@ ingress:
       - secretName: librechat-tls-cert
         hosts:
           - *domain
+          - gpt.${HOME_DOMAIN}
 
 persistence:
   images:
