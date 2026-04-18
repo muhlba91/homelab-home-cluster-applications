@@ -107,7 +107,7 @@ data:
           modelDisplayLabel: Model Proxy
           apiKey:  user_provided
           baseURL: http://litellm.litellm:4000/v1
-          iconURL: https://raw.githubusercontent.com/BerriAI/litellm/main/docs/my-docs/static/img/litellm_logo.png
+          iconURL: https://raw.githubusercontent.com/BerriAI/litellm/main/docs/my-website/img/favicon.png
           models:
             default:
               - qwen3.5
