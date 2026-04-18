@@ -35,7 +35,7 @@ data:
       enabled: true
 
     memory:
-      disabled: false
+      disabled: true
       messageWindowSize: 8
       validKeys:
         - user_preferences
