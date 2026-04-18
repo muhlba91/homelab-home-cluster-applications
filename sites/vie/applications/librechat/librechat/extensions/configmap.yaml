@@ -110,8 +110,26 @@ data:
           iconURL: https://raw.githubusercontent.com/BerriAI/litellm/main/docs/my-website/img/favicon.png
           models:
             default:
-              - qwen3.5
+              - claude-haiku-4-5
+              - claude-opus-4-6
+              - claude-sonnet-4-6
+              - codestral-latest
+              - devstral-latest
+              - devstral-medium-latest
+              - devstral-small-latest
+              - gemini-3-flash-preview
+              - gemini-3.1-flash-lite-preview
+              - gemini-3.1-pro-preview
+              - gemini-embedding-2-preview
               - gemma4
+              - gpt-5.4
+              - gpt-5.4-mini
+              - gpt-5.4-nano
+              - mistral-large-latest
+              - mistral-medium-latest
+              - mistral-ocr-latest
+              - mistral-small-latest
+              - qwen3.5
             fetch: true
           titleConvo: true
           titleModel: gemini-3.1-flash-lite-preview
