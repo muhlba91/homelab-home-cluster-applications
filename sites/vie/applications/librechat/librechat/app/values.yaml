@@ -141,8 +141,7 @@ service:
       http:
         port: 8000
 
-# TODO: migrate to chat.ai.${HOME_DOMAIN} in due time
-# change DOMAIN_CLIENT and DOMAIN_SERVER in librechat-env configmap
+# TODO: migrate to only chat.ai.${HOME_DOMAIN} in due time
 ingress:
   librechat:
     enabled: true
