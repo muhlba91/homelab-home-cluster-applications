@@ -55,7 +55,7 @@ controllers:
       grafana:
         image:
           repository: alpine/k8s
-          tag: 1.35.3
+          tag: 1.35.4
           pullPolicy: IfNotPresent
         command:
           - /scripts/grafana.sh
