@@ -4,6 +4,8 @@ controllers:
   main:
     annotations:
       reloader.stakater.com/auto: "true"
+    serviceAccount:
+      identifier: bot-opsbot
     initContainers:
       init:
         image:
@@ -76,6 +78,34 @@ service:
     ports:
       gateway:
         port: 18790
+
+serviceAccount:
+  bot-opsbot:
+    enabled: true
+rbac:
+  roles:
+    bot-opsbot-restart-self:
+      enabled: true
+      type: Role
+      rules:
+        - apiGroups:
+            - apps
+          resources:
+            - deployments
+          resourceNames:
+            - agents-bot-opsbot-picoclaw
+          verbs:
+            - get
+            - patch
+  bindings:
+    bot-opsbot-restart-self:
+      enabled: true
+      type: RoleBinding
+      roleRef:
+        kind: Role
+        identifier: bot-opsbot-restart-self
+      subjects:
+        - identifier: bot-opsbot
 
 persistence:
   workspace:
