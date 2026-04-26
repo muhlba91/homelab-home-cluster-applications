@@ -93,6 +93,8 @@ service:
     ports:
       manage:
         port: 443
+      upgrade:
+        port: 8043
       app-discovery:
         port: 27001
         protocol: UDP
