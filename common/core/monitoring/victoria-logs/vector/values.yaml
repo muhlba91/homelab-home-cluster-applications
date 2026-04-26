@@ -6,7 +6,6 @@ customConfig:
   api:
     enabled: false
     address: 0.0.0.0:8686
-    playground: true
   sources:
     kubernetes_logs:
       # Kubernetes Logs using the built-in Kubernetes API (no file monitoring)
