@@ -11,7 +11,7 @@ controllers:
         image:
           repository: ghcr.io/containers/kubernetes-mcp-server
           pullPolicy: IfNotPresent
-          tag: v0.0.60
+          tag: v0.0.61
 
         args:
           - --config
