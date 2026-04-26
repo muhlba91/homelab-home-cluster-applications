@@ -12,7 +12,7 @@ controllers:
         image:
           repository: ghcr.io/danny-avila/librechat
           pullPolicy: IfNotPresent
-          tag: v0.8.4
+          tag: v0.8.5
 
         envFrom:
           - configMapRef:
@@ -96,7 +96,7 @@ controllers:
         image:
           repository: ghcr.io/danny-avila/librechat-rag-api-dev-lite
           pullPolicy: IfNotPresent
-          tag: 847c91b3f227db531919813e80ad253de110a4ca # FIXME: waiting for new release to include google_genai
+          tag: v0.8.0
 
         envFrom:
           - configMapRef:
