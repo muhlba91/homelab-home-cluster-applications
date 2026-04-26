@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: litellm-helm
-      version: 1.82.3
+      version: 1.83.10-stable
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository

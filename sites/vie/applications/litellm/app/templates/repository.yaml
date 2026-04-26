@@ -7,5 +7,5 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  url: oci://docker.litellm.ai/berriai/
+  url: oci://ghcr.io/berriai/
   type: oci
