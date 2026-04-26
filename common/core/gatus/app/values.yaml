@@ -63,7 +63,7 @@ controllers:
         image:
           repository: ghcr.io/home-operations/gatus-sidecar
           pullPolicy: IfNotPresent
-          tag: 0.0.13
+          tag: 0.0.14
         args:
           - --enable-httproute
           - --enable-ingress
