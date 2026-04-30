@@ -4,6 +4,7 @@ sources:
   - service
   - ingress
   - gateway-httproute
+enableGatewayListenerSets: true
 
 interval: 2m
 
