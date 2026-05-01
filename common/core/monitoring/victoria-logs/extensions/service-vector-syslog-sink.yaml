@@ -25,6 +25,6 @@ spec:
       protocol: TCP
       targetPort: 6000
   selector:
-    app.kubernetes.io/instance: victoria-logs
+    app.kubernetes.io/instance: victoria-logs-vector
     app.kubernetes.io/name: vector
     app.kubernetes.io/component: Agent
