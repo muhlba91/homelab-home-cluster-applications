@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: prometheus-snmp-exporter
-      version: 9.13.1
+      version: 9.13.2
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
