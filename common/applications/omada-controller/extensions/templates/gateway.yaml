@@ -5,7 +5,8 @@ metadata:
   name: omada-controller-backend-policy
 spec:
   targetRefs:
-    - kind: Service
+    - group: ""
+      kind: Service
       name: omada-controller-web
   tls:
     insecureSkipVerify: true
