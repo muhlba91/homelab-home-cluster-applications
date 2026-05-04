@@ -2,42 +2,43 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: ListenerSet
 metadata:
-  name: emqx-dashboard-listeners
+  name: grafana-listeners
   annotations:
-    cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
+    cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
 spec:
   parentRef:
-    name: kgateway-gateway-internal
+    name: kgateway-gateway
     namespace: kgateway
   listeners:
-    - name: https-emqx-dashboard
+    - name: https-grafana
       protocol: HTTPS
       port: 443
-      hostname: emqx.iot.${LOCAL_INTERNAL_DOMAIN}
+      hostname: grafana.${LOCAL_HOME_DOMAIN}
       tls:
         mode: Terminate
         certificateRefs:
-          - name: home-assistant-emqx-tls-cert
+          - name: grafana-tls-cert
 
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: emqx-dashboard
+  name: grafana
   annotations:
-    external-dns.alpha.kubernetes.io/provider: internal
+    external-dns.alpha.kubernetes.io/provider: public
+    external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
 spec:
   parentRefs:
-    - name: emqx-dashboard-listeners
+    - name: grafana-listeners
       kind: ListenerSet
       group: gateway.networking.k8s.io
   hostnames:
-    - emqx.iot.${LOCAL_INTERNAL_DOMAIN}
+    - grafana.${LOCAL_HOME_DOMAIN}
   rules:
     - matches:
         - path:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: emqx
-          port: 18083
+        - name: grafana
+          port: 80
