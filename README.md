@@ -64,7 +64,6 @@ The following applications are defined in [`common/infrastructure/`](common/infr
 - [x] [Cert Manager](https://cert-manager.io) - Certificate management using ACME Let's Encrypt.
 - [x] [External DNS](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Google Cloud DNS domains for publicly reachable services.
 - [x] [Gateway API](https://gateway-api.sigs.k8s.io) - Exposes Kubernetes `Gateway API` resources to the "outside world".
-- [x] [Traefik](https://traefik.io) - Exposes Kubernetes `Ingress` resources to the "outside world".
 - [x] [kgateway](https://kgateway.dev) - Exposes Kubernetes `Gateway API` resources to the "outside world".
 
 ### Core Applications
@@ -188,8 +187,9 @@ The following applications are defined in [`sites/hochschule-burgenland/infrastr
 - [x] External Secrets
 - [x] [Democratic CSI](https://github.com/democratic-csi/democratic-csi) - CSI driver for dynamic provisioning of storage using iSCSI on Proxmox VE.
 - [x] MetalLB
-- [x] Traefik
+- [x] gateway-api
 - [x] kgateway
+- [x] [Traefik](https://traefik.io) - Exposes Kubernetes `Ingress` resources to the "outside world".
 - [x] Cert Manager
 - [x] External DNS
 - [x] Reloader
