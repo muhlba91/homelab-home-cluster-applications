@@ -7,3 +7,4 @@ resources:
   - ./certificate.yaml
   - ./external-secret-emqx.yaml
   - ./service-mqtt.yaml
+  - ./gateway.yaml
