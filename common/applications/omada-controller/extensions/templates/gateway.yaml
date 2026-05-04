@@ -7,7 +7,6 @@ spec:
   targetRefs:
     - kind: Service
       name: omada-controller-web
-      port: 80
   tls:
     insecureSkipVerify: true
 
