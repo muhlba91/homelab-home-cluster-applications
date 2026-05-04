@@ -3,6 +3,9 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: kgateway-gateway
+  annotations:
+    external-dns.alpha.kubernetes.io/provider: public
+    external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
 spec:
   gatewayClassName: kgateway
   infrastructure:

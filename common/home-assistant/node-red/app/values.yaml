@@ -150,8 +150,6 @@ route:
   node-red:
     enabled: true
     kind: HTTPRoute
-    annotations:
-      external-dns.alpha.kubernetes.io/provider: internal
     parentRefs:
       - group: gateway.networking.k8s.io
         kind: ListenerSet
