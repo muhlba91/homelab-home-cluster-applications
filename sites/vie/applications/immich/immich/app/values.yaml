@@ -367,7 +367,7 @@ route:
               value: /
         backendRefs:
           - identifier: immich
-            port: 8080
+            port: 2283
 rawResources:
   listeners:
     apiVersion: gateway.networking.k8s.io/v1
