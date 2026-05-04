@@ -11,17 +11,7 @@ service:
 
 ingress:
   dashboard:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
-      external-dns.alpha.kubernetes.io/provider: internal
-      traefik.ingress.kubernetes.io/router.tls: "true"
-    hosts:
-      - &domain emqx.iot.${LOCAL_INTERNAL_DOMAIN}
-    tls:
-      - secretName: home-assistant-emqx-tls-cert
-        hosts:
-          - *domain
+    enabled: false
 
 persistence:
   enabled: true
