@@ -63,6 +63,7 @@ The following applications are defined in [`common/infrastructure/`](common/infr
 - [x] [Rook Ceph](https://rook.io) - Manages persistent storage in the cluster.
 - [x] [Cert Manager](https://cert-manager.io) - Certificate management using ACME Let's Encrypt.
 - [x] [External DNS](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Google Cloud DNS domains for publicly reachable services.
+- [x] [Gateway API](https://gateway-api.sigs.k8s.io) - Exposes Kubernetes `Gateway API` resources to the "outside world".
 - [x] [Traefik](https://traefik.io) - Exposes Kubernetes `Ingress` resources to the "outside world".
 - [x] [kgateway](https://kgateway.dev) - Exposes Kubernetes `Gateway API` resources to the "outside world".
 
@@ -121,6 +122,7 @@ The following applications are defined in [`sites/vie/infrastructure/`](sites/vi
 - [x] NVIDIA Device Plugin
 - [x] External Secrets
 - [x] Rook Ceph
+- [x] gateway-api
 - [x] kgateway
 - [x] Cert Manager
 - [x] External DNS

@@ -10,6 +10,7 @@ resources:
   - ../../../common/infrastructure/cert-manager/
   - ../../../common/infrastructure/external-dns/
   - ../../../common/infrastructure/reloader/
+  - ../../../common/infrastructure/gateway-api/
   - ../../../common/infrastructure/traefik/
   - ../../../common/infrastructure/kgateway/
   - ./rook-ceph/
