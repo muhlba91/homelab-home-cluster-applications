@@ -176,7 +176,7 @@ rawResources:
     spec:
       spec:
         parentRef:
-          name: kgateway-gateway
+          name: kgateway-gateway-internal
           namespace: kgateway
         listeners:
           - name: https-home-assistant-node-red
