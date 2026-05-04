@@ -6,3 +6,4 @@ namespace: ${APPLICATION_NAMESPACE}
 resources:
   - gateway-service-parameters.yaml
   - gateway.yaml
+  - listeners.yaml
