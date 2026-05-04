@@ -132,7 +132,7 @@ route:
           - identifier: gatus
             port: 8080
 rawResources:
-  gatus-listeners:
+  listeners:
     apiVersion: gateway.networking.k8s.io/v1
     kind: ListenerSet
     annotations:
