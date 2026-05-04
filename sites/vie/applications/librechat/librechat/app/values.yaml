@@ -141,35 +141,48 @@ service:
       http:
         port: 8000
 
-# TODO: migrate to only chat.ai.${HOME_DOMAIN} in due time
-ingress:
+route:
   librechat:
     enabled: true
+    kind: HTTPRoute
     annotations:
-      cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
       external-dns.alpha.kubernetes.io/provider: public
       external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
-      traefik.ingress.kubernetes.io/router.tls: "true"
-    hosts:
-      - host: &domain chat.ai.${HOME_DOMAIN}
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-            service:
-              identifier: librechat
-              port: 3080
-      - host: gpt.${HOME_DOMAIN}
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-            service:
-              identifier: librechat
-              port: 3080
-    tls:
-      - secretName: librechat-tls-cert
-        hosts:
-          - *domain
-          - gpt.${HOME_DOMAIN}
+    parentRefs:
+      - group: gateway.networking.k8s.io
+        kind: ListenerSet
+        namespace: ${APPLICATION_NAMESPACE}
+        name: librechat-listeners
+    hostnames:
+      - &domain chat.ai.${HOME_DOMAIN}
+    rules:
+      - matches:
+          - path:
+              type: PathPrefix
+              value: /
+        backendRefs:
+          - identifier: librechat
+            port: 3080
+rawResources:
+  listeners:
+    apiVersion: gateway.networking.k8s.io/v1
+    kind: ListenerSet
+    annotations:
+      cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
+    spec:
+      spec:
+        parentRef:
+          name: kgateway-gateway
+          namespace: kgateway
+        listeners:
+          - name: https-librechat
+            protocol: HTTPS
+            port: 443
+            hostname: *domain
+            tls:
+              mode: Terminate
+              certificateRefs:
+                - name: librechat-tls-cert
 
 persistence:
   images:

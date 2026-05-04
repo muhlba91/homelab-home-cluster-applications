@@ -73,22 +73,47 @@ migrationJob:
     helm:
       enabled: true
 
-ingress:
-  enabled: true
-  className: traefik
-  annotations:
-    cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
-    external-dns.alpha.kubernetes.io/provider: internal
-    traefik.ingress.kubernetes.io/router.tls: "true"
-  hosts:
-    - host: &domain proxy.ai.${LOCAL_INTERNAL_DOMAIN}
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  tls:
-    - secretName: litellm-tls-cert
-      hosts:
-        - *domain
+route:
+  litellm:
+    enabled: true
+    kind: HTTPRoute
+    annotations:
+      external-dns.alpha.kubernetes.io/provider: internal
+    parentRefs:
+      - group: gateway.networking.k8s.io
+        kind: ListenerSet
+        namespace: ${APPLICATION_NAMESPACE}
+        name: litellm-listeners
+    hostnames:
+      - &domain proxy.ai.${LOCAL_INTERNAL_DOMAIN}
+    rules:
+      - matches:
+          - path:
+              type: PathPrefix
+              value: /
+        backendRefs:
+          - identifier: litellm
+            port: 8080
+rawResources:
+  listeners:
+    apiVersion: gateway.networking.k8s.io/v1
+    kind: ListenerSet
+    annotations:
+      cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
+    spec:
+      spec:
+        parentRef:
+          name: kgateway-gateway-internal
+          namespace: kgateway
+        listeners:
+          - name: https-litellm
+            protocol: HTTPS
+            port: 443
+            hostname: *domain
+            tls:
+              mode: Terminate
+              certificateRefs:
+                - name: litellm-tls-cert
 
 resources:
   requests:
