@@ -99,44 +99,87 @@ service:
       http:
         port: 8123
 
-ingress:
+route:
   home-assistant-internal:
     enabled: true
+    kind: HTTPRoute
     annotations:
-      cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
       external-dns.alpha.kubernetes.io/provider: internal
-      traefik.ingress.kubernetes.io/router.tls: "true"
-    hosts:
-      - host: &internal_domain manage.iot.${LOCAL_INTERNAL_DOMAIN}
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-            service:
-              identifier: home-assistant
-              port: 8123
-    tls:
-      - secretName: home-assistant-home-assistant-internal-tls-cert
-        hosts:
-          - *internal_domain
+    parentRefs:
+      - group: gateway.networking.k8s.io
+        kind: ListenerSet
+        namespace: ${APPLICATION_NAMESPACE}
+        name: home-assistant-home-assistant-internal-listeners
+    hostnames:
+      - &internal_domain manage.iot.${LOCAL_INTERNAL_DOMAIN}
+    rules:
+      - matches:
+          - path:
+              type: PathPrefix
+              value: /
+        backendRefs:
+          - identifier: home-assistant
+            port: 8123
   home-assistant-external:
     enabled: true
+    kind: HTTPRoute
     annotations:
-      cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
       external-dns.alpha.kubernetes.io/provider: public
       external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
-      traefik.ingress.kubernetes.io/router.tls: "true"
-    hosts:
-      - host: &external_domain jarvis.${LOCAL_HOME_DOMAIN}
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-            service:
-              identifier: home-assistant
-              port: 8123
-    tls:
-      - secretName: home-assistant-home-assistant-external-tls-cert
-        hosts:
-          - *external_domain
+    parentRefs:
+      - group: gateway.networking.k8s.io
+        kind: ListenerSet
+        namespace: ${APPLICATION_NAMESPACE}
+        name: home-assistant-home-assistant-external-listeners
+    hostnames:
+      - &external_domain jarvis.${LOCAL_HOME_DOMAIN}
+    rules:
+      - matches:
+          - path:
+              type: PathPrefix
+              value: /
+        backendRefs:
+          - identifier: home-assistant
+            port: 8123
+rawResources:
+  internal-listeners:
+    apiVersion: gateway.networking.k8s.io/v1
+    kind: ListenerSet
+    annotations:
+      cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
+    spec:
+      spec:
+        parentRef:
+          name: kgateway-gateway-internal
+          namespace: kgateway
+        listeners:
+          - name: https-home-assistant-internal
+            protocol: HTTPS
+            port: 443
+            hostname: *internal_domain
+            tls:
+              mode: Terminate
+              certificateRefs:
+                - name: home-assistant-internal-tls-cert
+  external-listeners:
+    apiVersion: gateway.networking.k8s.io/v1
+    kind: ListenerSet
+    annotations:
+      cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
+    spec:
+      spec:
+        parentRef:
+          name: kgateway-gateway
+          namespace: kgateway
+        listeners:
+          - name: https-home-assistant-external
+            protocol: HTTPS
+            port: 443
+            hostname: *external_domain
+            tls:
+              mode: Terminate
+              certificateRefs:
+                - name: home-assistant-external-tls-cert
 
 persistence:
   config:
