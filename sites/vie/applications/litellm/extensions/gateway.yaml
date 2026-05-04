@@ -28,7 +28,7 @@ metadata:
     external-dns.alpha.kubernetes.io/provider: internal
 spec:
   parentRefs:
-    - name: influxdb-listeners
+    - name: litellm-listeners
       kind: ListenerSet
       group: gateway.networking.k8s.io
   hostnames:

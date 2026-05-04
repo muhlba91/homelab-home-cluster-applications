@@ -23,9 +23,6 @@ service:
   annotations:
     gatus.home-operations.com/enabled: "true"
 
-ingress:
-  enabled: false
-
 resources:
   requests:
     cpu: 12m

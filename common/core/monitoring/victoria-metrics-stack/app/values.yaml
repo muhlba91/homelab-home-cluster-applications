@@ -56,8 +56,6 @@ vmsingle:
       resources:
         requests:
           storage: 20Gi
-  ingress:
-    enabled: false
 
 vmcluster:
   enabled: false

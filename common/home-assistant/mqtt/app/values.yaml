@@ -9,10 +9,6 @@ service:
   annotations:
     gatus.home-operations.com/enabled: "true"
 
-ingress:
-  dashboard:
-    enabled: false
-
 persistence:
   enabled: true
   storageClassName: ${DEFAULT_STORAGE_CLASS}

@@ -28,9 +28,6 @@ deploymentStrategy:
 envFromSecrets:
   - name: grafana-oidc
 
-ingress:
-  enabled: false
-
 persistence:
   enabled: true
   type: statefulset

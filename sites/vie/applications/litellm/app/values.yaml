@@ -73,9 +73,6 @@ migrationJob:
     helm:
       enabled: true
 
-ingress:
-  enabled: false
-
 resources:
   requests:
     cpu: 20m
