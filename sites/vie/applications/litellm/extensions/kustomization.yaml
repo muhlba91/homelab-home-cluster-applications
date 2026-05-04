@@ -12,3 +12,4 @@ resources:
   - ./postgresql.yaml
   - ./postgresql-objectstore-scaleway.yaml
   - ./postgresql-backup.yaml
+  - ./gateway.yaml
