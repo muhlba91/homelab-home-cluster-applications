@@ -84,32 +84,6 @@ server:
   service:
     annotations:
       gatus.home-operations.com/enabled: "true"
-  ingress:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
-      external-dns.alpha.kubernetes.io/provider: public
-      external-dns.alpha.kubernetes.io/target: ${PUBLIC_IP}
-      traefik.ingress.kubernetes.io/router.tls: "true"
-    extraTls:
-      - hosts:
-          - *domain
-        secretName: hochschule-burgenland-argocd-tls
-
-applicationSet:
-  ingress:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
-      external-dns.alpha.kubernetes.io/provider: public
-      external-dns.alpha.kubernetes.io/target: ${PUBLIC_IP}
-      traefik.ingress.kubernetes.io/router.tls: "true"
-    hostname: &webhookDomain webhook.argocd.${PUBLIC_DOMAIN}
-    tls: true
-    extraTls:
-      - secretName: hochschule-burgenland-argocd-webhook-tls
-        hosts:
-          - *webhookDomain
 
 notifications:
   argocdUrl: https://argocd.${PUBLIC_DOMAIN}

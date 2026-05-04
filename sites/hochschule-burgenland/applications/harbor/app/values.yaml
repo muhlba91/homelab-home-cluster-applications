@@ -3,7 +3,7 @@ updateStrategy:
   type: Recreate
 
 expose:
-  type: ingress
+  type: clusterIP
   ingress:
     hosts:
       core: registry.${PUBLIC_DOMAIN}

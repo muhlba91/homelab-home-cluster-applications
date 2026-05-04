@@ -7,3 +7,4 @@ resources:
   - ./external-secret-admin-password.yaml
   - ./external-secret-google-credentials.yaml
   - ./external-secret-harbor-secrets.yaml
+  - ./gateway.yaml

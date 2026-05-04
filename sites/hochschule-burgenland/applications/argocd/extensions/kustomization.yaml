@@ -8,5 +8,7 @@ resources:
   - ./external-secret-argocd-github.yaml
   - ./repository-apps.yaml
   - ./application-app-of-apps.yaml
+  - ./gateway-server.yaml
+  - ./gateway-applicationset.yaml
   # - ./external-secret-registry-credentials.yaml
   # - ./external-secret-assignment-repository.yaml

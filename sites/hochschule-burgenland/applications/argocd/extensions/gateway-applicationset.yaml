@@ -1,0 +1,44 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: ListenerSet
+metadata:
+  name: argocd-applicationset-listeners
+  annotations:
+    cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
+spec:
+  parentRef:
+    name: kgateway-gateway
+    namespace: kgateway
+  listeners:
+    - name: https-argocd-applicationset
+      protocol: HTTPS
+      port: 443
+      hostname: webhook.argocd.${PUBLIC_DOMAIN}
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: hochschule-burgenland-argocd-applicationset-tls
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: argocd-applicationset
+  annotations:
+    external-dns.alpha.kubernetes.io/provider: public
+    external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
+spec:
+  parentRefs:
+    - name: argocd-applicationset-listeners
+      kind: ListenerSet
+      group: gateway.networking.k8s.io
+  hostnames:
+    - webhook.argocd.${PUBLIC_DOMAIN}
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: argocd-applicationset-controller
+          port: 7000
