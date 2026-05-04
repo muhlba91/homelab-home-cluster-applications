@@ -1,7 +1,10 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-4.2.0/charts/library/common/values.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-5.0.0/charts/library/common/values.schema.json
 global:
   alwaysAppendIdentifierToResourceName: true
+
+defaultPodOptions:
+  automountServiceAccountToken: true
 
 controllers:
   main:
@@ -169,11 +172,12 @@ route:
             port: 1880
 rawResources:
   listeners:
-    apiVersion: gateway.networking.k8s.io/v1
-    kind: ListenerSet
-    annotations:
-      cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
-    spec:
+    manifest:
+      apiVersion: gateway.networking.k8s.io/v1
+      kind: ListenerSet
+      metadata:
+        annotations:
+          cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
       spec:
         parentRef:
           name: kgateway-gateway-internal
