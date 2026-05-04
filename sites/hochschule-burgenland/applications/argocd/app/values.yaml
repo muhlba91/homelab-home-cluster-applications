@@ -1,6 +1,6 @@
 ---
 global:
-  domain: &domain argocd.${PUBLIC_DOMAIN}
+  domain: argocd.${PUBLIC_DOMAIN}
   statefulsetAnnotations:
     reloader.stakater.com/auto: "true"
   deploymentAnnotations:
