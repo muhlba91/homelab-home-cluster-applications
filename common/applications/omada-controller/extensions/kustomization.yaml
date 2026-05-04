@@ -7,3 +7,4 @@ resources:
   - ./templates/service.yaml
   - ./templates/endpoint.yaml
   - ./templates/ingress.yaml
+  - ./templates/gateway.yaml

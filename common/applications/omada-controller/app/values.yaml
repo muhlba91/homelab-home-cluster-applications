@@ -72,8 +72,6 @@ service:
   omada-controller-https:
     controller: main
     ipFamilyPolicy: PreferDualStack
-    annotations:
-      traefik.ingress.kubernetes.io/service.serversscheme: https # FIXME: gateway api
     ports:
       manage:
         port: 443
