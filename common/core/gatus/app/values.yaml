@@ -121,6 +121,7 @@ route:
     parentRefs:
       - kind: ListenerSet
         name: gatus-listeners
+        namespace: "{{ .Release.Namespace }}"
     rules:
       - backendRefs:
           - identifier: gatus
