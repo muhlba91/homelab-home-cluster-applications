@@ -109,7 +109,7 @@ ingress:
         hosts:
           - *domain
 
-routes:
+route:
   gatus:
     enabled: true
     kind: HTTPRoute
