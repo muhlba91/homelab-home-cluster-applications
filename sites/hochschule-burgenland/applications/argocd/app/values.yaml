@@ -39,6 +39,11 @@ configs:
           hs = {}
           hs.status = "Healthy"
           return hs
+      gateway.networking.k8s.io/HTTPRoute:
+        health.lua: |
+          hs = {}
+          hs.status = "Healthy"
+          return hs
     resource.compareoptions: |
       # disables status field diffing in specified resource types
       ignoreAggregatedRoles: true
