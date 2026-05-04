@@ -20,7 +20,7 @@ metadata:
     cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
 spec:
   parentRef:
-    name: kgateway-gateway-internal
+    name: kgateway-gateway
     namespace: kgateway
   listeners:
     - name: https-omada-controller
