@@ -73,7 +73,7 @@ service:
     controller: main
     ipFamilyPolicy: PreferDualStack
     annotations:
-      traefik.ingress.kubernetes.io/service.serversscheme: https
+      traefik.ingress.kubernetes.io/service.serversscheme: https # FIXME: gateway api
     ports:
       manage:
         port: 443
@@ -115,29 +115,6 @@ service:
         port: 29816
       device-monitor:
         port: 29817
-
-# TODO: we cannot use the ingress due to https://github.com/mbentley/docker-omada-controller/discussions/317
-# hence, we are setting the endpoint to the load balancer and create a new ingress resource using our extensions
-# ingress:
-#   omada-controller:
-#     enabled: true
-#     annotations:
-#       cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
-#       external-dns.alpha.kubernetes.io/provider: public
-#       external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
-#       traefik.ingress.kubernetes.io/router.tls: "true"
-#     hosts:
-#       - host: &domain omada.network.vie.home.muehlbachler.io
-#         paths:
-#           - path: /
-#             pathType: ImplementationSpecific
-#             service:
-#               identifier: omada-controller-http
-#               port: 443
-#     tls:
-#       - secretName: omada-controller-tls-cert
-#         hosts:
-#           - *domain
 
 persistence:
   data:

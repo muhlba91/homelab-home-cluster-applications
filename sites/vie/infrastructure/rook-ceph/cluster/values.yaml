@@ -90,18 +90,6 @@ cephClusterSpec:
       limits:
         memory: 100Mi
 
-ingress:
-  dashboard:
-    annotations:
-      cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
-      external-dns.alpha.kubernetes.io/provider: internal
-    host:
-      name: &domain rook.${LOCAL_INTERNAL_DOMAIN}
-    tls:
-      - secretName: rook-ceph-dashboard-tls-cert
-        hosts:
-          - *domain
-
 cephBlockPools:
   - name: builtin-mgr
     spec:

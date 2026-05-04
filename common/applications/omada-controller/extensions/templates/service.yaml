@@ -5,7 +5,7 @@ kind: Service
 metadata:
   name: omada-controller-web
   annotations:
-    traefik.ingress.kubernetes.io/service.serversscheme: https
+    traefik.ingress.kubernetes.io/service.serversscheme: https # FIXME: gateway api
 spec:
   type: ClusterIP
   ipFamilyPolicy: PreferDualStack
