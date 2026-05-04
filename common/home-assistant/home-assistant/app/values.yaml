@@ -166,8 +166,9 @@ rawResources:
     manifest:
       apiVersion: gateway.networking.k8s.io/v1
       kind: ListenerSet
-      annotations:
-        cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
+      metadata:
+        annotations:
+          cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
       spec:
         parentRef:
           name: kgateway-gateway
