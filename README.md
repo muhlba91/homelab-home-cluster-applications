@@ -121,7 +121,6 @@ The following applications are defined in [`sites/vie/infrastructure/`](sites/vi
 - [x] NVIDIA Device Plugin
 - [x] External Secrets
 - [x] Rook Ceph
-- [x] Traefik
 - [x] kgateway
 - [x] Cert Manager
 - [x] External DNS

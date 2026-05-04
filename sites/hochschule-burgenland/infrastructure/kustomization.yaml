@@ -11,6 +11,5 @@ resources:
   - ../../../common/infrastructure/cert-manager/
   - ../../../common/infrastructure/reloader/
   - ../../../common/infrastructure/reflector/
-  - ../../../common/infrastructure/traefik/
   - ../../../common/infrastructure/kgateway/
   - ./democratic-csi/
