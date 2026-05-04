@@ -23,3 +23,9 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
+    - name: https-443
+      protocol: HTTPS
+      port: 443
+      allowedRoutes:
+        namespaces:
+          from: All
