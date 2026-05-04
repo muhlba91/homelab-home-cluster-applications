@@ -160,7 +160,7 @@ rawResources:
             tls:
               mode: Terminate
               certificateRefs:
-                - name: home-assistant-internal-tls-cert
+                - name: home-assistant-home-assistant-internal-tls-cert
   external-listeners:
     apiVersion: gateway.networking.k8s.io/v1
     kind: ListenerSet
@@ -179,7 +179,7 @@ rawResources:
             tls:
               mode: Terminate
               certificateRefs:
-                - name: home-assistant-external-tls-cert
+                - name: home-assistant-home-assistant-external-tls-cert
 
 persistence:
   config:
