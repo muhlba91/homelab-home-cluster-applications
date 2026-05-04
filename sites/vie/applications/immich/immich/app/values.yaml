@@ -359,7 +359,7 @@ route:
         namespace: ${APPLICATION_NAMESPACE}
         name: immich-listeners
     hostnames:
-      - &domain photos.${LOCAL_HOME_DOMAIN}
+      - &domain photos.${HOME_DOMAIN}
     rules:
       - matches:
           - path:
