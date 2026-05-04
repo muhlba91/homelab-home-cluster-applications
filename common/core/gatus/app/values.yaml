@@ -88,27 +88,6 @@ service:
       http:
         port: 8080
 
-ingress:
-  gatus:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
-      external-dns.alpha.kubernetes.io/provider: public
-      external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
-      traefik.ingress.kubernetes.io/router.tls: "true"
-    hosts:
-      - host: &domain status.${LOCAL_HOME_DOMAIN}
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-            service:
-              identifier: gatus
-              port: 8080
-    tls:
-      - secretName: gatus-tls-cert
-        hosts:
-          - *domain
-
 route:
   gatus:
     enabled: true
