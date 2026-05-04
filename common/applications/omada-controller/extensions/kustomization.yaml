@@ -6,5 +6,4 @@ namespace: ${APPLICATION_NAMESPACE}
 resources:
   - ./templates/service.yaml
   - ./templates/endpoint.yaml
-  - ./templates/ingress.yaml
   - ./templates/gateway.yaml
