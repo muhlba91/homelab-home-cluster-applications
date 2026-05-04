@@ -96,25 +96,47 @@ service:
         enabled: true
         port: 3000
 
-ingress:
-  zwave-js:
+route:
+  zwave:
     enabled: true
+    kind: HTTPRoute
+    annotations:
+      external-dns.alpha.kubernetes.io/provider: internal
+    parentRefs:
+      - group: gateway.networking.k8s.io
+        kind: ListenerSet
+        namespace: ${APPLICATION_NAMESPACE}
+        name: home-assistant-zwave-listeners
+    hostnames:
+      - &domain zwave.iot.${LOCAL_INTERNAL_DOMAIN}
+    rules:
+      - matches:
+          - path:
+              type: PathPrefix
+              value: /
+        backendRefs:
+          - identifier: zwave-js
+            port: 8091
+rawResources:
+  listeners:
+    apiVersion: gateway.networking.k8s.io/v1
+    kind: ListenerSet
     annotations:
       cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
-      external-dns.alpha.kubernetes.io/provider: internal
-      traefik.ingress.kubernetes.io/router.tls: "true"
-    hosts:
-      - host: &domain zwave.iot.${LOCAL_INTERNAL_DOMAIN}
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-            service:
-              identifier: zwave-js
-              port: 8091
-    tls:
-      - secretName: home-assistant-zwave-tls-cert
-        hosts:
-          - *domain
+    spec:
+      spec:
+        parentRef:
+          name: kgateway-gateway
+          namespace: kgateway
+        listeners:
+          - name: https-home-assistant-zwave
+            protocol: HTTPS
+            port: 443
+            hostname: *domain
+            tls:
+              mode: Terminate
+              certificateRefs:
+                - name: home-assistant-zwave-tls-cert
 
 persistence:
   config:

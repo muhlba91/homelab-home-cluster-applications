@@ -146,25 +146,47 @@ service:
       http:
         port: 1880
 
-ingress:
+route:
   node-red:
     enabled: true
+    kind: HTTPRoute
+    annotations:
+      external-dns.alpha.kubernetes.io/provider: internal
+    parentRefs:
+      - group: gateway.networking.k8s.io
+        kind: ListenerSet
+        namespace: ${APPLICATION_NAMESPACE}
+        name: home-assistant-node-red-listeners
+    hostnames:
+      - &domain node-red.iot.${LOCAL_INTERNAL_DOMAIN}
+    rules:
+      - matches:
+          - path:
+              type: PathPrefix
+              value: /
+        backendRefs:
+          - identifier: node-red
+            port: 1880
+rawResources:
+  listeners:
+    apiVersion: gateway.networking.k8s.io/v1
+    kind: ListenerSet
     annotations:
       cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
-      external-dns.alpha.kubernetes.io/provider: internal
-      traefik.ingress.kubernetes.io/router.tls: "true"
-    hosts:
-      - host: &domain node-red.iot.${LOCAL_INTERNAL_DOMAIN}
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-            service:
-              identifier: node-red
-              port: 1880
-    tls:
-      - secretName: home-assistant-node-red-tls-cert
-        hosts:
-          - *domain
+    spec:
+      spec:
+        parentRef:
+          name: kgateway-gateway
+          namespace: kgateway
+        listeners:
+          - name: https-home-assistant-node-red
+            protocol: HTTPS
+            port: 443
+            hostname: *domain
+            tls:
+              mode: Terminate
+              certificateRefs:
+                - name: home-assistant-node-red-tls-cert
 
 persistence:
   data:
