@@ -24,14 +24,7 @@ service:
     gatus.home-operations.com/enabled: "true"
 
 ingress:
-  enabled: true
-  tls: true
-  secretName: influxdb-tls-cert
-  hostname: influxdb.${LOCAL_INTERNAL_DOMAIN}
-  annotations:
-    cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
-    external-dns.alpha.kubernetes.io/provider: internal
-    traefik.ingress.kubernetes.io/router.tls: "true"
+  enabled: false
 
 resources:
   requests:
