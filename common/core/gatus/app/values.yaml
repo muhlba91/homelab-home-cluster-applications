@@ -3,6 +3,9 @@
 global:
   alwaysAppendIdentifierToResourceName: true
 
+defaultPodOptions:
+  automountServiceAccountToken: true
+
 controllers:
   main:
     annotations:
