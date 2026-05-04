@@ -116,45 +116,40 @@ route:
     annotations:
       external-dns.alpha.kubernetes.io/provider: public
       external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
+    parentRefs:
+      - group: gateway.networking.k8s.io
+        kind: ListenerSet
+        namespace: ${APPLICATION_NAMESPACE}
+        name: gatus-listeners
     hostnames:
       - &domain status.${LOCAL_HOME_DOMAIN}
-    parentRefs:
-      - kind: ListenerSet
-        name: gatus-listeners
-        namespace: ${APPLICATION_NAMESPACE}
     rules:
-      - backendRefs:
-          - identifier: gatus
-            port: 8080
-        matches:
+      - matches:
           - path:
               type: PathPrefix
               value: /
-# rawResources:
-#   gatus-listeners:
-#     apiVersion: gateway.networking.k8s.io/v1
-#     kind: ListenerSet
-#     annotations:
-#       cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
-#     spec:
-#       parentRef:
-#         group: gateway.networking.k8s.io
-#         kind: Gateway
-#         name: kgateway-gateway
-#         namespace: kgateway
-#       listeners:
-#         - allowedRoutes:
-#             namespaces:
-#               from: Same
-#           hostname: *domain
-#           name: https-gatus
-#           port: 443
-#           protocol: HTTPS
-#           tls:
-#             certificateRefs:
-#               - kind: Secret
-#                 name: gatus-tls-cert
-#             mode: Terminate
+        backendRefs:
+          - identifier: gatus
+            port: 8080
+rawResources:
+  gatus-listeners:
+    apiVersion: gateway.networking.k8s.io/v1
+    kind: ListenerSet
+    annotations:
+      cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
+    spec:
+      parentRef:
+        name: kgateway-gateway
+        namespace: kgateway
+      listeners:
+        - name: gatus
+          protocol: HTTPS
+          port: 443
+          hostname: *domain
+          tls:
+            mode: Terminate
+            certificateRefs:
+              - name: gatus-tls-cert
 
 persistence:
   data:
