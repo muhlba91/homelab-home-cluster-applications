@@ -1,7 +1,14 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-4.2.0/charts/library/common/values.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-5.0.0/charts/library/common/values.schema.json
 global:
   alwaysAppendIdentifierToResourceName: true
+
+defaultPodOptions:
+  terminationGracePeriodSeconds: 60
+  securityContext:
+    sysctls:
+      - name: net.ipv4.ip_unprivileged_port_start
+        value: "0"
 
 controllers:
   main:
@@ -52,13 +59,6 @@ controllers:
           readiness: *server_probes
           startup:
             enabled: false
-
-defaultPodOptions:
-  terminationGracePeriodSeconds: 60
-  securityContext:
-    sysctls:
-      - name: net.ipv4.ip_unprivileged_port_start
-        value: "0"
 
 service:
   omada-controller-http:
