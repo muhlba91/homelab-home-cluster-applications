@@ -29,18 +29,7 @@ envFromSecrets:
   - name: grafana-oidc
 
 ingress:
-  enabled: true
-  annotations:
-    cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
-    external-dns.alpha.kubernetes.io/provider: public
-    external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
-    traefik.ingress.kubernetes.io/router.tls: "true"
-  hosts:
-    - &domain grafana.${LOCAL_HOME_DOMAIN}
-  tls:
-    - secretName: grafana-tls-cert
-      hosts:
-        - *domain
+  enabled: false
 
 persistence:
   enabled: true
