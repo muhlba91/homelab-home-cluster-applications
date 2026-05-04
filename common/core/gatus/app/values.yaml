@@ -138,18 +138,19 @@ rawResources:
     annotations:
       cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
     spec:
-      parentRef:
-        name: kgateway-gateway
-        namespace: kgateway
-      listeners:
-        - name: gatus
-          protocol: HTTPS
-          port: 443
-          hostname: *domain
-          tls:
-            mode: Terminate
-            certificateRefs:
-              - name: gatus-tls-cert
+      spec:
+        parentRef:
+          name: kgateway-gateway
+          namespace: kgateway
+        listeners:
+          - name: gatus
+            protocol: HTTPS
+            port: 443
+            hostname: *domain
+            tls:
+              mode: Terminate
+              certificateRefs:
+                - name: gatus-tls-cert
 
 persistence:
   data:
