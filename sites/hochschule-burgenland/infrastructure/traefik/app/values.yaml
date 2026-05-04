@@ -1,0 +1,69 @@
+---
+fullnameOverride: traefik
+
+providers:
+  kubernetesCRD:
+    allowExternalNameServices: true
+    allowEmptyServices: true
+  kubernetesIngress:
+    allowExternalNameServices: true
+    allowEmptyServices: true
+    publishedService:
+      enabled: true
+  kubernetesGateway:
+    enabled: true
+
+additionalArguments:
+  - "--serversTransport.insecureSkipVerify=true"
+
+ports:
+  traefik:
+    expose:
+      default: true
+  web:
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+          permanent: true
+      forwardedHeaders:
+        trustedIPs:
+          - 10.0.0.0/8
+        insecure: true
+      proxyProtocol:
+        trustedIPs:
+          - 10.0.0.0/8
+        insecure: true
+  websecure:
+    http:
+      forwardedHeaders:
+        trustedIPs:
+          - 10.0.0.0/8
+        insecure: true
+      proxyProtocol:
+        trustedIPs:
+          - 10.0.0.0/8
+        insecure: true
+
+ingressRoute:
+  dashboard:
+    enabled: true
+
+service:
+  annotations:
+    ${TRAEFIK_IP_ANNOTATION}: "${TRAEFIK_IP}"
+    gatus.home-operations.com/enabled: "true"
+  labels:
+    loadbalancer/pool: l2
+  spec:
+    type: LoadBalancer
+    loadBalancerClass: ${TRAEFIK_LB_CLASS}
+    externalTrafficPolicy: Local
+
+resources:
+  requests:
+    cpu: 14m
+    memory: 181Mi
+  limits:
+    memory: 181Mi
