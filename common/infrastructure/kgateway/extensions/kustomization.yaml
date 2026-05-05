@@ -8,4 +8,4 @@ resources:
   - ./external/
   - global-https-redirect.yaml
   - global-hsts.yaml
-  - global-listenerpolicy.yaml
+  - global-http-listener-policy.yaml

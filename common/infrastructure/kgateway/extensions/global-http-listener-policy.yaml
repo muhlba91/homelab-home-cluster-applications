@@ -1,8 +1,8 @@
 ---
 apiVersion: gateway.kgateway.dev/v1alpha1
-kind: ListenerPolicy
+kind: HTTPListenerPolicy
 metadata:
-  name: global-listenerpolicy
+  name: global-http-listener-policy
 spec:
   targetRefs:
     - group: gateway.networking.k8s.io
