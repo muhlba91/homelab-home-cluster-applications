@@ -51,6 +51,8 @@ controllers:
 service:
   homepage:
     controller: main
+    annotations:
+      gatus.home-operations.com/enabled: "true"
     ipFamilyPolicy: PreferDualStack
     ports:
       http:
