@@ -1,0 +1,35 @@
+---
+driver:
+  enabled: false
+toolkit:
+  enabled: false
+hostPaths:
+  driverInstallDir: /usr/local
+
+devicePlugin:
+  config:
+    name: device-plugin-config
+    create: true
+    data:
+      default: |-
+        version: v1
+        flags:
+          migStrategy: "none"
+          failOnInitError: false
+          nvidiaDriverRoot: "/"
+          plugin:
+            passDeviceSpecs: false
+            deviceListStrategy:
+              - envvar
+            deviceIDStrategy: uuid
+        sharing:
+          timeSlicing:
+            renameByDefault: false
+            failRequestsGreaterThanOne: true
+            resources:
+              - name: nvidia.com/gpu
+                replicas: 10
+          # mps:
+          #   resources:
+          #     - name: nvidia.com/gpu
+          #       replicas: 10
