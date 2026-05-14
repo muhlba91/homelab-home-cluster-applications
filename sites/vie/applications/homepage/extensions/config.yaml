@@ -1,0 +1,40 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homepage-config
+data:
+  kubernetes.yaml: |
+    mode: cluster
+    gateway: true
+  settings.yaml: |-
+    instanceName: internal
+    title: Tuxnet
+
+    language: en
+
+    theme: dark
+    color: slate
+    iconStyle: theme
+    fullWidth: true
+    useEqualHeights: true
+    headerStyle: clean
+
+    target: _blank
+
+    quicklaunch:
+      searchDescriptions: true
+      hideInternetSearch: true
+      showSearchSuggestions: false
+      hideVisitURL: true
+      provider: google
+
+    hideVersion: true
+    disableUpdateCheck: true
+    disableIndexing: true
+  services.yaml: ""
+  widgets.yaml: ""
+  bookmarks.yaml: ""
+  custom.css: ""
+  custom.js: ""
+  docker.yaml: ""

@@ -1,0 +1,172 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-5.0.0/charts/library/common/values.schema.json
+global:
+  alwaysAppendIdentifierToResourceName: true
+
+defaultPodOptions:
+  automountServiceAccountToken: true
+
+controllers:
+  main:
+    annotations:
+      reloader.stakater.com/auto: "true"
+    serviceAccount:
+      identifier: homepage
+    containers:
+      homepage:
+        image:
+          repository: ghcr.io/gethomepage/homepage
+          pullPolicy: IfNotPresent
+          tag: v1.13.1
+
+        env:
+          - name: MY_POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+          - name: HOMEPAGE_ALLOWED_HOSTS
+            value: "$(MY_POD_IP):3000,landing.${LOCAL_INTERNAL_DOMAIN}"
+
+        resources:
+          requests:
+            cpu: 5m
+            memory: 128Mi
+          limits:
+            memory: 128Mi
+
+        probes:
+          liveness: &probe
+            enabled: true
+            custom: true
+            spec:
+              httpGet:
+                path: /api/healthcheck
+                port: 3000
+              initialDelaySeconds: 10
+              periodSeconds: 30
+              timeoutSeconds: 2
+              failureThreshold: 3
+          readiness: *probe
+
+service:
+  homepage:
+    controller: main
+    ipFamilyPolicy: PreferDualStack
+    ports:
+      http:
+        port: 3000
+
+serviceAccount:
+  homepage:
+    enabled: true
+rbac:
+  roles:
+    homepage:
+      enabled: true
+      type: ClusterRole
+      rules:
+        - apiGroups:
+            - ""
+          resources:
+            - namespaces
+            - pods
+            - nodes
+          verbs:
+            - get
+            - list
+        - apiGroups:
+            - gateway.networking.k8s.io
+          resources:
+            - httproutes
+            - gateways
+          verbs:
+            - get
+            - list
+        - apiGroups:
+            - metrics.k8s.io
+          resources:
+            - nodes
+            - pods
+          verbs:
+            - get
+            - list
+  bindings:
+    homepage:
+      enabled: true
+      type: ClusterRoleBinding
+      roleRef:
+        kind: ClusterRole
+        identifier: homepage
+      subjects:
+        - identifier: homepage
+
+route:
+  homepage:
+    enabled: true
+    kind: HTTPRoute
+    annotations:
+      external-dns.alpha.kubernetes.io/provider: private
+    parentRefs:
+      - group: gateway.networking.k8s.io
+        kind: ListenerSet
+        namespace: ${APPLICATION_NAMESPACE}
+        name: homepage-listeners
+    hostnames:
+      - &domain landing.${LOCAL_INTERNAL_DOMAIN}
+    rules:
+      - matches:
+          - path:
+              type: PathPrefix
+              value: /
+        backendRefs:
+          - identifier: homepage
+            port: 3000
+rawResources:
+  listeners:
+    manifest:
+      apiVersion: gateway.networking.k8s.io/v1
+      kind: ListenerSet
+      metadata:
+        annotations:
+          cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
+      spec:
+        parentRef:
+          name: kgateway-gateway
+          namespace: kgateway
+        listeners:
+          - name: https-homepage
+            protocol: HTTPS
+            port: 443
+            hostname: *domain
+            tls:
+              mode: Terminate
+              certificateRefs:
+                - name: homepage-tls-cert
+
+persistence:
+  logs:
+    enabled: true
+    type: emptyDir
+    globalMounts:
+      - path: /app/config/logs
+  config:
+    enabled: true
+    type: configMap
+    name: homepage-config
+    globalMounts:
+      - path: /app/config/custom.js
+        subPath: custom.js
+      - path: /app/config/custom.css
+        subPath: custom.css
+      - path: /app/config/docker.yaml
+        subPath: docker.yaml
+      - path: /app/config/kubernetes.yaml
+        subPath: kubernetes.yaml
+      - path: /app/config/bookmarks.yaml
+        subPath: bookmarks.yaml
+      - path: /app/config/services.yaml
+        subPath: services.yaml
+      - path: /app/config/settings.yaml
+        subPath: settings.yaml
+      - path: /app/config/widgets.yaml
+        subPath: widgets.yaml
