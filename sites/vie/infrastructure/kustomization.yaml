@@ -5,7 +5,7 @@ resources:
   - ./cilium/
   - ../../../common/infrastructure/kubelet-serving-cert-approver/
   - ../../../common/infrastructure/metrics-server/
-  # - ../../../common/infrastructure/nvidia-device-plugin/
+  - ../../../common/infrastructure/nvidia-gpu-operator/
   - ./external-secrets/
   - ../../../common/infrastructure/cert-manager/
   - ../../../common/infrastructure/external-dns/
