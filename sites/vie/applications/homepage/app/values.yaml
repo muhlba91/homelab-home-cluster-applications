@@ -77,6 +77,14 @@ rbac:
             - get
             - list
         - apiGroups:
+            - extensions
+            - networking.k8s.io
+          resources:
+            - ingresses
+          verbs:
+            - get
+            - list
+        - apiGroups:
             - gateway.networking.k8s.io
           resources:
             - httproutes
