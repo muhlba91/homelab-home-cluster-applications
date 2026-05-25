@@ -6,3 +6,5 @@ resources:
   - ./namespace.yaml
   - ./app/ks.yaml
   - ./extensions/ks.yaml
+  - ./configurations/ks.yaml
+  - ./compositions/ks.yaml

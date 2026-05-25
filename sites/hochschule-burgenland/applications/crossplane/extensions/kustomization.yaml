@@ -5,4 +5,4 @@ kind: Kustomization
 namespace: ${APPLICATION_NAMESPACE}
 resources:
   - ./providers/
-  - ./compositions/
+  - ./functions/
