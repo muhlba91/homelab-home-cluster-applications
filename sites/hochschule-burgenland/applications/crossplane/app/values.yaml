@@ -12,9 +12,9 @@ function:
 resourcesCrossplane:
   requests:
     cpu: 10m
-    memory: 386Mi
+    memory: 512Mi
   limits:
-    memory: 386Mi
+    memory: 512Mi
 
 resourcesRBACManager:
   requests:
