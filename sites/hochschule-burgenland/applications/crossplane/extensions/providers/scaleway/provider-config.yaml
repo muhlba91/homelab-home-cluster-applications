@@ -1,0 +1,12 @@
+---
+apiVersion: scaleway.m.upbound.io/v1beta1
+kind: ClusterProviderConfig
+metadata:
+  name: scaleway
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      name: scaleway-credentials
+      namespace: ${APPLICATION_NAMESPACE}
+      key: credentials
