@@ -82,4 +82,22 @@ preflight:
   enabled: false
 
 hubble:
-  enabled: false
+  enabled: true
+  relay:
+    enabled: true
+  ui:
+    enabled: true
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: cluster-issuer-muehlbachler-xyz
+        external-dns.alpha.kubernetes.io/provider: public
+        external-dns.alpha.kubernetes.io/target: 178.63.69.250,2a01:4f8:121:14e2:100:3:3:1
+        traefik.ingress.kubernetes.io/router.tls: "true"
+      className: traefik
+      hosts:
+        - hubble.hochschule-burgenland.muehlbachler.xyz
+      tls:
+        - secretName: hubble-ui-tls
+          hosts:
+            - hubble.hochschule-burgenland.muehlbachler.xyz
