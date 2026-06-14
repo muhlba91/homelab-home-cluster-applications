@@ -17,7 +17,7 @@ controllers:
         image:
           repository: ghcr.io/gethomepage/homepage
           pullPolicy: IfNotPresent
-          tag: v1.13.1
+          tag: v1.13.2
 
         env:
           - name: MY_POD_IP
