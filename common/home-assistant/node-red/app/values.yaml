@@ -62,7 +62,7 @@ controllers:
       init-chown-data:
         image:
           repository: alpine
-          tag: 3.23
+          tag: 3.24
           pullPolicy: IfNotPresent
         command:
           - chown
@@ -83,7 +83,7 @@ controllers:
       init-chown-node-modules:
         image:
           repository: alpine
-          tag: 3.23
+          tag: 3.24
           pullPolicy: IfNotPresent
         command:
           - chown
