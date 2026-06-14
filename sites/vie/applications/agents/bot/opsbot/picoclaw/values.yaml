@@ -38,7 +38,7 @@ controllers:
         image:
           repository: ghcr.io/sipeed/picoclaw
           pullPolicy: IfNotPresent
-          tag: v0.2.8
+          tag: v0.2.9
 
         env:
           - name: PICOCLAW_CONFIG
