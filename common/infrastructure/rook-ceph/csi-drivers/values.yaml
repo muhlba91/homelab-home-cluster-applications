@@ -107,6 +107,7 @@ drivers:
             memory: 100Mi
           limits:
             memory: 100Mi
+        omapGenerator: {}
         addons: {}
         liveness: {}
         logRotator: {}
