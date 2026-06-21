@@ -1,0 +1,124 @@
+---
+operatorConfig:
+  driverSpecDefaults:
+    nodePlugin:
+      priorityClassName: system-node-critical
+    controllerPlugin:
+      priorityClassName: system-cluster-critical
+      replicas: 1
+
+drivers:
+  rbd:
+    enabled: true
+    name: rook-ceph.rbd.csi.ceph.com
+    controllerPlugin:
+      priorityClassName: system-cluster-critical
+      resources:
+        attacher:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+          limits:
+            memory: 100Mi
+        omapGenerator:
+          requests:
+            cpu: 10m
+            memory: 128Mi
+          limits:
+            memory: 1Gi
+        plugin:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+          limits:
+            memory: 384Mi
+        provisioner:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+          limits:
+            memory: 100Mi
+        resizer:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+          limits:
+            memory: 100Mi
+        snapshotter:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+          limits:
+            memory: 100Mi
+    nodePlugin:
+      priorityClassName: system-cluster-critical
+      resources:
+        plugin:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+          limits:
+            memory: 384Mi
+        registrar:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+          limits:
+            memory: 100Mi
+
+  cephfs:
+    enabled: true
+    name: rook-ceph.cephfs.csi.ceph.com
+    controllerPlugin:
+      resources:
+        attacher:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+          limits:
+            memory: 100Mi
+        plugin:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+          limits:
+            memory: 384Mi
+        provisioner:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+          limits:
+            memory: 100Mi
+        resizer:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+          limits:
+            memory: 100Mi
+        snapshotter:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+          limits:
+            memory: 100Mi
+    nodePlugin:
+      resources:
+        plugin:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+          limits:
+            memory: 384Mi
+        registrar:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+          limits:
+            memory: 100Mi
+
+  nfs:
+    enabled: false
+    name: rook-ceph.nfs.csi.ceph.com
+  nvmeof:
+    enabled: false
+    name: rook-ceph.nvmeof.csi.ceph.com
