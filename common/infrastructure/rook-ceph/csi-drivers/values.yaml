@@ -50,6 +50,9 @@ drivers:
             memory: 100Mi
           limits:
             memory: 100Mi
+        addons: {}
+        liveness: {}
+        logRotator: {}
     nodePlugin:
       priorityClassName: system-cluster-critical
       resources:
@@ -65,6 +68,9 @@ drivers:
             memory: 100Mi
           limits:
             memory: 100Mi
+        addons: {}
+        liveness: {}
+        logRotator: {}
 
   cephfs:
     enabled: true
@@ -101,6 +107,9 @@ drivers:
             memory: 100Mi
           limits:
             memory: 100Mi
+        addons: {}
+        liveness: {}
+        logRotator: {}
     nodePlugin:
       resources:
         plugin:
@@ -115,6 +124,9 @@ drivers:
             memory: 100Mi
           limits:
             memory: 100Mi
+        addons: {}
+        liveness: {}
+        logRotator: {}
 
   nfs:
     enabled: false
