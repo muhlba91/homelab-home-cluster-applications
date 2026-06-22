@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: crossplane
-      version: 2.3.2
+      version: 2.3.3
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
