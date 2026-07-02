@@ -26,7 +26,7 @@ spec:
   chart:
     spec:
       chart: ceph-csi-drivers
-      version: 1.0.1
+      version: 1.0.3
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
