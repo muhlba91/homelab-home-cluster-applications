@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: victoria-metrics-operator
-      version: 0.66.2
+      version: 0.66.3
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
