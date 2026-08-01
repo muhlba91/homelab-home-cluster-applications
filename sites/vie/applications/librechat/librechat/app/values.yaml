@@ -96,7 +96,7 @@ controllers:
         image:
           repository: ghcr.io/danny-avila/librechat-rag-api-dev-lite
           pullPolicy: IfNotPresent
-          tag: v0.8.0
+          tag: v0.9.0
 
         envFrom:
           - configMapRef:
