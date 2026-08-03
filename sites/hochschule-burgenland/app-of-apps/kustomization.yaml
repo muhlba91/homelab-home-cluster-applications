@@ -6,5 +6,5 @@ resources:
   - cluster-configuration.yaml
   - repository.yaml
   - infrastructure.yaml
-  # - core.yaml
+  - core.yaml
   # - applications.yaml
