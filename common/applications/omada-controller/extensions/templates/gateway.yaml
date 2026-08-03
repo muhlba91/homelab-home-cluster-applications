@@ -26,7 +26,7 @@ spec:
     - name: https-omada-controller
       protocol: HTTPS
       port: 443
-      hostname: omada.network.${LOCAL_HOME_DOMAIN}
+      hostname: omada.network.${LOCAL_PUBLIC_DOMAIN}
       tls:
         mode: Terminate
         certificateRefs:
@@ -46,7 +46,7 @@ spec:
       kind: ListenerSet
       group: gateway.networking.k8s.io
   hostnames:
-    - omada.network.${LOCAL_HOME_DOMAIN}
+    - omada.network.${LOCAL_PUBLIC_DOMAIN}
   rules:
     - matches:
         - path:

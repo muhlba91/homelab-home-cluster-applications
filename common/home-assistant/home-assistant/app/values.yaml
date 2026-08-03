@@ -132,7 +132,7 @@ route:
         namespace: ${APPLICATION_NAMESPACE}
         name: home-assistant-home-assistant-external-listeners
     hostnames:
-      - &external_domain jarvis.${LOCAL_HOME_DOMAIN}
+      - &external_domain jarvis.${LOCAL_PUBLIC_DOMAIN}
     rules:
       - matches:
           - path:

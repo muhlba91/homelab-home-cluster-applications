@@ -7,25 +7,25 @@ metadata:
 data:
   # cluster configuration
   SITE: hochschule-burgenland
+  CILIUM_CLUSTER_ID: "1"
 
-  # cilium
-  K8S_SERVICE_PORT: "6443"
-  CILIUM_CGROUP_AUTO_MOUNT_ENABLED: "true"
-  CILIUM_CGROUP_HOST_ROOT: "/run/cilium/cgroupv2"
+  # network configuration
+  NODE_IP: "10.100.50.1"
+  ROUTER_IP: "10.100.0.1"
 
   # domain names
   PUBLIC_DOMAIN: hochschule-burgenland.muehlbachler.xyz
+  LOCAL_PUBLIC_DOMAIN: hochschule-burgenland.muehlbachler.xyz
   INTERNAL_DOMAIN: internal.muehlbachler.xyz
   LOCAL_INTERNAL_DOMAIN: hochschule-burgenland.internal.muehlbachler.xyz
-  LOCAL_HOME_DOMAIN: hochschule-burgenland.muehlbachler.xyz
 
   # cluster issuers
   PUBLIC_CLUSTER_ISSUER: cluster-issuer-muehlbachler-xyz
   INTERNAL_CLUSTER_ISSUER: cluster-issuer-muehlbachler-xyz
 
   # CIDRs
-  CILIUM_IPV4_POD_CIDR: "10.103.0.0/16"
-  CILIUM_IPV6_POD_CIDR: "fc00:db8:103::/112"
+  CILIUM_IPV4_POD_CIDR: "10.102.0.0/16"
+  CILIUM_IPV6_POD_CIDR: "fc00:db8:102::/112"
 
   # load balancer
   METALLB_LB_CLASS: "io.metallb/load-balancer"
@@ -34,13 +34,13 @@ data:
   CILIUM_L2_LB_CLASS: "io.cilium/l2-announcer"
   CILIUM_IP_ANNOTATION: "lbipam.cilium.io/ips"
   # kgateway specific load balancer
-  KGATEWAY_INTERNAL_LB_CLASS: "io.metallb/load-balancer"
-  KGATEWAY_INTERNAL_IP_ANNOTATION: "metallb.io/loadBalancerIPs"
-  KGATEWAY_EXTERNAL_LB_CLASS: "io.metallb/load-balancer"
-  KGATEWAY_EXTERNAL_IP_ANNOTATION: "metallb.io/loadBalancerIPs"
+  KGATEWAY_INTERNAL_LB_CLASS: "io.cilium/l2-announcer"
+  KGATEWAY_INTERNAL_IP_ANNOTATION: "lbipam.cilium.io/ips"
+  KGATEWAY_EXTERNAL_LB_CLASS: "io.cilium/l2-announcer"
+  KGATEWAY_EXTERNAL_IP_ANNOTATION: "lbipam.cilium.io/ips"
   # traefik specific load balancer
-  TRAEFIK_LB_CLASS: "io.metallb/load-balancer"
-  TRAEFIK_IP_ANNOTATION: "metallb.io/loadBalancerIPs"
+  TRAEFIK_LB_CLASS: "io.cilium/l2-announcer"
+  TRAEFIK_IP_ANNOTATION: "lbipam.cilium.io/ips"
   # ip addresses for services
   TRAEFIK_IP: "10.100.72.3"
   KGATEWAY_INTERNAL_IP: "10.100.72.1,2a01:4f8:121:14e2:100:3:3:1"
@@ -50,4 +50,4 @@ data:
   PUBLIC_IP: "178.63.69.250,2a01:4f8:121:14e2:100:3:3:2"
 
   # storage classes
-  DEFAULT_STORAGE_CLASS: "zfs"
+  DEFAULT_STORAGE_CLASS: "rook-ceph-block"

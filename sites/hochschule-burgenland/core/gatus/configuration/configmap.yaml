@@ -21,7 +21,7 @@ data:
         topic: $${NTFY_TOPIC}
         token: $${NTFY_TOKEN}
         priority: 2
-        click: https://status.${LOCAL_HOME_DOMAIN}
+        click: https://status.${LOCAL_PUBLIC_DOMAIN}
         default-alert:
           description: site ${SITE}
           send-on-resolved: true

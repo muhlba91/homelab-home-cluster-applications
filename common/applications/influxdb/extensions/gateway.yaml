@@ -13,7 +13,7 @@ spec:
     - name: https-influxdb
       protocol: HTTPS
       port: 443
-      hostname: influxdb.${LOCAL_HOME_DOMAIN}
+      hostname: influxdb.${LOCAL_PUBLIC_DOMAIN}
       tls:
         mode: Terminate
         certificateRefs:
@@ -32,7 +32,7 @@ spec:
       kind: ListenerSet
       group: gateway.networking.k8s.io
   hostnames:
-    - influxdb.${LOCAL_HOME_DOMAIN}
+    - influxdb.${LOCAL_PUBLIC_DOMAIN}
   rules:
     - matches:
         - path:

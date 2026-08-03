@@ -104,7 +104,7 @@ route:
         namespace: ${APPLICATION_NAMESPACE}
         name: gatus-listeners
     hostnames:
-      - &domain status.${LOCAL_HOME_DOMAIN}
+      - &domain status.${LOCAL_PUBLIC_DOMAIN}
     rules:
       - matches:
           - path:
