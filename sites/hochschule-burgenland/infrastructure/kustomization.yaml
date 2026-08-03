@@ -5,13 +5,10 @@ resources:
   - ./cilium/
   - ../../../common/infrastructure/kubelet-serving-cert-approver/
   - ../../../common/infrastructure/metrics-server/
-  # - ./metallb/
-  # - ./external-secrets/
+  - ./external-secrets/
   # - ../../../common/infrastructure/external-dns/
   # - ../../../common/infrastructure/cert-manager/
   # - ../../../common/infrastructure/reloader/
   # - ../../../common/infrastructure/reflector/
   # - ../../../common/infrastructure/gateway-api/
   # - ../../../common/infrastructure/kgateway/
-  # - ./traefik/
-  # - ./democratic-csi/

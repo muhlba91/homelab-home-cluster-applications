@@ -7,12 +7,12 @@ spec:
   provider:
     vault:
       server: https://vault.platform.muehlbachler.io:8200
-      path: kubernetes-public-services-cluster
+      path: kubernetes-hochschule-burgenland-cluster
       version: v2
       auth:
         appRole:
           path: approle
-          roleId: c01cd705-2c92-da95-0ff4-3f1a3e3d92d8
+          roleId: d38e1aa3-307e-9341-2bb2-c26f00213298
           secretRef:
             namespace: external-secrets
             name: *name
