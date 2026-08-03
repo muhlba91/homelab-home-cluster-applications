@@ -28,22 +28,44 @@ configs:
         if obj.status.health ~= nil then
           hs.status = obj.status.health.status
           if obj.status.health.message ~= nil then
-      hs.message = obj.status.health.message
+            hs.message = obj.status.health.message
           end
         end
       end
       return hs
-    resource.customizations: |
-      networking.k8s.io/Ingress:
-        health.lua: |
-          hs = {}
+    resource.customizations.health.networking.k8s.io_Ingress: |
+      hs = {}
+      if obj.status and obj.status.loadBalancer and obj.status.loadBalancer.ingress and #obj.status.loadBalancer.ingress > 0 then
+        hs.status = "Healthy"
+      else
+        hs.status = "Progressing"
+        hs.message = "no loadBalancer ingress assigned"
+      end
+      return hs
+    resource.customizations.health.gateway.networking.k8s.io_HTTPRoute: |
+      hs = {}
+      hs.status = "Progressing"
+      hs.message = "Waiting for Gateway to accept route"
+      if obj.status ~= nil and obj.status.parents ~= nil and #obj.status.parents > 0 then
+        local allAccepted = true
+        for i, parent in ipairs(obj.status.parents) do
+          local accepted = false
+          if parent.conditions ~= nil then
+            for j, condition in ipairs(parent.conditions) do
+              if condition.type == "Accepted" and condition.status == "True" then
+                accepted = true
+              end
+            end
+          end
+          if not accepted then
+            allAccepted = false
+          end
+        end
+        if allAccepted then
           hs.status = "Healthy"
-          return hs
-      gateway.networking.k8s.io/HTTPRoute:
-        health.lua: |
-          hs = {}
-          hs.status = "Healthy"
-          return hs
+        end
+      end
+      return hs
     resource.compareoptions: |
       # disables status field diffing in specified resource types
       ignoreAggregatedRoles: true
@@ -55,7 +77,7 @@ configs:
           config:
             issuer: https://auth.${PUBLIC_DOMAIN}/api/dex
             clientID: argo-cd
-            clientSecret: $argocd-oidc:clientSecret
+            clientSecret: $argocd-oidc:client_secret
             scopes:
               - openid
               - profile
@@ -97,23 +119,34 @@ notifications:
   cm:
     create: true
   notifiers:
-    service.github: |
-      appID: $argocd-github:appId
-      installationID: $argocd-github:installationId
-      privateKey: $argocd-github:privateKey
+    service.github.muhlba91: |
+      appID: $github-application:app_id
+      installationID: $github-application:muhlba91_installation_id
+      privateKey: $github-application:private_key
+    service.github.organization: |
+      appID: $github-application:app_id
+      installationID: $github-application:org_installation_id
+      privateKey: $github-application:private_key
   triggers:
     trigger.on-deployed: |
-      - description: Application is synced and healthy. Triggered once per commit.
+      - description: Application is synced and healthy.
+        oncePer: app.status.operationState.syncResult.revision
         send:
-        - app-deployed
+          - app-deployed
         when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'
+    trigger.on-deployment-failed: |
+      - description: Application sync or health failed.
+        oncePer: app.status.operationState.syncResult.revision
+        send:
+          - app-deployment-failed
+        when: app.status.operationState.phase in ['Error', 'Failed'] or app.status.health.status == 'Degraded'
   templates:
     template.app-deployed: |
       message: |
         Application {{.app.metadata.name}} is now running in a preview environment.
       github:
         repoURLPath: "{{ .app.spec.source.repoURL }}"
-        revisionPath: "{{ .app.metadata.annotations.revision }}"
+        revisionPath: "{{ coalesce .app.status.operationState.syncResult.revision .app.status.sync.revision }}"
         status:
           state: success
           label: "continuous-delivery/{{ .app.metadata.name }}"
@@ -124,3 +157,13 @@ notifications:
           environmentURL: "https://{{ .app.metadata.name }}.demo.${PUBLIC_DOMAIN}"
           logURL: "{{ .context.argocdUrl }}/applications/{{ .app.metadata.name }}?operation=true"
           requiredContexts: []
+    template.app-deployment-failed: |
+      message: |
+        Application {{.app.metadata.name}} failed to deploy.
+      github:
+        repoURLPath: "{{ .app.spec.source.repoURL }}"
+        revisionPath: "{{ coalesce .app.status.operationState.syncResult.revision .app.status.sync.revision }}"
+        status:
+          state: failure
+          label: "continuous-delivery/{{ .app.metadata.name }}"
+          targetURL: "{{ .context.argocdUrl }}/applications/{{ .app.metadata.name }}?operation=true"

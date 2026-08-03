@@ -5,10 +5,11 @@ kind: Kustomization
 namespace: ${APPLICATION_NAMESPACE}
 resources:
   - ./external-secret-argocd-oidc.yaml
-  - ./external-secret-argocd-github.yaml
+  - :/external-secret-github-application.yaml
+  - ./external-secret-github-muhlba91-application.yaml
+  - ./external-secret-github-organization-application.yaml
   - ./repository-apps.yaml
   - ./application-app-of-apps.yaml
   - ./gateway-server.yaml
   - ./gateway-applicationset.yaml
   # - ./external-secret-registry-credentials.yaml
-  # - ./external-secret-assignment-repository.yaml
