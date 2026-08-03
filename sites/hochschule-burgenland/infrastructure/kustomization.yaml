@@ -6,9 +6,10 @@ resources:
   - ../../../common/infrastructure/kubelet-serving-cert-approver/
   - ../../../common/infrastructure/metrics-server/
   - ./external-secrets/
-  # - ../../../common/infrastructure/external-dns/
-  # - ../../../common/infrastructure/cert-manager/
-  # - ../../../common/infrastructure/reloader/
-  # - ../../../common/infrastructure/reflector/
-  # - ../../../common/infrastructure/gateway-api/
-  # - ../../../common/infrastructure/kgateway/
+  - ../../../common/infrastructure/cert-manager/
+  - ../../../common/infrastructure/external-dns/
+  - ../../../common/infrastructure/reloader/
+  - ../../../common/infrastructure/reflector/
+  - ../../../common/infrastructure/gateway-api/
+  - ../../../common/infrastructure/kgateway/
+  # - ./rook-ceph/
