@@ -7,4 +7,4 @@ resources:
   - repository.yaml
   - infrastructure.yaml
   - core.yaml
-  # - applications.yaml
+  - applications.yaml
