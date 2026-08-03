@@ -1,0 +1,25 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumBGPPeerConfig
+metadata:
+  name: cilium-peer
+spec:
+  timers:
+    connectRetryTimeSeconds: 5
+    holdTimeSeconds: 180
+    keepAliveTimeSeconds: 60
+  gracefulRestart:
+    enabled: true
+    restartTimeSeconds: 15
+  ebgpMultihop: 10
+  families:
+    - afi: ipv4
+      safi: unicast
+      advertisements:
+        matchLabels:
+          advertise: "bgp"
+    - afi: ipv6
+      safi: unicast
+      advertisements:
+        matchLabels:
+          advertise: "bgp"

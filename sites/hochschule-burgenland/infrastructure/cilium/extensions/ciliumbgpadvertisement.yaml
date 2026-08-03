@@ -1,0 +1,31 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumBGPAdvertisement
+metadata:
+  name: bgp-advertisements
+  labels:
+    advertise: bgp
+spec:
+  advertisements:
+    - advertisementType: "PodCIDR"
+    - advertisementType: "Service"
+      service:
+        aggregationLengthIPv4: 16
+        aggregationLengthIPv6: 112
+        addresses:
+          - ClusterIP
+      selector: &allServices # select all services
+        matchExpressions:
+          - key: somekey
+            operator: NotIn
+            values: ['never-used-value']
+    - advertisementType: "Service"
+      service:
+        addresses:
+          - ExternalIP
+      selector: *allServices
+    - advertisementType: "Service"
+      service:
+        addresses:
+          - LoadBalancerIP
+      selector: *allServices

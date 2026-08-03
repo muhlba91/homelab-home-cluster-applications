@@ -5,6 +5,6 @@ namespace: flux-system
 resources:
   - cluster-configuration.yaml
   - repository.yaml
-  # - infrastructure.yaml
+  - infrastructure.yaml
   # - core.yaml
   # - applications.yaml
