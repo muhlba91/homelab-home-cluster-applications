@@ -12,4 +12,4 @@ resources:
   - ../../../common/infrastructure/reflector/
   - ../../../common/infrastructure/gateway-api/
   - ../../../common/infrastructure/kgateway/
-  # - ./rook-ceph/
+  - ./rook-ceph/
