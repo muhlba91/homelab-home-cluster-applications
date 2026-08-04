@@ -5,6 +5,6 @@ kind: Kustomization
 namespace: ${APPLICATION_NAMESPACE}
 resources:
   - ./external-secret-admin-password.yaml
-  - ./external-secret-google-credentials.yaml
+  - ./external-secret-scaleway-credentials.yaml
   - ./external-secret-harbor-secrets.yaml
   - ./gateway.yaml

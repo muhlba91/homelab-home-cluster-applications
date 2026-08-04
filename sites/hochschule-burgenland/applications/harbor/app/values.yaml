@@ -12,7 +12,7 @@ persistence:
   persistentVolumeClaim:
     registry:
       storageClass: ${DEFAULT_STORAGE_CLASS}
-      size: 25Gi
+      size: 10Gi
     jobservice:
       jobLog:
         storageClass: ${DEFAULT_STORAGE_CLASS}
@@ -25,13 +25,15 @@ persistence:
       size: 5Gi
     trivy:
       storageClass: ${DEFAULT_STORAGE_CLASS}
-      size: 25Gi
-
-imageChartStorage:
-  type: gcs
-  gcs:
-    bucket: harbor-a24964b0-32e7-4792-8dc4-5c0b27237405
-    existingSecret: google-credentials
+      size: 10Gi
+  imageChartStorage:
+    type: s3
+    s3:
+      region: fr-par
+      regionendpoint: https://s3.fr-par.scw.cloud
+      rootdirectory: /harbor
+      bucket: scaleway-bucket-home-cluster-hochschule-burgenland-reg-ca4535c # TODO: this bucket must be changed
+      existingSecret: scaleway-credentials
 
 existingSecretAdminPassword: admin-password
 
@@ -42,6 +44,8 @@ metrics:
 cache:
   enabled: true
   expireHours: 24
+
+existingSecretSecretKey: harbor-secrets
 
 core:
   existingSecret: harbor-secrets
@@ -54,7 +58,7 @@ registry:
   existingSecret: harbor-secrets
   credentials:
     username: harbor_registry_user
-    htpasswdString: "harbor_registry_user:$2y$10$lxiEev2WBEL3zcCzplq3lOLVr2.KETk22F8L74GtKgR5NEAU5.K9."
+    htpasswdString: "harbor_registry_user:$2y$10$6d9gCdug96wcS4mDeJLlR.XaEcHC2X7XpHBRFhyBhxd7noMbgDVRy"
 
 trivy:
   severity: "LOW,MEDIUM,HIGH,CRITICAL"
