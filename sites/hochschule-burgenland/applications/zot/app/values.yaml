@@ -3,6 +3,7 @@ fullnameOverride: zot
 
 deploymentAnnotations:
   reloader.stakater.com/auto: "true"
+replicaCount: 1
 
 mountConfig: false # zot-config
 mountSecret: false # zot-secret
