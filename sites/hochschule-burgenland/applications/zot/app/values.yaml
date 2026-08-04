@@ -49,7 +49,10 @@ service:
   annotations:
     gatus.home-operations.com/enabled: "true"
 
-persistence: false
+persistence: true
+pvc:
+  storage: 8Gi
+  storageClassName: ${DEFAULT_STORAGE_CLASS}
 
 httproute:
   enabled: true
