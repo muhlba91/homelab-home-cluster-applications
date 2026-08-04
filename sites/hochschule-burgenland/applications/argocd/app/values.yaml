@@ -171,7 +171,7 @@ notifications:
       privateKey: $github-application:private_key
     service.github.organization: |
       appID: $github-application:app_id
-      installationID: $github-application:org_installation_id
+      installationID: $github-application:organization_installation_id
       privateKey: $github-application:private_key
   triggers:
     trigger.on-deploying: |
