@@ -116,10 +116,6 @@ server:
     annotations:
       external-dns.alpha.kubernetes.io/provider: public
       external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
-    parentRefs:
-      - name: argocd-listeners
-        kind: ListenerSet
-        group: gateway.networking.k8s.io
     hostnames:
       - argocd.${PUBLIC_DOMAIN}
   listenerset:
@@ -140,10 +136,6 @@ applicationSet:
     annotations:
       external-dns.alpha.kubernetes.io/provider: public
       external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
-    parentRefs:
-      - name: argocd-listeners
-        kind: ListenerSet
-        group: gateway.networking.k8s.io
     hostnames:
       - webhook.argocd.${PUBLIC_DOMAIN}
   listenerset:
