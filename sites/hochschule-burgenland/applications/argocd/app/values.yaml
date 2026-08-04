@@ -111,6 +111,52 @@ server:
   service:
     annotations:
       gatus.home-operations.com/enabled: "true"
+  httproute:
+    enabled: true
+    annotations:
+      external-dns.alpha.kubernetes.io/provider: public
+      external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
+    parentRefs:
+      - name: argocd-listeners
+        kind: ListenerSet
+        group: gateway.networking.k8s.io
+    hostnames:
+      - argocd.${PUBLIC_DOMAIN}
+  listenerset:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
+    parentRef:
+      name: kgateway-gateway
+      namespace: kgateway
+    hostname: argocd.${PUBLIC_DOMAIN}
+    listenerName: https-argocd
+    tls:
+      secretName: hochschule-burgenland-argocd-tls
+
+applicationSet:
+  httproute:
+    enabled: true
+    annotations:
+      external-dns.alpha.kubernetes.io/provider: public
+      external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
+    parentRefs:
+      - name: argocd-listeners
+        kind: ListenerSet
+        group: gateway.networking.k8s.io
+    hostnames:
+      - webhook.argocd.${PUBLIC_DOMAIN}
+  listenerset:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
+    parentRef:
+      name: kgateway-gateway
+      namespace: kgateway
+    hostname: webhook.argocd.${PUBLIC_DOMAIN}
+    listenerName: https-argocd-applicationset
+    tls:
+      secretName: hochschule-burgenland-argocd-applicationset-tls
 
 notifications:
   argocdUrl: https://argocd.${PUBLIC_DOMAIN}
@@ -128,20 +174,56 @@ notifications:
       installationID: $github-application:org_installation_id
       privateKey: $github-application:private_key
   triggers:
+    trigger.on-deploying: |
+      - description: Application sync started.
+        oncePer: app.status.operationState.syncResult.revision ?? app.status.sync.revision
+        send:
+          - app-deploying
+        when: app.status.operationState.phase in ['Running']
     trigger.on-deployed: |
+      - description: Preview app is synced and healthy.
+        oncePer: app.status.operationState.syncResult.revision
+        send:
+          - app-deployed-preview
+        when: >-
+          (app.metadata.labels['preview-environment'] ?? '') == 'true' and
+          app.status.operationState.phase in ['Succeeded'] and
+          app.status.health.status == 'Healthy'
       - description: Application is synced and healthy.
         oncePer: app.status.operationState.syncResult.revision
         send:
           - app-deployed
-        when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'
+        when: >-
+          (app.metadata.labels['preview-environment'] ?? '') != 'true' and
+          app.status.operationState.phase in ['Succeeded'] and
+          app.status.health.status == 'Healthy'
     trigger.on-deployment-failed: |
       - description: Application sync or health failed.
-        oncePer: app.status.operationState.syncResult.revision
+        oncePer: app.status.operationState.syncResult.revision ?? app.status.sync.revision
         send:
           - app-deployment-failed
-        when: app.status.operationState.phase in ['Error', 'Failed'] or app.status.health.status == 'Degraded'
+        when: >-
+          app.status.operationState.phase in ['Error', 'Failed']
+    trigger.on-health-degraded: |
+      - description: Application became degraded after a successful sync. Triggered once per commit.
+        oncePer: app.status.operationState.syncResult.revision ?? app.status.sync.revision
+        send:
+          - app-health-degraded
+        when: >-
+          app.status.operationState.phase in ['Succeeded'] and
+          app.status.health.status == 'Degraded'
   templates:
-    template.app-deployed: |
+    template.app-deploying: |
+      message: |
+        Application {{.app.metadata.name}} is deploying.
+      github:
+        repoURLPath: "{{ .app.spec.source.repoURL }}"
+        revisionPath: "{{ coalesce .app.status.operationState.syncResult.revision .app.status.sync.revision }}"
+        status:
+          state: pending
+          label: "continuous-delivery/{{ .app.metadata.name }}"
+          targetURL: "{{ .context.argocdUrl }}/applications/{{ .app.metadata.name }}?operation=true"
+    template.app-deployed-preview: |
       message: |
         Application {{.app.metadata.name}} is now running in a preview environment.
       github:
@@ -157,9 +239,29 @@ notifications:
           environmentURL: "https://{{ .app.metadata.name }}.demo.${PUBLIC_DOMAIN}"
           logURL: "{{ .context.argocdUrl }}/applications/{{ .app.metadata.name }}?operation=true"
           requiredContexts: []
+    template.app-deployed: |
+      message: |
+        Application {{.app.metadata.name}} has been deployed successfully.
+      github:
+        repoURLPath: "{{ .app.spec.source.repoURL }}"
+        revisionPath: "{{ coalesce .app.status.operationState.syncResult.revision .app.status.sync.revision }}"
+        status:
+          state: success
+          label: "continuous-delivery/{{ .app.metadata.name }}"
+          targetURL: "{{ .context.argocdUrl }}/applications/{{ .app.metadata.name }}?operation=true"
     template.app-deployment-failed: |
       message: |
         Application {{.app.metadata.name}} failed to deploy.
+      github:
+        repoURLPath: "{{ .app.spec.source.repoURL }}"
+        revisionPath: "{{ coalesce .app.status.operationState.syncResult.revision .app.status.sync.revision }}"
+        status:
+          state: failure
+          label: "continuous-delivery/{{ .app.metadata.name }}"
+          targetURL: "{{ .context.argocdUrl }}/applications/{{ .app.metadata.name }}?operation=true"
+    template.app-health-degraded: |
+      message: |
+        Application {{.app.metadata.name}} synced but is now degraded.
       github:
         repoURLPath: "{{ .app.spec.source.repoURL }}"
         revisionPath: "{{ coalesce .app.status.operationState.syncResult.revision .app.status.sync.revision }}"

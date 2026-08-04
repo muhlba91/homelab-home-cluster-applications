@@ -10,6 +10,4 @@ resources:
   - ./external-secret-github-organization-application.yaml
   - ./repository-apps.yaml
   - ./application-app-of-apps.yaml
-  - ./gateway-server.yaml
-  - ./gateway-applicationset.yaml
   # - ./external-secret-registry-credentials.yaml
