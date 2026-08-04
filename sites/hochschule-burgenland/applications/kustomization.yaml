@@ -4,5 +4,6 @@ kind: Kustomization
 resources:
   - ./dex/
   - ./argocd/
+  - ./zot/
   # - ./harbor/
   # - ./crossplane/

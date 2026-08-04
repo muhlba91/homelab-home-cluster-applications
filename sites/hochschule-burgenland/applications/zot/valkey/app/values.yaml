@@ -1,0 +1,42 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-5.0.0/charts/library/common/values.schema.json
+global:
+  alwaysAppendIdentifierToResourceName: true
+
+controllers:
+  main:
+    containers:
+      valkey:
+        image:
+          repository: valkey/valkey
+          pullPolicy: IfNotPresent
+          tag: 9.1.1-alpine
+
+        resources:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+          limits:
+            memory: 100Mi
+
+        probes:
+          liveness: &server_probes
+            enabled: true
+            custom: true
+            spec:
+              tcpSocket:
+                port: 6379
+              periodSeconds: 30
+              timeoutSeconds: 1
+              failureThreshold: 5
+          readiness: *server_probes
+          startup:
+            enabled: false
+
+service:
+  valkey:
+    controller: main
+    ipFamilyPolicy: PreferDualStack
+    ports:
+      valkey:
+        port: 6379

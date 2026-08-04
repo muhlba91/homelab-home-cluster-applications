@@ -1,0 +1,84 @@
+---
+fullnameOverride: zot
+
+deploymentAnnotations:
+  reloader.stakater.com/auto: "true"
+
+mountConfig: false # zot-config
+mountSecret: false # zot-secret
+
+extraArgs:
+  - serve
+  - /etc/zot/config.yaml
+
+env:
+  - name: AWS_ACCESS_KEY_ID
+    valueFrom:
+      secretKeyRef:
+        name: scaleway-credentials
+        key: access-key
+  - name: AWS_SECRET_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        name: scaleway-credentials
+        key: secret-key
+
+extraVolumes:
+  - name: zot-config
+    secret:
+      secretName: zot-config
+  - name: dex-config
+    secret:
+      secretName: dex-config
+extraVolumeMounts:
+  - name: zot-config
+    mountPath: /etc/zot/config.yaml
+    subPath: config.yaml
+  - name: dex-config
+    mountPath: /etc/zot/dex-credentials.json
+    subPath: credentials.json
+
+initContainers: []
+# - name: init-config
+#   image: busybox
+#   command: ["sh", "-c", "echo initializing"]
+
+service:
+  type: ClusterIP
+  annotations:
+    gatus.home-operations.com/enabled: "true"
+
+persistence: false
+
+httproute:
+  enabled: true
+  annotations:
+    external-dns.alpha.kubernetes.io/provider: public
+    external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: ListenerSet
+      name: zot
+  hostnames:
+    - registry.${PUBLIC_DOMAIN}
+listenerset:
+  enabled: true
+  annotations:
+    cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
+  parentRef:
+    name: kgateway-gateway
+    namespace: kgateway
+  listeners:
+    - name: https-zot
+      port: 443
+      protocol: HTTPS
+      hostname: registry.${PUBLIC_DOMAIN}
+      tls:
+        certificateRefs:
+          - group: ""
+            kind: Secret
+            name: zot-tls-cert
+        mode: Terminate
+      allowedRoutes:
+        namespaces:
+          from: Same
