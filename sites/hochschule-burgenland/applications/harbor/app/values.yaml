@@ -39,6 +39,7 @@ persistence:
 
 existingSecretAdminPassword: admin-password
 
+# logLevel: warning
 logLevel: debug
 metrics:
   enabled: true
@@ -60,7 +61,7 @@ registry:
   existingSecret: harbor-secrets
   credentials:
     username: harbor_registry_user
-    htpasswdString: "harbor_registry_user:$2y$10$ZFJ.a8gO7U.ypeWHT/HJnugnrSAOlzMP5Kc0e.nKBAtYkZGjsWKR."
+    htpasswdString: "harbor_registry_user:$2y$05$.NWQboc2TmXxVvqH0Cv0R.VrWXVBEUpGUmzj8Jhm9Ph78YeOl/L56"
 
 trivy:
   severity: "LOW,MEDIUM,HIGH,CRITICAL"
