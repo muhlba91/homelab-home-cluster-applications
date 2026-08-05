@@ -41,4 +41,4 @@ spec:
             value: /
       backendRefs:
         - name: harbor
-          port: 80
+          port: 443
