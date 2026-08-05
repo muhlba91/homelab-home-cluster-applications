@@ -65,16 +65,6 @@ registry:
 trivy:
   severity: "LOW,MEDIUM,HIGH,CRITICAL"
 
-# OIDC manual configuration
-# endpoint: https://auth.${PUBLIC_DOMAIN}/api/dex
-# clientID: registry
-# clientSecret: check vault
-# groupClaimName: groups
-# adminGroupName: fhburgenland-bswe:dmuehlbachler
-# scopes: openid,profile,email,groups,offline_access
-# automatic onboarding: true
-# usernameClaim: preferred_username
-
 # system settings manual configuration
 # projectCreationRestriction: admin-only
 # robotTokenExpiration: 365d
