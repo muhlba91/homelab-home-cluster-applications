@@ -39,8 +39,7 @@ persistence:
 
 existingSecretAdminPassword: admin-password
 
-# logLevel: warning
-logLevel: debug
+logLevel: warning
 metrics:
   enabled: true
 
@@ -68,7 +67,6 @@ trivy:
 
 # system settings manual configuration
 # projectCreationRestriction: admin-only
-# robotTokenExpiration: 365d
 
 # cleanup manual configuration
 # garbage collection:
