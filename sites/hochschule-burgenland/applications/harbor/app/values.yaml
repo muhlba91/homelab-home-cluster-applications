@@ -4,6 +4,9 @@ updateStrategy:
 
 expose:
   type: clusterIP
+  tls:
+    auto:
+      commonName: registry.${PUBLIC_DOMAIN}
 
 externalURL: https://registry.${PUBLIC_DOMAIN}
 
