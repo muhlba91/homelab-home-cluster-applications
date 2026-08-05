@@ -39,7 +39,7 @@ persistence:
 
 existingSecretAdminPassword: admin-password
 
-logLevel: warning
+logLevel: debug
 metrics:
   enabled: true
 
