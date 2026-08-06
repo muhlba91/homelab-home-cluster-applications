@@ -3,6 +3,18 @@ grafana:
   enabled: true
 
 admissionController:
+  rbac: &extraRbacResources
+    clusterRole:
+      extraResources:
+        - apiGroups:
+            - gateway.networking.k8s.io
+          resources:
+            - httproutes
+            - listenersets
+          verbs:
+            - get
+            - list
+            - watch
   container:
     resources:
       requests:
@@ -12,6 +24,7 @@ admissionController:
         memory: 128Mi
 
 backgroundController:
+  rbac: *extraRbacResources
   resources:
     requests:
       cpu: 10m
@@ -20,6 +33,7 @@ backgroundController:
       memory: 384Mi
 
 cleanupController:
+  rbac: *extraRbacResources
   resources:
     requests:
       cpu: 10m
@@ -28,6 +42,7 @@ cleanupController:
       memory: 100Mi
 
 reportsController:
+  rbac: *extraRbacResources
   resources:
     requests:
       cpu: 10m
