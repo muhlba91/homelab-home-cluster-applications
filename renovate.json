@@ -33,7 +33,7 @@
     ],
     "packageRules": [
         {
-            "description": "traefik early access",
+            "description": "kyverno rc",
             "matchManagers": [
                 "flux"
             ],
@@ -41,38 +41,9 @@
                 "helm"
             ],
             "matchPackageNames": [
-                "traefik"
+                "kyverno"
             ],
-            "ignoreUnstable": false,
-            "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<prerelease>ea\\.\\d+)$"
-        },
-        {
-            "description": "kgateway beta",
-            "matchManagers": [
-                "flux"
-            ],
-            "matchDatasources": [
-                "helm"
-            ],
-            "matchPackageNames": [
-                "kgateway"
-            ],
-            "ignoreUnstable": false,
-            "versioning": "semver"
-        },
-        {
-            "description": "kgateway-crds beta",
-            "matchManagers": [
-                "flux"
-            ],
-            "matchDatasources": [
-                "helm"
-            ],
-            "matchPackageNames": [
-                "kgateway-crds"
-            ],
-            "ignoreUnstable": false,
-            "versioning": "semver"
+            "ignoreUnstable": false
         }
     ]
 }
