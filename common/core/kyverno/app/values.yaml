@@ -7,17 +7,17 @@ admissionController:
     resources:
       requests:
         cpu: 10m
-        memory: 106Mi
+        memory: 128Mi
       limits:
-        memory: 106Mi
+        memory: 128Mi
 
 backgroundController:
   resources:
     requests:
       cpu: 10m
-      memory: 146Mi
+      memory: 192Mi
     limits:
-      memory: 146Mi
+      memory: 192Mi
 
 cleanupController:
   resources:
