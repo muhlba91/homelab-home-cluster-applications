@@ -28,6 +28,7 @@ ports:
     expose:
       default: true
   web:
+    exposedPort: 8000
     http:
       redirections:
         entryPoint:
@@ -43,6 +44,7 @@ ports:
           - 10.0.0.0/8
         insecure: true
   websecure:
+    exposedPort: 8443
     http:
       forwardedHeaders:
         trustedIPs:
