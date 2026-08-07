@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: reloader
-      version: 2.2.14
+      version: 2.2.15
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
