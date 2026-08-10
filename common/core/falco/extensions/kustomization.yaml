@@ -8,4 +8,4 @@ resources:
   - ./components/
   - ./configs/
   - ./rules/
-  # - falco.yaml
+  - falco.yaml
