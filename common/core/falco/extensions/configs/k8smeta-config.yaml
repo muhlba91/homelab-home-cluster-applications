@@ -6,7 +6,6 @@ metadata:
   namespace: falco
 spec:
   config:
-    load_plugins: [container, k8smeta]
     plugins:
       - name: k8smeta
         library_path: k8smeta.so
