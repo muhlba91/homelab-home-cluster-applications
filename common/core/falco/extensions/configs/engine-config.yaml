@@ -6,6 +6,7 @@ metadata:
 spec:
   config:
     engine:
+      kind: modern_ebpf
       modern_ebpf:
         buf_size_preset: 4
         cpus_for_each_buffer: 2
