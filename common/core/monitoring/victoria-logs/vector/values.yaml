@@ -66,7 +66,21 @@ customConfig:
         if err == null && is_object(parsed) {
           . = merge(., object!(parsed))
         }
-        .log = .msg || .log || .message
+        if exists(.rule) && exists(.priority) {
+          .stream = "falco"
+          priority_map = {
+            "emergency": "crit", "alert": "crit", "critical": "crit",
+            "error": "error",
+            "warning": "warn",
+            "notice": "info", "informational": "info",
+            "debug": "debug"
+          }
+          .level = get(priority_map, [downcase(string!(.priority))]) ?? "info"
+          .log = .output || .message
+        } else {
+          .log = .msg || .log || .message
+          .level = .level || "info"
+        }
         .service = .kubernetes.pod_labels."app.kubernetes.io/name" ||
                   .kubernetes.pod_labels."app.kubernetes.io/instance" ||
                   .kubernetes.pod_labels.app ||
@@ -74,7 +88,6 @@ customConfig:
                   "unknown-service"
         .pod = .kubernetes.pod_name || "unknown-pod"
         .namespace = .kubernetes.pod_namespace
-        .level = .level || "info"
         del(.message)
         del(.kubernetes.pod_annotations)
     mikrotik_parser:
@@ -160,7 +173,7 @@ customConfig:
       request:
         headers:
           VL-Time-Field: timestamp,_time
-          VL-Stream-Fields: stream,host,service,level,namespace,pod
+          VL-Stream-Fields: stream,host,service,level,namespace,pod,priority
           VL-Msg-Field: log,message,msg,_msg
           VL-Level-Field: level,severity
           AccountID: "0"

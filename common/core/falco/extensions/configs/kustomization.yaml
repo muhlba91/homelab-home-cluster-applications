@@ -6,5 +6,5 @@ namespace: ${APPLICATION_NAMESPACE}
 resources:
   - ./engine-config.yaml
   - ./output-format.yaml
-  - ./sidekick-output.yaml
+  # - ./sidekick-output.yaml
   - ./k8smeta-config.yaml
