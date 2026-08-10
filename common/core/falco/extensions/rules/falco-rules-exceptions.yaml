@@ -1,0 +1,17 @@
+---
+apiVersion: artifact.falcosecurity.dev/v1alpha1
+kind: Rulesfile
+metadata:
+  name: falco-rules-exceptions
+  namespace: falco
+spec:
+  inlineRules:
+    - rule: Drop and execute new binary in container
+      exceptions:
+        - name: cilium_cni_binary_install
+          fields: [proc.name, proc.exepath]
+          comps: [=, =]
+          values:
+            - [cilium-cni, /opt/cni/bin/cilium-cni]
+      append: true
+  priority: 51

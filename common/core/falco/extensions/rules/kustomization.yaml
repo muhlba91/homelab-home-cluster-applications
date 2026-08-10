@@ -5,3 +5,4 @@ kind: Kustomization
 namespace: ${APPLICATION_NAMESPACE}
 resources:
   - ./falco-rules.yaml
+  - ./falco-rules-exceptions.yaml
