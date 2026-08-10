@@ -13,7 +13,7 @@ spec:
         - name: falcosidekick
           resources:
             requests:
-              cpu: 5m
-              memory: 32Mi
+              cpu: 3m
+              memory: 24Mi
             limits:
               memory: 64Mi

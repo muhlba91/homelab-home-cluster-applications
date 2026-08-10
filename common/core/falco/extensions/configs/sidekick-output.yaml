@@ -1,0 +1,12 @@
+---
+apiVersion: artifact.falcosecurity.dev/v1alpha1
+kind: Config
+metadata:
+  name: sidekick-output
+  namespace: falco
+spec:
+  config:
+    http_output:
+      enabled: true
+      url: http://sidekick:2801
+  priority: 60
