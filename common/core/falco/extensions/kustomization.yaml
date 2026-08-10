@@ -5,7 +5,7 @@ kind: Kustomization
 namespace: ${APPLICATION_NAMESPACE}
 resources:
   - ./plugins/
-  # - ./components/
+  - ./components/
   # - ./rules/
   # - ./configs/
   # - falco.yaml
