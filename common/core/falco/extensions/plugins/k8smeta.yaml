@@ -1,0 +1,12 @@
+---
+apiVersion: artifact.falcosecurity.dev/v1alpha1
+kind: Plugin
+metadata:
+  name: k8smeta
+spec:
+  ociArtifact:
+    image:
+      repository: falcosecurity/plugins/plugin/k8smeta
+      tag: latest
+    registry:
+      name: ghcr.io

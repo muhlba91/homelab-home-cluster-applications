@@ -1,0 +1,17 @@
+---
+apiVersion: artifact.falcosecurity.dev/v1alpha1
+kind: Config
+metadata:
+  name: engine-config
+spec:
+  config:
+    engine:
+      modern_ebpf:
+        buf_size_preset: 4
+        cpus_for_each_buffer: 2
+        drop_failed_exit: false
+    output_timeout: 2000
+    buffered_outputs: false
+    outputs_queue:
+      capacity: 0
+  priority: 50

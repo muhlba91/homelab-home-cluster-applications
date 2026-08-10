@@ -1,0 +1,19 @@
+---
+apiVersion: instance.falcosecurity.dev/v1alpha1
+kind: Component
+metadata:
+  name: metacollector
+spec:
+  component:
+    type: metacollector
+  replicas: 1
+  podTemplateSpec:
+    spec:
+      containers:
+        - name: metacollector
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              memory: 128Mi
