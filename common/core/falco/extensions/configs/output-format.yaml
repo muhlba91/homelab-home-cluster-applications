@@ -1,0 +1,12 @@
+---
+apiVersion: artifact.falcosecurity.dev/v1alpha1
+kind: Config
+metadata:
+  name: output-format
+  namespace: falco
+spec:
+  config:
+    json_output: true
+    json_include_output_property: true
+    json_include_tags_property: true
+  priority: 50

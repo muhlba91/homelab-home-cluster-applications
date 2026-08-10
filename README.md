@@ -50,21 +50,19 @@ The [common](common/) directory contains applications and templates that can be 
 
 The following applications are defined in [`common/infrastructure/`](common/infrastructure/).
 
+- [x] [Cert Manager](https://cert-manager.io) - Certificate management using ACME Let's Encrypt.
 - [x] [Cilium](https://cilium.io) - Provides the cluster CNI and load balancing.
+- [x] [External DNS](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Google Cloud DNS domains for publicly reachable services.
 - [x] [External Secrets Operator](http://external-secrets.io) - Synchronizes secrets from external stores to Kubernetes `Secret` objects.
+- [x] [Gateway API](https://gateway-api.sigs.k8s.io) - Exposes Kubernetes `Gateway API` resources to the "outside world".
 - [x] [Generic Device Plugin](https://github.com/squat/generic-device-plugin) - Makes custom hardware devices accessible in the cluster.
+- [x] [kgateway](https://kgateway.dev) - Exposes Kubernetes `Gateway API` resources to the "outside world".
 - [x] [Kubelet Serving Cert Approver](https://github.com/alex1989hu/kubelet-serving-cert-approver) - Enables automatic certificate approval by the kubelet.
-- [x] [MetalLB](https://metallb.universe.tf) - Provides a Kubernetes network load balancer to expose Kubernetes `Service`s.
-  - deprecated in favor of Cilium load balancer
 - [x] [Metrics Server](https://github.com/kubernetes-sigs/metrics-server) - Collects container resource metrics.
 - [x] [NVIDIA Device Plugin](https://github.com/NVIDIA/k8s-device-plugin) - Makes the NVIDIA GPU accessible in the cluster.
 - [x] [Reflector](https://github.com/reflector/reflector) - Watches Kubernetes resources and reflects changes to another namespace.
 - [x] [Reloader](https://github.com/stakater/Reloader) - Automatically reloads Kubernetes resources when secrets or configmaps change.
 - [x] [Rook Ceph](https://rook.io) - Manages persistent storage in the cluster.
-- [x] [Cert Manager](https://cert-manager.io) - Certificate management using ACME Let's Encrypt.
-- [x] [External DNS](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Google Cloud DNS domains for publicly reachable services.
-- [x] [Gateway API](https://gateway-api.sigs.k8s.io) - Exposes Kubernetes `Gateway API` resources to the "outside world".
-- [x] [kgateway](https://kgateway.dev) - Exposes Kubernetes `Gateway API` resources to the "outside world".
 
 ### Core Applications
 
@@ -72,6 +70,7 @@ The following applications are defined in [`common/core/`](common/core/).
 
 - [x] [Adguard External DNS](common/core/adguard-external-dns/) - Adguard DNS integration for External DNS.
 - [x] [CloudNativePG](https://cloudnative-pg.io/documentation/current/) - PostgreSQL database operator.
+- [x] [Falco](https://falco.org) - Runtime security monitoring for Kubernetes.
 - [x] [Gatus](https://gatus.io) - Service status page.
 - [x] [Kyverno](https://kyverno.io) - Policy engine designed for Kubernetes.
 - [x] Monitoring
@@ -87,7 +86,6 @@ The following applications are defined in [`common/core/`](common/core/).
 The following applications are defined in [`common/applications/`](common/applications/).
 
 - [x] [InfluxDB](https://www.influxdata.com) - InfluxDB time-series database.
-- [x] [Ollama](https://ollama.com) - Ollama local LLM model runner.
 - [x] [Omada Controller](https://www.tp-link.com/us/business-networking/omada-sdn-controller/) - TP-Link Omada Controller.
 
 #### Home Assistant
@@ -120,13 +118,13 @@ The following applications are defined in [`sites/vie/infrastructure/`](sites/vi
 - [x] Metrics Server
 - [x] NVIDIA Device Plugin
 - [x] External Secrets
-- [x] Rook Ceph
-- [x] gateway-api
-- [x] kgateway
 - [x] Cert Manager
 - [x] External DNS
-- [x] [Flux Extensions](sites/vie/infrastructure/flux-extensions/) - Provides GitHub alerts and external secrets for Flux.
 - [x] Reloader
+- [x] gateway-api
+- [x] kgateway
+- [x] Rook Ceph
+- [x] [Flux Extensions](sites/vie/infrastructure/flux-extensions/) - Provides GitHub alerts and external secrets for Flux.
 
 #### Core Applications (VIE)
 
@@ -145,8 +143,10 @@ The following applications are defined in [`sites/vie/applications/`](sites/vie/
 
 - [x] Omada Controller
 - [x] InfluxDB
-- [x] Ollama
 - [x] External Services
+- [x] [Homepage](https://gethomepage.dev) - Modern, fully customizable application dashboard.
+- [x] [LiteLLM](https://github.com/BerriAI/litellm) - Proxy Server to call 100+ LLM APIs using OpenAI format.
+- [x] Ollama
 - [x] [Immich](https://immich.app) - Photo management solution.
 - [x] [LibreChat](https://librechat.ai) - Open-source chat application for AI conversations.
 - [x] [Mealie](https://mealie.io) - Recipe management application.
@@ -185,15 +185,14 @@ The following applications are defined in [`sites/hochschule-burgenland/infrastr
 - [x] Kubelet Serving Cert Approver
 - [x] Metrics Server
 - [x] External Secrets
-- [x] [Democratic CSI](https://github.com/democratic-csi/democratic-csi) - CSI driver for dynamic provisioning of storage using iSCSI on Proxmox VE.
-- [x] MetalLB
-- [x] gateway-api
-- [x] kgateway
-- [x] [Traefik](https://traefik.io) - Exposes Kubernetes `Ingress` resources to the "outside world".
 - [x] Cert Manager
 - [x] External DNS
 - [x] Reloader
 - [x] Reflector
+- [x] gateway-api
+- [x] kgateway
+- [x] [Traefik](https://traefik.io) - Exposes Kubernetes `Ingress` resources to the "outside world".
+- [x] Rook Ceph
 
 #### Core Applications (hochschule-burgenland)
 
@@ -201,15 +200,16 @@ The following applications are defined in [`sites/hochschule-burgenland/core/`](
 
 - [x] CloudNativePG
 - [x] Kyverno
+- [x] Falco
 - [x] Gatus
 
 #### (User) Applications (hochschule-burgenland)
 
 The following applications are defined in [`sites/hochschule-burgenland/applications/`](sites/hochschule-burgenland/applications/).
 
-- [ ] [Dex](https://dexidp.io) - OpenID Connect Identity (OIDC) and OAuth 2.0 Provider.
-- [ ] [Harbor](https://goharbor.io) - Container image registry.
-- [ ] [ArgoCD](https://argo-cd.readthedocs.io) - GitOps continuous delivery tool for Kubernetes.
+- [x] [Dex](https://dexidp.io) - OpenID Connect Identity (OIDC) and OAuth 2.0 Provider.
+- [x] [ArgoCD](https://argo-cd.readthedocs.io) - GitOps continuous delivery tool for Kubernetes.
+- [x] [Harbor](https://goharbor.io) - Container image registry.
 - [ ] [Crossplane](https://www.crossplane.io) - Cloud-native control plane.
 
 ---

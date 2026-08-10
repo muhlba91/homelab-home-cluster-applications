@@ -18,10 +18,10 @@ spec:
         - name: falco
           resources:
             requests:
-              cpu: 10m
+              cpu: 50m
               memory: 256Mi
             limits:
-              memory: 768Mi
+              memory: 1024Mi
           env:
             - name: FALCO_K8S_NODE_NAME
               valueFrom:
