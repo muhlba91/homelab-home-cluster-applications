@@ -11,6 +11,9 @@ spec:
     spec:
       containers:
         - name: falcosidekick
+          env:
+            - name: WEBUI_URL
+              value: http://falcosidekick-ui:2802
           resources:
             requests:
               cpu: 3m
