@@ -6,6 +6,6 @@ namespace: ${APPLICATION_NAMESPACE}
 resources:
   - ./plugins/
   - ./components/
-  # - ./rules/
-  # - ./configs/
+  - ./configs/
+  - ./rules/
   # - falco.yaml
