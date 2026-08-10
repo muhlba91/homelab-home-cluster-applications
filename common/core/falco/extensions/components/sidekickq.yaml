@@ -1,0 +1,19 @@
+---
+apiVersion: instance.falcosecurity.dev/v1alpha1
+kind: Component
+metadata:
+  name: sidekick
+spec:
+  component:
+    type: falcosidekick
+  replicas: 1
+  podTemplateSpec:
+    spec:
+      containers:
+        - name: falcosidekick
+          resources:
+            requests:
+              cpu: 5m
+              memory: 32Mi
+            limits:
+              memory: 64Mi
