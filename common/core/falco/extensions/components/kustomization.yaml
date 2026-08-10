@@ -6,4 +6,3 @@ namespace: ${APPLICATION_NAMESPACE}
 resources:
   - ./metacollector.yaml
   - ./sidekick.yaml
-  - ./sidekick-ui.yaml
