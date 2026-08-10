@@ -5,4 +5,4 @@ kind: Kustomization
 namespace: ${APPLICATION_NAMESPACE}
 resources:
   - ./engine-config.yaml
-  - ./k8smeta-config.yaml
+  # - ./k8smeta-config.yaml
