@@ -13,5 +13,6 @@ spec:
           comps: [=, =]
           values:
             - [cilium-cni, /opt/cni/bin/cilium-cni]
-      append: true
+      override:
+        exceptions: append
   priority: 51
