@@ -1,13 +1,13 @@
 ---
 repos:
   - repo: https://github.com/talos-systems/conform
-    rev: v0.1.0-alpha.30
+    rev: v0.1.0-alpha.31
     hooks:
       - id: conform
         stages:
           - commit-msg
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: end-of-file-fixer
       - id: check-json
@@ -33,6 +33,6 @@ repos:
 #            "next"
 #        ]
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.28.0
+    rev: v8.30.0
     hooks:
       - id: gitleaks

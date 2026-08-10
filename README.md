@@ -134,6 +134,7 @@ The following applications are defined in [`sites/vie/core/`](sites/vie/core/).
 - [x] CloudNativePG
 - [x] Monitoring (full stack)
 - [x] Kyverno
+- [x] Falco
 - [x] Gatus
 - [x] Velero
 
