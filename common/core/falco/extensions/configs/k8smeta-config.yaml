@@ -9,7 +9,7 @@ spec:
     load_plugins: [container, k8smeta]
     plugins:
       - name: k8smeta
-        library_path: libk8smeta.so
+        library_path: k8smeta.so
         init_config:
           collectorHostname: metacollector
           collectorPort: 45000
