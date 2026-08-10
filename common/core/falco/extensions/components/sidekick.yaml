@@ -11,12 +11,9 @@ spec:
     spec:
       containers:
         - name: falcosidekick
-          env:
-            - name: WEBUI_URL
-              value: http://falcosidekick-ui:2802
           resources:
             requests:
               cpu: 3m
-              memory: 24Mi
+              memory: 16Mi
             limits:
-              memory: 64Mi
+              memory: 32Mi
