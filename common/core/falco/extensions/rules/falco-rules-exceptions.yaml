@@ -12,18 +12,21 @@ spec:
           fields: [proc.name, proc.exepath]
           comps: [=, =]
           values:
-            - [cilium-cni, /opt/cni/bin/cilium-cni]
+            - - cilium-cni
+              - /opt/cni/bin/cilium-cni
         - name: homeassistant_backup_and_sops
           fields: [container.image.repository, container.name, k8s.ns.name]
           comps: [=, =, startswith]
           values:
-            - [docker.io/library/alpine, backup, home-assistant-]
-            - [docker.io/library/python, backup, home-assistant-]
-            - [
-                ghcr.io/home-assistant/home-assistant,
-                home-assistant,
-                home-assistant-,
-              ]
+            - - docker.io/library/alpine
+              - backup
+              - home-assistant-
+            - - docker.io/library/python
+              - backup
+              - home-assistant-
+            - - ghcr.io/home-assistant/home-assistant
+              - home-assistant
+              - home-assistant-
       override:
         exceptions: append
   priority: 51

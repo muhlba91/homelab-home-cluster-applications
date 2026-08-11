@@ -76,32 +76,22 @@ customConfig:
             "debug": "debug"
           }
           .level = get(priority_map, [downcase(string!(.priority))]) ?? "info"
-          redact_patterns = [
-            r'(?i)(access_key|secret_key)=\S+',
-            r'(?i)Authorization:\s*(Bearer|Basic)\s+\S+',
-            r'"password"\s*:\s*"[^"]*"',
-            r'(?i)(token|apikey|api_key)=\S+'
-          ]
-          redact_replacements = [
-            "$1=[REDACTED]",
-            "Authorization: $1 [REDACTED]",
-            "\"password\":\"[REDACTED]\"",
-            "$1=[REDACTED]"
-          ]
           if exists(.output) && is_string(.output) {
             out = string!(.output)
-            for_each(redact_patterns) -> |i, pat| {
-              out = replace(out, pat, redact_replacements[i])
-            }
+            out = replace(out, r'(?i)(access_key|secret_key)=\S+', "$1=[REDACTED]")
+            out = replace(out, r'(?i)Authorization:\s*(Bearer|Basic)\s+\S+', "Authorization: $1 [REDACTED]")
+            out = replace(out, r'"password"\s*:\s*"[^"]*"', "\"password\":\"[REDACTED]\"")
+            out = replace(out, r'(?i)(token|apikey|api_key)=\S+', "$1=[REDACTED]")
             .output = out
           }
           if exists(.output_fields) {
             cmdline = get(.output_fields, ["proc.cmdline"]) ?? null
             if cmdline != null && is_string(cmdline) {
               cl = string!(cmdline)
-              for_each(redact_patterns) -> |i, pat| {
-                cl = replace(cl, pat, redact_replacements[i])
-              }
+              cl = replace(cl, r'(?i)(access_key|secret_key)=\S+', "$1=[REDACTED]")
+              cl = replace(cl, r'(?i)Authorization:\s*(Bearer|Basic)\s+\S+', "Authorization: $1 [REDACTED]")
+              cl = replace(cl, r'"password"\s*:\s*"[^"]*"', "\"password\":\"[REDACTED]\"")
+              cl = replace(cl, r'(?i)(token|apikey|api_key)=\S+', "$1=[REDACTED]")
               .output_fields = set!(.output_fields, ["proc.cmdline"], cl)
             }
           }
