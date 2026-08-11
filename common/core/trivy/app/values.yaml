@@ -49,7 +49,7 @@ trivy:
         cpu: 3m
         memory: 32Mi
       limits:
-        memory: 128Mi
+        memory: 192Mi
 
 compliance:
   reportType: summary
