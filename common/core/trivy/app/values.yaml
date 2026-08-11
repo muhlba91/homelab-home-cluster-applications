@@ -47,7 +47,7 @@ trivy:
     resources:
       requests:
         cpu: 3m
-        memory: 64Mi
+        memory: 48Mi
       limits:
         memory: 128Mi
 
