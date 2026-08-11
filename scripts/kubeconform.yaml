@@ -1,0 +1,5 @@
+---
+schemas:
+  - default
+  - https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json
+  - https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json
