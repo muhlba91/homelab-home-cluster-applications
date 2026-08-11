@@ -1,0 +1,94 @@
+---
+excludeNamespaces: kube-system,kube-public,kube-node-lease,trivy-system
+
+operator:
+  builtInTrivyServer: true
+
+  vulnerabilityScannerEnabled: true
+  sbomGenerationEnabled: true
+  configAuditScannerEnabled: false
+  rbacAssessmentScannerEnabled: true
+  infraAssessmentScannerEnabled: false
+  clusterComplianceEnabled: true
+
+  scanJobsConcurrentLimit: 2
+  scanJobTTL: 30m
+  scanJobTimeout: 20m
+  scannerReportTTL: 24h
+  batchDeleteLimit: 10
+  batchDeleteDelay: 10s
+
+  metricsFindingsEnabled: true
+  metricsVulnIdEnabled: false
+  exposedSecretScannerEnabled: true
+  metricsExposedSecretInfo: true
+  metricsConfigAuditInfo: false
+  metricsRbacAssessmentInfo: true
+  metricsInfraAssessmentInfo: false
+  metricsClusterComplianceInfo: true
+
+serviceMonitor:
+  enabled: false
+
+trivy:
+  mode: ClientServer
+  storageClassEnabled: true
+  storageClassName: ${DEFAULT_STORAGE_CLASS}
+  storageSize: 5Gi
+  severity: CRITICAL,HIGH,MEDIUM
+  ignoreUnfixed: true
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      memory: 512Mi
+  server:
+    resources:
+      requests:
+        cpu: 5m
+        memory: 64Mi
+      limits:
+        memory: 512Mi
+
+compliance:
+  reportType: summary
+  cron: 0 3 * * 0
+
+resources:
+  requests:
+    cpu: 3m
+    memory: 32Mi
+  limits:
+    memory: 64Mi
+
+# https://github.com/aquasecurity/trivy-operator/issues/2566
+# configure node collector for Talos Linux (only mount writable /var paths)
+nodeCollector:
+  useNodeSelector: false
+  volumeMounts:
+    - mountPath: /var/lib/etcd
+      name: var-lib-etcd
+      readOnly: true
+    - mountPath: /var/lib/kubelet
+      name: var-lib-kubelet
+      readOnly: true
+    - mountPath: /var/lib/kube-scheduler
+      name: var-lib-kube-scheduler
+      readOnly: true
+    - mountPath: /var/lib/kube-controller-manager
+      name: var-lib-kube-controller-manager
+      readOnly: true
+  volumes:
+    - name: var-lib-etcd
+      hostPath:
+        path: /var/lib/etcd
+    - name: var-lib-kubelet
+      hostPath:
+        path: /var/lib/kubelet
+    - name: var-lib-kube-scheduler
+      hostPath:
+        path: /var/lib/kube-scheduler
+    - name: var-lib-kube-controller-manager
+      hostPath:
+        path: /var/lib/kube-controller-manager

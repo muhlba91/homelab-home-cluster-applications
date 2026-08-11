@@ -73,6 +73,7 @@ The following applications are defined in [`common/core/`](common/core/).
 - [x] [Falco](https://falco.org) - Runtime security monitoring for Kubernetes.
 - [x] [Gatus](https://gatus.io) - Service status page.
 - [x] [Kyverno](https://kyverno.io) - Policy engine designed for Kubernetes.
+- [x] [Trivy Operator](https://aquasecurity.github.io/trivy-operator) - Kubernetes-native security toolkit for continuous vulnerability scanning.
 - [x] Monitoring
   - [x] [Victoria Metrics Operator](https://victoriametrics.com) - Victoria Metrics operator for Kubernetes.
   - [x] [Victoria Metrics](https://victoriametrics.com) - Victoria Metrics time-series database.
@@ -136,6 +137,7 @@ The following applications are defined in [`sites/vie/core/`](sites/vie/core/).
 - [x] Kyverno
 - [x] Falco
 - [x] Gatus
+- [x] Trivy
 - [x] Velero
 
 #### (User) Applications (VIE)
@@ -203,6 +205,7 @@ The following applications are defined in [`sites/hochschule-burgenland/core/`](
 - [x] Kyverno
 - [x] Falco
 - [x] Gatus
+- [ ] Trivy
 
 #### (User) Applications (hochschule-burgenland)
 

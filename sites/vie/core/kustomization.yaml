@@ -6,6 +6,7 @@ resources:
   - ../../../common/core/cloudnative-pg/
   - ./monitoring/
   - ../../../common/core/kyverno/
+  - ../../../common/core/trivy/
   - ./falco/
   - ./gatus/
   - ./velero/
