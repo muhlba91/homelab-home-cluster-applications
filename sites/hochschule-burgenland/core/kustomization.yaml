@@ -5,5 +5,6 @@ resources:
   # - ../../../common/core/adguard-external-dns/
   - ../../../common/core/cloudnative-pg/
   - ../../../common/core/kyverno/
+  - ../../../common/core/trivy/
   - ./falco/
   - ./gatus/

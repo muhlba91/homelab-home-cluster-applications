@@ -6,7 +6,7 @@ operator:
 
   vulnerabilityScannerEnabled: true
   sbomGenerationEnabled: true
-  configAuditScannerEnabled: false
+  configAuditScannerEnabled: true
   rbacAssessmentScannerEnabled: true
   infraAssessmentScannerEnabled: false
   clusterComplianceEnabled: true
@@ -22,7 +22,7 @@ operator:
   metricsVulnIdEnabled: false
   exposedSecretScannerEnabled: true
   metricsExposedSecretInfo: true
-  metricsConfigAuditInfo: false
+  metricsConfigAuditInfo: true
   metricsRbacAssessmentInfo: true
   metricsInfraAssessmentInfo: false
   metricsClusterComplianceInfo: true
