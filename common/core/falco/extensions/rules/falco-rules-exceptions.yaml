@@ -27,6 +27,11 @@ spec:
             - - ghcr.io/home-assistant/home-assistant
               - home-assistant
               - home-assistant-
+        - name: telegraf_entrypoint_binary
+          fields: [container.image.repository, container.name, proc.name]
+          comps: [=, =, =]
+          values:
+            - [docker.io/library/telegraf, telegraf, telegraf]
       override:
         exceptions: append
     - rule: Fileless execution via memfd_create
