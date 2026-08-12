@@ -72,6 +72,7 @@ The following applications are defined in [`common/core/`](common/core/).
 - [x] [CloudNativePG](https://cloudnative-pg.io/documentation/current/) - PostgreSQL database operator.
 - [x] [Falco](https://falco.org) - Runtime security monitoring for Kubernetes.
 - [x] [Gatus](https://gatus.io) - Service status page.
+- [x] [KRR](https://github.com/robusta-dev/krr) - Kubernetes Resource Recommendations; runs as a daily CronJob and prints resource optimization suggestions to logs.
 - [x] [Kyverno](https://kyverno.io) - Policy engine designed for Kubernetes.
 - [x] [Trivy Operator](https://aquasecurity.github.io/trivy-operator) - Kubernetes-native security toolkit for continuous vulnerability scanning.
 - [x] Monitoring
@@ -133,6 +134,7 @@ The following applications are defined in [`sites/vie/core/`](sites/vie/core/).
 
 - [x] Adguard External DNS
 - [x] CloudNativePG
+- [x] KRR
 - [x] Monitoring (full stack)
 - [x] Kyverno
 - [x] Falco
@@ -202,6 +204,7 @@ The following applications are defined in [`sites/hochschule-burgenland/infrastr
 The following applications are defined in [`sites/hochschule-burgenland/core/`](sites/hochschule-burgenland/core/).
 
 - [x] CloudNativePG
+- [x] KRR
 - [x] Kyverno
 - [x] Falco
 - [x] Gatus
@@ -255,17 +258,15 @@ The following services also have Git repositories to store their configuration w
 
 ## Resource Optimization
 
-[Kubernetes Resource Recommendations](https://github.com/robusta-dev/krr) can be used to analyze the resource usage of the cluster and provide recommendations for optimizing the resource requests and limits.
+[Kubernetes Resource Recommendations (KRR)](https://github.com/robusta-dev/krr) runs as a daily `CronJob` (defined in [`common/core/krr/`](common/core/krr/)) and prints resource optimization recommendations to its pod logs.
+
+To retrieve the latest recommendations:
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/robusta-dev/krr/refs/heads/main/docs/krr-in-cluster/krr-in-cluster-job.yaml
-kubectl logs -l batch.kubernetes.io/job-name=krr > krr.txt
-kubectl delete -f https://raw.githubusercontent.com/robusta-dev/krr/refs/heads/main/docs/krr-in-cluster/krr-in-cluster-job.yaml
+kubectl logs -n krr -l app.kubernetes.io/name=krr --tail=-1
 ```
 
-By default, this generates a text file with the recommendations. To output any other format, you can use the `-f` flag followed by the desired format.
-
-If using JSON, you can use the `jq` command to get a list of all changes:
+Use the `jq` command to get a list of all changes:
 
 ```bash
 # get all current CPU requests
