@@ -35,7 +35,7 @@ trivy:
   storageClassEnabled: true
   storageClassName: ${DEFAULT_STORAGE_CLASS}
   storageSize: 5Gi
-  severity: CRITICAL,HIGH,MEDIUM
+  severity: CRITICAL,HIGH
   ignoreUnfixed: true
   resources:
     requests:

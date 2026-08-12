@@ -283,6 +283,52 @@ cat krr.json | jq '.scans[].recommended.requests.memory | select(.value != "?") 
 
 ---
 
+## Scripts
+
+### Validate Manifests
+
+[`scripts/validate-manifests.sh`](scripts/validate-manifests.sh) validates all Kustomize leaf directories for every site against [kubeconform](https://github.com/yannh/kubeconform).
+
+**Pipeline per leaf kustomization:** `kustomize build` → `envsubst` (site-scoped variables) → `kubeconform`
+
+- **Leaf detection:** only kustomizations whose `resources[]` entries are all `.yaml`/`.yml` files are validated; aggregator kustomizations that compose other kustomizations are skipped to avoid duplicate validation.
+- **Variable substitution:** Flux `postBuild` variable substitution (`${VAR}`) is replicated offline by sourcing each site's `cluster-configuration.yaml` and running `envsubst` with an explicit allowlist, so only variables defined for that site are expanded.
+- **Schema config:** schema locations and the skip-list are read from [`scripts/kubeconform.yaml`](scripts/kubeconform.yaml) so they can be updated without modifying the script.
+- **SOPS documents:** encrypted documents (identified by a top-level `.sops` key) are stripped before validation.
+
+**Prerequisites:** `kustomize`, `kubeconform`, `yq`, `jq`, `envsubst`
+
+```bash
+./scripts/validate-manifests.sh
+```
+
+Exit code is non-zero when any kustomization fails validation.
+
+### Trivy Reports
+
+[`scripts/trivy-reports.sh`](scripts/trivy-reports.sh) generates a Markdown snapshot of all [Trivy Operator](https://aquasecurity.github.io/trivy-operator) reports from the currently active Kubernetes context and writes it to `trivy-reports/trivy-reports-<timestamp>.md`.
+
+The report includes the following sections:
+
+- **Cluster Compliance (CIS)** — summary of `ClusterComplianceReport` resources.
+- **Cluster RBAC Assessment** — summary of `ClusterRbacAssessmentReport` resources.
+- **Vulnerability Reports** — per-workload vulnerability summary grouped by image.
+- **Exposed Secret Reports** — workloads with at least one critical or high exposed secret finding.
+- **RBAC Assessment Reports** — namespaced RBAC assessment summaries.
+- **Full detail** — all individual CVE findings whose CVSS score meets or exceeds the configured threshold.
+
+**Prerequisites:** `kubectl` (with a valid context pointing at a cluster running the Trivy Operator), `jq`
+
+```bash
+# Default score threshold (7.0)
+./scripts/trivy-reports.sh
+
+# Custom score threshold
+./scripts/trivy-reports.sh 8.5
+```
+
+---
+
 ## Continuous Integration and Automations
 
 - [GitHub Actions](https://docs.github.com/en/actions) are linting all YAML files.
