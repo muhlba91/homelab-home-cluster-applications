@@ -25,7 +25,10 @@ controllers:
         command:
           - /bin/sh
           - -c
-          - "python krr.py simple --max-workers 3 -f json --logtostderr"
+          - >-
+            python krr.py simple --max-workers 3 --width 2048
+            --logtostderr -f json
+            | python3 -c "import json,sys; print(json.dumps(json.load(sys.stdin)))"
         resources:
           requests:
             cpu: 50m
