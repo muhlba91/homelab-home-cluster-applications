@@ -304,14 +304,17 @@ The report includes the following sections:
 
 [`scripts/krr-reports.sh`](scripts/krr-reports.sh) fetches the latest [KRR](https://github.com/robusta-dev/krr) CronJob log and generates a Markdown report with two tables written to `resource-reports/krr-report-<timestamp>.md`. The raw JSON snapshot is saved alongside as `resource-reports/krr-<timestamp>.json`.
 
-- **⚠️ Out of range** — containers whose current CPU or memory requests deviate from the KRR recommendation by more than 10 %.
+- **⚠️ Out of range** — containers whose current CPU or memory requests deviate from the KRR recommendation by more than the configured threshold (default: 10 %).
 - **✅ Within range** — containers that are already well-tuned.
 
 **Prerequisites:** `kubectl` (with a valid context), `jq`, `awk`
 
 ```bash
-# Fetch latest KRR log and generate report
+# Fetch latest KRR log and generate report (10 % threshold)
 ./scripts/krr-reports.sh
+
+# Use a stricter 5 % threshold
+./scripts/krr-reports.sh --threshold=5
 
 # Analyse an existing krr-<timestamp>.json without hitting the cluster
 ./scripts/krr-reports.sh --skip-fetch

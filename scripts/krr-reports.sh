@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # Usage:
-#   ./krr-reports.sh          # fetch latest KRR log, analyse and write markdown
-#   ./krr-reports.sh --skip-fetch   # skip kubectl fetch, analyse existing resource-reports/krr.json
+#   ./krr-reports.sh                        # fetch latest KRR log, analyse and write markdown
+#   ./krr-reports.sh --skip-fetch           # skip kubectl fetch, analyse existing resource-reports/krr.json
+#   ./krr-reports.sh --threshold=15         # use 15 % as the out-of-range threshold (default: 10)
+#   ./krr-reports.sh --skip-fetch --threshold=5
 
 set -euo pipefail
 
@@ -10,8 +12,19 @@ for bin in kubectl jq awk; do
 done
 
 SKIP_FETCH=false
-if [[ "${1:-}" == "--skip-fetch" ]]; then
-  SKIP_FETCH=true
+THRESHOLD=10
+
+for _arg in "$@"; do
+  case "$_arg" in
+    --skip-fetch)      SKIP_FETCH=true ;;
+    --threshold=*)     THRESHOLD="${_arg#--threshold=}" ;;
+    *) echo "Unknown argument: $_arg" >&2; exit 1 ;;
+  esac
+done
+
+if ! [[ "$THRESHOLD" =~ ^[0-9]+([.][0-9]+)?$ ]]; then
+  echo "--threshold must be a positive number, got: $THRESHOLD" >&2
+  exit 1
 fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -96,7 +109,7 @@ OVER_FILE=$(mktemp)
 GOOD_FILE=$(mktemp)
 trap 'rm -f "$OVER_FILE" "$GOOD_FILE"' EXIT
 
-echo "$TSV" | awk -F'\t' -v over="$OVER_FILE" -v good="$GOOD_FILE" '
+echo "$TSV" | awk -F'\t' -v over="$OVER_FILE" -v good="$GOOD_FILE" -v threshold="$THRESHOLD" '
   function fmt_cpu(v,    m) {
     if (v == "null") return "—"
     m = int(v * 1000 + 0.5)
@@ -107,12 +120,13 @@ echo "$TSV" | awk -F'\t' -v over="$OVER_FILE" -v good="$GOOD_FILE" '
     mib = int(v / 1048576 + 0.5)
     return mib " MiB"
   }
-  function off(cur, rec,    ratio) {
+  function off(cur, rec,    ratio, limit) {
     if (cur == "null" || rec == "null") return 0
     if (cur + 0 == 0) return 0
     ratio = (cur - rec) / cur
     if (ratio < 0) ratio = -ratio
-    return (ratio > 0.10)
+    limit = threshold / 100
+    return (ratio > limit)
   }
   {
     ns   = $1; name = $2; ctr = $3
@@ -135,16 +149,16 @@ echo "$TSV" | awk -F'\t' -v over="$OVER_FILE" -v good="$GOOD_FILE" '
   echo "# KRR Resource Report — $(date -u +%Y-%m-%dT%H:%M:%SZ)"
   echo ""
 
-  echo "## ⚠️ Out of range (>10 % off recommendation)"
+  echo "## ⚠️ Out of range (>${THRESHOLD} % off recommendation)"
   echo ""
-  echo "Containers whose current requests or limits deviate from the KRR recommendation by more than 10 %."
+  echo "Containers whose current requests or limits deviate from the KRR recommendation by more than ${THRESHOLD} %."
   echo ""
   echo "$TABLE_HEADER"
   echo "$TABLE_SEP"
   sort "$OVER_FILE"
   echo ""
 
-  echo "## ✅ Within range (≤10 % of recommendation)"
+  echo "## ✅ Within range (≤${THRESHOLD} % of recommendation)"
   echo ""
   echo "Containers that are already well-tuned."
   echo ""
