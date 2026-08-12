@@ -17,21 +17,19 @@ repos:
       - id: check-xml
       - id: destroyed-symlinks
       - id: detect-aws-credentials
-        args: [
-          "--allow-missing-credentials"
-        ]
+        args: ["--allow-missing-credentials"]
       - id: detect-private-key
       - id: trailing-whitespace
-        args: [
-          "--markdown-linebreak-ext=md"
-        ]
-#      - id: no-commit-to-branch
-#        args: [
-#            "--branch",
-#            "main",
-#            "--branch",
-#            "next"
-#        ]
+        args: ["--markdown-linebreak-ext=md"]
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+  #      - id: no-commit-to-branch
+  #        args: [
+  #            "--branch",
+  #            "main",
+  #            "--branch",
+  #            "next"
+  #        ]
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.30.0
     hooks:

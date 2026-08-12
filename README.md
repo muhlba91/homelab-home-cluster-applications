@@ -256,34 +256,6 @@ The following services also have Git repositories to store their configuration w
 
 ---
 
-## Resource Optimization
-
-[Kubernetes Resource Recommendations (KRR)](https://github.com/robusta-dev/krr) runs as a daily `CronJob` (defined in [`common/core/krr/`](common/core/krr/)) and prints resource optimization recommendations to its pod logs.
-
-To retrieve the latest recommendations:
-
-```bash
-kubectl logs -n krr -l app.kubernetes.io/name=krr --tail=-1
-```
-
-Use the `jq` command to get a list of all changes:
-
-```bash
-# get all current CPU requests
-cat krr.json | jq '.scans[].object.allocations.requests.cpu | select(. != "?") | select(. != null)' | awk '{ sum += $0 } END { print sum }'
-# get all recommended CPU requests
-cat krr.json | jq '.scans[].recommended.requests.cpu | select(.value != "?") | .value' | awk '{ sum += $0 } END { print sum }'
-
-# get all current memory requests
-cat krr.json | jq '.scans[].object.allocations.requests.memory | select(. != "?") | select(. != null)' | awk '{ sum += $0 } END { print sum/1.074e9 }'
-# get all current memory limits
-cat krr.json | jq '.scans[].object.allocations.limits.memory | select(. != "?") | select(. != null)' | awk '{ sum += $0 } END { print sum/1.074e9 }'
-# get all recommended memory requests (= limits)
-cat krr.json | jq '.scans[].recommended.requests.memory | select(.value != "?") | .value' | awk '{ sum += $0 } END { print sum/1.074e9 }'
-```
-
----
-
 ## Scripts
 
 ### Validate Manifests
@@ -326,6 +298,23 @@ The report includes the following sections:
 
 # Custom score threshold
 ./scripts/trivy-reports.sh 8.5
+```
+
+### KRR Reports
+
+[`scripts/krr-reports.sh`](scripts/krr-reports.sh) fetches the latest [KRR](https://github.com/robusta-dev/krr) CronJob log and generates a Markdown report with two tables written to `resource-reports/krr-report-<timestamp>.md`. The raw JSON snapshot is saved alongside as `resource-reports/krr-<timestamp>.json`.
+
+- **⚠️ Out of range** — containers whose current CPU or memory requests deviate from the KRR recommendation by more than 10 %.
+- **✅ Within range** — containers that are already well-tuned.
+
+**Prerequisites:** `kubectl` (with a valid context), `jq`, `awk`
+
+```bash
+# Fetch latest KRR log and generate report
+./scripts/krr-reports.sh
+
+# Analyse an existing krr-<timestamp>.json without hitting the cluster
+./scripts/krr-reports.sh --skip-fetch
 ```
 
 ---

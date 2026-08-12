@@ -37,3 +37,4 @@ local.env
 .vscode/
 gcp-*-key.json
 trivy-reports/
+resource-reports/

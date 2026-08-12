@@ -27,6 +27,23 @@ jobs:
       - run: |
           yamllint .
 
+  shellcheck:
+    runs-on: ubuntu-latest
+    name: Shellcheck
+
+    steps:
+      - uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2.20.1
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+
+      - uses: ludeeus/action-shellcheck@00cae500b08a931fb5698e11e79bfbd38e612a38 # 2.0.0
+        with:
+          scandir: ./scripts
+
   kubeconform:
     runs-on: ubuntu-latest
     name: Kubeconform
