@@ -29,4 +29,13 @@ spec:
               - home-assistant-
       override:
         exceptions: append
+    - rule: Fileless execution via memfd_create
+      exceptions:
+        - name: nvidia_ctk_ldconfig_hook
+          fields: [proc.pname, proc.exepath]
+          comps: [=, startswith]
+          values:
+            - [nvidia-ctk, "memfd:runc_cloned:/run/nvidia-ctk-hook/"]
+      override:
+        exceptions: append
   priority: 51
