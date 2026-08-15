@@ -26,7 +26,7 @@ controllers:
           - /bin/sh
           - -c
           - >-
-            python krr.py simple --max-workers 3 --width 2048
+            python krr.py simple --max-workers 3 --width 2048 --cpu-min 3 --mem-min 8
             --logtostderr -f json
             | python3 -c "import json,sys; print(json.dumps(json.load(sys.stdin)))"
         resources:
