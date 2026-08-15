@@ -21,6 +21,9 @@ spec:
             - - docker.io/library/alpine
               - backup
               - home-assistant-
+            - - docker.io/library/alpine
+              - backup-restore
+              - home-assistant-
             - - docker.io/library/python
               - backup
               - home-assistant-
@@ -31,7 +34,9 @@ spec:
           fields: [container.image.repository, container.name, proc.name]
           comps: [=, =, =]
           values:
-            - [docker.io/library/telegraf, telegraf, telegraf]
+            - - docker.io/library/telegraf
+              - telegraf
+              - telegraf
       override:
         exceptions: append
     - rule: Fileless execution via memfd_create
@@ -40,7 +45,30 @@ spec:
           fields: [proc.pname, proc.exepath]
           comps: [=, startswith]
           values:
-            - [nvidia-ctk, "memfd:runc_cloned:/run/nvidia-ctk-hook/"]
+            - - nvidia-ctk
+              - "memfd:runc_cloned:/run/nvidia-ctk-hook/"
+      override:
+        exceptions: append
+    - rule: Terminal shell in container
+      exceptions:
+        - name: rook_ceph_logrotate_sidecar
+          fields: [container.image.repository, container.name, k8s.ns.name]
+          comps: [=, =, =]
+          values:
+            - - quay.io/ceph/ceph
+              - log-collector
+              - rook-ceph
+      override:
+        exceptions: append
+    - rule: Packet socket created in container
+      exceptions:
+        - name: homeassistant_dhcp_discovery
+          fields: [container.image.repository, container.name, proc.name]
+          comps: [=, =, =]
+          values:
+            - - ghcr.io/home-assistant/home-assistant
+              - home-assistant
+              - python3
       override:
         exceptions: append
   priority: 51
