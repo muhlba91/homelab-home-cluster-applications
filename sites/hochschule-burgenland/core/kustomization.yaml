@@ -7,5 +7,4 @@ resources:
   - ../../../common/core/kyverno/
   - ../../../common/core/trivy/
   - ./falco/
-  - ../../../common/core/krr/
   - ./gatus/

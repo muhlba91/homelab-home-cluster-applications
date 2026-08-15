@@ -204,7 +204,6 @@ The following applications are defined in [`sites/hochschule-burgenland/infrastr
 The following applications are defined in [`sites/hochschule-burgenland/core/`](sites/hochschule-burgenland/core/).
 
 - [x] CloudNativePG
-- [x] KRR
 - [x] Kyverno
 - [x] Falco
 - [x] Gatus
