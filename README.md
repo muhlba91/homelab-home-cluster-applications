@@ -301,27 +301,35 @@ The report includes the following sections:
 
 ### KRR Reports
 
-[`scripts/krr-reports.sh`](scripts/krr-reports.sh) fetches the latest [KRR](https://github.com/robusta-dev/krr) CronJob log and generates a Markdown report with two tables written to `resource-reports/krr-report-<timestamp>.md`. The raw JSON snapshot is saved alongside as `resource-reports/krr-<timestamp>.json`.
+[`scripts/krr-reports.py`](scripts/krr-reports.py) fetches logs from the last N [KRR](https://github.com/robusta-dev/krr) CronJob pods, merges their results by taking the maximum observed value for each container, and generates a Markdown report written to `resource-reports/krr-report-<timestamp>.md`.
+
+For each run, individual pod snapshots are saved as `resource-reports/krr-<timestamp>-pod-N.json` and the merged result as `resource-reports/krr-<timestamp>.json`.
 
 - **⚠️ Out of range** — containers whose current CPU or memory requests deviate from the KRR recommendation by more than the configured threshold (default: 10 %).
 - **✅ Within range** — containers that are already well-tuned.
 
-**Prerequisites:** `kubectl` (with a valid context), `jq`, `awk`
+**Prerequisites:** Python 3, `kubectl` (with a valid context)
 
 ```bash
-# Fetch latest KRR log and generate report (10 % threshold)
-./scripts/krr-reports.sh
+# Fetch all available KRR pods and generate report (10 % threshold)
+./scripts/krr-reports.py
+
+# Use only the last 3 pods
+./scripts/krr-reports.py --pods=3
 
 # Use a stricter 5 % threshold
-./scripts/krr-reports.sh --threshold=5
+./scripts/krr-reports.py --threshold=5
 
-# Analyse an existing krr-<timestamp>.json without hitting the cluster
-./scripts/krr-reports.sh --skip-fetch
+# Analyse existing krr-<timestamp>-pod-*.json files without hitting the cluster
+./scripts/krr-reports.py --skip-fetch
+
+# Combine flags
+./scripts/krr-reports.py --pods=5 --threshold=5
 ```
 
 ---
 
 ## Continuous Integration and Automations
 
-- [GitHub Actions](https://docs.github.com/en/actions) are linting all YAML files.
+- [GitHub Actions](https://docs.github.com/en/actions) are linting all YAML files and Python scripts (ruff).
 - [Renovate Bot](https://github.com/renovatebot/renovate) is updating Helm releases and used container images in the `values.yaml` files, and GitHub Actions.
