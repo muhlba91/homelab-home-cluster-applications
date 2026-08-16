@@ -23,7 +23,7 @@ cephClusterSpec:
     managePodBudgets: false
   cephConfig:
     global:
-      osd_pool_default_size: "1"
+      osd_pool_default_size: "2"
       osd_pool_default_min_size: "1"
       mon_warn_on_pool_no_redundancy: "false"
       bdev_flock_retry: "20"
@@ -46,7 +46,7 @@ cephClusterSpec:
   storage:
     useAllNodes: true
     useAllDevices: false
-    deviceFilter: "^sdb"
+    deviceFilter: "^sd[bc]"
   priorityClassNames:
     all: system-node-critical
   resources:
@@ -96,7 +96,7 @@ cephBlockPools:
       name: .mgr
       failureDomain: osd
       replicated:
-        size: 1
+        size: 2
         requireSafeReplicaSize: false
       parameters:
         compression_mode: none
@@ -108,7 +108,7 @@ cephBlockPools:
     spec:
       failureDomain: osd
       replicated:
-        size: 1
+        size: 2
         requireSafeReplicaSize: false
       parameters:
         compression_mode: aggressive
