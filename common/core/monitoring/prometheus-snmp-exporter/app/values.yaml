@@ -25,6 +25,6 @@ configmapReload:
 resources:
   requests:
     cpu: 3m
-    memory: 24Mi
+    memory: 25Mi
   limits:
-    memory: 24Mi
+    memory: 25Mi

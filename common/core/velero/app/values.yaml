@@ -7,10 +7,10 @@ kubectl:
 
 resources:
   requests:
-    cpu: 128m
-    memory: 256Mi
+    cpu: 10m
+    memory: 285Mi
   limits:
-    memory: 256Mi
+    memory: 285Mi
 
 initContainers:
   - name: velero-plugin-for-aws
@@ -32,7 +32,7 @@ deployNodeAgent: true
 nodeAgent:
   resources:
     requests:
-      cpu: 10m
-      memory: 256Mi
+      cpu: 5m
+      memory: 115Mi
     limits:
       memory: 2Gi

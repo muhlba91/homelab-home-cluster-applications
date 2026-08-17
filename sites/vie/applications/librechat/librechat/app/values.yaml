@@ -28,8 +28,8 @@ controllers:
 
         resources:
           requests:
-            cpu: 10m
-            memory: 768Mi
+            cpu: 5m
+            memory: 566Mi
           limits:
             memory: 768Mi
 
@@ -118,10 +118,10 @@ controllers:
 
         resources:
           requests:
-            cpu: 10m
-            memory: 768Mi
+            cpu: 5m
+            memory: 204Mi
           limits:
-            memory: 768Mi
+            memory: 512Mi
 
         probes: *probes
 

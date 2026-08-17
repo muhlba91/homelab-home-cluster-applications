@@ -33,8 +33,8 @@ service:
 
 resources:
   requests:
-    cpu: 10m
-    memory: 226Mi
+    cpu: 5m
+    memory: 551Mi
   limits:
     memory: 4Gi
 

@@ -35,7 +35,7 @@ volumePermissions:
 
 resources:
   requests:
-    cpu: 90m
-    memory: 478Mi
+    cpu: 110m
+    memory: 337Mi
   limits:
-    memory: 478Mi
+    memory: 384Mi

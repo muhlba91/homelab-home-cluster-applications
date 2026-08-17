@@ -18,7 +18,7 @@ admissionController:
   container:
     resources:
       requests:
-        cpu: 10m
+        cpu: 8m
         memory: 128Mi
       limits:
         memory: 128Mi
@@ -27,25 +27,25 @@ backgroundController:
   rbac: *extraRbacResources
   resources:
     requests:
-      cpu: 10m
-      memory: 384Mi
+      cpu: 7m
+      memory: 192Mi
     limits:
-      memory: 384Mi
+      memory: 192Mi
 
 cleanupController:
   rbac: *extraRbacResources
   resources:
     requests:
-      cpu: 10m
-      memory: 100Mi
+      cpu: 9m
+      memory: 56Mi
     limits:
-      memory: 100Mi
+      memory: 56Mi
 
 reportsController:
   rbac: *extraRbacResources
   resources:
     requests:
-      cpu: 10m
-      memory: 100Mi
+      cpu: 4m
+      memory: 104Mi
     limits:
-      memory: 100Mi
+      memory: 104Mi

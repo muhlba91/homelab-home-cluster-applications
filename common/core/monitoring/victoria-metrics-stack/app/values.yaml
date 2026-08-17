@@ -45,8 +45,8 @@ vmsingle:
         ipFamilyPolicy: PreferDualStack
     resources:
       requests:
-        cpu: 22m
-        memory: 1511Mi
+        cpu: 23m
+        memory: 1218Mi
       limits:
         memory: 1511Mi
     storage:
@@ -81,8 +81,8 @@ vmagent:
         ipFamilyPolicy: PreferDualStack
     resources:
       requests:
-        cpu: 53m
-        memory: 512Mi
+        cpu: 60m
+        memory: 406Mi
       limits:
         memory: 512Mi
 
@@ -102,10 +102,10 @@ prometheus-node-exporter:
       enabled: true
   resources:
     requests:
-      cpu: 10m
-      memory: 100Mi
+      cpu: 5m
+      memory: 42Mi
     limits:
-      memory: 100Mi
+      memory: 64Mi
 
 kube-state-metrics:
   enabled: true
@@ -114,10 +114,10 @@ kube-state-metrics:
       enabled: true
   resources:
     requests:
-      cpu: 10m
-      memory: 130Mi
+      cpu: 5m
+      memory: 73Mi
     limits:
-      memory: 130Mi
+      memory: 128Mi
 
 kubelet:
   enabled: true

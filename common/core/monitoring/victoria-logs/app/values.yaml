@@ -22,10 +22,10 @@ server:
     ipFamilyPolicy: PreferDualStack
   resources:
     requests:
-      cpu: 30m
-      memory: 512Mi
+      cpu: 27m
+      memory: 1141Mi
     limits:
-      memory: 1Gi
+      memory: 1280Mi
 
 dashboards:
   enabled: true
