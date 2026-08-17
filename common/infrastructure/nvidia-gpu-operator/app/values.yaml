@@ -6,7 +6,68 @@ toolkit:
 hostPaths:
   driverInstallDir: /usr/local
 
+operator:
+  resources:
+    limits:
+      memory: 256Mi
+    requests:
+      cpu: 3m
+      memory: 168Mi
+
+node-feature-discovery:
+  gc:
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 5m
+        memory: 64Mi
+  master:
+    resources:
+      limits:
+        memory: 512Mi
+      requests:
+        cpu: 5m
+        memory: 96Mi
+  worker:
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 5m
+        memory: 64Mi
+
+gfd:
+  resources:
+    requests:
+      cpu: 3m
+      memory: 128Mi
+    limits:
+      memory: 192Mi
+
+dcgmExporter:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 518Mi
+    limits:
+      memory: 768Mi
+
+validator:
+  resources:
+    requests:
+      cpu: 5m
+      memory: 16Mi
+    limits:
+      memory: 32Mi
+
 devicePlugin:
+  resources:
+    requests:
+      cpu: 5m
+      memory: 96Mi
+    limits:
+      memory: 128Mi
   config:
     name: device-plugin-config
     create: true
