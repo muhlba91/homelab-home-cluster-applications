@@ -29,10 +29,10 @@ spec:
                 - name: cert-approver
                   resources:
                     requests:
-                      cpu: 10m
-                      memory: 100Mi
+                      cpu: 3m
+                      memory: 54Mi
                     limits:
-                      memory: 100Mi
+                      memory: 96Mi
       target:
         kind: Deployment
         labelSelector: "app.kubernetes.io/name=kubelet-serving-cert-approver"
