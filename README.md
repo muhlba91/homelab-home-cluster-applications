@@ -278,25 +278,32 @@ Exit code is non-zero when any kustomization fails validation.
 
 ### Trivy Reports
 
-[`scripts/trivy-reports.sh`](scripts/trivy-reports.sh) generates a Markdown snapshot of all [Trivy Operator](https://aquasecurity.github.io/trivy-operator) reports from the currently active Kubernetes context and writes it to `trivy-reports/trivy-reports-<timestamp>.md`.
+[`scripts/trivy-reports.py`](scripts/trivy-reports.py) generates a Markdown snapshot of all [Trivy Operator](https://aquasecurity.github.io/trivy-operator) reports from the currently active Kubernetes context and writes it to `trivy-reports/trivy-reports-<timestamp>.md`.
 
 The report includes the following sections:
 
-- **Cluster Compliance (CIS)** — summary of `ClusterComplianceReport` resources.
-- **Cluster RBAC Assessment** — summary of `ClusterRbacAssessmentReport` resources.
-- **Vulnerability Reports** — per-workload vulnerability summary grouped by image.
-- **Exposed Secret Reports** — workloads with at least one critical or high exposed secret finding.
-- **RBAC Assessment Reports** — namespaced RBAC assessment summaries.
-- **Full detail** — all individual CVE findings whose CVSS score meets or exceeds the configured threshold.
+| # | Section | Source CRD |
+| --- | --- | --- |
+| 1 | **Compliance summary** — pass/fail totals per framework (CIS / NSA / PSS) | `ClusterComplianceReport` |
+| 2 | **Failing compliance checks** — every failing control across all frameworks, sorted by failure count | `ClusterComplianceReport` |
+| 3 | **Config audit — deduped by check (actionable)** — failing checks aggregated by check ID for non-structural namespaces only, sorted by affected-workload count; includes title and remediation hint | `ConfigAuditReport` |
+| 3b | **Config audit — deduped by check (structural)** — same aggregation for `cilium` / `rook-ceph`; compact awareness table (check ID, severity, count, title — no remediation) | `ConfigAuditReport` |
+| 4 | **Config audit — critical/high actionable findings** — one row per critical or high finding for non-structural namespaces; includes remediation text and the Trivy detail message | `ConfigAuditReport` |
+| 5 | **Config audit — critical/high structural findings** — same detail view for `cilium` and `rook-ceph`, separated because privileged/hostNetwork access is required by design for a CNI and storage operator | `ConfigAuditReport` |
+| 6 | **Unique vulnerability findings** — CVEs deduped across all workloads whose CVSS score meets or exceeds the configured threshold, with affected-image count and examples | `VulnerabilityReport` |
+| 7 | **Exposed secret reports** — workloads with at least one critical or high exposed-secret finding | `ExposedSecretReport` |
+| 8 | **RBAC assessment — cluster scoped** — `ClusterRbacAssessmentReport` summaries sorted by severity | `ClusterRbacAssessmentReport` |
+| 9 | **RBAC assessment — namespaced** — per-namespace RBAC summaries sorted by severity | `RbacAssessmentReport` |
+| 10 | **Vulnerability reports by workload** — per-workload/image vulnerability counts (critical → unknown), useful as a long-tail reference | `VulnerabilityReport` |
 
-**Prerequisites:** `kubectl` (with a valid context pointing at a cluster running the Trivy Operator), `jq`
+**Prerequisites:** Python 3, `kubectl` (with a valid context pointing at a cluster running the Trivy Operator)
 
 ```bash
 # Default score threshold (7.0)
-./scripts/trivy-reports.sh
+./scripts/trivy-reports.py
 
 # Custom score threshold
-./scripts/trivy-reports.sh 8.5
+./scripts/trivy-reports.py 8.5
 ```
 
 ### KRR Reports

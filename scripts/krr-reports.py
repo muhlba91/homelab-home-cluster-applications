@@ -1,63 +1,45 @@
 #!/usr/bin/env python3
 """
-krr-reports.py - Fetch KRR pod logs, merge N runs by max values, generate markdown.
+scripts/krr-reports.py
+
+Manual/ad-hoc tool — NOT part of GitOps reconciliation.
+Fetches KRR pod logs, merges N runs by taking the maximum observed value
+for each container, and generates a Markdown report.
+
+Stdlib only — no pip installs required.
 
 Usage:
-  ./krr-reports.py
-  ./krr-reports.py --skip-fetch
-  ./krr-reports.py --threshold=15
-  ./krr-reports.py --pods=3           # use last 3 pods (default: -1 = all)
-  ./krr-reports.py --skip-fetch --threshold=5 --pods=2
+    ./scripts/krr-reports.py                              # fetch all pods, 10 % threshold
+    ./scripts/krr-reports.py --skip-fetch                 # reuse existing JSON files
+    ./scripts/krr-reports.py --threshold=15               # stricter threshold
+    ./scripts/krr-reports.py --pods=3                     # use only last 3 pods
+    ./scripts/krr-reports.py --skip-fetch --threshold=5 --pods=2
 """
 
+import argparse
 import json
+import shutil
 import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-# ── Argument parsing ──────────────────────────────────────────────────────────
-SKIP_FETCH = False
-THRESHOLD = 10.0
-POD_COUNT = -1  # -1 = all
-
-for _arg in sys.argv[1:]:
-    if _arg == "--skip-fetch":
-        SKIP_FETCH = True
-    elif _arg.startswith("--threshold="):
-        try:
-            THRESHOLD = float(_arg.split("=", 1)[1])
-        except ValueError:
-            sys.exit(f"--threshold must be a number, got: {_arg}")
-    elif _arg.startswith("--pods="):
-        try:
-            POD_COUNT = int(_arg.split("=", 1)[1])
-        except ValueError:
-            sys.exit(f"--pods must be an integer, got: {_arg}")
-    else:
-        sys.exit(f"Unknown argument: {_arg}")
-
-if THRESHOLD <= 0:
-    sys.exit(f"--threshold must be a positive number, got: {THRESHOLD}")
-
-SCRIPT_DIR = Path(__file__).resolve().parent
-REPO_ROOT = SCRIPT_DIR.parent
-REPORT_DIR = REPO_ROOT / "resource-reports"
-REPORT_DIR.mkdir(exist_ok=True)
-
-TS = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M")
-
-
 # ── Helpers ───────────────────────────────────────────────────────────────────
-def run(cmd: list) -> str:
-    """Run a subprocess and return stdout; exit with stderr on failure."""
+
+def die(msg: str) -> None:
+    print(f"error: {msg}", file=sys.stderr)
+    sys.exit(1)
+
+
+def run(cmd: list[str]) -> str:
+    """Run a subprocess and return stdout; die with stderr on failure."""
     result = subprocess.run(cmd, capture_output=True, text=True, check=False)
     if result.returncode != 0:
-        sys.exit(f"Command failed: {' '.join(cmd)}\n{result.stderr.strip()}")
+        die(f"Command failed: {' '.join(cmd)}\n{result.stderr.strip()}")
     return result.stdout
 
 
-def extract_val(v):
+def extract_val(v) -> float | None:
     """Convert a KRR value field to float or None."""
     if v is None or v == "?" or v == "null":
         return None
@@ -76,7 +58,7 @@ def get_nested(node, *path):
     return node
 
 
-def max_val(a, b):
+def max_val(a: float | None, b: float | None) -> float | None:
     """Return max of two nullable floats; None if both are None."""
     if a is None:
         return b
@@ -93,29 +75,25 @@ def fmt_mem(v) -> str:
     return "—" if v is None else f"{int(v / 1048576 + 0.5)} MiB"
 
 
-def is_off(cur, rec) -> bool:
+def is_off(cur: float | None, rec: float | None, threshold: float) -> bool:
     if cur is None or rec is None or cur == 0:
         return False
-    return abs(cur - rec) / cur > THRESHOLD / 100
+    return abs(cur - rec) / cur > threshold / 100
 
 
 # ── Merge logic ───────────────────────────────────────────────────────────────
+
 def merge_scans(all_scan_lists: list) -> list:
     """
     Merge multiple lists of KRR scan entries into one by taking the maximum
     numeric value for each (namespace, name, container) tuple.
     """
-    # Maps key → dict of {field: max_value, _raw: original_scan}
-    best = {}
+    best: dict = {}
 
     for scan_list in all_scan_lists:
         for scan in scan_list:
             obj = scan.get("object", {})
-            key = (
-                obj.get("namespace"),
-                obj.get("name"),
-                obj.get("container"),
-            )
+            key = (obj.get("namespace"), obj.get("name"), obj.get("container"))
             cpu_req_cur = extract_val(get_nested(obj,  "allocations", "requests", "cpu"))
             mem_req_cur = extract_val(get_nested(obj,  "allocations", "requests", "memory"))
             mem_lim_cur = extract_val(get_nested(obj,  "allocations", "limits",   "memory"))
@@ -139,7 +117,7 @@ def merge_scans(all_scan_lists: list) -> list:
                 b["cpu_req_rec"] = max_val(b["cpu_req_rec"], cpu_req_rec)
                 b["mem_req_rec"] = max_val(b["mem_req_rec"], mem_req_rec)
 
-    # Rebuild into the original KRR scan structure, patching the merged values back in
+    # Rebuild into the original KRR scan structure, patching merged values back in
     result = []
     for key in sorted(best.keys()):
         b = best[key]
@@ -163,156 +141,188 @@ def merge_scans(all_scan_lists: list) -> list:
     return result
 
 
-# ── 1. Collect pod JSON files ─────────────────────────────────────────────────
-json_files = []
+# ── Main ──────────────────────────────────────────────────────────────────────
 
-if not SKIP_FETCH:
-    print("Fetching KRR pod list…")
-    raw_pods = run([
-        "kubectl", "get", "pods", "-n", "krr", "-l", "job-name",
-        "--sort-by=.metadata.creationTimestamp",
-        "-o", "jsonpath={.items[*].metadata.name}",
-    ])
-    pods = raw_pods.strip().split() if raw_pods.strip() else []
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Merge KRR pod logs and generate a Markdown report.")
+    parser.add_argument("--skip-fetch", action="store_true",
+                        help="reuse existing JSON files instead of hitting the cluster")
+    parser.add_argument("--threshold", type=float, default=10.0,
+                        help="deviation threshold in %% before a container is flagged (default: 10)")
+    parser.add_argument("--pods", type=int, default=-1,
+                        help="max number of most-recent KRR pods to use (-1 = all, default: -1)")
+    args = parser.parse_args()
 
-    if not pods:
-        sys.exit("No KRR pods found in namespace 'krr'")
+    if args.threshold <= 0:
+        die(f"--threshold must be a positive number, got: {args.threshold}")
 
-    # Take the last N pods (most recent); -1 means all
-    if POD_COUNT != -1:
-        pods = pods[-POD_COUNT:]
+    if not shutil.which("kubectl"):
+        die("missing dependency: kubectl")
 
-    print(f"  using {len(pods)} pod(s): {', '.join(pods)}")
+    script_dir = Path(__file__).resolve().parent
+    repo_root = script_dir.parent
+    report_dir = repo_root / "resource-reports"
+    report_dir.mkdir(exist_ok=True)
 
-    for i, pod in enumerate(pods):
-        print(f"  fetching log: {pod}")
-        log = run(["kubectl", "logs", "-n", "krr", pod])
-        last_line = log.strip().splitlines()[-1] if log.strip() else ""
+    now_utc = datetime.now(timezone.utc)
+    ts = now_utc.strftime("%Y%m%d-%H%M")
+
+    # ── 1. Collect pod JSON files ─────────────────────────────────────────────
+
+    json_files: list[Path] = []
+
+    if not args.skip_fetch:
+        print("Fetching KRR pod list…")
+        raw_pods = run([
+            "kubectl", "get", "pods", "-n", "krr", "-l", "job-name",
+            "--sort-by=.metadata.creationTimestamp",
+            "-o", "jsonpath={.items[*].metadata.name}",
+        ])
+        pods = raw_pods.strip().split() if raw_pods.strip() else []
+
+        if not pods:
+            die("No KRR pods found in namespace 'krr'")
+
+        if args.pods != -1:
+            pods = pods[-args.pods:]
+
+        print(f"  using {len(pods)} pod(s): {', '.join(pods)}")
+
+        for i, pod in enumerate(pods):
+            print(f"  fetching log: {pod}")
+            log = run(["kubectl", "logs", "-n", "krr", pod])
+            last_line = log.strip().splitlines()[-1] if log.strip() else ""
+            try:
+                data = json.loads(last_line)
+            except json.JSONDecodeError as e:
+                die(f"Failed to parse JSON from pod {pod}: {e}")
+
+            pod_json = report_dir / f"krr-{ts}-pod-{i + 1}.json"
+            pod_json.write_text(json.dumps(data, indent=2))
+            print(f"  saved → {pod_json}")
+            json_files.append(pod_json)
+
+    else:
+        # --skip-fetch: find existing per-pod files, then fall back to plain files
+        candidates = sorted(report_dir.glob("krr-[0-9]*-pod-*.json"), reverse=True)
+        if not candidates:
+            candidates = sorted(report_dir.glob("krr-[0-9]*.json"), reverse=True)
+        if not candidates and (report_dir / "krr.json").exists():
+            candidates = [report_dir / "krr.json"]
+
+        if not candidates:
+            die(f"No KRR JSON found in {report_dir}; run without --skip-fetch first.")
+
+        if args.pods != -1:
+            candidates = candidates[:args.pods]
+
+        json_files = candidates
+
+        # Align ts to the newest file's timestamp prefix
+        stem_parts = json_files[0].stem.split("-")
+        if len(stem_parts) >= 3 and stem_parts[1].isdigit() and stem_parts[2].isdigit():
+            ts = f"{stem_parts[1]}-{stem_parts[2]}"
+
+        print(f"  reusing {len(json_files)} file(s):")
+        for f in json_files:
+            print(f"    {f}")
+
+    # ── 2. Parse all JSONs and merge ──────────────────────────────────────────
+
+    all_scan_lists: list = []
+    first_doc = None
+
+    for jf in json_files:
         try:
-            data = json.loads(last_line)
+            data = json.loads(Path(jf).read_text())
         except json.JSONDecodeError as e:
-            sys.exit(f"Failed to parse JSON from pod {pod}: {e}")
+            die(f"Failed to parse {jf}: {e}")
+        if first_doc is None:
+            first_doc = data
+        all_scan_lists.append(data.get("scans", []))
 
-        pod_json = REPORT_DIR / f"krr-{TS}-pod-{i + 1}.json"
-        pod_json.write_text(json.dumps(data, indent=2))
-        print(f"  saved → {pod_json}")
-        json_files.append(pod_json)
+    if not all_scan_lists:
+        die("No scan data found in any JSON file.")
 
-else:
-    # --skip-fetch: find existing per-pod files, then fall back to plain files
-    candidates = sorted(REPORT_DIR.glob("krr-[0-9]*-pod-*.json"), reverse=True)
-    if not candidates:
-        candidates = sorted(REPORT_DIR.glob("krr-[0-9]*.json"), reverse=True)
-    if not candidates and (REPORT_DIR / "krr.json").exists():
-        candidates = [REPORT_DIR / "krr.json"]
+    merged_scans = merge_scans(all_scan_lists)
 
-    if not candidates:
-        sys.exit(f"No KRR JSON found in {REPORT_DIR}; run without --skip-fetch first.")
+    # Write merged JSON (top-level structure from first doc, scans replaced)
+    krr_json = report_dir / f"krr-{ts}.json"
+    merged_doc = {**first_doc, "scans": merged_scans}
+    krr_json.write_text(json.dumps(merged_doc, indent=2))
+    print(f"Merged JSON  → {krr_json}")
 
-    if POD_COUNT != -1:
-        candidates = candidates[:POD_COUNT]
+    # ── 3. Generate markdown ──────────────────────────────────────────────────
 
-    json_files = candidates
+    out_path = report_dir / f"krr-report-{ts}.md"
 
-    # Align TS to the newest file's timestamp prefix
-    stem_parts = json_files[0].stem.split("-")
-    if len(stem_parts) >= 3 and stem_parts[1].isdigit() and stem_parts[2].isdigit():
-        TS = f"{stem_parts[1]}-{stem_parts[2]}"
-
-    print(f"  reusing {len(json_files)} file(s):")
-    for f in json_files:
-        print(f"    {f}")
-
-# ── 2. Parse all JSONs and merge ──────────────────────────────────────────────
-all_scan_lists = []
-first_doc = None
-
-for jf in json_files:
-    try:
-        data = json.loads(Path(jf).read_text())
-    except json.JSONDecodeError as e:
-        sys.exit(f"Failed to parse {jf}: {e}")
-    if first_doc is None:
-        first_doc = data
-    all_scan_lists.append(data.get("scans", []))
-
-if not all_scan_lists:
-    sys.exit("No scan data found in any JSON file.")
-
-merged_scans = merge_scans(all_scan_lists)
-
-# Write merged JSON (top-level structure from first doc, scans replaced)
-KRR_JSON = REPORT_DIR / f"krr-{TS}.json"
-merged_doc = {**first_doc, "scans": merged_scans}
-KRR_JSON.write_text(json.dumps(merged_doc, indent=2))
-print(f"Merged JSON  → {KRR_JSON}")
-
-# ── 3. Generate markdown ──────────────────────────────────────────────────────
-OUT = REPORT_DIR / f"krr-report-{TS}.md"
-
-TABLE_HEADER = (
-    "| Namespace | Name | Container"
-    " | CPU Req (cur) | CPU Req (rec)"
-    " | Mem Req (cur) | Mem Req (rec)"
-    " | Mem Lim (cur) |"
-)
-TABLE_SEP = (
-    "| --------- | ---- | ---------"
-    " | :-----------: | :-----------:"
-    " | :-----------: | :-----------:"
-    " | :-----------: |"
-)
-
-over_rows = []
-good_rows = []
-
-for scan in merged_scans:
-    obj  = scan.get("object", {})
-    ns   = obj.get("namespace", "")
-    name = obj.get("name", "")
-    ctr  = obj.get("container", "")
-
-    ccpu = extract_val(get_nested(obj,  "allocations", "requests", "cpu"))
-    cmem = extract_val(get_nested(obj,  "allocations", "requests", "memory"))
-    clim = extract_val(get_nested(obj,  "allocations", "limits",   "memory"))
-    rcpu = extract_val(get_nested(scan, "recommended", "requests", "cpu",    "value"))
-    rmem = extract_val(get_nested(scan, "recommended", "requests", "memory", "value"))
-
-    row = (
-        f"| {ns} | {name} | {ctr}"
-        f" | {fmt_cpu(ccpu)} | {fmt_cpu(rcpu)}"
-        f" | {fmt_mem(cmem)} | {fmt_mem(rmem)}"
-        f" | {fmt_mem(clim)} |"
+    table_header = (
+        "| Namespace | Name | Container"
+        " | CPU Req (cur) | CPU Req (rec)"
+        " | Mem Req (cur) | Mem Req (rec)"
+        " | Mem Lim (cur) |"
+    )
+    table_sep = (
+        "| --------- | ---- | ---------"
+        " | :-----------: | :-----------:"
+        " | :-----------: | :-----------:"
+        " | :-----------: |"
     )
 
-    if is_off(ccpu, rcpu) or is_off(cmem, rmem):
-        over_rows.append(row)
-    else:
-        good_rows.append(row)
+    over_rows: list[str] = []
+    good_rows: list[str] = []
 
-thr = int(THRESHOLD) if THRESHOLD == int(THRESHOLD) else THRESHOLD
-now_str = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    for scan in merged_scans:
+        obj  = scan.get("object", {})
+        ns   = obj.get("namespace", "")
+        name = obj.get("name", "")
+        ctr  = obj.get("container", "")
 
-lines = [
-    f"# KRR Resource Report — {now_str}",
-    "",
-    f"## ⚠️ Out of range (>{thr} % off recommendation)",
-    "",
-    f"Containers whose current requests or limits deviate from the KRR recommendation by more than {thr} %.",
-    "",
-    TABLE_HEADER,
-    TABLE_SEP,
-    *sorted(over_rows),
-    "",
-    f"## ✅ Within range (≤{thr} % of recommendation)",
-    "",
-    "Containers that are already well-tuned.",
-    "",
-    TABLE_HEADER,
-    TABLE_SEP,
-    *sorted(good_rows),
-    "",
-]
+        ccpu = extract_val(get_nested(obj,  "allocations", "requests", "cpu"))
+        cmem = extract_val(get_nested(obj,  "allocations", "requests", "memory"))
+        clim = extract_val(get_nested(obj,  "allocations", "limits",   "memory"))
+        rcpu = extract_val(get_nested(scan, "recommended", "requests", "cpu",    "value"))
+        rmem = extract_val(get_nested(scan, "recommended", "requests", "memory", "value"))
 
-OUT.write_text("\n".join(lines))
-print(f"Written to   → {OUT}")
+        row = (
+            f"| {ns} | {name} | {ctr}"
+            f" | {fmt_cpu(ccpu)} | {fmt_cpu(rcpu)}"
+            f" | {fmt_mem(cmem)} | {fmt_mem(rmem)}"
+            f" | {fmt_mem(clim)} |"
+        )
+
+        if is_off(ccpu, rcpu, args.threshold) or is_off(cmem, rmem, args.threshold):
+            over_rows.append(row)
+        else:
+            good_rows.append(row)
+
+    thr = int(args.threshold) if args.threshold == int(args.threshold) else args.threshold
+    now_str = now_utc.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    lines = [
+        f"# KRR Resource Report — {now_str}",
+        "",
+        f"## ⚠️ Out of range (>{thr} % off recommendation)",
+        "",
+        f"Containers whose current requests or limits deviate from the KRR recommendation by more than {thr} %.",
+        "",
+        table_header,
+        table_sep,
+        *sorted(over_rows),
+        "",
+        f"## ✅ Within range (≤{thr} % of recommendation)",
+        "",
+        "Containers that are already well-tuned.",
+        "",
+        table_header,
+        table_sep,
+        *sorted(good_rows),
+        "",
+    ]
+
+    out_path.write_text("\n".join(lines))
+    print(f"Written to   → {out_path}")
+
+
+if __name__ == "__main__":
+    main()
