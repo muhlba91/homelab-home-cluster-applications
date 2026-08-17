@@ -44,8 +44,8 @@ controllers:
 
         resources:
           requests:
-            cpu: 143m
-            memory: 840Mi
+            cpu: 50m
+            memory: 1241Mi
           limits:
             memory: 2048Mi
 
@@ -123,8 +123,8 @@ controllers:
 
         resources:
           requests:
-            cpu: 10m
-            memory: 375Mi
+            cpu: 5m
+            memory: 477Mi
             nvidia.com/gpu: "1"
           limits:
             memory: 3072Mi
@@ -192,10 +192,10 @@ controllers:
 
         resources: &samba_resources
           requests:
-            cpu: 10m
-            memory: 100Mi
+            cpu: 3m
+            memory: 35Mi
           limits:
-            memory: 200Mi
+            memory: 192Mi
 
         probes:
           liveness:
