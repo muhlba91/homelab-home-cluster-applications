@@ -3,10 +3,10 @@ toolbox:
   enabled: true
   resources:
     requests:
-      cpu: 10m
-      memory: 100Mi
+      cpu: 5m
+      memory: 16Mi
     limits:
-      memory: 100Mi
+      memory: 32Mi
 
 cephImage:
   repository: quay.io/ceph/ceph
@@ -52,43 +52,43 @@ cephClusterSpec:
   resources:
     mgr:
       requests:
-        cpu: 30m
-        memory: 1024Mi
+        cpu: 66m
+        memory: 1171Mi
       limits:
-        memory: 1024Mi
+        memory: 1171Mi
     mon:
       requests:
-        cpu: 25m
-        memory: 543Mi
+        cpu: 59m
+        memory: 594Mi
       limits:
         memory: 1024Mi
     osd:
       requests:
-        cpu: 58m
-        memory: 2556Mi
+        cpu: 150m
+        memory: 2560Mi
       limits:
         memory: 4096Mi
     # prepareosd: # not set
     # mgr-sidecar: # not set
     crashcollector:
       requests:
-        cpu: 10m
-        memory: 100Mi
+        cpu: 5m
+        memory: 64Mi
       limits:
-        memory: 100Mi
+        memory: 96Mi
     logcollector:
       requests:
-        cpu: 10m
-        memory: 100Mi
+        cpu: 3m
+        memory: 8Mi
       limits:
-        memory: 100Mi
+        memory: 16Mi
     # cleanup # not set
     exporter:
       requests:
         cpu: 15m
-        memory: 100Mi
+        memory: 32Mi
       limits:
-        memory: 100Mi
+        memory: 64Mi
 
 cephBlockPools:
   - name: builtin-mgr
