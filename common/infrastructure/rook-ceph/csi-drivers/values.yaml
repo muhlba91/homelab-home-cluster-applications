@@ -16,10 +16,10 @@ drivers:
       resources:
         attacher:
           requests:
-            cpu: 10m
-            memory: 100Mi
+            cpu: 5m
+            memory: 96Mi
           limits:
-            memory: 100Mi
+            memory: 96Mi
         omapGenerator:
           requests:
             cpu: 10m
@@ -28,22 +28,22 @@ drivers:
             memory: 1Gi
         plugin:
           requests:
-            cpu: 10m
-            memory: 100Mi
+            cpu: 5m
+            memory: 56Mi
           limits:
-            memory: 384Mi
+            memory: 96Mi
         provisioner:
           requests:
-            cpu: 10m
-            memory: 100Mi
+            cpu: 5m
+            memory: 96Mi
           limits:
-            memory: 100Mi
+            memory: 96Mi
         resizer:
           requests:
-            cpu: 10m
-            memory: 100Mi
+            cpu: 5m
+            memory: 96Mi
           limits:
-            memory: 100Mi
+            memory: 96Mi
         snapshotter:
           requests:
             cpu: 10m
@@ -52,25 +52,35 @@ drivers:
             memory: 100Mi
         addons: {}
         liveness: {}
-        logRotator: {}
+        logRotator:
+          requests:
+            cpu: 5m
+            memory: 8Mi
+          limits:
+            memory: 16Mi
     nodePlugin:
       priorityClassName: system-cluster-critical
       resources:
         plugin:
           requests:
-            cpu: 10m
-            memory: 100Mi
+            cpu: 5m
+            memory: 64Mi
           limits:
-            memory: 384Mi
+            memory: 128Mi
         registrar:
           requests:
-            cpu: 10m
-            memory: 100Mi
+            cpu: 5m
+            memory: 16Mi
           limits:
-            memory: 100Mi
+            memory: 32Mi
         addons: {}
         liveness: {}
-        logRotator: {}
+        logRotator:
+          requests:
+            cpu: 5m
+            memory: 8Mi
+          limits:
+            memory: 16Mi
 
   cephfs:
     enabled: true
@@ -79,55 +89,65 @@ drivers:
       resources:
         attacher:
           requests:
-            cpu: 10m
-            memory: 100Mi
+            cpu: 5m
+            memory: 24Mi
           limits:
-            memory: 100Mi
+            memory: 64Mi
         plugin:
           requests:
-            cpu: 10m
-            memory: 100Mi
+            cpu: 5m
+            memory: 32Mi
           limits:
-            memory: 384Mi
+            memory: 64Mi
         provisioner:
           requests:
-            cpu: 10m
-            memory: 100Mi
+            cpu: 5m
+            memory: 24Mi
           limits:
-            memory: 100Mi
+            memory: 64Mi
         resizer:
           requests:
-            cpu: 10m
-            memory: 100Mi
+            cpu: 5m
+            memory: 24Mi
           limits:
-            memory: 100Mi
+            memory: 64Mi
         snapshotter:
           requests:
-            cpu: 10m
-            memory: 100Mi
+            cpu: 5m
+            memory: 64Mi
           limits:
-            memory: 100Mi
+            memory: 64Mi
         omapGenerator: {}
         addons: {}
         liveness: {}
-        logRotator: {}
+        logRotator:
+          requests:
+            cpu: 5m
+            memory: 8Mi
+          limits:
+            memory: 16Mi
     nodePlugin:
       resources:
         plugin:
           requests:
-            cpu: 10m
-            memory: 100Mi
+            cpu: 5m
+            memory: 32Mi
           limits:
-            memory: 384Mi
+            memory: 64Mi
         registrar:
           requests:
-            cpu: 10m
-            memory: 100Mi
+            cpu: 5m
+            memory: 16Mi
           limits:
-            memory: 100Mi
+            memory: 32Mi
         addons: {}
         liveness: {}
-        logRotator: {}
+        logRotator:
+          requests:
+            cpu: 5m
+            memory: 8Mi
+          limits:
+            memory: 16Mi
 
   nfs:
     enabled: false
