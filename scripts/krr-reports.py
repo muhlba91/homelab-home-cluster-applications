@@ -269,8 +269,9 @@ def main() -> None:
         " | :-----------: |"
     )
 
-    over_rows: list[str] = []
-    good_rows: list[str] = []
+    # Each entry: (row_str, ccpu, cmem, rcpu, rmem)
+    over_rows: list[tuple] = []
+    good_rows: list[tuple] = []
 
     for scan in merged_scans:
         obj  = scan.get("object", {})
@@ -291,10 +292,30 @@ def main() -> None:
             f" | {fmt_mem(clim)} |"
         )
 
+        entry = (row, ccpu, cmem, rcpu, rmem)
         if is_off(ccpu, rcpu, args.threshold) or is_off(cmem, rmem, args.threshold):
-            over_rows.append(row)
+            over_rows.append(entry)
         else:
-            good_rows.append(row)
+            good_rows.append(entry)
+
+    def diff_summary(rows: list[tuple]) -> list[str]:
+        """Return summary lines for CPU and memory differences after a table."""
+        total_cpu_diff = sum((r or 0) - (c or 0) for _, c, _, r, _ in rows)
+        total_mem_diff = sum((r or 0) - (c or 0) for _, _, c, _, r in rows)
+
+        def fmt_diff_cpu(v: float) -> str:
+            sign = "+" if v >= 0 else ""
+            return f"{sign}{int(v * 1000 + (0.5 if v >= 0 else -0.5))}m"
+
+        def fmt_diff_mem(v: float) -> str:
+            sign = "+" if v >= 0 else ""
+            return f"{sign}{int(v / 1048576 + (0.5 if v >= 0 else -0.5))} MiB"
+
+        return [
+            "",
+            f"**CPU difference (rec − cur):** {fmt_diff_cpu(total_cpu_diff)}  ",
+            f"**Memory difference (rec − cur):** {fmt_diff_mem(total_mem_diff)}",
+        ]
 
     thr = int(args.threshold) if args.threshold == int(args.threshold) else args.threshold
     now_str = now_utc.strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -308,7 +329,8 @@ def main() -> None:
         "",
         table_header,
         table_sep,
-        *sorted(over_rows),
+        *sorted(r for r, *_ in over_rows),
+        *diff_summary(over_rows),
         "",
         f"## ✅ Within range (≤{thr} % of recommendation)",
         "",
@@ -316,7 +338,8 @@ def main() -> None:
         "",
         table_header,
         table_sep,
-        *sorted(good_rows),
+        *sorted(r for r, *_ in good_rows),
+        *diff_summary(good_rows),
         "",
     ]
 
