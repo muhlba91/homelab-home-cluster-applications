@@ -49,7 +49,7 @@ service:
 
 resources:
   requests:
-    cpu: 10m
-    memory: 100Mi
+    cpu: 3m
+    memory: 41Mi
   limits:
-    memory: 100Mi
+    memory: 41Mi

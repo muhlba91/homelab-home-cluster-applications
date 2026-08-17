@@ -4,23 +4,23 @@ service:
 
 resources:
   requests:
-    cpu: 10m
-    memory: 100Mi
+    cpu: 3m
+    memory: 64Mi
   limits:
-    memory: 100Mi
+    memory: 64Mi
 
 webhook:
   resources:
     requests:
-      cpu: 10m
-      memory: 100Mi
+      cpu: 3m
+      memory: 101Mi
     limits:
-      memory: 100Mi
+      memory: 101Mi
 
 certController:
   resources:
     requests:
-      cpu: 10m
-      memory: 100Mi
+      cpu: 3m
+      memory: 82Mi
     limits:
-      memory: 100Mi
+      memory: 82Mi

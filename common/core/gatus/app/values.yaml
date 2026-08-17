@@ -46,10 +46,10 @@ controllers:
 
         resources:
           requests:
-            cpu: 10m
-            memory: 138Mi
+            cpu: 5m
+            memory: 73Mi
           limits:
-            memory: 138Mi
+            memory: 128Mi
 
         probes:
           liveness:
@@ -75,10 +75,10 @@ controllers:
           - --output=/config/gatus-sidecar.yaml
         resources:
           requests:
-            cpu: 10m
-            memory: 64Mi
+            cpu: 3m
+            memory: 51Mi
           limits:
-            memory: 64Mi
+            memory: 51Mi
 
 serviceAccount:
   gatus: {}

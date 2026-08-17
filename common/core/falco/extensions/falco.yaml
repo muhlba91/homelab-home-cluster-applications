@@ -18,8 +18,8 @@ spec:
         - name: falco
           resources:
             requests:
-              cpu: 50m
-              memory: 256Mi
+              cpu: 122m
+              memory: 317Mi
             limits:
               memory: 1024Mi
           env:
