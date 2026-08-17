@@ -4,9 +4,9 @@ toolbox:
   resources:
     requests:
       cpu: 5m
-      memory: 16Mi
-    limits:
       memory: 32Mi
+    limits:
+      memory: 256Mi
 
 cephImage:
   repository: quay.io/ceph/ceph
