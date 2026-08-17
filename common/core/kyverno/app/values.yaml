@@ -28,9 +28,9 @@ backgroundController:
   resources:
     requests:
       cpu: 7m
-      memory: 384Mi
+      memory: 192Mi
     limits:
-      memory: 384Mi
+      memory: 512Mi
 
 cleanupController:
   rbac: *extraRbacResources
