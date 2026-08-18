@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: kyverno
-      version: 3.9.0-rc.3
+      version: 3.9.0-rc.4
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
