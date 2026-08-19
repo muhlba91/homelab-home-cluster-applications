@@ -30,6 +30,13 @@ spec:
             - - ghcr.io/home-assistant/home-assistant
               - home-assistant
               - home-assistant-
+        - name: agents_init_provisioning
+          fields: [container.image.repository, container.name, k8s.ns.name]
+          comps: [=, =, startswith]
+          values:
+            - - docker.io/library/alpine
+              - init
+              - agents
         - name: telegraf_entrypoint_binary
           fields: [container.image.repository, container.name, proc.name]
           comps: [=, =, =]
@@ -69,6 +76,17 @@ spec:
             - - ghcr.io/home-assistant/home-assistant
               - home-assistant
               - python3
+      override:
+        exceptions: append
+    - rule: Create Hardlink Over Sensitive Files
+      exceptions:
+        - name: samba_adduser_provisioning
+          fields: [container.image.repository, container.name, proc.name]
+          comps: [=, =, =]
+          values:
+            - - ghcr.io/crazy-max/samba
+              - samba
+              - adduser
       override:
         exceptions: append
   priority: 51
