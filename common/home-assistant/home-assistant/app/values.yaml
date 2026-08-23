@@ -9,6 +9,29 @@ controllers:
     annotations:
       reloader.stakater.com/auto: "true"
     containers:
+      git-sync:
+        image: &git-sync-image
+          repository: registry.k8s.io/git-sync/git-sync
+          tag: v4.7.1
+          pullPolicy: IfNotPresent
+        env:
+          - name: GITSYNC_REPO
+            valueFrom:
+              configMapKeyRef:
+                name: home-assistant-git
+                key: GIT_REPO
+          - name: GITSYNC_ROOT
+            value: /config-repo
+          - name: GITSYNC_LINK
+            value: link
+          - name: GITSYNC_DEPTH
+            value: "1"
+        resources: &git-sync-resources
+          requests:
+            cpu: 10m
+            memory: 64Mi
+          limits:
+            memory: 128Mi
       home-assistant:
         image:
           repository: ghcr.io/home-assistant/home-assistant
@@ -20,6 +43,10 @@ controllers:
             value: UTC
           - name: DATA_PATH
             value: /config
+          - name: STATE_PATH
+            value: /config-state
+          - name: REPO_PATH
+            value: /config-repo/link
           - name: GOOGLE_APPLICATION_CREDENTIALS
             value: /gcp-credentials/credentials.json
           - name: GOOGLE_CREDENTIALS
@@ -32,20 +59,15 @@ controllers:
               secretKeyRef:
                 name: home-assistant-postgresql-app
                 key: uri
-
         envFrom:
           - secretRef:
               name: home-assistant-backup
-          - configMapRef:
-              name: home-assistant-git
-
         resources:
           requests:
             cpu: 19m
             memory: 1069Mi
           limits:
             memory: 1538Mi
-
         probes:
           liveness:
             enabled: true
@@ -58,22 +80,59 @@ controllers:
               periodSeconds: 5
 
     initContainers:
-      backup-restore:
-        image:
+      git-sync:
+        image: *git-sync-image
+        env:
+          - name: GITSYNC_REPO
+            valueFrom:
+              configMapKeyRef:
+                name: home-assistant-git
+                key: GIT_REPO
+          - name: GITSYNC_ROOT
+            value: /config-repo
+          - name: GITSYNC_LINK
+            value: link
+          - name: GITSYNC_ONE_TIME
+            value: "true"
+          - name: GITSYNC_DEPTH
+            value: "1"
+        resources: *git-sync-resources
+      configuration-sync:
+        image: &init-image
           repository: alpine
           tag: 3.24
           pullPolicy: IfNotPresent
         command:
-          - /scripts/backup_restore.sh
+          - /scripts/sync_configuration.sh
+        args:
           - "true"
-        envFrom:
-          - secretRef:
-              name: home-assistant-backup
-          - configMapRef:
-              name: home-assistant-git
         env:
           - name: DATA_PATH
             value: /config
+          - name: STATE_PATH
+            value: /config-state
+          - name: REPO_PATH
+            value: /config-repo/link
+        resources: &init-resources
+          requests:
+            cpu: 50m
+            memory: 256Mi
+          limits:
+            memory: 512Mi
+      backup-restore:
+        image: *init-image
+        command:
+          - /scripts/backup_restore.sh
+        envFrom:
+          - secretRef:
+              name: home-assistant-backup
+        env:
+          - name: DATA_PATH
+            value: /config
+          - name: STATE_PATH
+            value: /config-state
+          - name: REPO_PATH
+            value: /config-repo/link
           - name: GOOGLE_APPLICATION_CREDENTIALS
             value: /gcp-credentials/credentials.json
           - name: GOOGLE_CREDENTIALS
@@ -81,13 +140,7 @@ controllers:
               secretKeyRef:
                 name: home-assistant-gcp-credentials
                 key: credentials.json
-        resources:
-          requests:
-            cpu: 50m
-            memory: 256Mi
-          limits:
-            cpu: "1"
-            memory: 512Mi
+        resources: *init-resources
 
 service:
   home-assistant:
@@ -191,6 +244,16 @@ persistence:
     accessMode: ReadWriteOnce
     size: 1Gi
     retain: false
+  config-state:
+    enabled: true
+    type: emptyDir
+    globalMounts:
+      - path: /config-state
+  config-repo:
+    enabled: true
+    type: emptyDir
+    globalMounts:
+      - path: /config-repo
   scripts:
     enabled: true
     type: configMap

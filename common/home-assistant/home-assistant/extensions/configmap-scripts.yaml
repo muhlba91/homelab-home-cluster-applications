@@ -6,22 +6,22 @@ metadata:
 data:
   backup_restore.sh: |
     #!/bin/sh
+    set -eu
 
-    COPY_CONFIGURATION=$${1:-false}
+    apk --no-cache add bash libarchive-tools s3cmd
 
-    apk --no-cache add git s3cmd bash libarchive-tools
-    wget -O /usr/bin/sops https://github.com/mozilla/sops/releases/download/v3.7.3/sops-v3.7.3.linux.amd64 &> /dev/null
-    chmod +x /usr/bin/sops
+    "$${REPO_PATH}/lifecycle/backup_restore.sh" "$${DATA_PATH}"
+  sync_configuration.sh: |
+    #!/bin/sh
+    set -eu
 
-    rm -rf /tmp/repo
-    git clone $${GIT_REPO} /tmp/repo
-    cd /tmp/repo
+    IGNORE_RETURN_VALUES="${1:-false}"
 
-    /tmp/repo/lifecycle/sops.sh d /tmp/repo
-    /tmp/repo/lifecycle/backup_restore.sh $${DATA_PATH} $${COPY_CONFIGURATION} /tmp/repo ${SITE}
+    apk --no-cache add bash libarchive-tools sops
 
-    if [[ "$${COPY_CONFIGURATION}" == true ]]; then
-      /tmp/repo/lifecycle/prepare.sh $${DATA_PATH} /tmp/repo ${SITE}
-    fi
+    "$${REPO_PATH}/lifecycle/sops.sh" d "$${REPO_PATH}"
+
+    "$${REPO_PATH}/lifecycle/configuration.sh" "$${DATA_PATH}" "$${REPO_PATH}" ${SITE} "$${STATE_PATH}" "$${IGNORE_RETURN_VALUES}"
+    "$${REPO_PATH}/lifecycle/prepare.sh" "$${DATA_PATH}" "$${REPO_PATH}" "$${STATE_PATH}" "$${IGNORE_RETURN_VALUES}"
   dockerenv: |
     # TODO: remove once https://github.com/home-assistant/core/issues/127966 (PR: https://github.com/home-assistant/core/pull/132404) is fixed
