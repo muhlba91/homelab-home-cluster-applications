@@ -21,7 +21,7 @@ controllers:
       krr:
         image:
           repository: robustadev/krr
-          tag: v1.29.0
+          tag: v1.30.0
         command:
           - /bin/sh
           - -c
