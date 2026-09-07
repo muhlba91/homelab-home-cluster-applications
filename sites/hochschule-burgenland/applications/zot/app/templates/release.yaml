@@ -24,7 +24,7 @@ spec:
   chart:
     spec:
       chart: zot
-      version: 0.1.122
+      version: 0.1.124
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
