@@ -76,6 +76,6 @@ migrationJob:
 resources:
   requests:
     cpu: 10m
-    memory: 1506MI
+    memory: 1506Mi
   limits:
     memory: 1792Mi
