@@ -1,0 +1,36 @@
+---
+replicaCount: 1
+
+service:
+  annotations:
+    gatus.home-operations.com/enabled: "true"
+
+additionalAnnotations:
+  reloader.stakater.com/auto: "true"
+
+env:
+  - name: QDRANT__SERVICE__API_KEY
+    valueFrom:
+      secretKeyRef:
+        name: qdrant-zoocode-apikey
+        key: api-key
+  - name: QDRANT__SERVICE__READ_ONLY_API_KEY
+    valueFrom:
+      secretKeyRef:
+        name: qdrant-zoocode-apikey
+        key: read-only-api-key
+
+livenessProbe:
+  enabled: true
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 256Mi
+  limits:
+    cpu: "1"
+    memory: 1Gi
+
+persistence:
+  size: 8Gi
+  storageClassName: ${DEFAULT_STORAGE_CLASS}

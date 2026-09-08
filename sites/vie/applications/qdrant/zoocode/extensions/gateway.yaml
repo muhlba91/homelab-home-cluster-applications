@@ -1,0 +1,44 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: ListenerSet
+metadata:
+  name: qdrant-zoocode-listeners
+  annotations:
+    cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
+spec:
+  parentRef:
+    name: kgateway-gateway
+    namespace: kgateway
+  listeners:
+    - name: https-qdrant-zoocode
+      protocol: HTTPS
+      port: 443
+      hostname: qdrant.ai.${HOME_DOMAIN}
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: qdrant-zoocode-tls-cert
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: qdrant-zoocode
+  annotations:
+    external-dns.alpha.kubernetes.io/provider: public
+    external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
+spec:
+  parentRefs:
+    - name: qdrant-zoocode-listeners
+      kind: ListenerSet
+      group: gateway.networking.k8s.io
+  hostnames:
+    - qdrant.ai.${HOME_DOMAIN}
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: qdrant-zoocode
+          port: 6333
