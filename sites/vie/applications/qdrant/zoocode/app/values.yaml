@@ -25,8 +25,8 @@ livenessProbe:
 
 resources:
   requests:
-    cpu: 10m
-    memory: 256Mi
+    cpu: 5m
+    memory: 128Mi
   limits:
     cpu: "1"
     memory: 1Gi
