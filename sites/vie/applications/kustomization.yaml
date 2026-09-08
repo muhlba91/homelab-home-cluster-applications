@@ -11,5 +11,5 @@ resources:
   - ./immich/
   - ./librechat/
   - ./mealie/
-  # - ./qdrant/
+  - ./qdrant/
   - ./agents/
