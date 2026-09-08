@@ -13,7 +13,7 @@ spec:
     - name: https-qdrant-zoocode
       protocol: HTTPS
       port: 443
-      hostname: qdrant.ai.${HOME_DOMAIN}
+      hostname: zoocode.qdrant.ai.${HOME_DOMAIN}
       tls:
         mode: Terminate
         certificateRefs:
@@ -33,7 +33,7 @@ spec:
       kind: ListenerSet
       group: gateway.networking.k8s.io
   hostnames:
-    - qdrant.ai.${HOME_DOMAIN}
+    - zoocode.qdrant.ai.${HOME_DOMAIN}
   rules:
     - matches:
         - path:
