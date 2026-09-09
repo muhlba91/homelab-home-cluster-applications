@@ -1,4 +1,9 @@
 ---
+csi:
+  cephcsi:
+    repository: quay.io/cephcsi/cephcsi
+    tag: v3.17.1
+
 resources:
   requests:
     cpu: 80m
