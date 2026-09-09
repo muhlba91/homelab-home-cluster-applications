@@ -33,15 +33,12 @@
     ],
     "packageRules": [
         {
-            "description": "kyverno rc",
-            "matchManagers": [
-                "flux"
-            ],
+            "description": "librechat rc",
             "matchDatasources": [
-                "helm"
+                "docker"
             ],
             "matchPackageNames": [
-                "kyverno"
+                "ghcr.io/danny-avila/librechat"
             ],
             "ignoreUnstable": false
         }
