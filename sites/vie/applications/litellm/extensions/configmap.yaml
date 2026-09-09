@@ -28,6 +28,7 @@ data:
       disable_adding_master_key_hash_to_db: true
 
       proxy_batch_write_at: 120
+      proxy_config_reload_interval_seconds: 120
       database_connection_pool_limit: 10
 
       store_prompts_in_spend_logs: false
