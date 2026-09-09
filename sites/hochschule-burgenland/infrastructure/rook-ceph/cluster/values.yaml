@@ -25,13 +25,13 @@ cephClusterSpec:
     cephx:
       csi:
         keyRotationPolicy: KeyGeneration
-        keyGeneration: 3
-        keepPriorKeyCountMax: 2
+        keyGeneration: 4
+        keepPriorKeyCountMax: 1
         keyType: aes256k
       daemon:
         keyRotationPolicy: KeyGeneration
-        keyGeneration: 3
-        keepPriorKeyCountMax: 2
+        keyGeneration: 2
+        keepPriorKeyCountMax: 1
         keyType: aes256k
   healthCheck:
     muteHealthWarning:
