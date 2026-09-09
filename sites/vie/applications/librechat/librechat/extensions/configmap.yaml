@@ -171,13 +171,13 @@ data:
           titleMethod: completion
           models:
             default:
-              - codestral-latest
-              - devstral-latest
-              - devstral-medium-latest
-              - devstral-small-latest
-              - mistral-large-latest
-              - mistral-medium-latest
               - mistral-small-latest
+              - mistral-medium-latest
+              - mistral-large-latest
+              - devstral-small-latest
+              - devstral-medium-latest
+              - devstral-latest
+              - codestral-latest
             fetch: false
 
         - name: OSS Models
