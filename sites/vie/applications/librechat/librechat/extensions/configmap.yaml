@@ -113,8 +113,11 @@ data:
 
       custom:
         - name: Anthropic Claude
+          provider: anthropic
           apiKey: user_provided
-          baseURL: http://litellm.litellm:4000/v1
+          baseURL: http://litellm.litellm:4000
+          headers:
+            anthropic-version: 2023-06-01
           iconURL: anthropic
           titleConvo: true
           titleEndpoint: Google Gemini
