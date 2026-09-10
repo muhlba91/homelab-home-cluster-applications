@@ -23,8 +23,8 @@ cephClusterSpec:
     managePodBudgets: false
   security:
     cephx:
-      # allowedCiphers:
-      #   - aes256k
+      allowedCiphers:
+        - aes256k
       csi:
         keyRotationPolicy: KeyGeneration
         keyGeneration: 2
