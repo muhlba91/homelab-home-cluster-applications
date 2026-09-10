@@ -117,7 +117,7 @@ data:
           apiKey: user_provided
           baseURL: http://litellm.litellm:4000
           headers:
-            anthropic-version: 2023-06-01
+            anthropic-version: "2023-06-01"
           iconURL: anthropic
           titleConvo: true
           titleEndpoint: Google Gemini
