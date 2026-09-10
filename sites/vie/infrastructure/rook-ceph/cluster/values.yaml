@@ -21,6 +21,7 @@ cephClusterSpec:
     confirmation: "" # "yes-really-destroy-data"
   disruptionManagement:
     managePodBudgets: false
+  security:
     cephx:
       # allowedCiphers:
       #   - aes256k
