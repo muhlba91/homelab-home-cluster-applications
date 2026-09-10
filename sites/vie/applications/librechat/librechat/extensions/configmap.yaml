@@ -118,12 +118,6 @@ data:
           baseURL: http://litellm.litellm:4000
           headers:
             anthropic-version: "2023-06-01"
-          customParams:
-            paramDefinitions:
-              - key: promptCache
-                default: true
-              - key: promptCacheTtl
-                default: 15m
           iconURL: anthropic
           titleConvo: true
           titleEndpoint: Google Gemini
