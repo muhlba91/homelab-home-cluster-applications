@@ -38,8 +38,8 @@ kind: HTTPRoute
 metadata:
   name: omada-controller
   annotations:
-    external-dns.alpha.kubernetes.io/provider: public
-    external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
+    external-dns.kubernetes.io/provider: public
+    external-dns.kubernetes.io/target: "${PUBLIC_IP}"
 spec:
   parentRefs:
     - name: omada-controller-listeners

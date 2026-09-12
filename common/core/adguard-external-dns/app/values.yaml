@@ -13,7 +13,7 @@ domainFilters:
   - internal.muehlbachler.io
   - internal.muehlbachler.xyz
 
-annotationFilter: "external-dns.alpha.kubernetes.io/provider=internal"
+annotationFilter: "external-dns.kubernetes.io/provider=internal"
 
 policy: sync
 txtOwnerId: external-dns-${SITE}-adguard

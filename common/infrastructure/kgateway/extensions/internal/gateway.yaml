@@ -4,7 +4,7 @@ kind: Gateway
 metadata:
   name: kgateway-gateway-internal
   annotations:
-    external-dns.alpha.kubernetes.io/provider: internal
+    external-dns.kubernetes.io/provider: internal
 spec:
   gatewayClassName: kgateway
   infrastructure:

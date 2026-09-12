@@ -114,8 +114,8 @@ server:
   httproute:
     enabled: true
     annotations:
-      external-dns.alpha.kubernetes.io/provider: public
-      external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
+      external-dns.kubernetes.io/provider: public
+      external-dns.kubernetes.io/target: "${PUBLIC_IP}"
     hostnames:
       - argocd.${PUBLIC_DOMAIN}
   listenerset:
@@ -134,8 +134,8 @@ applicationSet:
   httproute:
     enabled: true
     annotations:
-      external-dns.alpha.kubernetes.io/provider: public
-      external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
+      external-dns.kubernetes.io/provider: public
+      external-dns.kubernetes.io/target: "${PUBLIC_IP}"
     hostnames:
       - webhook.argocd.${PUBLIC_DOMAIN}
   listenerset:

@@ -43,8 +43,8 @@ service:
     loadBalancerClass: ${CILIUM_LB_CLASS}
     ipFamilyPolicy: PreferDualStack
     annotations:
-      external-dns.alpha.kubernetes.io/provider: internal
-      external-dns.alpha.kubernetes.io/hostname: openwakeword.iot.${LOCAL_INTERNAL_DOMAIN}
+      external-dns.kubernetes.io/provider: internal
+      external-dns.kubernetes.io/hostname: openwakeword.iot.${LOCAL_INTERNAL_DOMAIN}
     ports:
       http:
         port: 10400

@@ -4,8 +4,8 @@ kind: Gateway
 metadata:
   name: kgateway-gateway
   annotations:
-    external-dns.alpha.kubernetes.io/provider: public
-    external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
+    external-dns.kubernetes.io/provider: public
+    external-dns.kubernetes.io/target: "${PUBLIC_IP}"
 spec:
   gatewayClassName: kgateway
   infrastructure:

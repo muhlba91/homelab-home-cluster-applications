@@ -282,8 +282,8 @@ service:
     loadBalancerClass: ${CILIUM_LB_CLASS}
     externalTrafficPolicy: Local
     annotations:
-      external-dns.alpha.kubernetes.io/provider: internal
-      external-dns.alpha.kubernetes.io/hostname: photos-daniel.smb.${INTERNAL_DOMAIN}
+      external-dns.kubernetes.io/provider: internal
+      external-dns.kubernetes.io/hostname: photos-daniel.smb.${INTERNAL_DOMAIN}
     ports:
       smb:
         enabled: true
@@ -317,8 +317,8 @@ service:
     loadBalancerClass: ${CILIUM_LB_CLASS}
     externalTrafficPolicy: Local
     annotations:
-      external-dns.alpha.kubernetes.io/provider: internal
-      external-dns.alpha.kubernetes.io/hostname: photos-kasia.smb.${INTERNAL_DOMAIN}
+      external-dns.kubernetes.io/provider: internal
+      external-dns.kubernetes.io/hostname: photos-kasia.smb.${INTERNAL_DOMAIN}
     ports:
       smb:
         enabled: true
@@ -351,8 +351,8 @@ route:
     enabled: true
     kind: HTTPRoute
     annotations:
-      external-dns.alpha.kubernetes.io/provider: public
-      external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
+      external-dns.kubernetes.io/provider: public
+      external-dns.kubernetes.io/target: "${PUBLIC_IP}"
     parentRefs:
       - group: gateway.networking.k8s.io
         kind: ListenerSet

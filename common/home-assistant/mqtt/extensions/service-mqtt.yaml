@@ -4,8 +4,8 @@ kind: Service
 metadata:
   name: emqx-mqtt
   annotations:
-    external-dns.alpha.kubernetes.io/provider: internal
-    external-dns.alpha.kubernetes.io/hostname: mqtt.iot.${LOCAL_INTERNAL_DOMAIN}
+    external-dns.kubernetes.io/provider: internal
+    external-dns.kubernetes.io/hostname: mqtt.iot.${LOCAL_INTERNAL_DOMAIN}
 spec:
   type: LoadBalancer
   loadBalancerClass: ${CILIUM_LB_CLASS}

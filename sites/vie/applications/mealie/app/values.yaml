@@ -77,8 +77,8 @@ route:
     enabled: true
     kind: HTTPRoute
     annotations:
-      external-dns.alpha.kubernetes.io/provider: public
-      external-dns.alpha.kubernetes.io/target: "${PUBLIC_IP}"
+      external-dns.kubernetes.io/provider: public
+      external-dns.kubernetes.io/target: "${PUBLIC_IP}"
     parentRefs:
       - group: gateway.networking.k8s.io
         kind: ListenerSet
