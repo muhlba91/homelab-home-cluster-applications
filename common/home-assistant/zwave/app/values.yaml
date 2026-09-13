@@ -105,6 +105,11 @@ route:
     kind: HTTPRoute
     annotations:
       external-dns.kubernetes.io/provider: internal
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/name: Z-Wave
+      gethomepage.dev/group: Home Automation
+      gethomepage.dev/icon: z-wave-js-ui
+      gethomepage.dev/weight: "${LANDING_PAGE_INTERNAL_WEIGHT}"
     parentRefs:
       - group: gateway.networking.k8s.io
         kind: ListenerSet

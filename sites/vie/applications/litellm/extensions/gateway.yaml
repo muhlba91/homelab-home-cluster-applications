@@ -26,6 +26,11 @@ metadata:
   name: litellm
   annotations:
     external-dns.kubernetes.io/provider: internal
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: LLM Proxy
+    gethomepage.dev/group: AI
+    gethomepage.dev/icon: sh-litellm
+    gethomepage.dev/weight: "${LANDING_PAGE_INTERNAL_WEIGHT}"
 spec:
   parentRefs:
     - name: litellm-listeners

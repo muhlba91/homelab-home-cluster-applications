@@ -26,6 +26,11 @@ metadata:
   name: emqx-dashboard
   annotations:
     external-dns.kubernetes.io/provider: internal
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: MQTT Broker
+    gethomepage.dev/group: Home Automation
+    gethomepage.dev/icon: emqx
+    gethomepage.dev/weight: "${LANDING_PAGE_INTERNAL_WEIGHT}"
 spec:
   parentRefs:
     - name: emqx-dashboard-listeners

@@ -32,6 +32,23 @@ data:
     hideVersion: true
     disableUpdateCheck: true
     disableIndexing: true
+
+    layout:
+      Lifestyle:
+        style: row
+        columns: 2
+      AI:
+        style: row
+        columns: 2
+      Home Automation:
+        style: row
+        columns: 3
+      Monitoring:
+        style: row
+        columns: 2
+      Network:
+        style: row
+        columns: 2
   services.yaml: ""
   widgets.yaml: ""
   bookmarks.yaml: ""

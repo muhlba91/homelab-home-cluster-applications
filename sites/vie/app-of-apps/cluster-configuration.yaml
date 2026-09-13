@@ -23,6 +23,10 @@ data:
   PUBLIC_CLUSTER_ISSUER: cluster-issuer-home-muehlbachler-io
   INTERNAL_CLUSTER_ISSUER: cluster-issuer-internal-muehlbachler-io
 
+  # landing page ordering
+  LANDING_PAGE_PUBLIC_WEIGHT: "10"
+  LANDING_PAGE_INTERNAL_WEIGHT: "100"
+
   # CIDRs
   CILIUM_IPV4_POD_CIDR: "10.101.0.0/16"
   CILIUM_IPV6_POD_CIDR: "fc00:db8:101::/112"

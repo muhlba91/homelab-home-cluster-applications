@@ -54,6 +54,11 @@ metadata:
   annotations:
     external-dns.kubernetes.io/hostname: &domain adguard.${LOCAL_INTERNAL_DOMAIN}
     external-dns.kubernetes.io/provider: internal
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: AdGuard Home / DNS
+    gethomepage.dev/group: Network
+    gethomepage.dev/icon: adguard-home
+    gethomepage.dev/weight: "${LANDING_PAGE_INTERNAL_WEIGHT}"
 spec:
   parentRefs:
     - name: adguard-listeners

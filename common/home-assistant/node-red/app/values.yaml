@@ -155,6 +155,11 @@ route:
     kind: HTTPRoute
     annotations:
       external-dns.kubernetes.io/provider: internal
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/name: Node-RED
+      gethomepage.dev/group: Home Automation
+      gethomepage.dev/icon: node-red
+      gethomepage.dev/weight: "${LANDING_PAGE_INTERNAL_WEIGHT}"
     parentRefs:
       - group: gateway.networking.k8s.io
         kind: ListenerSet
