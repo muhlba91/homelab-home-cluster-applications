@@ -183,6 +183,7 @@ route:
       gethomepage.dev/name: Home Assistant
       gethomepage.dev/group: Home Automation
       gethomepage.dev/icon: home-assistant
+      gethomepage.dev/pod-selector: "app.kubernetes.io/name=home-assistant-home-assistant"
       gethomepage.dev/weight: "${LANDING_PAGE_PUBLIC_WEIGHT}"
     parentRefs:
       - group: gateway.networking.k8s.io
