@@ -47,7 +47,20 @@ data:
         style: row
         columns: 3
   services.yaml: ""
-  widgets.yaml: ""
+  widgets.yaml: |
+    - datetime:
+        text_size: xl
+        format:
+          dateStyle: long
+          timeStyle: short
+          hour12: true
+    - openmeteo:
+        label: Theresienfeld
+        latitude: 47.85
+        longitude: 16.23333
+        timezone: Europe/Vienna
+        units: metric
+        cache: 30
   bookmarks.yaml: ""
   custom.css: ""
   custom.js: ""
