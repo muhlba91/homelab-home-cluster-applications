@@ -40,9 +40,9 @@ spec:
       resources:
         requests:
           cpu: 110m
-          memory: 337Mi
-        limits:
           memory: 384Mi
+        limits:
+          memory: 512Mi
       volumeSpec:
         persistentVolumeClaim:
           storageClassName: ${DEFAULT_STORAGE_CLASS}
