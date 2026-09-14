@@ -47,6 +47,16 @@ controllers:
               timeoutSeconds: 2
               failureThreshold: 3
           readiness: *probe
+          startup:
+            enabled: true
+            custom: true
+            spec:
+              httpGet:
+                path: /api/healthcheck
+                port: 3000
+              periodSeconds: 2
+              timeoutSeconds: 2
+              failureThreshold: 30
 
 service:
   homepage:
