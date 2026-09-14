@@ -76,6 +76,13 @@ spec:
             - - ghcr.io/home-assistant/home-assistant
               - home-assistant
               - python3
+        - name: homeassistant_dhcp_discovery_syncworker
+          fields: [container.image.repository, container.name, proc.name]
+          comps: [=, =, startswith]
+          values:
+            - - ghcr.io/home-assistant/home-assistant
+              - home-assistant
+              - SyncWorker
       override:
         exceptions: append
     - rule: Create Hardlink Over Sensitive Files
