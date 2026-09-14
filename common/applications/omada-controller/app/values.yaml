@@ -33,8 +33,8 @@ controllers:
           - name: EAP_MONGOD_URI
             valueFrom:
               secretKeyRef:
-                name: omada-controller-mongodb-user
-                key: uri
+                name: omada-controller-mongodb-user-conn-str
+                key: omada_rs0_connectionStringSrv
 
         securityContext:
           capabilities:
