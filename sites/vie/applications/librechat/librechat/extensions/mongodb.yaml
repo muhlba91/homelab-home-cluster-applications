@@ -16,6 +16,11 @@ spec:
   upgradeOptions:
     apply: disabled
 
+  # single-node replset (no HA) is a deliberate choice for this homelab -
+  # see MONGO_MIGRATION.md / the size:1 discussion for why this is safe here
+  unsafeFlags:
+    replsetSize: true
+
   secrets:
     users: librechat-mongodb-secrets
 
