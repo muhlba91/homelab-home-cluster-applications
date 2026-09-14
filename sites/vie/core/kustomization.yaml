@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ../../../common/core/adguard-external-dns/
   - ../../../common/core/cloudnative-pg/
+  - ../../../common/core/percona-mongodb-operator/
   - ./monitoring/
   - ../../../common/core/kyverno/
   - ../../../common/core/trivy/

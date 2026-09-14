@@ -74,6 +74,7 @@ The following applications are defined in [`common/core/`](common/core/).
 - [x] [Gatus](https://gatus.io) - Service status page.
 - [x] [KRR](https://github.com/robusta-dev/krr) - Kubernetes Resource Recommendations; runs as a daily CronJob and prints resource optimization suggestions to logs.
 - [x] [Kyverno](https://kyverno.io) - Policy engine designed for Kubernetes.
+- [x] [Percona Operator for MongoDB](https://docs.percona.com/percona-operator-for-mongodb/) - MongoDB database operator.
 - [x] [Trivy Operator](https://aquasecurity.github.io/trivy-operator) - Kubernetes-native security toolkit for continuous vulnerability scanning.
 - [x] Monitoring
   - [x] [Victoria Metrics Operator](https://victoriametrics.com) - Victoria Metrics operator for Kubernetes.
@@ -137,6 +138,7 @@ The following applications are defined in [`sites/vie/core/`](sites/vie/core/).
 - [x] KRR
 - [x] Monitoring (full stack)
 - [x] Kyverno
+- [x] Percona Operator for MongoDB
 - [x] Falco
 - [x] Gatus
 - [x] Trivy
