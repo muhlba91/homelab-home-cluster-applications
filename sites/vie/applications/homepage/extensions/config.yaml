@@ -16,7 +16,7 @@ data:
     theme: dark
     color: slate
     iconStyle: theme
-    fullWidth: true
+    fullWidth: false
     useEqualHeights: true
     headerStyle: clean
 
