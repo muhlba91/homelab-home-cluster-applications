@@ -24,7 +24,10 @@ controllers:
 
         env:
           - name: MONGO_URI
-            value: mongodb://librechat-mongodb:27017/librechat
+            valueFrom:
+              secretKeyRef:
+                name: librechat-mongodb-user
+                key: uri
 
         resources:
           requests:
