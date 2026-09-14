@@ -36,19 +36,19 @@ data:
     layout:
       Lifestyle:
         style: row
-        columns: 2
+        columns: 3
       AI:
         style: row
-        columns: 2
+        columns: 3
       Home Automation:
         style: row
-        columns: 2
+        columns: 3
       Monitoring:
         style: row
-        columns: 2
+        columns: 3
       Network:
         style: row
-        columns: 2
+        columns: 3
   services.yaml: ""
   widgets.yaml: ""
   bookmarks.yaml: ""
