@@ -7,3 +7,6 @@ resources:
   - ./templates/service.yaml
   - ./templates/endpoint.yaml
   - ./templates/gateway.yaml
+  - ./templates/external-secret-omada-controller-mongodb-user.yaml
+  - ./templates/external-secret-percona-mongodb-backup-credentials.yaml
+  - ./templates/mongodb.yaml
