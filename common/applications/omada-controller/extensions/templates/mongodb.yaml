@@ -31,6 +31,12 @@ spec:
       roles:
         - name: dbOwner
           db: omada
+        # omada-controller also keeps historical/statistics data in a second
+        # database ("omada_data") alongside the main "omada" one - both are
+        # required, discovered the hard way when the app failed post-migration
+        # with "not authorized on omada_data"
+        - name: dbOwner
+          db: omada_data
 
   replsets:
     - name: rs0
