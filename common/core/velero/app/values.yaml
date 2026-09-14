@@ -1,10 +1,4 @@
 ---
-# see https://github.com/vmware-tanzu/helm-charts/issues/698
-kubectl:
-  image:
-    repository: public.ecr.aws/bitnami/kubectl
-    tag: 1.36.0
-
 resources:
   requests:
     cpu: 10m
