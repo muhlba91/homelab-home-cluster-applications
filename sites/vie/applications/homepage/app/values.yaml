@@ -42,7 +42,7 @@ controllers:
               httpGet:
                 path: /api/healthcheck
                 port: 3000
-              initialDelaySeconds: 1
+              initialDelaySeconds: 5
               periodSeconds: 30
               timeoutSeconds: 2
               failureThreshold: 3
