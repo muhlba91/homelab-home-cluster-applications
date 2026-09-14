@@ -31,6 +31,7 @@ metadata:
     gethomepage.dev/name: LLM Proxy
     gethomepage.dev/group: AI
     gethomepage.dev/icon: sh-litellm
+    gethomepage.dev/description: Unified API gateway for language models
     # hardcoded: Flux substitution of numeric values into raw manifests loses
     # YAML string quoting during the kustomize build step, breaking typed-patch
     # apply (annotations must stay strings) - keep in sync with

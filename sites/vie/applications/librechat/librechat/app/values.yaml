@@ -152,6 +152,7 @@ route:
       gethomepage.dev/name: Chat
       gethomepage.dev/group: AI
       gethomepage.dev/icon: librechat
+      gethomepage.dev/description: AI chat
       gethomepage.dev/weight: "${LANDING_PAGE_PUBLIC_WEIGHT}"
     parentRefs:
       - group: gateway.networking.k8s.io

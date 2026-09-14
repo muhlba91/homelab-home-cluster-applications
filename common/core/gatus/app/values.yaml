@@ -102,6 +102,7 @@ route:
       gethomepage.dev/name: Status / Uptime
       gethomepage.dev/group: Monitoring
       gethomepage.dev/icon: gatus
+      gethomepage.dev/description: Service uptime and health status
       gethomepage.dev/weight: "${LANDING_PAGE_PUBLIC_WEIGHT}"
     parentRefs:
       - group: gateway.networking.k8s.io

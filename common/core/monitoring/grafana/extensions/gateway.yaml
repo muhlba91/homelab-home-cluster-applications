@@ -31,6 +31,7 @@ metadata:
     gethomepage.dev/name: Grafana
     gethomepage.dev/group: Monitoring
     gethomepage.dev/icon: grafana
+    gethomepage.dev/description: Monitoring and logging dashboards
     # hardcoded: Flux substitution of numeric values into raw manifests loses
     # YAML string quoting during the kustomize build step, breaking typed-patch
     # apply (annotations must stay strings) - keep in sync with
