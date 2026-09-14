@@ -31,7 +31,10 @@ controllers:
           - name: MONGO_EXTERNAL
             value: "true"
           - name: EAP_MONGOD_URI
-            value: "mongodb://omada-controller-mongodb:27017/omada"
+            valueFrom:
+              secretKeyRef:
+                name: omada-controller-mongodb-user
+                key: uri
 
         securityContext:
           capabilities:
