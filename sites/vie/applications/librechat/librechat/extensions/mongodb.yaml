@@ -1,0 +1,70 @@
+---
+apiVersion: psmdb.percona.com/v1
+kind: PerconaServerMongoDB
+metadata:
+  name: librechat-mongodb
+  finalizers:
+    - percona.com/delete-psmdb-pods-in-order
+spec:
+  # renovate: datasource=docker packageName=percona/percona-server-mongodb-operator
+  crVersion: "1.23.0"
+
+  # renovate: datasource=docker packageName=percona/percona-server-mongodb
+  image: percona/percona-server-mongodb:8.0.26-11
+
+  updateStrategy: SmartUpdate
+  upgradeOptions:
+    apply: disabled
+
+  secrets:
+    users: librechat-mongodb-secrets
+
+  users:
+    - name: librechat
+      db: librechat
+      passwordSecretRef:
+        name: librechat-mongodb-user
+        key: password
+      roles:
+        - name: dbOwner
+          db: librechat
+
+  replsets:
+    - name: rs0
+      size: 1
+      resources:
+        requests:
+          cpu: 110m
+          memory: 337Mi
+        limits:
+          memory: 384Mi
+      volumeSpec:
+        persistentVolumeClaim:
+          storageClassName: ${DEFAULT_STORAGE_CLASS}
+          resources:
+            requests:
+              storage: 5Gi
+
+  backup:
+    enabled: true
+    # renovate: datasource=docker packageName=percona/percona-backup-mongodb
+    image: percona/percona-backup-mongodb:2.15.0
+    storages:
+      scaleway:
+        type: s3
+        s3:
+          bucket: infrastructure-backups-5274ba70-fde0-47de-8e9a-f1bc64c11157
+          region: fr-par
+          endpointUrl: https://s3.fr-par.scw.cloud
+          credentialsSecret: percona-mongodb-backup-credentials
+          prefix: cluster/${SITE}/librechat-mongodb
+    tasks:
+      - name: daily
+        enabled: true
+        schedule: "0 0 * * *"
+        storageName: scaleway
+        compressionType: gzip
+        retention:
+          type: count
+          count: 7
+          deleteFromStorage: true

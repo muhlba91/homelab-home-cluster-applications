@@ -27,11 +27,20 @@
                 "/(^|/|\\.).*\\.ya?ml$/"
             ],
             "matchStrings": [
-                "# renovate: datasource=(?<datasource>[a-z-]+) packageName=(?<packageName>.+)\\s+image(Name)?:.+:(?<currentValue>.+)"
+                "# renovate: datasource=(?<datasource>[a-z-]+) packageName=(?<packageName>.+)\\s+image(Name)?:.+:(?<currentValue>.+)",
+                "# renovate: datasource=(?<datasource>[a-z-]+) packageName=(?<packageName>.+)\\s+crVersion: [\"']?(?<currentValue>[\\w.-]+)[\"']?"
             ]
         }
     ],
     "packageRules": [
+        {
+            "description": "keep the percona mongodb operator chart and its CR's crVersion in lockstep",
+            "groupName": "percona mongodb operator",
+            "matchPackageNames": [
+                "psmdb-operator",
+                "percona/percona-server-mongodb-operator"
+            ]
+        },
         {
             "description": "librechat rc",
             "matchDatasources": [
