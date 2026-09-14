@@ -36,10 +36,10 @@ data:
     layout:
       Lifestyle & Productivity:
         style: row
-        columns: 3
-      Smart Home:
-        style: row
         columns: 4
+      Smart Home Management:
+        style: row
+        columns: 3
       Network:
         style: row
         columns: 2

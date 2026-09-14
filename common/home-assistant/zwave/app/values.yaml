@@ -107,10 +107,10 @@ route:
       external-dns.kubernetes.io/provider: internal
       gethomepage.dev/enabled: "true"
       gethomepage.dev/name: Z-Wave
-      gethomepage.dev/group: Smart Home
+      gethomepage.dev/group: Smart Home Management
       gethomepage.dev/icon: z-wave-js-ui
       gethomepage.dev/description: Z-Wave device management
-      gethomepage.dev/weight: "${LANDING_PAGE_INTERNAL_WEIGHT}"
+      gethomepage.dev/weight: "100"
     parentRefs:
       - group: gateway.networking.k8s.io
         kind: ListenerSet

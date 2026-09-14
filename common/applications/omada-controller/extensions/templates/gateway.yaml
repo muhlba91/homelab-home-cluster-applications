@@ -45,10 +45,6 @@ metadata:
     gethomepage.dev/group: Network
     gethomepage.dev/icon: omada
     gethomepage.dev/description: WiFi management
-    # hardcoded: Flux substitution of numeric values into raw manifests loses
-    # YAML string quoting during the kustomize build step, breaking typed-patch
-    # apply (annotations must stay strings) - keep in sync with
-    # LANDING_PAGE_PUBLIC_WEIGHT in cluster-configuration.yaml
     gethomepage.dev/weight: "10"
 spec:
   parentRefs:

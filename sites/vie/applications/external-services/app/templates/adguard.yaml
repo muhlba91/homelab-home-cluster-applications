@@ -59,10 +59,6 @@ metadata:
     gethomepage.dev/group: Network
     gethomepage.dev/icon: adguard-home
     gethomepage.dev/description: Internal DNS with ad-blocking features
-    # hardcoded: Flux substitution of numeric values into raw manifests loses
-    # YAML string quoting during the kustomize build step, breaking typed-patch
-    # apply (annotations must stay strings) - keep in sync with
-    # LANDING_PAGE_INTERNAL_WEIGHT in cluster-configuration.yaml
     gethomepage.dev/weight: "100"
 spec:
   parentRefs:

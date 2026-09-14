@@ -32,10 +32,6 @@ metadata:
     gethomepage.dev/group: Infrastructure
     gethomepage.dev/icon: grafana
     gethomepage.dev/description: Monitoring and logging dashboards
-    # hardcoded: Flux substitution of numeric values into raw manifests loses
-    # YAML string quoting during the kustomize build step, breaking typed-patch
-    # apply (annotations must stay strings) - keep in sync with
-    # LANDING_PAGE_PUBLIC_WEIGHT in cluster-configuration.yaml
     gethomepage.dev/weight: "10"
 spec:
   parentRefs:
