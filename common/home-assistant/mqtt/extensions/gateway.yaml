@@ -31,9 +31,6 @@ metadata:
     gethomepage.dev/group: Home Automation
     gethomepage.dev/icon: emqx
     gethomepage.dev/pod-selector: "app.kubernetes.io/name=emqx"
-    gethomepage.dev/widget.type: gatus
-    gethomepage.dev/widget.url: http://gatus.gatus.svc.cluster.local:8080
-    gethomepage.dev/widget.key: _emqx
     # hardcoded: Flux substitution of numeric values into raw manifests loses
     # YAML string quoting during the kustomize build step, breaking typed-patch
     # apply (annotations must stay strings) - keep in sync with

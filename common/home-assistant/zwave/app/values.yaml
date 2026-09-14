@@ -109,9 +109,6 @@ route:
       gethomepage.dev/name: Z-Wave
       gethomepage.dev/group: Home Automation
       gethomepage.dev/icon: z-wave-js-ui
-      gethomepage.dev/widget.type: gatus
-      gethomepage.dev/widget.url: http://gatus.gatus.svc.cluster.local:8080
-      gethomepage.dev/widget.key: _home-assistant-zwave-zwave-js
       gethomepage.dev/weight: "${LANDING_PAGE_INTERNAL_WEIGHT}"
     parentRefs:
       - group: gateway.networking.k8s.io

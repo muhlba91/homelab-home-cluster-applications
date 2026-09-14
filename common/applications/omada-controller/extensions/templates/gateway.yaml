@@ -44,9 +44,6 @@ metadata:
     gethomepage.dev/name: Omada Controller
     gethomepage.dev/group: Network
     gethomepage.dev/icon: omada
-    gethomepage.dev/widget.type: gatus
-    gethomepage.dev/widget.url: http://gatus.gatus.svc.cluster.local:8080
-    gethomepage.dev/widget.key: _omada-controller
     # hardcoded: Flux substitution of numeric values into raw manifests loses
     # YAML string quoting during the kustomize build step, breaking typed-patch
     # apply (annotations must stay strings) - keep in sync with

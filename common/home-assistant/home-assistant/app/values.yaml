@@ -184,9 +184,6 @@ route:
       gethomepage.dev/group: Home Automation
       gethomepage.dev/icon: home-assistant
       gethomepage.dev/pod-selector: "app.kubernetes.io/name=home-assistant-home-assistant"
-      gethomepage.dev/widget.type: gatus
-      gethomepage.dev/widget.url: http://gatus.gatus.svc.cluster.local:8080
-      gethomepage.dev/widget.key: _home-assistant-home-assistant
       gethomepage.dev/weight: "${LANDING_PAGE_PUBLIC_WEIGHT}"
     parentRefs:
       - group: gateway.networking.k8s.io

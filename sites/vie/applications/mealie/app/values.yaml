@@ -83,9 +83,6 @@ route:
       gethomepage.dev/name: Recipes
       gethomepage.dev/group: Lifestyle
       gethomepage.dev/icon: mealie
-      gethomepage.dev/widget.type: gatus
-      gethomepage.dev/widget.url: http://gatus.gatus.svc.cluster.local:8080
-      gethomepage.dev/widget.key: _mealie
       gethomepage.dev/weight: "${LANDING_PAGE_PUBLIC_WEIGHT}"
     parentRefs:
       - group: gateway.networking.k8s.io
