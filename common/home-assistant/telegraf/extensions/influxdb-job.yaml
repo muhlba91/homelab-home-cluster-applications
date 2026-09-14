@@ -16,7 +16,7 @@ spec:
       restartPolicy: OnFailure
       containers:
         - name: influxdb
-          image: influxdb:2.7.4-alpine
+          image: influxdb:2.9.1
           imagePullPolicy: IfNotPresent
           command:
             - /scripts/influxdb.sh

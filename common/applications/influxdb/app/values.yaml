@@ -1,6 +1,10 @@
 ---
 fullnameOverride: influxdb
 
+image:
+  repository: influxdb
+  tag: 2.9.1
+
 podAnnotations:
   backup.velero.io/backup-volumes: data
 
