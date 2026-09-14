@@ -29,7 +29,7 @@ metadata:
     external-dns.kubernetes.io/target: "${PUBLIC_IP}"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Grafana
-    gethomepage.dev/group: Monitoring
+    gethomepage.dev/group: Infrastructure
     gethomepage.dev/icon: grafana
     gethomepage.dev/description: Monitoring and logging dashboards
     # hardcoded: Flux substitution of numeric values into raw manifests loses

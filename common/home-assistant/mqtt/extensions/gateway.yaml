@@ -28,7 +28,7 @@ metadata:
     external-dns.kubernetes.io/provider: internal
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: MQTT Broker
-    gethomepage.dev/group: Home Automation
+    gethomepage.dev/group: Smart Home
     gethomepage.dev/icon: emqx
     gethomepage.dev/pod-selector: "app.kubernetes.io/name=emqx"
     gethomepage.dev/description: Message broker for smart home devices

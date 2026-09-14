@@ -29,7 +29,7 @@ metadata:
     gatus.home-operations.com/enabled: "true"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: LLM Proxy
-    gethomepage.dev/group: AI
+    gethomepage.dev/group: Infrastructure
     gethomepage.dev/icon: sh-litellm
     gethomepage.dev/description: Unified API gateway for language models
     # hardcoded: Flux substitution of numeric values into raw manifests loses

@@ -150,7 +150,7 @@ route:
       external-dns.kubernetes.io/target: "${PUBLIC_IP}"
       gethomepage.dev/enabled: "true"
       gethomepage.dev/name: Chat
-      gethomepage.dev/group: AI
+      gethomepage.dev/group: Lifestyle & Productivity
       gethomepage.dev/icon: librechat
       gethomepage.dev/description: AI chat
       gethomepage.dev/weight: "${LANDING_PAGE_PUBLIC_WEIGHT}"

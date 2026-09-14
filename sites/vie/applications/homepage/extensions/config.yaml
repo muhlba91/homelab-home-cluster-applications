@@ -34,21 +34,18 @@ data:
     disableIndexing: true
 
     layout:
-      Lifestyle:
+      Lifestyle & Productivity:
         style: row
-        columns: 4
-      AI:
-        style: row
-        columns: 4
-      Home Automation:
-        style: row
-        columns: 4
-      Monitoring:
+        columns: 3
+      Smart Home:
         style: row
         columns: 4
       Network:
         style: row
-        columns: 4
+        columns: 2
+      Infrastructure:
+        style: row
+        columns: 3
   services.yaml: ""
   widgets.yaml: ""
   bookmarks.yaml: ""
