@@ -27,7 +27,7 @@ controllers:
             valueFrom:
               secretKeyRef:
                 name: librechat-mongodb-user-conn-str
-                key: librechat_rs0_connectionStringSrv
+                key: librechat_rs0_connectionString
 
         resources:
           requests:
