@@ -283,5 +283,5 @@ extraObjects:
       timeouts:
         streamIdle: 3600s
       compression:
-        responseDirection:
-          enabled: false
+        responseCompression:
+          disable: true
