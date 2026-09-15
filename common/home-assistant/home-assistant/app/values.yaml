@@ -62,6 +62,8 @@ controllers:
         envFrom:
           - secretRef:
               name: home-assistant-backup
+          - secretRef:
+              name: home-assistant-oidc
         resources:
           requests:
             cpu: 19m
