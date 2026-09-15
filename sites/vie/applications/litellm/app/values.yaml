@@ -65,6 +65,10 @@ redis:
 deploymentAnnotations:
   reloader.stakater.com/auto: "true"
 
+service:
+  annotations:
+    gatus.home-operations.com/enabled: "true"
+
 migrationJob:
   enabled: false # also sets env vars for main container which then sets DISABLE_SCHEMA_UPDATE twice on the migration job
   hooks:

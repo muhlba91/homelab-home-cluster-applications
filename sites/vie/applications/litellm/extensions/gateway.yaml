@@ -26,7 +26,6 @@ metadata:
   name: litellm
   annotations:
     external-dns.kubernetes.io/provider: internal
-    gatus.home-operations.com/enabled: "true"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: LLM Proxy
     gethomepage.dev/group: Infrastructure
