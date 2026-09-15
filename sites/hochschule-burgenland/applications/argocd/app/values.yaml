@@ -282,6 +282,3 @@ extraObjects:
           name: argocd-server
       timeouts:
         streamIdle: 3600s
-      compression:
-        responseCompression:
-          disable: true
