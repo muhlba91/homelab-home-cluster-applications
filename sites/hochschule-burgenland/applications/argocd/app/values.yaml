@@ -118,6 +118,14 @@ server:
       external-dns.kubernetes.io/target: "${PUBLIC_IP}"
     hostnames:
       - argocd.${PUBLIC_DOMAIN}
+    rules:
+      - matches:
+          - path:
+              type: PathPrefix
+              value: /
+        timeouts:
+          request: 0s
+          backendRequest: 3600s
   listenerset:
     enabled: true
     annotations:
@@ -261,3 +269,16 @@ notifications:
           state: failure
           label: "continuous-delivery/{{ .app.metadata.name }}"
           targetURL: "{{ .context.argocdUrl }}/applications/{{ .app.metadata.name }}?operation=true"
+
+extraObjects:
+  - apiVersion: gateway.kgateway.dev/v1alpha1
+    kind: TrafficPolicy
+    metadata:
+      name: argocd-stream-timeout
+    spec:
+      targetRefs:
+        - group: gateway.networking.k8s.io
+          kind: HTTPRoute
+          name: argocd-server
+      timeouts:
+        streamIdle: 3600s
