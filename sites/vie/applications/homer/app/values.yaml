@@ -75,7 +75,7 @@ rawResources:
           cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
       spec:
         parentRef:
-          name: kgateway-gateway
+          name: kgateway-gateway-internal
           namespace: kgateway
         listeners:
           - name: https-homer
