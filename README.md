@@ -151,7 +151,6 @@ The following applications are defined in [`sites/vie/applications/`](sites/vie/
 - [x] Omada Controller
 - [x] InfluxDB
 - [x] External Services
-- [x] [Homepage](https://gethomepage.dev) - Modern, fully customizable application dashboard.
 - [x] [LiteLLM](https://github.com/BerriAI/litellm) - Proxy Server to call 100+ LLM APIs using OpenAI format.
 - [x] Ollama
 - [x] [Immich](https://immich.app) - Photo management solution.
