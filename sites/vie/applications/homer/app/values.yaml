@@ -1,0 +1,97 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-5.0.0/charts/library/common/values.schema.json
+controllers:
+  main:
+    annotations:
+      reloader.stakater.com/auto: "true"
+    containers:
+      homer:
+        image:
+          repository: b4bz/homer
+          pullPolicy: IfNotPresent
+          tag: v26.08.3
+
+        resources:
+          requests:
+            cpu: 3m
+            memory: 64Mi
+          limits:
+            memory: 128Mi
+
+        probes:
+          liveness: &server_probes
+            enabled: true
+            custom: true
+            spec:
+              httpGet:
+                path: /
+                port: 8080
+              initialDelaySeconds: 0
+              periodSeconds: 30
+              timeoutSeconds: 1
+              failureThreshold: 5
+          readiness: *server_probes
+          startup:
+            enabled: false
+
+service:
+  homer:
+    controller: main
+    annotations:
+      gatus.home-operations.com/enabled: "true"
+    ipFamilyPolicy: PreferDualStack
+    ports:
+      http:
+        port: 8080
+
+route:
+  homer:
+    enabled: true
+    kind: HTTPRoute
+    annotations:
+      external-dns.kubernetes.io/provider: internal
+    parentRefs:
+      - group: gateway.networking.k8s.io
+        kind: ListenerSet
+        namespace: ${APPLICATION_NAMESPACE}
+        name: homer-listeners
+    hostnames:
+      - &domain landing.${LOCAL_INTERNAL_DOMAIN}
+    rules:
+      - matches:
+          - path:
+              type: PathPrefix
+              value: /
+        backendRefs:
+          - identifier: homer
+            port: 8080
+rawResources:
+  listeners:
+    manifest:
+      apiVersion: gateway.networking.k8s.io/v1
+      kind: ListenerSet
+      metadata:
+        annotations:
+          cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
+      spec:
+        parentRef:
+          name: kgateway-gateway
+          namespace: kgateway
+        listeners:
+          - name: https-homer
+            protocol: HTTPS
+            port: 443
+            hostname: *domain
+            tls:
+              mode: Terminate
+              certificateRefs:
+                - name: homer-tls-cert
+
+persistence:
+  config:
+    enabled: true
+    type: configMap
+    name: homer-config
+    globalMounts:
+      - path: /www/assets/config.yml
+        subPath: config.yml

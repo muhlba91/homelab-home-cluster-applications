@@ -157,6 +157,7 @@ The following applications are defined in [`sites/vie/applications/`](sites/vie/
 - [x] [LibreChat](https://librechat.ai) - Open-source chat application for AI conversations.
 - [x] [Mealie](https://mealie.io) - Recipe management application.
 - [x] [Qdrant](https://qdrant.tech) - Vector database, used by zoocode for codebase indexing.
+- [x] [Homer](https://github.com/bastienwirtz/homer) - Landing page.
 - [x] Personal Agents and Assistants
   - [x] MCP Servers
     - [x] [Kubernetes MCP Server](https://github.com/containers/kubernetes-mcp-server) - MCP server to allow personal agents to interact with Kubernetes data.

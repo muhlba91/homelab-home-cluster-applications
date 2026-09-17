@@ -12,3 +12,4 @@ resources:
   - ./mealie/
   - ./qdrant/
   - ./agents/
+  - ./homer/
