@@ -79,12 +79,6 @@ route:
     annotations:
       external-dns.kubernetes.io/provider: public
       external-dns.kubernetes.io/target: "${PUBLIC_IP}"
-      gethomepage.dev/enabled: "true"
-      gethomepage.dev/name: Recipes
-      gethomepage.dev/group: Lifestyle & Productivity
-      gethomepage.dev/icon: mealie
-      gethomepage.dev/description: Recipe manager
-      gethomepage.dev/weight: "10"
     parentRefs:
       - group: gateway.networking.k8s.io
         kind: ListenerSet

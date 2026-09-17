@@ -98,12 +98,6 @@ route:
     annotations:
       external-dns.kubernetes.io/provider: public
       external-dns.kubernetes.io/target: "${PUBLIC_IP}"
-      gethomepage.dev/enabled: "true"
-      gethomepage.dev/name: Status / Uptime
-      gethomepage.dev/group: Infrastructure
-      gethomepage.dev/icon: gatus
-      gethomepage.dev/description: Service uptime and health status
-      gethomepage.dev/weight: "10"
     parentRefs:
       - group: gateway.networking.k8s.io
         kind: ListenerSet

@@ -155,12 +155,6 @@ route:
     kind: HTTPRoute
     annotations:
       external-dns.kubernetes.io/provider: internal
-      gethomepage.dev/enabled: "true"
-      gethomepage.dev/name: Node-RED
-      gethomepage.dev/group: Smart Home Management
-      gethomepage.dev/icon: node-red
-      gethomepage.dev/description: Smart home automation flows
-      gethomepage.dev/weight: "100"
     parentRefs:
       - group: gateway.networking.k8s.io
         kind: ListenerSet

@@ -181,13 +181,6 @@ route:
     annotations:
       external-dns.kubernetes.io/provider: public
       external-dns.kubernetes.io/target: "${PUBLIC_IP}"
-      gethomepage.dev/enabled: "true"
-      gethomepage.dev/name: Home Assistant
-      gethomepage.dev/group: Lifestyle & Productivity
-      gethomepage.dev/icon: home-assistant
-      gethomepage.dev/description: Smart home control and automation
-      gethomepage.dev/pod-selector: "app.kubernetes.io/name=home-assistant-home-assistant"
-      gethomepage.dev/weight: "10"
     parentRefs:
       - group: gateway.networking.k8s.io
         kind: ListenerSet

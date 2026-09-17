@@ -26,13 +26,6 @@ metadata:
   name: emqx-dashboard
   annotations:
     external-dns.kubernetes.io/provider: internal
-    gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: MQTT Broker
-    gethomepage.dev/group: Smart Home Management
-    gethomepage.dev/icon: emqx
-    gethomepage.dev/pod-selector: "app.kubernetes.io/name=emqx"
-    gethomepage.dev/description: Message broker for smart home devices
-    gethomepage.dev/weight: "100"
 spec:
   parentRefs:
     - name: emqx-dashboard-listeners

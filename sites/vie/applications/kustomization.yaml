@@ -5,7 +5,6 @@ resources:
   - ../../../common/applications/omada-controller/
   - ../../../common/applications/influxdb/
   - ./external-services/
-  - ./homepage/
   - ./litellm/
   - ./ollama/
   - ./immich/

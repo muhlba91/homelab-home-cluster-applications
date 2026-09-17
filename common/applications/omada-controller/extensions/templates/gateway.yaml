@@ -40,12 +40,6 @@ metadata:
   annotations:
     external-dns.kubernetes.io/provider: public
     external-dns.kubernetes.io/target: "${PUBLIC_IP}"
-    gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: Omada Controller
-    gethomepage.dev/group: Network
-    gethomepage.dev/icon: omada
-    gethomepage.dev/description: WiFi management
-    gethomepage.dev/weight: "10"
 spec:
   parentRefs:
     - name: omada-controller-listeners

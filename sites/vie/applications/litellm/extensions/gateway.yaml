@@ -26,12 +26,6 @@ metadata:
   name: litellm
   annotations:
     external-dns.kubernetes.io/provider: internal
-    gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: LLM Proxy
-    gethomepage.dev/group: Infrastructure
-    gethomepage.dev/icon: sh-litellm
-    gethomepage.dev/description: Unified API gateway for language models
-    gethomepage.dev/weight: "100"
 spec:
   parentRefs:
     - name: litellm-listeners
