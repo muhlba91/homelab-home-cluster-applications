@@ -71,6 +71,7 @@ data:
         items:
           - name: LibreChat
             icon: fa-solid fa-comments
+            type: Ping
             subtitle: Self-hosted AI chat assistant
             tag: ai
             keywords: ai chat
@@ -78,6 +79,7 @@ data:
             target: _blank
           - name: Home Assistant
             icon: fa-solid fa-house-signal
+            type: Ping
             subtitle: Smart home control
             tag: smart-home
             keywords: smart home
@@ -85,6 +87,7 @@ data:
             target: _blank
           - name: Immich
             icon: fa-solid fa-images
+            type: Ping
             subtitle: Photo & video library
             tag: photos
             keywords: photos videos backup
@@ -92,6 +95,7 @@ data:
             target: _blank
           - name: Mealie
             icon: fa-solid fa-utensils
+            type: Ping
             subtitle: Recipe manager
             tag: recipes
             keywords: recipes cooking food meal
@@ -99,6 +103,7 @@ data:
             target: _blank
           - name: Webmail
             icon: fa-solid fa-envelope
+            type: Ping
             subtitle: Access your email inbox
             tag: mail
             keywords: email inbox webmail mail
@@ -106,6 +111,7 @@ data:
             target: _blank
           - name: SimpleLogin
             icon: fa-solid fa-at
+            type: Ping
             subtitle: Manage private email aliases
             tag: mail
             keywords: email aliases privacy anti-spam
@@ -117,6 +123,7 @@ data:
         items:
           - name: Gatus
             icon: fa-solid fa-heart-pulse
+            type: Ping
             subtitle: Live status page for all services
             tag: monitoring
             keywords: status uptime health monitoring
@@ -124,6 +131,7 @@ data:
             target: _blank
           - name: Grafana
             icon: fa-solid fa-chart-line
+            type: Ping
             subtitle: Metrics & dashboards
             tag: monitoring
             keywords: metrics dashboards monitoring
@@ -135,6 +143,7 @@ data:
         items:
           - name: EMQX
             icon: fa-solid fa-network-wired
+            type: Ping
             subtitle: MQTT broker powering IoT device messaging
             tag: smart-home
             keywords: mqtt broker iot smart home
@@ -142,6 +151,7 @@ data:
             target: _blank
           - name: Node-RED
             icon: fa-solid fa-diagram-project
+            type: Ping
             subtitle: Visual automation flows for smart home devices
             tag: smart-home
             keywords: automation iot smart home
@@ -149,6 +159,7 @@ data:
             target: _blank
           - name: Z-Wave JS UI
             icon: fa-solid fa-wave-square
+            type: Ping
             subtitle: Manage Z-Wave smart home devices
             tag: smart-home
             keywords: zwave z-wave smart home
@@ -160,6 +171,7 @@ data:
         items:
           - name: AdGuard Home
             icon: fa-solid fa-shield-halved
+            type: Ping
             subtitle: Network-wide ad & tracker blocking
             tag: network
             keywords: dns ad-blocker privacy
@@ -167,6 +179,7 @@ data:
             target: _blank
           - name: Omada Controller
             icon: fa-solid fa-wifi
+            type: Ping
             subtitle: Manage Wi-Fi access points & network
             tag: network
             keywords: wifi tp-link omada
@@ -199,6 +212,7 @@ data:
         items:
           - name: Vault
             icon: fa-solid fa-key
+            type: Ping
             subtitle: Secrets management
             tag: security
             keywords: secrets vault
@@ -206,6 +220,7 @@ data:
             target: _blank
           - name: Zitadel
             icon: fa-solid fa-id-badge
+            type: Ping
             subtitle: Identity provider / single sign-on
             tag: security
             keywords: identity sso authentication oidc
@@ -213,6 +228,7 @@ data:
             target: _blank
           - name: VPN Management
             icon: fa-solid fa-lock
+            type: Ping
             subtitle: Manage VPN access
             tag: vpn
             keywords: vpn wireguard
@@ -220,6 +236,7 @@ data:
             target: _blank
           - name: LiteLLM Proxy
             icon: fa-solid fa-plug
+            type: Ping
             subtitle: Unified API gateway for multiple LLM providers
             tag: ai
             keywords: ai
