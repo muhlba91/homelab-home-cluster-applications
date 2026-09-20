@@ -15,7 +15,7 @@ data:
     header: true
     footer: ""
 
-    columns: "3"
+    columns: 3
     connectivityCheck: true
 
     defaults:
@@ -66,31 +66,142 @@ data:
     updateIntervalMs: 300000
 
     services:
-      - name: "Applications"
-        icon: "fas fa-cloud"
+      - name: Lifestyle & Productivity
+        icon: fa-solid fa-house-user
         items:
-          - name: "Get started"
-            icon: "fa-solid fa-download"
-            subtitle: "Start using Homer in a few minutes"
-            tag: "setup"
-            url: "https://github.com/bastienwirtz/homer?tab=readme-ov-file#get-started"
-          - name: "Configuration"
-            icon: "fa-solid fa-sliders"
-            subtitle: "Configuration options documentation"
-            tag: "setup"
-            url: "https://github.com/bastienwirtz/homer/blob/main/docs/configuration.md"
-          - name: "Theming"
-            icon: "fa-solid fa-palette"
-            subtitle: "Customize Homer appearance"
-            tag: "theming"
-            url: "https://github.com/bastienwirtz/homer/blob/main/docs/theming.md"
-          - name: "Smart cards"
-            icon: "fa-solid fa-palette"
-            subtitle: "Displays dynamic information or actions."
-            tag: "setup"
-            url: "https://github.com/bastienwirtz/homer/blob/main/docs/customservices.md"
-          - name: "Dashboard icons"
-            icon: "fa-solid fa-icons"
-            subtitle: "Dashboard icons"
-            tag: "setup"
-            url: "https://github.com/walkxcode/dashboard-icons"
+          - name: LibreChat
+            icon: fa-solid fa-comments
+            subtitle: Self-hosted AI chat assistant
+            tag: ai
+            keywords: ai chat
+            url: https://chat.ai.home.muehlbachler.io
+          - name: Home Assistant
+            icon: fa-solid fa-house-signal
+            subtitle: Smart home control - lights, sensors & automations
+            tag: smart-home
+            keywords: smart home
+            url: https://jarvis.vie.home.muehlbachler.io
+          - name: Immich
+            icon: fa-solid fa-images
+            subtitle: Photo & video library
+            tag: photos
+            keywords: photos videos backup
+            url: https://photos.home.muehlbachler.io
+          - name: Mealie
+            icon: fa-solid fa-utensils
+            subtitle: Recipe manager
+            tag: recipes
+            keywords: recipes cooking food meal
+            url: https://recipes.home.muehlbachler.io
+          - name: Webmail
+            icon: fa-solid fa-envelope
+            subtitle: Access your email inbox
+            tag: mail
+            keywords: email inbox webmail mail
+            url: https://mail.muehlbachler.io
+          - name: SimpleLogin
+            icon: fa-solid fa-at
+            subtitle: Manage private email aliases
+            tag: mail
+            keywords: email aliases privacy anti-spam
+            url: https://aliases.email.muehlbachler.io
+
+      - name: Monitoring
+        icon: fa-solid fa-gauge-high
+        items:
+          - name: Gatus
+            icon: fa-solid fa-heart-pulse
+            subtitle: Live status page for all services
+            tag: monitoring
+            keywords: status uptime health monitoring
+            url: https://status.vie.home.muehlbachler.io
+          - name: Grafana
+            icon: fa-solid fa-chart-line
+            subtitle: Metrics & dashboards
+            tag: monitoring
+            keywords: metrics dashboards monitoring
+            url: https://grafana.vie.home.muehlbachler.io
+
+      - name: Smart Home Management
+        icon: fa-solid fa-house-signal
+        items:
+          - name: EMQX
+            icon: fa-solid fa-network-wired
+            subtitle: MQTT broker powering IoT device messaging
+            tag: smart-home
+            keywords: mqtt broker iot smart home
+            url: https://emqx.iot.vie.internal.muehlbachler.io
+          - name: Node-RED
+            icon: fa-solid fa-diagram-project
+            subtitle: Visual automation flows for smart home devices
+            tag: smart-home
+            keywords: automation iot smart home
+            url: https://node-red.iot.vie.internal.muehlbachler.io
+          - name: Z-Wave JS UI
+            icon: fa-solid fa-wave-square
+            subtitle: Manage Z-Wave smart home devices
+            tag: smart-home
+            keywords: zwave z-wave smart home
+            url: https://zwave.iot.vie.internal.muehlbachler.io
+
+      - name: Network
+        icon: fa-solid fa-network-wired
+        items:
+          - name: AdGuard Home
+            icon: fa-solid fa-shield-halved
+            subtitle: Network-wide ad & tracker blocking
+            tag: network
+            keywords: dns ad-blocker privacy
+            url: https://adguard.vie.internal.muehlbachler.io
+          - name: Omada Controller
+            icon: fa-solid fa-wifi
+            subtitle: Manage Wi-Fi access points & network
+            tag: network
+            keywords: wifi tp-link omada
+            url: https://omada.network.vie.home.muehlbachler.io
+          - name: Router
+            icon: fa-solid fa-router
+            subtitle: Router admin console
+            tag: network
+            keywords: router gateway
+            url: https://10.0.0.1
+          - name: Switch 1 (Tech Hub)
+            icon: fa-solid fa-ethernet
+            subtitle: Network switch admin console
+            tag: network
+            keywords: switch
+            url: http://10.0.10.1
+          - name: Switch 2 (Office)
+            icon: fa-solid fa-ethernet
+            subtitle: Network switch admin console
+            tag: network
+            keywords: switch
+            url: http://10.0.10.1
+
+      - name: Infrastructure
+        icon: fa-solid fa-server
+        items:
+          - name: Vault
+            icon: fa-solid fa-key
+            subtitle: Secrets management
+            tag: security
+            keywords: secrets vault
+            url: https://vault.platform.muehlbachler.io:8200
+          - name: Zitadel
+            icon: fa-solid fa-id-badge
+            subtitle: Identity provider / single sign-on
+            tag: security
+            keywords: identity sso authentication oidc
+            url: https://muehlbachler-mhvy5g.zitadel.cloud
+          - name: VPN Management
+            icon: fa-solid fa-lock
+            subtitle: Manage VPN access
+            tag: vpn
+            keywords: vpn wireguard
+            url: https://vpn.platform.muehlbachler.io
+          - name: LiteLLM Proxy
+            icon: fa-solid fa-plug
+            subtitle: Unified API gateway for multiple LLM providers - generate API keys
+            tag: ai
+            keywords: ai
+            url: https://proxy.ai.home.muehlbachler.io
