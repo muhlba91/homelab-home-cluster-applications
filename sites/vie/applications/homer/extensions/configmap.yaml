@@ -8,7 +8,7 @@ data:
     ---
     title: Tuxnet Services
     subtitle: Landing Page
-    icon: fas fa-house
+    icon: fas fa-house-chimney
 
     theme: default
 
