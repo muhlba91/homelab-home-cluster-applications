@@ -78,7 +78,7 @@ data:
             target: _blank
           - name: Home Assistant
             icon: fa-solid fa-house-signal
-            subtitle: Smart home control - lights, sensors & automations
+            subtitle: Smart home control
             tag: smart-home
             keywords: smart home
             url: https://jarvis.vie.home.muehlbachler.io
@@ -220,7 +220,7 @@ data:
             target: _blank
           - name: LiteLLM Proxy
             icon: fa-solid fa-plug
-            subtitle: Unified API gateway for multiple LLM providers - generate API keys
+            subtitle: Unified API gateway for multiple LLM providers
             tag: ai
             keywords: ai
             url: https://proxy.ai.home.muehlbachler.io
