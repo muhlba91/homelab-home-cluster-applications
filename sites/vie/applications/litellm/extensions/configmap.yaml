@@ -27,6 +27,8 @@ data:
       disable_master_key_return: true
       disable_adding_master_key_hash_to_db: true
 
+      disable_env_credential_login: true
+
       proxy_batch_write_at: 120
       proxy_config_reload_interval_seconds: 120
       database_connection_pool_limit: 10
