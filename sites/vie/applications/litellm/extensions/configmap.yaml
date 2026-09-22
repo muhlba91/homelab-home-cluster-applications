@@ -33,7 +33,7 @@ data:
       proxy_config_reload_interval_seconds: 120
       database_connection_pool_limit: 10
 
-      store_prompts_in_spend_logs: false
+      store_prompts_in_spend_logs: true
       disable_spend_logs: false
       disable_spend_updates: false
       maximum_spend_logs_retention_period: 90d
