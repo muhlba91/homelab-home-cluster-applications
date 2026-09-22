@@ -23,7 +23,7 @@ extraEnv:
   - name: OLLAMA_NUM_PARALLEL
     value: "2"
   - name: OLLAMA_KEEP_ALIVE
-    value: "1"
+    value: "1m"
   - name: OLLAMA_CONTEXT_LENGTH
     value: "16384"
 
