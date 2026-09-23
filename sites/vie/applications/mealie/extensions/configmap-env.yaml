@@ -26,7 +26,7 @@ data:
   OIDC_REMEMBER_ME: "true"
   OIDC_USER_CLAIM: email
   OIDC_ADMIN_GROUP: admin
-  OPENAI_BASE_URL: https://generativelanguage.googleapis.com/v1beta/openai/
+  OPENAI_BASE_URL: http://litellm.litellm:4000/v1
   OPENAI_MODEL: gemini-3.8-flash
   OPENAI_ENABLE_IMAGE_SERVICES: "true"
   OPENAI_SEND_DATABASE_DATA: "true"

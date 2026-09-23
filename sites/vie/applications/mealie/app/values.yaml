@@ -23,7 +23,7 @@ controllers:
           - secretRef:
               name: mealie-oidc
           - secretRef:
-              name: mealie-openai
+              name: mealie-litellm
           - secretRef:
               name: mealie-smtp
 
