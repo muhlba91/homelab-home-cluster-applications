@@ -79,7 +79,7 @@ data:
             subtitle: Self-hosted AI chat assistant
             tag: ai
             keywords: ai chat
-            url: https://chat.ai.home.muehlbachler.io
+            url: https://chat.ai.${HOME_DOMAIN}
             target: _blank
           - name: Home Assistant
             icon: fa-solid fa-house-signal
@@ -87,7 +87,7 @@ data:
             subtitle: Smart home control
             tag: smart-home
             keywords: smart home
-            url: https://jarvis.vie.home.muehlbachler.io
+            url: https://jarvis.${LOCAL_PUBLIC_DOMAIN}
             target: _blank
           - name: Immich
             icon: fa-solid fa-images
@@ -95,7 +95,7 @@ data:
             subtitle: Photo & video library
             tag: photos
             keywords: photos videos backup
-            url: https://photos.home.muehlbachler.io
+            url: https://photos.${HOME_DOMAIN}
             target: _blank
           - name: Mealie
             icon: fa-solid fa-utensils
@@ -103,7 +103,7 @@ data:
             subtitle: Recipe manager
             tag: recipes
             keywords: recipes cooking food meal
-            url: https://recipes.home.muehlbachler.io
+            url: https://recipes.${HOME_DOMAIN}
             target: _blank
           - name: Webmail
             icon: fa-solid fa-envelope
@@ -131,7 +131,7 @@ data:
             subtitle: Live status page for all services
             tag: monitoring
             keywords: status uptime health monitoring
-            url: https://status.vie.home.muehlbachler.io
+            url: https://status.${LOCAL_PUBLIC_DOMAIN}
             target: _blank
 
       - name: Administration
@@ -151,5 +151,5 @@ data:
             subtitle: Unified API gateway for multiple LLM providers
             tag: ai
             keywords: ai
-            url: https://proxy.ai.home.muehlbachler.io
+            url: https://proxy.ai.${LOCAL_INTERNAL_DOMAIN}
             target: _blank

@@ -79,7 +79,7 @@ data:
             subtitle: Live status page for all services
             tag: monitoring
             keywords: status uptime health monitoring
-            url: https://status.vie.home.muehlbachler.io
+            url: https://status.${LOCAL_PUBLIC_DOMAIN}
             target: _blank
           - name: Grafana
             icon: fa-solid fa-chart-line
@@ -87,7 +87,7 @@ data:
             subtitle: Metrics & dashboards
             tag: monitoring
             keywords: metrics dashboards monitoring
-            url: https://grafana.vie.home.muehlbachler.io
+            url: https://grafana.${LOCAL_PUBLIC_DOMAIN}
             target: _blank
 
       - name: Smart Home Management
@@ -99,7 +99,7 @@ data:
             subtitle: MQTT broker powering IoT device messaging
             tag: smart-home
             keywords: mqtt broker iot smart home
-            url: https://emqx.iot.vie.internal.muehlbachler.io
+            url: https://emqx.iot.${LOCAL_INTERNAL_DOMAIN}
             target: _blank
           - name: Node-RED
             icon: fa-solid fa-diagram-project
@@ -107,7 +107,7 @@ data:
             subtitle: Visual automation flows for smart home devices
             tag: smart-home
             keywords: automation iot smart home
-            url: https://node-red.iot.vie.internal.muehlbachler.io
+            url: https://node-red.iot.${LOCAL_INTERNAL_DOMAIN}
             target: _blank
           - name: Z-Wave JS UI
             icon: fa-solid fa-wave-square
@@ -115,7 +115,7 @@ data:
             subtitle: Manage Z-Wave smart home devices
             tag: smart-home
             keywords: zwave z-wave smart home
-            url: https://zwave.iot.vie.internal.muehlbachler.io
+            url: https://zwave.iot.${LOCAL_INTERNAL_DOMAIN}
             target: _blank
 
       - name: Network
@@ -135,7 +135,7 @@ data:
             subtitle: Manage Wi-Fi access points & network
             tag: network
             keywords: wifi tp-link omada
-            url: https://omada.network.vie.home.muehlbachler.io
+            url: https://omada.network.${LOCAL_PUBLIC_DOMAIN}
             target: _blank
           - name: Router
             icon: fa-solid fa-network-wired
