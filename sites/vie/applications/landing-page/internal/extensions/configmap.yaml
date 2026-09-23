@@ -58,6 +58,10 @@ data:
       - name: Landing Page
         icon: fas fa-house
         url: "/"
+      - name: External Services
+        icon: fas fa-wifi
+        url: https://landing.${LOCAL_PUBLIC_DOMAIN}
+        target: _blank
       - name: Documentation
         icon: fas fa-book
         url: https://muhlba91.github.io/homelab-documentation/
@@ -66,58 +70,6 @@ data:
     updateIntervalMs: 300000
 
     services:
-      - name: Lifestyle & Productivity
-        icon: fa-solid fa-house-user
-        items:
-          - name: LibreChat
-            icon: fa-solid fa-comments
-            # type: Ping
-            subtitle: Self-hosted AI chat assistant
-            tag: ai
-            keywords: ai chat
-            url: https://chat.ai.home.muehlbachler.io
-            target: _blank
-          - name: Home Assistant
-            icon: fa-solid fa-house-signal
-            # type: Ping
-            subtitle: Smart home control
-            tag: smart-home
-            keywords: smart home
-            url: https://jarvis.vie.home.muehlbachler.io
-            target: _blank
-          - name: Immich
-            icon: fa-solid fa-images
-            # type: Ping
-            subtitle: Photo & video library
-            tag: photos
-            keywords: photos videos backup
-            url: https://photos.home.muehlbachler.io
-            target: _blank
-          - name: Mealie
-            icon: fa-solid fa-utensils
-            # type: Ping
-            subtitle: Recipe manager
-            tag: recipes
-            keywords: recipes cooking food meal
-            url: https://recipes.home.muehlbachler.io
-            target: _blank
-          - name: Webmail
-            icon: fa-solid fa-envelope
-            # type: Ping
-            subtitle: Access your email inbox
-            tag: mail
-            keywords: email inbox webmail mail
-            url: https://mail.muehlbachler.io
-            target: _blank
-          - name: SimpleLogin
-            icon: fa-solid fa-at
-            # type: Ping
-            subtitle: Manage private email aliases
-            tag: mail
-            keywords: email aliases privacy anti-spam
-            url: https://aliases.email.muehlbachler.io
-            target: _blank
-
       - name: Monitoring
         icon: fa-solid fa-gauge-high
         items:
@@ -218,14 +170,6 @@ data:
             keywords: secrets vault
             url: https://vault.platform.muehlbachler.io:8200
             target: _blank
-          - name: Zitadel
-            icon: fa-solid fa-id-badge
-            # type: Ping
-            subtitle: Identity provider / single sign-on
-            tag: security
-            keywords: identity sso authentication oidc
-            url: https://muehlbachler-mhvy5g.zitadel.cloud
-            target: _blank
           - name: VPN Management
             icon: fa-solid fa-lock
             # type: Ping
@@ -233,12 +177,4 @@ data:
             tag: vpn
             keywords: vpn wireguard
             url: https://vpn.platform.muehlbachler.io
-            target: _blank
-          - name: LiteLLM Proxy
-            icon: fa-solid fa-plug
-            # type: Ping
-            subtitle: Unified API gateway for multiple LLM providers
-            tag: ai
-            keywords: ai
-            url: https://proxy.ai.home.muehlbachler.io
             target: _blank

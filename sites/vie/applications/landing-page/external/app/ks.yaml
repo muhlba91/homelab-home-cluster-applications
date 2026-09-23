@@ -1,0 +1,26 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &application landing-page-external
+  namespace: flux-system
+spec:
+  sourceRef:
+    kind: GitRepository
+    name: cluster-applications
+  path: ./sites/vie/applications/landing-page/homer/app/
+  interval: 10m
+  retryInterval: 2m
+  prune: true
+  force: false
+  wait: false
+  postBuild:
+    substitute:
+      APPLICATION: *application
+      APPLICATION_NAMESPACE: landing-page
+      GATEWAY_NAME: kgateway-gateway
+      PARENT_DOMAIN: ${LOCAL_PUBLIC_DOMAIN}
+      EXTERNAL_DNS_PROVIDER: public
+      CLUSTER_ISSUER: ${PUBLIC_CLUSTER_ISSUER}
+      # external-dns.kubernetes.io/target: "${PUBLIC_IP}"
