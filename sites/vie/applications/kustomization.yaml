@@ -12,4 +12,4 @@ resources:
   - ./mealie/
   - ./qdrant/
   - ./agents/
-  - ./homer/
+  - ./landing-page/

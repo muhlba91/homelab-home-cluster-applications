@@ -38,7 +38,7 @@ controllers:
             enabled: false
 
 service:
-  homer:
+  ${APPLICATION}:
     controller: main
     annotations:
       gatus.home-operations.com/enabled: "true"
@@ -48,25 +48,25 @@ service:
         port: 8080
 
 route:
-  homer:
+  ${APPLICATION}:
     enabled: true
     kind: HTTPRoute
     annotations:
-      external-dns.kubernetes.io/provider: internal
+      external-dns.kubernetes.io/provider: "${EXTERNAL_DNS_PROVIDER}"
     parentRefs:
       - group: gateway.networking.k8s.io
         kind: ListenerSet
         namespace: ${APPLICATION_NAMESPACE}
-        name: homer-listeners
+        name: ${APPLICATION}-listeners
     hostnames:
-      - &domain landing.${LOCAL_INTERNAL_DOMAIN}
+      - &domain landing.${PARENT_DOMAIN}
     rules:
       - matches:
           - path:
               type: PathPrefix
               value: /
         backendRefs:
-          - identifier: homer
+          - identifier: ${APPLICATION}
             port: 8080
 rawResources:
   listeners:
@@ -75,26 +75,26 @@ rawResources:
       kind: ListenerSet
       metadata:
         annotations:
-          cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
+          cert-manager.io/cluster-issuer: "${CLUSTER_ISSUER}"
       spec:
         parentRef:
-          name: kgateway-gateway-internal
+          name: ${GATEWAY_NAME}
           namespace: kgateway
         listeners:
-          - name: https-homer
+          - name: https-${APPLICATION}
             protocol: HTTPS
             port: 443
             hostname: *domain
             tls:
               mode: Terminate
               certificateRefs:
-                - name: homer-tls-cert
+                - name: ${APPLICATION}-tls-cert
 
 persistence:
   config:
     enabled: true
     type: configMap
-    name: homer-config
+    name: ${APPLICATION}-config
     globalMounts:
       - path: /www/assets/config.yml
         subPath: config.yml

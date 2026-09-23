@@ -3,13 +3,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &application homer-extensions
+  name: &application landing-page-internal-extensions
   namespace: flux-system
 spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./sites/vie/applications/homer/extensions/
+  path: ./sites/vie/applications/landing-page/internal/extensions/
   interval: 10m
   retryInterval: 2m
   prune: true
@@ -18,4 +18,4 @@ spec:
   postBuild:
     substitute:
       APPLICATION: *application
-      APPLICATION_NAMESPACE: homer
+      APPLICATION_NAMESPACE: landing-page

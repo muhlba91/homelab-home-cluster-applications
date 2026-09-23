@@ -3,13 +3,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &application homer
+  name: &application landing-page-internal
   namespace: flux-system
 spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  path: ./sites/vie/applications/homer/app/
+  path: ./sites/vie/applications/landing-page/homer/app/
   interval: 10m
   retryInterval: 2m
   prune: true
@@ -18,4 +18,8 @@ spec:
   postBuild:
     substitute:
       APPLICATION: *application
-      APPLICATION_NAMESPACE: *application
+      APPLICATION_NAMESPACE: landing-page
+      GATEWAY_NAME: kgateway-gateway-internal
+      PARENT_DOMAIN: ${LOCAL_INTERNAL_DOMAIN}
+      EXTERNAL_DNS_PROVIDER: internal
+      CLUSTER_ISSUER: ${INTERNAL_CLUSTER_ISSUER}
