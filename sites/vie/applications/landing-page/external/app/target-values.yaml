@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ${APPLICATION}-target-values
+  namespace: flux-system
+data:
+  values.yaml: |
+    ---
+    route:
+      ${APPLICATION}:
+        annotations:
+          external-dns.kubernetes.io/target: "${PUBLIC_IP}"

@@ -138,7 +138,7 @@ data:
             url: https://omada.network.vie.home.muehlbachler.io
             target: _blank
           - name: Router
-            icon: fa-solid fa-router
+            icon: fa-solid fa-network-wired
             subtitle: Router admin console
             tag: network
             keywords: router gateway

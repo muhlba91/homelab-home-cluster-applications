@@ -11,3 +11,13 @@ configMapGenerator:
       - values.yaml=values.yaml
 configurations:
   - kustomizeconfig.yml
+patches:
+  - target:
+      kind: HelmRelease
+    patch: |-
+      - op: add
+        path: /spec/valuesFrom/-
+        value:
+          kind: ConfigMap
+          name: ${APPLICATION}-target-values
+          valuesKey: values.yaml
