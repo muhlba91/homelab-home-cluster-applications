@@ -7,10 +7,3 @@ metadata:
 data:
   values.yaml: |
     ---
-    route:
-      ${APPLICATION}:
-        annotations:
-          # internal IPs are not deterministic, so no target is pinned here
-          # (contrast with landing-page-external-target-values, where
-          # PUBLIC_IP is static and safe to pin).
-          external-dns.kubernetes.io/target: ""

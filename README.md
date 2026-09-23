@@ -88,6 +88,7 @@ The following applications are defined in [`common/core/`](common/core/).
 
 The following applications are defined in [`common/applications/`](common/applications/).
 
+- [x] [Homer](https://github.com/bastienwirtz/homer) - Landing page chart definition, shared across sites and their internal/external exposure variants.
 - [x] [InfluxDB](https://www.influxdata.com) - InfluxDB time-series database.
 - [x] [Omada Controller](https://www.tp-link.com/us/business-networking/omada-sdn-controller/) - TP-Link Omada Controller.
 
@@ -158,6 +159,8 @@ The following applications are defined in [`sites/vie/applications/`](sites/vie/
 - [x] [Mealie](https://mealie.io) - Recipe management application.
 - [x] [Qdrant](https://qdrant.tech) - Vector database, used by zoocode for codebase indexing.
 - [x] [Homer](https://github.com/bastienwirtz/homer) - Landing page.
+  - [x] [internal](sites/vie/applications/landing-page/internal/) - Internal-only `HTTPRoute`, no `external-dns` target pinned.
+  - [x] [external](sites/vie/applications/landing-page/external/) - Publicly reachable `HTTPRoute`, `external-dns` target pinned to the static public IP.
 - [x] Personal Agents and Assistants
   - [x] MCP Servers
     - [x] [Kubernetes MCP Server](https://github.com/containers/kubernetes-mcp-server) - MCP server to allow personal agents to interact with Kubernetes data.
