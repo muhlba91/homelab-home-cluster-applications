@@ -109,7 +109,6 @@ data:
             - "mcp:*:delete_*"
           ask:
             - "mcp:*:write_*"
-            - "mcp:*:delete_*"
 
       custom:
         - name: Anthropic Claude
