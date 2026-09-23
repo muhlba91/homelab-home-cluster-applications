@@ -156,6 +156,8 @@ data:
           titleEndpoint: OpenAI GPT
           titleModel: gpt-6-luna
           titleMethod: completion
+          dropParams:
+            - metadata
           models:
             default:
               - gpt-6-luna
