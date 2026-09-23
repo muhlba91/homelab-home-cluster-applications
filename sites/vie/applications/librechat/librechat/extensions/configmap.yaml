@@ -54,8 +54,8 @@ data:
       disabled: true
 
     summarization:
-      provider: Google Gemini
-      model: gemini-flash-lite-latest
+      provider: OpenAI GPT
+      model: gpt-6-luna
       maxSummaryTokens: 4096
       reserveRatio: 0.1
       trigger:
@@ -99,8 +99,8 @@ data:
         maxCitationsPerFile: 7
         minRelevanceScore: 0.45
         activityLabel: true
-        activityEndpoint: Google Gemini
-        activityModel: gemini-flash-lite-latest
+        activityEndpoint: OpenAI GPT
+        activityModel: gpt-6-luna
         activityPhaseLabel: true
         toolApproval:
           enabled: true
@@ -120,17 +120,16 @@ data:
             anthropic-version: "2023-06-01"
           iconURL: anthropic
           titleConvo: true
-          titleEndpoint: Google Gemini
-          titleModel: gemini-flash-lite-latest
+          titleEndpoint: OpenAI GPT
+          titleModel: gpt-6-luna
           titleMethod: completion
           models:
             default:
               - claude-haiku-4-5
-              - claude-sonnet-4-6
-              - claude-sonnet-4-8
               - claude-sonnet-5
+              - claude-opus-5-5
               - claude-opus-4-8
-              - claude-opus-5
+              - claude-sonnet-4-8
             fetch: false
 
         - name: Google Gemini
@@ -138,14 +137,13 @@ data:
           baseURL: http://litellm.litellm:4000/v1
           iconURL: google
           titleConvo: true
-          titleEndpoint: Google Gemini
-          titleModel: gemini-flash-lite-latest
+          titleEndpoint: OpenAI GPT
+          titleModel: gpt-6-luna
           titleMethod: completion
           models:
             default:
               - gemini-flash-lite-latest
               - gemini-3.8-flash
-              - gemini-3.7-flash
               - gemini-3.1-pro-preview
               - gemini-embedding-2-preview
             fetch: false
@@ -155,22 +153,24 @@ data:
           baseURL: http://litellm.litellm:4000/v1
           iconURL: openAI
           titleConvo: true
-          titleEndpoint: Google Gemini
-          titleModel: gemini-flash-lite-latest
+          titleEndpoint: OpenAI GPT
+          titleModel: gpt-6-luna
           titleMethod: completion
           models:
             default:
-              - gpt-5-nano
-              - gpt-5.4-mini
-              - gpt-5.6
+              - gpt-6-luna
+              - gpt-5.6-terra
+              - gpt-6-sol
+              - gpt-5.6-luna
+              - gpt-5.6-sol
             fetch: false
 
         - name: Mistral
           apiKey: user_provided
           baseURL: http://litellm.litellm:4000/v1
           titleConvo: true
-          titleEndpoint: Google Gemini
-          titleModel: gemini-flash-lite-latest
+          titleEndpoint: OpenAI GPT
+          titleModel: gpt-6-luna
           titleMethod: completion
           models:
             default:
@@ -183,16 +183,30 @@ data:
               - codestral-latest
             fetch: false
 
-        - name: OSS Models
+        - name: DeepSeek
           apiKey: user_provided
           baseURL: http://litellm.litellm:4000/v1
-          iconURL: https://raw.githubusercontent.com/BerriAI/litellm-docs/main/img/favicon.png
+          iconURL: deepseek
           titleConvo: true
-          titleEndpoint: Google Gemini
-          titleModel: gemini-flash-lite-latest
+          titleEndpoint: OpenAI GPT
+          titleModel: gpt-6-luna
           titleMethod: completion
           models:
             default:
-              - gemma4
-              - qwen3.5
+              - deepseek-flash-latest
+              - deepseek-pro-latest
+            fetch: false
+
+        - name: GLM
+          apiKey: user_provided
+          baseURL: http://litellm.litellm:4000/v1
+          iconURL: https://unpkg.com/@lobehub/icons-static-svg@latest/icons/zhipu-color.svg
+          titleConvo: true
+          titleEndpoint: OpenAI GPT
+          titleModel: gpt-6-luna
+          titleMethod: completion
+          models:
+            default:
+              - glm-flash-latest
+              - glm-latest
             fetch: false
