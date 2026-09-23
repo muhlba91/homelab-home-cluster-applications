@@ -23,7 +23,7 @@ data:
       cache: false
 
     general_settings:
-      # master_key: os.environ/PROXY_MASTER_KEY
+      # master_key: os.environ/LITELLM_MASTER_KEY
       disable_master_key_return: true
       disable_adding_master_key_hash_to_db: true
 
