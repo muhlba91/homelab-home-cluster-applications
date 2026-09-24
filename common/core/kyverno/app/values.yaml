@@ -37,9 +37,9 @@ cleanupController:
   resources:
     requests:
       cpu: 10m
-      memory: 58Mi
+      memory: 64Mi
     limits:
-      memory: 58Mi
+      memory: 64Mi
 
 reportsController:
   rbac: *extraRbacResources
