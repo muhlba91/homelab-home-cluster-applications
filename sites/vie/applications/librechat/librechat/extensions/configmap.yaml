@@ -90,6 +90,10 @@ data:
       jinaApiKey: "$${JINA_API_KEY}"
       safeSearch: 0
 
+    mcpSettings:
+      allowedAddresses:
+        - "litellm.litellm:4000"
+
     mcpServers:
       litellm:
         type: streamable-http
