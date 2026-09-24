@@ -199,8 +199,8 @@ rawResources:
             kind: HTTPRoute
             name: librechat
         timeouts:
-          request: 30m
-          streamIdle: 30m
+          request: 3600s
+          streamIdle: 3600s
 
 persistence:
   images:

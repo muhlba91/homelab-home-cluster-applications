@@ -281,4 +281,5 @@ extraObjects:
           kind: HTTPRoute
           name: argocd-server
       timeouts:
+        request: 3600s
         streamIdle: 3600s
