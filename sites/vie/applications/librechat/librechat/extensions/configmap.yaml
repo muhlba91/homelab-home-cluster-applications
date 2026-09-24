@@ -98,6 +98,7 @@ data:
       litellm:
         type: streamable-http
         url: http://litellm.litellm:4000/mcp
+        requiresOAuth: false
         headers:
           x-litellm-api-key: "Bearer {{LITELLM_API_KEY}}"
         customUserVars:
