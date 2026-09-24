@@ -22,6 +22,12 @@ data:
 
       cache: false
 
+      mcp_semantic_tool_filter:
+        enabled: true
+        embedding_model: gemini-embedding-2-preview
+        top_k: 5
+        similarity_threshold: 0.25
+
     general_settings:
       # master_key: os.environ/LITELLM_MASTER_KEY
       disable_master_key_return: true
