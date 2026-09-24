@@ -156,7 +156,7 @@ data:
             subtitle: Network switch admin console
             tag: network
             keywords: switch
-            url: http://10.0.10.1
+            url: http://10.0.10.2
             target: _blank
 
       - name: Infrastructure
