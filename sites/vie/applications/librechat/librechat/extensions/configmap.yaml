@@ -90,6 +90,19 @@ data:
       jinaApiKey: "$${JINA_API_KEY}"
       safeSearch: 0
 
+    mcpServers:
+      litellm:
+        type: streamable-http
+        url: http://litellm.litellm:4000/mcp
+        headers:
+          x-litellm-api-key: "Bearer {{LITELLM_API_KEY}}"
+        customUserVars:
+          LITELLM_API_KEY:
+            title: LiteLLM API Key
+            description: Your personal LiteLLM virtual key
+            required: true
+        chatMenu: true
+
     endpoints:
       agents:
         recursionLimit: 50
