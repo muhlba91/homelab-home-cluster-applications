@@ -1,7 +1,17 @@
 ---
 resources:
   requests:
-    cpu: 80m
-    memory: 320Mi
+    cpu: 78m
+    memory: 364Mi
   limits:
-    memory: 320Mi
+    memory: 364Mi
+
+ceph-csi-operator:
+  controllerManager:
+    manager:
+      resources:
+        requests:
+          cpu: 3m
+          memory: 72Mi
+        limits:
+          memory: 72Mi

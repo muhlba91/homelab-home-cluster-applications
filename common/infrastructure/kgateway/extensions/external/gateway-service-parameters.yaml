@@ -20,7 +20,7 @@ spec:
     envoyContainer:
       resources:
         limits:
-          memory: 145Mi
+          memory: 154Mi
         requests:
-          cpu: 12m
-          memory: 145Mi
+          cpu: 14m
+          memory: 154Mi

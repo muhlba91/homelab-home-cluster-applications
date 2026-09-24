@@ -20,7 +20,7 @@ controllers:
         resources:
           requests:
             cpu: 3m
-            memory: 73Mi
+            memory: 76Mi
           limits:
             memory: 128Mi
 

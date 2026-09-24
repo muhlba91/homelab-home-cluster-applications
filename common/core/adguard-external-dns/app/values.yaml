@@ -46,9 +46,9 @@ provider:
     resources:
       requests:
         cpu: 3m
-        memory: 39Mi
+        memory: 40Mi
       limits:
-        memory: 39Mi
+        memory: 40Mi
 
 deploymentAnnotations:
   reloader.stakater.com/auto: "true"
@@ -61,6 +61,6 @@ service:
 resources:
   requests:
     cpu: 3m
-    memory: 117Mi
+    memory: 120Mi
   limits:
-    memory: 117Mi
+    memory: 120Mi

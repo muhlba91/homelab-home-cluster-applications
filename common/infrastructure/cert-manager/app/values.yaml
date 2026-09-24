@@ -19,22 +19,22 @@ webhook:
   serviceIPFamilyPolicy: PreferDualStack
   resources:
     requests:
-      cpu: 3m
-      memory: 72Mi
+      cpu: 5m
+      memory: 69Mi
     limits:
-      memory: 72Mi
+      memory: 69Mi
 
 cainjector:
   resources:
     requests:
       cpu: 3m
-      memory: 125Mi
+      memory: 131Mi
     limits:
-      memory: 125Mi
+      memory: 131Mi
 
 resources:
   requests:
     cpu: 3m
-    memory: 113Mi
+    memory: 115Mi
   limits:
-    memory: 113Mi
+    memory: 115Mi

@@ -3,8 +3,8 @@ toolbox:
   enabled: true
   resources:
     requests:
-      cpu: 5m
-      memory: 32Mi
+      cpu: 10m
+      memory: 44Mi
     limits:
       memory: 256Mi
 
@@ -69,30 +69,30 @@ cephClusterSpec:
   resources:
     mgr:
       requests:
-        cpu: 66m
-        memory: 1171Mi
+        cpu: 32m
+        memory: 491Mi
       limits:
-        memory: 1171Mi
+        memory: 1024Mi
     mon:
       requests:
-        cpu: 59m
-        memory: 594Mi
+        cpu: 32m
+        memory: 513Mi
       limits:
         memory: 1024Mi
     osd:
       requests:
-        cpu: 150m
-        memory: 2560Mi
+        cpu: 84m
+        memory: 2486Mi
       limits:
         memory: 4096Mi
     # prepareosd: # not set
     # mgr-sidecar: # not set
     crashcollector:
       requests:
-        cpu: 5m
-        memory: 64Mi
+        cpu: 3m
+        memory: 27Mi
       limits:
-        memory: 96Mi
+        memory: 64Mi
     logcollector:
       requests:
         cpu: 3m
@@ -102,8 +102,8 @@ cephClusterSpec:
     # cleanup # not set
     exporter:
       requests:
-        cpu: 15m
-        memory: 32Mi
+        cpu: 13m
+        memory: 25Mi
       limits:
         memory: 64Mi
 

@@ -28,10 +28,10 @@ controllers:
             value: "1"
         resources: &git-sync-resources
           requests:
-            cpu: 10m
-            memory: 64Mi
+            cpu: 14m
+            memory: 31Mi
           limits:
-            memory: 128Mi
+            memory: 31Mi
       home-assistant:
         image:
           repository: ghcr.io/home-assistant/home-assistant
@@ -67,7 +67,7 @@ controllers:
         resources:
           requests:
             cpu: 19m
-            memory: 1069Mi
+            memory: 1149Mi
           limits:
             memory: 1538Mi
         probes:

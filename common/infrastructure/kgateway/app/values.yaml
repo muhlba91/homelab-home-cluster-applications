@@ -9,6 +9,6 @@ controller:
 resources:
   requests:
     cpu: 3m
-    memory: 210Mi
+    memory: 217Mi
   limits:
-    memory: 210Mi
+    memory: 217Mi

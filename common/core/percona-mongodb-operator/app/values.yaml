@@ -5,7 +5,7 @@ disableTelemetry: true
 
 resources:
   requests:
-    cpu: 5m
-    memory: 128Mi
+    cpu: 75m
+    memory: 203Mi
   limits:
-    memory: 256Mi
+    memory: 203Mi

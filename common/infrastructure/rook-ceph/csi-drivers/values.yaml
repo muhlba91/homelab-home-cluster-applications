@@ -19,9 +19,9 @@ drivers:
         attacher:
           requests:
             cpu: 5m
-            memory: 96Mi
+            memory: 50Mi
           limits:
-            memory: 96Mi
+            memory: 64Mi
         omapGenerator:
           requests:
             cpu: 10m
@@ -30,22 +30,22 @@ drivers:
             memory: 1Gi
         plugin:
           requests:
-            cpu: 5m
-            memory: 56Mi
+            cpu: 3m
+            memory: 98Mi
           limits:
-            memory: 96Mi
+            memory: 98Mi
         provisioner:
           requests:
-            cpu: 5m
-            memory: 96Mi
+            cpu: 4m
+            memory: 49Mi
           limits:
-            memory: 96Mi
+            memory: 64Mi
         resizer:
           requests:
-            cpu: 5m
-            memory: 96Mi
+            cpu: 4m
+            memory: 43Mi
           limits:
-            memory: 96Mi
+            memory: 64Mi
         snapshotter:
           requests:
             cpu: 10m
@@ -56,7 +56,7 @@ drivers:
         liveness: {}
         logRotator:
           requests:
-            cpu: 5m
+            cpu: 3m
             memory: 8Mi
           limits:
             memory: 16Mi
@@ -65,21 +65,21 @@ drivers:
       resources:
         plugin:
           requests:
-            cpu: 5m
-            memory: 64Mi
+            cpu: 3m
+            memory: 70Mi
           limits:
-            memory: 128Mi
+            memory: 96Mi
         registrar:
           requests:
-            cpu: 5m
-            memory: 16Mi
+            cpu: 3m
+            memory: 9Mi
           limits:
-            memory: 32Mi
+            memory: 16Mi
         addons: {}
         liveness: {}
         logRotator:
           requests:
-            cpu: 5m
+            cpu: 3m
             memory: 8Mi
           limits:
             memory: 16Mi
@@ -91,40 +91,40 @@ drivers:
       resources:
         attacher:
           requests:
-            cpu: 5m
-            memory: 24Mi
+            cpu: 3m
+            memory: 52Mi
           limits:
             memory: 64Mi
         plugin:
           requests:
-            cpu: 5m
-            memory: 32Mi
+            cpu: 3m
+            memory: 24Mi
           limits:
-            memory: 64Mi
+            memory: 32Mi
         provisioner:
           requests:
-            cpu: 5m
-            memory: 24Mi
+            cpu: 4m
+            memory: 50Mi
           limits:
             memory: 64Mi
         resizer:
           requests:
-            cpu: 5m
-            memory: 24Mi
+            cpu: 3m
+            memory: 57Mi
           limits:
             memory: 64Mi
         snapshotter:
           requests:
-            cpu: 5m
-            memory: 64Mi
+            cpu: 3m
+            memory: 68Mi
           limits:
-            memory: 64Mi
+            memory: 68Mi
         omapGenerator: {}
         addons: {}
         liveness: {}
         logRotator:
           requests:
-            cpu: 5m
+            cpu: 3m
             memory: 8Mi
           limits:
             memory: 16Mi
@@ -132,21 +132,21 @@ drivers:
       resources:
         plugin:
           requests:
-            cpu: 5m
-            memory: 32Mi
+            cpu: 3m
+            memory: 24Mi
           limits:
-            memory: 64Mi
+            memory: 32Mi
         registrar:
           requests:
-            cpu: 5m
-            memory: 16Mi
+            cpu: 3m
+            memory: 9Mi
           limits:
-            memory: 32Mi
+            memory: 16Mi
         addons: {}
         liveness: {}
         logRotator:
           requests:
-            cpu: 5m
+            cpu: 3m
             memory: 8Mi
           limits:
             memory: 16Mi

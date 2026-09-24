@@ -1,10 +1,10 @@
 ---
 resources:
   requests:
-    cpu: 10m
-    memory: 285Mi
+    cpu: 8m
+    memory: 301Mi
   limits:
-    memory: 285Mi
+    memory: 301Mi
 
 initContainers:
   - name: velero-plugin-for-aws
@@ -26,7 +26,7 @@ deployNodeAgent: true
 nodeAgent:
   resources:
     requests:
-      cpu: 5m
-      memory: 115Mi
+      cpu: 3m
+      memory: 114Mi
     limits:
-      memory: 2Gi
+      memory: 114Mi

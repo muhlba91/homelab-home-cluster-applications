@@ -34,7 +34,7 @@ controllers:
         resources:
           requests:
             cpu: 3m
-            memory: 270Mi
+            memory: 358Mi
             nvidia.com/gpu: "1"
           limits:
             memory: 1024Mi

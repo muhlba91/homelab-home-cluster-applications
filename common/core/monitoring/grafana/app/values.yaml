@@ -79,10 +79,10 @@ plugins:
 sidecar:
   resources:
     requests:
-      cpu: 5m
-      memory: 100Mi
+      cpu: 4m
+      memory: 112Mi
     limits:
-      memory: 160Mi
+      memory: 112Mi
   alerts:
     enabled: false
     labelValue: "1"
@@ -116,7 +116,7 @@ sidecar:
 
 resources:
   requests:
-    cpu: 17m
-    memory: 1100Mi
+    cpu: 21m
+    memory: 1258Mi
   limits:
     memory: 1536Mi

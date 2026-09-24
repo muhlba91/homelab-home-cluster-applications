@@ -70,8 +70,8 @@ prometheus:
 
 resources:
   requests:
-    cpu: 53m
-    memory: 1299Mi
+    cpu: 64m
+    memory: 1303Mi
   limits:
     memory: 2048Mi
 
@@ -82,15 +82,15 @@ operator:
     enabled: true
   resources:
     requests:
-      cpu: 7m
-      memory: 228Mi
+      cpu: 8m
+      memory: 245Mi
     limits:
-      memory: 228Mi
+      memory: 245Mi
 
 envoy:
   resources:
     requests:
-      cpu: 11m
+      cpu: 12m
       memory: 71Mi
     limits:
       memory: 128Mi

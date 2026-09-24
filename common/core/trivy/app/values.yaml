@@ -47,9 +47,9 @@ trivy:
     resources:
       requests:
         cpu: 3m
-        memory: 90Mi
+        memory: 208Mi
       limits:
-        memory: 192Mi
+        memory: 208Mi
 
 compliance:
   reportType: summary
@@ -57,10 +57,10 @@ compliance:
 
 resources:
   requests:
-    cpu: 14m
-    memory: 441Mi
+    cpu: 13m
+    memory: 507Mi
   limits:
-    memory: 441Mi
+    memory: 507Mi
 
 # https://github.com/aquasecurity/trivy-operator/issues/2566
 # configure node collector for Talos Linux (only mount writable /var paths)

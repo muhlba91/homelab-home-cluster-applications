@@ -43,10 +43,10 @@ spec:
       size: 1
       resources:
         requests:
-          cpu: 110m
-          memory: 512Mi
+          cpu: 86m
+          memory: 873Mi
         limits:
-          memory: 768Mi
+          memory: 873Mi
       volumeSpec:
         persistentVolumeClaim:
           storageClassName: ${DEFAULT_STORAGE_CLASS}
@@ -58,6 +58,12 @@ spec:
     enabled: true
     # renovate: datasource=docker packageName=percona/percona-backup-mongodb
     image: percona/percona-backup-mongodb:2.15.0
+    resources:
+      requests:
+        cpu: 4m
+        memory: 266Mi
+      limits:
+        memory: 266Mi
     storages:
       scaleway:
         type: s3

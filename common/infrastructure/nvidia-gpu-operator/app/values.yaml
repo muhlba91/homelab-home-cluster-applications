@@ -9,65 +9,65 @@ hostPaths:
 operator:
   resources:
     limits:
-      memory: 256Mi
+      memory: 195Mi
     requests:
       cpu: 3m
-      memory: 168Mi
+      memory: 195Mi
 
 node-feature-discovery:
   gc:
     resources:
       limits:
-        memory: 128Mi
+        memory: 41Mi
       requests:
-        cpu: 5m
-        memory: 64Mi
+        cpu: 3m
+        memory: 41Mi
   master:
     resources:
       limits:
-        memory: 512Mi
+        memory: 63Mi
       requests:
-        cpu: 5m
-        memory: 96Mi
+        cpu: 3m
+        memory: 63Mi
   worker:
     resources:
       limits:
-        memory: 128Mi
+        memory: 60Mi
       requests:
-        cpu: 5m
-        memory: 64Mi
+        cpu: 3m
+        memory: 60Mi
 
 gfd:
   resources:
     requests:
       cpu: 3m
-      memory: 128Mi
+      memory: 90Mi
     limits:
-      memory: 192Mi
+      memory: 90Mi
 
 dcgmExporter:
   resources:
     requests:
-      cpu: 10m
-      memory: 518Mi
+      cpu: 11m
+      memory: 578Mi
     limits:
-      memory: 768Mi
+      memory: 578Mi
 
 validator:
   resources:
     requests:
-      cpu: 5m
-      memory: 16Mi
+      cpu: 3m
+      memory: 8Mi
     limits:
-      memory: 32Mi
+      memory: 8Mi
 
 devicePlugin:
   resources:
     requests:
-      cpu: 5m
-      memory: 96Mi
+      cpu: 3m
+      memory: 52Mi
     limits:
-      memory: 128Mi
+      memory: 52Mi
   config:
     name: device-plugin-config
     create: true

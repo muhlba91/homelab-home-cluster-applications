@@ -18,8 +18,8 @@ spec:
         - name: falco
           resources:
             requests:
-              cpu: 122m
-              memory: 317Mi
+              cpu: 116m
+              memory: 266Mi
             limits:
               memory: 1024Mi
           env:
@@ -27,3 +27,10 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
+        - name: artifact-operator
+          resources:
+            requests:
+              cpu: 3m
+              memory: 258Mi
+            limits:
+              memory: 258Mi
