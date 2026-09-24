@@ -59,7 +59,8 @@ validator:
       cpu: 3m
       memory: 8Mi
     limits:
-      memory: 8Mi
+      # this is required for startup
+      memory: 32Mi
 
 devicePlugin:
   resources:
