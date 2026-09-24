@@ -28,6 +28,10 @@ data:
         top_k: 5
         similarity_threshold: 0.25
 
+      default_key_generate_params:
+        object_permission:
+          mcp_tool_search_enabled: true
+
     general_settings:
       # master_key: os.environ/LITELLM_MASTER_KEY
       disable_master_key_return: true
