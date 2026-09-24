@@ -187,6 +187,20 @@ rawResources:
               mode: Terminate
               certificateRefs:
                 - name: librechat-tls-cert
+  trafficPolicy:
+    manifest:
+      apiVersion: gateway.kgateway.dev/v1alpha1
+      kind: TrafficPolicy
+      metadata:
+        name: librechat-stream-timeout
+      spec:
+        targetRefs:
+          - group: gateway.networking.k8s.io
+            kind: HTTPRoute
+            name: librechat
+        timeouts:
+          request: 30m
+          streamIdle: 30m
 
 persistence:
   images:
