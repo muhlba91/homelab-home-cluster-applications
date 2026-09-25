@@ -9,4 +9,5 @@ resources:
   - ./external-secret-backup.yaml
   - ./external-secret-gcp.yaml
   - ./external-secret-oidc.yaml
+  - ./external-secret-ntfy.yaml
   - ./postgresql.yaml

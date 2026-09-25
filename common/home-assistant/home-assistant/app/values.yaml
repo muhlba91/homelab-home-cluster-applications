@@ -64,6 +64,8 @@ controllers:
               name: home-assistant-backup
           - secretRef:
               name: home-assistant-oidc
+          - secretRef:
+              name: home-assistant-ntfy
         resources:
           requests:
             cpu: 19m
