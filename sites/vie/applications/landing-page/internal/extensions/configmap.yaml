@@ -101,14 +101,6 @@ data:
             keywords: mqtt broker iot smart home
             url: https://emqx.iot.${LOCAL_INTERNAL_DOMAIN}
             target: _blank
-          - name: Node-RED
-            icon: fa-solid fa-diagram-project
-            # type: Ping
-            subtitle: Visual automation flows for smart home devices
-            tag: smart-home
-            keywords: automation iot smart home
-            url: https://node-red.iot.${LOCAL_INTERNAL_DOMAIN}
-            target: _blank
           - name: Z-Wave JS UI
             icon: fa-solid fa-wave-square
             # type: Ping

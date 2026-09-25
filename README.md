@@ -99,7 +99,6 @@ The following applications are defined in [`common/home-assistant/`](common/home
 - [x] [Home Assistant](https://home-assistant.io) - The Home Assistant instance.
   - [x] PostgreSQL instance as the Home Assistant recorder target and configured via the CloudNativePG operator.
 - [x] [EMQX](https://www.emqx.io) - A MQTT broker.
-- [x] [Node-RED](https://nodered.org) - Automation based on flows and Home Assistant data.
 - [x] [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) - Forwards Home Assistant state changes to a local [InfluxDB](https://www.influxdata.com) instance.
 - [x] [Z-Wave JS](https://github.com/zwave-js/zwave-js-ui) - Full featured Z-Wave Control Panel and MQTT Gateway.
 
@@ -175,7 +174,6 @@ The following applications are defined in [`sites/vie/home-assistant/`](sites/vi
 - [x] Telegraf
 - [x] Z-Wave JS
 - [x] Home Assistant
-- [x] Node-RED
 - [x] [ecowitt2mqtt](https://github.com/bachya/ecowitt2mqtt) - Forwards data received from ecowitt devices to the MQTT broker.
 - [x] [Ring MQTT](https://github.com/tsightler/ring-mqtt) - Amazon Ring devices to MQTT bridge.
 - [x] [Faster Whisper](https://github.com/SYSTRAN/faster-whisper) - Faster Whisper transcription with CTranslate2.
@@ -247,7 +245,6 @@ The following services implement an `initContainer` as well as a nightly `CronJo
 
 The following services use API calls to determine whether a backup or restore is necessary.
 
-- Node-RED
 - Home Assistant
 - Z-Wave JS UI
 
