@@ -51,7 +51,7 @@ spec:
   backup:
     enabled: true
     # renovate: datasource=docker packageName=percona/percona-backup-mongodb
-    image: percona/percona-backup-mongodb:2.15.0
+    image: percona/percona-backup-mongodb:2.16.0
     resources:
       requests:
         cpu: 4m
