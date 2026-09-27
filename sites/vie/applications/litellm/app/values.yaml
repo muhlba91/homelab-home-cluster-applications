@@ -13,7 +13,7 @@ extraEnvVars:
   - name: ROOT_REDIRECT_URL
     value: "/ui"
   - name: PROXY_BASE_URL
-    value: "https://proxy.ai.${LOCAL_INTERNAL_DOMAIN}"
+    value: "https://proxy.ai.${HOME_DOMAIN}"
   - name: BACKGROUND_HEALTH_CHECK_MAX_TOKENS
     value: "16"
   - name: ALLOWED_EMAIL_DOMAINS
