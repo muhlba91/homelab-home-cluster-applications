@@ -42,3 +42,17 @@ spec:
       backendRefs:
         - name: litellm
           port: 4000
+
+---
+apiVersion: gateway.kgateway.dev/v1alpha1
+kind: TrafficPolicy
+metadata:
+  name: litellm-timeouts
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: litellm
+  timeouts:
+    request: 3600s
+    streamIdle: 3600s

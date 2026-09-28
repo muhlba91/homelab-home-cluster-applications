@@ -192,7 +192,7 @@ rawResources:
       apiVersion: gateway.kgateway.dev/v1alpha1
       kind: TrafficPolicy
       metadata:
-        name: librechat-stream-timeout
+        name: librechat-timeouts
       spec:
         targetRefs:
           - group: gateway.networking.k8s.io

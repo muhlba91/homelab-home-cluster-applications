@@ -274,7 +274,7 @@ extraObjects:
   - apiVersion: gateway.kgateway.dev/v1alpha1
     kind: TrafficPolicy
     metadata:
-      name: argocd-stream-timeout
+      name: argocd-timeouts
     spec:
       targetRefs:
         - group: gateway.networking.k8s.io
