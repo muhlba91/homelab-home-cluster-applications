@@ -12,6 +12,7 @@ resources:
   - ./external-secret-librechat-secrets.yaml
   - ./external-secret-librechat-rag-secrets.yaml
   - ./external-secret-librechat-mongodb-user.yaml
+  - ./external-secret-librechat-mongodb-secrets.yaml
   - ./external-secret-percona-mongodb-backup-credentials.yaml
   - ./postgresql.yaml
   - ./mongodb.yaml
