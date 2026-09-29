@@ -24,7 +24,7 @@ data:
 
       mcp_semantic_tool_filter:
         enabled: true
-        embedding_model: gemini-embedding-2-preview
+        embedding_model: gemini-embedding-latest
         top_k: 5
         similarity_threshold: 0.25
 

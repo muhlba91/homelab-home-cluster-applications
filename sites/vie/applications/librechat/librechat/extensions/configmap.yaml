@@ -55,7 +55,7 @@ data:
 
     summarization:
       provider: OpenAI GPT
-      model: gpt-6-luna
+      model: gpt-luna-latest
       maxSummaryTokens: 4096
       reserveRatio: 0.1
       trigger:
@@ -118,7 +118,7 @@ data:
         minRelevanceScore: 0.45
         activityLabel: true
         activityEndpoint: OpenAI GPT
-        activityModel: gpt-6-luna
+        activityModel: gpt-luna-latest
         activityPhaseLabel: true
         toolApproval:
           enabled: true
@@ -138,15 +138,13 @@ data:
           iconURL: anthropic
           titleConvo: true
           titleEndpoint: OpenAI GPT
-          titleModel: gpt-6-luna
+          titleModel: gpt-luna-latest
           titleMethod: completion
           models:
             default:
-              - claude-haiku-4-5
-              - claude-sonnet-5
-              - claude-opus-5-5
-              - claude-opus-4-8
-              - claude-sonnet-4-8
+              - claude-haiku-latest
+              - claude-sonnet-latest
+              - claude-opus-latest
             fetch: false
 
         - name: Google Gemini
@@ -155,14 +153,14 @@ data:
           iconURL: google
           titleConvo: true
           titleEndpoint: OpenAI GPT
-          titleModel: gpt-6-luna
+          titleModel: gpt-luna-latest
           titleMethod: completion
           models:
             default:
               - gemini-flash-lite-latest
-              - gemini-3.8-flash
-              - gemini-3.1-pro-preview
-              - gemini-embedding-2-preview
+              - gemini-flash-latest
+              - gemini-pro-latest
+              - gemini-embedding-latest
             fetch: false
 
         - name: OpenAI GPT
@@ -171,15 +169,13 @@ data:
           iconURL: openAI
           titleConvo: true
           titleEndpoint: OpenAI GPT
-          titleModel: gpt-6-luna
+          titleModel: gpt-luna-latest
           titleMethod: completion
           models:
             default:
-              - gpt-6-luna
-              - gpt-5.6-terra
-              - gpt-6-sol
-              - gpt-5.6-luna
-              - gpt-5.6-sol
+              - gpt-luna-latest
+              - gpt-terra-latest
+              - gpt-sol-latest
             fetch: false
 
         - name: Mistral
@@ -187,7 +183,7 @@ data:
           baseURL: http://litellm.litellm:4000/v1
           titleConvo: true
           titleEndpoint: OpenAI GPT
-          titleModel: gpt-6-luna
+          titleModel: gpt-luna-latest
           titleMethod: completion
           models:
             default:
@@ -206,7 +202,7 @@ data:
           iconURL: deepseek
           titleConvo: true
           titleEndpoint: OpenAI GPT
-          titleModel: gpt-6-luna
+          titleModel: gpt-luna-latest
           titleMethod: completion
           models:
             default:
@@ -220,7 +216,7 @@ data:
           iconURL: https://unpkg.com/@lobehub/icons-static-svg@latest/icons/zhipu-color.svg
           titleConvo: true
           titleEndpoint: OpenAI GPT
-          titleModel: gpt-6-luna
+          titleModel: gpt-luna-latest
           titleMethod: completion
           models:
             default:
