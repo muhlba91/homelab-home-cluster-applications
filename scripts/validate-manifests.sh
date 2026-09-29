@@ -43,6 +43,8 @@ fi
 KUBECONFORM_FLAGS=("-strict" "-verbose" "-ignore-missing-schemas" "-output" "json")
 
 while IFS= read -r location; do
+  # locations starting with ./ are local schema directories relative to this script
+  [[ "$location" == ./* ]] && location="${SCRIPT_DIR}/${location#./}"
   KUBECONFORM_FLAGS+=("-schema-location" "$location")
 done < <(yq eval '.schemas[]' "$KUBECONFORM_CONFIG")
 

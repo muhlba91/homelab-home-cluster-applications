@@ -1,5 +1,7 @@
 ---
 schemas:
   - default
+  # local overrides for CRDs whose catalog schema is outdated (regenerate from the installed CRD on upgrades, see schemas/README.md)
+  - ./schemas/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json
   - https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json
   - https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json
