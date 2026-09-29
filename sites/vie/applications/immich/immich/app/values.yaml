@@ -147,6 +147,8 @@ controllers:
             enabled: false
   samba-daniel:
     enabled: true
+    annotations:
+      reloader.stakater.com/auto: "true"
     pod:
       affinity:
         podAffinity:
@@ -206,6 +208,8 @@ controllers:
             enabled: false
   samba-kasia:
     enabled: true
+    annotations:
+      reloader.stakater.com/auto: "true"
     pod:
       affinity:
         podAffinity:
