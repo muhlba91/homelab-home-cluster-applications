@@ -37,10 +37,16 @@ spec:
           name: librechat-database
 
   bootstrap:
-    initdb:
+    # initdb:
+    #   database: librechat-rag
+    #   owner: librechat
+    #   encoding: UTF8
+    #   secret:
+    #     name: librechat-database
+    recovery:
+      source: librechat-postgresql-backup
       database: librechat-rag
       owner: librechat
-      encoding: UTF8
       secret:
         name: librechat-database
 
