@@ -8,8 +8,6 @@ metadata:
   annotations:
     meta.helm.sh/release-name: gatus
     meta.helm.sh/release-namespace: gatus
-    # defined in two kustomizations (audit S7); keeps the removal of one copy from pruning it
-    kustomize.toolkit.fluxcd.io/prune: disabled
 rules:
   - apiGroups: [""]
     resources: ["services"]
@@ -31,8 +29,6 @@ metadata:
   annotations:
     meta.helm.sh/release-name: gatus
     meta.helm.sh/release-namespace: gatus
-    # defined in two kustomizations (audit S7); keeps the removal of one copy from pruning it
-    kustomize.toolkit.fluxcd.io/prune: disabled
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
