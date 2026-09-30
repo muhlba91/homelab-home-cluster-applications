@@ -401,6 +401,8 @@ persistence:
     storageClass: ${DEFAULT_STORAGE_CLASS}
     accessMode: ReadWriteOnce
     size: 256Gi
+    # keep the PVC on helm uninstall (e.g. app removed from Git or a failed install)
+    retain: true
     advancedMounts:
       main:
         immich:

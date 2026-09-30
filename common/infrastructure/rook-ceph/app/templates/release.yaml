@@ -5,6 +5,9 @@ kind: HelmRelease
 metadata:
   name: ${APPLICATION}
   namespace: flux-system
+  annotations:
+    # guardrail: removing this from Git orphans it instead of deleting its data
+    kustomize.toolkit.fluxcd.io/prune: disabled
 spec:
   releaseName: ${APPLICATION}
   targetNamespace: ${APPLICATION_NAMESPACE}
@@ -13,8 +16,8 @@ spec:
   install:
     createNamespace: true
     crds: Create
-    remediation:
-      retries: -1
+    strategy:
+      name: RetryOnFailure
   upgrade:
     crds: CreateReplace
     remediation:

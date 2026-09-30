@@ -36,3 +36,13 @@ spec:
       target:
         kind: Deployment
         labelSelector: "app.kubernetes.io/name=kubelet-serving-cert-approver"
+    - patch: |-
+        apiVersion: v1
+        kind: Namespace
+        metadata:
+          name: not-used
+          labels:
+            kustomize.toolkit.fluxcd.io/prune: disabled
+      target:
+        kind: Namespace
+        name: kubelet-serving-cert-approver

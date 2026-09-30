@@ -14,8 +14,8 @@ spec:
   install:
     createNamespace: true
     crds: Create
-    remediation:
-      retries: -1
+    strategy:
+      name: RetryOnFailure
   upgrade:
     crds: CreateReplace
     remediation:

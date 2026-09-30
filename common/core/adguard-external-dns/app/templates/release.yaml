@@ -13,8 +13,8 @@ spec:
   install:
     createNamespace: true
     crds: Skip
-    remediation:
-      retries: -1
+    strategy:
+      name: RetryOnFailure
   upgrade:
     crds: Skip
     remediation:

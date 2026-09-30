@@ -255,6 +255,19 @@ the old one, **including its data**:
 Moving a directory is safe as long as the Kustomization `metadata.name` stays
 the same.
 
+Guardrails for data that must survive such mistakes:
+
+- CloudNativePG `Cluster`s with backups, `PerconaServerMongoDB`s and HelmReleases
+  owning irreplaceable data (immich, rook-ceph, rook-ceph-cluster) carry the
+  `kustomize.toolkit.fluxcd.io/prune: disabled` annotation: removing them from
+  Git orphans them instead of deleting them. Delete them deliberately if needed.
+- app-template PVCs without another source of truth set `retain: true`
+  (`helm.sh/resource-policy: keep`).
+- All HelmReleases install with `strategy.name: RetryOnFailure`, so a failed
+  install is retried as an upgrade instead of being uninstalled.
+- Every object is owned by exactly one Flux Kustomization. An object defined
+  in two places flips ownership on every reconcile and can be pruned by either.
+
 ### Application Layout
 
 New apps follow this layout; existing apps keep their names.
