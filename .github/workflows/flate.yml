@@ -1,0 +1,55 @@
+---
+name: Flate
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  flate:
+    runs-on: ubuntu-latest
+    name: Flate
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: write
+    strategy:
+      fail-fast: false
+      matrix:
+        site:
+          - vie
+          - hochschule-burgenland
+
+    steps:
+      - uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2.21.1
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+
+      - uses: home-operations/flate/action@631b76b69c4e58c6f4d1cb01e23616fa61aebafa # v0.6.5
+        with:
+          base: origin/${{ github.base_ref }}
+          cache: "true"
+
+      - run: flate diff all --path sites/${{ matrix.site }}/app-of-apps -o github > flate-diff.txt
+
+      - uses: marocchino/sticky-pull-request-comment@5770ad5eb8f42dd2c4f34da00c94c5381e49af88 # v3.0.5
+        # the token of pull requests from forks is read-only
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        with:
+          header: flate-${{ matrix.site }}
+          skip_unchanged: true
+          path: flate-diff.txt
+          message: |
+            ### Flate diff: ${{ matrix.site }}
+
+            Rendered changes against `${{ github.base_ref }}` (empty = no changes).
+
+            ```diff
+            {{{content}}}
+            ```

@@ -433,4 +433,5 @@ For each run, individual pod snapshots are saved as `resource-reports/krr-<times
 ## Continuous Integration and Automations
 
 - [GitHub Actions](https://docs.github.com/en/actions) are linting all YAML files and Python scripts (ruff).
+- [flate](https://github.com/home-operations/flate) renders each site like Flux would on every pull request and posts the rendered changes against the base branch as a PR comment; the check fails if anything the PR touches does not render.
 - [Renovate Bot](https://github.com/renovatebot/renovate) is updating Helm releases and used container images in the `values.yaml` files, and GitHub Actions.
