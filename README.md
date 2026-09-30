@@ -2,7 +2,7 @@
 
 [![Build status](https://img.shields.io/github/actions/workflow/status/muhlba91/homelab-home-cluster-applications/pipeline.yml?style=for-the-badge)](https://github.com/muhlba91/homelab-home-cluster-applications/actions/workflows/pipeline.yml)
 [![License](https://img.shields.io/github/license/muhlba91/homelab-home-cluster-applications?style=for-the-badge)](LICENSE.md)
-[![](https://api.scorecard.dev/projects/github.com/muhlba91/homelab-home-cluster-applications/badge?style=for-the-badge)](https://scorecard.dev/viewer/?uri=github.com/muhlba91/homelab-home-cluster-applications)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/muhlba91/homelab-home-cluster-applications/badge?style=for-the-badge)](https://scorecard.dev/viewer/?uri=github.com/muhlba91/homelab-home-cluster-applications)
 
 This repository contains applications deployed on the `home-cluster` via [Flux](https://fluxcd.io) using [GitOps](https://opengitops.dev).
 
@@ -12,7 +12,9 @@ This repository contains applications deployed on the `home-cluster` via [Flux](
 
 A Kubernetes cluster needs to be bootstrapped with the [Cilium CNI](https://cilium.io) and Flux pointing to this repository.
 
-For [ksops](https://github.com/viaduct-ai/kustomize-sops) and Flux to decrypt the initial secrets for configuring the [External Secrets Operator](http://external-secrets.io) using [HashiCorp Vault](https://developer.hashicorp.com/vault), a [Google Cloud Service Account](https://cloud.google.com/docs/authentication#service-accounts) with access to the correct KMS key needs to be set in the `flux` namespace.
+For [ksops](https://github.com/viaduct-ai/kustomize-sops) and Flux to decrypt the initial secrets for configuring the [External Secrets
+Operator](http://external-secrets.io) using [HashiCorp Vault](https://developer.hashicorp.com/vault), a [Google Cloud Service
+Account](https://cloud.google.com/docs/authentication#service-accounts) with access to the correct KMS key needs to be set in the `flux` namespace.
 
 ---
 
@@ -55,11 +57,11 @@ The following applications are defined in [`common/infrastructure/`](common/infr
 - [x] [External DNS](https://github.com/kubernetes-sigs/external-dns) - Creates DNS records in Google Cloud DNS domains for publicly reachable services.
 - [x] [External Secrets Operator](http://external-secrets.io) - Synchronizes secrets from external stores to Kubernetes `Secret` objects.
 - [x] [Gateway API](https://gateway-api.sigs.k8s.io) - Exposes Kubernetes `Gateway API` resources to the "outside world".
-- [x] [Generic Device Plugin](https://github.com/squat/generic-device-plugin) - Makes custom hardware devices accessible in the cluster.
+- [ ] [Generic Device Plugin](https://github.com/squat/generic-device-plugin) - Makes custom hardware devices accessible in the cluster.
 - [x] [kgateway](https://kgateway.dev) - Exposes Kubernetes `Gateway API` resources to the "outside world".
 - [x] [Kubelet Serving Cert Approver](https://github.com/alex1989hu/kubelet-serving-cert-approver) - Enables automatic certificate approval by the kubelet.
 - [x] [Metrics Server](https://github.com/kubernetes-sigs/metrics-server) - Collects container resource metrics.
-- [x] [NVIDIA Device Plugin](https://github.com/NVIDIA/k8s-device-plugin) - Makes the NVIDIA GPU accessible in the cluster.
+- [x] [NVIDIA GPU Operator](https://github.com/NVIDIA/gpu-operator) - Makes the NVIDIA GPU accessible in the cluster.
 - [x] [Reflector](https://github.com/reflector/reflector) - Watches Kubernetes resources and reflects changes to another namespace.
 - [x] [Reloader](https://github.com/stakater/Reloader) - Automatically reloads Kubernetes resources when secrets or configmaps change.
 - [x] [Rook Ceph](https://rook.io) - Manages persistent storage in the cluster.
@@ -82,6 +84,7 @@ The following applications are defined in [`common/core/`](common/core/).
   - [x] [Victoria Logs](https://victoriametrics.com/logs/) - Victoria Metrics log collection and processing.
   - [x] [Vector](https://vector.dev) - Log collection and processing.
   - [x] [Grafana](http://grafana.com) - Visualization of monitoring data.
+  - [x] [Prometheus SNMP Exporter](https://github.com/prometheus/snmp_exporter) - Exposes SNMP metrics of network devices.
 - [x] [Velero](https://velero.io) - Performs cluster backups.
 
 ### (User) Applications
@@ -119,7 +122,7 @@ The following applications are defined in [`sites/vie/infrastructure/`](sites/vi
 - [x] Cilium
 - [x] Kubelet Serving Cert Approver
 - [x] Metrics Server
-- [x] NVIDIA Device Plugin
+- [x] NVIDIA GPU Operator
 - [x] External Secrets
 - [x] Cert Manager
 - [x] External DNS
@@ -136,7 +139,7 @@ The following applications are defined in [`sites/vie/core/`](sites/vie/core/).
 - [x] Adguard External DNS
 - [x] CloudNativePG
 - [x] KRR
-- [x] Monitoring (full stack)
+- [x] Monitoring (full stack, plus SNMP scrapes of the MikroTik switch)
 - [x] Kyverno
 - [x] Percona Operator for MongoDB
 - [x] Falco
@@ -161,7 +164,7 @@ The following applications are defined in [`sites/vie/applications/`](sites/vie/
 - [x] Personal Agents and Assistants
   - [x] MCP Servers
     - [x] [Kubernetes MCP Server](https://github.com/containers/kubernetes-mcp-server) - MCP server to allow personal agents to interact with Kubernetes data.
-    - [x] [Victoria Metrics MCP Server](https://github.com/VictoriaMetrics/mcp-victorialogs) - MCP server to allow personal agents to interact with Victoria Metrics data.
+    - [x] [Victoria Metrics MCP Server](https://github.com/VictoriaMetrics/mcp-victoriametrics) - MCP server to allow personal agents to interact with Victoria Metrics data.
     - [x] [Victoria Logs MCP Server](https://github.com/VictoriaMetrics/mcp-victorialogs) - MCP server to allow personal agents to interact with Victoria Logs data.
   - [x] Bots
     - [x] [OpsBot](sites/vie/applications/agents/bot/opsbot/) - Personal assistant bot for operations (metrics, logs, kubernetes, git analysis).
@@ -219,6 +222,7 @@ The following applications are defined in [`sites/hochschule-burgenland/applicat
 - [x] [ArgoCD](https://argo-cd.readthedocs.io) - GitOps continuous delivery tool for Kubernetes.
 - [x] [Harbor](https://goharbor.io) - Container image registry.
 - [ ] [Crossplane](https://www.crossplane.io) - Cloud-native control plane.
+- [ ] [zot](https://zotregistry.dev) - OCI-native container image registry.
 
 ---
 
@@ -276,7 +280,7 @@ See [docs/restore.md](docs/restore.md) for how to restore each of them.
 
 Home Assistant related backup and restore is handled via S3 backups.
 
-The following services implement an `initContainer` as well as a nightly `CronJob` to backup data to an S3 bucket. If no data is found in the Persistent Volume yet, the data from will be retrieved and copied over which results in a full restore.
+The following services implement an `initContainer` as well as a nightly `CronJob` to backup data to an S3 bucket. If no data is found in the Persistent Volume yet, the data from S3 will be retrieved and copied over which results in a full restore.
 
 - Ring MQTT
 
@@ -288,7 +292,7 @@ The following services use API calls to determine whether a backup or restore is
 The following services also have Git repositories to store their configuration which gets pulled in upon start.
 
 - [Home Assistant](https://github.com/muhlba91/homelab-home-assistant-configuration)
-  - Home Assistant also defines it's own backup method via a `trigger` and a `shell_command`, and doesn't rely on a `CronJob`.
+  - Home Assistant also defines its own backup method via a `trigger` and a `shell_command`, and doesn't rely on a `CronJob`.
 - [Ring MQTT](https://github.com/muhlba91/homelab-ring-mqtt-configuration)
 
 ---
@@ -297,12 +301,14 @@ The following services also have Git repositories to store their configuration w
 
 ### Validate Manifests
 
-[`scripts/validate-manifests.sh`](scripts/validate-manifests.sh) validates all Kustomize leaf directories for every site against [kubeconform](https://github.com/yannh/kubeconform).
+[`scripts/validate-manifests.sh`](scripts/validate-manifests.sh) validates all Kustomize leaf directories for every site against
+[kubeconform](https://github.com/yannh/kubeconform).
 
 **Pipeline per leaf kustomization:** `kustomize build` → `envsubst` (site-scoped variables) → `kubeconform`
 
 - **Leaf detection:** only kustomizations whose `resources[]` entries are all `.yaml`/`.yml` files are validated; aggregator kustomizations that compose other kustomizations are skipped to avoid duplicate validation.
-- **Variable substitution:** Flux `postBuild` variable substitution (`${VAR}`) is replicated offline by sourcing each site's `cluster-configuration.yaml` and running `envsubst` with an explicit allowlist, so only variables defined for that site are expanded.
+- **Variable substitution:** Flux `postBuild` variable substitution (`${VAR}`) is replicated offline by sourcing each site's `cluster-configuration.yaml` and
+  running `envsubst` with an explicit allowlist, so only variables defined for that site are expanded.
 - **Schema config:** schema locations and the skip-list are read from [`scripts/kubeconform.yaml`](scripts/kubeconform.yaml) so they can be updated without modifying the script.
 - **SOPS documents:** encrypted documents (identified by a top-level `.sops` key) are stripped before validation.
 
@@ -376,6 +382,6 @@ For each run, individual pod snapshots are saved as `resource-reports/krr-<times
 
 ## Continuous Integration and Automations
 
-- [GitHub Actions](https://docs.github.com/en/actions) are linting all YAML files and Python scripts (ruff).
+- [GitHub Actions](https://docs.github.com/en/actions) lint all YAML files (yamllint), shell scripts (ShellCheck) and Python scripts (ruff), and validate all manifests with [`scripts/validate-manifests.sh`](#validate-manifests).
 - [flate](https://github.com/home-operations/flate) renders each site like Flux would on every pull request and posts the rendered changes against the base branch as a PR comment; the check fails if anything the PR touches does not render.
-- [Renovate Bot](https://github.com/renovatebot/renovate) is updating Helm releases and used container images in the `values.yaml` files, and GitHub Actions.
+- [Renovate Bot](https://github.com/renovatebot/renovate) updates Helm charts (`HelmRepository`/`OCIRepository`), container images in `values.yaml` files and Kubernetes manifests, and GitHub Actions.
