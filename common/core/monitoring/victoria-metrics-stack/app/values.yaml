@@ -34,7 +34,7 @@ vmsingle:
   annotations:
     helm.toolkit.fluxcd.io/driftDetection: disabled
   spec:
-    retentionPeriod: "14"
+    retentionPeriod: 14d
     replicaCount: 1
     logLevel: WARN
     extraArgs:
