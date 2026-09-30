@@ -4,10 +4,10 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: ${APPLICATION_NAMESPACE}
 resources:
-  - ./templates/service.yaml
-  - ./templates/endpoint.yaml
-  - ./templates/gateway.yaml
-  - ./templates/external-secret-omada-controller-mongodb-user.yaml
-  - ./templates/external-secret-omada-controller-mongodb-secrets.yaml
-  - ./templates/external-secret-percona-mongodb-backup-credentials.yaml
-  - ./templates/mongodb.yaml
+  - ./service.yaml
+  - ./endpoint.yaml
+  - ./gateway.yaml
+  - ./external-secret-omada-controller-mongodb-user.yaml
+  - ./external-secret-omada-controller-mongodb-secrets.yaml
+  - ./external-secret-percona-mongodb-backup-credentials.yaml
+  - ./mongodb.yaml

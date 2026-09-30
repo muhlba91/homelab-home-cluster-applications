@@ -9,7 +9,6 @@ spec:
   # renovate: datasource=docker packageName=percona/percona-server-mongodb-operator
   crVersion: "1.23.0"
 
-  # renovate: datasource=docker packageName=percona/percona-server-mongodb
   image: percona/percona-server-mongodb:8.0.26-11
 
   updateStrategy: SmartUpdate
@@ -56,7 +55,6 @@ spec:
 
   backup:
     enabled: true
-    # renovate: datasource=docker packageName=percona/percona-backup-mongodb
     image: percona/percona-backup-mongodb:2.16.0
     resources:
       requests:

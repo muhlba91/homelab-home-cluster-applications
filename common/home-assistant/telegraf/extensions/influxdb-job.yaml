@@ -4,9 +4,8 @@ kind: Job
 metadata:
   name: influxdb-init
   annotations:
-    helm.sh/hook: post-install
-    helm.sh/hook-weight: "1"
-    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+    # recreate (= re-run) the Job when an immutable field such as the image changes
+    kustomize.toolkit.fluxcd.io/force: Enabled
 spec:
   backoffLimit: 5
   template:

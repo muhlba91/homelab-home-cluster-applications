@@ -7,3 +7,4 @@ resources:
   - ./grafana.yaml
   - ./immich.yaml
   - ./influxdb.yaml
+  - ./mealie.yaml

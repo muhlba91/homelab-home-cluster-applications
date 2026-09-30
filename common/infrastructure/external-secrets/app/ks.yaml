@@ -9,8 +9,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cluster-applications
-  decryption:
-    provider: sops
   path: ./common/infrastructure/external-secrets/app/
   interval: 10m
   retryInterval: 2m
