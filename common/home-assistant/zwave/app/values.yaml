@@ -172,3 +172,25 @@ persistence:
       backup:
         backup:
           - path: /scripts
+
+rbac:
+  roles:
+    backup-restore:
+      enabled: true
+      type: Role
+      rules:
+        - apiGroups:
+            - ""
+          resources:
+            - pods
+          verbs:
+            - "*"
+  bindings:
+    backup-restore:
+      enabled: true
+      type: RoleBinding
+      roleRef:
+        kind: Role
+        identifier: backup-restore
+      subjects:
+        - identifier: home-assistant-zwave

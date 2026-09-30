@@ -8,5 +8,4 @@ resources:
   - ./external-secret-backup.yaml
   - ./external-secret-network.yaml
   - ./external-secret-session.yaml
-  - ./rbac-backup.yaml
   - ./restore-job.yaml

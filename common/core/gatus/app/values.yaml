@@ -154,3 +154,45 @@ persistence:
     globalMounts:
       - path: /config/config.yaml
         subPath: config.yaml
+
+rbac:
+  roles:
+    sidecar:
+      enabled: true
+      type: ClusterRole
+      rules:
+        - apiGroups:
+            - ""
+          resources:
+            - services
+          verbs:
+            - get
+            - list
+            - watch
+        - apiGroups:
+            - networking.k8s.io
+          resources:
+            - ingresses
+            - ingressclasses
+          verbs:
+            - get
+            - list
+            - watch
+        - apiGroups:
+            - gateway.networking.k8s.io
+          resources:
+            - httproutes
+            - gateways
+          verbs:
+            - get
+            - list
+            - watch
+  bindings:
+    sidecar:
+      enabled: true
+      type: ClusterRoleBinding
+      roleRef:
+        kind: ClusterRole
+        identifier: sidecar
+      subjects:
+        - identifier: gatus
