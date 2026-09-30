@@ -9,6 +9,4 @@ resources:
   - ./configmap-scripts.yaml
   - ./configmap-telegraf-config.yaml
   - ./external-secret-influxdb-auth.yaml
-  - ./rbac-grafana.yaml
-  - ./rbac-influxdb.yaml
   - ./influxdb-job.yaml

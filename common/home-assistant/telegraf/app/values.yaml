@@ -129,3 +129,25 @@ persistence:
       main:
         grafana:
           - path: /grafana-datasources
+
+rbac:
+  roles:
+    secrets:
+      enabled: true
+      type: Role
+      rules:
+        - apiGroups:
+            - ""
+          resources:
+            - secrets
+          verbs:
+            - "*"
+  bindings:
+    secrets:
+      enabled: true
+      type: RoleBinding
+      roleRef:
+        kind: Role
+        identifier: secrets
+      subjects:
+        - identifier: home-assistant-telegraf
