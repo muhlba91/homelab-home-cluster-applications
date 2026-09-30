@@ -4,6 +4,8 @@ kind: Cluster
 metadata:
   name: librechat-postgresql
   annotations:
+    # guardrail: removing this from Git orphans it instead of deleting its data
+    kustomize.toolkit.fluxcd.io/prune: disabled
     cnpg.io/skipEmptyWalArchiveCheck: enabled
 spec:
   instances: 1

@@ -3,6 +3,9 @@ apiVersion: psmdb.percona.com/v1
 kind: PerconaServerMongoDB
 metadata:
   name: librechat-mongodb
+  annotations:
+    # guardrail: removing this from Git orphans it instead of deleting its data
+    kustomize.toolkit.fluxcd.io/prune: disabled
   finalizers:
     - percona.com/delete-psmdb-pods-in-order
 spec:
