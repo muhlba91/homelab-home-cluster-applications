@@ -21,15 +21,10 @@ spec:
       retries: -1
   rollback:
     recreate: true
-  chart:
-    spec:
-      chart: kgateway
-      version: v2.4.5
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: kgateway
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: kgateway
+    namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
       name: ${APPLICATION}-values
@@ -58,12 +53,7 @@ spec:
       retries: -1
   rollback:
     recreate: true
-  chart:
-    spec:
-      chart: kgateway-crds
-      version: v2.4.5
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: kgateway
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: kgateway-crds
+    namespace: flux-system

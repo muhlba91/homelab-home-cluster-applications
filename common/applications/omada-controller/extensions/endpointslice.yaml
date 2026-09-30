@@ -1,0 +1,39 @@
+---
+# backend of the selector-less Service omada-controller-web: the controller's own LoadBalancer IP
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: omada-controller-web-ipv4
+  labels:
+    kubernetes.io/service-name: omada-controller-web
+    endpointslice.kubernetes.io/managed-by: fluxcd
+addressType: IPv4
+ports:
+  - name: http
+    port: 443
+    protocol: TCP
+endpoints:
+  - addresses:
+      - ${OMADA_CONTROLLER_IPV4}
+    conditions:
+      ready: true
+
+# enable to also reach the controller via IPv6 (the Service is dual-stack)
+# ---
+# apiVersion: discovery.k8s.io/v1
+# kind: EndpointSlice
+# metadata:
+#   name: omada-controller-web-ipv6
+#   labels:
+#     kubernetes.io/service-name: omada-controller-web
+#     endpointslice.kubernetes.io/managed-by: fluxcd
+# addressType: IPv6
+# ports:
+#   - name: http
+#     port: 443
+#     protocol: TCP
+# endpoints:
+#   - addresses:
+#       - ${OMADA_CONTROLLER_IPV6}
+#     conditions:
+#       ready: true

@@ -21,15 +21,10 @@ spec:
       retries: -1
   rollback:
     recreate: true
-  chart:
-    spec:
-      chart: prometheus-snmp-exporter
-      version: 9.18.1
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: prometheus-snmp-exporter
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: prometheus-snmp-exporter
+    namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
       name: ${APPLICATION}-values

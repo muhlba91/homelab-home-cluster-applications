@@ -1,11 +1,30 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/helmrepository_v1.json
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/ocirepository_v1.json
 apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
+kind: OCIRepository
 metadata:
   name: kgateway
   namespace: flux-system
 spec:
   interval: 10m
-  url: oci://cr.kgateway.dev/kgateway-dev/charts
-  type: oci
+  url: oci://cr.kgateway.dev/kgateway-dev/charts/kgateway
+  ref:
+    tag: v2.4.5
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/ocirepository_v1.json
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: kgateway-crds
+  namespace: flux-system
+spec:
+  interval: 10m
+  url: oci://cr.kgateway.dev/kgateway-dev/charts/kgateway-crds
+  ref:
+    tag: v2.4.5
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy

@@ -236,38 +236,6 @@ Only add `dependsOn` or `wait: true` where it is strictly required (e.g.
 comes up later (restart or wait). A failed first bootstrap is fixed by
 restarting the rollout.
 
-### Never Change on a Stateful App
-
-Changing any of the following makes Helm or Flux see a *new* object and delete
-the old one, **including its data**:
-
-- `APPLICATION`, `releaseName`, `targetNamespace` or `storageNamespace` of a
-  HelmRelease → Helm reinstall.
-- `fullnameOverride`, `global.alwaysAppendIdentifierToResourceName` or
-  persistence keys → new, empty PVC; old PVC deleted.
-- The `metadata.name` of a Flux Kustomization (it feeds `APPLICATION` via the
-  `&application` anchor) → the old Kustomization is pruned together with
-  everything it owns.
-- Removing an app from its parent `kustomization.yaml` → same as above.
-  Namespaces survive (`kustomize.toolkit.fluxcd.io/prune: disabled`), their
-  contents don't.
-
-Moving a directory is safe as long as the Kustomization `metadata.name` stays
-the same.
-
-Guardrails for data that must survive such mistakes:
-
-- CloudNativePG `Cluster`s with backups, `PerconaServerMongoDB`s and HelmReleases
-  owning irreplaceable data (immich, rook-ceph, rook-ceph-cluster) carry the
-  `kustomize.toolkit.fluxcd.io/prune: disabled` annotation: removing them from
-  Git orphans them instead of deleting them. Delete them deliberately if needed.
-- app-template PVCs without another source of truth set `retain: true`
-  (`helm.sh/resource-policy: keep`).
-- All HelmReleases install with `strategy.name: RetryOnFailure`, so a failed
-  install is retried as an upgrade instead of being uninstalled.
-- Every object is owned by exactly one Flux Kustomization. An object defined
-  in two places flips ownership on every reconcile and can be pruned by either.
-
 ### Application Layout
 
 New apps follow this layout; existing apps keep their names.
@@ -275,7 +243,7 @@ New apps follow this layout; existing apps keep their names.
 ```text
 common/<layer>/<app>/          # single-component app
   namespace.yaml               # label: kustomize.toolkit.fluxcd.io/prune
-  kustomization.yaml           # namespace + app/ks + extensions/ks
+  kustomization.yaml           # namespace + extensions/ks + app/ks
   app/                         # ks, kustomization, kustomizeconfig, values,
                                # templates/{repository,release}.yaml
   extensions/                  # ks, kustomization, <kind>-<name>.yaml
@@ -291,25 +259,6 @@ sites/<site>/<layer>/<app>/    # site overlay of a common app
   <overlay>/ks.yaml            # name: <app>-site, never <app>-extensions
 ```
 
-- **Site overlays** must not be named `<app>-extensions`: that name belongs to
-  `common/<app>/extensions`, and a collision makes two Kustomizations prune
-  each other's objects. The existing `cilium-extensions` and
-  `external-secrets-extensions` overlays keep their names; renaming them would
-  delete their resources.
-- **app-template** ([bjw-s](https://bjw-s-labs.github.io/helm-charts/)) apps
-  set `global.alwaysAppendIdentifierToResourceName: true` and expose
-  themselves via `route:` + a `rawResources` `ListenerSet` in their values.
-  Charts without Gateway API support use `extensions/gateway.yaml` instead.
-  `omada-controller` is an exception because it proxies to its own
-  LoadBalancer IP (manual endpoints + `BackendConfigPolicy`).
-- **Multi-instance apps** follow [Homer](common/applications/homer/): the
-  common directory only provides the chart and base values, and each instance
-  adds its own values and Kustomization.
-- **`app/` variants:** a few `app/` directories contain raw manifests
-  (`external-services`, `generic-device-plugin`) or a remote `GitRepository` +
-  Kustomization (`gateway-api`, `kubelet-serving-cert-approver`) instead of a
-  HelmRelease.
-
 ---
 
 ## Backup and Restore
@@ -322,11 +271,6 @@ The current backup and restore strategy consists of:
 - Velero as a second layer disaster recovery for critical workloads
 
 See [docs/restore.md](docs/restore.md) for how to restore each of them.
-
-Timewise, the layers of backups follow the strategy:
-
-1. `12:00am`: in-application backups
-2. `02:00am`: Velero backups
 
 ### Home Assistant Backup
 

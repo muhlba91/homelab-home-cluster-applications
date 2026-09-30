@@ -5,7 +5,7 @@ kind: Kustomization
 namespace: ${APPLICATION_NAMESPACE}
 resources:
   - ./service.yaml
-  - ./endpoint.yaml
+  - ./endpointslice.yaml
   - ./gateway.yaml
   - ./external-secret-omada-controller-mongodb-user.yaml
   - ./external-secret-omada-controller-mongodb-secrets.yaml

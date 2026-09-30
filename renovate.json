@@ -45,6 +45,14 @@
             ]
         },
         {
+            "description": "keep the kgateway chart and its CRDs chart in lockstep",
+            "groupName": "kgateway",
+            "matchPackageNames": [
+                "cr.kgateway.dev/kgateway-dev/charts/kgateway",
+                "cr.kgateway.dev/kgateway-dev/charts/kgateway-crds"
+            ]
+        },
+        {
             "description": "librechat rc",
             "matchDatasources": [
                 "docker"
