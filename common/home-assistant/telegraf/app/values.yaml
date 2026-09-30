@@ -9,6 +9,8 @@ defaultPodOptions:
 controllers:
   main:
     type: deployment
+    annotations:
+      reloader.stakater.com/auto: "true"
     serviceAccount:
       identifier: home-assistant-telegraf
     containers:

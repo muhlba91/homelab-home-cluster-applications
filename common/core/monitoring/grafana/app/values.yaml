@@ -3,6 +3,9 @@ global:
   oidc:
     autoLogin: false
 
+annotations:
+  reloader.stakater.com/auto: "true"
+
 podAnnotations:
   backup.velero.io/backup-volumes: storage
 
