@@ -24,15 +24,10 @@ spec:
       retries: -1
   rollback:
     recreate: true
-  chart:
-    spec:
-      chart: app-template
-      version: 5.2.1
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: immich
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: immich
+    namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
       name: ${APPLICATION}-values

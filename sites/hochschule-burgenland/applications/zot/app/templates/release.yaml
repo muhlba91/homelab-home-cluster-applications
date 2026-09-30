@@ -21,15 +21,10 @@ spec:
       retries: -1
   rollback:
     recreate: true
-  chart:
-    spec:
-      chart: zot
-      version: 0.1.125
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: zot
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: zot
+    namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
       name: ${APPLICATION}-values

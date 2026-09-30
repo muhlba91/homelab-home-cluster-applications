@@ -32,8 +32,6 @@ bgpControlPlane:
 
 l2announcements:
   enabled: true
-externalIPs:
-  enabled: true
 
 defaultLBServiceIPAM: none
 
