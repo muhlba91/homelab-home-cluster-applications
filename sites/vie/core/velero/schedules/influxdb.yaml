@@ -8,7 +8,7 @@ spec:
   schedule: "0 2 * * *"
   useOwnerReferencesInBackup: false
   template:
-    ttl: 72h
+    ttl: 168h
     includedNamespaces:
       - influxdb
     includedResources:
