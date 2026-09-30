@@ -8,16 +8,19 @@
         "helm-values",
         "helmv3",
         "flux",
+        "kubernetes",
         "github-actions",
         "pre-commit",
         "custom.regex"
     ],
     "flux": {
         "managerFilePatterns": [
-            "/(^|/)applications/.+\\.ya?ml$/",
-            "/(^|/)core/.+\\.ya?ml$/",
-            "/(^|/)home-assistant/.+\\.ya?ml$/",
-            "/(^|/)infrastructure/.+\\.ya?ml$/"
+            "/\\.ya?ml$/"
+        ]
+    },
+    "kubernetes": {
+        "managerFilePatterns": [
+            "/\\.ya?ml$/"
         ]
     },
     "customManagers": [

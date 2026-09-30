@@ -10,7 +10,6 @@ data:
   CILIUM_CLUSTER_ID: "1"
 
   # network configuration
-  NODE_IP: "10.100.50.1"
   ROUTER_IP: "10.100.0.1"
 
   # domain names
@@ -28,8 +27,6 @@ data:
   CILIUM_IPV6_POD_CIDR: "fc00:db8:102::/112"
 
   # load balancer
-  METALLB_LB_CLASS: "io.metallb/load-balancer"
-  METALLB_IP_ANNOTATION: "metallb.io/loadBalancerIPs"
   CILIUM_LB_CLASS: "io.cilium/bgp-control-plane"
   CILIUM_L2_LB_CLASS: "io.cilium/l2-announcer"
   CILIUM_IP_ANNOTATION: "lbipam.cilium.io/ips"

@@ -28,8 +28,24 @@ data:
       echo "backing up..."
 
       # download backup
-      token=$(curl -s -X POST $${URL}/authenticate -d "{ \"username\": \"$${ZWAVE_USERNAME}\", \"password\": \"$${ZWAVE_PASSWORD}\" }" -H "Content-Type: application/json" | jq -c '.user.token' -r)
-      curl -s $${URL}/store/backup -H "Authorization: Bearer $${token}" -H "Accept: application/json" -J -o backup.zip &> /dev/null
+      token=$(curl -fsS -X POST $${URL}/authenticate -d "{ \"username\": \"$${ZWAVE_USERNAME}\", \"password\": \"$${ZWAVE_PASSWORD}\" }" -H "Content-Type: application/json" | jq -c '.user.token' -r)
+      if [[ -z "$${token}" || "$${token}" == "null" ]]; then
+        echo "backup error: authentication failed."
+        exit 1
+      fi
+      rm -f backup.zip
+      curl -fsS $${URL}/store/backup -H "Authorization: Bearer $${token}" -H "Accept: application/json" -o backup.zip
+
+      # never overwrite the last good backup in S3 with an error body or an empty archive
+      if ! unzip -l backup.zip > /dev/null 2>&1; then
+        echo "backup error: downloaded backup.zip is not a valid archive; keeping the previous backup."
+        exit 1
+      fi
+      entries=$(unzip -l backup.zip | tail -n 1 | awk '{print $$2}')
+      if ! [ "$${entries}" -ge 1 ] 2> /dev/null; then
+        echo "backup error: downloaded backup.zip is empty; keeping the previous backup."
+        exit 1
+      fi
 
       # upload backup to S3
       s3cmd --access_key=$${SCW_ACCESS_KEY} --secret_key="$${SCW_SECRET_KEY}" --host="https://s3.$${SCW_DEFAULT_REGION}.scw.cloud" --host-bucket="https://%(bucket)s.s3.$${SCW_DEFAULT_REGION}.scw.cloud" sync backup.zip s3://$${S3_ASSETS_BUCKET_BACKUP_PATH}/
@@ -51,6 +67,7 @@ data:
         restart
       else
         echo "restore error: `echo $${restore} | jq -c '.message' -r`"
+        exit 1
       fi
     }
     #endregion
