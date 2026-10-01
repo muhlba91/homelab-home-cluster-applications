@@ -10,7 +10,7 @@ metadata:
     - percona.com/delete-psmdb-pods-in-order
 spec:
   # renovate: datasource=docker packageName=percona/percona-server-mongodb-operator
-  crVersion: "1.23.0"
+  crVersion: "1.23.1"
 
   image: percona/percona-server-mongodb:8.0.26-11
 
