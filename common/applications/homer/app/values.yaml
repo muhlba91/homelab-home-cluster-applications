@@ -76,6 +76,7 @@ rawResources:
       metadata:
         annotations:
           cert-manager.io/cluster-issuer: "${CLUSTER_ISSUER}"
+          external-dns.kubernetes.io/provider: "${EXTERNAL_DNS_PROVIDER}"
       spec:
         parentRef:
           name: ${GATEWAY_NAME}

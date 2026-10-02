@@ -5,6 +5,7 @@ metadata:
   name: grafana-listeners
   annotations:
     cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
+    external-dns.kubernetes.io/provider: public
 spec:
   parentRef:
     name: kgateway-gateway

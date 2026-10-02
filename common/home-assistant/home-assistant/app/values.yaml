@@ -206,6 +206,7 @@ rawResources:
       metadata:
         annotations:
           cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
+          external-dns.kubernetes.io/provider: internal
       spec:
         parentRef:
           name: kgateway-gateway-internal
@@ -226,6 +227,7 @@ rawResources:
       metadata:
         annotations:
           cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
+          external-dns.kubernetes.io/provider: public
       spec:
         parentRef:
           name: kgateway-gateway
