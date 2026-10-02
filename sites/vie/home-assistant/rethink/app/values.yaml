@@ -55,6 +55,11 @@ service:
     annotations:
       external-dns.kubernetes.io/provider: internal
       external-dns.kubernetes.io/hostname: rethink-cloud.iot.${LOCAL_INTERNAL_DOMAIN}
+      gatus.home-operations.com/enabled: "true"
+      gatus.home-operations.com/endpoint: |-
+        url: tcp://rethink-cloud.iot.${LOCAL_INTERNAL_DOMAIN}:8883
+        conditions:
+          - "[CONNECTED] == true"
     ports:
       https:
         port: 443
