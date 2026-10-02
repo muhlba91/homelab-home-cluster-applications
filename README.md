@@ -179,6 +179,7 @@ The following applications are defined in [`sites/vie/home-assistant/`](sites/vi
 - [x] Home Assistant
 - [x] [ecowitt2mqtt](https://github.com/bachya/ecowitt2mqtt) - Forwards data received from ecowitt devices to the MQTT broker.
 - [x] [Ring MQTT](https://github.com/tsightler/ring-mqtt) - Amazon Ring devices to MQTT bridge.
+- [x] [rethink-cloud](https://github.com/anszom/rethink) - Local cloud replacement for LG ThinQ appliances, bridging them to the MQTT broker.
 - [x] [Faster Whisper](https://github.com/SYSTRAN/faster-whisper) - Faster Whisper transcription with CTranslate2.
 - [x] [Piper](https://github.com/rhasspy/piper) - A local TTS server.
 - [x] [OpenWakeWord](https://github.com/dscripka/openWakeWord) - An open-source audio wake word detection framework.

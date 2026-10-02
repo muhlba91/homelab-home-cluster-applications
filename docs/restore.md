@@ -7,7 +7,7 @@ manifest. The mechanisms below only restore **data**.
   and daily base backup. [Automatic](#cloudnativepg-automatic).
 - **Percona MongoDB** (librechat, omada-controller): PBM logical backup, daily.
   [Manual restore CR](#percona-mongodb-manual).
-- **App PVCs** (immich `data`, mealie `data`, influxdb, grafana): Velero
+- **App PVCs** (immich `data`, mealie `data`, influxdb, grafana, rethink `data`): Velero
   file-system backup (kopia), daily. [Manual Velero restore](#velero-manual).
 - **Home Assistant, Z-Wave JS UI, Ring MQTT**: S3 backup via
   `CronJob`/`initContainer`/`Job`.

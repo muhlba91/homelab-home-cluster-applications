@@ -1,0 +1,22 @@
+---
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: home-assistant-rethink
+spec:
+  paused: false
+  schedule: "0 2 * * *"
+  useOwnerReferencesInBackup: false
+  template:
+    ttl: 168h
+    includedNamespaces:
+      - home-assistant-rethink
+    includedResources:
+      - pod
+      - pvc
+      - pv
+    storageLocation: scaleway
+    defaultVolumesToFsBackup: false
+    snapshotMoveData: false
+    uploaderConfig:
+      parallelFilesUpload: 8

@@ -1,0 +1,36 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rethink-config
+data:
+  config.json: |
+    {
+      "hostname": "rethink-cloud.iot.${LOCAL_INTERNAL_DOMAIN}",
+
+      "homeassistant": {
+        "mqtt_url": "mqtt://emqx.home-assistant-mqtt:1883",
+        "discovery_prefix": "homeassistant",
+        "rethink_prefix": "rethink",
+        "mqtt_user": "",
+        "mqtt_pass": ""
+      },
+
+      "ca_key_file": "/app/data/ca.key",
+      "ca_cert_file": "/app/data/ca.cert",
+
+      "https_port": 443,
+      "mqtts_port": 8883,
+
+      "thinq1_https_port": {},
+      "thinq1_port": {},
+
+      "management_port": 44401,
+
+      "bridge": {
+        "dns": ["https://1.1.1.1/dns-query", "https://1.0.0.1/dns-query"],
+        "storage_path": "/app/data/state"
+      },
+
+      "log": ["status", "incoming", "HTTPS", "publish", "MGMT"]
+    }

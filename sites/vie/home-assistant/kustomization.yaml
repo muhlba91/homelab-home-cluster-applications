@@ -8,6 +8,7 @@ resources:
   - ../../../common/home-assistant/home-assistant/
   - ./ecowitt2mqtt/
   - ./ring-mqtt/
+  - ./rethink/
   - ./faster-whisper/
   - ./piper/
   - ./openwakeword/

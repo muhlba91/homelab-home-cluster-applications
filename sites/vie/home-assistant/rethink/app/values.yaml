@@ -1,0 +1,134 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-5.0.0/charts/library/common/values.schema.json
+global:
+  alwaysAppendIdentifierToResourceName: true
+
+controllers:
+  main:
+    type: deployment
+    strategy: Recreate
+    annotations:
+      reloader.stakater.com/auto: "true"
+    pod:
+      annotations:
+        backup.velero.io/backup-volumes: data
+    containers:
+      rethink:
+        image:
+          repository: ghcr.io/anszom/rethink
+          pullPolicy: IfNotPresent
+          tag: dev@sha256:e2cd2110cea585adfddbfb4cb0b90a71e3ee5361cfdc229f04a8f3dca69a962a
+        command:
+          - node
+          - dist/rethink-cloud.js
+          - /config/config.json
+
+        resources:
+          requests:
+            cpu: 10m
+            memory: 128Mi
+          limits:
+            memory: 256Mi
+
+        probes:
+          liveness: &server_probes
+            enabled: true
+            custom: true
+            spec:
+              tcpSocket:
+                port: 44401
+              initialDelaySeconds: 0
+              periodSeconds: 30
+              timeoutSeconds: 1
+              failureThreshold: 5
+          readiness: *server_probes
+          startup:
+            enabled: false
+
+service:
+  device:
+    controller: main
+    type: LoadBalancer
+    loadBalancerClass: ${CILIUM_LB_CLASS}
+    ipFamilyPolicy: PreferDualStack
+    externalTrafficPolicy: Local
+    annotations:
+      external-dns.kubernetes.io/provider: internal
+      external-dns.kubernetes.io/hostname: rethink-cloud.iot.${LOCAL_INTERNAL_DOMAIN}
+    ports:
+      https:
+        port: 443
+      mqtts:
+        port: 8883
+  dashboard:
+    controller: main
+    ports:
+      http:
+        port: 44401
+
+route:
+  dashboard:
+    enabled: true
+    kind: HTTPRoute
+    annotations:
+      external-dns.kubernetes.io/provider: internal
+    parentRefs:
+      - group: gateway.networking.k8s.io
+        kind: ListenerSet
+        namespace: ${APPLICATION_NAMESPACE}
+        name: ${APPLICATION}-listeners
+    hostnames:
+      - &domain rethink.iot.${LOCAL_INTERNAL_DOMAIN}
+    rules:
+      - matches:
+          - path:
+              type: PathPrefix
+              value: /
+        backendRefs:
+          - identifier: dashboard
+            port: 44401
+
+rawResources:
+  listeners:
+    manifest:
+      apiVersion: gateway.networking.k8s.io/v1
+      kind: ListenerSet
+      metadata:
+        annotations:
+          cert-manager.io/cluster-issuer: "${INTERNAL_CLUSTER_ISSUER}"
+          external-dns.kubernetes.io/provider: internal
+      spec:
+        parentRef:
+          name: kgateway-gateway-internal
+          namespace: kgateway
+        listeners:
+          - name: https-rethink
+            protocol: HTTPS
+            port: 443
+            hostname: *domain
+            tls:
+              mode: Terminate
+              certificateRefs:
+                - name: ${APPLICATION}-tls-cert
+
+persistence:
+  data:
+    enabled: true
+    type: persistentVolumeClaim
+    storageClass: ${DEFAULT_STORAGE_CLASS}
+    accessMode: ReadWriteOnce
+    size: 32Mi
+    retain: true
+    advancedMounts:
+      main:
+        rethink:
+          - path: /app/data
+  config:
+    enabled: true
+    type: configMap
+    name: rethink-config
+    advancedMounts:
+      main:
+        rethink:
+          - path: /config
+            readOnly: true
