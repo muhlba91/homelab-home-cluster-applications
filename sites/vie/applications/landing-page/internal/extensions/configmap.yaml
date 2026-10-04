@@ -93,14 +93,6 @@ data:
       - name: Smart Home Management
         icon: fa-solid fa-house-signal
         items:
-          - name: EMQX
-            icon: fa-solid fa-network-wired
-            # type: Ping
-            subtitle: MQTT broker powering IoT device messaging
-            tag: smart-home
-            keywords: mqtt broker iot smart home
-            url: https://emqx.iot.${LOCAL_INTERNAL_DOMAIN}
-            target: _blank
           - name: Z-Wave JS UI
             icon: fa-solid fa-wave-square
             # type: Ping
@@ -116,6 +108,14 @@ data:
             tag: smart-home
             keywords: lg thinq rethink smart home
             url: https://rethink.iot.${LOCAL_INTERNAL_DOMAIN}
+            target: _blank
+          - name: EMQX
+            icon: fa-solid fa-network-wired
+            # type: Ping
+            subtitle: MQTT broker powering IoT device messaging
+            tag: smart-home
+            keywords: mqtt broker iot smart home
+            url: https://emqx.iot.${LOCAL_INTERNAL_DOMAIN}
             target: _blank
 
       - name: Network
@@ -169,6 +169,14 @@ data:
             tag: security
             keywords: secrets vault
             url: https://vault.platform.muehlbachler.io:8200
+            target: _blank
+          - name: NetBird
+            icon: fa-solid fa-lock
+            # type: Ping
+            subtitle: Manage NetBird access
+            tag: vpn
+            keywords: vpn netbird
+            url: https://netbird.platform.muehlbachler.io
             target: _blank
           - name: VPN Management
             icon: fa-solid fa-lock

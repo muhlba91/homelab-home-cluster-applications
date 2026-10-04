@@ -73,6 +73,14 @@ data:
       - name: Lifestyle & Productivity
         icon: fa-solid fa-house-user
         items:
+          - name: Webmail
+            icon: fa-solid fa-envelope
+            # type: Ping
+            subtitle: Access your email inbox
+            tag: mail
+            keywords: email inbox webmail mail
+            url: https://mail.muehlbachler.io
+            target: _blank
           - name: LibreChat
             icon: fa-solid fa-comments
             # type: Ping
@@ -104,14 +112,6 @@ data:
             tag: recipes
             keywords: recipes cooking food meal
             url: https://recipes.${HOME_DOMAIN}
-            target: _blank
-          - name: Webmail
-            icon: fa-solid fa-envelope
-            # type: Ping
-            subtitle: Access your email inbox
-            tag: mail
-            keywords: email inbox webmail mail
-            url: https://mail.muehlbachler.io
             target: _blank
           - name: SimpleLogin
             icon: fa-solid fa-at
