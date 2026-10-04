@@ -109,6 +109,14 @@ data:
             keywords: zwave z-wave smart home
             url: https://zwave.iot.${LOCAL_INTERNAL_DOMAIN}
             target: _blank
+          - name: Rethink
+            icon: fa-solid fa-tower-broadcast
+            # type: Ping
+            subtitle: Local LG ThinQ server for appliances
+            tag: smart-home
+            keywords: lg thinq rethink smart home
+            url: https://rethink.iot.${LOCAL_INTERNAL_DOMAIN}
+            target: _blank
 
       - name: Network
         icon: fa-solid fa-network-wired
