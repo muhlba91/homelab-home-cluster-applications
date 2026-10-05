@@ -126,6 +126,15 @@ data:
         alerts:
           - type: ntfy
             priority: 5
+      - name: NetBird
+        group: External - Infrastructure
+        url: https://netbird.platform.muehlbachler.io/
+        interval: 5m
+        conditions:
+          - "[STATUS] == 200"
+        alerts:
+          - type: ntfy
+            priority: 5
       - name: VPN
         group: External - Infrastructure
         url: https://vpn.platform.muehlbachler.io/
