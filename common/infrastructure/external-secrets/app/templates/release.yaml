@@ -25,7 +25,7 @@ spec:
     spec:
       chart: external-secrets
       # on upgrade: regenerate the CI schema override, see scripts/schemas/README.md
-      version: 2.11.0
+      version: 2.12.0
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
