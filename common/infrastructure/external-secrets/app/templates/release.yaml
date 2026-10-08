@@ -21,16 +21,10 @@ spec:
       retries: -1
   rollback:
     recreate: true
-  chart:
-    spec:
-      chart: external-secrets
-      # on upgrade: regenerate the CI schema override, see scripts/schemas/README.md
-      version: 2.12.0
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: external-secrets
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: external-secrets
+    namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
       name: ${APPLICATION}-values

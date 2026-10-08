@@ -1,10 +1,15 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/helmrepository_v1.json
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/ocirepository_v1.json
 apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
+kind: OCIRepository
 metadata:
   name: percona-mongodb-operator
   namespace: flux-system
 spec:
   interval: 10m
-  url: https://percona.github.io/percona-helm-charts
+  url: oci://ghcr.io/percona/percona-helm-charts/psmdb-operator
+  ref:
+    tag: 1.23.2
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy

@@ -1,10 +1,16 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/helmrepository_v1.json
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/ocirepository_v1.json
 apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
+kind: OCIRepository
 metadata:
   name: external-secrets
   namespace: flux-system
 spec:
   interval: 10m
-  url: https://charts.external-secrets.io
+  url: oci://ghcr.io/external-secrets/charts/external-secrets
+  # on upgrade: regenerate the CI schema override, see scripts/schemas/README.md
+  ref:
+    tag: 2.12.0
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy

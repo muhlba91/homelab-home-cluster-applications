@@ -21,15 +21,10 @@ spec:
       retries: -1
   rollback:
     recreate: true
-  chart:
-    spec:
-      chart: gpu-operator
-      version: v26.7.1
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: nvidia-gpu-operator
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: nvidia-gpu-operator
+    namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
       name: ${APPLICATION}-values

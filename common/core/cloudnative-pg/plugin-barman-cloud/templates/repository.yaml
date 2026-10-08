@@ -1,10 +1,15 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/helmrepository_v1.json
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/ocirepository_v1.json
 apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
+kind: OCIRepository
 metadata:
   name: cloudnative-pg-plugin-barman-cloud
   namespace: flux-system
 spec:
   interval: 10m
-  url: https://cloudnative-pg.github.io/charts
+  url: oci://ghcr.io/cloudnative-pg/charts/plugin-barman-cloud
+  ref:
+    tag: 0.8.1
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy

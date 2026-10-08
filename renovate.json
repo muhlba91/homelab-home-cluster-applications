@@ -40,7 +40,7 @@
             "description": "keep the percona mongodb operator chart and its CR's crVersion in lockstep",
             "groupName": "percona mongodb operator",
             "matchPackageNames": [
-                "psmdb-operator",
+                "ghcr.io/percona/percona-helm-charts/psmdb-operator",
                 "percona/percona-server-mongodb-operator"
             ]
         },

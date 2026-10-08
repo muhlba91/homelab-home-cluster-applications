@@ -21,15 +21,10 @@ spec:
       retries: -1
   rollback:
     recreate: true
-  chart:
-    spec:
-      chart: plugin-barman-cloud
-      version: 0.8.1
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: cloudnative-pg-plugin-barman-cloud
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: cloudnative-pg-plugin-barman-cloud
+    namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
       name: ${APPLICATION}-values

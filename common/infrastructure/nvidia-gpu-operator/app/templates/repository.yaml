@@ -1,10 +1,15 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/helmrepository_v1.json
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/ocirepository_v1.json
 apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
+kind: OCIRepository
 metadata:
   name: nvidia-gpu-operator
   namespace: flux-system
 spec:
   interval: 10m
-  url: https://helm.ngc.nvidia.com/nvidia
+  url: oci://nvcr.io/nvidia/cloud-native-charts/gpu-operator
+  ref:
+    tag: v26.7.1
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy
