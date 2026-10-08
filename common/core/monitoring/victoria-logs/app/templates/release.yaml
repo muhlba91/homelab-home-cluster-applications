@@ -21,15 +21,10 @@ spec:
       retries: -1
   rollback:
     recreate: true
-  chart:
-    spec:
-      chart: victoria-logs-single
-      version: 0.13.10
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: victoria-logs
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: victoria-logs
+    namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
       name: ${APPLICATION}-values

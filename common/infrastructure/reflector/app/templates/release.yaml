@@ -21,15 +21,10 @@ spec:
       retries: -1
   rollback:
     recreate: true
-  chart:
-    spec:
-      chart: reflector
-      version: 10.0.65
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: reflector
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: reflector
+    namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
       name: ${APPLICATION}-values

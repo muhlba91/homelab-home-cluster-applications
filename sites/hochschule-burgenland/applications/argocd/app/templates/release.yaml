@@ -21,15 +21,10 @@ spec:
       retries: -1
   rollback:
     recreate: true
-  chart:
-    spec:
-      chart: argo-cd
-      version: 10.10.0
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: argocd
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: argocd
+    namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
       name: ${APPLICATION}-values

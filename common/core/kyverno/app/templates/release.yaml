@@ -21,15 +21,10 @@ spec:
       retries: -1
   rollback:
     recreate: true
-  chart:
-    spec:
-      chart: kyverno
-      version: 3.9.1
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: kyverno
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: kyverno
+    namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
       name: ${APPLICATION}-values

@@ -1,21 +1,31 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/helmrepository_v1.json
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/ocirepository_v1.json
 apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
-metadata:
-  name: prometheus-operator-crds
-  namespace: flux-system
-spec:
-  interval: 10m
-  url: https://prometheus-community.github.io/helm-charts
-
----
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/helmrepository_v1.json
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
+kind: OCIRepository
 metadata:
   name: victoria-metrics-operator
   namespace: flux-system
 spec:
   interval: 10m
-  url: https://victoriametrics.github.io/helm-charts
+  url: oci://ghcr.io/victoriametrics/helm-charts/victoria-metrics-operator
+  ref:
+    tag: 0.68.1
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy
+
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/ocirepository_v1.json
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: prometheus-operator-crds
+  namespace: flux-system
+spec:
+  interval: 10m
+  url: oci://ghcr.io/prometheus-community/charts/prometheus-operator-crds
+  ref:
+    tag: 32.0.1
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy

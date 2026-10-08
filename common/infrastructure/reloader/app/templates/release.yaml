@@ -21,15 +21,10 @@ spec:
       retries: -1
   rollback:
     recreate: true
-  chart:
-    spec:
-      chart: reloader
-      version: 2.2.18
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: reloader
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: reloader
+    namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
       name: ${APPLICATION}-values

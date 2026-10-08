@@ -21,15 +21,10 @@ spec:
       retries: -1
   rollback:
     recreate: true
-  chart:
-    spec:
-      chart: victoria-metrics-operator
-      version: 0.68.1
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: victoria-metrics-operator
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: victoria-metrics-operator
+    namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
       name: ${APPLICATION}-values
@@ -58,12 +53,7 @@ spec:
       retries: -1
   rollback:
     recreate: true
-  chart:
-    spec:
-      chart: prometheus-operator-crds
-      version: 32.0.1
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: prometheus-operator-crds
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: prometheus-operator-crds
+    namespace: flux-system

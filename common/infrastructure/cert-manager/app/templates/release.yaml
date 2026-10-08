@@ -21,15 +21,10 @@ spec:
       retries: -1
   rollback:
     recreate: true
-  chart:
-    spec:
-      chart: cert-manager
-      version: v1.21.2
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: cert-manager
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: cert-manager
+    namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
       name: ${APPLICATION}-values

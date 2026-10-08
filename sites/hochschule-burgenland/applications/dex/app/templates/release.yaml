@@ -21,15 +21,10 @@ spec:
       retries: -1
   rollback:
     recreate: true
-  chart:
-    spec:
-      chart: dex
-      version: 0.26.0
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: dex
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: dex
+    namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
       name: ${APPLICATION}-values

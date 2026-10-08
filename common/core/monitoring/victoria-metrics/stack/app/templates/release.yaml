@@ -21,15 +21,10 @@ spec:
       retries: -1
   rollback:
     recreate: true
-  chart:
-    spec:
-      chart: victoria-metrics-k8s-stack
-      version: 0.95.2
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: victoria-metrics-stack
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: victoria-metrics-stack
+    namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
       name: ${APPLICATION}-values

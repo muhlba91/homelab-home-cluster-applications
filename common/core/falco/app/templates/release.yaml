@@ -21,15 +21,10 @@ spec:
       retries: -1
   rollback:
     recreate: true
-  chart:
-    spec:
-      chart: falco-operator
-      version: 0.3.1
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: falco
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: falco
+    namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
       name: ${APPLICATION}-values
