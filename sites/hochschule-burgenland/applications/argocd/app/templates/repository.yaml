@@ -9,7 +9,7 @@ spec:
   interval: 10m
   url: oci://ghcr.io/argoproj/argo-helm/argo-cd
   ref:
-    tag: 10.10.0
+    tag: 10.10.1
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
