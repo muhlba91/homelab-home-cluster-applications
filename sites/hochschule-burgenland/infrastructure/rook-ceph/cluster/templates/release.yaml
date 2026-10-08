@@ -26,15 +26,10 @@ spec:
     recreate: true
   dependsOn:
     - name: rook-ceph
-  chart:
-    spec:
-      chart: rook-ceph-cluster
-      version: v1.20.8
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: rook-ceph-cluster
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: rook-ceph-cluster
+    namespace: flux-system
   valuesFrom:
     - kind: ConfigMap
       name: ${APPLICATION}-values
