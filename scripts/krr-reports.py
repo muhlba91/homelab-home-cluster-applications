@@ -21,7 +21,7 @@ import json
 import shutil
 import subprocess
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -164,7 +164,7 @@ def main() -> None:
     report_dir = repo_root / "resource-reports"
     report_dir.mkdir(exist_ok=True)
 
-    now_utc = datetime.now(timezone.utc)
+    now_utc = datetime.now(UTC)
     ts = now_utc.strftime("%Y%m%d-%H%M")
 
     # ── 1. Collect pod JSON files ─────────────────────────────────────────────

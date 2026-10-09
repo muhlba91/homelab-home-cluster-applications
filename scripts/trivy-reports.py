@@ -18,7 +18,7 @@ import json
 import shutil
 import subprocess
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 MAX_LISTED_IMAGES = 5
@@ -95,7 +95,7 @@ def main() -> None:
     repo_root = script_dir.parent
     out_dir = repo_root / "trivy-reports"
     out_dir.mkdir(exist_ok=True)
-    now_utc = datetime.now(timezone.utc)
+    now_utc = datetime.now(UTC)
     out_path = out_dir / f"trivy-reports-{now_utc.strftime('%Y%m%d-%H%M')}.md"
 
     sections: list[str] = []
