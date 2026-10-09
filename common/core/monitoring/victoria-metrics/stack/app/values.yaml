@@ -41,6 +41,7 @@ vmsingle:
       maxLabelsPerTimeseries: "150"
       enableTCP6: "true"
     serviceSpec:
+      useAsDefault: true
       spec:
         ipFamilyPolicy: PreferDualStack
     resources:
@@ -77,6 +78,7 @@ vmagent:
       enableTCP6: "true"
       promscrape.maxScrapeSize: "67108864"
     serviceSpec:
+      useAsDefault: true
       spec:
         ipFamilyPolicy: PreferDualStack
     resources:

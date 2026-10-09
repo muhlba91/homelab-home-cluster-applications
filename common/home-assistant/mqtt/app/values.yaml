@@ -5,6 +5,13 @@ envFromSecret: home-assistant-emqx
 
 replicaCount: 1
 
+emqxConfig:
+  EMQX_LISTENERS__TCP__DEFAULT__BIND: "[::]:1883"
+  EMQX_LISTENERS__SSL__DEFAULT__BIND: "[::]:8883"
+  EMQX_LISTENERS__WS__DEFAULT__BIND: "[::]:8083"
+  EMQX_LISTENERS__WSS__DEFAULT__BIND: "[::]:8084"
+  EMQX_DASHBOARD__LISTENERS__HTTP__BIND: "[::]:18083"
+
 service:
   annotations:
     gatus.home-operations.com/enabled: "true"

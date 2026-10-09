@@ -67,6 +67,7 @@ service:
         port: 8883
   dashboard:
     controller: main
+    ipFamilyPolicy: PreferDualStack
     ports:
       http:
         port: 44401

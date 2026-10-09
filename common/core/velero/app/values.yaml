@@ -22,6 +22,10 @@ configuration:
   volumeSnapshotLocation: []
   defaultBackupStorageLocation: scaleway
 
+metrics:
+  service:
+    ipFamilyPolicy: PreferDualStack
+
 deployNodeAgent: true
 nodeAgent:
   resources:
