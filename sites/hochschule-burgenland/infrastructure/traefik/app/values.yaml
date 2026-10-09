@@ -64,6 +64,7 @@ service:
   spec:
     type: LoadBalancer
     loadBalancerClass: ${TRAEFIK_LB_CLASS}
+    ipFamilyPolicy: PreferDualStack
     externalTrafficPolicy: Local
 
 resources:
