@@ -3,6 +3,8 @@ fullnameOverride: kgateway
 
 controller:
   replicaCount: 1
+  service:
+    ipFamilyPolicy: PreferDualStack
   extraEnv:
     KGW_ENABLE_GATEWAY_API_EXPERIMENTAL_FEATURES: "true"
 

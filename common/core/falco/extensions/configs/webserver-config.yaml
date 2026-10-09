@@ -1,0 +1,11 @@
+---
+apiVersion: artifact.falcosecurity.dev/v1alpha1
+kind: Config
+metadata:
+  name: webserver-config
+  namespace: falco
+spec:
+  config:
+    webserver:
+      listen_address: "::"
+  priority: 50

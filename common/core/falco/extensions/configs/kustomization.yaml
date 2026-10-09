@@ -8,3 +8,4 @@ resources:
   - ./output-format.yaml
   # - ./sidekick-output.yaml
   - ./k8smeta-config.yaml
+  - ./webserver-config.yaml

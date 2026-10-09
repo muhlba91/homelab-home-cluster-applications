@@ -39,6 +39,9 @@ persistence:
 
 existingSecretAdminPassword: admin-password
 
+ipFamily:
+  policy: PreferDualStack
+
 logLevel: warning
 metrics:
   enabled: true
