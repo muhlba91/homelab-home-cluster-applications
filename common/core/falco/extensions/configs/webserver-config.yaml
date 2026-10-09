@@ -6,6 +6,14 @@ metadata:
   namespace: falco
 spec:
   config:
+    # config.d overrides replace the whole `webserver` block, so all keys must be repeated
     webserver:
+      enabled: true
+      k8s_healthz_endpoint: /healthz
       listen_address: "::"
+      listen_port: 8765
+      prometheus_metrics_enabled: true
+      ssl_certificate: /etc/falco/falco.pem
+      ssl_enabled: false
+      threadiness: 0
   priority: 50
