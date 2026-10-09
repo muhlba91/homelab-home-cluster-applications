@@ -5,6 +5,9 @@ envFromSecret: home-assistant-emqx
 
 replicaCount: 1
 
+podAnnotations:
+  reloader.stakater.com/auto: "true"
+
 emqxConfig:
   EMQX_LISTENERS__TCP__DEFAULT__BIND: "[::]:1883"
   EMQX_LISTENERS__SSL__DEFAULT__BIND: "[::]:8883"
