@@ -178,11 +178,3 @@ data:
             keywords: vpn netbird
             url: https://netbird.platform.muehlbachler.io
             target: _blank
-          - name: VPN Management
-            icon: fa-solid fa-lock
-            # type: Ping
-            subtitle: Manage VPN access
-            tag: vpn
-            keywords: vpn wireguard
-            url: https://vpn.platform.muehlbachler.io
-            target: _blank
