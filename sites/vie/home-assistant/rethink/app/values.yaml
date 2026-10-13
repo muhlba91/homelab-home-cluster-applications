@@ -58,6 +58,8 @@ service:
       gatus.home-operations.com/enabled: "true"
       gatus.home-operations.com/endpoint: |-
         url: tcp://rethink-cloud.iot.${LOCAL_INTERNAL_DOMAIN}:8883
+        client:
+          timeout: 15s
         conditions:
           - "[CONNECTED] == true"
     ports:
