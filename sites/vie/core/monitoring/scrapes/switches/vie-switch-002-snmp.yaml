@@ -2,13 +2,16 @@
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMStaticScrape
 metadata:
-  name: mikrotik-switch-snmp
+  name: vie-switch-002-snmp
 spec:
   jobName: mikrotik-switch-snmp
   targetEndpoints:
     - targets:
-        - 10.0.10.1
         - 10.0.10.2
+      labels:
+        instance: vie-switch-002
+        role: switch
+        site: vie
       path: /snmp
       interval: 5m
       scrapeTimeout: 30s
@@ -21,8 +24,5 @@ spec:
         - sourceLabels:
             - __address__
           targetLabel: __param_target
-        - sourceLabels:
-            - __param_target
-          targetLabel: instance
         - targetLabel: __address__
           replacement: prometheus-snmp-exporter.prometheus-snmp-exporter:9116

@@ -1,0 +1,17 @@
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMStaticScrape
+metadata:
+  name: vie-router-001-frr
+spec:
+  jobName: router-frr
+  targetEndpoints:
+    - targets:
+        - 10.0.0.1:9342
+      path: /metrics
+      interval: 2m
+      scrapeTimeout: 30s
+      labels:
+        instance: vie-router-001
+        role: router
+        site: vie

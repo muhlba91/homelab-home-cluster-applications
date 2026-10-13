@@ -139,7 +139,16 @@ The following applications are defined in [`sites/vie/core/`](sites/vie/core/).
 - [x] Adguard External DNS
 - [x] CloudNativePG
 - [x] KRR
-- [x] Monitoring (full stack, plus SNMP scrapes of the MikroTik switch)
+- [x] Monitoring (full stack, see above)
+  - [x] [Static scrapes](sites/vie/core/monitoring/scrapes/) - Victoria Metrics static scrapes of devices outside the cluster.
+    - [x] Router (`vie-router-001`)
+      - [x] [Node Exporter](https://github.com/prometheus/node_exporter) - System metrics.
+      - [x] [Kea Exporter](https://github.com/mweinelt/kea-exporter) - DHCP leases and pools.
+      - [x] [FRR Exporter](https://github.com/tynany/frr_exporter) - BGP sessions and routes.
+      - [x] [smartctl Exporter](https://github.com/prometheus-community/smartctl_exporter) - Disk health.
+      - [x] [CrowdSec](https://www.crowdsec.net) - Metrics.
+      - [x] [NUT Exporter](https://github.com/DRuggeri/nut_exporter) - UPS status.
+    - [x] MikroTik switches (`vie-switch-001`, `vie-switch-002`) - via the SNMP exporter.
 - [x] Kyverno
 - [x] Percona Operator for MongoDB
 - [x] Falco

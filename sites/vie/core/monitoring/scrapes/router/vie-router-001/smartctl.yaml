@@ -1,0 +1,17 @@
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMStaticScrape
+metadata:
+  name: vie-router-001-smartctl
+spec:
+  jobName: router-smartctl
+  targetEndpoints:
+    - targets:
+        - 10.0.0.1:9633
+      path: /metrics
+      interval: 5m
+      scrapeTimeout: 60s
+      labels:
+        instance: vie-router-001
+        role: router
+        site: vie
