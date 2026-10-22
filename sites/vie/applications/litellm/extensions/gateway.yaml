@@ -8,7 +8,7 @@ metadata:
     external-dns.kubernetes.io/provider: public
 spec:
   parentRef:
-    name: kgateway-gateway-internal
+    name: kgateway-gateway
     namespace: kgateway
   listeners:
     - name: https-litellm
