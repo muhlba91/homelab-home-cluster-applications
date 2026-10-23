@@ -9,7 +9,7 @@ spec:
   interval: 10m
   url: oci://ghcr.io/prometheus-community/charts/prometheus-snmp-exporter
   ref:
-    tag: 9.18.1
+    tag: 9.18.2
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
