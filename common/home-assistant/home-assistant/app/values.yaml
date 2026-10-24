@@ -26,6 +26,9 @@ controllers:
             value: link
           - name: GITSYNC_DEPTH
             value: "1"
+          # git-sync >= 4.8.0 no longer sets safe.directory=*, the emptyDir is not owned by its uid
+          - name: GITSYNC_GIT_CONFIG
+            value: "safe.directory:*"
         resources: &git-sync-resources
           requests:
             cpu: 14m
@@ -100,6 +103,9 @@ controllers:
             value: "true"
           - name: GITSYNC_DEPTH
             value: "1"
+          # git-sync >= 4.8.0 no longer sets safe.directory=*, the emptyDir is not owned by its uid
+          - name: GITSYNC_GIT_CONFIG
+            value: "safe.directory:*"
         resources: *git-sync-resources
       002-backup-restore:
         image: &init-image
