@@ -9,7 +9,7 @@ spec:
   interval: 10m
   url: oci://ghcr.io/berriai/litellm-helm
   ref:
-    tag: 1.106.2
+    tag: 1.106.3
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
