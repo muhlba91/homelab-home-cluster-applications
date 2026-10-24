@@ -10,7 +10,7 @@ spec:
   url: oci://ghcr.io/external-secrets/charts/external-secrets
   # on upgrade: regenerate the CI schema override, see scripts/schemas/README.md
   ref:
-    tag: 2.13.0
+    tag: 2.14.0
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
