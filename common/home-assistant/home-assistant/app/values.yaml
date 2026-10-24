@@ -12,7 +12,7 @@ controllers:
       git-sync:
         image: &git-sync-image
           repository: registry.k8s.io/git-sync/git-sync
-          tag: v4.7.1
+          tag: v4.8.0
           pullPolicy: IfNotPresent
         env:
           - name: GITSYNC_REPO
