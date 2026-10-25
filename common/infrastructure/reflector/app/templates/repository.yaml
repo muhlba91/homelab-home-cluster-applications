@@ -9,7 +9,7 @@ spec:
   interval: 10m
   url: oci://ghcr.io/emberstack/helm-charts/reflector
   ref:
-    tag: 10.0.65
+    tag: 10.0.68
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
