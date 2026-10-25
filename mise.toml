@@ -1,0 +1,10 @@
+min_version = "2026.10.0"
+
+[settings]
+lockfile = true
+lockfile_platforms = ["macos-arm64", "linux-x64", "linux-arm64"]
+
+[tools]
+kustomize = "5.8.3"
+kubeconform = "0.8.0"
+yq = "4.54.1"

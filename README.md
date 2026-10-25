@@ -322,7 +322,7 @@ The following services also have Git repositories to store their configuration w
 - **Schema config:** schema locations and the skip-list are read from [`scripts/kubeconform.yaml`](scripts/kubeconform.yaml) so they can be updated without modifying the script.
 - **SOPS documents:** encrypted documents (identified by a top-level `.sops` key) are stripped before validation.
 
-**Prerequisites:** `kustomize`, `kubeconform`, `yq`, `jq`, `envsubst`
+**Prerequisites:** `kustomize`, `kubeconform`, `yq` (versions from mise, see [Development](#development)), `jq`, `envsubst`
 
 ```bash
 ./scripts/validate-manifests.sh
@@ -395,3 +395,9 @@ For each run, individual pod snapshots are saved as `resource-reports/krr-<times
 - [GitHub Actions](https://docs.github.com/en/actions) lint all YAML files (yamllint), shell scripts (ShellCheck) and Python scripts (ruff), and validate all manifests with [`scripts/validate-manifests.sh`](#validate-manifests).
 - [flate](https://github.com/home-operations/flate) renders each site like Flux would on every pull request and posts the rendered changes against the base branch as a PR comment; the check fails if anything the PR touches does not render.
 - [Renovate Bot](https://github.com/renovatebot/renovate) updates Helm charts (`HelmRepository`/`OCIRepository`), container images in `values.yaml` files and Kubernetes manifests, and GitHub Actions.
+
+---
+
+## Development
+
+Tool versions (`kustomize`, `kubeconform`, `yq`) are managed with [mise](https://mise.jdx.dev): run `mise trust` and `mise install` once, then use the commands the workflows run, e.g. `./scripts/validate-manifests.sh` (which calls `kustomize build`, `envsubst` and `kubeconform`).
