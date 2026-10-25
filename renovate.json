@@ -11,7 +11,8 @@
         "kubernetes",
         "github-actions",
         "pre-commit",
-        "custom.regex"
+        "custom.regex",
+        "mise"
     ],
     "flux": {
         "managerFilePatterns": [

@@ -210,3 +210,6 @@ local.env
 gcp-*-key.json
 trivy-reports/
 resource-reports/
+
+# mise
+mise.local.toml
