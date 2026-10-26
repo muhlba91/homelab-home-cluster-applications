@@ -9,7 +9,7 @@ spec:
   interval: 10m
   url: oci://ghcr.io/rook/rook-ceph-cluster
   ref:
-    tag: 1.21.0
+    tag: 1.21.1
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
