@@ -9,7 +9,7 @@ spec:
   interval: 10m
   url: oci://ghcr.io/vmware-tanzu/charts/velero
   ref:
-    tag: 12.2.2
+    tag: 12.2.3
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
