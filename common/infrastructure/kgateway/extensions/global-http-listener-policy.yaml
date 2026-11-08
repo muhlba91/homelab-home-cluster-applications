@@ -1,6 +1,6 @@
 ---
 apiVersion: gateway.kgateway.dev/v1alpha1
-kind: HTTPListenerPolicy
+kind: ListenerPolicy
 metadata:
   name: global-http-listener-policy
 spec:
@@ -11,6 +11,8 @@ spec:
     - group: gateway.networking.k8s.io
       kind: Gateway
       name: kgateway-gateway-internal
-  upgradeConfig:
-    enabledUpgrades:
-      - websocket
+  default:
+    httpSettings:
+      upgradeConfig:
+        enabledUpgrades:
+          - websocket
