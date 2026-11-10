@@ -1,0 +1,104 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: coder
+spec:
+  type: ClusterIP
+  ipFamilyPolicy: PreferDualStack
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http
+
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: coder-ipv4
+  labels:
+    kubernetes.io/service-name: coder
+    endpointslice.kubernetes.io/managed-by: external-services
+addressType: IPv4
+ports:
+  - name: http
+    port: 3000
+    protocol: TCP
+endpoints:
+  - addresses:
+      - 10.100.60.1
+    conditions:
+      ready: true
+
+---
+# Coder and its workspace apps (<app>--<agent>--<workspace>--<user>.coder.dev...): one certificate
+# with both names (DNS-01, so the wildcard works).
+apiVersion: gateway.networking.k8s.io/v1
+kind: ListenerSet
+metadata:
+  name: coder-listeners
+  annotations:
+    cert-manager.io/cluster-issuer: "${PUBLIC_CLUSTER_ISSUER}"
+    external-dns.kubernetes.io/provider: public
+spec:
+  parentRef:
+    name: kgateway-gateway
+    namespace: kgateway
+  listeners:
+    - name: https-coder
+      protocol: HTTPS
+      port: 443
+      hostname: coder.dev.${HOME_DOMAIN}
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: coder-tls-cert
+    - name: https-coder-apps
+      protocol: HTTPS
+      port: 443
+      hostname: "*.coder.dev.${HOME_DOMAIN}"
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: coder-tls-cert
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: coder
+  annotations:
+    external-dns.kubernetes.io/provider: public
+    external-dns.kubernetes.io/target: "${PUBLIC_IP}"
+spec:
+  parentRefs:
+    - name: coder-listeners
+      kind: ListenerSet
+      group: gateway.networking.k8s.io
+  hostnames:
+    - coder.dev.${HOME_DOMAIN}
+    - "*.coder.dev.${HOME_DOMAIN}"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: coder
+          port: 80
+
+---
+# Terminals, agents and workspace apps are long-lived websockets: no route timeout.
+apiVersion: gateway.kgateway.dev/v1alpha1
+kind: TrafficPolicy
+metadata:
+  name: coder-timeouts
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: coder
+  timeouts:
+    request: 0s
+    streamIdle: 3600s
