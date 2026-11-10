@@ -9,7 +9,7 @@ spec:
   interval: 10m
   url: oci://ghcr.io/falcosecurity/charts/falco-operator
   ref:
-    tag: 0.3.1
+    tag: 0.4.0
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
