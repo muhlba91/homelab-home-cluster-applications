@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - adguard.yaml
   - coder.yaml
+  - paseo.yaml
