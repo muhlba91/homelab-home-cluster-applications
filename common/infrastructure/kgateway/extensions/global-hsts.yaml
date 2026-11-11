@@ -1,4 +1,7 @@
 ---
+# headerModifiers (Envoy's native response header mutation), not a transformation: kgateway's
+# transformation filter buffers every response body until it ends (also for header-only rules),
+# which rejects large downloads and holds back streamed responses.
 apiVersion: gateway.kgateway.dev/v1alpha1
 kind: TrafficPolicy
 metadata:
@@ -11,7 +14,7 @@ spec:
     - group: gateway.networking.k8s.io
       kind: Gateway
       name: kgateway-gateway-internal
-  transformation:
+  headerModifiers:
     response:
       set:
         - name: Strict-Transport-Security
