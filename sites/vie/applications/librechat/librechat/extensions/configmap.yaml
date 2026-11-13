@@ -159,7 +159,9 @@ data:
             default:
               - gemini-flash-lite-latest
               - gemini-flash-latest
-              - gemini-pro-latest
+              - gemini-hydrogen-latest
+              - gemini-argon-latest
+              - gemini-carbon-latest
               - gemini-embedding-latest
             fetch: false
 
