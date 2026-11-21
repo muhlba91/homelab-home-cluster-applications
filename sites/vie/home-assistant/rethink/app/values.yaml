@@ -17,7 +17,7 @@ controllers:
         image:
           repository: ghcr.io/anszom/rethink
           pullPolicy: IfNotPresent
-          tag: dev@sha256:2aafcf0d091e6babafe4fae4e667c1fbe691ba4f394606bfef9dfa127ec6e2da
+          tag: dev@sha256:38c87160e45f66948daf71eda88a9a702e2605572aba71c09090396f980ed8d9
         command:
           - node
           - dist/rethink-cloud.js
