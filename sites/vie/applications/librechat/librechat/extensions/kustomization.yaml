@@ -15,6 +15,7 @@ resources:
   - ./external-secret-percona-mongodb-backup-credentials.yaml
   - ./external-secret-cloudnativepg-barman-credentials.yaml
   - ./postgresql.yaml
+  - ./postgresql-database.yaml
   - ./postgresql-objectstore-scaleway.yaml
   - ./postgresql-backup.yaml
   - ./mongodb.yaml

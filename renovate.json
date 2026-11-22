@@ -31,7 +31,7 @@
                 "/(^|/|\\.).*\\.ya?ml$/"
             ],
             "matchStrings": [
-                "# renovate: datasource=(?<datasource>[a-z-]+) packageName=(?<packageName>.+)\\s+image(Name)?:.+:(?<currentValue>.+)",
+                "# renovate: datasource=(?<datasource>[a-z-]+) packageName=(?<packageName>\\S+)(?: versioning=(?<versioning>\\S+))?(?: extractVersion=(?<extractVersion>\\S+))?\\s+[\\w.-]+: [\"']?(?:[^:\\s\"']+:)?(?<currentValue>[^\\s\"']+)[\"']?",
                 "# renovate: datasource=(?<datasource>[a-z-]+) packageName=(?<packageName>.+)\\s+crVersion: [\"']?(?<currentValue>[\\w.-]+)[\"']?"
             ]
         }
