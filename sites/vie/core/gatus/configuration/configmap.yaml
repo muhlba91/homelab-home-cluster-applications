@@ -110,7 +110,7 @@ data:
             priority: 5
       - name: Vault
         group: External - Infrastructure
-        url: https://vault.platform.muehlbachler.io:8200/ui/
+        url: https://vault.platform.muehlbachler.io/ui/
         interval: 5m
         conditions:
           - "[STATUS] == 200"

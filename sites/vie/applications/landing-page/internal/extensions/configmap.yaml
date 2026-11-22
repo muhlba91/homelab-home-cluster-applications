@@ -161,7 +161,7 @@ data:
             subtitle: Secrets management
             tag: security
             keywords: secrets vault
-            url: https://vault.platform.muehlbachler.io:8200
+            url: https://vault.platform.muehlbachler.io
             target: _blank
           - name: NetBird
             icon: fa-solid fa-lock

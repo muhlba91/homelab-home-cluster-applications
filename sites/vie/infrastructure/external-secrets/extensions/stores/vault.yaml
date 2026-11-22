@@ -6,7 +6,7 @@ metadata:
 spec:
   provider:
     vault:
-      server: https://vault.platform.muehlbachler.io:8200
+      server: https://vault.platform.muehlbachler.io
       path: kubernetes-home-cluster
       version: v2
       auth:
