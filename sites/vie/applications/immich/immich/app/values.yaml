@@ -127,7 +127,7 @@ controllers:
             memory: 474Mi
             nvidia.com/gpu: "1"
           limits:
-            memory: 474Mi
+            memory: 3072Mi
             nvidia.com/gpu: "1"
 
         probes:
