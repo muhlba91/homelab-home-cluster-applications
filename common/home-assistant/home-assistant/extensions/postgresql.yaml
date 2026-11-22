@@ -6,8 +6,8 @@ metadata:
 spec:
   instances: 1
 
-  # renovate: datasource=docker packageName=ghcr.io/cloudnative-pg/postgresql
-  imageName: ghcr.io/cloudnative-pg/postgresql:18.7-standard-trixie
+  # renovate: datasource=docker packageName=ghcr.io/cloudnative-pg/postgresql versioning=regex:^(?<major>18)\.(?<minor>\d+)-minimal-trixie$
+  imageName: ghcr.io/cloudnative-pg/postgresql:18.7-minimal-trixie
 
   storage:
     size: 10Gi
