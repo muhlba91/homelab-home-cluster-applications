@@ -1,0 +1,20 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: immich-postgresql-immich
+  annotations:
+    # guardrail: removing this from Git orphans it instead of deleting its data
+    kustomize.toolkit.fluxcd.io/prune: disabled
+spec:
+  name: immich
+  owner: immich
+  cluster:
+    name: immich-postgresql
+  extensions:
+    - name: vector
+      # renovate: datasource=docker packageName=ghcr.io/cloudnative-pg/pgvector extractVersion=^(?<version>\d+\.\d+\.\d+)-18-trixie$
+      version: "0.8.7"
+    - name: vchord
+      # renovate: datasource=docker packageName=ghcr.io/muhlba91/postgresql-vchord-extension extractVersion=^(?<version>\d+\.\d+\.\d+)-18-v\d+\.\d+\.\d+$
+      version: "1.3.0"
