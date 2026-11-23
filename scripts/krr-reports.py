@@ -26,6 +26,7 @@ from pathlib import Path
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
+
 def die(msg: str) -> None:
     print(f"error: {msg}", file=sys.stderr)
     sys.exit(1)
@@ -83,6 +84,7 @@ def is_off(cur: float | None, rec: float | None, threshold: float) -> bool:
 
 # ── Merge logic ───────────────────────────────────────────────────────────────
 
+
 def merge_scans(all_scan_lists: list) -> list:
     """
     Merge multiple lists of KRR scan entries into one by taking the maximum
@@ -94,11 +96,19 @@ def merge_scans(all_scan_lists: list) -> list:
         for scan in scan_list:
             obj = scan.get("object", {})
             key = (obj.get("namespace"), obj.get("name"), obj.get("container"))
-            cpu_req_cur = extract_val(get_nested(obj,  "allocations", "requests", "cpu"))
-            mem_req_cur = extract_val(get_nested(obj,  "allocations", "requests", "memory"))
-            mem_lim_cur = extract_val(get_nested(obj,  "allocations", "limits",   "memory"))
-            cpu_req_rec = extract_val(get_nested(scan, "recommended", "requests", "cpu",    "value"))
-            mem_req_rec = extract_val(get_nested(scan, "recommended", "requests", "memory", "value"))
+            cpu_req_cur = extract_val(get_nested(obj, "allocations", "requests", "cpu"))
+            mem_req_cur = extract_val(
+                get_nested(obj, "allocations", "requests", "memory")
+            )
+            mem_lim_cur = extract_val(
+                get_nested(obj, "allocations", "limits", "memory")
+            )
+            cpu_req_rec = extract_val(
+                get_nested(scan, "recommended", "requests", "cpu", "value")
+            )
+            mem_req_rec = extract_val(
+                get_nested(scan, "recommended", "requests", "memory", "value")
+            )
 
             if key not in best:
                 best[key] = {
@@ -123,17 +133,17 @@ def merge_scans(all_scan_lists: list) -> list:
         b = best[key]
         merged = json.loads(json.dumps(b["_raw"]))  # deep copy
 
-        obj     = merged.setdefault("object", {})
-        alloc   = obj.setdefault("allocations", {})
-        req     = alloc.setdefault("requests", {})
-        lim     = alloc.setdefault("limits", {})
-        rec     = merged.setdefault("recommended", {})
+        obj = merged.setdefault("object", {})
+        alloc = obj.setdefault("allocations", {})
+        req = alloc.setdefault("requests", {})
+        lim = alloc.setdefault("limits", {})
+        rec = merged.setdefault("recommended", {})
         rec_req = rec.setdefault("requests", {})
 
-        req["cpu"]    = b["cpu_req_cur"]
+        req["cpu"] = b["cpu_req_cur"]
         req["memory"] = b["mem_req_cur"]
         lim["memory"] = b["mem_lim_cur"]
-        rec_req.setdefault("cpu",    {})["value"] = b["cpu_req_rec"]
+        rec_req.setdefault("cpu", {})["value"] = b["cpu_req_rec"]
         rec_req.setdefault("memory", {})["value"] = b["mem_req_rec"]
 
         result.append(merged)
@@ -143,14 +153,28 @@ def merge_scans(all_scan_lists: list) -> list:
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
+
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Merge KRR pod logs and generate a Markdown report.")
-    parser.add_argument("--skip-fetch", action="store_true",
-                        help="reuse existing JSON files instead of hitting the cluster")
-    parser.add_argument("--threshold", type=float, default=10.0,
-                        help="deviation threshold in %% before a container is flagged (default: 10)")
-    parser.add_argument("--pods", type=int, default=-1,
-                        help="max number of most-recent KRR pods to use (-1 = all, default: -1)")
+    parser = argparse.ArgumentParser(
+        description="Merge KRR pod logs and generate a Markdown report."
+    )
+    parser.add_argument(
+        "--skip-fetch",
+        action="store_true",
+        help="reuse existing JSON files instead of hitting the cluster",
+    )
+    parser.add_argument(
+        "--threshold",
+        type=float,
+        default=10.0,
+        help="deviation threshold in %% before a container is flagged (default: 10)",
+    )
+    parser.add_argument(
+        "--pods",
+        type=int,
+        default=-1,
+        help="max number of most-recent KRR pods to use (-1 = all, default: -1)",
+    )
     args = parser.parse_args()
 
     if args.threshold <= 0:
@@ -173,18 +197,27 @@ def main() -> None:
 
     if not args.skip_fetch:
         print("Fetching KRR pod list…")
-        raw_pods = run([
-            "kubectl", "get", "pods", "-n", "krr", "-l", "job-name",
-            "--sort-by=.metadata.creationTimestamp",
-            "-o", "jsonpath={.items[*].metadata.name}",
-        ])
+        raw_pods = run(
+            [
+                "kubectl",
+                "get",
+                "pods",
+                "-n",
+                "krr",
+                "-l",
+                "job-name",
+                "--sort-by=.metadata.creationTimestamp",
+                "-o",
+                "jsonpath={.items[*].metadata.name}",
+            ]
+        )
         pods = raw_pods.strip().split() if raw_pods.strip() else []
 
         if not pods:
             die("No KRR pods found in namespace 'krr'")
 
         if args.pods != -1:
-            pods = pods[-args.pods:]
+            pods = pods[-args.pods :]
 
         print(f"  using {len(pods)} pod(s): {', '.join(pods)}")
 
@@ -214,7 +247,7 @@ def main() -> None:
             die(f"No KRR JSON found in {report_dir}; run without --skip-fetch first.")
 
         if args.pods != -1:
-            candidates = candidates[:args.pods]
+            candidates = candidates[: args.pods]
 
         json_files = candidates
 
@@ -274,16 +307,18 @@ def main() -> None:
     good_rows: list[tuple] = []
 
     for scan in merged_scans:
-        obj  = scan.get("object", {})
-        ns   = obj.get("namespace", "")
+        obj = scan.get("object", {})
+        ns = obj.get("namespace", "")
         name = obj.get("name", "")
-        ctr  = obj.get("container", "")
+        ctr = obj.get("container", "")
 
-        ccpu = extract_val(get_nested(obj,  "allocations", "requests", "cpu"))
-        cmem = extract_val(get_nested(obj,  "allocations", "requests", "memory"))
-        clim = extract_val(get_nested(obj,  "allocations", "limits",   "memory"))
-        rcpu = extract_val(get_nested(scan, "recommended", "requests", "cpu",    "value"))
-        rmem = extract_val(get_nested(scan, "recommended", "requests", "memory", "value"))
+        ccpu = extract_val(get_nested(obj, "allocations", "requests", "cpu"))
+        cmem = extract_val(get_nested(obj, "allocations", "requests", "memory"))
+        clim = extract_val(get_nested(obj, "allocations", "limits", "memory"))
+        rcpu = extract_val(get_nested(scan, "recommended", "requests", "cpu", "value"))
+        rmem = extract_val(
+            get_nested(scan, "recommended", "requests", "memory", "value")
+        )
 
         row = (
             f"| {ns} | {name} | {ctr}"
@@ -317,7 +352,9 @@ def main() -> None:
             f"**Memory difference (rec − cur):** {fmt_diff_mem(total_mem_diff)}",
         ]
 
-    thr = int(args.threshold) if args.threshold == int(args.threshold) else args.threshold
+    thr = (
+        int(args.threshold) if args.threshold == int(args.threshold) else args.threshold
+    )
     now_str = now_utc.strftime("%Y-%m-%dT%H:%M:%SZ")
 
     lines = [

@@ -3,8 +3,8 @@
 Schemas here take precedence over the datree CRDs-catalog (see `../kubeconform.yaml`).
 Only add a schema when the catalog is outdated for the version installed in the cluster.
 
-| Schema | Reason | Source |
-|---|---|---|
+| Schema                                       | Reason                                        | Source                                                                                        |
+| -------------------------------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `external-secrets.io/externalsecret_v1.json` | catalog lacks `creationPolicy: CreateOrMerge` | CRD `externalsecrets.external-secrets.io` (v1) from the vie cluster, external-secrets v2.11.0 |
 
 Regenerate after an external-secrets upgrade (read-only against the cluster):

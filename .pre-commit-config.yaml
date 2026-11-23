@@ -1,4 +1,6 @@
 ---
+default_language_version:
+  node: system
 repos:
   - repo: https://github.com/siderolabs/conform
     rev: v0.1.0-alpha.33
@@ -14,7 +16,6 @@ repos:
       - id: check-merge-conflict
       - id: check-symlinks
       - id: check-toml
-      - id: check-xml
       - id: destroyed-symlinks
       - id: detect-aws-credentials
         args: ["--allow-missing-credentials"]
@@ -33,9 +34,31 @@ repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.17.6
     hooks:
-      - id: ruff
-        args: ["check"]
+      - id: ruff-check
+        args: ["--fix"]
         files: "scripts/.*\\.py$"
+      - id: ruff-format
+        files: "scripts/.*\\.py$"
+  - repo: local
+    hooks:
+      - id: shellcheck
+        name: shellcheck
+        entry: mise exec -- shellcheck
+        language: system
+        types: [shell]
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.12
+    hooks:
+      - id: actionlint
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.24.2
+    hooks:
+      - id: markdownlint-cli2
+        exclude: ^LICENSE\.md$
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.38.0
+    hooks:
+      - id: yamllint
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.30.1
     hooks:
