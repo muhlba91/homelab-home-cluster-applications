@@ -17,4 +17,4 @@ spec:
       version: "0.8.7"
     - name: vchord
       # renovate: datasource=docker packageName=ghcr.io/muhlba91/postgresql-vchord-extension extractVersion=^(?<version>\d+\.\d+\.\d+)-18-v\d+\.\d+\.\d+$
-      version: "1.3.0"
+      version: "1.5.0"

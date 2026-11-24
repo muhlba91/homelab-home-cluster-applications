@@ -63,7 +63,7 @@ spec:
       - name: vchord
         image:
           # renovate: datasource=docker packageName=ghcr.io/muhlba91/postgresql-vchord-extension versioning=regex:^\d+\.\d+\.\d+-18-v(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)$
-          reference: ghcr.io/muhlba91/postgresql-vchord-extension:1.3.0-18-v1.0.0
+          reference: ghcr.io/muhlba91/postgresql-vchord-extension:1.5.0-18-v1.1.0
 
   plugins:
     - name: barman-cloud.cloudnative-pg.io
