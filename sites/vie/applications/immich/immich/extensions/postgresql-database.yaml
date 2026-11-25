@@ -13,8 +13,8 @@ spec:
     name: immich-postgresql
   extensions:
     - name: vector
-      # renovate: datasource=docker packageName=ghcr.io/cloudnative-pg/pgvector extractVersion=^(?<version>\d+\.\d+\.\d+)-18-trixie$
+      # renovate: datasource=docker packageName=ghcr.io/cloudnative-pg/pgvector extractVersion=^(?<version>\d+\.\d+\.\d+)-19-trixie$
       version: "0.8.7"
     - name: vchord
-      # renovate: datasource=docker packageName=ghcr.io/muhlba91/postgresql-vchord-extension extractVersion=^(?<version>\d+\.\d+\.\d+)-18-v\d+\.\d+\.\d+$
+      # renovate: datasource=docker packageName=ghcr.io/muhlba91/postgresql-vchord-extension extractVersion=^(?<version>\d+\.\d+\.\d+)-19-v\d+\.\d+\.\d+$
       version: "1.5.0"
